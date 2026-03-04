@@ -2990,7 +2990,7 @@ body {
 .fintokei-link:hover { color: #5b00a8; }
 .fintokei-cta-wrap { text-align: center; margin-top: 2rem; }
 .btn-crayon-rect-green {
-    background: url('../images/ボタン用四角緑.png') center/100% 100% no-repeat;
+    background: url('../images/btn-rect-green.png') center/100% 100% no-repeat;
     color: white; font-weight: 800; font-size: 1.125rem;
     letter-spacing: 0.5px; padding: 1.4rem 3.5rem;
     position: relative; border: none; border-radius: 0;

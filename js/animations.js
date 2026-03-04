@@ -1319,58 +1319,6 @@ function drawFintokeiChart(data, months, refBalance) {
         if (typeof ScrollTrigger !== 'undefined') {
             ScrollTrigger.refresh();
         }
-
-        // プランカードカルーセル（左右矢印 + ドット + スワイプ）
-        (function() {
-            var track = document.getElementById('plan-carousel-track');
-            var prevBtn = document.getElementById('plan-prev');
-            var nextBtn = document.getElementById('plan-next');
-            var wrap = document.getElementById('plan-carousel');
-            if (!track || !wrap) return;
-
-            var current = 1; // スタンダード（index 1）から開始
-            var total = 3;
-            var dots = wrap.querySelectorAll('.plan-carousel-dot');
-
-            function goTo(idx) {
-                if (idx < 0) idx = 0;
-                if (idx >= total) idx = total - 1;
-                current = idx;
-                track.style.transform = 'translateX(-' + (current * 33.3333) + '%)';
-                for (var i = 0; i < dots.length; i++) {
-                    dots[i].classList.toggle('active', i === current);
-                }
-            }
-
-            prevBtn.addEventListener('click', function() { goTo(current - 1); });
-            nextBtn.addEventListener('click', function() { goTo(current + 1); });
-
-            // ドットクリック
-            for (var i = 0; i < dots.length; i++) {
-                dots[i].addEventListener('click', function() {
-                    goTo(parseInt(this.getAttribute('data-index')));
-                });
-            }
-
-            // タッチスワイプ
-            var startX = 0, diffX = 0;
-            track.addEventListener('touchstart', function(e) {
-                startX = e.touches[0].clientX; diffX = 0;
-                track.style.transition = 'none';
-            }, { passive: true });
-            track.addEventListener('touchmove', function(e) {
-                diffX = e.touches[0].clientX - startX;
-                var cardW = track.clientWidth / 3;
-                var offset = -(current * 33.3333) + (diffX / cardW * 33.3333);
-                track.style.transform = 'translateX(' + offset + '%)';
-            }, { passive: true });
-            track.addEventListener('touchend', function() {
-                track.style.transition = 'transform 0.4s cubic-bezier(0.33,1,0.68,1)';
-                if (diffX > 50) goTo(current - 1);
-                else if (diffX < -50) goTo(current + 1);
-                else goTo(current);
-            });
-        })();
     });
 
 })();

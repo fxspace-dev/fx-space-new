@@ -1316,7 +1316,7 @@
                                             <div class="cc-yt-play">▶</div>
                                         </div>
                                         <div class="cc-yt-info">
-                                            <span class="cc-yt-title">【3/4】朝のシナリオ構築 XAUUSD・USDJPY・GBPUSD</span>
+                                            <span class="cc-yt-title">【3/4】朝のシナリオ構築 XAUUSD・USDJPY・<br>GBPUSD</span>
                                             <span class="cc-yt-channel">よすが FX SPACE</span>
                                         </div>
                                     </div>
@@ -1347,7 +1347,7 @@
                                             <div class="cc-yt-play">▶</div>
                                         </div>
                                         <div class="cc-yt-info">
-                                            <span class="cc-yt-title">【3/5】朝のシナリオ構築 XAUUSD・USDJPY・GBPUSD</span>
+                                            <span class="cc-yt-title">【3/5】朝のシナリオ構築 XAUUSD・USDJPY・<br>GBPUSD</span>
                                             <span class="cc-yt-channel">よすが FX SPACE</span>
                                         </div>
                                     </div>
@@ -2849,10 +2849,10 @@
         <h2 class="heading-lg text-center" style="margin-bottom:2rem;color:#fff;">主宰者</h2>
         <div style="background:white;border-radius:24px;padding:2.5rem;box-shadow:0 2px 12px rgba(0,0,0,0.04);position:relative;overflow:hidden;">
             <img src="img/symbol-mark.png" alt="" style="position:absolute;top:calc(50% - 1.5cm);left:50%;transform:translate(-50%,-50%);width:55%;height:55%;object-fit:contain;opacity:0.06;pointer-events:none;">
-            <div style="display:flex;align-items:center;gap:1.5rem;margin-bottom:2rem;position:relative;">
+            <div class="founder-header">
                 <div class="founder-avatar" style="width:80px;height:80px;border-radius:50%;overflow:hidden;flex-shrink:0;box-shadow:0 4px 16px rgba(0,0,0,0.06);"><img src="images/chat_photo_4.png" alt="よすが"></div>
-                <div>
-                    <h2 style="font-size:1.5rem;font-weight:900;letter-spacing:-0.02em;line-height:1.2;color:#111827;">よすが</h2>
+                <div style="flex-shrink:0;">
+                    <h2 style="font-size:1.5rem;font-weight:900;letter-spacing:-0.02em;line-height:1.2;color:#111827;white-space:nowrap;">よすが</h2>
                 </div>
                 <div class="founder-sns" style="margin-left:auto;">
                     <a href="https://x.com/yosuga____" target="_blank"><img src="img/icon-x.png" alt="X"></a>
@@ -2886,69 +2886,76 @@
         </div>
 
         <!-- 利用規約リンク -->
-        <div style="text-align:center; margin-bottom:1.5rem;">
+        <div style="text-align:center; margin-bottom:3rem;">
             <a href="https://drive.google.com/file/d/17vbSozToeLWHQO9s_eBHcceYGh80ryCQ/view?usp=sharing" target="_blank" rel="noopener" style="color:#9ca3af; font-size:0.8125rem; text-decoration:underline; text-underline-offset:3px;">利用規約はこちら</a>
         </div>
 
-        <!-- 3 Plan Cards -->
-        <div class="plan-cards">
-            <!-- Free -->
-            <div class="plan-card pricing-reveal revealed">
-                <div class="plan-name" style="color:#9ca3af;">フリー</div>
-                <div class="plan-desc plan-desc-light">まずは無料で体験</div>
-                <div class="plan-price-wrap">
-                    <div class="plan-price-free">¥0</div>
+        <!-- 3 Plan Cards (Carousel) -->
+        <div class="plan-carousel" id="plan-carousel">
+            <div class="plan-carousel-track">
+                <!-- Free -->
+                <div class="plan-carousel-slide">
+                    <div class="plan-card">
+                        <div class="plan-name" style="color:#9ca3af;">フリー</div>
+                        <div class="plan-desc plan-desc-light">まずは無料で体験</div>
+                        <div class="plan-price-wrap">
+                            <div class="plan-price-free">¥0</div>
+                        </div>
+                        <div class="plan-divider"></div>
+                        <ul class="plan-features">
+                            <li><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">速攻プロフローチャート</span></li>
+                        </ul>
+                        <a href="https://discord.gg/CcUtqSdRDZ" target="_blank" class="btn plan-cta plan-cta-outline">無料で始める</a>
+                    </div>
                 </div>
-                <div class="plan-divider"></div>
-                <ul class="plan-features">
-                    <li><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">速攻プロフローチャート</span></li>
-                </ul>
-                <a href="https://discord.gg/CcUtqSdRDZ" target="_blank" class="btn plan-cta plan-cta-outline">無料で始める</a>
-            </div>
 
-            <!-- Standard -->
-            <div class="plan-card pricing-reveal revealed">
-                <div class="plan-name">スタンダード</div>
-                <div class="plan-desc plan-desc-light">ほぼ全機能が使い放題</div>
-                <div class="plan-price-wrap">
-                    <span class="plan-price-amount">¥2,900</span><span class="plan-price-period">/月</span>
+                <!-- Standard -->
+                <div class="plan-carousel-slide">
+                    <div class="plan-card">
+                        <div class="plan-name">スタンダード</div>
+                        <div class="plan-desc plan-desc-light">ほぼ全機能が使い放題</div>
+                        <div class="plan-price-wrap">
+                            <span class="plan-price-amount">¥2,900</span><span class="plan-price-period">/月</span>
+                        </div>
+                        <div class="plan-divider"></div>
+                        <ul class="plan-features">
+                            <li><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">速攻プロフローチャート</span></li>
+                            <li><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">AIサポート</span></li>
+                            <li><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">毎日のシナリオ動画</span></li>
+                            <li><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">深掘解説等の限定動画</span></li>
+                            <li><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">サポートツール YTT</span></li>
+                            <li><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">3か月プロ企画 ゼロプロ90</span></li>
+                            <li><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">プロトレーダー ASTRO</span></li>
+                            <li><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">プロに相談</span></li>
+                        </ul>
+                        <a href="https://discord.com/oauth2/authorize?client_id=1132937165379211284&amp;response_type=code&amp;redirect_uri=https%3A%2F%2Ffx-space.com%2Fpp_sub_standard.php&amp;scope=identify" class="btn plan-cta plan-cta-outline" style="border-color:var(--primary); color:var(--primary);">スタンダードに加入 →</a>
+                    </div>
                 </div>
-                <div class="plan-divider"></div>
-                <ul class="plan-features">
-                    <li><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">速攻プロフローチャート</span></li>
-                    <li><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">AIサポート</span></li>
-                    <li><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">毎日のシナリオ動画</span></li>
-                    <li><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">深掘解説等の限定動画</span></li>
-                    <li><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">超実践FX問題集</span></li>
-                    <li><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">サポートツール YTT</span></li>
-                    <li><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">3か月プロ企画 ゼロプロ90</span></li>
-                    <li><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">プロトレーダー ASTRO</span></li>
-                    <li><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">プロに相談</span></li>
-                    <li><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">つまずき解消 継続特典</span></li>
-                    <li><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">AIオートトレード SIRIUS</span></li>
-                </ul>
-                <a href="https://discord.com/oauth2/authorize?client_id=1132937165379211284&amp;response_type=code&amp;redirect_uri=https%3A%2F%2Ffx-space.com%2Fpp_sub_standard.php&amp;scope=identify" class="btn plan-cta plan-cta-outline">スタンダードに加入 →</a>
-            </div>
 
-            <!-- Premium -->
-            <div class="plan-card plan-premium-card pricing-reveal revealed">
-                <div class="plan-badge plan-badge-prem">全機能解放</div>
-                <div class="plan-name" style="color:var(--primary);">プレミアム</div>
-                <div class="plan-desc plan-desc-light">スタンダード全機能＋ライブ＆交流</div>
-                <div class="plan-price-wrap">
-                    <span class="plan-price-amount" id="premium-price">¥5,410</span><span class="plan-price-period" id="premium-period">/月</span>
-                    <div class="plan-price-sub" id="premium-sub">年額 ¥64,900（月あたり¥5,410） / 月額 ¥5,900</div>
+                <!-- Premium -->
+                <div class="plan-carousel-slide">
+                    <div class="plan-card plan-premium-card">
+                        <div class="plan-badge plan-badge-prem">全機能解放</div>
+                        <div class="plan-name" style="color:var(--primary);">プレミアム</div>
+                        <div class="plan-desc plan-desc-light">スタンダード全機能＋ライブ＆交流</div>
+                        <div class="plan-price-wrap">
+                            <span class="plan-price-amount" id="premium-price">¥5,410</span><span class="plan-price-period" id="premium-period">/月</span>
+                            <div class="plan-price-sub" id="premium-sub">年額 ¥64,900（月あたり¥5,410） / 月額 ¥5,900</div>
+                        </div>
+                        <div class="plan-divider"></div>
+                        <ul class="plan-features">
+                            <li><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">スタンダードの全機能</span></li>
+                            <li><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text" style="font-weight:700;">ライブチャート分析</span></li>
+                            <li><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text" style="font-weight:700;">トレード交流</span></li>
+                        </ul>
+                        <a href="https://discord.com/oauth2/authorize?client_id=1132937165379211284&amp;response_type=code&amp;redirect_uri=https%3A%2F%2Ffx-space.com%2Fpp_sub_premium_year.php&amp;scope=identify" id="premium-cta" class="btn btn-solid-blue btn-solid-md">プレミアムに加入（年額） →</a>
+                        <a href="https://discord.com/oauth2/authorize?client_id=1132937165379211284&amp;response_type=code&amp;redirect_uri=https%3A%2F%2Ffx-space.com%2Fpp_sub_premium.php&amp;scope=identify" id="premium-year-link" class="plan-year-link plan-year-link-light">月額プランで加入 →</a>
+                        <p style="font-size:0.6875rem; color:#9ca3af; margin-top:0.75rem;">※ プレミアム加入でスタンダードは自動解約される安心設計です</p>
+                    </div>
                 </div>
-                <div class="plan-divider"></div>
-                <ul class="plan-features">
-                    <li><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">スタンダードの全機能</span></li>
-                    <li><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text" style="font-weight:700;">ライブチャート分析</span></li>
-                    <li><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text" style="font-weight:700;">トレード交流</span></li>
-                </ul>
-                <a href="https://discord.com/oauth2/authorize?client_id=1132937165379211284&amp;response_type=code&amp;redirect_uri=https%3A%2F%2Ffx-space.com%2Fpp_sub_premium_year.php&amp;scope=identify" id="premium-cta" class="btn btn-solid-blue btn-solid-md">プレミアムに加入（年額） →</a>
-                <a href="https://discord.com/oauth2/authorize?client_id=1132937165379211284&amp;response_type=code&amp;redirect_uri=https%3A%2F%2Ffx-space.com%2Fpp_sub_premium.php&amp;scope=identify" id="premium-year-link" class="plan-year-link plan-year-link-light">月額プランで加入 →</a>
-                <p style="font-size:0.6875rem; color:#9ca3af; margin-top:0.75rem;">※ プレミアム加入でスタンダードは自動解約される安心設計です</p>
             </div>
+            <button class="plan-carousel-arrow plan-carousel-prev" id="plan-carousel-prev" aria-label="前のプラン">&#8249;</button>
+            <button class="plan-carousel-arrow plan-carousel-next" id="plan-carousel-next" aria-label="次のプラン">&#8250;</button>
         </div>
 
         <div style="margin-top:2.5rem; margin-bottom:2.5rem; padding:1.5rem 1.75rem; border:1px solid #9ca3af; border-radius:0.75rem; max-width:36rem; margin-left:auto; margin-right:auto; text-align:center;">

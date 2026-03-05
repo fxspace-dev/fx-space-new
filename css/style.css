@@ -1156,6 +1156,16 @@ body {
     height: 100%;
     object-fit: contain;
 }
+.founder-header {
+    display: flex; align-items: center; gap: 1.5rem;
+    margin-bottom: 1.5rem; position: relative;
+}
+@media (max-width: 768px) {
+    .founder-section { padding: 4rem 1rem; }
+    .founder-header { flex-wrap: wrap; }
+    .founder-header .founder-sns { margin-left: 0 !important; width: 100%; justify-content: center; }
+    .founder-sns a { width: 48px; height: 48px; }
+}
 .cta-section { background: var(--primary); color: white; text-align: center; padding: 5rem 2rem; }
 .cta-section .subtitle { color: rgba(255,255,255,0.85); margin-bottom: 2rem; font-size: 1rem; }
 
@@ -3031,7 +3041,7 @@ body {
 /* ===== PLANS & PREMIUM UPSELL SECTION ===== */
 .pricing-section {
     background: #f8f9fc; color: var(--text);
-    padding: 6rem 2rem 5rem; position: relative; overflow: hidden;
+    padding: 6rem 2rem 5rem; position: relative;
 }
 .pricing-bg-glow {
     display: none;
@@ -3059,15 +3069,46 @@ body {
     color: var(--text-muted); font-size: 1.0625rem; max-width: 540px; margin: 0 auto;
 }
 
-/* Plan Cards */
-.plan-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 3.5rem; }
+/* Plan Carousel */
+.plan-carousel {
+    position: relative; margin-bottom: 3.5rem;
+    display: flex; flex-direction: column; align-items: center;
+}
+.plan-carousel-track {
+    position: relative; width: 100%; min-height: 620px;
+    overflow-x: clip; overflow-y: visible;
+}
+.plan-carousel-slide {
+    position: absolute; top: 50%; left: 50%;
+    width: 340px;
+    transition: transform 0.7s cubic-bezier(0.16,1,0.3,1), opacity 0.7s cubic-bezier(0.16,1,0.3,1), filter 0.7s cubic-bezier(0.16,1,0.3,1), width 0.7s cubic-bezier(0.16,1,0.3,1);
+    cursor: pointer;
+}
+.plan-carousel-slide.is-active { width: 420px; cursor: default; }
+.plan-carousel-slide:not(.is-active) .plan-card a,
+.plan-carousel-slide:not(.is-active) .plan-card button { pointer-events: none; }
+.plan-carousel-arrow {
+    position: absolute; top: 50%; transform: translateY(-50%); z-index: 3;
+    width: 48px; height: 48px; border-radius: 50%;
+    background: var(--primary); color: #fff;
+    border: none; font-size: 1.75rem; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.25s, transform 0.25s;
+    box-shadow: 0 4px 16px rgba(79,70,229,0.25);
+    line-height: 1;
+}
+.plan-carousel-arrow:hover {
+    background: #6366f1;
+    transform: translateY(-50%) scale(1.08);
+}
+.plan-carousel-prev { left: 6px; }
+.plan-carousel-next { right: 6px; }
 .plan-card {
-    background: #fff; border: 1.5px solid #e5e7eb; border-radius: 20px;
+    background: #fff; border: 1.5px solid #9ca3af; border-radius: 20px;
     padding: 2.25rem 1.75rem 1.75rem; display: flex; flex-direction: column;
     position: relative;
-    transition: transform 0.45s cubic-bezier(0.16,1,0.3,1), box-shadow 0.45s cubic-bezier(0.16,1,0.3,1);
+    transition: box-shadow 0.45s cubic-bezier(0.16,1,0.3,1);
 }
-.plan-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(0,0,0,0.07); }
 .plan-card.plan-recommended {
     border-color: var(--primary);
     background: linear-gradient(180deg, rgba(79,70,229,0.03) 0%, #fff 100%);
@@ -3203,9 +3244,6 @@ body {
 /* Animations */
 .pricing-reveal { opacity: 0; transform: translateY(40px); }
 .pricing-reveal.revealed { opacity: 1; transform: translateY(0); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
-.plan-card.pricing-reveal.revealed:nth-child(1) { transition-delay: 0s; }
-.plan-card.pricing-reveal.revealed:nth-child(2) { transition-delay: 0.15s; }
-.plan-card.pricing-reveal.revealed:nth-child(3) { transition-delay: 0.3s; }
 .prem-feature-card.pricing-reveal.revealed:nth-child(1) { transition-delay: 0.05s; }
 .prem-feature-card.pricing-reveal.revealed:nth-child(2) { transition-delay: 0.2s; }
 .purchase-card.pricing-reveal.revealed:nth-child(1) { transition-delay: 0s; }
@@ -3241,8 +3279,12 @@ body {
 .prem-mock-chat .cc-input { margin: 0.375rem 0.75rem 0.5rem; padding: 0.375rem 0.625rem; }
 
 @media (max-width: 768px) {
-    /* プランカード: 3列横並び、フリーを狭くしてスタンダード・プレミアムを広く */
-    .plan-cards { grid-template-columns: 0.6fr 1fr 1fr; gap: 0.5rem; margin-bottom: 2rem; }
+    /* プランカルーセル */
+    .plan-carousel-track { min-height: 520px; }
+    .plan-carousel-slide { width: 240px; }
+    .plan-carousel-slide.is-active { width: 300px; }
+    .plan-carousel-arrow { width: 36px; height: 36px; font-size: 1.25rem; }
+    .plan-carousel-next { right: 4px; }
     .plan-card { padding: 1.125rem 0.75rem 1rem; border-radius: 14px; }
     .plan-badge { font-size: 0.6875rem; padding: 0.25rem 0.75rem; top: -10px; }
     .plan-name { font-size: 1.125rem; }

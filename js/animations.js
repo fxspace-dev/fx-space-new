@@ -1321,4 +1321,22 @@ function drawFintokeiChart(data, months, refBalance) {
         }
     });
 
+    // ── Feature card & fintokei card click → smooth scroll ──
+    document.querySelectorAll('.feature-card[data-href], .fintokei-card[data-href]').forEach(function(card) {
+        card.addEventListener('click', function() {
+            var target = document.querySelector(card.getAttribute('data-href'));
+            if (target) target.scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+
+    // ── Daily-chart comm-row fade-in (same pattern as other comm-rows) ──
+    var dailyRow = document.getElementById('daily-chart');
+    if (dailyRow && typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        gsap.from(dailyRow, {
+            y: 40, opacity: 0, duration: 0.8,
+            ease: 'power2.out',
+            scrollTrigger: { trigger: dailyRow, start: 'top 85%', once: true }
+        });
+    }
+
 })();

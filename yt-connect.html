@@ -1,0 +1,1977 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FX SPACE - YouTubeメンバーシップのつなぎ方</title>
+<meta property="og:title" content="FX SPACE - YouTubeメンバーシップのつなぎ方">
+<meta property="og:description" content="YouTubeのメンバーになったら、Discordとつないでメンバー限定の部屋に入れるようにしよう。">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;800;900&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter','Noto Sans JP',sans-serif;
+  background:#f9fafb;
+  color:#111827;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  overflow-x:hidden;
+}
+
+a{color:inherit;text-decoration:none}
+
+/* ===== Header ===== */
+.ob-header{
+  text-align:center;
+  padding:3rem 1.5rem 2.5rem;
+  background:#fff;
+  border-bottom:1px solid #f0f0f0;
+  position:relative;
+}
+.ob-welcome-wrap{position:relative;display:inline-block;}
+.ob-welcome .accent{color:#5865f2;}
+.ob-welcome-wave{
+  display:block;
+  width:100%;
+  height:22px;
+  object-fit:fill;
+  margin:0.375rem auto 0;
+}
+.ob-logo{
+  width:140px;height:auto;
+  margin:0 auto 1rem;
+  display:block;
+}
+.ob-welcome{
+  font-size:clamp(1.4rem,4vw,1.875rem);
+  font-weight:900;
+  color:#1e1b4b;
+  letter-spacing:-0.02em;
+  line-height:1.3;
+  margin-bottom:0.75rem;
+}
+.ob-welcome-sub{
+  font-size:0.9375rem;
+  color:#6b7280;
+  max-width:520px;
+  margin:0 auto;
+  line-height:1.8;
+}
+
+/* ===== Overview (what is this) ===== */
+.yt-overview{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:1rem;
+  padding:1.75rem 1rem;
+  max-width:480px;
+  margin:0 auto;
+}
+.yt-ov-box{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:0.375rem;
+}
+.yt-ov-icon{
+  width:64px;height:64px;
+  border-radius:18px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.5rem;
+  position:relative;
+  box-shadow:0 8px 24px rgba(0,0,0,0.08);
+}
+.yt-ov-icon::before{
+  content:'';
+  position:absolute;inset:-6px;
+  border-radius:22px;
+  background:inherit;
+  filter:blur(16px);
+  opacity:0.6;
+  z-index:-1;
+}
+.yt-ov-icon.yt{background:#fff;border:2px solid rgba(255,0,0,0.2);}
+.yt-ov-icon.dc{background:#fff;border:2px solid rgba(88,101,242,0.2);}
+.yt-ov-icon::before{display:none;}
+.yt-ov-label{font-size:0.75rem;font-weight:700;color:#6b7280;letter-spacing:0.04em;}
+.yt-ov-arrow{
+  font-size:1.75rem;
+  color:#4f46e5;
+  margin-top:-1.25rem;
+  font-weight:800;
+  animation:arrowPulse 1.8s ease-in-out infinite;
+}
+@keyframes arrowPulse{
+  0%,100%{transform:translateX(0);opacity:0.6;}
+  50%{transform:translateX(4px);opacity:1;}
+}
+
+/* ===== Main Content ===== */
+.yt-main{
+  flex:1;
+  padding:0.5rem 1rem 3rem;
+  max-width:680px;
+  width:100%;
+  margin:0 auto;
+}
+
+/* ===== Device selector tabs ===== */
+.device-tabs{
+  display:flex;
+  background:#fff;
+  border:1.5px solid #e5e7eb;
+  border-radius:100px;
+  padding:0.25rem;
+  max-width:320px;
+  margin:1.25rem auto 0.75rem;
+  box-shadow:0 2px 8px rgba(0,0,0,0.04);
+}
+.device-tab{
+  flex:1;
+  padding:0.5rem 1rem;
+  border:none;
+  background:transparent;
+  border-radius:100px;
+  font-family:inherit;
+  font-size:0.8125rem;
+  font-weight:700;
+  color:#6b7280;
+  cursor:pointer;
+  transition:background 0.18s, color 0.18s;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:0.375rem;
+}
+.device-tab.active{
+  background:#4f46e5;
+  color:#fff;
+}
+.device-tab-icon{font-size:1rem;}
+
+/* Device-specific content */
+body[data-device="pc"] .sp-only{display:none;}
+body[data-device="sp"] .pc-only{display:none;}
+
+/* ===== Section Card ===== */
+.yt-section{
+  background:#fff;
+  border-radius:20px;
+  box-shadow:0 2px 16px rgba(0,0,0,0.06);
+  padding:2rem 2rem;
+  margin-bottom:1.25rem;
+  position:relative;
+}
+
+/* Scroll reveal */
+.reveal{
+  opacity:0;
+  transform:translateY(28px);
+  transition:opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-d1{transition-delay:0.08s;}
+.reveal-d2{transition-delay:0.16s;}
+.reveal-d3{transition-delay:0.24s;}
+
+/* ===== Section header (editorial typography) ===== */
+.sec-head{
+  display:flex;
+  align-items:baseline;
+  gap:1rem;
+  margin-bottom:1rem;
+  position:relative;
+}
+.sec-num-big{
+  font-family:'Inter','Noto Sans JP',sans-serif;
+  font-size:2.75rem;
+  font-weight:900;
+  line-height:0.9;
+  letter-spacing:-0.04em;
+  color:#4f46e5;
+  flex-shrink:0;
+  font-feature-settings:"tnum";
+}
+.sec-num-big.sec-num-amber{color:#f59e0b;}
+.sec-num-big.sec-num-green{color:#10b981;font-size:3.25rem;}
+.sec-num-big.sec-num-gray{color:#9ca3af;font-size:3.25rem;}
+.sec-num-big .sec-num-total{
+  font-size:1rem;
+  font-weight:700;
+  color:#d1d5db;
+  margin-left:0.0625rem;
+  letter-spacing:0;
+}
+.sec-sub{
+  font-size:0.75rem;
+  font-weight:700;
+  color:#9ca3af;
+  margin-bottom:0.25rem;
+  letter-spacing:0.02em;
+}
+.sec-sub-green{color:#059669;}
+.sec-head-text{flex:1;min-width:0;padding-top:0.375rem;}
+.sec-eyebrow{
+  font-size:0.75rem;
+  font-weight:700;
+  color:#6b7280;
+  margin-bottom:0.25rem;
+  letter-spacing:0.02em;
+}
+.sec-eyebrow.accent{color:#4f46e5;}
+.sec-eyebrow.green{color:#059669;}
+.sec-eyebrow.amber{color:#b45309;}
+.sec-head-text .yt-section-title{margin-bottom:0;}
+
+/* Variants for non-step sections: just small eyebrow + title, no big number */
+.sec-head.no-num{gap:0;}
+
+/* Keep .yt-section-label hidden */
+.yt-section-label{display:none;}
+
+@media(max-width:540px){
+  .sec-num-big{font-size:2.25rem;}
+  .sec-head{gap:0.75rem;}
+}
+.yt-section-title{
+  font-size:clamp(1.15rem,3vw,1.375rem);
+  font-weight:800;
+  color:#1e1b4b;
+  margin-bottom:0.5rem;
+  line-height:1.4;
+}
+.yt-section-desc{
+  font-size:0.875rem;
+  color:#6b7280;
+  line-height:1.8;
+  margin-bottom:1.25rem;
+}
+
+/* ===== Prereq checklist ===== */
+.prereq-list{
+  display:flex;
+  flex-direction:column;
+  gap:0;
+  border:1.5px solid #e5e7eb;
+  border-radius:14px;
+  overflow:hidden;
+  background:#fff;
+}
+.prereq-item{
+  display:grid;
+  grid-template-columns:48px 1fr auto;
+  align-items:center;
+  gap:0.875rem;
+  padding:1rem 1.125rem;
+  border-bottom:1px solid #f3f4f6;
+  position:relative;
+}
+.prereq-item:last-child{border-bottom:none;}
+.prereq-item::before{
+  content:'';
+  position:absolute;
+  left:0;top:0;bottom:0;
+  width:3px;
+  background:transparent;
+}
+.prereq-item.prereq-yt::before{background:#ff0000;}
+.prereq-item.prereq-dc::before{background:#5865f2;}
+.prereq-icon-wrap{
+  width:40px;height:40px;
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+}
+.prereq-item.prereq-yt .prereq-icon-wrap{background:rgba(255,0,0,0.06);}
+.prereq-item.prereq-dc .prereq-icon-wrap{background:rgba(88,101,242,0.08);}
+.prereq-body{min-width:0;}
+.prereq-title{
+  font-size:0.9375rem;
+  font-weight:800;
+  color:#1e1b4b;
+  line-height:1.35;
+  margin-bottom:0.1875rem;
+}
+.prereq-sub{
+  font-size:0.75rem;
+  color:#6b7280;
+  line-height:1.6;
+}
+.prereq-link-inline{
+  display:inline-flex;
+  align-items:center;
+  gap:0.25rem;
+  padding:0.375rem 0.75rem;
+  font-size:0.75rem;
+  font-weight:700;
+  color:#4f46e5;
+  text-decoration:none;
+  border-radius:8px;
+  transition:background 0.15s;
+  white-space:nowrap;
+  flex-shrink:0;
+}
+.prereq-link-inline:hover{background:rgba(79,70,229,0.08);}
+.prereq-arrow{
+  display:inline-block;
+  transition:transform 0.15s;
+  margin-left:0.125rem;
+}
+.prereq-link-inline:hover .prereq-arrow{transform:translateX(2px);}
+@media(max-width:540px){
+  .prereq-item{
+    grid-template-columns:40px 1fr;
+    grid-template-rows:auto auto;
+    row-gap:0.625rem;
+  }
+  .prereq-link-inline{
+    grid-column:1 / -1;
+    justify-content:center;
+    background:#f9fafb;
+    padding:0.5rem;
+  }
+}
+
+/* ===== Simple numbered step ===== */
+.yt-step-wrap{
+  margin-bottom:1.5rem;
+}
+.yt-step-head{
+  display:flex;
+  align-items:center;
+  gap:0.75rem;
+  margin-bottom:0.5rem;
+}
+.yt-step-num{
+  width:30px;height:30px;
+  border-radius:50%;
+  background:#4f46e5;
+  color:#fff;
+  font-size:0.8125rem;
+  font-weight:800;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.yt-step-title{
+  font-size:0.9375rem;
+  font-weight:700;
+  color:#1e1b4b;
+}
+.yt-step-explain{
+  font-size:0.8125rem;
+  color:#6b7280;
+  line-height:1.75;
+  margin-left:42px;
+  margin-bottom:0.75rem;
+}
+.yt-step-explain strong{color:#374151;}
+
+/* ===== Connector arrow between steps ===== */
+.yt-step-connector{
+  width:18px;
+  height:26px;
+  margin:0 0 0 6px;
+  background:url('img/dotline-yellow.png') center/contain no-repeat;
+}
+
+/* ===== Tip / Warning — outlined fieldset style ===== */
+.yt-tip, .yt-warn{
+  position:relative;
+  margin:1.75rem 0 0.75rem;
+  padding:1.25rem 1.25rem 1.125rem;
+  border:1.5px solid rgba(79,70,229,0.25);
+  border-radius:14px;
+  background:#fff;
+}
+.yt-warn{border-color:rgba(245,158,11,0.35);}
+.yt-tip-icon, .yt-warn-icon{display:none;}
+.yt-tip::before, .yt-warn::before{
+  position:absolute;
+  top:-0.5625rem;
+  left:1.125rem;
+  display:inline-block;
+  padding:0 0.5rem;
+  background:#fff;
+  font-size:0.6875rem;
+  font-weight:800;
+  letter-spacing:0.12em;
+  line-height:1.1;
+}
+.yt-tip::before{content:'ヒント';color:#4f46e5;}
+.yt-warn::before{content:'注意';color:#d97706;}
+.yt-tip-text, .yt-warn-text{
+  font-size:0.8125rem;
+  color:#374151;
+  line-height:1.8;
+  display:block;
+}
+.yt-tip-text strong, .yt-warn-text strong{
+  display:block;
+  font-size:0.9375rem;
+  color:#1e1b4b;
+  font-weight:800;
+  margin-bottom:0.25rem;
+  line-height:1.45;
+}
+
+/* ============================================================
+   MOCK UI COMPONENTS
+   ============================================================ */
+
+/* --- Generic mock frame --- */
+.mock{
+  border-radius:12px;
+  overflow:visible;
+  margin:1.5rem 0 0.5rem;
+  border:1.5px solid #e5e7eb;
+  font-size:0.8125rem;
+  user-select:none;
+  position:relative;
+}
+
+/* --- Click-here pulse indicator --- */
+.click-here{
+  position:relative;
+  z-index:2;
+}
+.click-here::after{
+  content:'';
+  position:absolute;
+  inset:-4px;
+  border-radius:8px;
+  border:2.5px solid #f43f5e;
+  animation:clickPulse 1.6s ease-in-out infinite;
+  pointer-events:none;
+}
+@keyframes clickPulse{
+  0%,100%{opacity:1;transform:scale(1)}
+  50%{opacity:0.4;transform:scale(1.04)}
+}
+.click-label{
+  position:absolute;
+  right:-8px;top:-22px;
+  background:#f43f5e;
+  color:#fff;
+  font-size:0.625rem;
+  font-weight:800;
+  padding:0.125rem 0.5rem 0.125rem 0.25rem;
+  border-radius:6px;
+  white-space:nowrap;
+  z-index:3;
+  letter-spacing:0.02em;
+  display:inline-flex;
+  align-items:center;
+  gap:0.25rem;
+}
+.click-num{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:14px;height:14px;
+  border-radius:50%;
+  background:#fff;
+  color:#f43f5e;
+  font-size:0.625rem;
+  font-weight:900;
+  line-height:1;
+}
+.click-here.order-2::after{
+  border-color:#f59e0b;
+  animation-delay:0.4s;
+}
+.click-here.order-2 .click-label{background:#f59e0b;}
+.click-here.order-2 .click-num{color:#f59e0b;}
+
+/* ========== Discord Mock UI ========== */
+
+/* -- Discord bottom bar (gear icon) -- */
+.dc-bottom-bar{
+  display:flex;
+  align-items:center;
+  gap:0.5rem;
+  background:#2b2d31;
+  padding:0.75rem 0.625rem;
+  border-radius:10px;
+}
+.dc-avatar-sm{
+  width:28px;height:28px;
+  border-radius:50%;
+  background:#5865f2;
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:0.625rem;font-weight:700;
+}
+.dc-user-info{flex:1;min-width:0;}
+.dc-user-name{font-size:0.6875rem;color:#f2f3f5;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.dc-user-tag{font-size:0.5625rem;color:#949ba4;}
+.dc-gear{
+  width:28px;height:28px;
+  border-radius:6px;
+  display:flex;align-items:center;justify-content:center;
+  color:#b5bac1;
+  font-size:1rem;
+  cursor:default;
+  transition:background 0.15s;
+}
+
+/* ========== MOBILE Discord Mock UI ========== */
+.mob-frame{
+  max-width:280px;
+  margin:1.75rem auto 0.5rem;
+  background:#1e1f22;
+  border-radius:22px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.15);
+  border:1.5px solid #0b0d10;
+  position:relative;
+}
+/* Rounded corners on screen content without clipping pulse labels */
+.mob-frame > *:first-child{border-radius:20px 20px 0 0;}
+.mob-frame > *:last-child{border-radius:0 0 20px 20px;}
+.mob-statusbar{
+  height:20px;
+  background:#1e1f22;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 14px;
+  font-size:0.625rem;
+  color:#dbdee1;
+  font-weight:700;
+}
+
+.mob-header-bar{
+  background:#2b2d31;
+  padding:0.625rem 0.875rem;
+  display:flex;align-items:center;gap:0.5rem;
+  border-bottom:1px solid #1e1f22;
+}
+.mob-header-back{
+  color:#b5bac1;
+  font-size:1rem;
+}
+.mob-header-title{
+  flex:1;
+  font-size:0.8125rem;
+  font-weight:700;
+  color:#f2f3f5;
+}
+.mob-header-action{
+  color:#dbdee1;
+  font-size:1.125rem;
+  font-weight:800;
+  padding:0 0.25rem;
+  line-height:1;
+}
+
+.mob-profile-banner{
+  background:#313338;
+  padding:1rem 0.875rem;
+  text-align:center;
+  position:relative;
+}
+.mob-profile-av{
+  width:48px;height:48px;
+  border-radius:50%;
+  background:#5865f2;
+  color:#fff;
+  font-size:1rem;font-weight:800;
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 0.5rem;
+}
+.mob-profile-name{
+  font-size:0.875rem;
+  font-weight:700;
+  color:#f2f3f5;
+  margin-bottom:0.125rem;
+}
+.mob-profile-sub{
+  font-size:0.6875rem;
+  color:#b5bac1;
+}
+.mob-gear-top-right{
+  position:absolute;
+  top:12px;right:12px;
+  width:28px;height:28px;
+  display:flex;align-items:center;justify-content:center;
+  color:#b5bac1;
+}
+
+.mob-settings{
+  background:#2b2d31;
+  padding:0.375rem 0 0.5rem;
+}
+.mob-settings-row{
+  display:flex;
+  align-items:center;
+  gap:0.625rem;
+  padding:0.75rem 0.875rem;
+  color:#dbdee1;
+  font-size:0.8125rem;
+  border-bottom:1px solid #1e1f22;
+}
+.mob-settings-row:last-child{border-bottom:none;}
+.mob-settings-row-icon{
+  width:22px;height:22px;
+  display:flex;align-items:center;justify-content:center;
+  color:#b5bac1;
+  font-size:0.9375rem;
+  flex-shrink:0;
+}
+.mob-settings-row-label{flex:1;font-weight:500;}
+.mob-settings-row-arrow{color:#6d6f78;font-size:0.75rem;}
+
+.mob-bottom-tabs{
+  display:flex;
+  background:#1e1f22;
+  border-top:1px solid #2b2d31;
+  padding:0.375rem 0 0.5rem;
+}
+.mob-tab{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:0.1875rem;
+  padding:0.25rem;
+  color:#949ba4;
+  font-size:0.5rem;
+  font-weight:600;
+}
+.mob-tab-icon{
+  font-size:1.125rem;
+  line-height:1;
+}
+.mob-tab-avatar{
+  width:22px;height:22px;
+  border-radius:50%;
+  background:#5865f2;
+  color:#fff;
+  font-size:0.5625rem;font-weight:800;
+  display:flex;align-items:center;justify-content:center;
+  border:2px solid transparent;
+}
+.mob-tab.active{color:#fff;}
+.mob-tab.active .mob-tab-avatar{border-color:#fff;}
+
+.mob-conn-list{
+  background:#2b2d31;
+}
+.mob-conn-list-empty{
+  padding:1rem 0.875rem;
+  text-align:center;
+  color:#949ba4;
+  font-size:0.6875rem;
+}
+.mob-conn-row{
+  display:flex;
+  align-items:center;
+  gap:0.75rem;
+  padding:0.75rem 0.875rem;
+  border-bottom:1px solid #1e1f22;
+}
+.mob-conn-row:last-child{border-bottom:none;}
+.mob-conn-row-icon{
+  width:32px;height:32px;
+  border-radius:8px;
+  background:#1e1f22;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.mob-conn-row-name{
+  font-size:0.8125rem;
+  color:#dbdee1;
+  font-weight:600;
+}
+
+/* Caption under mocks */
+.mock-caption{
+  font-size:0.6875rem;
+  color:#6b7280;
+  text-align:center;
+  margin-top:0.5rem;
+  font-weight:500;
+}
+
+/* -- Discord settings sidebar -- */
+.dc-settings{
+  display:flex;
+  background:#313338;
+  min-height:200px;
+  border-radius:10px;
+  overflow:hidden;
+}
+.dc-settings-side{
+  width:160px;
+  background:#2b2d31;
+  padding:0.75rem 0.5rem;
+  flex-shrink:0;
+  border-right:1px solid #1e1f22;
+}
+.dc-settings-cat{
+  font-size:0.5625rem;
+  font-weight:800;
+  color:#949ba4;
+  text-transform:uppercase;
+  letter-spacing:0.04em;
+  padding:0.5rem 0.5rem 0.25rem;
+}
+.dc-settings-item{
+  padding:0.375rem 0.5rem;
+  border-radius:4px;
+  font-size:0.75rem;
+  color:#b5bac1;
+  cursor:default;
+  margin:1px 0;
+}
+.dc-settings-item.active{background:rgba(88,101,242,0.2);color:#fff;font-weight:600;}
+.dc-settings-main{
+  flex:1;
+  padding:1.25rem 1.5rem;
+}
+.dc-settings-main h3{
+  font-size:0.9375rem;
+  font-weight:700;
+  color:#f2f3f5;
+  margin-bottom:0.75rem;
+}
+
+/* -- Discord connections grid -- */
+.dc-conn-grid{
+  display:flex;
+  flex-wrap:wrap;
+  gap:0.5rem;
+}
+.dc-conn-icon{
+  width:42px;height:42px;
+  border-radius:10px;
+  background:#2b2d31;
+  border:1.5px solid #3f4147;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.25rem;
+  cursor:default;
+  position:relative;
+}
+.dc-conn-icon.yt-highlight{
+  border-color:#ff0000;
+  background:rgba(255,0,0,0.08);
+}
+
+/* -- Discord server header dropdown -- */
+.dc-server-header{
+  background:#2b2d31;
+  padding:0.75rem 1rem;
+  display:flex;align-items:center;justify-content:space-between;
+  border-radius:10px 10px 0 0;
+  border-bottom:1px solid #1e1f22;
+}
+.dc-server-name{font-size:0.875rem;font-weight:700;color:#f2f3f5;}
+.dc-server-arrow{color:#b5bac1;font-size:0.75rem;}
+
+.dc-dropdown{
+  background:#111214;
+  padding:0.375rem;
+  border-radius:0 0 10px 10px;
+}
+.dc-dropdown-item{
+  display:flex;align-items:center;gap:0.5rem;
+  padding:0.5rem 0.625rem;
+  border-radius:4px;
+  font-size:0.8125rem;
+  color:#b5bac1;
+  cursor:default;
+}
+.dc-dropdown-item.highlight{
+  background:rgba(88,101,242,0.15);
+  color:#fff;
+  font-weight:600;
+}
+.dc-dropdown-icon{font-size:1rem;width:20px;text-align:center;}
+.dc-dropdown-sep{
+  height:1px;
+  background:#2b2d31;
+  margin:0.25rem 0.5rem;
+}
+
+/* -- Discord linked roles panel -- */
+.dc-linked-panel{
+  background:#313338;
+  padding:1.25rem;
+  border-radius:0 0 10px 10px;
+}
+.dc-linked-title{
+  font-size:0.75rem;
+  color:#949ba4;
+  font-weight:600;
+  margin-bottom:0.75rem;
+}
+.dc-role-card{
+  display:flex;align-items:center;gap:0.75rem;
+  padding:0.75rem 1rem;
+  background:#2b2d31;
+  border-radius:8px;
+  cursor:default;
+  border:1.5px solid transparent;
+  transition:border-color 0.15s;
+}
+.dc-role-card.yt-highlight{border-color:#ff0000;}
+.dc-role-dot{
+  width:12px;height:12px;
+  border-radius:50%;
+  background:#ff0000;
+  flex-shrink:0;
+}
+.dc-role-info{flex:1;}
+.dc-role-name{font-size:0.8125rem;color:#f2f3f5;font-weight:600;}
+.dc-role-desc{font-size:0.6875rem;color:#949ba4;}
+.dc-role-arrow{color:#949ba4;font-size:0.875rem;}
+
+/* -- Discord channel list (before/after) -- */
+.dc-channels{
+  background:#2b2d31;
+  padding:0.75rem 0.5rem;
+  border-radius:10px;
+  min-width:180px;
+}
+.dc-ch-cat{
+  display:flex;align-items:center;gap:0.25rem;
+  font-size:0.625rem;font-weight:800;color:#949ba4;
+  text-transform:uppercase;letter-spacing:0.04em;
+  padding:0.5rem 0.25rem 0.25rem;
+}
+.dc-ch{
+  display:flex;align-items:center;gap:0.375rem;
+  padding:0.25rem 0.5rem;
+  border-radius:4px;
+  font-size:0.75rem;
+  color:#949ba4;
+  margin:1px 0;
+}
+.dc-ch .hash{color:#80848e;font-weight:600;margin-right:0.125rem;}
+.dc-ch.locked{opacity:0.4;}
+.dc-ch.new-visible{
+  background:rgba(88,101,242,0.12);
+  color:#f2f3f5;
+  font-weight:600;
+}
+.dc-ch-lock{font-size:0.625rem;margin-left:auto;}
+
+/* -- Success badge in channel -- */
+.dc-new-badge{
+  font-size:0.5rem;
+  background:#5865f2;
+  color:#fff;
+  padding:0.0625rem 0.3125rem;
+  border-radius:4px;
+  font-weight:700;
+  margin-left:auto;
+  letter-spacing:0.02em;
+}
+
+/* -- Before/After comparison -- */
+.ba-wrap{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  gap:0.75rem;
+  align-items:stretch;
+  margin:1.25rem 0 0.5rem;
+}
+.ba-card{
+  position:relative;
+  background:#fff;
+  border:1.5px solid #e5e7eb;
+  border-radius:12px;
+  padding:1.125rem 0.875rem 0.875rem;
+}
+.ba-card.after{
+  background:#fff;
+  border-color:#10b981;
+  border-width:2px;
+  box-shadow:0 6px 20px rgba(16,185,129,0.12);
+}
+.ba-label{
+  position:absolute;
+  top:-0.625rem;
+  left:50%;
+  transform:translateX(-50%);
+  padding:0.1875rem 0.75rem;
+  background:#fff;
+  border:1.5px solid #e5e7eb;
+  border-radius:999px;
+  font-size:0.625rem;
+  font-weight:800;
+  letter-spacing:0.04em;
+  white-space:nowrap;
+  line-height:1.2;
+}
+.ba-label.before{color:#6b7280;}
+.ba-label.after{
+  color:#fff;
+  border-color:#10b981;
+  background:#10b981;
+}
+.ba-arrow{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#10b981;
+  font-size:1.5rem;
+  font-weight:900;
+  padding:0 0.125rem;
+}
+
+/* ========== YouTube Mock UI ========== */
+.yt-mock-page{
+  background:#fff;
+  border-radius:10px;
+  padding:1rem;
+}
+.yt-mock-channel{
+  display:flex;align-items:center;gap:0.625rem;
+  margin-bottom:0.75rem;
+}
+.yt-mock-ch-avatar{
+  width:40px;height:40px;
+  border-radius:50%;
+  background:#1e1b4b;
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:0.75rem;font-weight:800;
+  flex-shrink:0;
+}
+.yt-mock-ch-name{font-size:0.875rem;font-weight:700;color:#0f0f0f;}
+.yt-mock-ch-sub{font-size:0.6875rem;color:#606060;}
+.yt-mock-join-btn{
+  display:inline-flex;align-items:center;gap:0.375rem;
+  background:#0f0f0f;color:#fff;
+  padding:0.5rem 1rem;
+  border-radius:100px;
+  font-size:0.8125rem;font-weight:600;
+  cursor:default;
+  margin-left:auto;
+}
+.yt-mock-member-badge{
+  display:inline-flex;align-items:center;gap:0.25rem;
+  background:#065f46;color:#fff;
+  padding:0.25rem 0.625rem;
+  border-radius:100px;
+  font-size:0.6875rem;font-weight:700;
+  margin-left:auto;
+}
+
+/* ========== Google OAuth Mock ========== */
+.g-oauth{
+  background:#fff;
+  border-radius:12px;
+  padding:1.5rem;
+  text-align:center;
+  max-width:320px;
+  margin:0 auto;
+  border:1.5px solid #e5e7eb;
+}
+.g-oauth-logo{
+  font-size:1.5rem;
+  margin-bottom:0.5rem;
+}
+.g-oauth-title{
+  font-size:0.875rem;
+  font-weight:700;
+  color:#202124;
+  margin-bottom:0.25rem;
+}
+.g-oauth-sub{
+  font-size:0.75rem;
+  color:#5f6368;
+  margin-bottom:1rem;
+  line-height:1.5;
+}
+.g-oauth-account{
+  display:flex;align-items:center;gap:0.5rem;
+  padding:0.625rem 0.75rem;
+  border:1.5px solid #dadce0;
+  border-radius:8px;
+  margin-bottom:0.5rem;
+  text-align:left;
+  cursor:default;
+  transition:background 0.15s;
+}
+.g-oauth-av{
+  width:32px;height:32px;border-radius:50%;
+  background:#4285f4;
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:0.6875rem;font-weight:700;
+  flex-shrink:0;
+}
+.g-oauth-email{font-size:0.75rem;color:#202124;font-weight:500;}
+.g-oauth-name{font-size:0.625rem;color:#5f6368;}
+.g-oauth-btn{
+  display:block;
+  width:100%;
+  padding:0.625rem;
+  background:#1a73e8;
+  color:#fff;
+  border:none;
+  border-radius:8px;
+  font-size:0.8125rem;
+  font-weight:600;
+  cursor:default;
+  margin-top:0.75rem;
+}
+
+/* ========== OAuth Consent (Permission) Screen ========== */
+.g-consent{
+  background:#fff;
+  border-radius:12px;
+  padding:1.25rem;
+  max-width:340px;
+  margin:0 auto;
+  border:1.5px solid #e5e7eb;
+}
+.g-consent-top{
+  display:flex;align-items:center;gap:0.5rem;
+  padding-bottom:0.75rem;
+  border-bottom:1px solid #f0f0f0;
+  margin-bottom:0.875rem;
+}
+.g-consent-app-icon{
+  width:32px;height:32px;
+  border-radius:8px;
+  background:#5865f2;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.g-consent-app-title{
+  font-size:0.8125rem;
+  font-weight:700;
+  color:#202124;
+  line-height:1.35;
+}
+.g-consent-app-sub{
+  font-size:0.6875rem;
+  color:#5f6368;
+}
+.g-consent-account{
+  display:flex;align-items:center;gap:0.5rem;
+  padding:0.5rem 0.625rem;
+  background:#f8f9fa;
+  border-radius:8px;
+  margin-bottom:0.875rem;
+}
+.g-consent-account-av{
+  width:24px;height:24px;border-radius:50%;
+  background:#4285f4;
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:0.625rem;font-weight:700;
+  flex-shrink:0;
+}
+.g-consent-account-mail{font-size:0.6875rem;color:#202124;font-weight:500;}
+.g-consent-ask{
+  font-size:0.8125rem;
+  color:#202124;
+  font-weight:600;
+  margin-bottom:0.625rem;
+  line-height:1.5;
+}
+.g-consent-perm{
+  display:flex;align-items:flex-start;gap:0.5rem;
+  padding:0.5rem 0;
+  font-size:0.6875rem;
+  color:#5f6368;
+  line-height:1.5;
+}
+.g-consent-perm-icon{
+  color:#1a73e8;
+  font-size:0.875rem;
+  flex-shrink:0;
+  margin-top:0.0625rem;
+}
+.g-consent-actions{
+  display:flex;gap:0.5rem;
+  justify-content:flex-end;
+  margin-top:1rem;
+  padding-top:0.75rem;
+  border-top:1px solid #f0f0f0;
+}
+.g-consent-btn{
+  padding:0.5rem 1rem;
+  border-radius:6px;
+  font-size:0.75rem;
+  font-weight:600;
+  border:none;
+  cursor:default;
+  font-family:inherit;
+}
+.g-consent-btn.cancel{
+  background:#fff;
+  color:#1a73e8;
+  border:1.5px solid transparent;
+}
+.g-consent-btn.allow{
+  background:#1a73e8;
+  color:#fff;
+}
+
+/* ===== Role Explanation Card ===== */
+.role-explain{
+  background:rgba(79,70,229,0.05);
+  border:1.5px solid rgba(79,70,229,0.15);
+  border-radius:14px;
+  padding:1rem 1.125rem;
+  margin-top:1rem;
+}
+.role-explain-title{
+  font-size:0.8125rem;
+  font-weight:800;
+  color:#1e1b4b;
+  margin-bottom:0.75rem;
+}
+.role-explain-body{
+  display:flex;
+  align-items:center;
+  gap:1rem;
+}
+.role-card-visual{
+  display:flex;
+  align-items:center;
+  gap:0.5rem;
+  background:#fff;
+  padding:0.625rem 0.75rem;
+  border-radius:10px;
+  border:1.5px solid #e5e7eb;
+  box-shadow:0 2px 8px rgba(0,0,0,0.06);
+  flex-shrink:0;
+  transform:rotate(-3deg);
+}
+.role-card-badge{
+  width:32px;height:32px;
+  background:rgba(255,0,0,0.08);
+  border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.role-card-label{
+  font-size:0.5rem;
+  font-weight:800;
+  color:#9ca3af;
+  letter-spacing:0.08em;
+}
+.role-card-name{
+  font-size:0.75rem;
+  font-weight:800;
+  color:#1e1b4b;
+}
+.role-explain-text{
+  font-size:0.8125rem;
+  color:#374151;
+  line-height:1.7;
+}
+.role-explain-text strong{color:#4f46e5;font-weight:700;}
+@media(max-width:540px){
+  .role-explain-body{flex-direction:column;align-items:flex-start;gap:0.75rem;}
+  .role-card-visual{transform:rotate(-2deg);}
+}
+
+/* ===== FAQ / Troubleshooting (editorial family) ===== */
+.yt-faq-list{
+  display:flex;
+  flex-direction:column;
+  gap:0.5rem;
+}
+.yt-faq-item{
+  border-left:3px solid transparent;
+  border-radius:0 10px 10px 0;
+  background:transparent;
+  transition:background 0.2s ease, border-left-color 0.2s ease;
+  padding:0.75rem 1rem 0.75rem 1.125rem;
+}
+.yt-faq-item:hover{background:rgba(79,70,229,0.03);}
+.yt-faq-item.open{
+  background:rgba(79,70,229,0.04);
+  border-left-color:#4f46e5;
+  padding-bottom:1rem;
+}
+.yt-faq-q{
+  display:flex;
+  align-items:center;
+  gap:0.75rem;
+  cursor:pointer;
+  user-select:none;
+}
+.yt-faq-q-label{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:22px;height:22px;
+  background:#e5e7eb;
+  color:#6b7280;
+  font-size:0.6875rem;
+  font-weight:900;
+  border-radius:5px;
+  flex-shrink:0;
+  transition:background 0.2s, color 0.2s;
+  line-height:1;
+}
+.yt-faq-item.open .yt-faq-q-label{background:#4f46e5;color:#fff;}
+.yt-faq-q-text{
+  flex:1;
+  font-size:0.875rem;
+  font-weight:700;
+  color:#1e1b4b;
+  line-height:1.5;
+}
+.yt-faq-arrow{
+  width:24px;height:24px;
+  border-radius:50%;
+  background:#f3f4f6;
+  color:#6b7280;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;
+  font-weight:700;
+  line-height:1;
+  transition:transform 0.2s, background 0.2s, color 0.2s;
+  flex-shrink:0;
+}
+.yt-faq-q:hover .yt-faq-arrow{background:rgba(79,70,229,0.1);color:#4f46e5;}
+.yt-faq-item.open .yt-faq-arrow{transform:rotate(45deg);background:#4f46e5;color:#fff;}
+.yt-faq-a{
+  display:none;
+  font-size:0.8125rem;
+  color:#4b5563;
+  line-height:1.8;
+  padding:0.75rem 0 0 2.125rem;
+  position:relative;
+}
+.yt-faq-item.open .yt-faq-a{display:block;}
+.yt-faq-a::before{
+  content:'A';
+  position:absolute;
+  left:0;top:0.75rem;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:22px;height:22px;
+  background:#f59e0b;
+  color:#fff;
+  font-size:0.6875rem;
+  font-weight:900;
+  border-radius:5px;
+  line-height:1;
+}
+.yt-faq-a strong{color:#1e1b4b;font-weight:800;}
+
+/* ===== Primary support callout (AI chat) ===== */
+.contact-box{
+  position:relative;
+  margin-top:2rem;
+  padding:1.5rem 1.5rem 1.5rem;
+  border:1.5px solid rgba(79,70,229,0.25);
+  border-radius:14px;
+  background:#fff;
+  text-align:center;
+}
+.contact-box .contact-btn{
+  margin-top:0.375rem;
+}
+
+/* Secondary: plain text button below */
+.contact-secondary{
+  text-align:center;
+  margin-top:0.875rem;
+}
+.contact-secondary-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:0.25rem;
+  font-size:0.8125rem;
+  font-weight:700;
+  color:#6b7280;
+  text-decoration:none;
+  padding:0.5rem 0.75rem;
+  border-bottom:1.5px solid #e5e7eb;
+  transition:color 0.15s, border-color 0.15s;
+}
+.contact-secondary-btn:hover{
+  color:#4f46e5;
+  border-bottom-color:#4f46e5;
+}
+.contact-icon{display:none;}
+.contact-title{
+  font-size:0.9375rem;
+  font-weight:800;
+  color:#1e1b4b;
+  margin-bottom:0.375rem;
+  line-height:1.5;
+}
+.contact-sub{
+  font-size:0.8125rem;
+  color:#4b5563;
+  line-height:1.85;
+  margin-bottom:0.875rem;
+}
+.contact-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:0.375rem;
+  font-size:0.8125rem;
+  font-weight:700;
+  color:#fff;
+  text-decoration:none;
+  padding:0.625rem 1.125rem;
+  background:#4f46e5;
+  border-radius:999px;
+  transition:background 0.15s, transform 0.15s;
+}
+.contact-btn:hover{
+  background:#4338ca;
+  transform:translateY(-1px);
+}
+
+/* ===== CTA ===== */
+.yt-cta{text-align:center;padding:2.5rem 2rem;}
+.yt-cta-title{
+  font-size:clamp(1.25rem,3.5vw,1.5rem);
+  font-weight:900;color:#1e1b4b;margin-bottom:0.5rem;
+}
+.yt-cta-desc{font-size:0.875rem;color:#6b7280;margin-bottom:1.5rem;line-height:1.7;}
+.ob-btn{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  padding:0.875rem 2rem;border-radius:12px;
+  background:#4f46e5;color:#fff;font-weight:700;font-size:1rem;
+  border:none;cursor:pointer;transition:all 0.2s;text-decoration:none;font-family:inherit;
+}
+.ob-btn:hover{background:#4338ca;transform:translateY(-1px);box-shadow:0 4px 12px rgba(79,70,229,0.25);}
+.ob-btn-outline{background:transparent;color:#4f46e5;border:2px solid #e5e7eb;}
+.ob-btn-outline:hover{background:rgba(79,70,229,0.04);border-color:#4f46e5;box-shadow:none;transform:translateY(-1px);}
+
+/* ===== Time estimate badge ===== */
+.yt-time{
+  display:inline-flex;align-items:center;gap:0.375rem;
+  padding:0.5rem 1rem;border-radius:100px;
+  background:rgba(79,70,229,0.06);color:#4f46e5;
+  font-size:0.8125rem;font-weight:700;
+  margin:0.75rem auto 0;
+}
+
+/* ===== Footer ===== */
+.ob-footer{
+  text-align:center;padding:1.5rem;font-size:0.75rem;color:#9ca3af;
+}
+.ob-footer a{color:#6b7280;text-decoration:underline;text-underline-offset:2px;}
+.ob-footer a:hover{color:#4f46e5;}
+
+/* ===== Responsive ===== */
+@media(max-width:540px){
+  .ob-header{padding:2rem 1rem 1.5rem;}
+  .yt-section{padding:1.5rem 1.25rem;}
+  .dc-settings-side{width:120px;}
+  .dc-settings-main{padding:1rem;}
+  .ba-wrap{grid-template-columns:1fr;gap:1.25rem;}
+  .ba-arrow{transform:rotate(90deg);margin:0 auto;}
+  .yt-overview{gap:0.625rem;}
+  .yt-ov-icon{width:44px;height:44px;font-size:1.25rem;}
+  .yt-step-explain{margin-left:0;margin-top:0.25rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="ob-header">
+  <img class="ob-logo" src="img/fxspace-logo-horizontal.png" alt="FX SPACE">
+  <div class="ob-welcome-wrap">
+    <h1 class="ob-welcome">YouTubeメンバーシップを<br><span class="accent">Discord</span>につなごう</h1>
+    <img class="ob-welcome-wave" src="img/underline-wave.png" alt="">
+  </div>
+  <p class="ob-welcome-sub">YouTubeの「メンバーになる」ボタンで登録したあと、<br>Discordとつなげると<strong style="color:#1e1b4b;">メンバー限定の部屋</strong>に入れるようになります。</p>
+
+  <!-- Visual: YT → DC -->
+  <div class="yt-overview">
+    <div class="yt-ov-box">
+      <div class="yt-ov-icon yt">
+        <svg width="24" height="18" viewBox="0 0 24 18" fill="none"><rect width="24" height="18" rx="4" fill="#FF0000"/><polygon points="10,4 10,14 17,9" fill="#fff"/></svg>
+      </div>
+      <span class="yt-ov-label">YouTube</span>
+    </div>
+    <span class="yt-ov-arrow">&#x2192;</span>
+    <div class="yt-ov-box">
+      <div class="yt-ov-icon dc">
+        <svg width="22" height="17" viewBox="0 0 71 55" fill="none"><path d="M60.1 4.9A58.5 58.5 0 0045.3.2a.2.2 0 00-.2.1 41 41 0 00-1.8 3.7 54 54 0 00-16.2 0A39 39 0 0025.3.3a.2.2 0 00-.2-.1 58.4 58.4 0 00-14.8 4.6.2.2 0 00-.1.1C1.5 18.7-.9 32 .3 45.2v.1a58.7 58.7 0 0017.9 9.1.2.2 0 00.3-.1 42 42 0 003.6-5.9.2.2 0 00-.1-.3 38.6 38.6 0 01-5.5-2.6.2.2 0 01 0-.4l1.1-.9a.2.2 0 01.2 0 41.8 41.8 0 0035.6 0 .2.2 0 01.2 0l1.1.9a.2.2 0 010 .4 36.3 36.3 0 01-5.5 2.6.2.2 0 00-.1.3 47 47 0 003.6 5.9.2.2 0 00.3.1 58.5 58.5 0 0018-9.1v-.1c1.4-14.6-2.3-27.2-9.9-38.4a.2.2 0 00-.1-.1zM23.7 37c-3.3 0-6-3.1-6-6.8s2.7-6.8 6-6.8 6.1 3.1 6 6.8c0 3.7-2.7 6.8-6 6.8zm22.2 0c-3.3 0-6-3.1-6-6.8s2.7-6.8 6-6.8 6.1 3.1 6 6.8c0 3.7-2.6 6.8-6 6.8z" fill="#5865F2"/></svg>
+      </div>
+      <span class="yt-ov-label">Discord</span>
+    </div>
+  </div>
+
+</header>
+
+<main class="yt-main">
+
+  <!-- Device selector -->
+  <div class="device-tabs" role="tablist" aria-label="端末を選択">
+    <button class="device-tab" data-device-choice="pc" onclick="setDevice('pc')" role="tab">
+      <span class="device-tab-icon">&#x1F4BB;</span> パソコン
+    </button>
+    <button class="device-tab" data-device-choice="sp" onclick="setDevice('sp')" role="tab">
+      <span class="device-tab-icon">&#x1F4F1;</span> スマホ
+    </button>
+  </div>
+
+  <!-- ===== Section 0: What you need ===== -->
+  <section class="yt-section">
+    <div class="sec-head">
+      <div class="sec-num-big sec-num-amber">00</div>
+      <div class="sec-head-text">
+        <p class="sec-sub">はじめに確認</p>
+        <h2 class="yt-section-title">この2つはそろっていますか?</h2>
+      </div>
+    </div>
+    <p class="yt-section-desc">どちらもあればそのまま進めます。まだの人は先に登録してから戻ってきてください。</p>
+
+    <div class="prereq-list">
+      <div class="prereq-item prereq-yt">
+        <div class="prereq-icon-wrap">
+          <svg width="24" height="17" viewBox="0 0 24 18" fill="none"><rect width="24" height="18" rx="4" fill="#FF0000"/><polygon points="10,4 10,14 17,9" fill="#fff"/></svg>
+        </div>
+        <div class="prereq-body">
+          <div class="prereq-title">YouTubeメンバーシップ</div>
+          <div class="prereq-sub">よすがのYouTubeチャンネルで「メンバーになる」から加入したもの</div>
+        </div>
+        <a href="https://www.youtube.com/@fxyosuga/join" target="_blank" class="prereq-link-inline">
+          未加入の方<span class="prereq-arrow">&#x2192;</span>
+        </a>
+      </div>
+
+      <div class="prereq-item prereq-dc">
+        <div class="prereq-icon-wrap">
+          <svg width="22" height="17" viewBox="0 0 71 55" fill="none"><path d="M60.1 4.9A58.5 58.5 0 0045.3.2a.2.2 0 00-.2.1 41 41 0 00-1.8 3.7 54 54 0 00-16.2 0A39 39 0 0025.3.3a.2.2 0 00-.2-.1 58.4 58.4 0 00-14.8 4.6.2.2 0 00-.1.1C1.5 18.7-.9 32 .3 45.2v.1a58.7 58.7 0 0017.9 9.1.2.2 0 00.3-.1 42 42 0 003.6-5.9.2.2 0 00-.1-.3 38.6 38.6 0 01-5.5-2.6.2.2 0 01 0-.4l1.1-.9a.2.2 0 01.2 0 41.8 41.8 0 0035.6 0 .2.2 0 01.2 0l1.1.9a.2.2 0 010 .4 36.3 36.3 0 01-5.5 2.6.2.2 0 00-.1.3 47 47 0 003.6 5.9.2.2 0 00.3.1 58.5 58.5 0 0018-9.1v-.1c1.4-14.6-2.3-27.2-9.9-38.4a.2.2 0 00-.1-.1zM23.7 37c-3.3 0-6-3.1-6-6.8s2.7-6.8 6-6.8 6.1 3.1 6 6.8c0 3.7-2.7 6.8-6 6.8zm22.2 0c-3.3 0-6-3.1-6-6.8s2.7-6.8 6-6.8 6.1 3.1 6 6.8c0 3.7-2.6 6.8-6 6.8z" fill="#5865F2"/></svg>
+        </div>
+        <div class="prereq-body">
+          <div class="prereq-title">Discordアカウント</div>
+          <div class="prereq-sub">FX SPACEサーバーに参加済みであればOK</div>
+        </div>
+        <a href="https://discord.com/register" target="_blank" class="prereq-link-inline">
+          未作成の方<span class="prereq-arrow">&#x2192;</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== STEP 1: Open Discord Settings ===== -->
+  <section class="yt-section">
+    <div class="sec-head">
+      <div class="sec-num-big">01<span class="sec-num-total">/02</span></div>
+      <div class="sec-head-text">
+        <h2 class="yt-section-title">Discordの「接続」画面を開いてYouTubeを選ぶ</h2>
+      </div>
+    </div>
+
+    <!-- ===== PC flow ===== -->
+    <div class="pc-only">
+      <div class="yt-step-wrap">
+        <div class="yt-step-head">
+          <span class="yt-step-num">1</span>
+          <span class="yt-step-title">左下の歯車マーク（ユーザー設定）をクリック</span>
+        </div>
+        <p class="yt-step-explain">Discordの画面の<strong>左下</strong>、あなたの名前の横にある小さな歯車マークをクリックします。これでユーザー設定画面が開きます。</p>
+
+        <!-- Mock: Discord PC bottom bar -->
+        <div class="mock">
+          <div class="dc-bottom-bar">
+            <div class="dc-avatar-sm">Y</div>
+            <div class="dc-user-info">
+              <div class="dc-user-name">あなたの名前</div>
+              <div class="dc-user-tag">オンライン</div>
+            </div>
+            <div class="dc-gear click-here" style="position:relative;">
+              <span class="click-label">ここをクリック</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.14 12.94c.04-.31.06-.63.06-.94 0-.31-.02-.63-.06-.94l2.03-1.58a.49.49 0 00.12-.61l-1.92-3.32a.49.49 0 00-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.48.48 0 00-.48-.41h-3.84a.48.48 0 00-.48.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96a.49.49 0 00-.59.22L2.74 8.87a.48.48 0 00.12.61l2.03 1.58c-.04.31-.06.63-.06.94s.02.63.06.94l-2.03 1.58a.49.49 0 00-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.48-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6A3.6 3.6 0 1112 8.4a3.6 3.6 0 010 7.2z"/></svg>
+            </div>
+          </div>
+          <div class="mock-caption">← Discord画面の左下の部分</div>
+        </div>
+      </div>
+
+      <div class="yt-step-connector"></div>
+
+      <div class="yt-step-wrap">
+        <div class="yt-step-head">
+          <span class="yt-step-num">2</span>
+          <span class="yt-step-title">左メニューから「接続」→ YouTubeアイコンをクリック</span>
+        </div>
+        <p class="yt-step-explain">ユーザー設定が開いたら、左のメニューを下にスクロールして<strong>「接続」</strong>をクリック。右側にたくさんのサービスのアイコンが出るので、その中の<strong>YouTubeアイコン</strong>をクリックします。</p>
+
+        <!-- Mock: Discord PC settings with sidebar -->
+        <div class="mock">
+          <div class="dc-settings">
+            <div class="dc-settings-side">
+              <div class="dc-settings-cat">ユーザー設定</div>
+              <div class="dc-settings-item">マイアカウント</div>
+              <div class="dc-settings-item">プロフィール</div>
+              <div class="dc-settings-item">プライバシー</div>
+              <div class="dc-settings-item">デバイス</div>
+              <div class="dc-settings-item active click-here order-1" style="position:relative;">
+                <span class="click-label"><span class="click-num">1</span>まずここ</span>
+                接続
+              </div>
+            </div>
+            <div class="dc-settings-main">
+              <h3>接続</h3>
+              <p style="font-size:0.75rem;color:#949ba4;margin-bottom:0.75rem;">他のサービスのアカウントとつなげることができます</p>
+              <div class="dc-conn-grid">
+                <div class="dc-conn-icon">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="#fff"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </div>
+                <div class="dc-conn-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M12 .3a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.5-1.4-1.3-1.8-1.3-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.7.3 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0012 .3z"/></svg>
+                </div>
+                <div class="dc-conn-icon click-here order-2" style="position:relative;">
+                  <span class="click-label"><span class="click-num">2</span>つぎにここ</span>
+                  <svg width="18" height="13" viewBox="0 0 24 18" fill="none"><rect width="24" height="18" rx="4" fill="#FF0000"/><polygon points="10,4 10,14 17,9" fill="#fff"/></svg>
+                </div>
+                <div class="dc-conn-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="#1DB954"><path d="M12 0a12 12 0 100 24 12 12 0 000-24zm5.5 17.3a.7.7 0 01-1 .3c-2.8-1.7-6.3-2.1-10.4-1.1a.7.7 0 11-.4-1.4c4.5-1 8.4-.6 11.5 1.3a.7.7 0 01.3 1zm1.5-3.3a.9.9 0 01-1.3.3c-3.2-2-8-2.5-11.8-1.4a.9.9 0 11-.5-1.7c4.3-1.3 9.6-.7 13.3 1.6a.9.9 0 01.3 1.2zm.1-3.4c-3.8-2.3-10.2-2.5-13.8-1.4a1.1 1.1 0 11-.6-2c4.2-1.3 11.1-1 15.5 1.6a1.1 1.1 0 01-.6 2 1 1 0 01-.5-.2z"/></svg>
+                </div>
+                <div class="dc-conn-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="#0077B5"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.3A1.8 1.8 0 116.5 4.8a1.8 1.8 0 010 3.5zM20 19h-3v-4.4c0-1-.4-1.7-1.3-1.7-.7 0-1.1.5-1.3 1-.1.2-.1.4-.1.6V19h-3v-9h3v1.2c.4-.6 1.1-1.5 2.7-1.5 2 0 3 1.3 3 4V19z"/></svg>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mock-caption">← ユーザー設定画面（PC）</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== SP flow ===== -->
+    <div class="sp-only">
+      <div class="yt-step-wrap">
+        <div class="yt-step-head">
+          <span class="yt-step-num">1</span>
+          <span class="yt-step-title">右下の「あなた」タブ → 「接続」をタップ</span>
+        </div>
+        <p class="yt-step-explain">Discordアプリを開いたら、画面の一番下にある<strong>「あなた」</strong>タブ（自分のアイコン）をタップ。すると自分のプロフィール画面が開くので、下にスクロールして<strong>「接続」</strong>の項目をタップします。</p>
+
+        <!-- Mock: Mobile あなた page -->
+        <div class="mock" style="border:none;background:none;">
+          <div class="mob-frame">
+            <div class="mob-statusbar"><span>9:41</span><span>&#x1F4F6; &#x1F50B;</span></div>
+
+            <!-- Profile banner -->
+            <div class="mob-profile-banner">
+              <div class="mob-gear-top-right">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.14 12.94c.04-.31.06-.63.06-.94 0-.31-.02-.63-.06-.94l2.03-1.58a.49.49 0 00.12-.61l-1.92-3.32a.49.49 0 00-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.48.48 0 00-.48-.41h-3.84a.48.48 0 00-.48.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96a.49.49 0 00-.59.22L2.74 8.87a.48.48 0 00.12.61l2.03 1.58c-.04.31-.06.63-.06.94s.02.63.06.94l-2.03 1.58a.49.49 0 00-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.48-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6A3.6 3.6 0 1112 8.4a3.6 3.6 0 010 7.2z"/></svg>
+              </div>
+              <div class="mob-profile-av">Y</div>
+              <div class="mob-profile-name">あなたの名前</div>
+              <div class="mob-profile-sub">&#x1F7E2; オンライン</div>
+            </div>
+
+            <!-- Settings rows -->
+            <div class="mob-settings">
+              <div class="mob-settings-row">
+                <span class="mob-settings-row-icon">&#x1F464;</span>
+                <span class="mob-settings-row-label">アカウント</span>
+                <span class="mob-settings-row-arrow">&#x203A;</span>
+              </div>
+              <div class="mob-settings-row">
+                <span class="mob-settings-row-icon">&#x1F512;</span>
+                <span class="mob-settings-row-label">プライバシーと安全</span>
+                <span class="mob-settings-row-arrow">&#x203A;</span>
+              </div>
+              <div class="mob-settings-row click-here order-2" style="position:relative;">
+                <span class="click-label"><span class="click-num">2</span>つぎにここ</span>
+                <span class="mob-settings-row-icon">&#x1F517;</span>
+                <span class="mob-settings-row-label">接続</span>
+                <span class="mob-settings-row-arrow">&#x203A;</span>
+              </div>
+              <div class="mob-settings-row">
+                <span class="mob-settings-row-icon">&#x1F514;</span>
+                <span class="mob-settings-row-label">通知</span>
+                <span class="mob-settings-row-arrow">&#x203A;</span>
+              </div>
+            </div>
+
+            <!-- Bottom tabs -->
+            <div class="mob-bottom-tabs">
+              <div class="mob-tab">
+                <span class="mob-tab-icon">&#x1F4AC;</span>
+                <span>サーバー</span>
+              </div>
+              <div class="mob-tab">
+                <span class="mob-tab-icon">&#x2709;&#xFE0F;</span>
+                <span>メッセージ</span>
+              </div>
+              <div class="mob-tab">
+                <span class="mob-tab-icon">&#x1F514;</span>
+                <span>通知</span>
+              </div>
+              <div class="mob-tab active click-here order-1" style="position:relative;">
+                <span class="click-label" style="top:-24px;right:50%;transform:translateX(50%);"><span class="click-num">1</span>まずここ</span>
+                <div class="mob-tab-avatar">Y</div>
+                <span>あなた</span>
+              </div>
+            </div>
+          </div>
+          <div class="mock-caption">← Discordアプリの「あなた」画面（スマホ）</div>
+        </div>
+      </div>
+
+      <div class="yt-step-connector"></div>
+
+      <div class="yt-step-wrap">
+        <div class="yt-step-head">
+          <span class="yt-step-num">2</span>
+          <span class="yt-step-title">右上の「＋追加」→ リストから「YouTube」をタップ</span>
+        </div>
+        <p class="yt-step-explain">接続画面が開いたら、画面<strong>右上の「＋」（追加）</strong>をタップ。出てきたサービス一覧を<strong>下にスクロール</strong>して、<strong>「YouTube」</strong>を見つけてタップします。</p>
+
+        <!-- Mock: Mobile Connections → Add service list -->
+        <div class="mock" style="border:none;background:none;">
+          <div class="mob-frame">
+            <div class="mob-statusbar"><span>9:41</span><span>&#x1F4F6; &#x1F50B;</span></div>
+
+            <!-- Header with + button -->
+            <div class="mob-header-bar">
+              <span class="mob-header-back">&#x2039;</span>
+              <span class="mob-header-title">接続</span>
+              <span class="mob-header-action click-here order-1" style="position:relative;">
+                <span class="click-label"><span class="click-num">1</span>まずここ</span>
+                +
+              </span>
+            </div>
+
+            <!-- Add service list -->
+            <div class="mob-conn-list">
+              <div class="mob-conn-list-empty">接続を追加</div>
+              <div class="mob-conn-row">
+                <span class="mob-conn-row-icon">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </span>
+                <span class="mob-conn-row-name">X</span>
+              </div>
+              <div class="mob-conn-row">
+                <span class="mob-conn-row-icon">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M12 .3a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.5-1.4-1.3-1.8-1.3-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.7.3 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0012 .3z"/></svg>
+                </span>
+                <span class="mob-conn-row-name">GitHub</span>
+              </div>
+              <div class="mob-conn-row">
+                <span class="mob-conn-row-icon">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="#1DB954"><path d="M12 0a12 12 0 100 24 12 12 0 000-24zm5.5 17.3a.7.7 0 01-1 .3c-2.8-1.7-6.3-2.1-10.4-1.1a.7.7 0 11-.4-1.4c4.5-1 8.4-.6 11.5 1.3a.7.7 0 01.3 1zm1.5-3.3a.9.9 0 01-1.3.3c-3.2-2-8-2.5-11.8-1.4a.9.9 0 11-.5-1.7c4.3-1.3 9.6-.7 13.3 1.6a.9.9 0 01.3 1.2zm.1-3.4c-3.8-2.3-10.2-2.5-13.8-1.4a1.1 1.1 0 11-.6-2c4.2-1.3 11.1-1 15.5 1.6a1.1 1.1 0 01-.6 2 1 1 0 01-.5-.2z"/></svg>
+                </span>
+                <span class="mob-conn-row-name">Spotify</span>
+              </div>
+              <div class="mob-conn-row click-here order-2" style="position:relative;">
+                <span class="click-label"><span class="click-num">2</span>つぎにここ</span>
+                <span class="mob-conn-row-icon">
+                  <svg width="16" height="12" viewBox="0 0 24 18" fill="none"><rect width="24" height="18" rx="4" fill="#FF0000"/><polygon points="10,4 10,14 17,9" fill="#fff"/></svg>
+                </span>
+                <span class="mob-conn-row-name">YouTube</span>
+              </div>
+              <div class="mob-conn-row">
+                <span class="mob-conn-row-icon">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="#9146FF"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
+                </span>
+                <span class="mob-conn-row-name">Twitch</span>
+              </div>
+            </div>
+          </div>
+          <div class="mock-caption">← 接続画面 → 追加リスト（スマホ）</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== STEP 2: Google Login ===== -->
+  <section class="yt-section">
+    <div class="sec-head">
+      <div class="sec-num-big">02<span class="sec-num-total">/02</span></div>
+      <div class="sec-head-text">
+        <h2 class="yt-section-title">Googleアカウントでログインしよう</h2>
+      </div>
+    </div>
+    <p class="yt-section-desc">YouTubeのアイコンをクリックすると、ブラウザ（ChromeやSafariなど）が自動で開いて、Googleのログイン画面が出てきます。</p>
+
+    <div class="yt-step-wrap">
+      <div class="yt-step-head">
+        <span class="yt-step-num">1</span>
+        <span class="yt-step-title">メンバーシップに登録したGoogleアカウントを選ぶ</span>
+      </div>
+      <p class="yt-step-explain">Googleのログイン画面が出たら、<strong>YouTubeのメンバーシップに登録したアカウント</strong>を選んでください。</p>
+
+      <!-- Mock: Google OAuth -->
+      <div class="mock" style="background:#f8f9fa;padding:1.25rem;">
+        <div class="g-oauth">
+          <div class="g-oauth-logo">
+            <svg width="24" height="24" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A10.998 10.998 0 0012 23z" fill="#34A853"/><path d="M5.84 14.09a6.6 6.6 0 010-4.18V7.07H2.18A10.998 10.998 0 001 12c0 1.78.43 3.46 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          </div>
+          <div class="g-oauth-title">アカウントの選択</div>
+          <div class="g-oauth-sub">Discord に移動するアカウントを<br>選択してください</div>
+          <div class="g-oauth-account click-here" style="position:relative;">
+            <span class="click-label">メンバーシップに登録した方を選ぶ</span>
+            <div class="g-oauth-av">Y</div>
+            <div>
+              <div class="g-oauth-email">yourname@gmail.com</div>
+              <div class="g-oauth-name">あなたの名前</div>
+            </div>
+          </div>
+          <div class="g-oauth-account" style="opacity:0.5;">
+            <div class="g-oauth-av" style="background:#999;">S</div>
+            <div>
+              <div class="g-oauth-email">sub-account@gmail.com</div>
+              <div class="g-oauth-name">サブアカウント</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="yt-step-connector"></div>
+
+    <div class="yt-step-wrap">
+      <div class="yt-step-head">
+        <span class="yt-step-num">2</span>
+        <span class="yt-step-title">「許可」ボタンをクリック</span>
+      </div>
+      <p class="yt-step-explain">次に、「DiscordがあなたのYouTubeの情報を見てもいいですか?」と聞かれる画面が出ます。<br><strong>「許可」</strong>ボタンをクリックすると、DiscordとYouTubeがつながります。</p>
+
+      <!-- Mock: Google OAuth Consent -->
+      <div class="mock" style="background:#f8f9fa;padding:1.25rem;">
+        <div class="g-consent">
+          <div class="g-consent-top">
+            <div class="g-consent-app-icon">
+              <svg width="18" height="14" viewBox="0 0 71 55" fill="none"><path d="M60.1 4.9A58.5 58.5 0 0045.3.2a.2.2 0 00-.2.1 41 41 0 00-1.8 3.7 54 54 0 00-16.2 0A39 39 0 0025.3.3a.2.2 0 00-.2-.1 58.4 58.4 0 00-14.8 4.6.2.2 0 00-.1.1C1.5 18.7-.9 32 .3 45.2v.1a58.7 58.7 0 0017.9 9.1.2.2 0 00.3-.1 42 42 0 003.6-5.9.2.2 0 00-.1-.3 38.6 38.6 0 01-5.5-2.6.2.2 0 01 0-.4l1.1-.9a.2.2 0 01.2 0 41.8 41.8 0 0035.6 0 .2.2 0 01.2 0l1.1.9a.2.2 0 010 .4 36.3 36.3 0 01-5.5 2.6.2.2 0 00-.1.3 47 47 0 003.6 5.9.2.2 0 00.3.1 58.5 58.5 0 0018-9.1v-.1c1.4-14.6-2.3-27.2-9.9-38.4a.2.2 0 00-.1-.1zM23.7 37c-3.3 0-6-3.1-6-6.8s2.7-6.8 6-6.8 6.1 3.1 6 6.8c0 3.7-2.7 6.8-6 6.8zm22.2 0c-3.3 0-6-3.1-6-6.8s2.7-6.8 6-6.8 6.1 3.1 6 6.8c0 3.7-2.6 6.8-6 6.8z" fill="#fff"/></svg>
+            </div>
+            <div>
+              <div class="g-consent-app-title">Discord がアクセスを<br>リクエストしています</div>
+            </div>
+          </div>
+
+          <div class="g-consent-account">
+            <div class="g-consent-account-av">Y</div>
+            <div class="g-consent-account-mail">yourname@gmail.com</div>
+          </div>
+
+          <div class="g-consent-ask">Discord に以下を許可します:</div>
+
+          <div class="g-consent-perm">
+            <span class="g-consent-perm-icon">&#x2714;</span>
+            <span>YouTube アカウントを表示する</span>
+          </div>
+          <div class="g-consent-perm">
+            <span class="g-consent-perm-icon">&#x2714;</span>
+            <span>メンバーシップ情報を確認する</span>
+          </div>
+
+          <div class="g-consent-actions">
+            <button class="g-consent-btn cancel">キャンセル</button>
+            <div class="click-here" style="position:relative;display:inline-block;">
+              <span class="click-label">ここをクリック</span>
+              <button class="g-consent-btn allow">許可</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="yt-warn">
+      <span class="yt-warn-icon">&#x26A0;&#xFE0F;</span>
+      <span class="yt-warn-text"><strong>Googleアカウントが2つ以上ある人は気をつけて</strong><br>YouTubeのメンバーシップに登録したのと違うアカウントでログインすると、メンバーだと認識されません。どのアカウントで登録したか分からない場合は、YouTubeアプリを開いて右上のアイコンをタップすると確認できます。</span>
+    </div>
+  </section>
+
+  <!-- ===== Result: Before / After ===== -->
+  <section class="yt-section">
+    <div class="sec-head">
+      <div class="sec-num-big sec-num-green">&#x2713;</div>
+      <div class="sec-head-text">
+        <p class="sec-sub sec-sub-green">設定完了</p>
+        <h2 class="yt-section-title">メンバー限定チャンネルが自動で開きます</h2>
+      </div>
+    </div>
+    <p class="yt-section-desc">接続が終わると、<strong>数分〜数十分</strong>でFX SPACEのDiscord内にメンバー限定の部屋（チャンネル）が自動で表示されるようになります。特別な操作はいりません。</p>
+
+    <!-- Before / After -->
+    <div class="ba-wrap">
+      <div class="ba-card before">
+        <div class="ba-label before">今</div>
+        <div class="dc-channels">
+          <div class="dc-ch-cat">&#x25BE; テキストチャンネル</div>
+          <div class="dc-ch"><span class="hash">#</span> はじめに</div>
+          <div class="dc-ch"><span class="hash">#</span> 自己紹介</div>
+          <div class="dc-ch"><span class="hash">#</span> 雑談</div>
+          <div class="dc-ch-cat" style="opacity:0.4;">&#x25BE; メンバー限定</div>
+          <div class="dc-ch locked"><span class="hash">#</span> ライブ分析 <span class="dc-ch-lock">&#x1F512;</span></div>
+          <div class="dc-ch locked"><span class="hash">#</span> メンバー雑談 <span class="dc-ch-lock">&#x1F512;</span></div>
+          <div class="dc-ch locked"><span class="hash">#</span> 質問部屋 <span class="dc-ch-lock">&#x1F512;</span></div>
+        </div>
+      </div>
+      <div class="ba-arrow">&#x2192;</div>
+      <div class="ba-card after">
+        <div class="ba-label after">接続完了後</div>
+        <div class="dc-channels">
+          <div class="dc-ch-cat">&#x25BE; テキストチャンネル</div>
+          <div class="dc-ch"><span class="hash">#</span> はじめに</div>
+          <div class="dc-ch"><span class="hash">#</span> 自己紹介</div>
+          <div class="dc-ch"><span class="hash">#</span> 雑談</div>
+          <div class="dc-ch-cat">&#x25BE; メンバー限定</div>
+          <div class="dc-ch new-visible"><span class="hash">#</span> ライブ分析 <span class="dc-new-badge">NEW</span></div>
+          <div class="dc-ch new-visible"><span class="hash">#</span> メンバー雑談 <span class="dc-new-badge">NEW</span></div>
+          <div class="dc-ch new-visible"><span class="hash">#</span> 質問部屋 <span class="dc-new-badge">NEW</span></div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="yt-section yt-cta">
+    <h2 class="yt-cta-title">設定できましたか?</h2>
+    <p class="yt-cta-desc">メンバー限定チャンネルで、一緒にトレードを学びましょう。</p>
+    <div style="display:flex;flex-direction:column;gap:0.75rem;align-items:center;">
+      <a href="https://discord.com/channels/1039824083208126474" target="_blank" class="ob-btn">FX SPACE を開く &#x2192;</a>
+      <a href="onboarding.html" class="ob-btn ob-btn-outline">はじめてガイドに戻る</a>
+    </div>
+  </section>
+
+  <!-- ===== Troubleshooting ===== -->
+  <section class="yt-section">
+    <div class="sec-head">
+      <div class="sec-num-big sec-num-gray">?</div>
+      <div class="sec-head-text">
+        <p class="sec-sub">よくある質問</p>
+        <h2 class="yt-section-title">困ったときは</h2>
+      </div>
+    </div>
+
+    <div class="yt-faq-list">
+
+    <div class="yt-faq-item">
+      <div class="yt-faq-q" onclick="toggleFaq(this)">
+        <span class="yt-faq-q-label">Q</span>
+        <span class="yt-faq-q-text">接続したのにメンバー限定チャンネルがすぐに見えない</span>
+        <span class="yt-faq-arrow">+</span>
+      </div>
+      <div class="yt-faq-a">接続が成功してから、メンバー限定チャンネルが表示されるまでに<strong>数分〜数十分</strong>かかることがあります。少し時間をおいてからDiscordアプリを再起動してみてください。<br><br>それでも表示されない場合は、違うGoogleアカウントで接続してしまっている可能性があります。下の項目もチェックしてみてください。</div>
+    </div>
+
+    <div class="yt-faq-item">
+      <div class="yt-faq-q" onclick="toggleFaq(this)">
+        <span class="yt-faq-q-label">Q</span>
+        <span class="yt-faq-q-text">YouTubeのアイコンが見つからない</span>
+        <span class="yt-faq-arrow">+</span>
+      </div>
+      <div class="yt-faq-a">Discordアプリが古いバージョンだと表示されないことがあります。<strong>Discordを最新版にアップデート</strong>してからもう一度やってみてください。<br>パソコン版の場合は、キーボードの <strong>Ctrl + R</strong>（Macの場合は Cmd + R）を押すとアプリが更新されます。</div>
+    </div>
+
+    <div class="yt-faq-item">
+      <div class="yt-faq-q" onclick="toggleFaq(this)">
+        <span class="yt-faq-q-label">Q</span>
+        <span class="yt-faq-q-text">しばらく待っても限定チャンネルが表示されない</span>
+        <span class="yt-faq-arrow">+</span>
+      </div>
+      <div class="yt-faq-a">よくある原因は、<strong>YouTubeメンバーシップに加入していないGoogleアカウント</strong>でDiscordと接続してしまうケースです。<br><br><strong>解決方法:</strong> Discordの設定 → 接続 から、YouTubeの接続を<strong>一度解除（×ボタン）</strong>して、メンバーシップに加入している正しいGoogleアカウントでもう一度接続し直してください。</div>
+    </div>
+
+    <div class="yt-faq-item">
+      <div class="yt-faq-q" onclick="toggleFaq(this)">
+        <span class="yt-faq-q-label">Q</span>
+        <span class="yt-faq-q-text">どのGoogleアカウントでメンバーシップに登録したか分からない</span>
+        <span class="yt-faq-arrow">+</span>
+      </div>
+      <div class="yt-faq-a">YouTubeアプリを開いて右上のアイコンをタップ → 「購入とメンバーシップ」から、どのアカウントで加入しているか確認できます。</div>
+    </div>
+
+    <div class="yt-faq-item">
+      <div class="yt-faq-q" onclick="toggleFaq(this)">
+        <span class="yt-faq-q-label">Q</span>
+        <span class="yt-faq-q-text">「接続できません」「エラー」と表示される</span>
+        <span class="yt-faq-arrow">+</span>
+      </div>
+      <div class="yt-faq-a">ブラウザが新しい画面を開くのをブロックしている（ポップアップブロック）場合に起きます。<br><strong>解決方法:</strong> ブラウザの設定でポップアップを許可するか、別のブラウザ（Chrome、Safariなど）で試してみてください。</div>
+    </div>
+
+    <div class="yt-faq-item">
+      <div class="yt-faq-q" onclick="toggleFaq(this)">
+        <span class="yt-faq-q-label">Q</span>
+        <span class="yt-faq-q-text">今まで見えていたメンバー限定チャンネルが急に見えなくなった</span>
+        <span class="yt-faq-arrow">+</span>
+      </div>
+      <div class="yt-faq-a">YouTubeメンバーシップの<strong>支払いがうまくいかなかった</strong>場合や、<strong>メンバーシップを解約</strong>した場合に、自動で限定チャンネルから外されます。<br>YouTubeアプリを開いて、自分のアイコン → 「購入とメンバーシップ」から、メンバーシップの状態を確認してみてください。</div>
+    </div>
+
+    </div><!-- /.yt-faq-list -->
+
+    <!-- Primary: AI chat callout -->
+    <div class="contact-box">
+      <div class="contact-title">分からないことがあれば</div>
+      <div class="contact-sub">すぐに回答が返ってきます。<br>24時間いつでも、気軽にチャットで聞いてみて<span style="white-space:nowrap;">ください。</span></div>
+      <a href="#" target="_blank" class="contact-btn">
+        チャットで聞いてみる &#x2192;
+      </a>
+    </div>
+
+    <!-- Secondary: contact button -->
+    <div class="contact-secondary">
+      <a href="#" target="_blank" class="contact-secondary-btn">
+        お問い合わせはこちら &#x2192;
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="ob-footer">
+  <a href="index.html">FX SPACE トップへ &#x2192;</a>
+</footer>
+
+<script>
+// Device selector
+function setDevice(device){
+  document.body.setAttribute('data-device', device);
+  document.querySelectorAll('.device-tab').forEach(function(b){
+    b.classList.toggle('active', b.getAttribute('data-device-choice') === device);
+  });
+  try { localStorage.setItem('yt-connect-device', device); } catch(e){}
+}
+(function initDevice(){
+  var saved = null;
+  try { saved = localStorage.getItem('yt-connect-device'); } catch(e){}
+  // 自動判別はしない。ユーザーが選べるようにデフォルトはPC、保存があればそれを優先
+  setDevice(saved || 'pc');
+})();
+
+function toggleFaq(el) {
+  var item = el.closest('.yt-faq-item');
+  var wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.yt-faq-item').forEach(function(f) {
+    f.classList.remove('open');
+  });
+  if (!wasOpen) item.classList.add('open');
+}
+
+// Scroll reveal
+(function(){
+  var sections = document.querySelectorAll('.yt-section');
+  sections.forEach(function(s){ s.classList.add('reveal'); });
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    sections.forEach(function(s){ io.observe(s); });
+  } else {
+    sections.forEach(function(s){ s.classList.add('visible'); });
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FX SPACE - 経験ゼロから、最短でプロへ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ===== Reset & Base ===== */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{
+  font-family:'Inter','Noto Sans JP',sans-serif;
+  background:#07090e;
+  color:#e8eaf0;
+  line-height:1.7;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+
+/* ===== Navigation ===== */
+.lp-nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:1rem 2rem;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(7,9,14,0.6);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  transition:background 0.3s;
+}
+.lp-nav-logo{
+  font-size:1.25rem;font-weight:900;letter-spacing:-0.02em;
+  background:linear-gradient(135deg,#a78bfa,#60a5fa);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.lp-nav-links{display:flex;gap:2rem;align-items:center;font-size:0.9rem;font-weight:600;color:rgba(255,255,255,0.6)}
+.lp-nav-links a:hover{color:#fff}
+.lp-nav-cta{
+  padding:0.5rem 1.25rem;border-radius:8px;
+  background:linear-gradient(135deg,#7c3aed,#3b82f6);
+  color:#fff;font-weight:700;font-size:0.85rem;
+  transition:opacity 0.2s;
+}
+.lp-nav-cta:hover{opacity:0.85}
+
+/* ===== Hero ===== */
+.lp-hero{
+  position:relative;
+  min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;
+  overflow:hidden;
+}
+.lp-hero-bg{
+  position:absolute;inset:0;z-index:0;
+}
+.lp-hero-bg canvas{
+  width:100%;height:100%;display:block;
+}
+.lp-hero-overlay{
+  position:absolute;inset:0;z-index:1;
+  background:radial-gradient(ellipse at 50% 50%,transparent 0%,rgba(7,9,14,0.4) 60%,rgba(7,9,14,0.85) 100%);
+}
+.lp-hero-content{
+  position:relative;z-index:2;
+  max-width:900px;padding:2rem;
+}
+.lp-hero-badge{
+  display:inline-block;
+  padding:0.35rem 1rem;border-radius:100px;
+  background:rgba(124,58,237,0.15);
+  border:1px solid rgba(124,58,237,0.3);
+  font-size:0.8rem;font-weight:700;color:#a78bfa;
+  letter-spacing:0.04em;
+  margin-bottom:1.5rem;
+  animation:lpFadeInUp 0.8s ease both;
+}
+.lp-hero h1{
+  font-size:clamp(2.5rem,6vw,4.5rem);
+  font-weight:900;
+  letter-spacing:-0.03em;
+  line-height:1.15;
+  margin-bottom:1.25rem;
+  animation:lpFadeInUp 0.8s 0.15s ease both;
+}
+.lp-hero h1 .accent{
+  background:linear-gradient(135deg,#a78bfa 0%,#60a5fa 50%,#34d399 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.lp-hero-sub{
+  font-size:clamp(1rem,2vw,1.3rem);
+  color:rgba(255,255,255,0.55);
+  max-width:600px;margin:0 auto 2.5rem;
+  line-height:1.8;
+  animation:lpFadeInUp 0.8s 0.3s ease both;
+}
+.lp-hero-cta-group{
+  display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;
+  animation:lpFadeInUp 0.8s 0.45s ease both;
+}
+.lp-btn-primary{
+  padding:0.85rem 2.25rem;border-radius:12px;
+  background:linear-gradient(135deg,#7c3aed,#3b82f6);
+  color:#fff;font-weight:700;font-size:1rem;
+  border:none;cursor:pointer;
+  transition:transform 0.2s,box-shadow 0.2s;
+  box-shadow:0 0 30px rgba(124,58,237,0.3);
+}
+.lp-btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 40px rgba(124,58,237,0.5)}
+.lp-btn-secondary{
+  padding:0.85rem 2.25rem;border-radius:12px;
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.12);
+  color:#fff;font-weight:700;font-size:1rem;
+  cursor:pointer;transition:background 0.2s;
+}
+.lp-btn-secondary:hover{background:rgba(255,255,255,0.12)}
+
+/* ===== Section Commons ===== */
+.lp-section{
+  padding:8rem 2rem;
+  max-width:1200px;margin:0 auto;
+}
+.lp-section-label{
+  display:inline-block;
+  padding:0.3rem 0.85rem;border-radius:100px;
+  font-size:0.75rem;font-weight:700;letter-spacing:0.06em;
+  text-transform:uppercase;
+  margin-bottom:1rem;
+}
+.lp-section-title{
+  font-size:clamp(2rem,4vw,3rem);
+  font-weight:900;letter-spacing:-0.03em;line-height:1.2;
+  margin-bottom:1rem;
+}
+.lp-section-desc{
+  font-size:1.1rem;color:rgba(255,255,255,0.5);
+  max-width:640px;line-height:1.8;margin-bottom:3.5rem;
+}
+.lp-section-desc.center{margin-left:auto;margin-right:auto;text-align:center}
+
+/* Fade-in on scroll */
+.lp-reveal{opacity:0;transform:translateY(40px);transition:opacity 0.7s ease,transform 0.7s ease}
+.lp-reveal.visible{opacity:1;transform:translateY(0)}
+.lp-reveal-delay-1{transition-delay:0.1s}
+.lp-reveal-delay-2{transition-delay:0.2s}
+.lp-reveal-delay-3{transition-delay:0.3s}
+.lp-reveal-delay-4{transition-delay:0.4s}
+
+/* ===== Ecosystem Section ===== */
+.lp-eco{
+  position:relative;
+  text-align:center;
+  padding-top:6rem;
+}
+.lp-eco::before{
+  content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:1px;height:4rem;
+  background:linear-gradient(to bottom,transparent,rgba(124,58,237,0.4));
+}
+.lp-eco .lp-section-label{background:rgba(124,58,237,0.12);color:#a78bfa;border:1px solid rgba(124,58,237,0.2)}
+.lp-eco-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:1.5rem;
+  margin-top:3rem;
+}
+.lp-eco-card{
+  position:relative;
+  padding:2.5rem 2rem;
+  border-radius:20px;
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.06);
+  text-align:left;
+  overflow:hidden;
+  transition:border-color 0.3s,transform 0.3s;
+}
+.lp-eco-card:hover{
+  border-color:rgba(255,255,255,0.12);
+  transform:translateY(-4px);
+}
+.lp-eco-card-glow{
+  position:absolute;top:-40%;left:-20%;width:140%;height:140%;
+  border-radius:50%;
+  opacity:0;
+  transition:opacity 0.4s;
+  pointer-events:none;
+  filter:blur(60px);
+}
+.lp-eco-card:hover .lp-eco-card-glow{opacity:1}
+.lp-eco-card-icon{
+  width:48px;height:48px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.4rem;
+  margin-bottom:1.25rem;
+}
+.lp-eco-card h3{
+  font-size:1.2rem;font-weight:800;margin-bottom:0.6rem;
+  letter-spacing:-0.01em;
+}
+.lp-eco-card p{
+  font-size:0.95rem;color:rgba(255,255,255,0.45);line-height:1.7;
+}
+
+/* Card color variants */
+.lp-eco-card--purple .lp-eco-card-glow{background:rgba(124,58,237,0.08)}
+.lp-eco-card--purple .lp-eco-card-icon{background:rgba(124,58,237,0.15);color:#a78bfa}
+.lp-eco-card--blue .lp-eco-card-glow{background:rgba(59,130,246,0.08)}
+.lp-eco-card--blue .lp-eco-card-icon{background:rgba(59,130,246,0.15);color:#60a5fa}
+.lp-eco-card--orange .lp-eco-card-glow{background:rgba(251,146,60,0.08)}
+.lp-eco-card--orange .lp-eco-card-icon{background:rgba(251,146,60,0.15);color:#fb923c}
+.lp-eco-card--green .lp-eco-card-glow{background:rgba(52,211,153,0.08)}
+.lp-eco-card--green .lp-eco-card-icon{background:rgba(52,211,153,0.15);color:#34d399}
+.lp-eco-card--pink .lp-eco-card-glow{background:rgba(244,114,182,0.08)}
+.lp-eco-card--pink .lp-eco-card-icon{background:rgba(244,114,182,0.15);color:#f472b6}
+
+/* ===== How It Works (Flow) ===== */
+.lp-flow{
+  position:relative;
+  text-align:center;
+}
+.lp-flow .lp-section-label{background:rgba(59,130,246,0.12);color:#60a5fa;border:1px solid rgba(59,130,246,0.2)}
+.lp-flow-steps{
+  display:flex;gap:0;align-items:stretch;justify-content:center;
+  margin-top:3rem;flex-wrap:wrap;
+}
+.lp-flow-step{
+  flex:1;min-width:200px;max-width:260px;
+  padding:2.5rem 1.5rem;
+  position:relative;
+  text-align:center;
+}
+.lp-flow-step::after{
+  content:'';position:absolute;top:3.5rem;right:-1rem;
+  width:2rem;height:2px;
+  background:linear-gradient(to right,rgba(96,165,250,0.4),transparent);
+}
+.lp-flow-step:last-child::after{display:none}
+.lp-flow-num{
+  width:48px;height:48px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 1.25rem;
+  font-size:1.1rem;font-weight:900;
+  background:rgba(59,130,246,0.1);color:#60a5fa;
+  border:1px solid rgba(59,130,246,0.2);
+}
+.lp-flow-step h3{font-size:1.05rem;font-weight:800;margin-bottom:0.5rem}
+.lp-flow-step p{font-size:0.88rem;color:rgba(255,255,255,0.4);line-height:1.7}
+
+/* ===== Highlight Section ===== */
+.lp-highlight{
+  position:relative;
+  border-radius:32px;
+  overflow:hidden;
+  margin:0 auto;
+  max-width:1200px;
+  padding:6rem 4rem;
+  background:linear-gradient(135deg,rgba(124,58,237,0.08),rgba(59,130,246,0.08));
+  border:1px solid rgba(255,255,255,0.06);
+}
+.lp-highlight-glow{
+  position:absolute;top:-200px;right:-200px;
+  width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,rgba(124,58,237,0.12),transparent 70%);
+  pointer-events:none;
+}
+.lp-highlight .lp-section-label{background:rgba(251,146,60,0.12);color:#fb923c;border:1px solid rgba(251,146,60,0.2)}
+.lp-highlight-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;
+  margin-top:2rem;
+}
+.lp-highlight-text h3{
+  font-size:1.6rem;font-weight:800;margin-bottom:1rem;
+  letter-spacing:-0.02em;
+}
+.lp-highlight-text p{
+  font-size:1rem;color:rgba(255,255,255,0.5);line-height:1.8;
+  margin-bottom:1.5rem;
+}
+.lp-highlight-features{list-style:none;display:flex;flex-direction:column;gap:0.75rem}
+.lp-highlight-features li{
+  display:flex;align-items:center;gap:0.75rem;
+  font-size:0.95rem;color:rgba(255,255,255,0.7);
+}
+.lp-highlight-features li::before{
+  content:'';width:6px;height:6px;border-radius:50%;
+  background:#fb923c;flex-shrink:0;
+}
+.lp-highlight-visual{
+  position:relative;
+  border-radius:20px;
+  overflow:hidden;
+  aspect-ratio:4/3;
+  background:rgba(0,0,0,0.3);
+  border:1px solid rgba(255,255,255,0.08);
+  display:flex;align-items:center;justify-content:center;
+}
+.lp-highlight-visual canvas{width:100%;height:100%;display:block}
+
+/* ===== Testimonial / Social Proof ===== */
+.lp-social{text-align:center}
+.lp-social .lp-section-label{background:rgba(52,211,153,0.12);color:#34d399;border:1px solid rgba(52,211,153,0.2)}
+.lp-stats{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;
+  margin-top:3rem;margin-bottom:4rem;
+}
+.lp-stat{
+  padding:2.5rem 1.5rem;
+  border-radius:20px;
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.06);
+}
+.lp-stat-num{
+  font-size:clamp(2rem,4vw,3rem);font-weight:900;
+  letter-spacing:-0.03em;
+  margin-bottom:0.5rem;
+}
+.lp-stat-num.purple{color:#a78bfa}
+.lp-stat-num.blue{color:#60a5fa}
+.lp-stat-num.green{color:#34d399}
+.lp-stat-label{font-size:0.95rem;color:rgba(255,255,255,0.45)}
+
+.lp-testimonials{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;
+  text-align:left;
+}
+.lp-testimonial{
+  padding:2rem;border-radius:20px;
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.06);
+}
+.lp-testimonial p{
+  font-size:0.95rem;color:rgba(255,255,255,0.6);line-height:1.8;
+  margin-bottom:1.25rem;font-style:italic;
+}
+.lp-testimonial-author{
+  font-size:0.85rem;font-weight:700;color:rgba(255,255,255,0.8);
+}
+.lp-testimonial-meta{font-size:0.8rem;color:rgba(255,255,255,0.35);margin-top:0.15rem}
+
+/* ===== Founder ===== */
+.lp-founder{
+  display:grid;grid-template-columns:auto 1fr;gap:3rem;align-items:center;
+  max-width:900px;margin:0 auto;
+  padding:4rem;border-radius:24px;
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.06);
+}
+.lp-founder-img{
+  width:140px;height:140px;border-radius:50%;
+  background:linear-gradient(135deg,rgba(124,58,237,0.3),rgba(59,130,246,0.3));
+  display:flex;align-items:center;justify-content:center;
+  font-size:3rem;color:#a78bfa;
+  border:3px solid rgba(124,58,237,0.2);
+}
+.lp-founder h3{font-size:1.5rem;font-weight:900;margin-bottom:0.5rem}
+.lp-founder-role{font-size:0.9rem;color:#a78bfa;font-weight:700;margin-bottom:1rem}
+.lp-founder p{font-size:0.95rem;color:rgba(255,255,255,0.5);line-height:1.8}
+
+/* ===== Pricing ===== */
+.lp-pricing{text-align:center}
+.lp-pricing .lp-section-label{background:rgba(244,114,182,0.12);color:#f472b6;border:1px solid rgba(244,114,182,0.2)}
+.lp-pricing-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;
+  margin-top:3rem;max-width:900px;margin-left:auto;margin-right:auto;
+}
+.lp-price-card{
+  padding:2.5rem 2rem;border-radius:20px;
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.06);
+  text-align:left;
+  transition:border-color 0.3s;
+}
+.lp-price-card--featured{
+  border-color:rgba(124,58,237,0.4);
+  background:linear-gradient(135deg,rgba(124,58,237,0.06),rgba(59,130,246,0.06));
+}
+.lp-price-card-name{font-size:1.1rem;font-weight:800;margin-bottom:0.75rem}
+.lp-price-card-price{
+  font-size:2.5rem;font-weight:900;letter-spacing:-0.03em;
+  margin-bottom:0.25rem;
+}
+.lp-price-card-price span{font-size:1rem;font-weight:600;color:rgba(255,255,255,0.4)}
+.lp-price-card-desc{font-size:0.88rem;color:rgba(255,255,255,0.4);margin-bottom:1.5rem;line-height:1.6}
+.lp-price-card-features{list-style:none;display:flex;flex-direction:column;gap:0.6rem;margin-bottom:2rem}
+.lp-price-card-features li{
+  font-size:0.9rem;color:rgba(255,255,255,0.6);
+  display:flex;align-items:center;gap:0.6rem;
+}
+.lp-price-card-features li .check{color:#34d399;font-weight:900;font-size:1rem}
+.lp-price-card .lp-btn-primary{width:100%;text-align:center;display:block}
+.lp-price-card .lp-btn-secondary{width:100%;text-align:center;display:block}
+
+/* ===== Final CTA ===== */
+.lp-final-cta{
+  text-align:center;
+  padding:10rem 2rem;
+  position:relative;
+  overflow:hidden;
+}
+.lp-final-cta-bg{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 80%,rgba(124,58,237,0.15),transparent 60%),
+             radial-gradient(ellipse at 30% 50%,rgba(59,130,246,0.1),transparent 50%);
+  pointer-events:none;
+}
+.lp-final-cta h2{
+  font-size:clamp(2rem,5vw,3.5rem);
+  font-weight:900;letter-spacing:-0.03em;line-height:1.2;
+  margin-bottom:1.25rem;position:relative;
+}
+.lp-final-cta p{
+  font-size:1.1rem;color:rgba(255,255,255,0.45);
+  margin-bottom:2.5rem;position:relative;
+}
+
+/* ===== Footer ===== */
+.lp-footer{
+  border-top:1px solid rgba(255,255,255,0.06);
+  padding:3rem 2rem;text-align:center;
+  font-size:0.85rem;color:rgba(255,255,255,0.3);
+}
+
+/* ===== Dividers ===== */
+.lp-divider{
+  width:100%;max-width:1200px;margin:0 auto;
+  height:1px;
+  background:linear-gradient(to right,transparent,rgba(255,255,255,0.06),transparent);
+}
+
+/* ===== Keyframes ===== */
+@keyframes lpFadeInUp{
+  from{opacity:0;transform:translateY(30px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* ===== Responsive ===== */
+@media(max-width:768px){
+  .lp-nav-links{display:none}
+  .lp-section{padding:5rem 1.25rem}
+  .lp-highlight{padding:3rem 1.5rem;border-radius:20px}
+  .lp-highlight-grid{grid-template-columns:1fr;gap:2rem}
+  .lp-flow-steps{flex-direction:column;align-items:center}
+  .lp-flow-step::after{display:none}
+  .lp-founder{grid-template-columns:1fr;text-align:center;padding:2.5rem 1.5rem}
+  .lp-founder-img{margin:0 auto}
+  .lp-stats{grid-template-columns:1fr}
+  .lp-pricing-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== Navigation ===== -->
+<nav class="lp-nav">
+  <div class="lp-nav-logo">FX SPACE</div>
+  <div class="lp-nav-links">
+    <a href="#ecosystem">Features</a>
+    <a href="#flow">Flow</a>
+    <a href="#ytt">YTT</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#cta" class="lp-nav-cta">Join Now</a>
+  </div>
+</nav>
+
+<!-- ===== Hero ===== -->
+<section class="lp-hero" id="hero">
+  <div class="lp-hero-bg"><canvas id="heroCanvas"></canvas></div>
+  <div class="lp-hero-overlay"></div>
+  <div class="lp-hero-content">
+    <div class="lp-hero-badge">FX Trading Ecosystem</div>
+    <h1>経験ゼロから、<br><span class="accent">最短でプロへ。</span></h1>
+    <p class="lp-hero-sub">
+      学習・分析・実践・仲間。<br>
+      FXで稼ぐために必要なすべてが、ここにある。
+    </p>
+    <div class="lp-hero-cta-group">
+      <a href="#pricing" class="lp-btn-primary">プランを見る</a>
+      <a href="#ecosystem" class="lp-btn-secondary">詳しく見る</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Ecosystem ===== -->
+<section class="lp-section lp-eco" id="ecosystem">
+  <div class="lp-reveal">
+    <span class="lp-section-label">ECOSYSTEM</span>
+    <h2 class="lp-section-title">5つのプロダクトが、<br>1つのシステムになる。</h2>
+    <p class="lp-section-desc center">
+      それぞれが独立した価値を持ちながら、すべてが連携して<br>
+      あなたのトレードスキルを最短で引き上げます。
+    </p>
+  </div>
+  <div class="lp-eco-grid">
+    <div class="lp-eco-card lp-eco-card--purple lp-reveal lp-reveal-delay-1">
+      <div class="lp-eco-card-glow"></div>
+      <div class="lp-eco-card-icon">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      </div>
+      <h3>eラーニング</h3>
+      <p>FXの基礎から実践まで体系的に学べる動画教材。自分のペースで何度でも復習可能。</p>
+    </div>
+    <div class="lp-eco-card lp-eco-card--blue lp-reveal lp-reveal-delay-2">
+      <div class="lp-eco-card-glow"></div>
+      <div class="lp-eco-card-icon">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      </div>
+      <h3>ゼロプロ90</h3>
+      <p>90日間でゼロからプロトレーダーへ。7つのステージを段階的にクリアしていく実践型プログラム。</p>
+    </div>
+    <div class="lp-eco-card lp-eco-card--orange lp-reveal lp-reveal-delay-3">
+      <div class="lp-eco-card-glow"></div>
+      <div class="lp-eco-card-icon">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      </div>
+      <h3>YTT（よすがトレードツール）</h3>
+      <p>チャート分析を劇的に効率化する独自ツール。プロの視点でマーケットを読み解く。</p>
+    </div>
+    <div class="lp-eco-card lp-eco-card--green lp-reveal lp-reveal-delay-4">
+      <div class="lp-eco-card-glow"></div>
+      <div class="lp-eco-card-icon">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <h3>コミュニティ</h3>
+      <p>同じ目標を持つ仲間と切磋琢磨。孤独なトレード学習を、チームの力で加速させる。</p>
+    </div>
+    <div class="lp-eco-card lp-eco-card--pink lp-reveal lp-reveal-delay-4">
+      <div class="lp-eco-card-glow"></div>
+      <div class="lp-eco-card-icon">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      </div>
+      <h3>Fintokei</h3>
+      <p>学んだスキルを実際の利益に。プロップトレーディングで資金提供を受けて稼ぐ道を拓く。</p>
+    </div>
+  </div>
+</section>
+
+<div class="lp-divider"></div>
+
+<!-- ===== How It Works ===== -->
+<section class="lp-section lp-flow" id="flow">
+  <div class="lp-reveal">
+    <span class="lp-section-label">HOW IT WORKS</span>
+    <h2 class="lp-section-title">学んで、分析して、稼ぐ。</h2>
+    <p class="lp-section-desc center">
+      あなたがやることはシンプル。<br>4つのステップを踏むだけ。
+    </p>
+  </div>
+  <div class="lp-flow-steps lp-reveal">
+    <div class="lp-flow-step">
+      <div class="lp-flow-num">1</div>
+      <h3>学ぶ</h3>
+      <p>eラーニングで基礎を固め、ゼロプロ90で実践力を磨く</p>
+    </div>
+    <div class="lp-flow-step">
+      <div class="lp-flow-num">2</div>
+      <h3>分析する</h3>
+      <p>YTTでチャートを読み解き、プロの視点を身につける</p>
+    </div>
+    <div class="lp-flow-step">
+      <div class="lp-flow-num">3</div>
+      <h3>仲間と磨く</h3>
+      <p>コミュニティで添削・質問。一人では気づけない視点を得る</p>
+    </div>
+    <div class="lp-flow-step">
+      <div class="lp-flow-num">4</div>
+      <h3>稼ぐ</h3>
+      <p>Fintokeiで資金提供を受け、実際に利益を手にする</p>
+    </div>
+  </div>
+</section>
+
+<div class="lp-divider"></div>
+
+<!-- ===== YTT Highlight ===== -->
+<section class="lp-section" id="ytt" style="padding-bottom:4rem">
+  <div class="lp-highlight lp-reveal">
+    <div class="lp-highlight-glow"></div>
+    <span class="lp-section-label">YTT - YOSHUGA TRADE TOOL</span>
+    <div class="lp-highlight-grid">
+      <div class="lp-highlight-text">
+        <h3>プロの分析を、<br>あなたの手に。</h3>
+        <p>
+          YTTは、FX SPACE独自のチャート分析ツール。
+          複雑なテクニカル分析を直感的に行い、
+          トレード判断の精度を飛躍的に高めます。
+        </p>
+        <ul class="lp-highlight-features">
+          <li>リアルタイムチャート分析</li>
+          <li>独自インジケーター搭載</li>
+          <li>シミュレーションモードで練習</li>
+          <li>添削結果をすぐに反映</li>
+        </ul>
+      </div>
+      <div class="lp-highlight-visual">
+        <canvas id="yttCanvas"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="lp-divider"></div>
+
+<!-- ===== Social Proof ===== -->
+<section class="lp-section lp-social" id="social">
+  <div class="lp-reveal">
+    <span class="lp-section-label">COMMUNITY</span>
+    <h2 class="lp-section-title">数字が証明する、成長の場。</h2>
+  </div>
+  <div class="lp-stats lp-reveal">
+    <div class="lp-stat">
+      <div class="lp-stat-num purple" data-count="500">0+</div>
+      <div class="lp-stat-label">メンバー数</div>
+    </div>
+    <div class="lp-stat">
+      <div class="lp-stat-num blue" data-count="90">0日</div>
+      <div class="lp-stat-label">プロ到達プログラム</div>
+    </div>
+    <div class="lp-stat">
+      <div class="lp-stat-num green" data-count="7">0+</div>
+      <div class="lp-stat-label">ステージ制の学習段階</div>
+    </div>
+  </div>
+  <div class="lp-testimonials lp-reveal">
+    <div class="lp-testimonial">
+      <p>「独学で2年間迷走していましたが、FX SPACEに入って3ヶ月で自分のトレードスタイルが確立できました。特にゼロプロ90の添削が効きました。」</p>
+      <div class="lp-testimonial-author">30代 会社員</div>
+      <div class="lp-testimonial-meta">ゼロプロ90 Stage 5 クリア</div>
+    </div>
+    <div class="lp-testimonial">
+      <p>「YTTの分析ツールが衝撃的。これまで何時間もかかっていたチャート分析が、直感的にできるようになりました。」</p>
+      <div class="lp-testimonial-author">40代 自営業</div>
+      <div class="lp-testimonial-meta">YTTヘビーユーザー</div>
+    </div>
+    <div class="lp-testimonial">
+      <p>「コミュニティの存在が大きい。同じ目標を持つ仲間がいるだけで、学習の継続力が全然違います。」</p>
+      <div class="lp-testimonial-author">20代 フリーランス</div>
+      <div class="lp-testimonial-meta">コミュニティ参加6ヶ月</div>
+    </div>
+  </div>
+</section>
+
+<div class="lp-divider"></div>
+
+<!-- ===== Founder ===== -->
+<section class="lp-section" id="founder">
+  <div class="lp-reveal" style="text-align:center;margin-bottom:3rem">
+    <span class="lp-section-label" style="background:rgba(124,58,237,0.12);color:#a78bfa;border:1px solid rgba(124,58,237,0.2)">FOUNDER</span>
+    <h2 class="lp-section-title">主宰者</h2>
+  </div>
+  <div class="lp-founder lp-reveal">
+    <div class="lp-founder-img">Y</div>
+    <div>
+      <h3>よすが</h3>
+      <div class="lp-founder-role">FX SPACE 主宰</div>
+      <p>
+        FXトレーダーとして長年の実績を持ち、多くのトレーダーを育成。
+        「正しい努力を、正しい順序で」をモットーに、
+        ゼロからプロトレーダーへの最短ルートを体系化。
+        FX SPACEのすべてのプロダクトの設計・監修を手がける。
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="lp-divider"></div>
+
+<!-- ===== Pricing ===== -->
+<section class="lp-section lp-pricing" id="pricing">
+  <div class="lp-reveal">
+    <span class="lp-section-label">PLANS & PRICING</span>
+    <h2 class="lp-section-title">あなたに合ったプランを。</h2>
+    <p class="lp-section-desc center">
+      すべてのプランでeラーニングとコミュニティが利用可能。
+    </p>
+  </div>
+  <div class="lp-pricing-grid lp-reveal">
+    <div class="lp-price-card">
+      <div class="lp-price-card-name">スタンダード</div>
+      <div class="lp-price-card-price">&yen;2,900<span>/月</span></div>
+      <div class="lp-price-card-desc">FXを基礎から学びたい方に</div>
+      <ul class="lp-price-card-features">
+        <li><span class="check">&#10003;</span>eラーニング全コース</li>
+        <li><span class="check">&#10003;</span>コミュニティ参加</li>
+        <li><span class="check">&#10003;</span>基本ツール利用</li>
+      </ul>
+      <a href="#" class="lp-btn-secondary">選択する</a>
+    </div>
+    <div class="lp-price-card lp-price-card--featured">
+      <div class="lp-price-card-name">プレミアム</div>
+      <div class="lp-price-card-price">&yen;5,410<span>/月</span></div>
+      <div class="lp-price-card-desc">本気でプロを目指す方に</div>
+      <ul class="lp-price-card-features">
+        <li><span class="check">&#10003;</span>スタンダードの全機能</li>
+        <li><span class="check">&#10003;</span>ゼロプロ90</li>
+        <li><span class="check">&#10003;</span>YTT フルアクセス</li>
+        <li><span class="check">&#10003;</span>添削・個別フィードバック</li>
+      </ul>
+      <a href="#" class="lp-btn-primary">選択する</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Final CTA ===== -->
+<section class="lp-final-cta" id="cta">
+  <div class="lp-final-cta-bg"></div>
+  <div class="lp-reveal">
+    <h2>さあ、最短ルートを<br>歩き始めよう。</h2>
+    <p>FX SPACEが、あなたの可能性を解放する。</p>
+    <a href="#pricing" class="lp-btn-primary">今すぐ始める</a>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer class="lp-footer">
+  <p>&copy; 2026 FX SPACE. All rights reserved.</p>
+</footer>
+
+<script>
+/* ===== Hero Background Animation ===== */
+(function(){
+  const canvas = document.getElementById('heroCanvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let w, h, orbs=[], mouse={x:0,y:0};
+
+  function resize(){
+    const dpr = Math.min(window.devicePixelRatio||1, 2);
+    const rect = canvas.parentElement.getBoundingClientRect();
+    w = rect.width; h = rect.height;
+    canvas.width = w * dpr; canvas.height = h * dpr;
+    canvas.style.width = w+'px'; canvas.style.height = h+'px';
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+
+  const colors = [
+    {r:124,g:58,b:237},   // purple
+    {r:59,g:130,b:246},   // blue
+    {r:52,g:211,b:153},   // green
+    {r:251,g:146,b:60},   // orange
+    {r:244,g:114,b:182},  // pink
+  ];
+
+  function createOrbs(){
+    orbs = [];
+    const count = Math.min(Math.floor(w*h/25000), 30);
+    for(let i=0; i<count; i++){
+      const c = colors[i % colors.length];
+      orbs.push({
+        x: Math.random()*w, y: Math.random()*h,
+        r: 80 + Math.random()*180,
+        vx: (Math.random()-0.5)*0.3,
+        vy: (Math.random()-0.5)*0.3,
+        color: c,
+        phase: Math.random()*Math.PI*2,
+        speed: 0.002 + Math.random()*0.003,
+      });
+    }
+  }
+
+  function draw(t){
+    ctx.clearRect(0,0,w,h);
+    for(const o of orbs){
+      o.phase += o.speed;
+      o.x += o.vx + Math.sin(o.phase)*0.3;
+      o.y += o.vy + Math.cos(o.phase*0.7)*0.3;
+      if(o.x < -o.r) o.x = w+o.r;
+      if(o.x > w+o.r) o.x = -o.r;
+      if(o.y < -o.r) o.y = h+o.r;
+      if(o.y > h+o.r) o.y = -o.r;
+
+      const alpha = 0.08 + Math.sin(o.phase)*0.03;
+      const grad = ctx.createRadialGradient(o.x,o.y,0,o.x,o.y,o.r);
+      grad.addColorStop(0,`rgba(${o.color.r},${o.color.g},${o.color.b},${alpha})`);
+      grad.addColorStop(1,`rgba(${o.color.r},${o.color.g},${o.color.b},0)`);
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(o.x,o.y,o.r,0,Math.PI*2);
+      ctx.fill();
+    }
+
+    /* connection lines between nearby orbs */
+    for(let i=0;i<orbs.length;i++){
+      for(let j=i+1;j<orbs.length;j++){
+        const dx=orbs[i].x-orbs[j].x, dy=orbs[i].y-orbs[j].y;
+        const dist=Math.sqrt(dx*dx+dy*dy);
+        if(dist<300){
+          const a = (1-dist/300)*0.06;
+          ctx.strokeStyle=`rgba(255,255,255,${a})`;
+          ctx.lineWidth=1;
+          ctx.beginPath();
+          ctx.moveTo(orbs[i].x,orbs[i].y);
+          ctx.lineTo(orbs[j].x,orbs[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize',()=>{resize();createOrbs()});
+  resize(); createOrbs(); draw(0);
+})();
+
+/* ===== YTT Mini Chart Animation ===== */
+(function(){
+  const canvas = document.getElementById('yttCanvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let w, h;
+
+  function resize(){
+    const dpr = Math.min(window.devicePixelRatio||1, 2);
+    const rect = canvas.parentElement.getBoundingClientRect();
+    w = rect.width; h = rect.height;
+    canvas.width = w*dpr; canvas.height = h*dpr;
+    canvas.style.width = w+'px'; canvas.style.height = h+'px';
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+
+  /* generate fake candlestick data */
+  const candles = [];
+  let price = 150;
+  for(let i=0; i<60; i++){
+    const open = price;
+    const change = (Math.random()-0.48)*2;
+    const close = open + change;
+    const high = Math.max(open,close) + Math.random()*1;
+    const low = Math.min(open,close) - Math.random()*1;
+    candles.push({o:open,h:high,l:low,c:close});
+    price = close;
+  }
+
+  let offset = 0;
+  function draw(){
+    ctx.clearRect(0,0,w,h);
+    offset += 0.015;
+
+    const candleW = w / 40;
+    const gap = candleW * 0.2;
+    const visibleCount = 40;
+    const startIdx = Math.floor(offset) % (candles.length - visibleCount);
+
+    /* find price range */
+    let minP=Infinity, maxP=-Infinity;
+    for(let i=0;i<visibleCount;i++){
+      const c = candles[(startIdx+i) % candles.length];
+      if(c.l<minP) minP=c.l;
+      if(c.h>maxP) maxP=c.h;
+    }
+    const range = maxP - minP || 1;
+    const py = p => h - ((p-minP)/range)*(h*0.8) - h*0.1;
+
+    /* grid */
+    ctx.strokeStyle='rgba(255,255,255,0.04)';
+    ctx.lineWidth=1;
+    for(let i=0;i<5;i++){
+      const y = h*0.1 + (h*0.8/4)*i;
+      ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();
+    }
+
+    /* candles */
+    for(let i=0;i<visibleCount;i++){
+      const c = candles[(startIdx+i) % candles.length];
+      const x = i*candleW + candleW/2;
+      const bull = c.c >= c.o;
+
+      /* wick */
+      ctx.strokeStyle = bull ? 'rgba(52,211,153,0.6)' : 'rgba(244,114,182,0.6)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(x, py(c.h));
+      ctx.lineTo(x, py(c.l));
+      ctx.stroke();
+
+      /* body */
+      const top = py(Math.max(c.o,c.c));
+      const bot = py(Math.min(c.o,c.c));
+      const bodyH = Math.max(bot-top, 1);
+      ctx.fillStyle = bull ? 'rgba(52,211,153,0.7)' : 'rgba(244,114,182,0.7)';
+      ctx.fillRect(x - candleW/2 + gap, top, candleW - gap*2, bodyH);
+    }
+
+    /* moving average line */
+    ctx.beginPath();
+    ctx.strokeStyle='rgba(124,58,237,0.5)';
+    ctx.lineWidth=2;
+    for(let i=0;i<visibleCount;i++){
+      let sum=0, cnt=0;
+      for(let j=Math.max(0,i-7);j<=i;j++){
+        sum += candles[(startIdx+j)%candles.length].c;
+        cnt++;
+      }
+      const avg = sum/cnt;
+      const x = i*candleW + candleW/2;
+      if(i===0) ctx.moveTo(x,py(avg)); else ctx.lineTo(x,py(avg));
+    }
+    ctx.stroke();
+
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', resize);
+  resize(); draw();
+})();
+
+/* ===== Scroll Reveal ===== */
+(function(){
+  const els = document.querySelectorAll('.lp-reveal');
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+      }
+    });
+  },{threshold:0.1, rootMargin:'0px 0px -40px 0px'});
+  els.forEach(el=>observer.observe(el));
+})();
+
+/* ===== Counter Animation ===== */
+(function(){
+  const nums = document.querySelectorAll('.lp-stat-num[data-count]');
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(!e.isIntersecting) return;
+      const el = e.target;
+      const target = parseInt(el.dataset.count);
+      const suffix = el.textContent.replace(/[0-9+]/g,'');
+      let current = 0;
+      const step = Math.max(1, Math.floor(target/40));
+      const timer = setInterval(()=>{
+        current += step;
+        if(current >= target){current=target;clearInterval(timer)}
+        el.textContent = current + '+' + suffix;
+      }, 30);
+      observer.unobserve(el);
+    });
+  },{threshold:0.5});
+  nums.forEach(n=>observer.observe(n));
+})();
+
+/* ===== Smooth nav background ===== */
+window.addEventListener('scroll',()=>{
+  const nav = document.querySelector('.lp-nav');
+  if(window.scrollY > 80){
+    nav.style.background='rgba(7,9,14,0.92)';
+  } else {
+    nav.style.background='rgba(7,9,14,0.6)';
+  }
+});
+</script>
+</body>
+</html>

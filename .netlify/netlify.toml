@@ -7,7 +7,7 @@ redirects = []
 [functions."*"]
 
 [build]
-publish = "/home/dev/fx-space-new"
+publish = "/mnt/c/Users/81808/Desktop/fx-space-new"
 publishOrigin = "default"
 
 [build.environment]

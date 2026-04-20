@@ -1329,15 +1329,8 @@ function drawFintokeiChart(data, months, refBalance) {
         });
     });
 
-    // ── Daily-chart comm-row fade-in (same pattern as other comm-rows) ──
-    var dailyRow = document.getElementById('daily-chart');
-    if (dailyRow && typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-        gsap.from(dailyRow, {
-            y: 40, opacity: 0, duration: 0.8,
-            ease: 'power2.out',
-            scrollTrigger: { trigger: dailyRow, start: 'top 85%', once: true }
-        });
-    }
+    // ── Daily-chart fade-in is now handled by the unified .comm-feature
+    //    scroll-trigger in flowchart.js (no separate animation needed) ──
 
     // ── Plan Carousel ──
     initPlanCarousel();

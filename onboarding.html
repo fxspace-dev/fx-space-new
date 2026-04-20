@@ -1,0 +1,3235 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FX SPACE - あなたに合ったルートを見つけよう</title>
+<meta property="og:title" content="FX SPACE - ルート診断">
+<meta property="og:description" content="かんたんな質問に答えるだけ。あなたにぴったりの学習ルートが見つかります。">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;800;900&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<!-- Reuse UI components from main site (community-chat, comm-embed-card, cc-yt-embed, etc.) -->
+<link rel="stylesheet" href="css/style.css?v=20260416">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter','Noto Sans JP',sans-serif;
+  background:#fdfcf9;
+  color:#111827;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  position:relative;
+  overflow-x:hidden;
+}
+/* Background dots pattern */
+body::before{
+  content:'';
+  position:fixed;inset:0;z-index:0;
+  background-image:radial-gradient(circle, rgba(79,70,229,0.08) 1.2px, transparent 1.2px);
+  background-size:24px 24px;
+  pointer-events:none;
+}
+/* Background color blobs */
+body::after{
+  content:'';
+  position:fixed;inset:0;z-index:0;
+  pointer-events:none;
+  background:
+    radial-gradient(circle 420px at 8% 12%, rgba(245,158,11,0.08), transparent 60%),
+    radial-gradient(circle 480px at 92% 25%, rgba(139,92,246,0.09), transparent 60%),
+    radial-gradient(circle 380px at 15% 85%, rgba(16,185,129,0.07), transparent 60%),
+    radial-gradient(circle 450px at 88% 90%, rgba(236,72,153,0.06), transparent 60%);
+}
+body > *{position:relative;z-index:1;}
+a{color:inherit;text-decoration:none}
+
+/* ===== Header ===== */
+.ob-header{
+  text-align:center;
+  padding:3rem 1.5rem 2.25rem;
+  position:relative;
+}
+.ob-welcome-wrap{
+  position:relative;
+  display:inline-block;
+}
+.ob-welcome-wave{
+  display:block;
+  width:100%;
+  height:28px;
+  object-fit:fill;
+  margin:calc(0.5rem - 0.5cm) auto 0;
+}
+.ob-logo{
+  width:96px;height:auto;
+  margin:0 auto 1rem;
+  display:block;
+}
+.ob-welcome{
+  font-size:clamp(1.5rem,4vw,2.125rem);
+  font-weight:900;
+  color:#1e1b4b;
+  letter-spacing:-0.02em;
+  line-height:1.3;
+  margin-bottom:0.25rem;
+}
+.ob-welcome .accent{
+  color:#f59e0b;
+  position:relative;
+  display:inline-block;
+}
+.ob-welcome-meta{
+  display:inline-flex;
+  align-items:center;
+  gap:0.5rem;
+  color:#9ca3af;
+  font-size:0.8125rem;
+  font-weight:700;
+  letter-spacing:0.04em;
+  margin-bottom:0.75rem;
+}
+.ob-dot{
+  width:6px;height:6px;
+  border-radius:50%;
+  background:#10b981;
+  box-shadow:0 0 0 3px rgba(16,185,129,0.2);
+  animation:obDotPulse 1.8s ease-in-out infinite;
+}
+@keyframes obDotPulse{
+  0%,100%{box-shadow:0 0 0 3px rgba(16,185,129,0.2);}
+  50%{box-shadow:0 0 0 6px rgba(16,185,129,0.05);}
+}
+.ob-welcome-sub{
+  font-size:0.9375rem;
+  color:#6b7280;
+  max-width:480px;
+  margin:0.75rem auto 0;
+  line-height:1.7;
+}
+
+/* ===== Progress ===== */
+.ob-progress{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:0.5rem;
+  padding:1.5rem 1rem 0;
+}
+.ob-dot{
+  width:12px;height:12px;
+  border-radius:50%;
+  background:#fff;
+  border:2px solid #e5e7eb;
+  transition:all 0.3s;
+}
+.ob-dot.active{
+  background:#4f46e5;border-color:#4f46e5;
+  transform:scale(1.3);
+  box-shadow:0 0 0 6px rgba(79,70,229,0.15);
+}
+.ob-dot.done{background:#10b981;border-color:#10b981;}
+.ob-dot-line{
+  width:40px;height:3px;
+  background:#e5e7eb;
+  border-radius:2px;
+  transition:background 0.3s;
+}
+.ob-dot-line.done{background:#10b981;}
+
+/* ===== Quiz Container ===== */
+.ob-quiz{
+  flex:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:2rem 1rem;
+}
+.ob-card{
+  max-width:500px;
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:1rem;
+  animation:obFadeIn 0.4s ease;
+}
+.ob-card-body{
+  background:#fff;
+  border-radius:24px;
+  box-shadow:
+    0 4px 0 rgba(79,70,229,0.12),
+    0 12px 32px rgba(79,70,229,0.08),
+    0 2px 8px rgba(0,0,0,0.04);
+  padding:2.75rem 2rem 2.5rem;
+  width:100%;
+  text-align:center;
+  position:relative;
+  border:1px solid rgba(79,70,229,0.08);
+}
+.ob-card-body::before{
+  content:'';
+  position:absolute;
+  top:-14px;left:50%;
+  transform:translateX(-50%);
+  width:56px;height:56px;
+  background:#fff;
+  border:3px solid #fde68a;
+  border-radius:50%;
+  box-shadow:0 3px 0 rgba(245,158,11,0.15);
+  z-index:1;
+}
+.ob-card-body::after{
+  content:attr(data-num);
+  position:absolute;
+  top:-14px;left:50%;
+  transform:translateX(-50%);
+  width:56px;height:56px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.5rem;
+  font-weight:900;
+  color:#f59e0b;
+  font-family:'Inter',sans-serif;
+  z-index:2;
+  letter-spacing:-0.02em;
+}
+@keyframes obFadeIn{
+  from{opacity:0;transform:translateY(16px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.ob-card[hidden]{display:none;}
+.ob-q-label{
+  display:inline-block;
+  font-size:0.75rem;
+  font-weight:800;
+  color:#4f46e5;
+  letter-spacing:0.08em;
+  margin-bottom:0.75rem;
+  padding:0.25rem 0.75rem;
+  background:rgba(79,70,229,0.08);
+  border-radius:100px;
+  margin-top:1.25rem;
+}
+.ob-q-title{
+  font-size:clamp(1.25rem,3.5vw,1.625rem);
+  font-weight:800;
+  color:#1e1b4b;
+  margin:1.5rem 0 1.75rem;
+  line-height:1.35;
+  position:relative;
+  display:inline-block;
+}
+.ob-q-underline{
+  display:block;
+  width:180px;
+  max-width:60%;
+  height:10px;
+  object-fit:fill;
+  margin:-0.25rem auto 1.75rem;
+  opacity:0.9;
+}
+.ob-choices{
+  display:flex;
+  flex-direction:column;
+  gap:0.75rem;
+}
+.ob-choice{
+  display:flex;
+  align-items:center;
+  gap:1rem;
+  padding:1rem 1.25rem;
+  border:2px solid #e5e7eb;
+  border-radius:16px;
+  background:#fff;
+  cursor:pointer;
+  transition:all 0.2s;
+  text-align:left;
+  font-family:inherit;
+  font-size:1rem;
+  box-shadow:0 2px 0 rgba(0,0,0,0.04);
+  position:relative;
+}
+.ob-choice:nth-child(1):hover{border-color:#f59e0b;background:rgba(245,158,11,0.04);box-shadow:0 4px 0 rgba(245,158,11,0.2),0 8px 20px rgba(245,158,11,0.12);}
+.ob-choice:nth-child(2):hover{border-color:#4f46e5;background:rgba(79,70,229,0.04);box-shadow:0 4px 0 rgba(79,70,229,0.2),0 8px 20px rgba(79,70,229,0.12);}
+.ob-choice:hover{transform:translateY(-2px);}
+.ob-choice:active{transform:translateY(0);box-shadow:0 1px 0 rgba(0,0,0,0.04);}
+.ob-choice-icon{
+  font-size:1.5rem;
+  flex-shrink:0;
+  width:44px;height:44px;
+  display:flex;align-items:center;justify-content:center;
+  background:#fff7ed;
+  border-radius:12px;
+  border:1.5px solid #fde68a;
+  transition:all 0.2s;
+}
+.ob-choice:nth-child(2) .ob-choice-icon{background:#eef2ff;border-color:#c7d2fe;}
+.ob-choice-text{flex:1;}
+.ob-choice-main{
+  font-weight:700;
+  font-size:1rem;
+  color:#1e1b4b;
+  display:block;
+}
+.ob-choice-sub{
+  font-size:0.8125rem;
+  color:#6b7280;
+  display:block;
+  margin-top:0.125rem;
+}
+.ob-choice-arrow{
+  color:#d1d5db;
+  font-size:1.25rem;
+  flex-shrink:0;
+  transition:color 0.2s;
+}
+.ob-choice:hover .ob-choice-arrow{color:#4f46e5;}
+
+/* Back button (below card) */
+.ob-back{
+  display:inline-flex;
+  align-items:center;
+  gap:0.375rem;
+  font-size:0.875rem;
+  font-weight:700;
+  color:#6b7280;
+  cursor:pointer;
+  background:#fff;
+  border:1.5px solid #e5e7eb;
+  padding:0.625rem 1.5rem;
+  border-radius:100px;
+  font-family:inherit;
+  transition:all 0.2s;
+  box-shadow:0 2px 0 rgba(0,0,0,0.04);
+}
+.ob-back:hover{
+  color:#4f46e5;
+  border-color:#c7d2fe;
+  background:#eef2ff;
+  transform:translateY(-1px);
+  box-shadow:0 3px 0 rgba(79,70,229,0.1);
+}
+
+/* ===== Result ===== */
+.ob-result{
+  background:#fff;
+  border-radius:24px;
+  box-shadow:
+    0 4px 0 rgba(79,70,229,0.12),
+    0 12px 32px rgba(79,70,229,0.08),
+    0 2px 8px rgba(0,0,0,0.04);
+  padding:2.75rem 2rem 2.5rem;
+  max-width:540px;
+  width:100%;
+  text-align:center;
+  animation:obFadeIn 0.4s ease;
+  position:relative;
+  border:1px solid rgba(79,70,229,0.08);
+  overflow:hidden;
+}
+.ob-result[hidden]{display:none;}
+.ob-result-icon{
+  font-size:3.25rem;
+  margin-bottom:0.5rem;
+  display:inline-block;
+  padding:0.75rem;
+  background:#fff7ed;
+  border:2px dashed #fde68a;
+  border-radius:50%;
+  width:88px;height:88px;
+  line-height:1;
+  display:inline-flex;
+  align-items:center;justify-content:center;
+  box-shadow:0 4px 0 rgba(245,158,11,0.15);
+  animation:obWiggle 2.5s ease-in-out infinite;
+}
+@keyframes obWiggle{
+  0%,100%{transform:rotate(-3deg)}
+  50%{transform:rotate(3deg)}
+}
+.ob-result-badge{
+  display:inline-block;
+  padding:0.375rem 1rem;
+  border-radius:100px;
+  font-size:0.75rem;
+  font-weight:800;
+  letter-spacing:0.04em;
+  margin-bottom:0.75rem;
+}
+.ob-result-badge.elearning{background:rgba(16,185,129,0.1);color:#065f46;}
+.ob-result-badge.zeropro{background:rgba(245,158,11,0.1);color:#92400e;}
+.ob-result-badge.ytt{background:rgba(139,92,246,0.1);color:#5b21b6;}
+.ob-result-badge.community{background:rgba(249,115,22,0.1);color:#9a3412;}
+.ob-result-badge.fintokei{background:rgba(6,182,212,0.1);color:#155e75;}
+/* 16Personalities-style character type */
+.ob-result-type{
+  font-size:0.875rem;
+  font-weight:700;
+  color:#6b7280;
+  margin:0.75rem 0 0.25rem;
+}
+.ob-type-name{
+  display:inline-block;
+  font-size:1.375rem;
+  font-weight:900;
+  letter-spacing:-0.02em;
+  padding:0.125rem 0.625rem;
+  border-radius:8px;
+  line-height:1.3;
+}
+.ob-type-name.elearning{color:#065f46;background:rgba(16,185,129,0.12);}
+.ob-type-name.zeropro{color:#92400e;background:rgba(245,158,11,0.15);}
+.ob-type-name.ytt{color:#5b21b6;background:rgba(139,92,246,0.12);}
+.ob-type-name.community{color:#9a3412;background:rgba(249,115,22,0.12);}
+.ob-type-name.fintokei{color:#155e75;background:rgba(6,182,212,0.12);}
+.ob-result-type-desc{
+  font-size:0.8125rem;
+  color:#6b7280;
+  margin:0.625rem 0 0.875rem;
+  line-height:1.5;
+}
+.ob-result-title{
+  font-size:clamp(1.375rem,4vw,1.75rem);
+  font-weight:900;
+  color:#1e1b4b;
+  margin-bottom:0.5rem;
+}
+.ob-result-desc{
+  font-size:0.9375rem;
+  color:#6b7280;
+  line-height:1.7;
+  margin-bottom:1.75rem;
+  max-width:400px;
+  margin-left:auto;
+  margin-right:auto;
+}
+/* Hero visual (image-first motivation) */
+.ob-hero-viz{
+  width:100%;
+  max-width:420px;
+  margin:0 auto 1.25rem;
+  border-radius:16px;
+  overflow:hidden;
+  position:relative;
+}
+.ob-hero-viz svg{
+  width:100%;
+  height:auto;
+  display:block;
+}
+/* Hero logo (image-first display for service logos) */
+.ob-hero-logo{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  max-width:420px;
+  margin:0.25rem auto 1.5rem;
+  padding:1rem;
+  min-height:130px;
+}
+.ob-hero-logo img{
+  max-width:100%;
+  max-height:130px;
+  object-fit:contain;
+  display:block;
+}
+/* YTT logo is vertical, needs more height */
+.ob-hero-logo.ytt img{max-height:150px;max-width:160px;filter:drop-shadow(0 4px 16px rgba(200,170,50,0.25));}
+/* Fintokei logo is horizontal text, larger size */
+.ob-hero-logo.fintokei img{max-height:110px;max-width:400px;}
+/* ZeroPro logo is tall logo */
+.ob-hero-logo.zeropro img{max-height:140px;max-width:200px;}
+/* Y-Academy logo is wide horizontal */
+.ob-hero-logo.academy img{max-height:140px;max-width:360px;}
+/* Community logo (two chat bubble bots) */
+.ob-hero-logo.community img{max-height:160px;max-width:180px;}
+.ob-hero-logo.dark{
+  background:#0a0a1a;
+  border-radius:14px;
+  padding:1rem 1.5rem;
+}
+.ob-hero-logo.scene{
+  padding:0;
+  border-radius:14px;
+  overflow:hidden;
+  max-width:420px;
+}
+.ob-hero-logo.scene img{
+  max-height:none;
+  width:100%;
+  height:auto;
+}
+/* Feature grid (key points at a glance) */
+.ob-features{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:0.5rem;
+  margin:1.25rem 0 1.5rem;
+}
+.ob-features.cols-2{grid-template-columns:repeat(2, 1fr);}
+.ob-feature{
+  padding:0.875rem 0.5rem;
+  background:#f9fafb;
+  border:1.5px solid #f3f4f6;
+  border-radius:14px;
+  text-align:center;
+  transition:all 0.2s;
+}
+.ob-feature:hover{border-color:#c7d2fe;background:#eef2ff;}
+.ob-feature-icon{
+  font-size:1.5rem;
+  margin-bottom:0.25rem;
+  line-height:1.2;
+}
+.ob-feature-label{
+  font-size:0.75rem;
+  font-weight:700;
+  color:#1e1b4b;
+  line-height:1.3;
+}
+/* Visual steps (each step has its own UI mockup) */
+.ob-vsteps{
+  text-align:left;
+  margin-bottom:1.5rem;
+}
+.ob-vsteps h4{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:0.75rem;
+  font-size:1.25rem;
+  font-weight:900;
+  color:#1e1b4b;
+  letter-spacing:-0.02em;
+  line-height:1.4;
+  margin:1rem 0 1.375rem;
+}
+.ob-vsteps h4::before,
+.ob-vsteps h4::after{
+  content:'';
+  flex:0 0 auto;
+  width:7px;height:7px;
+  border-radius:50%;
+  background:#f59e0b;
+}
+.ob-vsteps h4::before{
+  box-shadow:
+    -12px 0 0 -1px rgba(245,158,11,0.6),
+    -22px 0 0 -2px rgba(245,158,11,0.3);
+}
+.ob-vsteps h4::after{
+  box-shadow:
+    12px 0 0 -1px rgba(245,158,11,0.6),
+    22px 0 0 -2px rgba(245,158,11,0.3);
+}
+.ob-vsteps-lead{
+  font-size:0.8125rem;
+  color:#6b7280;
+  line-height:1.7;
+  margin:0.5rem auto 1.5rem;
+  text-align:center;
+  max-width:380px;
+}
+.ob-vstep{
+  background:#fff;
+  border:1.5px solid #eef2ff;
+  border-radius:16px;
+  padding:0.875rem 0.875rem 1rem;
+  margin-bottom:0.75rem;
+  box-shadow:0 2px 0 rgba(79,70,229,0.06);
+}
+.ob-vstep:last-child{margin-bottom:0;}
+.ob-vstep-head{
+  display:flex;
+  align-items:center;
+  gap:0.625rem;
+  margin-bottom:0.625rem;
+}
+.ob-vstep-num{
+  flex-shrink:0;
+  width:38px;height:38px;
+  display:flex;align-items:center;justify-content:center;
+}
+.ob-vstep-num img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  display:block;
+}
+.ob-vstep-title{
+  font-size:0.9375rem;
+  font-weight:800;
+  color:#1e1b4b;
+  line-height:1.3;
+  flex:1;
+}
+.ob-vstep-viz{
+  width:100%;
+  border-radius:10px;
+  overflow:hidden;
+  margin-bottom:0.625rem;
+  background:#f9fafb;
+}
+.ob-vstep-viz svg{width:100%;height:auto;display:block;}
+/* Compact overrides for reused UI components inside step viz */
+.ob-vstep-viz .community-chat{box-shadow:none;border-radius:10px;}
+.ob-vstep-viz .cc-body{min-height:auto;max-height:none;padding:0.625rem 0.875rem;}
+.ob-vstep-viz .cc-msg{display:flex !important;opacity:1 !important;transform:none !important;padding:0.25rem 0;}
+.ob-vstep-viz .cc-reaction{opacity:1 !important;transform:none !important;}
+.ob-vstep-viz .cc-header{padding:0.5rem 0.875rem;}
+.ob-vstep-viz .comm-embed-wrap{box-shadow:none;border-radius:10px;padding:0.75rem 0.875rem;max-width:100%;}
+.ob-vstep-viz .comm-embed-card{margin-left:2.5rem;max-width:100%;}
+.ob-vstep-viz .comm-embed-amount{font-size:1.75rem;}
+.ob-vstep-viz .comm-embed-reacts{margin-left:2.5rem;}
+.ob-vstep-viz .cc-yt-embed{max-width:100%;}
+.ob-vstep-viz .cc-yt-thumb{height:90px;}
+.ob-vstep-viz .cc-chart-grid{grid-template-columns:repeat(3,1fr);gap:4px;margin-top:0.5rem;}
+.ob-vstep-viz .cc-msg-content{font-size:0.78rem;}
+.ob-room-meta{
+  margin-left:auto;
+  font-size:0.6875rem;
+  color:#22c55e;
+  font-weight:700;
+}
+/* Trade rooms grid (Discord-style dark) */
+.ob-rooms{
+  background:#1e1f22;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,0.06);
+  padding:0.75rem 0.875rem 0.875rem;
+  color:#dbdee1;
+}
+.ob-rooms-header{
+  display:flex;align-items:center;gap:0.5rem;
+  font-size:0.8125rem;font-weight:700;color:#f2f3f5;
+  padding-bottom:0.625rem;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  margin-bottom:0.75rem;
+}
+.ob-rooms-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:0.375rem;
+  margin-bottom:0.75rem;
+}
+.ob-room{
+  background:#2b2d31;
+  border:1.5px solid #5865f2;
+  border-radius:8px;
+  padding:0.5rem 0.25rem;
+  display:flex;flex-direction:column;align-items:center;
+  gap:0.125rem;
+  transition:background 0.2s;
+}
+.ob-room:hover{background:#393b41;}
+.ob-room-emoji{font-size:1.125rem;line-height:1.2;}
+.ob-room-name{font-size:0.6875rem;font-weight:800;color:#f2f3f5;}
+.ob-room-sub{font-size:0.5625rem;font-weight:600;color:#9ca3af;}
+.ob-rooms-caption{
+  font-size:0.6875rem;color:#9ca3af;text-align:center;
+  padding-top:0.5rem;border-top:1px solid rgba(255,255,255,0.06);
+}
+/* Fintokei plan comparison cards (matches fintokei-card style) */
+.ob-plans{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0.625rem;
+}
+.ob-plan{
+  background:#fff;
+  border-radius:14px;
+  padding:1rem 0.875rem;
+  text-align:center;
+  border:1.5px solid rgba(99,102,241,0.15);
+  box-shadow:0 4px 12px rgba(99,102,241,0.06);
+  position:relative;
+  overflow:hidden;
+}
+.ob-plan::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;height:4px;
+}
+.ob-plan-purple::before{background:linear-gradient(90deg,#7c3aed,#a78bfa);}
+.ob-plan-gold::before{background:linear-gradient(90deg,#f59e0b,#fbbf24);}
+.ob-plan-head{
+  font-size:0.8125rem;
+  font-weight:800;
+  color:#1e1b4b;
+  margin-bottom:0.5rem;
+}
+.ob-plan-pct{
+  font-size:2rem;
+  font-weight:900;
+  letter-spacing:-0.03em;
+  line-height:1;
+  margin-bottom:0.125rem;
+}
+.ob-plan-pct span{font-size:1rem;font-weight:800;}
+.ob-plan-purple .ob-plan-pct{color:#7c3aed;}
+.ob-plan-gold .ob-plan-pct{color:#d97706;}
+.ob-plan-pct-label{
+  font-size:0.6875rem;
+  font-weight:700;
+  color:#6b7280;
+  margin-bottom:0.625rem;
+}
+.ob-plan-foot{
+  padding-top:0.625rem;
+  border-top:1px dashed #e5e7eb;
+}
+.ob-plan-tier{
+  font-size:0.6875rem;
+  color:#6b7280;
+  margin-bottom:0.125rem;
+}
+.ob-plan-amount{
+  font-size:0.75rem;
+  font-weight:800;
+  color:#1e1b4b;
+}
+/* Flow diagram (matches index.html design language) */
+.ob-flow{
+  display:flex;
+  align-items:stretch;
+  gap:0.25rem;
+  padding:0.625rem;
+  background:#fff;
+  border:1px solid rgba(99,102,241,0.12);
+  border-radius:12px;
+  box-shadow:0 2px 8px rgba(99,102,241,0.05);
+}
+.ob-flow-item{
+  flex:1;
+  background:#f9fafb;
+  border:1px solid #f0f1f3;
+  border-radius:10px;
+  padding:0.625rem 0.375rem;
+  display:flex;flex-direction:column;align-items:center;
+  gap:0.25rem;
+  text-align:center;
+}
+.ob-flow-item.ob-flow-goal{
+  background:linear-gradient(135deg, #fff7ed 0%, #fef3c7 100%);
+  border-color:#fbbf24;
+}
+.ob-flow-icon{
+  font-size:1.5rem;
+  line-height:1.2;
+}
+.ob-flow-name{
+  font-size:0.75rem;
+  font-weight:800;
+  color:#1e1b4b;
+}
+.ob-flow-desc{
+  font-size:0.625rem;
+  color:#6b7280;
+  line-height:1.4;
+}
+.ob-flow-goal .ob-flow-name{color:#92400e;}
+.ob-flow-goal .ob-flow-desc{color:#b45309;font-weight:800;}
+.ob-flow-arrow{
+  display:flex;align-items:center;
+  font-size:1rem;
+  font-weight:900;
+  color:#a5b4fc;
+}
+.ob-flow-caption{
+  font-size:0.6875rem;
+  color:#6b7280;
+  text-align:center;
+  margin-top:0.5rem;
+}
+/* YTT 3 features (matches dark YTT panel style with subtle accents) */
+.ob-ytt-features{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:0.5rem;
+  padding:0.75rem;
+  background:#1e1b4b;
+  border-radius:12px;
+  border:1px solid rgba(124,58,237,0.2);
+}
+.ob-ytt-feature{
+  background:#2b2d31;
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:10px;
+  padding:0.875rem 0.5rem;
+  text-align:center;
+  transition:all 0.2s;
+}
+.ob-ytt-feature:hover{
+  background:#393b41;
+  border-color:rgba(167,139,250,0.4);
+}
+.ob-ytt-feature-icon{
+  font-size:1.5rem;
+  line-height:1.2;
+  margin-bottom:0.375rem;
+}
+.ob-ytt-feature-name{
+  font-size:0.75rem;
+  font-weight:800;
+  color:#f2f3f5;
+  margin-bottom:0.25rem;
+}
+.ob-ytt-feature-desc{
+  font-size:0.625rem;
+  color:#a5b4fc;
+  line-height:1.4;
+}
+/* Browser preview (Fintokei official site) */
+.ob-browser{
+  background:#fff;
+  border-radius:10px;
+  overflow:hidden;
+  border:1px solid #e5e7eb;
+  box-shadow:0 4px 16px rgba(0,0,0,0.06);
+}
+.ob-browser-bar{
+  display:flex;
+  align-items:center;
+  gap:0.75rem;
+  padding:0.625rem 0.875rem;
+  background:#f1f3f5;
+  border-bottom:1px solid #e5e7eb;
+}
+.ob-browser-dots{
+  display:flex;gap:0.25rem;
+  flex-shrink:0;
+}
+.ob-browser-dots span{
+  width:10px;height:10px;
+  border-radius:50%;
+  background:#d1d5db;
+}
+.ob-browser-dots span:nth-child(1){background:#ef4444;}
+.ob-browser-dots span:nth-child(2){background:#fbbf24;}
+.ob-browser-dots span:nth-child(3){background:#22c55e;}
+.ob-browser-url{
+  flex:1;
+  display:flex;
+  align-items:center;
+  gap:0.375rem;
+  background:#fff;
+  padding:0.25rem 0.625rem;
+  border-radius:6px;
+  font-size:0.75rem;
+  color:#6b7280;
+  border:1px solid #e5e7eb;
+}
+.ob-browser-lock{font-size:0.75rem;}
+.ob-browser-body{
+  padding:1.25rem 1rem 1.375rem;
+  text-align:center;
+  background:linear-gradient(180deg, #fafbfc 0%, #fff 100%);
+}
+.ob-browser-logo{
+  height:36px;
+  width:auto;
+  display:block;
+  margin:0 auto 0.5rem;
+}
+.ob-browser-tagline{
+  font-size:0.75rem;
+  color:#6b7280;
+  margin-bottom:1rem;
+  font-weight:600;
+}
+.ob-browser-plans{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:0.5rem;
+}
+.ob-browser-plan{
+  background:#fff;
+  border:1.5px solid #e5e7eb;
+  border-radius:10px;
+  padding:0.5rem 0.375rem 0.625rem;
+  text-align:center;
+  box-shadow:0 2px 6px rgba(0,0,0,0.03);
+}
+.ob-browser-plan-tag{
+  display:inline-block;
+  padding:0.15rem 0.5rem;
+  border-radius:100px;
+  font-size:0.5625rem;
+  font-weight:800;
+  margin-bottom:0.375rem;
+  letter-spacing:0.02em;
+}
+.ob-browser-plan-name{
+  font-size:0.8125rem;
+  font-weight:900;
+  color:#1e1b4b;
+  margin-bottom:0.25rem;
+  letter-spacing:-0.01em;
+}
+.ob-browser-plan-price{
+  font-size:0.6875rem;
+  font-weight:800;
+  color:#4f46e5;
+  margin-bottom:0.25rem;
+}
+.ob-browser-plan-capital{
+  font-size:0.625rem;
+  font-weight:700;
+  color:#6b7280;
+  padding-top:0.25rem;
+  border-top:1px dashed #e5e7eb;
+}
+/* Coupon card (Fintokei YSG5) — warm chic style, matches page tone */
+.ob-coupon{
+  position:relative;
+  padding:1.75rem 1.75rem 1.5rem;
+  background:#fffbf2;
+  border:1.5px solid #e0c897;
+  border-radius:14px;
+  text-align:center;
+  overflow:hidden;
+  box-shadow:0 2px 10px rgba(180,140,70,0.08);
+}
+.ob-coupon-ribbon{
+  display:inline-block;
+  padding:0.3rem 0.95rem;
+  background:#78350f;
+  color:#fef9e7;
+  font-size:0.6875rem;
+  font-weight:700;
+  letter-spacing:0.12em;
+  border-radius:100px;
+  margin-bottom:1.25rem;
+}
+.ob-coupon-off{
+  font-size:3.25rem;
+  font-weight:400;
+  color:#1e1b4b;
+  line-height:1;
+  letter-spacing:-0.04em;
+  margin-bottom:1rem;
+  font-family:'Inter',sans-serif;
+}
+.ob-coupon-pct{
+  font-size:2.25rem;
+  font-weight:400;
+  margin-right:0.05em;
+  color:#1e1b4b;
+}
+.ob-coupon-off-label{
+  font-size:0.9375rem;
+  font-weight:800;
+  letter-spacing:0.18em;
+  margin-left:0.6rem;
+  color:#b45309;
+  vertical-align:0.35em;
+}
+.ob-coupon-label{
+  font-size:0.6875rem;
+  font-weight:600;
+  color:#a87c3e;
+  letter-spacing:0.28em;
+  margin-bottom:0.625rem;
+  text-transform:uppercase;
+  position:relative;
+  padding-top:1.25rem;
+}
+.ob-coupon-label::before{
+  content:'';
+  position:absolute;
+  top:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:32px;
+  height:1px;
+  background:#e0c897;
+}
+.ob-coupon-code{
+  display:inline-block;
+  padding:0.75rem 1.5rem;
+  background:#fff;
+  border:1px solid #ebd8b0;
+  border-radius:6px;
+  margin-bottom:1.125rem;
+  box-shadow:0 1px 2px rgba(180,140,70,0.04);
+}
+.ob-coupon-code span{
+  font-family:'Inter',monospace;
+  font-size:1.375rem;
+  font-weight:700;
+  letter-spacing:0.4em;
+  color:#1e1b4b;
+  padding-left:0.4em;
+}
+.ob-coupon-hint{
+  font-size:0.75rem;
+  color:#78716c;
+  line-height:1.75;
+  font-weight:400;
+  max-width:360px;
+  margin:0 auto;
+}
+.ob-coupon-hint a{
+  color:#78350f;
+  text-decoration:underline;
+  text-underline-offset:2px;
+  font-weight:700;
+}
+.ob-coupon-hint a:hover{color:#b45309;}
+/* Morning schedule timeline (community card step 2) */
+.ob-timeline{
+  background:#fff;
+  border:1px solid rgba(79,70,229,0.08);
+  border-radius:12px;
+  padding:0.875rem 1rem;
+  position:relative;
+}
+.ob-timeline::before{
+  content:'';
+  position:absolute;
+  left:1.9rem;top:1.5rem;bottom:1.5rem;
+  width:2px;
+  background:linear-gradient(to bottom, #fcd34d, #f97316);
+  z-index:0;
+}
+.ob-timeline-item{
+  display:flex;
+  align-items:center;
+  gap:0.75rem;
+  padding:0.5rem 0;
+  position:relative;
+  z-index:1;
+}
+.ob-timeline-time{
+  flex-shrink:0;
+  width:38px;
+  font-size:0.75rem;
+  font-weight:900;
+  color:#9ca3af;
+  text-align:right;
+}
+.ob-timeline-icon{
+  flex-shrink:0;
+  width:32px;height:32px;
+  display:flex;align-items:center;justify-content:center;
+  background:#fff;
+  border:1.5px solid #fcd34d;
+  border-radius:50%;
+  font-size:1rem;
+  line-height:1;
+}
+.ob-timeline-you .ob-timeline-icon{
+  background:linear-gradient(135deg,#fef3c7,#fcd34d);
+  border-color:#f59e0b;
+}
+.ob-timeline-you .ob-timeline-time{color:#f59e0b;font-size:0.875rem;}
+.ob-timeline-text{
+  flex:1;
+  font-size:0.8125rem;
+  color:#374151;
+  line-height:1.5;
+}
+.ob-timeline-text strong{
+  font-weight:800;
+  color:#1e1b4b;
+}
+/* 朝のシナリオ構築 サムネイル風カード */
+.ob-scenario-thumb{
+  position:relative;
+  aspect-ratio:16/9;
+  border-radius:12px;
+  overflow:hidden;
+  background:
+    linear-gradient(135deg, rgba(30,27,75,0.85) 0%, rgba(124,45,18,0.7) 50%, rgba(194,65,12,0.85) 100%);
+  color:#fff;
+  box-shadow:0 6px 20px rgba(30,27,75,0.25);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  padding:1rem;
+  cursor:pointer;
+  transition:transform 0.2s, box-shadow 0.2s;
+}
+.ob-scenario-thumb::before{
+  content:'';
+  position:absolute;inset:0;
+  background:
+    url('images/chart-usdjpy.png') center/cover no-repeat;
+  opacity:0.22;
+  z-index:0;
+  mix-blend-mode:luminosity;
+}
+.ob-scenario-thumb::after{
+  content:'▶';
+  position:absolute;
+  left:50%;top:50%;
+  transform:translate(-50%, -50%);
+  width:56px;height:56px;
+  background:rgba(255,255,255,0.95);
+  color:#1e1b4b;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.125rem;
+  font-weight:900;
+  padding-left:4px;
+  box-shadow:0 4px 16px rgba(0,0,0,0.3);
+  opacity:0;
+  transition:opacity 0.2s;
+}
+.ob-scenario-thumb:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 28px rgba(30,27,75,0.35);
+}
+.ob-scenario-thumb:hover::after{opacity:1;}
+.ob-scenario-brand{
+  position:absolute;
+  top:0.75rem;right:0.75rem;
+  display:flex;align-items:center;gap:0.35rem;
+  font-size:0.75rem;
+  font-weight:900;
+  letter-spacing:0.05em;
+  color:#fff;
+  z-index:2;
+  text-shadow:0 1px 3px rgba(0,0,0,0.4);
+}
+.ob-scenario-brand img{
+  width:14px;height:14px;
+  object-fit:contain;
+}
+.ob-scenario-title{
+  position:relative;
+  z-index:2;
+  font-size:clamp(1.25rem, 5.5vw, 1.875rem);
+  font-weight:900;
+  text-align:center;
+  letter-spacing:0.05em;
+  line-height:1.15;
+  margin-bottom:0.625rem;
+  text-shadow:
+    2px 2px 0 rgba(0,0,0,0.35),
+    0 0 20px rgba(255,200,100,0.3);
+  background:linear-gradient(135deg, #fff 0%, #fde68a 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.ob-scenario-pairs{
+  position:relative;
+  z-index:2;
+  display:flex;
+  gap:0.375rem;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+.ob-scenario-pair{
+  padding:0.25rem 0.625rem;
+  background:rgba(255,255,255,0.18);
+  border:1px solid rgba(255,255,255,0.35);
+  border-radius:5px;
+  font-size:0.6875rem;
+  font-weight:800;
+  letter-spacing:0.04em;
+  color:#fff;
+  backdrop-filter:blur(4px);
+  -webkit-backdrop-filter:blur(4px);
+}
+/* よすがの朝のシナリオ · プレイリスト風 */
+.ob-playlist{
+  background:#fff;
+  border:1px solid rgba(79,70,229,0.1);
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 3px 10px rgba(79,70,229,0.06);
+}
+.ob-playlist-head{
+  display:flex;
+  align-items:center;
+  gap:0.625rem;
+  padding:0.75rem 0.875rem;
+  background:linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+  color:#fff;
+}
+.ob-playlist-avatar{
+  width:36px;height:36px;
+  border-radius:50%;
+  overflow:hidden;
+  border:2px solid rgba(255,255,255,0.4);
+  flex-shrink:0;
+}
+.ob-playlist-avatar img{
+  width:100%;height:100%;
+  object-fit:cover;
+  display:block;
+}
+.ob-playlist-head-text{flex:1;min-width:0;}
+.ob-playlist-title{
+  font-size:0.875rem;
+  font-weight:900;
+  color:#fff;
+  letter-spacing:-0.01em;
+  line-height:1.3;
+}
+.ob-playlist-sub{
+  font-size:0.6875rem;
+  color:rgba(255,255,255,0.7);
+  font-weight:600;
+  margin-top:0.125rem;
+}
+.ob-playlist-live{
+  flex-shrink:0;
+  display:inline-flex;
+  align-items:center;
+  gap:0.25rem;
+  padding:0.2rem 0.5rem;
+  background:rgba(239,68,68,0.9);
+  border-radius:4px;
+  font-size:0.625rem;
+  font-weight:900;
+  letter-spacing:0.05em;
+  color:#fff;
+}
+.ob-playlist-item{
+  display:flex;
+  align-items:center;
+  gap:0.75rem;
+  padding:0.625rem 0.875rem;
+  border-bottom:1px solid #f3f4f6;
+  transition:background 0.15s;
+}
+.ob-playlist-item:last-of-type{border-bottom:none;}
+.ob-playlist-item:hover{background:#fafbfc;}
+.ob-playlist-latest{background:rgba(79,70,229,0.03);}
+.ob-playlist-play{
+  flex-shrink:0;
+  width:28px;height:28px;
+  border-radius:50%;
+  background:#eef2ff;
+  color:#4f46e5;
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.75rem;
+  font-weight:900;
+  padding-left:2px;
+}
+.ob-playlist-latest .ob-playlist-play{
+  background:#4f46e5;
+  color:#fff;
+  box-shadow:0 2px 8px rgba(79,70,229,0.35);
+}
+.ob-playlist-item-text{flex:1;min-width:0;}
+.ob-playlist-item-title{
+  font-size:0.8125rem;
+  font-weight:800;
+  color:#1e1b4b;
+  line-height:1.35;
+}
+.ob-playlist-item-meta{
+  font-size:0.6875rem;
+  color:#9ca3af;
+  font-weight:600;
+  margin-top:0.125rem;
+}
+.ob-playlist-badge{
+  flex-shrink:0;
+  padding:0.125rem 0.4rem;
+  background:#f59e0b;
+  color:#fff;
+  font-size:0.5625rem;
+  font-weight:900;
+  border-radius:4px;
+  letter-spacing:0.05em;
+}
+.ob-playlist-foot{
+  padding:0.625rem 0.875rem;
+  background:#fafbfc;
+  border-top:1px solid #f3f4f6;
+  font-size:0.6875rem;
+  color:#6b7280;
+  text-align:center;
+  font-weight:600;
+}
+/* 朝のシナリオ構築カード（実コンテンツ準拠: よすが + 3通貨ペアのチャート + 再生） */
+.ob-scenario-card{
+  background:#fff;
+  border:1px solid rgba(79,70,229,0.1);
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 3px 10px rgba(79,70,229,0.06);
+}
+.ob-scenario-card-hdr{
+  display:flex;
+  align-items:center;
+  gap:0.625rem;
+  padding:0.625rem 0.875rem;
+  background:linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+  color:#fff;
+}
+.ob-scenario-yosuga{
+  display:flex;
+  align-items:center;
+  gap:0.375rem;
+  flex-shrink:0;
+}
+.ob-scenario-yosuga img{
+  width:28px;height:28px;
+  border-radius:50%;
+  border:2px solid rgba(255,255,255,0.4);
+  object-fit:cover;
+}
+.ob-scenario-yosuga span{
+  font-size:0.75rem;
+  font-weight:800;
+}
+.ob-scenario-card-title{
+  flex:1;
+  font-size:0.9375rem;
+  font-weight:900;
+  letter-spacing:-0.01em;
+  text-align:right;
+}
+.ob-scenario-charts{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:4px;
+  padding:0.5rem;
+  background:#0a0a0f;
+}
+.ob-scenario-chart{
+  position:relative;
+  aspect-ratio:1/1;
+  border-radius:6px;
+  overflow:hidden;
+  background:#0a0a0f;
+}
+.ob-scenario-chart img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+.ob-scenario-chart-label{
+  position:absolute;
+  bottom:4px;left:4px;
+  padding:0.1rem 0.4rem;
+  background:rgba(0,0,0,0.65);
+  color:#fff;
+  font-size:0.5625rem;
+  font-weight:800;
+  border-radius:3px;
+  letter-spacing:0.02em;
+  backdrop-filter:blur(4px);
+}
+.ob-scenario-play{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:0.5rem;
+  padding:0.75rem;
+  background:#4f46e5;
+  color:#fff;
+  font-size:0.8125rem;
+  font-weight:800;
+  letter-spacing:0.02em;
+  cursor:pointer;
+  transition:background 0.15s;
+}
+.ob-scenario-play:hover{background:#4338ca;}
+.ob-scenario-play-icon{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:20px;height:20px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.2);
+  padding-left:2px;
+  font-size:0.625rem;
+}
+/* 超実践FX問題集（実物準拠） */
+.ob-quiz-card{
+  background:#fff;
+  border:1.5px solid rgba(79,70,229,0.1);
+  border-radius:14px;
+  padding:0.875rem;
+  box-shadow:0 3px 10px rgba(79,70,229,0.06);
+}
+.ob-quiz-card-cats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:0.375rem;
+  margin-bottom:0.75rem;
+}
+.ob-quiz-cat{
+  padding:0.4rem 0.25rem;
+  border:1.5px solid #c4b5fd;
+  border-radius:6px;
+  text-align:center;
+  font-size:0.625rem;
+  font-weight:700;
+  color:#4c1d95;
+  line-height:1.3;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:0.125rem;
+}
+.ob-quiz-cat strong{
+  font-size:0.9375rem;
+  font-weight:900;
+  color:#4338ca;
+  letter-spacing:-0.02em;
+}
+.ob-quiz-card-q{
+  background:#fff;
+  border:1px solid #e5e7eb;
+  border-radius:8px;
+  overflow:hidden;
+  margin-bottom:0.5rem;
+}
+.ob-quiz-card-qhead{
+  display:flex;
+  align-items:center;
+  gap:0.5rem;
+  padding:0.5rem 0.625rem;
+  background:#fef3c7;
+}
+.ob-quiz-card-qcat{
+  font-size:0.6875rem;
+  font-weight:800;
+  color:#92400e;
+}
+.ob-quiz-card-qtf{
+  padding:0.125rem 0.4rem;
+  background:#4338ca;
+  color:#fff;
+  font-size:0.625rem;
+  font-weight:700;
+  border-radius:3px;
+  letter-spacing:0.02em;
+}
+.ob-quiz-card-qnum{
+  margin-left:auto;
+  font-size:0.6875rem;
+  font-weight:700;
+  color:#9ca3af;
+}
+.ob-quiz-card-chart{
+  background:#fafafa;
+  border-bottom:1px solid #f3f4f6;
+  aspect-ratio:3/1;
+  overflow:hidden;
+}
+.ob-quiz-card-chart img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+.ob-quiz-card-prompt{
+  padding:0.625rem 0.75rem 0;
+  font-size:0.8125rem;
+  font-weight:700;
+  color:#1e1b4b;
+  line-height:1.5;
+}
+.ob-quiz-card-cta{
+  margin:0.625rem 0.5rem 0.5rem;
+  padding:0.5rem;
+  background:#4338ca;
+  color:#fff;
+  border-radius:6px;
+  text-align:center;
+  font-size:0.75rem;
+  font-weight:800;
+  letter-spacing:0.02em;
+}
+.ob-quiz-card-foot{
+  text-align:center;
+  font-size:0.6875rem;
+  font-weight:700;
+  color:#4338ca;
+  letter-spacing:0.04em;
+}
+.ob-vstep-desc{
+  font-size:0.8125rem;
+  color:#4b5563;
+  line-height:1.6;
+}
+.ob-vstep-desc a{
+  color:#2563eb;
+  font-weight:700;
+  text-decoration:underline;
+  text-underline-offset:2px;
+}
+/* Unified blue link style inside result cards (at-a-glance clickable) */
+.ob-link,
+.ob-vstep-title a,
+.ob-result a:not(.ob-btn):not(.ob-btn-outline):not(.ob-share-btn):not(.ob-route-chip){
+  color:#2563eb !important;
+  text-decoration:underline !important;
+  text-underline-offset:2px;
+  font-weight:700;
+}
+.ob-link:hover,
+.ob-vstep-title a:hover{
+  color:#1d4ed8 !important;
+  text-decoration-thickness:2px;
+}
+/* Compact steps (icon + one-liner) - DEPRECATED, kept for backward compat */
+.ob-quick-steps{
+  text-align:left;
+  margin-bottom:1.5rem;
+}
+.ob-quick-steps h4{
+  font-size:0.8125rem;
+  font-weight:800;
+  color:#4f46e5;
+  margin-bottom:0.75rem;
+  text-align:center;
+}
+.ob-quick-step{
+  display:flex;
+  align-items:center;
+  gap:0.75rem;
+  padding:0.625rem 0.875rem;
+  background:#fafbfc;
+  border:1.5px solid #f0f1f3;
+  border-radius:12px;
+  margin-bottom:0.5rem;
+}
+.ob-quick-step:last-child{margin-bottom:0;}
+.ob-qs-num{
+  flex-shrink:0;
+  width:26px;height:26px;
+  border-radius:50%;
+  background:#4f46e5;
+  color:#fff;
+  font-size:0.75rem;
+  font-weight:800;
+  display:flex;align-items:center;justify-content:center;
+}
+.ob-qs-text{
+  font-size:0.875rem;
+  color:#374151;
+  line-height:1.5;
+  font-weight:600;
+}
+.ob-qs-text a{
+  color:#4f46e5;
+  font-weight:800;
+  text-decoration:underline;
+  text-underline-offset:2px;
+}
+/* Coming Soon notice (hero alternative for unreleased content) */
+.ob-coming{
+  position:relative;
+  background:#fafbfc;
+  background-image:
+    radial-gradient(circle, rgba(79,70,229,0.06) 1px, transparent 1px);
+  background-size:14px 14px;
+  border:1.5px dashed rgba(79,70,229,0.28);
+  border-radius:18px;
+  padding:2rem 1.5rem 1.75rem;
+  margin:0.25rem auto 1.5rem;
+  max-width:420px;
+  text-align:center;
+  overflow:hidden;
+}
+.ob-coming::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(135deg, rgba(79,70,229,0.04) 0%, transparent 50%, rgba(245,158,11,0.04) 100%);
+  pointer-events:none;
+}
+.ob-coming > *{position:relative;z-index:1;}
+.ob-coming-badge{
+  display:inline-block;
+  padding:0.3rem 0.875rem;
+  background:#1e1b4b;
+  color:#fff;
+  font-size:0.6875rem;
+  font-weight:900;
+  letter-spacing:0.12em;
+  border-radius:100px;
+  margin-bottom:1rem;
+  box-shadow:0 2px 0 rgba(30,27,75,0.3), 0 4px 10px rgba(30,27,75,0.15);
+}
+.ob-coming-icon{
+  font-size:2.5rem;
+  line-height:1;
+  margin-bottom:0.625rem;
+  animation:obComingFloat 2.8s ease-in-out infinite;
+}
+@keyframes obComingFloat{
+  0%,100%{transform:translateY(0) rotate(-4deg);}
+  50%{transform:translateY(-6px) rotate(4deg);}
+}
+.ob-coming-title{
+  font-size:1rem;
+  font-weight:900;
+  color:#1e1b4b;
+  margin-bottom:0.5rem;
+  letter-spacing:-0.01em;
+}
+.ob-coming-desc{
+  font-size:0.8125rem;
+  color:#6b7280;
+  line-height:1.7;
+  max-width:320px;
+  margin:0 auto;
+}
+.ob-notice{
+  display:flex;
+  align-items:stretch;
+  gap:0;
+  background:#fff;
+  border:1px solid rgba(79,70,229,0.08);
+  border-radius:14px;
+  margin-bottom:1.5rem;
+  overflow:hidden;
+  position:relative;
+  box-shadow:
+    0 3px 0 rgba(245,158,11,0.18),
+    0 8px 24px rgba(245,158,11,0.08),
+    0 2px 6px rgba(0,0,0,0.03);
+}
+.ob-notice::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;bottom:0;
+  width:5px;
+  background:linear-gradient(180deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+  z-index:1;
+}
+.ob-notice::after{
+  content:'';
+  position:absolute;
+  top:-40%;right:-15%;
+  width:220px;height:220px;
+  background:radial-gradient(circle, rgba(245,158,11,0.08) 0%, transparent 65%);
+  pointer-events:none;
+}
+.ob-notice-icon{
+  flex-shrink:0;
+  width:72px;
+  background:linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+  border-right:1px solid rgba(245,158,11,0.15);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.875rem;
+  line-height:1;
+  position:relative;
+  z-index:1;
+}
+.ob-notice-text{
+  flex:1;
+  padding:1rem 1.25rem;
+  font-size:0.8125rem;
+  color:#4b5563;
+  line-height:1.7;
+  position:relative;
+  z-index:1;
+}
+.ob-notice-text strong{
+  display:block;
+  font-size:1rem;
+  font-weight:900;
+  color:#1e1b4b;
+  margin-bottom:0.375rem;
+  letter-spacing:-0.02em;
+  line-height:1.35;
+}
+.ob-notice-text a{
+  color:#92400e;
+  font-weight:800;
+  text-decoration:underline;
+  text-underline-offset:2px;
+  text-decoration-color:rgba(146,64,14,0.35);
+}
+.ob-notice-text a:hover{text-decoration-color:#92400e;}
+.ob-result-steps{
+  text-align:left;
+  margin-bottom:2rem;
+}
+.ob-result-steps h4{
+  font-size:0.875rem;
+  font-weight:800;
+  color:#4f46e5;
+  letter-spacing:0.02em;
+  margin-bottom:0.375rem;
+}
+.ob-steps-lead{
+  font-size:0.8125rem;
+  color:#6b7280;
+  line-height:1.6;
+  margin-bottom:1rem;
+}
+.ob-step-text strong{
+  color:#1e1b4b;
+  font-weight:700;
+  font-size:0.9375rem;
+}
+.ob-notice-text a{
+  color:#92400e;
+  font-weight:700;
+  text-decoration:underline;
+  text-underline-offset:2px;
+}
+.ob-step{
+  display:flex;
+  align-items:flex-start;
+  gap:0.75rem;
+  padding:0.75rem 0;
+  border-bottom:1px solid #f3f4f6;
+}
+.ob-step:last-child{border-bottom:none;}
+.ob-step-num{
+  width:24px;height:24px;
+  border-radius:50%;
+  background:#4f46e5;
+  color:#fff;
+  font-size:0.6875rem;
+  font-weight:800;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  margin-top:0.125rem;
+}
+.ob-step-text{
+  font-size:0.875rem;
+  color:#374151;
+  line-height:1.6;
+}
+.ob-step-text a{
+  color:#4f46e5;
+  font-weight:700;
+  text-decoration:underline;
+  text-decoration-color:rgba(79,70,229,0.3);
+  text-underline-offset:2px;
+}
+.ob-step-text a:hover{text-decoration-color:#4f46e5;}
+
+.ob-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:0.5rem;
+  padding:0.95rem 2.25rem;
+  border-radius:14px;
+  background:#4f46e5;
+  color:#fff;
+  font-weight:800;
+  font-size:1rem;
+  border:none;
+  cursor:pointer;
+  transition:all 0.2s;
+  text-decoration:none;
+  font-family:inherit;
+  box-shadow:0 4px 0 #3730a3,0 6px 16px rgba(79,70,229,0.25);
+}
+.ob-btn:hover{
+  background:#5b52ee;
+  transform:translateY(-2px);
+  box-shadow:0 6px 0 #3730a3,0 10px 24px rgba(79,70,229,0.3);
+}
+.ob-btn:active{
+  transform:translateY(2px);
+  box-shadow:0 2px 0 #3730a3,0 3px 8px rgba(79,70,229,0.2);
+}
+.ob-btn-outline{
+  background:transparent;
+  color:#4f46e5;
+  border:2px solid #e5e7eb;
+}
+.ob-btn-outline:hover{
+  background:rgba(79,70,229,0.04);
+  border-color:#4f46e5;
+  box-shadow:none;
+  transform:translateY(-1px);
+}
+.ob-result-actions{
+  display:flex;
+  flex-direction:column;
+  gap:0.75rem;
+  align-items:center;
+}
+/* ===== All Routes (after result) ===== */
+.ob-allroutes{
+  margin-top:1.5rem;
+  padding-top:1.5rem;
+  border-top:1px solid #f3f4f6;
+}
+.ob-allroutes-title{
+  font-size:0.75rem;
+  font-weight:700;
+  color:#9ca3af;
+  text-transform:uppercase;
+  letter-spacing:0.08em;
+  margin-bottom:0.75rem;
+}
+.ob-route-chips{
+  display:flex;
+  flex-wrap:wrap;
+  gap:0.5rem;
+  justify-content:center;
+}
+.ob-route-chip{
+  padding:0.375rem 0.875rem;
+  border-radius:100px;
+  border:1.5px solid #e5e7eb;
+  font-size:0.75rem;
+  font-weight:600;
+  color:#6b7280;
+  cursor:pointer;
+  background:#fff;
+  font-family:inherit;
+  transition:all 0.2s;
+}
+.ob-route-chip:hover{border-color:#4f46e5;color:#4f46e5;}
+.ob-route-chip.current{
+  border-color:#4f46e5;
+  background:rgba(79,70,229,0.06);
+  color:#4f46e5;
+  font-weight:700;
+}
+
+/* ===== Footer ===== */
+.ob-footer{
+  text-align:center;
+  padding:1.5rem;
+  font-size:0.75rem;
+  color:#9ca3af;
+}
+.ob-footer a{color:#6b7280;text-decoration:underline;text-underline-offset:2px;}
+.ob-footer a:hover{color:#4f46e5;}
+
+/* Inline SVG icon utility (replaces emoji) */
+.ob-ic{
+  width:1em;height:1em;
+  stroke:currentColor;fill:none;
+  stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
+  flex-shrink:0;vertical-align:-0.14em;
+}
+.ob-result-icon .ob-ic{width:44px;height:44px;stroke-width:1.8;}
+.ob-choice-icon .ob-ic{width:24px;height:24px;}
+.ob-flow-icon .ob-ic{width:26px;height:26px;}
+.ob-timeline-icon .ob-ic{width:18px;height:18px;}
+.ob-notice-icon .ob-ic{width:30px;height:30px;}
+.ob-coming-icon .ob-ic{width:40px;height:40px;}
+.ob-vstep-title .ob-ic{width:18px;height:18px;margin-right:0.35em;color:#f59e0b;}
+.ob-route-chip .ob-ic{width:14px;height:14px;margin-right:0.25em;vertical-align:-0.18em;}
+
+/* Result-icon color tinting per route */
+#ob-r-elearning .ob-result-icon{color:#059669;}
+#ob-r-zeropro .ob-result-icon{color:#d97706;}
+#ob-r-ytt .ob-result-icon{color:#7c3aed;}
+#ob-r-community .ob-result-icon{color:#ea580c;}
+#ob-r-fintokei .ob-result-icon{color:#0891b2;}
+
+/* YTT animation showcase (from index.html ytt-panel, compact version) */
+.ob-ytt-anim{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0.875rem;
+  margin:0.5rem 0 2rem;
+}
+.ob-ytt-anim-item{
+  background:linear-gradient(180deg,#1a1d2e 0%,#0f1523 100%);
+  border:1px solid rgba(124,58,237,0.22);
+  border-radius:14px;
+  padding:0.875rem 0.875rem 1rem;
+  box-shadow:0 6px 20px rgba(15,21,35,0.25);
+}
+.ob-ytt-anim-head{
+  display:flex;align-items:center;gap:0.5rem;
+  margin-bottom:0.375rem;
+}
+.ob-ytt-anim-num{
+  width:28px;height:auto;
+  flex-shrink:0;
+}
+.ob-ytt-anim-title{
+  font-size:0.875rem;
+  font-weight:800;
+  color:#f2f3f5;
+  letter-spacing:-0.01em;
+  line-height:1.3;
+}
+.ob-ytt-anim-desc{
+  font-size:0.7rem;
+  color:rgba(255,255,255,0.58);
+  line-height:1.55;
+  margin-bottom:0.625rem;
+  min-height:2.4em;
+}
+.ob-ytt-anim-scene{
+  aspect-ratio:4/3;
+  background:#0a0f1a;
+  border-radius:8px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,0.05);
+}
+.ob-ytt-anim-scene svg{width:100%;height:100%;display:block;}
+.ob-ytt-anim-caption{
+  text-align:center;
+  font-size:0.75rem;
+  font-weight:700;
+  color:#a78bfa;
+  margin:0.75rem 0 0.25rem;
+  letter-spacing:0.04em;
+}
+.ob-ytt-anim-caption-sub{
+  text-align:center;
+  font-size:0.7rem;
+  color:#6b7280;
+  line-height:1.6;
+  margin-bottom:0.75rem;
+}
+@media (max-width:640px){
+  .ob-ytt-anim{grid-template-columns:1fr;gap:0.75rem;}
+  .ob-ytt-anim-desc{min-height:auto;}
+}
+
+/* ===== Responsive ===== */
+@media(max-width:480px){
+  .ob-header{padding:2rem 1rem 1.5rem;}
+  .ob-card,.ob-result{padding:2rem 1.25rem;}
+  .ob-choice{padding:0.875rem 1rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="ob-header">
+  <img class="ob-logo" src="img/fxspace-symbol.png" alt="FX SPACE">
+  <div class="ob-welcome-wrap">
+    <h1 class="ob-welcome">ようこそ、<span class="accent">FX SPACE</span>へ!</h1>
+    <img class="ob-welcome-wave" src="img/underline-wave.png" alt="">
+  </div>
+  <p class="ob-welcome-sub">あなたにぴったりのルートを見つけましょう。</p>
+</header>
+
+<!-- Progress dots -->
+<div class="ob-progress" id="ob-progress">
+  <span class="ob-dot active" data-step="1"></span>
+  <span class="ob-dot-line"></span>
+  <span class="ob-dot" data-step="2"></span>
+</div>
+
+<!-- Quiz Area -->
+<main class="ob-quiz" id="ob-quiz">
+
+  <!-- Q1: FXの経験は？（3択） -->
+  <div class="ob-card" id="ob-q1">
+    <div class="ob-card-body" data-num="Q1">
+      <h2 class="ob-q-title">FXの経験は？</h2>
+      <div class="ob-choices">
+        <button class="ob-choice" onclick="obAnswer(1,'none')">
+          <span class="ob-choice-icon"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"/><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/></svg></span>
+          <span class="ob-choice-text">
+            <span class="ob-choice-main">ない</span>
+            <span class="ob-choice-sub">これからFXを始めたい</span>
+          </span>
+          <span class="ob-choice-arrow">›</span>
+        </button>
+        <button class="ob-choice" onclick="obAnswer(1,'beginner')">
+          <span class="ob-choice-icon"><svg class="ob-ic" viewBox="0 0 24 24"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/><line x1="3" y1="20" x2="21" y2="20"/></svg></span>
+          <span class="ob-choice-text">
+            <span class="ob-choice-main">初心者</span>
+            <span class="ob-choice-sub">始めているが、まだ利益が出ていない</span>
+          </span>
+          <span class="ob-choice-arrow">›</span>
+        </button>
+        <button class="ob-choice" onclick="obAnswer(1,'intermediate')">
+          <span class="ob-choice-icon"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg></span>
+          <span class="ob-choice-text">
+            <span class="ob-choice-main">中級者以上</span>
+            <span class="ob-choice-sub">ある程度勝てている</span>
+          </span>
+          <span class="ob-choice-arrow">›</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2a: どこから始めたい？（未経験者用） -->
+  <div class="ob-card" id="ob-q2a" hidden>
+    <div class="ob-card-body" data-num="Q2">
+      <h2 class="ob-q-title">どこから始めたいですか？</h2>
+      <div class="ob-choices">
+        <button class="ob-choice" onclick="obRoute('elearning')">
+          <span class="ob-choice-icon"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg></span>
+          <span class="ob-choice-text">
+            <span class="ob-choice-main">基礎をしっかり学びたい</span>
+            <span class="ob-choice-sub">億トレアカデミーで体系的に</span>
+          </span>
+          <span class="ob-choice-arrow">›</span>
+        </button>
+        <button class="ob-choice" onclick="obRoute('zeropro')">
+          <span class="ob-choice-icon"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg></span>
+          <span class="ob-choice-text">
+            <span class="ob-choice-main">短期集中で本気で取り組みたい</span>
+            <span class="ob-choice-sub">90日間のプログラムで一気に</span>
+          </span>
+          <span class="ob-choice-arrow">›</span>
+        </button>
+        <button class="ob-choice" onclick="obRoute('community')">
+          <span class="ob-choice-icon"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span>
+          <span class="ob-choice-text">
+            <span class="ob-choice-main">仲間と楽しくスタートしたい</span>
+            <span class="ob-choice-sub">コミュニティで一緒に成長</span>
+          </span>
+          <span class="ob-choice-arrow">›</span>
+        </button>
+      </div>
+    </div>
+    <button class="ob-back" onclick="obBack('q1')">← 戻る</button>
+  </div>
+
+  <!-- Q2b: 今の目標は？（初心者用） -->
+  <div class="ob-card" id="ob-q2b" hidden>
+    <div class="ob-card-body" data-num="Q2">
+      <h2 class="ob-q-title">今の目標は？</h2>
+      <div class="ob-choices">
+        <button class="ob-choice" onclick="obRoute('zeropro')">
+          <span class="ob-choice-icon"><svg class="ob-ic" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></span>
+          <span class="ob-choice-text">
+            <span class="ob-choice-main">トレードで勝てる実力をつける</span>
+            <span class="ob-choice-sub">ゼロプロ90でよすがの添削を受ける</span>
+          </span>
+          <span class="ob-choice-arrow">›</span>
+        </button>
+        <button class="ob-choice" onclick="obRoute('fintokei')">
+          <span class="ob-choice-icon"><svg class="ob-ic" viewBox="0 0 24 24"><polygon points="6 3 18 3 22 9 12 22 2 9"/><path d="M12 22 8 9l4-6"/><path d="M12 22 16 9l-4-6"/><line x1="2" y1="9" x2="22" y2="9"/></svg></span>
+          <span class="ob-choice-text">
+            <span class="ob-choice-main">プロトレーダーとして稼ぐ</span>
+            <span class="ob-choice-sub">Fintokeiで実戦デビュー</span>
+          </span>
+          <span class="ob-choice-arrow">›</span>
+        </button>
+        <button class="ob-choice" onclick="obRoute('ytt')">
+          <span class="ob-choice-icon"><svg class="ob-ic" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
+          <span class="ob-choice-text">
+            <span class="ob-choice-main">トレードを楽にしたい</span>
+            <span class="ob-choice-sub">YTTで再現性の高い手法を実行</span>
+          </span>
+          <span class="ob-choice-arrow">›</span>
+        </button>
+        <button class="ob-choice" onclick="obRoute('community')">
+          <span class="ob-choice-icon"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span>
+          <span class="ob-choice-text">
+            <span class="ob-choice-main">楽しくみんなとトレードしたい</span>
+            <span class="ob-choice-sub">コミュニティで仲間と学ぶ</span>
+          </span>
+          <span class="ob-choice-arrow">›</span>
+        </button>
+      </div>
+    </div>
+    <button class="ob-back" onclick="obBack('q1')">← 戻る</button>
+  </div>
+
+  <!-- Q2c: 今の目標は？（中級者以上用） -->
+  <div class="ob-card" id="ob-q2c" hidden>
+    <div class="ob-card-body" data-num="Q2">
+      <h2 class="ob-q-title">今の目標は？</h2>
+      <div class="ob-choices">
+        <button class="ob-choice" onclick="obRoute('fintokei')">
+          <span class="ob-choice-icon"><svg class="ob-ic" viewBox="0 0 24 24"><polygon points="6 3 18 3 22 9 12 22 2 9"/><path d="M12 22 8 9l4-6"/><path d="M12 22 16 9l-4-6"/><line x1="2" y1="9" x2="22" y2="9"/></svg></span>
+          <span class="ob-choice-text">
+            <span class="ob-choice-main">プロトレーダーとして稼ぐ</span>
+            <span class="ob-choice-sub">Fintokeiで実戦デビュー</span>
+          </span>
+          <span class="ob-choice-arrow">›</span>
+        </button>
+        <button class="ob-choice" onclick="obRoute('ytt')">
+          <span class="ob-choice-icon"><svg class="ob-ic" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
+          <span class="ob-choice-text">
+            <span class="ob-choice-main">トレードを楽にしたい</span>
+            <span class="ob-choice-sub">YTTで再現性の高い手法を実行</span>
+          </span>
+          <span class="ob-choice-arrow">›</span>
+        </button>
+        <button class="ob-choice" onclick="obRoute('community')">
+          <span class="ob-choice-icon"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span>
+          <span class="ob-choice-text">
+            <span class="ob-choice-main">楽しくみんなとトレードしたい</span>
+            <span class="ob-choice-sub">コミュニティで仲間と刺激し合う</span>
+          </span>
+          <span class="ob-choice-arrow">›</span>
+        </button>
+      </div>
+    </div>
+    <button class="ob-back" onclick="obBack('q1')">← 戻る</button>
+  </div>
+
+  <!-- ===== Results ===== -->
+
+  <!-- Result: 億トレアカデミー -->
+  <div class="ob-result" id="ob-r-elearning" hidden>
+    <div class="ob-result-icon"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg></div>
+    <h2 class="ob-result-title">億トレアカデミー</h2>
+    <p class="ob-result-desc">全12章で勝てる手法を体系的にマスター。</p>
+    <div class="ob-coming">
+      <div class="ob-coming-badge">COMING SOON</div>
+      <div class="ob-coming-icon"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
+      <div class="ob-coming-title">現在、鋭意製作中</div>
+      <div class="ob-coming-desc">公開までは下記で準備しておきましょう。</div>
+    </div>
+    <div class="ob-vsteps">
+      <h4>公開までの間におすすめ</h4>
+
+      <!-- Step 1: シナリオ動画視聴 -->
+      <div class="ob-vstep">
+        <div class="ob-vstep-head">
+          <span class="ob-vstep-num"><img src="img/crayon-1.png" alt="1"></span>
+          <span class="ob-vstep-title"><svg class="ob-ic" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"/><polyline points="17 2 12 7 7 2"/></svg>平日毎朝の<a href="https://discord.com/channels/1039824083208126474/1048136270582382592" target="_blank" class="ob-link">よすがシナリオ動画</a>を視聴</span>
+        </div>
+        <div class="ob-vstep-viz">
+          <div class="community-chat static-chat">
+            <div class="cc-header">
+              <span class="cc-header-hash">#</span>
+              <span class="cc-header-name">朝のシナリオ公開</span>
+            </div>
+            <div class="cc-body">
+              <div class="cc-messages">
+                <div class="cc-msg visible">
+                  <div class="cc-avatar cc-avatar-yosuga"></div>
+                  <div class="cc-msg-body">
+                    <div class="cc-msg-header">
+                      <span class="cc-msg-name" style="color:#ed4245;">よすが</span>
+                      <span class="cc-msg-time">毎朝配信</span>
+                    </div>
+                    <div class="cc-msg-content">@everyone おはようございます！今日の3通貨ペアのシナリオ公開しました📈</div>
+                    <div class="cc-yt-embed">
+                      <div class="cc-yt-thumb">
+                        <img src="images/chart-usdjpy.png" alt="動画サムネイル" style="width:100%;height:100%;object-fit:cover;border-radius:4px;">
+                        <div class="cc-yt-play" style="position:absolute;">▶</div>
+                      </div>
+                      <div class="cc-yt-info">
+                        <span class="cc-yt-title">朝のシナリオ構築 XAU/USD・USD/JPY・GBP/USD</span>
+                        <span class="cc-yt-channel">よすが FX SPACE</span>
+                      </div>
+                    </div>
+                    <div class="cc-chart-grid">
+                      <div class="cc-chart-item">
+                        <img src="images/chart-xauusd.png" alt="XAU/USD">
+                        <span class="cc-chart-label">XAU/USD</span>
+                      </div>
+                      <div class="cc-chart-item">
+                        <img src="images/chart-usdjpy.png" alt="USD/JPY">
+                        <span class="cc-chart-label">USD/JPY</span>
+                      </div>
+                      <div class="cc-chart-item">
+                        <img src="images/chart-gbpusd.png" alt="GBP/USD">
+                        <span class="cc-chart-label">GBP/USD</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2: トレードルーム見学 -->
+      <div class="ob-vstep">
+        <div class="ob-vstep-head">
+          <span class="ob-vstep-num"><img src="img/crayon-2.png" alt="2"></span>
+          <span class="ob-vstep-title"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg><a href="https://discord.com/channels/1039824083208126474/1356783303105183916" target="_blank" class="ob-link">トレードルーム</a>で先輩のトレードを見学</span>
+        </div>
+        <div class="ob-vstep-viz">
+          <div class="community-chat static-chat">
+            <div class="cc-header">
+              <span class="cc-header-hash">#</span>
+              <span class="cc-header-name">あなたのトレードルーム</span>
+            </div>
+            <div class="cc-body">
+              <div class="cc-messages">
+                <div class="cc-msg visible">
+                  <div class="cc-avatar" style="background:#57f287;">M</div>
+                  <div class="cc-msg-body">
+                    <div class="cc-msg-header"><span class="cc-msg-name" style="color:#57f287;">Mochi</span><span class="cc-msg-time">今日 08:32</span></div>
+                    <div class="cc-msg-content">USD/JPY ロング エントリーしました📈 H4の押し目バッチリでした</div>
+                  </div>
+                </div>
+                <div class="cc-msg visible">
+                  <div class="cc-avatar" style="background:#ed4245;">Y</div>
+                  <div class="cc-msg-body">
+                    <div class="cc-msg-header"><span class="cc-msg-name" style="color:#ed4245;">よすが</span><span class="cc-pro-badge">主宰</span><span class="cc-msg-time">今日 08:35</span></div>
+                    <div class="cc-msg-content">いい判断！H4上目線と一致してますね👍</div>
+                  </div>
+                </div>
+                <div class="cc-msg visible">
+                  <div class="cc-avatar" style="background:#fee75c;color:#000;">S</div>
+                  <div class="cc-msg-body">
+                    <div class="cc-msg-header"><span class="cc-msg-name" style="color:#fee75c;">Sat</span><span class="cc-msg-time">今日 08:40</span></div>
+                    <div class="cc-msg-content">参考にさせてもらいます！僕もちょうど見てたところです🙏</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3: 問題集で実践テスト -->
+      <div class="ob-vstep">
+        <div class="ob-vstep-head">
+          <span class="ob-vstep-num"><img src="img/crayon-3.png" alt="3"></span>
+          <span class="ob-vstep-title"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M12 22H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9l5 5v5"/><polyline points="13 2 13 9 20 9"/><path d="M10.4 12.6a2 2 0 1 1 3 3L8 21l-4 1 1-4 5.4-5.4Z"/></svg><a href="https://discord.com/channels/1039824083208126474/1246768528506486836" target="_blank" class="ob-link">超実践FX問題集</a>で知識を試す</span>
+        </div>
+        <div class="ob-vstep-viz">
+          <div class="ob-quiz-card">
+            <div class="ob-quiz-card-q">
+              <div class="ob-quiz-card-qhead">
+                <span class="ob-quiz-card-qcat">シナリオ問題</span>
+                <span class="ob-quiz-card-qtf">H4</span>
+                <span class="ob-quiz-card-qnum">Q.12</span>
+              </div>
+              <div class="ob-quiz-card-chart">
+                <img src="images/zp-qa-chart1.png" alt="チャート問題">
+              </div>
+              <div class="ob-quiz-card-prompt">このチャートでシナリオを描いてみよう</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="ob-result-actions">
+      <a href="https://discord.com/channels/1039824083208126474/1356783303105183916" target="_blank" class="ob-btn">トレードルームを覗いてみる →</a>
+      <button class="ob-btn ob-btn-outline" onclick="obReset()">もう一度診断する</button>
+    </div>
+    <div class="ob-allroutes">
+      <div class="ob-allroutes-title">他のルートも見てみる</div>
+      <div class="ob-route-chips">
+        <button class="ob-route-chip current"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>億トレアカデミー</button>
+        <button class="ob-route-chip" onclick="obShowResult('zeropro')"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>ゼロプロ90</button>
+        <button class="ob-route-chip" onclick="obShowResult('ytt')"><svg class="ob-ic" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>YTT</button>
+        <button class="ob-route-chip" onclick="obShowResult('community')"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>コミュニティ</button>
+        <button class="ob-route-chip" onclick="obShowResult('fintokei')"><svg class="ob-ic" viewBox="0 0 24 24"><polygon points="6 3 18 3 22 9 12 22 2 9"/><path d="M12 22 8 9l4-6"/><path d="M12 22 16 9l-4-6"/><line x1="2" y1="9" x2="22" y2="9"/></svg>Fintokei</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Result: ゼロプロ90 -->
+  <div class="ob-result" id="ob-r-zeropro" hidden>
+    <div class="ob-result-icon"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg></div>
+    <h2 class="ob-result-title">ゼロプロ90</h2>
+    <p class="ob-result-desc">よすがが3ヶ月マンツーマン添削。ゼロからプロへ。</p>
+    <div class="ob-hero-logo zeropro">
+      <img src="images/zeropro90-logo.png" alt="ZERO PRO 90">
+    </div>
+    <div class="ob-notice">
+      <span class="ob-notice-icon"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/></svg></span>
+      <div class="ob-notice-text">
+        <strong>3ヶ月に1度の抽選募集制</strong>
+        次回募集は<a href="https://discord.com/channels/1039824083208126474/1171706488234979378" target="_blank">ゼロプロ90チャンネル</a>で告知。
+      </div>
+    </div>
+    <div class="ob-vsteps">
+      <h4>募集までの待ち時間を「最高の準備期間」に</h4>
+      <p class="ob-vsteps-lead">スタート前にやっておくと伸びが段違い。</p>
+
+      <!-- Step 1: シナリオ動画視聴 -->
+      <div class="ob-vstep">
+        <div class="ob-vstep-head">
+          <span class="ob-vstep-num"><img src="img/crayon-1.png" alt="1"></span>
+          <span class="ob-vstep-title"><svg class="ob-ic" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"/><polyline points="17 2 12 7 7 2"/></svg>平日毎朝の<a href="https://discord.com/channels/1039824083208126474/1048136270582382592" target="_blank" class="ob-link">よすがシナリオ動画</a>を視聴</span>
+        </div>
+        <div class="ob-vstep-viz">
+          <div class="community-chat static-chat">
+            <div class="cc-header">
+              <span class="cc-header-hash">#</span>
+              <span class="cc-header-name">朝のシナリオ公開</span>
+            </div>
+            <div class="cc-body">
+              <div class="cc-messages">
+                <div class="cc-msg visible">
+                  <div class="cc-avatar cc-avatar-yosuga"></div>
+                  <div class="cc-msg-body">
+                    <div class="cc-msg-header">
+                      <span class="cc-msg-name" style="color:#ed4245;">よすが</span>
+                      <span class="cc-msg-time">毎朝配信</span>
+                    </div>
+                    <div class="cc-msg-content">@everyone おはようございます！今日の3通貨ペアのシナリオ公開しました📈</div>
+                    <div class="cc-yt-embed">
+                      <div class="cc-yt-thumb">
+                        <img src="images/chart-usdjpy.png" alt="動画サムネイル" style="width:100%;height:100%;object-fit:cover;border-radius:4px;">
+                        <div class="cc-yt-play" style="position:absolute;">▶</div>
+                      </div>
+                      <div class="cc-yt-info">
+                        <span class="cc-yt-title">朝のシナリオ構築 XAU/USD・USD/JPY・GBP/USD</span>
+                        <span class="cc-yt-channel">よすが FX SPACE</span>
+                      </div>
+                    </div>
+                    <div class="cc-chart-grid">
+                      <div class="cc-chart-item">
+                        <img src="images/chart-xauusd.png" alt="XAU/USD">
+                        <span class="cc-chart-label">XAU/USD</span>
+                      </div>
+                      <div class="cc-chart-item">
+                        <img src="images/chart-usdjpy.png" alt="USD/JPY">
+                        <span class="cc-chart-label">USD/JPY</span>
+                      </div>
+                      <div class="cc-chart-item">
+                        <img src="images/chart-gbpusd.png" alt="GBP/USD">
+                        <span class="cc-chart-label">GBP/USD</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2: YTT導入 -->
+      <div class="ob-vstep">
+        <div class="ob-vstep-head">
+          <span class="ob-vstep-num"><img src="img/crayon-2.png" alt="2"></span>
+          <span class="ob-vstep-title"><svg class="ob-ic" viewBox="0 0 24 24"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/><line x1="3" y1="20" x2="21" y2="20"/></svg><a href="https://discord.com/channels/1039824083208126474/1447939661186990173" target="_blank" class="ob-link">YTT</a>を自分のチャートに導入する</span>
+        </div>
+        <div class="ob-vstep-viz">
+          <svg viewBox="0 0 360 140" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="140" rx="10" fill="#1e1b4b"/>
+            <!-- Chart area -->
+            <g>
+              <line x1="14" y1="40" x2="240" y2="40" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
+              <line x1="14" y1="80" x2="240" y2="80" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
+              <rect x="30" y="70" width="6" height="20" fill="#22c55e"/>
+              <rect x="45" y="65" width="6" height="22" fill="#22c55e"/>
+              <rect x="60" y="68" width="6" height="14" fill="#ef4444"/>
+              <rect x="75" y="58" width="6" height="22" fill="#22c55e"/>
+              <rect x="90" y="50" width="6" height="20" fill="#22c55e"/>
+              <rect x="105" y="55" width="6" height="14" fill="#ef4444"/>
+              <rect x="120" y="44" width="6" height="22" fill="#22c55e"/>
+              <rect x="135" y="38" width="6" height="20" fill="#22c55e"/>
+              <rect x="150" y="42" width="6" height="14" fill="#ef4444"/>
+              <rect x="165" y="32" width="6" height="22" fill="#22c55e"/>
+              <rect x="180" y="26" width="6" height="20" fill="#22c55e"/>
+              <rect x="195" y="30" width="6" height="14" fill="#ef4444"/>
+              <rect x="210" y="20" width="6" height="20" fill="#22c55e"/>
+              <line x1="14" y1="22" x2="240" y2="22" stroke="#ef4444" stroke-width="1" stroke-dasharray="4,3"/>
+              <line x1="14" y1="100" x2="240" y2="100" stroke="#22d3ee" stroke-width="1" stroke-dasharray="4,3"/>
+            </g>
+            <!-- YTT Panel -->
+            <rect x="252" y="14" width="94" height="112" rx="6" fill="#2b2d31" stroke="rgba(255,255,255,0.1)"/>
+            <rect x="258" y="20" width="46" height="12" rx="6" fill="#7c3aed"/>
+            <text x="281" y="29" fill="#fff" font-size="8" font-weight="800" text-anchor="middle" font-family="Inter,sans-serif">YTT</text>
+            <text x="316" y="29" fill="#22c55e" font-size="7" font-weight="700" font-family="Inter,sans-serif">起動中</text>
+            <rect x="258" y="40" width="82" height="16" rx="3" fill="#1e1f22"/>
+            <text x="263" y="51" fill="rgba(255,255,255,0.6)" font-size="7" font-family="Inter,sans-serif">Lot 0.01</text>
+            <rect x="258" y="60" width="38" height="20" rx="3" fill="#1D5FB6"/>
+            <text x="277" y="74" fill="#fff" font-size="9" font-weight="900" text-anchor="middle" font-family="Inter,sans-serif">BUY</text>
+            <rect x="302" y="60" width="38" height="20" rx="3" fill="#8B1A1A"/>
+            <text x="321" y="74" fill="#fff" font-size="9" font-weight="900" text-anchor="middle" font-family="Inter,sans-serif">SELL</text>
+            <rect x="258" y="84" width="82" height="16" rx="3" fill="#C8A200"/>
+            <text x="299" y="95" fill="#1e1f22" font-size="8" font-weight="800" text-anchor="middle" font-family="Inter,sans-serif">全決済</text>
+            <rect x="258" y="104" width="82" height="16" rx="3" fill="#2B8C44"/>
+            <text x="299" y="115" fill="#fff" font-size="8" font-weight="800" text-anchor="middle" font-family="Inter,sans-serif">1/2決済</text>
+            <!-- MT4 label -->
+            <text x="14" y="135" fill="rgba(255,255,255,0.4)" font-size="7" font-weight="700" font-family="Inter,sans-serif">MT4 / TradingView</text>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Step 3: トレードルームで実戦 -->
+      <div class="ob-vstep">
+        <div class="ob-vstep-head">
+          <span class="ob-vstep-num"><img src="img/crayon-3.png" alt="3"></span>
+          <span class="ob-vstep-title"><svg class="ob-ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg><a href="https://discord.com/channels/1039824083208126474/1356783303105183916" target="_blank" class="ob-link">トレードルーム</a>で実戦を始める</span>
+        </div>
+        <div class="ob-vstep-viz">
+          <div class="comm-embed-wrap">
+            <div class="comm-embed-head">
+              <div class="comm-embed-head-av">🤖</div>
+              <span class="comm-embed-head-name">FX SPACE<span class="cc-bot-badge">BOT</span></span>
+              <span class="comm-embed-head-time">今日 11:42</span>
+            </div>
+            <div class="comm-embed-card">
+              <div class="comm-embed-title">🎉 利確達成</div>
+              <div class="comm-embed-amount">+8,400円</div>
+              <div class="comm-embed-symbol">USD/JPY · Long</div>
+              <div class="comm-embed-fields">
+                <div>
+                  <div class="comm-embed-field-label">トレーダー</div>
+                  <div class="comm-embed-field-value">あなた</div>
+                </div>
+                <div>
+                  <div class="comm-embed-field-label">保有時間</div>
+                  <div class="comm-embed-field-value">2時間14分</div>
+                </div>
+                <div>
+                  <div class="comm-embed-field-label">今月勝率</div>
+                  <div class="comm-embed-field-value">68%</div>
+                </div>
+              </div>
+              <div class="comm-embed-footer">
+                <span>🚀 <strong>プロトレーダー</strong>に昇格しました</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ob-result-actions">
+      <a href="https://discord.com/channels/1039824083208126474/1171706488234979378" target="_blank" class="ob-btn">ゼロプロ90チャンネルへ →</a>
+      <button class="ob-btn ob-btn-outline" onclick="obReset()">もう一度診断する</button>
+    </div>
+    <div class="ob-allroutes">
+      <div class="ob-allroutes-title">他のルートも見てみる</div>
+      <div class="ob-route-chips">
+        <button class="ob-route-chip" onclick="obShowResult('elearning')"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>億トレアカデミー</button>
+        <button class="ob-route-chip current"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>ゼロプロ90</button>
+        <button class="ob-route-chip" onclick="obShowResult('ytt')"><svg class="ob-ic" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>YTT</button>
+        <button class="ob-route-chip" onclick="obShowResult('community')"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>コミュニティ</button>
+        <button class="ob-route-chip" onclick="obShowResult('fintokei')"><svg class="ob-ic" viewBox="0 0 24 24"><polygon points="6 3 18 3 22 9 12 22 2 9"/><path d="M12 22 8 9l4-6"/><path d="M12 22 16 9l-4-6"/><line x1="2" y1="9" x2="22" y2="9"/></svg>Fintokei</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Result: YTT -->
+  <div class="ob-result" id="ob-r-ytt" hidden>
+    <div class="ob-result-icon"><svg class="ob-ic" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+    <h2 class="ob-result-title">YTT（よすが式トレードツール）</h2>
+    <p class="ob-result-desc">よすがの手法を再現性高く実行する、トレードを楽にする補助ツール。</p>
+    <div class="ob-hero-logo ytt">
+      <img src="images/ytt-logo.png" alt="YTT">
+    </div>
+
+    <div class="ob-ytt-anim-caption">YTTで、こんなことができます</div>
+    <div class="ob-ytt-anim-caption-sub">MT4/TradingView上で動く、よすが式の補助ツール</div>
+    <div class="ob-ytt-anim" id="ob-ytt-anim-wrap">
+
+      <!-- Feature 1: 直感的な注文・決済 -->
+      <div class="ob-ytt-anim-item">
+        <div class="ob-ytt-anim-head">
+          <div class="ob-ytt-anim-title">直感的な注文・決済</div>
+        </div>
+        <p class="ob-ytt-anim-desc">ロット数を指定してBUY/SELLで即座に注文。全決済・1/2決済も1クリック。</p>
+        <div class="ob-ytt-anim-scene" id="scene-ytt-p1">
+          <svg viewBox="0 0 280 220" preserveAspectRatio="xMidYMid meet">
+            <rect id="p1-panel" x="50" y="5" width="180" height="210" rx="8" fill="#2b2d31" opacity="0"></rect>
+            <text id="p1-title" x="140" y="22" fill="rgba(255,255,255,0.5)" text-anchor="middle" font-size="8" font-weight="600" font-family="Inter" opacity="0">注文パネル</text>
+            <g id="p1-lot" opacity="0">
+              <rect x="68" y="28" width="26" height="27" rx="4" fill="#3f4147"></rect>
+              <text x="81" y="40" fill="rgba(255,255,255,0.7)" text-anchor="middle" font-size="9" font-family="Inter">▲</text>
+              <text x="81" y="51" fill="rgba(255,255,255,0.7)" text-anchor="middle" font-size="9" font-family="Inter">▼</text>
+              <rect x="98" y="28" width="80" height="27" rx="4" fill="#1e1f22" stroke="#3f4147" stroke-width="0.8"></rect>
+              <text x="138" y="47" fill="white" text-anchor="middle" font-size="16" font-weight="800" font-family="Inter">0.01</text>
+              <rect x="182" y="28" width="30" height="27" rx="4" fill="#3f4147"></rect>
+              <rect x="190" y="40" width="3" height="10" rx="0.5" fill="rgba(255,255,255,0.5)"></rect>
+              <rect x="195" y="36" width="3" height="14" rx="0.5" fill="rgba(255,255,255,0.5)"></rect>
+              <rect x="200" y="42" width="3" height="8" rx="0.5" fill="rgba(255,255,255,0.5)"></rect>
+              <polygon points="202,40 206,40 204,36" fill="rgba(255,255,255,0.5)"></polygon>
+            </g>
+            <g id="p1-sell" opacity="0">
+              <rect x="58" y="60" width="82" height="36" rx="5" fill="#8B1A1A"></rect>
+              <text x="99" y="77" fill="white" text-anchor="middle" font-size="14" font-weight="900" font-family="Inter">SELL</text>
+              <text x="99" y="90" fill="rgba(255,255,255,0.5)" text-anchor="middle" font-size="8" font-family="Inter">0.01 lot</text>
+            </g>
+            <g id="p1-buy" opacity="0">
+              <rect x="144" y="60" width="82" height="36" rx="5" fill="#1D5FB6"></rect>
+              <text x="185" y="77" fill="white" text-anchor="middle" font-size="14" font-weight="900" font-family="Inter">BUY</text>
+              <text x="185" y="90" fill="rgba(255,255,255,0.5)" text-anchor="middle" font-size="8" font-family="Inter">0.01 lot</text>
+            </g>
+            <g id="p1-cls" opacity="0">
+              <rect x="58" y="101" width="168" height="26" rx="5" fill="#C8A200"></rect>
+              <text x="142" y="118" fill="#1e1f22" text-anchor="middle" font-size="11" font-weight="700" font-family="Inter">全決済</text>
+            </g>
+            <g id="p1-half" opacity="0">
+              <rect x="58" y="131" width="168" height="26" rx="5" fill="#2B8C44"></rect>
+              <text x="142" y="148" fill="#1e1f22" text-anchor="middle" font-size="11" font-weight="700" font-family="Inter">1/2決済</text>
+            </g>
+            <g id="p1-pl" opacity="0">
+              <rect x="58" y="163" width="168" height="44" rx="6" fill="#1e1f22" stroke="#3f4147" stroke-width="0.5"></rect>
+              <circle id="p1-pl-dot" cx="68" cy="176" r="3" fill="#4ade80"></circle>
+              <text x="76" y="179" fill="rgba(255,255,255,0.6)" font-size="8" font-weight="600" font-family="Inter">USDJPY  Buy 0.01</text>
+              <text x="66" y="199" fill="rgba(255,255,255,0.4)" font-size="7.5" font-weight="600" font-family="Inter">損益</text>
+              <text id="p1-pl-val" x="218" y="200" fill="#4ade80" text-anchor="end" font-size="15" font-weight="900" font-family="Inter">+0 円</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Feature 2: Yトレード・シナリオ機能 -->
+      <div class="ob-ytt-anim-item">
+        <div class="ob-ytt-anim-head">
+          <div class="ob-ytt-anim-title">Yトレード・シナリオ機能</div>
+        </div>
+        <p class="ob-ytt-anim-desc">チャート上でTP/SLを視覚的に設定。朝にシナリオを仕込んで張り付き不要に。</p>
+        <div class="ob-ytt-anim-scene" id="scene-ytt">
+          <svg viewBox="0 0 280 160" preserveAspectRatio="xMidYMid meet">
+            <line class="grid-line" x1="0" y1="40" x2="280" y2="40" stroke="rgba(255,255,255,0.05)"></line>
+            <line class="grid-line" x1="0" y1="80" x2="280" y2="80" stroke="rgba(255,255,255,0.05)"></line>
+            <line class="grid-line" x1="0" y1="120" x2="280" y2="120" stroke="rgba(255,255,255,0.05)"></line>
+            <g class="candle" style="opacity:0;"><line x1="14" y1="128" x2="14" y2="142" stroke="#ef4444" stroke-width="1"></line><rect x="12" y="130" width="4" height="8" rx="0.5" fill="#ef4444"></rect></g>
+            <g class="candle" style="opacity:0;"><line x1="21" y1="124" x2="21" y2="140" stroke="#22c55e" stroke-width="1"></line><rect x="19" y="126" width="4" height="10" rx="0.5" fill="#22c55e"></rect></g>
+            <g class="candle" style="opacity:0;"><line x1="28" y1="126" x2="28" y2="144" stroke="#ef4444" stroke-width="1"></line><rect x="26" y="130" width="4" height="10" rx="0.5" fill="#ef4444"></rect></g>
+            <g class="candle" style="opacity:0;"><line x1="35" y1="122" x2="35" y2="138" stroke="#22c55e" stroke-width="1"></line><rect x="33" y="124" width="4" height="10" rx="0.5" fill="#22c55e"></rect></g>
+            <g class="candle" style="opacity:0;"><line x1="42" y1="126" x2="42" y2="140" stroke="#ef4444" stroke-width="1"></line><rect x="40" y="128" width="4" height="8" rx="0.5" fill="#ef4444"></rect></g>
+            <g class="candle" style="opacity:0;"><line x1="49" y1="120" x2="49" y2="142" stroke="#22c55e" stroke-width="1"></line><rect x="47" y="124" width="4" height="12" rx="0.5" fill="#22c55e"></rect></g>
+            <g class="candle" style="opacity:0;"><line x1="56" y1="118" x2="56" y2="140" stroke="#ef4444" stroke-width="1"></line><rect x="54" y="122" width="4" height="14" rx="0.5" fill="#ef4444"></rect></g>
+            <g class="candle" style="opacity:0;"><line x1="63" y1="112" x2="63" y2="138" stroke="#22c55e" stroke-width="1"></line><rect x="61" y="116" width="4" height="15" rx="0.5" fill="#22c55e"></rect></g>
+            <g class="candle" style="opacity:0;"><line x1="70" y1="110" x2="70" y2="136" stroke="#ef4444" stroke-width="1"></line><rect x="68" y="114" width="4" height="16" rx="0.5" fill="#ef4444"></rect></g>
+            <g class="candle" style="opacity:0;"><line x1="77" y1="112" x2="77" y2="140" stroke="#22c55e" stroke-width="1"></line><rect x="75" y="116" width="4" height="16" rx="0.5" fill="#22c55e"></rect></g>
+            <g class="candle" style="opacity:0;"><line x1="84" y1="108" x2="84" y2="134" stroke="#ef4444" stroke-width="1"></line><rect x="82" y="112" width="4" height="16" rx="0.5" fill="#ef4444"></rect></g>
+            <g class="candle" style="opacity:0;"><line x1="91" y1="106" x2="91" y2="132" stroke="#22c55e" stroke-width="1"></line><rect x="89" y="110" width="4" height="14" rx="0.5" fill="#22c55e"></rect></g>
+            <g class="candle" style="opacity:0;"><line x1="98" y1="108" x2="98" y2="136" stroke="#ef4444" stroke-width="1"></line><rect x="96" y="112" width="4" height="18" rx="0.5" fill="#ef4444"></rect></g>
+            <g class="candle" style="opacity:0;"><line x1="105" y1="104" x2="105" y2="130" stroke="#22c55e" stroke-width="1"></line><rect x="103" y="108" width="4" height="14" rx="0.5" fill="#22c55e"></rect></g>
+            <path class="scenario-path" d="M 107,108 L 155,35 L 192,75 L 250,10" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="300" stroke-dashoffset="300" style="opacity:0;"></path>
+            <g id="ytt-buy" opacity="0"><rect x="184" y="67" width="16" height="16" rx="2" fill="rgba(0,0,0,0.7)" stroke="#facc15" stroke-width="1.2"></rect><text x="192" y="79" fill="#facc15" font-size="11" text-anchor="middle" font-weight="900" font-family="Inter">↑</text></g>
+            <g id="ytt-tp" opacity="0"><rect x="240" y="17" width="16" height="16" rx="2" fill="rgba(0,0,0,0.7)" stroke="#facc15" stroke-width="1.2"></rect><text x="248" y="29" fill="#4ade80" font-size="11" text-anchor="middle" font-weight="900" font-family="Inter">✓</text></g>
+            <g id="ytt-sl" opacity="0"><rect x="240" y="117" width="16" height="16" rx="2" fill="rgba(0,0,0,0.7)" stroke="#facc15" stroke-width="1.2"></rect><text x="248" y="130" fill="#facc15" font-size="11" text-anchor="middle" font-weight="900" font-family="Inter">✗</text></g>
+            <text class="ytt-status" x="140" y="155" fill="rgba(255,255,255,0.45)" font-size="6.5" text-anchor="middle" font-family="Inter" font-weight="600" opacity="0">シナリオ完成</text>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Feature 3: 分析サポート・オートライン -->
+      <div class="ob-ytt-anim-item">
+        <div class="ob-ytt-anim-head">
+          <div class="ob-ytt-anim-title">分析サポート・オートライン</div>
+        </div>
+        <p class="ob-ytt-anim-desc">独自ロジックで重要ラインを自動描画。トレンド方向も時間足ごとに可視化。</p>
+        <div class="ob-ytt-anim-scene" id="scene-ytt-p3">
+          <svg viewBox="0 0 280 210" preserveAspectRatio="xMidYMid meet">
+            <line x1="0" y1="52" x2="280" y2="52" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"></line>
+            <line x1="0" y1="105" x2="280" y2="105" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"></line>
+            <line x1="0" y1="158" x2="280" y2="158" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"></line>
+            <g id="p3-candles" opacity="0">
+              <rect x="18" y="130" width="4" height="18" rx="0.5" fill="#22c55e"></rect>
+              <rect x="32" y="140" width="4" height="15" rx="0.5" fill="#ef4444"></rect>
+              <rect x="46" y="120" width="4" height="20" rx="0.5" fill="#22c55e"></rect>
+              <rect x="60" y="128" width="4" height="14" rx="0.5" fill="#ef4444"></rect>
+              <rect x="74" y="105" width="4" height="22" rx="0.5" fill="#22c55e"></rect>
+              <rect x="88" y="115" width="4" height="16" rx="0.5" fill="#ef4444"></rect>
+              <rect x="102" y="90" width="4" height="24" rx="0.5" fill="#22c55e"></rect>
+              <rect x="116" y="100" width="4" height="18" rx="0.5" fill="#ef4444"></rect>
+              <rect x="130" y="78" width="4" height="20" rx="0.5" fill="#22c55e"></rect>
+              <rect x="144" y="85" width="4" height="15" rx="0.5" fill="#ef4444"></rect>
+              <rect x="158" y="60" width="4" height="25" rx="0.5" fill="#22c55e"></rect>
+              <rect x="172" y="70" width="4" height="18" rx="0.5" fill="#ef4444"></rect>
+              <rect x="186" y="48" width="4" height="22" rx="0.5" fill="#22c55e"></rect>
+            </g>
+            <line id="p3-hl1" x1="10" y1="38" x2="205" y2="38" stroke="#ef4444" stroke-width="2" stroke-dasharray="195" stroke-dashoffset="195"></line>
+            <text id="p3-hl1-lbl" x="207" y="41" fill="#ef4444" font-size="6.5" font-weight="800" font-family="Inter" opacity="0">強</text>
+            <line id="p3-hl2" x1="10" y1="82" x2="205" y2="82" stroke="#22d3ee" stroke-width="1.5" stroke-dasharray="195" stroke-dashoffset="195"></line>
+            <text id="p3-hl2-lbl" x="207" y="85" fill="#22d3ee" font-size="6.5" font-weight="700" font-family="Inter" opacity="0">中</text>
+            <line id="p3-hl3" x1="10" y1="130" x2="205" y2="130" stroke="#22d3ee" stroke-width="1" stroke-dasharray="4,3" opacity="0"></line>
+            <text id="p3-hl3-lbl" x="207" y="133" fill="#22d3ee" font-size="6.5" font-weight="700" font-family="Inter" opacity="0">弱</text>
+            <line id="p3-hl4" x1="10" y1="165" x2="205" y2="165" stroke="rgba(255,255,255,0.45)" stroke-width="0.8" stroke-dasharray="3,4" opacity="0"></line>
+            <line id="p3-ch1" x1="4" y1="126" x2="202" y2="41" stroke="#a78bfa" stroke-width="1.2" stroke-dasharray="220" stroke-dashoffset="220"></line>
+            <line id="p3-ch2" x1="4" y1="168" x2="202" y2="83" stroke="#a78bfa" stroke-width="1.2" stroke-dasharray="220" stroke-dashoffset="220"></line>
+            <g id="p3-trend" opacity="0">
+              <rect x="215" y="8" width="58" height="82" rx="5" fill="rgba(0,0,0,0.8)" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"></rect>
+              <g id="p3-tr1" opacity="0">
+                <text x="223" y="28" fill="rgba(255,255,255,0.55)" font-size="8.5" font-weight="700" font-family="Inter">H4</text>
+                <rect x="252" y="18" width="15" height="13" rx="2.5" fill="rgba(239,68,68,0.2)"></rect>
+                <text x="259.5" y="28.5" fill="#ef4444" text-anchor="middle" font-size="10" font-weight="900" font-family="Inter">↓</text>
+              </g>
+              <g id="p3-tr2" opacity="0">
+                <text x="223" y="46" fill="rgba(255,255,255,0.55)" font-size="8.5" font-weight="700" font-family="Inter">H1</text>
+                <rect x="252" y="36" width="15" height="13" rx="2.5" fill="rgba(34,211,238,0.2)"></rect>
+                <text x="259.5" y="46.5" fill="#22d3ee" text-anchor="middle" font-size="10" font-weight="900" font-family="Inter">→</text>
+              </g>
+              <g id="p3-tr3" opacity="0">
+                <text x="223" y="64" fill="rgba(255,255,255,0.55)" font-size="8.5" font-weight="700" font-family="Inter">M15</text>
+                <rect x="252" y="54" width="15" height="13" rx="2.5" fill="rgba(74,222,128,0.2)"></rect>
+                <text x="259.5" y="64.5" fill="#4ade80" text-anchor="middle" font-size="10" font-weight="900" font-family="Inter">↑</text>
+              </g>
+              <g id="p3-tr4" opacity="0">
+                <text x="223" y="82" fill="rgba(255,255,255,0.55)" font-size="8.5" font-weight="700" font-family="Inter">M5</text>
+                <rect x="252" y="72" width="15" height="13" rx="2.5" fill="rgba(74,222,128,0.2)"></rect>
+                <text x="259.5" y="82.5" fill="#4ade80" text-anchor="middle" font-size="10" font-weight="900" font-family="Inter">↑</text>
+              </g>
+            </g>
+            <line id="p3-econ" x1="148" y1="5" x2="148" y2="190" stroke="#ef4444" stroke-width="0.8" opacity="0"></line>
+            <text id="p3-econ-t" x="153" y="10" fill="#ef4444" font-size="7" font-weight="700" font-family="Inter" writing-mode="tb" opacity="0">雇用統計</text>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Feature 4: リスク管理 -->
+      <div class="ob-ytt-anim-item">
+        <div class="ob-ytt-anim-head">
+          <div class="ob-ytt-anim-title">リスク管理・自動ロット計算</div>
+        </div>
+        <p class="ob-ytt-anim-desc">損失率を決めるだけでロットを自動計算。1トレードのリスクを常に一定に。</p>
+        <div class="ob-ytt-anim-scene" id="scene-ytt-p5">
+          <svg viewBox="0 0 280 210" preserveAspectRatio="xMidYMid meet">
+            <rect x="5" y="5" width="270" height="200" rx="4" fill="#0f1523" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+            <g id="p5-scene1">
+              <text id="p5-title" x="140" y="38" fill="rgba(255,255,255,0.7)" text-anchor="middle" font-size="12" font-weight="800" font-family="Inter" opacity="0">損失率固定モード</text>
+              <g id="p5-balance" opacity="0">
+                <text x="60" y="68" fill="rgba(255,255,255,0.4)" font-size="8" font-family="Inter">残高</text>
+                <text x="220" y="68" fill="rgba(255,255,255,0.8)" text-anchor="end" font-size="12" font-weight="800" font-family="Inter">1,000,000 円</text>
+                <line x1="50" y1="75" x2="230" y2="75" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+              </g>
+              <g id="p5-rate" opacity="0">
+                <text x="60" y="95" fill="rgba(255,255,255,0.4)" font-size="8" font-family="Inter">許容損失率</text>
+                <text x="220" y="95" fill="#fbbf24" text-anchor="end" font-size="14" font-weight="900" font-family="Inter">2.0 %</text>
+                <line x1="50" y1="102" x2="230" y2="102" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+              </g>
+              <text id="p5-arrow" x="140" y="122" fill="rgba(255,255,255,0.25)" text-anchor="middle" font-size="14" font-family="Inter" opacity="0">↓</text>
+              <g id="p5-maxloss" opacity="0">
+                <text x="60" y="145" fill="rgba(255,255,255,0.4)" font-size="8" font-family="Inter">最大損失額</text>
+                <text x="220" y="145" fill="#ef4444" text-anchor="end" font-size="13" font-weight="800" font-family="Inter">20,000 円</text>
+                <line x1="50" y1="152" x2="230" y2="152" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+              </g>
+              <g id="p5-lot" opacity="0">
+                <rect x="59" y="160" width="180" height="30" rx="6" fill="rgba(74,222,128,0.08)" stroke="#4ade80" stroke-width="0.8"/>
+                <text x="69" y="180" fill="rgba(74,222,128,0.6)" font-size="9" font-weight="600" font-family="Inter">推奨ロット</text>
+                <text x="229" y="181" fill="#4ade80" text-anchor="end" font-size="16" font-weight="900" font-family="Inter">0.15</text>
+              </g>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="ob-vsteps">
+      <h4>YTTをチャートに導入する手順</h4>
+
+      <!-- Step 1: 導入ガイド確認 -->
+      <div class="ob-vstep">
+        <div class="ob-vstep-head">
+          <span class="ob-vstep-num"><img src="img/crayon-1.png" alt="1"></span>
+          <span class="ob-vstep-title"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><a href="https://discord.com/channels/1039824083208126474/1447939661186990173" target="_blank" class="ob-link">YTTチャンネル</a>で導入方法を確認</span>
+        </div>
+        <div class="ob-vstep-viz">
+          <div class="community-chat static-chat">
+            <div class="cc-header">
+              <span class="cc-header-hash">#</span>
+              <span class="cc-header-name">YTT · 導入ガイド 📌</span>
+            </div>
+            <div class="cc-body">
+              <div class="cc-messages">
+                <div class="cc-msg visible">
+                  <div class="cc-avatar cc-avatar-yosuga"></div>
+                  <div class="cc-msg-body">
+                    <div class="cc-msg-header">
+                      <span class="cc-msg-name" style="color:#ed4245;">よすが</span>
+                      <span class="cc-pro-badge">主宰</span>
+                      <span class="cc-msg-time">📌 ピン留め</span>
+                    </div>
+                    <div class="cc-msg-content">📘 <strong>YTT セットアップガイド</strong><br>MT4版の導入手順を動画付きでまとめています。お使いの環境に合わせて進めてください。</div>
+                    <div class="cc-yt-embed">
+                      <div class="cc-yt-thumb">
+                        <img src="images/chart-usdjpy.png" alt="MT4導入動画" style="width:100%;height:100%;object-fit:cover;border-radius:4px;">
+                        <div class="cc-yt-play" style="position:absolute;">▶</div>
+                      </div>
+                      <div class="cc-yt-info">
+                        <span class="cc-yt-title">YTT MT4版 セットアップ完全ガイド</span>
+                        <span class="cc-yt-channel">よすが FX SPACE · 5:32</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2: 自分のチャートにセットアップ -->
+      <div class="ob-vstep">
+        <div class="ob-vstep-head">
+          <span class="ob-vstep-num"><img src="img/crayon-2.png" alt="2"></span>
+          <span class="ob-vstep-title"><svg class="ob-ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v3"/><path d="M12 20v3"/><path d="M4.22 4.22l2.12 2.12"/><path d="M17.66 17.66l2.12 2.12"/><path d="M1 12h3"/><path d="M20 12h3"/><path d="M4.22 19.78l2.12-2.12"/><path d="M17.66 6.34l2.12-2.12"/></svg>自分のチャートに<a href="https://discord.com/channels/1039824083208126474/1161882625519140874" target="_blank" class="ob-link">セットアップ</a></span>
+        </div>
+        <div class="ob-vstep-viz">
+          <div class="ob-flow">
+            <div class="ob-flow-item">
+              <div class="ob-flow-icon"><svg class="ob-ic" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+              <div class="ob-flow-name">環境を選ぶ</div>
+              <div class="ob-flow-desc">MT4 または<br>TradingView</div>
+            </div>
+            <div class="ob-flow-arrow">→</div>
+            <div class="ob-flow-item">
+              <div class="ob-flow-icon"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
+              <div class="ob-flow-name">ファイル追加</div>
+              <div class="ob-flow-desc">ガイドに沿って<br>配置するだけ</div>
+            </div>
+            <div class="ob-flow-arrow">→</div>
+            <div class="ob-flow-item ob-flow-goal">
+              <div class="ob-flow-icon"><svg class="ob-ic" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+              <div class="ob-flow-name">完了</div>
+              <div class="ob-flow-desc">数分で<br>使える</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3: 実戦で使う -->
+      <div class="ob-vstep">
+        <div class="ob-vstep-head">
+          <span class="ob-vstep-num"><img src="img/crayon-3.png" alt="3"></span>
+          <span class="ob-vstep-title"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>実戦で使ってみる</span>
+        </div>
+        <div class="ob-vstep-viz">
+          <div class="community-chat static-chat">
+            <div class="cc-header">
+              <span class="cc-header-hash">#</span>
+              <span class="cc-header-name">トレードルーム</span>
+            </div>
+            <div class="cc-body">
+              <div class="cc-messages">
+                <div class="cc-msg visible">
+                  <div class="cc-avatar" style="background:#57f287;">M</div>
+                  <div class="cc-msg-body">
+                    <div class="cc-msg-header"><span class="cc-msg-name" style="color:#57f287;">Mochi</span><span class="cc-msg-time">今日 15:40</span></div>
+                    <div class="cc-msg-content">今日も朝セットしたYTTのシナリオ通りTP到達しました🎉 +15,200円<br>張り付き不要でほんと楽…</div>
+                    <div class="cc-reactions"><span class="cc-reaction visible">🎉 <span class="cc-reaction-count">12</span></span><span class="cc-reaction visible">🔥 <span class="cc-reaction-count">7</span></span></div>
+                  </div>
+                </div>
+                <div class="cc-msg visible">
+                  <div class="cc-avatar cc-avatar-yosuga"></div>
+                  <div class="cc-msg-body">
+                    <div class="cc-msg-header"><span class="cc-msg-name" style="color:#ed4245;">よすが</span><span class="cc-pro-badge">主宰</span><span class="cc-msg-time">今日 15:45</span></div>
+                    <div class="cc-msg-content">朝セットして放置できるのがYTTの真骨頂ですね👍</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ob-result-actions">
+      <a href="https://discord.com/channels/1039824083208126474/1447939661186990173" target="_blank" class="ob-btn">YTTチャンネルで導入方法を見る →</a>
+      <button class="ob-btn ob-btn-outline" onclick="obReset()">もう一度診断する</button>
+    </div>
+    <div class="ob-allroutes">
+      <div class="ob-allroutes-title">他のルートも見てみる</div>
+      <div class="ob-route-chips">
+        <button class="ob-route-chip" onclick="obShowResult('elearning')"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>億トレアカデミー</button>
+        <button class="ob-route-chip" onclick="obShowResult('zeropro')"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>ゼロプロ90</button>
+        <button class="ob-route-chip current"><svg class="ob-ic" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>YTT</button>
+        <button class="ob-route-chip" onclick="obShowResult('community')"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>コミュニティ</button>
+        <button class="ob-route-chip" onclick="obShowResult('fintokei')"><svg class="ob-ic" viewBox="0 0 24 24"><polygon points="6 3 18 3 22 9 12 22 2 9"/><path d="M12 22 8 9l4-6"/><path d="M12 22 16 9l-4-6"/><line x1="2" y1="9" x2="22" y2="9"/></svg>Fintokei</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Result: コミュニティ -->
+  <div class="ob-result" id="ob-r-community" hidden>
+    <div class="ob-result-icon"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
+    <h2 class="ob-result-title">コミュニティで成長する</h2>
+    <p class="ob-result-desc">少人数トレードルームで仲間と毎日学ぶ。</p>
+    <div class="ob-hero-logo community">
+      <img src="images/community-logo.png" alt="コミュニティ">
+    </div>
+    <div class="ob-vsteps">
+      <h4>コミュニティの歩き方</h4>
+
+      <!-- Step 1: トレードルームを覗く -->
+      <div class="ob-vstep">
+        <div class="ob-vstep-head">
+          <span class="ob-vstep-num"><img src="img/crayon-1.png" alt="1"></span>
+          <span class="ob-vstep-title"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M13 4h3a2 2 0 0 1 2 2v14"/><path d="M2 20h3"/><path d="M13 20h9"/><path d="M10 12v.01"/><path d="M13 4.562v16.157a1 1 0 0 1-1.242.97L5 20V5.562a2 2 0 0 1 1.515-1.94l4-1A2 2 0 0 1 13 4.561Z"/></svg><a href="https://discord.com/channels/1039824083208126474/1356783303105183916" target="_blank" class="ob-link">トレードルーム</a>を覗いてみる</span>
+        </div>
+        <div class="ob-vstep-viz">
+          <div class="community-chat static-chat">
+            <div class="cc-header">
+              <span class="cc-header-hash">#</span>
+              <span class="cc-header-name">あなたのトレードルーム</span>
+              <span class="ob-room-meta">● 今のメンバー 14人</span>
+            </div>
+            <div class="cc-body">
+              <div class="cc-messages">
+                <div class="cc-msg visible">
+                  <div class="cc-avatar" style="background:#57f287;">M</div>
+                  <div class="cc-msg-body">
+                    <div class="cc-msg-header"><span class="cc-msg-name" style="color:#57f287;">Mochi</span><span class="cc-msg-time">今日 08:15</span></div>
+                    <div class="cc-msg-content">おはようございます！ドル円の赤ライン付近、気になってます。皆さんどう見てますか？</div>
+                  </div>
+                </div>
+                <div class="cc-msg visible">
+                  <div class="cc-avatar" style="background:#c084fc;">K</div>
+                  <div class="cc-msg-body">
+                    <div class="cc-msg-header"><span class="cc-msg-name" style="color:#c084fc;">Kenta</span><span class="cc-msg-time">今日 08:22</span></div>
+                    <div class="cc-msg-content">僕もそこ見てます！4H足でダウ転換しそうな形ですよね</div>
+                  </div>
+                </div>
+                <div class="cc-msg visible">
+                  <div class="cc-avatar" style="background:#eb459e;">H</div>
+                  <div class="cc-msg-body">
+                    <div class="cc-msg-header"><span class="cc-msg-name" style="color:#eb459e;">HiU</span><span class="cc-msg-time">今日 08:25</span></div>
+                    <div class="cc-msg-content">日足の流れ的にまだ戻り売り優勢かなと🤔 私は売り目線で待ってます</div>
+                  </div>
+                </div>
+                <div class="cc-msg visible">
+                  <div class="cc-avatar" style="background:#ed4245;">S</div>
+                  <div class="cc-msg-body">
+                    <div class="cc-msg-header"><span class="cc-msg-name" style="color:#ed4245;">Sato</span><span class="cc-pro-badge">プロ</span><span class="cc-msg-time">今日 08:30</span></div>
+                    <div class="cc-msg-content">3人ともいい目の付け所👍 赤ラインは意識されやすいから、反応を見てから入るのが正解</div>
+                    <div class="cc-reactions"><span class="cc-reaction visible">🔥 <span class="cc-reaction-count">8</span></span><span class="cc-reaction visible">👍 <span class="cc-reaction-count">5</span></span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2: 朝の情報チェックして宣言 -->
+      <div class="ob-vstep">
+        <div class="ob-vstep-head">
+          <span class="ob-vstep-num"><img src="img/crayon-2.png" alt="2"></span>
+          <span class="ob-vstep-title"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M17 18a5 5 0 0 0-10 0"/><line x1="12" y1="2" x2="12" y2="9"/><line x1="4.22" y1="10.22" x2="5.64" y2="11.64"/><line x1="1" y1="18" x2="3" y2="18"/><line x1="21" y1="18" x2="23" y2="18"/><line x1="18.36" y1="11.64" x2="19.78" y2="10.22"/><line x1="23" y1="22" x2="1" y2="22"/><polyline points="8 6 12 2 16 6"/></svg><a href="https://discord.com/channels/1039824083208126474/1048136270582382592" target="_blank" class="ob-link">毎朝の情報</a>をチェックして宣言</span>
+        </div>
+        <div class="ob-vstep-viz">
+          <div class="ob-timeline">
+            <div class="ob-timeline-item">
+              <div class="ob-timeline-icon"><svg class="ob-ic" viewBox="0 0 24 24"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/><line x1="3" y1="20" x2="21" y2="20"/></svg></div>
+              <div class="ob-timeline-text"><strong>経済指標・ニュース</strong>を自動配信</div>
+            </div>
+            <div class="ob-timeline-item">
+              <div class="ob-timeline-icon"><svg class="ob-ic" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"/><polyline points="17 2 12 7 7 2"/></svg></div>
+              <div class="ob-timeline-text"><strong>よすがのシナリオ動画</strong>が公開</div>
+            </div>
+            <div class="ob-timeline-item ob-timeline-you">
+              <div class="ob-timeline-icon"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+              <div class="ob-timeline-text"><strong>あなたも通貨ペアを宣言</strong>して参加</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3: 自分のトレードを共有 -->
+      <div class="ob-vstep">
+        <div class="ob-vstep-head">
+          <span class="ob-vstep-num"><img src="img/crayon-3.png" alt="3"></span>
+          <span class="ob-vstep-title"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg><a href="https://discord.com/channels/1039824083208126474/1356783303105183916" target="_blank" class="ob-link">トレードルーム</a>で自分のトレードを共有</span>
+        </div>
+        <div class="ob-vstep-viz">
+          <div class="comm-embed-wrap">
+            <div class="comm-embed-head">
+              <div class="comm-embed-head-av">🤖</div>
+              <span class="comm-embed-head-name">FX SPACE<span class="cc-bot-badge">BOT</span></span>
+              <span class="comm-embed-head-time">今日 15:45</span>
+            </div>
+            <div class="comm-embed-card">
+              <div class="comm-embed-title">🎉 利確達成</div>
+              <div class="comm-embed-amount">+12,000円</div>
+              <div class="comm-embed-symbol">USD/JPY · Long</div>
+              <div class="comm-embed-fields">
+                <div>
+                  <div class="comm-embed-field-label">トレーダー</div>
+                  <div class="comm-embed-field-value">あなた</div>
+                </div>
+                <div>
+                  <div class="comm-embed-field-label">保有時間</div>
+                  <div class="comm-embed-field-value">3時間14分</div>
+                </div>
+                <div>
+                  <div class="comm-embed-field-label">今月勝率</div>
+                  <div class="comm-embed-field-value">72%</div>
+                </div>
+              </div>
+              <div class="comm-embed-footer">
+                <span>🚀 <strong>プロトレーダー</strong>に昇格しました</span>
+              </div>
+            </div>
+            <div class="comm-embed-reacts">
+              <span class="comm-embed-react">🎉 18</span>
+              <span class="comm-embed-react">👏 12</span>
+              <span class="comm-embed-react">🚀 9</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="ob-result-actions">
+      <a href="https://discord.com/channels/1039824083208126474/1356783303105183916" target="_blank" class="ob-btn">トレードルームを覗く →</a>
+      <button class="ob-btn ob-btn-outline" onclick="obReset()">もう一度診断する</button>
+    </div>
+    <div class="ob-allroutes">
+      <div class="ob-allroutes-title">他のルートも見てみる</div>
+      <div class="ob-route-chips">
+        <button class="ob-route-chip" onclick="obShowResult('elearning')"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>億トレアカデミー</button>
+        <button class="ob-route-chip" onclick="obShowResult('zeropro')"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>ゼロプロ90</button>
+        <button class="ob-route-chip" onclick="obShowResult('ytt')"><svg class="ob-ic" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>YTT</button>
+        <button class="ob-route-chip current"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>コミュニティ</button>
+        <button class="ob-route-chip" onclick="obShowResult('fintokei')"><svg class="ob-ic" viewBox="0 0 24 24"><polygon points="6 3 18 3 22 9 12 22 2 9"/><path d="M12 22 8 9l4-6"/><path d="M12 22 16 9l-4-6"/><line x1="2" y1="9" x2="22" y2="9"/></svg>Fintokei</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Result: Fintokei -->
+  <div class="ob-result" id="ob-r-fintokei" hidden>
+    <div class="ob-result-icon"><svg class="ob-ic" viewBox="0 0 24 24"><polygon points="6 3 18 3 22 9 12 22 2 9"/><path d="M12 22 8 9l4-6"/><path d="M12 22 16 9l-4-6"/><line x1="2" y1="9" x2="22" y2="9"/></svg></div>
+    <h2 class="ob-result-title">Fintokeiで実戦デビュー</h2>
+    <p class="ob-result-desc">運用資金リスクなしで実戦デビュー。</p>
+    <div class="ob-hero-logo fintokei">
+      <img src="images/fintokei_logo_purple.png" alt="Fintokei">
+    </div>
+    <div class="ob-notice">
+      <span class="ob-notice-icon"><svg class="ob-ic" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01"/><path d="M18 12h.01"/></svg></span>
+      <div class="ob-notice-text">
+        <strong>最大5,000万円のデモ資金</strong>
+        3プランをレベル別に段階的に挑戦。
+      </div>
+    </div>
+    <div class="ob-vsteps">
+      <h4>Fintokei挑戦までの流れ</h4>
+
+      <!-- Step 1: 公式サイトで仕組みを理解 -->
+      <div class="ob-vstep">
+        <div class="ob-vstep-head">
+          <span class="ob-vstep-num"><img src="img/crayon-1.png" alt="1"></span>
+          <span class="ob-vstep-title"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><a href="https://www.fintokei.com/jp/?affiliate=55" target="_blank" class="ob-link">公式サイト</a>で仕組みを理解する</span>
+        </div>
+        <div class="ob-vstep-viz">
+          <div class="ob-browser">
+            <div class="ob-browser-bar">
+              <div class="ob-browser-dots">
+                <span></span><span></span><span></span>
+              </div>
+              <div class="ob-browser-url">
+                <span class="ob-browser-lock">🔒</span>
+                <span>fintokei.com/jp</span>
+              </div>
+            </div>
+            <div class="ob-browser-body">
+              <img class="ob-browser-logo" src="images/fintokei_logo_purple.png" alt="Fintokei">
+              <div class="ob-browser-tagline">教育評価型プロップファーム</div>
+              <div class="ob-browser-plans">
+                <div class="ob-browser-plan">
+                  <div class="ob-browser-plan-tag" style="background:rgba(16,185,129,0.1);color:#065f46;">ビギナー向け</div>
+                  <div class="ob-browser-plan-name">入門プラン</div>
+                  <div class="ob-browser-plan-price">1万円〜</div>
+                  <div class="ob-browser-plan-capital">最大2,000万円</div>
+                </div>
+                <div class="ob-browser-plan">
+                  <div class="ob-browser-plan-tag" style="background:rgba(124,58,237,0.1);color:#5b21b6;">挑戦者向け</div>
+                  <div class="ob-browser-plan-name">チャレンジ</div>
+                  <div class="ob-browser-plan-price">1万2,500円〜</div>
+                  <div class="ob-browser-plan-capital">最大5,000万円</div>
+                </div>
+                <div class="ob-browser-plan">
+                  <div class="ob-browser-plan-tag" style="background:rgba(245,158,11,0.12);color:#92400e;">上級者向け</div>
+                  <div class="ob-browser-plan-name">速攻プロ</div>
+                  <div class="ob-browser-plan-price">2万3,800円〜</div>
+                  <div class="ob-browser-plan-capital">最大3,500万円</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2: 5%オフクーポン（YSG5） -->
+      <div class="ob-vstep">
+        <div class="ob-vstep-head">
+          <span class="ob-vstep-num"><img src="img/crayon-2.png" alt="2"></span>
+          <span class="ob-vstep-title"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/></svg>限定クーポンでプラン購入時に5%オフ</span>
+        </div>
+        <div class="ob-vstep-viz">
+          <div class="ob-coupon">
+            <div class="ob-coupon-ribbon">FX SPACEメンバー限定</div>
+            <div class="ob-coupon-off">5<span class="ob-coupon-pct">%</span> <span class="ob-coupon-off-label">OFF</span></div>
+            <div class="ob-coupon-label">クーポンコード</div>
+            <div class="ob-coupon-code"><span>YSG5</span></div>
+            <div class="ob-coupon-hint"><a href="https://www.fintokei.com/jp/?affiliate=55" target="_blank" class="ob-link">Fintokei公式サイト</a>でチャレンジプランを購入する際、決済画面でこのコードを入力するとプラン購入金額が5%オフになります。</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3: 挑戦開始 -->
+      <div class="ob-vstep">
+        <div class="ob-vstep-head">
+          <span class="ob-vstep-num"><img src="img/crayon-3.png" alt="3"></span>
+          <span class="ob-vstep-title"><svg class="ob-ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>プランを選んで挑戦開始</span>
+        </div>
+        <div class="ob-vstep-viz">
+          <div class="community-chat static-chat">
+            <div class="cc-header">
+              <span class="cc-header-hash">#</span>
+              <span class="cc-header-name">合格報告</span>
+            </div>
+            <div class="cc-body">
+              <div class="cc-messages">
+                <div class="cc-msg visible">
+                  <div class="cc-avatar" style="background:#5865f2;">K</div>
+                  <div class="cc-msg-body">
+                    <div class="cc-msg-header"><span class="cc-msg-name" style="color:#5865f2;">Kenta</span><span class="cc-msg-time">今日 21:05</span></div>
+                    <div class="cc-msg-content">Fintokeiの入門プラン合格しました！🎉<br>1万円スタートでここまで来れるのは夢あります</div>
+                    <div class="cc-reactions"><span class="cc-reaction visible">🎉 <span class="cc-reaction-count">18</span></span><span class="cc-reaction visible">🔥 <span class="cc-reaction-count">9</span></span></div>
+                  </div>
+                </div>
+                <div class="cc-msg visible">
+                  <div class="cc-avatar cc-avatar-yosuga"></div>
+                  <div class="cc-msg-body">
+                    <div class="cc-msg-header"><span class="cc-msg-name" style="color:#ed4245;">よすが</span><span class="cc-pro-badge">主宰</span><span class="cc-msg-time">今日 21:10</span></div>
+                    <div class="cc-msg-content">おめでとうございます🎊 ここからが本番ですね。次はチャレンジプランに挑戦しましょう💪</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ob-result-actions">
+      <a href="https://www.fintokei.com/jp/?affiliate=55" target="_blank" class="ob-btn">Fintokei公式ページを見る →</a>
+      <button class="ob-btn ob-btn-outline" onclick="obReset()">もう一度診断する</button>
+    </div>
+    <div class="ob-allroutes">
+      <div class="ob-allroutes-title">他のルートも見てみる</div>
+      <div class="ob-route-chips">
+        <button class="ob-route-chip" onclick="obShowResult('elearning')"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>億トレアカデミー</button>
+        <button class="ob-route-chip" onclick="obShowResult('zeropro')"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>ゼロプロ90</button>
+        <button class="ob-route-chip" onclick="obShowResult('ytt')"><svg class="ob-ic" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>YTT</button>
+        <button class="ob-route-chip" onclick="obShowResult('community')"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>コミュニティ</button>
+        <button class="ob-route-chip current"><svg class="ob-ic" viewBox="0 0 24 24"><polygon points="6 3 18 3 22 9 12 22 2 9"/><path d="M12 22 8 9l4-6"/><path d="M12 22 16 9l-4-6"/><line x1="2" y1="9" x2="22" y2="9"/></svg>Fintokei</button>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer class="ob-footer">
+  <a href="index.html">FX SPACE チュートリアルへ →</a>
+</footer>
+
+<script src="js/gsap.min.js?v=20260301a"></script>
+<script>
+/* ===== YTT animation (ported from index.html) ===== */
+var yttP1Tl=null, candleTl=null, yttP3Tl=null, yttP5Tl=null;
+var yttAnimPlayed = { p1:false, p2:false, p3:false, p5:false };
+
+function animateYttP1() {
+  if (yttP1Tl) yttP1Tl.kill();
+  var panel=document.getElementById('p1-panel'),title=document.getElementById('p1-title'),
+      buy=document.getElementById('p1-buy'),sell=document.getElementById('p1-sell'),
+      lot=document.getElementById('p1-lot'),cls=document.getElementById('p1-cls'),
+      half=document.getElementById('p1-half'),pl=document.getElementById('p1-pl');
+  var plVal=document.getElementById('p1-pl-val');
+  var plDot=document.getElementById('p1-pl-dot');
+  if(!panel) return;
+  var plCounter={v:0};
+  yttP1Tl=gsap.timeline({repeat:-1,repeatDelay:2});
+  yttP1Tl.set([panel,title,buy,sell,lot,cls,half,pl],{opacity:0});
+  yttP1Tl.set(plCounter,{v:0});
+  yttP1Tl.to(panel,{opacity:1,duration:0.4},0.2);
+  yttP1Tl.to(title,{opacity:1,duration:0.3},0.4);
+  yttP1Tl.to(lot,{opacity:1,duration:0.3},0.7);
+  yttP1Tl.to([sell,buy],{opacity:1,duration:0.3,stagger:0.1,ease:'back.out(2)'},1.1);
+  yttP1Tl.to([cls,half],{opacity:1,duration:0.3,stagger:0.15,ease:'back.out(1.5)'},1.6);
+  yttP1Tl.to(buy,{scale:0.93,duration:0.1,transformOrigin:'center center'},2.3);
+  yttP1Tl.to(buy,{scale:1,duration:0.15},2.4);
+  yttP1Tl.to(pl,{opacity:1,duration:0.4,ease:'power2.out'},2.6);
+  yttP1Tl.to(plDot,{opacity:0.3,duration:0.3,yoyo:true,repeat:19},2.8);
+  var plSteps=[0,3200,-1500,4800,-800,7200,5100,9600,12500];
+  plSteps.forEach(function(v,i){
+    yttP1Tl.to(plCounter,{v:v,duration:0.6,ease:'power1.inOut',
+      onUpdate:function(){
+        if(!plVal)return;
+        var n=Math.round(plCounter.v);
+        var color=n>=0?'#4ade80':'#ef4444';
+        var sign=n>=0?'+':'';
+        plVal.textContent=sign+n.toLocaleString()+' 円';
+        plVal.setAttribute('fill',color);
+      }
+    },3.0+i*0.8);
+  });
+  var clsTime=3.0+plSteps.length*0.8+0.3;
+  yttP1Tl.to(cls,{scale:0.93,duration:0.1,transformOrigin:'center center'},clsTime);
+  yttP1Tl.to(cls,{scale:1,duration:0.15},clsTime+0.1);
+  yttP1Tl.to(plVal,{attr:{'font-size':17},duration:0.15,yoyo:true,repeat:1},clsTime+0.2);
+}
+
+function animateCandles() {
+  if (candleTl) candleTl.kill();
+  var candles=document.querySelectorAll('#scene-ytt .candle');
+  var scenarioPath=document.querySelector('#scene-ytt .scenario-path');
+  var buyMarker=document.getElementById('ytt-buy');
+  var tpMarker=document.getElementById('ytt-tp');
+  var slMarker=document.getElementById('ytt-sl');
+  var status=document.querySelector('#scene-ytt .ytt-status');
+  if(!candles.length) return;
+  candleTl=gsap.timeline({repeat:-1,repeatDelay:2});
+  candleTl.set(candles,{opacity:0});
+  candleTl.set(scenarioPath,{strokeDashoffset:300,opacity:0});
+  candleTl.set([buyMarker,tpMarker,slMarker],{opacity:0,scale:1});
+  candleTl.set(status,{opacity:0});
+  candles.forEach(function(c,i){candleTl.to(c,{opacity:1,duration:0.08},0.15+i*0.05);});
+  candleTl.call(function(){if(status)status.textContent='シナリオ作成中...';});
+  candleTl.to(status,{opacity:1,duration:0.3},"+=0.15");
+  candleTl.to(scenarioPath,{strokeDashoffset:0,opacity:1,duration:1,ease:"power1.inOut"},"+=0.15");
+  candleTl.to(buyMarker,{opacity:1,duration:0.25,ease:"back.out(2.5)"},"+=0.05");
+  candleTl.to(tpMarker,{opacity:1,duration:0.25,ease:"back.out(2.5)"},"+=0.05");
+  candleTl.to(slMarker,{opacity:1,duration:0.25,ease:"back.out(2.5)"},"+=0.05");
+  candleTl.call(function(){if(status)status.textContent='シナリオ完成';});
+}
+
+function animateYttP3() {
+  if (yttP3Tl) yttP3Tl.kill();
+  var candles=document.getElementById('p3-candles');
+  var hl1=document.getElementById('p3-hl1'),hl1Lbl=document.getElementById('p3-hl1-lbl');
+  var hl2=document.getElementById('p3-hl2'),hl2Lbl=document.getElementById('p3-hl2-lbl');
+  var hl3=document.getElementById('p3-hl3'),hl3Lbl=document.getElementById('p3-hl3-lbl');
+  var hl4=document.getElementById('p3-hl4');
+  var ch1=document.getElementById('p3-ch1'),ch2=document.getElementById('p3-ch2');
+  var trend=document.getElementById('p3-trend');
+  var tr1=document.getElementById('p3-tr1'),tr2=document.getElementById('p3-tr2'),tr3=document.getElementById('p3-tr3'),tr4=document.getElementById('p3-tr4');
+  var econ=document.getElementById('p3-econ'),econT=document.getElementById('p3-econ-t');
+  if(!candles) return;
+  yttP3Tl=gsap.timeline({repeat:-1,repeatDelay:2});
+  yttP3Tl.set(candles,{opacity:0});
+  yttP3Tl.set([hl1Lbl,hl2Lbl,hl3,hl3Lbl,hl4,trend,tr1,tr2,tr3,tr4,econ,econT],{opacity:0});
+  yttP3Tl.set([hl1,hl2],{attr:{'stroke-dashoffset':195}});
+  yttP3Tl.set([ch1,ch2],{attr:{'stroke-dashoffset':220}});
+  yttP3Tl.to(candles,{opacity:0.25,duration:0.5},0.2);
+  yttP3Tl.to(hl1,{attr:{'stroke-dashoffset':0},duration:0.8,ease:'power1.inOut'},0.8);
+  yttP3Tl.to(hl1Lbl,{opacity:1,duration:0.25},1.4);
+  yttP3Tl.to(hl2,{attr:{'stroke-dashoffset':0},duration:0.7,ease:'power1.inOut'},1.7);
+  yttP3Tl.to(hl2Lbl,{opacity:1,duration:0.25},2.2);
+  yttP3Tl.to(hl3,{opacity:1,duration:0.5},2.5);
+  yttP3Tl.to(hl3Lbl,{opacity:1,duration:0.25},2.8);
+  yttP3Tl.to(hl4,{opacity:1,duration:0.5},3.1);
+  yttP3Tl.to(ch1,{attr:{'stroke-dashoffset':0},duration:0.9,ease:'power1.inOut'},3.6);
+  yttP3Tl.to(ch2,{attr:{'stroke-dashoffset':0},duration:0.9,ease:'power1.inOut'},3.8);
+  yttP3Tl.fromTo(trend,{opacity:0,x:20},{opacity:1,x:0,duration:0.4,ease:'power2.out'},4.8);
+  yttP3Tl.to(tr1,{opacity:1,duration:0.2},5.1);
+  yttP3Tl.to(tr2,{opacity:1,duration:0.2},5.3);
+  yttP3Tl.to(tr3,{opacity:1,duration:0.2},5.5);
+  yttP3Tl.to(tr4,{opacity:1,duration:0.2},5.7);
+  yttP3Tl.to(econ,{opacity:0.7,duration:0.4},6.1);
+  yttP3Tl.to(econT,{opacity:1,duration:0.3},6.3);
+}
+
+function animateYttP5() {
+  if (yttP5Tl) yttP5Tl.kill();
+  var title=document.getElementById('p5-title'),
+      balance=document.getElementById('p5-balance'),
+      rate=document.getElementById('p5-rate'),
+      arrow=document.getElementById('p5-arrow'),
+      maxloss=document.getElementById('p5-maxloss'),
+      lot=document.getElementById('p5-lot');
+  if(!title) return;
+  yttP5Tl=gsap.timeline({repeat:-1,repeatDelay:2});
+  yttP5Tl.set([title,balance,rate,arrow,maxloss,lot],{opacity:0});
+  yttP5Tl.to(title,{opacity:1,duration:0.8},0.5);
+  yttP5Tl.to(balance,{opacity:1,duration:0.8},1.8);
+  yttP5Tl.to(rate,{opacity:1,duration:0.8},3.0);
+  yttP5Tl.to(arrow,{opacity:1,duration:0.5},4.2);
+  yttP5Tl.to(maxloss,{opacity:1,duration:0.8},5.0);
+  yttP5Tl.fromTo(lot,{opacity:0,scale:0.9},{opacity:1,scale:1,duration:0.8,ease:'back.out(1.5)',transformOrigin:'center center'},6.2);
+}
+
+function startYttAnimations() {
+  if (typeof gsap === 'undefined') return;
+  if (!yttAnimPlayed.p1) { yttAnimPlayed.p1=true; animateYttP1(); }
+  if (!yttAnimPlayed.p2) { yttAnimPlayed.p2=true; animateCandles(); }
+  if (!yttAnimPlayed.p3) { yttAnimPlayed.p3=true; animateYttP3(); }
+  if (!yttAnimPlayed.p5) { yttAnimPlayed.p5=true; animateYttP5(); }
+}
+
+(function(){
+  var state = { step: 'q1', answers: {} };
+  var allCards = document.querySelectorAll('.ob-card, .ob-result');
+  var progress = document.getElementById('ob-progress');
+  var dots = progress.querySelectorAll('.ob-dot');
+  var lines = progress.querySelectorAll('.ob-dot-line');
+
+  function show(id) {
+    allCards.forEach(function(c){ c.hidden = true; });
+    var el = document.getElementById('ob-' + id);
+    if (el) { el.hidden = false; }
+    // Re-trigger animation
+    if (el) {
+      el.style.animation = 'none';
+      el.offsetHeight; // reflow
+      el.style.animation = '';
+    }
+  }
+
+  function updateProgress(stepNum, isResult) {
+    dots.forEach(function(d, i) {
+      d.classList.remove('active', 'done');
+      if (i < stepNum - 1) d.classList.add('done');
+      else if (i === stepNum - 1) d.classList.add(isResult ? 'done' : 'active');
+    });
+    lines.forEach(function(l, i) {
+      l.classList.remove('done');
+      if (i < stepNum - 1) l.classList.add('done');
+      if (isResult && i < stepNum) l.classList.add('done');
+    });
+  }
+
+  window.obAnswer = function(q, val) {
+    state.answers['q' + q] = val;
+    if (q === 1) {
+      var nextStep = 'q2a';
+      if (val === 'beginner') nextStep = 'q2b';
+      else if (val === 'intermediate') nextStep = 'q2c';
+      state.step = nextStep;
+      show(nextStep);
+      updateProgress(2, false);
+    }
+  };
+
+  window.obRoute = function(route) {
+    state.answers.route = route;
+    state.step = 'result';
+    show('r-' + route);
+    updateProgress(2, true);
+    // Hide progress on result
+    progress.style.display = 'none';
+    if (route === 'ytt') startYttAnimations();
+  };
+
+  window.obBack = function(target) {
+    state.step = target;
+    show(target);
+    if (target === 'q1') updateProgress(1, false);
+    else updateProgress(2, false);
+  };
+
+  window.obReset = function() {
+    state = { step: 'q1', answers: {} };
+    show('q1');
+    updateProgress(1, false);
+    progress.style.display = '';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  window.obShowResult = function(route) {
+    state.answers.route = route;
+    show('r-' + route);
+    if (route === 'ytt') startYttAnimations();
+  };
+
+  window.obShare = function(route) {
+    var routeNames = {
+      elearning: '億トレアカデミー',
+      zeropro: 'ゼロプロ90',
+      ytt: 'YTT（よすが式トレードツール）',
+      community: 'コミュニティで成長',
+      fintokei: 'Fintokeiで実戦デビュー'
+    };
+    var routeName = routeNames[route] || '';
+    var text = 'FX SPACEの診断をやってみたら、おすすめルートは「' + routeName + '」でした👉';
+    var url = window.location.href;
+    var shareUrl = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(url);
+    window.open(shareUrl, '_blank', 'noopener,noreferrer');
+  };
+
+  // Init
+  show('q1');
+  updateProgress(1, false);
+})();
+</script>
+</body>
+</html>

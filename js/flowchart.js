@@ -719,10 +719,29 @@ function setupAnimations() {
     // Community circle-reveal
     animateZpCommunityReveal();
 
-    // Community: チャットが中央からズーム＋ブラー解除で登場
-    scrollTriggerInstances.push(ScrollTrigger.create({ trigger: '#community-section', start: triggerStart, onEnter: function() {
-        document.querySelectorAll('.comm-row').forEach(function(row, i) { gsap.fromTo(row, { opacity: 0, y: 60, filter: 'blur(6px)' }, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.7, delay: 0.2 + i * 0.2, ease: 'power3.out' }); });
-    }, once: true }));
+    // Community: 各 .comm-feature がスクロール入場時に個別にフェードイン＋スライドアップ
+    document.querySelectorAll('#community-section .comm-feature').forEach(function(feature) {
+        // Text and visual sides slide in from opposite directions
+        var textEl = feature.querySelector('.comm-feature-text');
+        var visualEl = feature.querySelector('.comm-feature-visual');
+        var isEven = Array.prototype.indexOf.call(feature.parentNode.children, feature) % 2 === 1;
+        // isEven=true => section is on the right-to-left alternated row (②④)
+        var textX = isEven ? 40 : -40;
+        var visualX = isEven ? -40 : 40;
+
+        if (textEl) gsap.set(textEl, { opacity: 0, x: textX, filter: 'blur(6px)' });
+        if (visualEl) gsap.set(visualEl, { opacity: 0, x: visualX, y: 30, filter: 'blur(8px)' });
+
+        scrollTriggerInstances.push(ScrollTrigger.create({
+            trigger: feature,
+            start: 'top 82%',
+            once: true,
+            onEnter: function() {
+                if (textEl) gsap.to(textEl, { opacity: 1, x: 0, filter: 'blur(0px)', duration: 0.8, ease: 'power3.out' });
+                if (visualEl) gsap.to(visualEl, { opacity: 1, x: 0, y: 0, filter: 'blur(0px)', duration: 0.9, delay: 0.15, ease: 'power3.out' });
+            }
+        }));
+    });
 
     // Content: カードが放射状にポップイン
     scrollTriggerInstances.push(ScrollTrigger.create({ trigger: '#content-section', start: triggerStart, onEnter: function() {

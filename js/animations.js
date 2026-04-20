@@ -649,7 +649,7 @@ function renderElSimStart() {
     body.innerHTML = '<div class="el-sim-start">' +
         '<div class="el-sim-start-visual">📝</div>' +
         '<h3>FXの基礎知識をチェック！</h3>' +
-        '<p>Y式億トレ再現アカデミー第1章・第2章から4問出題。<br>あなたはどれだけ知っていますか？</p>' +
+        '<p>億トレアカデミー第1章・第2章から4問出題。<br>あなたはどれだけ知っていますか？</p>' +
         '<div class="el-sim-start-meta">' +
             '<div class="el-sim-start-meta-item"><span>📋</span> 全4問</div>' +
             '<div class="el-sim-start-meta-item"><span>⏱</span> 約1分</div>' +
@@ -768,9 +768,9 @@ function renderElSimResult() {
     var score = elSimState.score;
     var total = elSimData.length;
     var icon, msg;
-    if (score === total) { icon = '🏆'; msg = '満点です！FXの基礎がしっかり身についています。<br>Y式億トレ再現アカデミーで続きの章も学んでみましょう！'; }
-    else if (score >= 2) { icon = '👏'; msg = 'いい調子です！<br>Y式億トレ再現アカデミーで全12章を学べば、さらに理解が深まります。'; }
-    else { icon = '📚'; msg = 'FXの基礎を学ぶチャンスです！<br>Y式億トレ再現アカデミーなら体系的に理解できます。'; }
+    if (score === total) { icon = '🏆'; msg = '満点です！FXの基礎がしっかり身についています。<br>億トレアカデミーで続きの章も学んでみましょう！'; }
+    else if (score >= 2) { icon = '👏'; msg = 'いい調子です！<br>億トレアカデミーで全12章を学べば、さらに理解が深まります。'; }
+    else { icon = '📚'; msg = 'FXの基礎を学ぶチャンスです！<br>億トレアカデミーなら体系的に理解できます。'; }
     body.innerHTML = '<div class="el-sim-slide active"><div class="el-sim-result">' +
         '<div class="el-sim-result-icon">' + icon + '</div>' +
         '<h3>クイズ結果</h3>' +
@@ -778,7 +778,7 @@ function renderElSimResult() {
         '<div class="el-sim-result-msg">' + msg + '</div>' +
         '<div class="el-sim-result-actions">' +
         '<button class="el-sim-retry" onclick="initElSim()">もう一度挑戦する</button>' +
-        '<a href="https://fx-space.learnworlds.com/course/zeroprokiso" target="_blank" class="btn btn-primary">Y式億トレ再現アカデミーで全章を学ぶ →</a>' +
+        '<a href="https://fx-space.learnworlds.com/course/zeroprokiso" target="_blank" class="btn btn-primary">億トレアカデミーで全章を学ぶ →</a>' +
         '</div></div></div>';
     for (var j = 0; j < elSimData.length; j++) {
         var dot = document.getElementById('el-sim-dot-' + j);

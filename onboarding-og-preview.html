@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>OGP Preview — onboarding</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;800;900&family=Inter:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  html,body{background:#1e1a4f;}
+  body{
+    font-family:'Inter','Noto Sans JP',sans-serif;
+    padding:40px;
+    display:flex;justify-content:center;align-items:flex-start;
+    min-height:100vh;
+  }
+
+  /* ======= 1200x630 OGP canvas ======= */
+  .ogp{
+    width:1200px;height:630px;
+    position:relative;
+    background:#3430b0;
+    overflow:hidden;
+    border-radius:12px;
+    box-shadow:0 20px 60px rgba(0,0,0,0.4);
+    color:#fff;
+  }
+
+  /* うっすらドットパターン */
+  .ogp::before{
+    content:'';position:absolute;inset:0;
+    background-image:radial-gradient(circle, rgba(255,255,255,0.06) 1.2px, transparent 1.4px);
+    background-size:26px 26px;
+    pointer-events:none;z-index:0;
+  }
+
+  /* うっすらFX SPACEテキスト（右上） */
+  .brand-watermark{
+    position:absolute;top:28px;right:36px;
+    font-size:13px;font-weight:800;letter-spacing:0.2em;
+    color:rgba(255,255,255,0.22);
+    z-index:1;
+  }
+
+  /* ====== 左カラム ====== */
+  .left{
+    position:absolute;
+    top:0;left:0;
+    width:600px;height:100%;
+    padding:56px 40px 56px 64px;
+    display:flex;flex-direction:column;
+    z-index:3;
+  }
+
+  .brand{
+    display:flex;align-items:center;gap:10px;
+    margin-bottom:44px;
+  }
+  .brand-mark{
+    width:34px;height:34px;border-radius:10px;
+    background:#facc15;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:900;color:#3430b0;font-size:18px;
+    box-shadow:0 3px 0 rgba(0,0,0,0.15);
+  }
+  .brand-name{
+    font-weight:900;font-size:18px;letter-spacing:0.08em;
+  }
+
+  /* 診断バッジ */
+  .quiz-badge{
+    display:inline-flex;align-items:center;gap:8px;
+    background:rgba(250,204,21,0.15);
+    border:1.5px solid rgba(250,204,21,0.45);
+    color:#fde68a;
+    padding:7px 14px;border-radius:999px;
+    font-size:13px;font-weight:800;letter-spacing:0.04em;
+    width:fit-content;
+    margin-bottom:20px;
+  }
+  .quiz-badge .dot{
+    width:8px;height:8px;border-radius:50%;
+    background:#facc15;
+    box-shadow:0 0 0 4px rgba(250,204,21,0.2);
+  }
+
+  /* タイトル */
+  .title{
+    font-family:'Noto Sans JP',sans-serif;
+    font-weight:900;
+    font-size:56px;
+    line-height:1.28;
+    letter-spacing:-0.02em;
+    margin-bottom:24px;
+  }
+  .title .hl{
+    position:relative;display:inline-block;
+    color:#fff;
+  }
+  .title .hl::after{
+    content:'';
+    position:absolute;left:-4px;right:-4px;bottom:2px;
+    height:14px;
+    background:#facc15;
+    z-index:-1;
+    border-radius:4px;
+    transform:skewX(-4deg);
+  }
+
+  /* サブタイトル */
+  .sub{
+    font-size:19px;line-height:1.7;font-weight:700;
+    color:rgba(255,255,255,0.88);
+    margin-bottom:28px;
+    letter-spacing:0.01em;
+  }
+
+  /* 特徴リスト */
+  .features{
+    display:flex;flex-direction:column;gap:12px;
+    margin-bottom:36px;
+  }
+  .feature{
+    display:flex;align-items:center;gap:12px;
+    font-size:16px;font-weight:700;
+    color:#fff;
+  }
+  .feature .check{
+    width:26px;height:26px;border-radius:50%;
+    background:#facc15;
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;
+  }
+  .feature .check svg{width:14px;height:14px;}
+  .feature .check.alt{background:#10b981;}
+
+  /* フロービジュアル */
+  .flow{
+    margin-top:auto;
+    display:flex;align-items:center;gap:14px;
+  }
+  .flow-node{
+    width:58px;height:58px;border-radius:16px;
+    background:#fff;color:#3430b0;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:900;font-size:18px;
+    box-shadow:0 4px 0 rgba(0,0,0,0.15);
+    letter-spacing:-0.02em;
+  }
+  .flow-node.goal{
+    background:#10b981;color:#fff;
+  }
+  .flow-arrow{
+    color:#facc15;font-size:22px;font-weight:900;
+  }
+  .flow-label{
+    font-size:12px;font-weight:800;letter-spacing:0.06em;
+    color:rgba(255,255,255,0.6);
+    margin-left:8px;
+  }
+
+  /* ====== 右カラム：3層カード ====== */
+  .right{
+    position:absolute;
+    top:0;right:0;
+    width:640px;height:100%;
+    z-index:2;
+  }
+
+  .card{
+    position:absolute;
+    background:#fff;
+    border-radius:22px;
+    box-shadow:
+      0 2px 0 rgba(79,70,229,0.18),
+      0 20px 50px rgba(0,0,0,0.35),
+      0 6px 16px rgba(0,0,0,0.2);
+    color:#111827;
+    overflow:hidden;
+    border:1px solid rgba(79,70,229,0.1);
+  }
+
+  /* Back card — Q1 */
+  .card-q1{
+    top:60px;right:60px;
+    width:420px;height:300px;
+    transform:rotate(-6deg);
+    padding:20px 22px;
+  }
+  .card-q1 .ch{
+    position:absolute;top:-14px;left:50%;
+    transform:translateX(-50%);
+    width:50px;height:50px;border-radius:50%;
+    background:#fff;border:3px solid #fde68a;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:900;font-size:15px;color:#f59e0b;
+    letter-spacing:-0.02em;
+  }
+  .card-q1 .qtitle{
+    text-align:center;font-weight:900;font-size:18px;
+    margin:18px 0 14px;color:#1e1b4b;
+    letter-spacing:-0.01em;
+  }
+  .q1-opts{display:flex;flex-direction:column;gap:8px;}
+  .q1-opt{
+    display:flex;align-items:center;gap:10px;
+    background:#f9fafb;
+    border:1.5px solid #e5e7eb;
+    border-radius:14px;
+    padding:9px 12px;
+    font-size:13px;font-weight:800;color:#111827;
+  }
+  .q1-opt .ic{
+    width:28px;height:28px;border-radius:8px;
+    background:#eef2ff;color:#4f46e5;
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;font-size:13px;font-weight:900;
+  }
+  .q1-opt.picked{
+    border-color:#4f46e5;
+    background:#eef2ff;
+    box-shadow:0 3px 0 rgba(79,70,229,0.18);
+  }
+  .q1-opt .sub{
+    display:block;font-weight:600;color:#6b7280;font-size:11px;margin-top:1px;
+  }
+  .q1-opt .arrow{margin-left:auto;color:#9ca3af;font-weight:900;}
+
+  /* Middle card — Q2 */
+  .card-q2{
+    top:186px;right:180px;
+    width:430px;height:300px;
+    transform:rotate(4deg);
+    padding:22px 22px;
+  }
+  .card-q2 .ch{
+    position:absolute;top:-14px;left:50%;
+    transform:translateX(-50%);
+    width:52px;height:52px;border-radius:50%;
+    background:#fff;border:3px solid #fde68a;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:900;font-size:15px;color:#f59e0b;
+  }
+  .card-q2 .qtitle{
+    text-align:center;font-weight:900;font-size:19px;
+    margin:22px 0 16px;color:#1e1b4b;
+  }
+  .q2-opts{display:flex;flex-direction:column;gap:9px;}
+  .q2-opt{
+    display:flex;align-items:center;gap:11px;
+    background:#fff;
+    border:1.5px solid #e5e7eb;
+    border-radius:14px;
+    padding:10px 14px;
+    font-size:13.5px;font-weight:800;color:#111827;
+  }
+  .q2-opt .ic{
+    width:32px;height:32px;border-radius:10px;
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;
+    font-weight:900;font-size:13px;color:#fff;
+  }
+  .q2-opt .ic.pro{background:#4f46e5;}
+  .q2-opt .ic.easy{background:#f59e0b;}
+  .q2-opt .ic.fun{background:#ec4899;}
+  .q2-opt .main{}
+  .q2-opt .sub{
+    display:block;font-weight:600;color:#6b7280;font-size:11px;margin-top:1px;
+  }
+
+  /* Front card — Result */
+  .card-result{
+    bottom:46px;right:48px;
+    width:360px;
+    transform:rotate(-3deg);
+    padding:20px 22px 22px;
+  }
+  .result-top{
+    display:flex;align-items:center;gap:8px;
+    color:#10b981;font-weight:900;font-size:12px;
+    letter-spacing:0.05em;margin-bottom:8px;
+  }
+  .result-check{
+    width:22px;height:22px;border-radius:50%;
+    background:#10b981;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .result-check svg{width:12px;height:12px;}
+  .result-label{
+    font-size:12px;color:#6b7280;font-weight:800;
+    margin-bottom:4px;letter-spacing:0.04em;
+  }
+  .result-name{
+    font-size:26px;font-weight:900;color:#1e1b4b;
+    letter-spacing:-0.02em;
+    line-height:1.2;
+    margin-bottom:10px;
+  }
+  .result-name .yellow{color:#f59e0b;}
+  .result-tags{
+    display:flex;flex-wrap:wrap;gap:6px;
+    margin-bottom:12px;
+  }
+  .result-tag{
+    font-size:11px;font-weight:800;
+    background:#eef2ff;color:#4f46e5;
+    padding:4px 10px;border-radius:999px;
+  }
+  .result-bar{
+    height:8px;background:#f3f4f6;border-radius:99px;
+    overflow:hidden;margin-bottom:6px;
+  }
+  .result-bar-fill{
+    height:100%;width:82%;
+    background:#4f46e5;
+    border-radius:99px;
+  }
+  .result-bar-label{
+    font-size:10.5px;color:#6b7280;font-weight:700;
+  }
+
+  /* 装飾パーツ */
+  .sparkle{
+    position:absolute;color:#facc15;
+    font-weight:900;z-index:2;
+    text-shadow:0 0 12px rgba(250,204,21,0.4);
+  }
+  .sparkle.s1{top:78px;left:52%;font-size:22px;transform:rotate(12deg);}
+  .sparkle.s2{top:510px;right:38%;font-size:18px;}
+  .sparkle.s3{top:170px;right:20px;font-size:16px;color:rgba(255,255,255,0.5);}
+  .sparkle.s4{top:430px;left:560px;font-size:14px;color:rgba(255,255,255,0.45);}
+
+  /* 下ボーダーライン装飾 */
+  .bottom-line{
+    position:absolute;bottom:18px;left:64px;right:64px;
+    height:2px;
+    background:repeating-linear-gradient(90deg, rgba(255,255,255,0.25) 0 8px, transparent 8px 14px);
+    z-index:1;
+  }
+  .bottom-info{
+    position:absolute;bottom:34px;left:64px;
+    font-size:12px;font-weight:800;letter-spacing:0.12em;
+    color:rgba(255,255,255,0.55);
+    z-index:3;
+  }
+
+  /* プログレスドット */
+  .progress{
+    display:flex;align-items:center;gap:4px;
+    margin-bottom:18px;
+  }
+  .progress .pd{
+    width:8px;height:8px;border-radius:50%;
+    background:rgba(255,255,255,0.35);
+  }
+  .progress .pd.active{background:#facc15;width:26px;border-radius:99px;}
+</style>
+</head>
+<body>
+
+<div class="ogp">
+  <!-- 右上ウォーターマーク -->
+  <div class="brand-watermark">FX SPACE</div>
+
+  <!-- ===== 左 ===== -->
+  <div class="left">
+    <div class="brand">
+      <div class="brand-mark">FX</div>
+      <div class="brand-name">FX SPACE</div>
+    </div>
+
+    <div class="progress">
+      <span class="pd active"></span>
+      <span class="pd"></span>
+      <span class="pd" style="opacity:0.6"></span>
+    </div>
+
+    <div class="quiz-badge">
+      <span class="dot"></span>
+      2問でわかる・ルート診断
+    </div>
+
+    <h1 class="title">
+      あなたに合った<br>
+      <span class="hl">学習ルート</span>を<br>
+      見つけよう
+    </h1>
+
+    <p class="sub">
+      かんたんな質問に答えるだけ。<br>
+      ぴったりのスタート地点が見つかります。
+    </p>
+
+    <div class="features">
+      <div class="feature">
+        <span class="check">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#3430b0" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </span>
+        約30秒でカンタン診断
+      </div>
+      <div class="feature">
+        <span class="check alt">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </span>
+        5つのルートから最適な1つを提案
+      </div>
+    </div>
+
+    <div class="flow">
+      <div class="flow-node">Q1</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">Q2</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node goal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="width:26px;height:26px;"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <div class="flow-label">YOUR<br>ROUTE</div>
+    </div>
+  </div>
+
+  <!-- ===== 右：3層カード ===== -->
+  <div class="right">
+    <!-- Back: Q1 -->
+    <div class="card card-q1">
+      <div class="ch">Q1</div>
+      <div class="qtitle">FXの経験は？</div>
+      <div class="q1-opts">
+        <div class="q1-opt">
+          <span class="ic">🌱</span>
+          <span>ない<span class="sub">これから始めたい</span></span>
+          <span class="arrow">›</span>
+        </div>
+        <div class="q1-opt picked">
+          <span class="ic" style="background:#4f46e5;color:#fff;">📊</span>
+          <span>初心者<span class="sub">まだ利益が出ていない</span></span>
+          <span class="arrow" style="color:#4f46e5;">›</span>
+        </div>
+        <div class="q1-opt">
+          <span class="ic">🏆</span>
+          <span>中級者以上<span class="sub">ある程度勝てている</span></span>
+          <span class="arrow">›</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Middle: Q2 -->
+    <div class="card card-q2">
+      <div class="ch">Q2</div>
+      <div class="qtitle">今の目標は？</div>
+      <div class="q2-opts">
+        <div class="q2-opt">
+          <span class="ic pro">📈</span>
+          <span>勝てる実力をつける<span class="sub">ゼロプロ90で添削を受ける</span></span>
+        </div>
+        <div class="q2-opt">
+          <span class="ic easy">⚡</span>
+          <span>トレードを楽にしたい<span class="sub">YTTで再現性の高い手法</span></span>
+        </div>
+        <div class="q2-opt">
+          <span class="ic fun">💬</span>
+          <span>仲間と楽しく学ぶ<span class="sub">コミュニティでスタート</span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Front: Result -->
+    <div class="card card-result">
+      <div class="result-top">
+        <span class="result-check">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </span>
+        あなたにおすすめ
+      </div>
+      <div class="result-label">RECOMMENDED ROUTE</div>
+      <div class="result-name">ゼロプロ<span class="yellow">90</span></div>
+      <div class="result-tags">
+        <span class="result-tag">初心者</span>
+        <span class="result-tag">添削あり</span>
+        <span class="result-tag">90日集中</span>
+      </div>
+      <div class="result-bar">
+        <div class="result-bar-fill"></div>
+      </div>
+      <div class="result-bar-label">マッチ度  82%</div>
+    </div>
+  </div>
+
+  <!-- 装飾 -->
+  <div class="sparkle s1">✦</div>
+  <div class="sparkle s2">✦</div>
+  <div class="sparkle s3">○</div>
+  <div class="sparkle s4">✦</div>
+
+  <!-- 下部ライン -->
+  <div class="bottom-line"></div>
+  <div class="bottom-info">ROUTE QUIZ  ·  2 QUESTIONS  ·  30 SEC</div>
+</div>
+
+</body>
+</html>

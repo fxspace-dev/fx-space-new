@@ -3,10 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FX SPACE - あなたに合ったルートを見つけよう</title>
-<meta property="og:title" content="FX SPACE - ルート診断">
-<meta property="og:description" content="かんたんな質問に答えるだけ。あなたにぴったりの学習ルートが見つかります。">
+<title>FX SPACE - あなたに合う学び方が見つかる</title>
+<meta name="description" content="かんたんな質問に答えるだけで、あなたにぴったりの学習ルートが見つかります。FX SPACE 新メンバー向け診断ページ。">
+<meta property="og:title" content="FX SPACE - あなたに合う学び方が見つかる">
+<meta property="og:description" content="かんたんな質問に答えるだけで、あなたにぴったりの学習ルートが見つかります。">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://fx-space-community-preview-1775890548.netlify.app/onboarding.html">
+<meta property="og:image" content="https://fx-space-community-preview-1775890548.netlify.app/images/onboarding-og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="FX SPACE - あなたに合う学び方が見つかる">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="FX SPACE - あなたに合う学び方が見つかる">
+<meta name="twitter:description" content="かんたんな質問に答えるだけで、あなたにぴったりの学習ルートが見つかります。">
+<meta name="twitter:image" content="https://fx-space-community-preview-1775890548.netlify.app/images/onboarding-og.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;800;900&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Reuse UI components from main site (community-chat, comm-embed-card, cc-yt-embed, etc.) -->
@@ -884,7 +894,7 @@ a{color:inherit;text-decoration:none}
   padding-top:0.25rem;
   border-top:1px dashed #e5e7eb;
 }
-/* Coupon card (Fintokei YSG5) — warm chic style, matches page tone */
+/* Coupon card (Fintokei YOSUGA10 main / FINTO5KEI sub) — warm chic style */
 .ob-coupon{
   position:relative;
   padding:1.75rem 1.75rem 1.5rem;
@@ -962,9 +972,8 @@ a{color:inherit;text-decoration:none}
   font-family:'Inter',monospace;
   font-size:1.375rem;
   font-weight:700;
-  letter-spacing:0.4em;
+  letter-spacing:0;
   color:#1e1b4b;
-  padding-left:0.4em;
 }
 .ob-coupon-hint{
   font-size:0.75rem;
@@ -981,6 +990,56 @@ a{color:inherit;text-decoration:none}
   font-weight:700;
 }
 .ob-coupon-hint a:hover{color:#b45309;}
+/* Sub coupon (FINTO5KEI / 2回目以降向け・おまけ扱い) */
+.ob-coupon-sub{
+  margin-top:0.875rem;
+  padding:0.875rem 1.125rem;
+  background:#fff;
+  border:1px dashed #e0c897;
+  border-radius:10px;
+  text-align:center;
+}
+.ob-coupon-sub-label{
+  display:inline-block;
+  font-size:0.6875rem;
+  font-weight:700;
+  color:#a87c3e;
+  letter-spacing:0.06em;
+  margin-bottom:0.5rem;
+  padding:0.15rem 0.5rem;
+  background:#fffbf2;
+  border-radius:4px;
+}
+.ob-coupon-sub-body{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:0.5rem;
+  margin-bottom:0.5rem;
+}
+.ob-coupon-sub-off{
+  font-size:1rem;
+  font-weight:800;
+  color:#b45309;
+  letter-spacing:0.02em;
+}
+.ob-coupon-sub-code{
+  display:inline-block;
+  padding:0.3rem 0.7rem;
+  background:#fffbf2;
+  border:1px solid #ebd8b0;
+  border-radius:5px;
+  font-family:'Inter',monospace;
+  font-size:0.8125rem;
+  font-weight:700;
+  letter-spacing:0;
+  color:#1e1b4b;
+}
+.ob-coupon-sub-hint{
+  font-size:0.6875rem;
+  color:#78716c;
+  line-height:1.6;
+}
 /* Morning schedule timeline (community card step 2) */
 .ob-timeline{
   background:#fff;
@@ -2928,19 +2987,27 @@ a{color:inherit;text-decoration:none}
         </div>
       </div>
 
-      <!-- Step 2: 5%オフクーポン（YSG5） -->
+      <!-- Step 2: 10%オフクーポン（YOSUGA10 初回限定 / FINTO5KEI 2回目以降） -->
       <div class="ob-vstep">
         <div class="ob-vstep-head">
           <span class="ob-vstep-num"><img src="img/crayon-2.png" alt="2"></span>
-          <span class="ob-vstep-title"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/></svg>限定クーポンでプラン購入時に5%オフ</span>
+          <span class="ob-vstep-title"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/></svg>限定クーポンでプラン購入時に10%オフ</span>
         </div>
         <div class="ob-vstep-viz">
           <div class="ob-coupon">
-            <div class="ob-coupon-ribbon">FX SPACEメンバー限定</div>
-            <div class="ob-coupon-off">5<span class="ob-coupon-pct">%</span> <span class="ob-coupon-off-label">OFF</span></div>
+            <div class="ob-coupon-ribbon">FX SPACEメンバー限定 / 初回チャレンジ</div>
+            <div class="ob-coupon-off">10<span class="ob-coupon-pct">%</span> <span class="ob-coupon-off-label">OFF</span></div>
             <div class="ob-coupon-label">クーポンコード</div>
-            <div class="ob-coupon-code"><span>YSG5</span></div>
-            <div class="ob-coupon-hint"><a href="https://www.fintokei.com/jp/?affiliate=55" target="_blank" class="ob-link">Fintokei公式サイト</a>でチャレンジプランを購入する際、決済画面でこのコードを入力するとプラン購入金額が5%オフになります。</div>
+            <div class="ob-coupon-code"><span>YOSUGA10</span></div>
+            <div class="ob-coupon-hint"><a href="https://www.fintokei.com/jp/?affiliate=55" target="_blank" class="ob-link">Fintokei公式サイト</a>でチャレンジプランを購入する際、決済画面でこのコードを入力するとプラン購入金額が10%オフになります。</div>
+          </div>
+          <div class="ob-coupon-sub">
+            <div class="ob-coupon-sub-label">2回目以降のチャレンジの方へ</div>
+            <div class="ob-coupon-sub-body">
+              <span class="ob-coupon-sub-off">5% OFF</span>
+              <span class="ob-coupon-sub-code">FINTO5KEI</span>
+            </div>
+            <div class="ob-coupon-sub-hint">こちらは何度でもご利用いただけるクーポンです。</div>
           </div>
         </div>
       </div>

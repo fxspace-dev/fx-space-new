@@ -1,0 +1,347 @@
+<!--
+  Community Section v2 (保存日: 2026-04-21)
+  -----------------------------------------------------------------
+  2026年6月頃に index.html のコミュニティセクションへ差し戻して使用予定。
+  必要なCSSクラス: .comm-feature, .comm-flow, .comm-profile-panel,
+                  .comm-showcase, .comm-details-link など
+  （これらは css/style.css に679d607で追加済みのため現在も残っている）
+  このファイル自体はページに読み込まれません（index.html の外）。
+-->
+<div class="zp-community-pin" id="zp-community-pin">
+<div class="zp-community-reveal" id="zp-community-reveal">
+<svg style="position:absolute;width:0;height:0;overflow:hidden;" aria-hidden="true"><defs><filter id="thicken-frame"><feMorphology operator="dilate" radius="0.7"/></filter></defs></svg>
+<section class="community-section section-bg-dark" id="community-section">
+    <div class="community-inner">
+        <div class="text-center" style="margin-bottom:1rem;"><span class="section-title-badge"><img class="hero-title-side hero-title-side--left" src="img/title-side-left.png" alt="">コミュニティ<img class="hero-title-side hero-title-side--right" src="img/title-side-right.png" alt=""></span></div>
+        <h2 class="heading-lg text-center">一人じゃない。<br>だから、続けられる。</h2>
+        <p class="subtitle text-center" style="margin-top:1.75rem;">同じ目標を持った仲間・プロの先輩・毎日の相場情報。<br>あなたのトレード成長を支える全てが、ここにあります。</p>
+        <div class="comm-rows">
+
+            <!-- ① 仲間と一緒にトレードできる -->
+            <div class="comm-feature">
+                <h3 class="comm-feature-headline"><img src="img/crayon-orange-1.png" alt="①" class="comm-feature-num">ルームを開けば、仲間がいる</h3>
+                <div class="comm-feature-hero">
+                    <img src="images/community-hero-1-door.png" alt="ルームを開けば、仲間がいる">
+                </div>
+                <p class="comm-feature-sub">同じレベルの仲間と少人数制。今日の相場を相談しながら、<br>プロトレーダーも同じ部屋で見守ってくれます。</p>
+                <div class="comm-feature-visual">
+                    <div class="community-chat static-chat">
+                        <div class="cc-header"><span class="cc-header-hash">#</span><span class="cc-header-name">あなたのトレードルーム</span></div>
+                        <div class="cc-body">
+                            <div class="cc-messages">
+                                <div class="cc-msg">
+                                    <div class="cc-avatar" style="background:#57f287;">M</div>
+                                    <div class="cc-msg-body">
+                                        <div class="cc-msg-header"><span class="cc-msg-name" style="color:#57f287;">Mochi</span><span class="cc-msg-time">今日 08:15</span></div>
+                                        <div class="cc-msg-content">おはようございます！ドル円の赤ライン付近、気になってます。皆さんどう見てますか？</div>
+                                    </div>
+                                </div>
+                                <div class="cc-msg">
+                                    <div class="cc-avatar" style="background:#c084fc;">K</div>
+                                    <div class="cc-msg-body">
+                                        <div class="cc-msg-header"><span class="cc-msg-name" style="color:#c084fc;">Kenta</span><span class="cc-msg-time">今日 08:22</span></div>
+                                        <div class="cc-msg-content">僕もそこ見てます！4H足でダウ転換しそうな形ですよね</div>
+                                    </div>
+                                </div>
+                                <div class="cc-msg">
+                                    <div class="cc-avatar" style="background:#eb459e;">H</div>
+                                    <div class="cc-msg-body">
+                                        <div class="cc-msg-header"><span class="cc-msg-name" style="color:#eb459e;">HiU</span><span class="cc-msg-time">今日 08:25</span></div>
+                                        <div class="cc-msg-content">同意です。ただ日足の流れ的にまだ戻り売り優勢かなと🤔 私は売り目線で待ってます</div>
+                                    </div>
+                                </div>
+                                <div class="cc-msg">
+                                    <div class="cc-avatar" style="background:#ed4245;">S</div>
+                                    <div class="cc-msg-body">
+                                        <div class="cc-msg-header"><span class="cc-msg-name" style="color:#ed4245;">Sato</span><span class="cc-pro-badge">プロ</span><span class="cc-msg-time">今日 08:30</span></div>
+                                        <div class="cc-msg-content">3人ともいい目の付け所👍 赤ラインは意識されやすい価格だから、反応を見てから入るのが正解。M15で包み足出たら入っていいかも</div>
+                                        <div class="cc-reactions"><span class="cc-reaction">🔥 <span class="cc-reaction-count">8</span></span><span class="cc-reaction">👍 <span class="cc-reaction-count">5</span></span><span class="cc-reaction">📝 <span class="cc-reaction-count">3</span></span></div>
+                                    </div>
+                                </div>
+                                <div class="cc-msg">
+                                    <div class="cc-avatar" style="background:#57f287;">M</div>
+                                    <div class="cc-msg-body">
+                                        <div class="cc-msg-header"><span class="cc-msg-name" style="color:#57f287;">Mochi</span><span class="cc-msg-time">今日 08:35</span></div>
+                                        <div class="cc-msg-content">ありがとうございます！M15の包み足待ちます🙏 前回はここで焦って入って損切になったので、今日はちゃんと待つぞ</div>
+                                    </div>
+                                </div>
+                                <div class="cc-msg">
+                                    <div class="cc-avatar" style="background:#fee75c;color:#000;">K</div>
+                                    <div class="cc-msg-body">
+                                        <div class="cc-msg-header"><span class="cc-msg-name" style="color:#fee75c;">Kenta_FX</span><span class="cc-msg-time">今日 09:12</span></div>
+                                        <div class="cc-msg-content">出ました！M15で綺麗な包み足。僕もエントリー📈 この部屋毎朝勉強になりすぎる🙏</div>
+                                        <div class="cc-reactions"><span class="cc-reaction">❤️ <span class="cc-reaction-count">11</span></span><span class="cc-reaction">🚀 <span class="cc-reaction-count">7</span></span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="comm-feature-link">詳しくはこちら →</a>
+            </div>
+
+            <!-- ② 上手い先輩が自然と教えてくれる -->
+            <div class="comm-feature">
+                <h3 class="comm-feature-headline"><img src="img/crayon-orange-2.png" alt="②" class="comm-feature-num">気づいたら、先輩ができている</h3>
+                <div class="comm-feature-hero">
+                    <img src="images/community-hero-2-mentor.png" alt="気づいたら、先輩ができている">
+                </div>
+                <p class="comm-feature-sub">申し込み不要。普通にトレードしているだけで、<br>プロがあなたのメンターになってくれます。</p>
+                <div class="comm-feature-visual">
+                    <div class="comm-profile-panel">
+                        <div class="comm-profile-banner"></div>
+                        <div class="comm-profile-body">
+                            <div class="comm-profile-avatar-wrap">
+                                <div class="comm-profile-avatar" style="background:#57f287;">M</div>
+                                <span class="comm-profile-status"></span>
+                            </div>
+                            <div class="comm-profile-name">Mochi</div>
+                            <div class="comm-profile-handle">mochi_fx</div>
+                            <div class="comm-profile-panel-divider"></div>
+                            <div class="comm-profile-section-label">メンバー登録日</div>
+                            <div class="comm-profile-since">2024年11月28日</div>
+                            <div class="comm-profile-panel-divider"></div>
+                            <div class="comm-profile-section-label">🎓 あなたの先輩トレーダー</div>
+                            <div class="comm-profile-mentor-row">
+                                <div class="comm-profile-mentor-av" style="background:#ed4245;">S</div>
+                                <div>
+                                    <div class="comm-profile-mentor-name">Sato<span class="cc-pro-badge">プロ</span></div>
+                                    <div class="comm-profile-mentor-sub">出金達成まで伴走中</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="comm-feature-link">詳しくはこちら →</a>
+            </div>
+
+            <!-- ③ 頑張りが認められる -->
+            <div class="comm-feature">
+                <h3 class="comm-feature-headline"><img src="img/crayon-orange-3.png" alt="③" class="comm-feature-num">勝ったら、みんなで祝う</h3>
+                <div class="comm-feature-hero">
+                    <img src="images/community-hero-3-celebrate.png" alt="勝ったら、みんなで祝う">
+                </div>
+                <p class="comm-feature-sub">利確したら自動で仲間に通知。プロ認定も週間MVPも、<br>すべて祝ってもらえる環境です。</p>
+                <div class="comm-feature-visual">
+                    <div class="comm-embed-wrap">
+                        <div class="comm-embed-head">
+                            <div class="comm-embed-head-av">🤖</div>
+                            <span class="comm-embed-head-name">FX SPACE<span class="cc-bot-badge">BOT</span></span>
+                            <span class="comm-embed-head-time">今日 15:45</span>
+                        </div>
+                        <div class="comm-embed-card">
+                            <div class="comm-embed-title">🎉 利確達成</div>
+                            <div class="comm-embed-amount">+12,000円</div>
+                            <div class="comm-embed-symbol">USD/JPY · Long</div>
+                            <div class="comm-embed-fields">
+                                <div>
+                                    <div class="comm-embed-field-label">トレーダー</div>
+                                    <div class="comm-embed-field-value">Mochi</div>
+                                </div>
+                                <div>
+                                    <div class="comm-embed-field-label">保有時間</div>
+                                    <div class="comm-embed-field-value">3時間14分</div>
+                                </div>
+                                <div>
+                                    <div class="comm-embed-field-label">今月勝率</div>
+                                    <div class="comm-embed-field-value">68%</div>
+                                </div>
+                            </div>
+                            <div class="comm-embed-footer">
+                                <span>🚀 <strong>プロトレーダー</strong>に昇格しました</span>
+                            </div>
+                        </div>
+                        <div class="comm-embed-reacts">
+                            <span class="comm-embed-react">🎉 45</span>
+                            <span class="comm-embed-react">🚀 32</span>
+                            <span class="comm-embed-react">🔥 28</span>
+                            <span class="comm-embed-react">❤️ 22</span>
+                        </div>
+                        <div class="comm-embed-replies">
+                            <div class="cc-msg">
+                                <div class="cc-avatar" style="background:#c084fc;">K</div>
+                                <div class="cc-msg-body">
+                                    <div class="cc-msg-header"><span class="cc-msg-name" style="color:#c084fc;">Kenta</span><span class="cc-msg-time">今日 15:46</span></div>
+                                    <div class="cc-msg-content">おめ！！🎉 朝言ってた赤ラインで入ったの？すごい！</div>
+                                </div>
+                            </div>
+                            <div class="cc-msg">
+                                <div class="cc-avatar" style="background:#ed4245;">S</div>
+                                <div class="cc-msg-body">
+                                    <div class="cc-msg-header"><span class="cc-msg-name" style="color:#ed4245;">Sato</span><span class="cc-pro-badge">プロ</span><span class="cc-msg-time">今日 15:48</span></div>
+                                    <div class="cc-msg-content">自分の判断で入った君がすごい🙌 本当におめでとう！</div>
+                                </div>
+                            </div>
+                            <div class="cc-msg">
+                                <div class="cc-avatar cc-avatar-yosuga"></div>
+                                <div class="cc-msg-body">
+                                    <div class="cc-msg-header"><span class="cc-msg-name" style="color:#ed4245;">よすが</span><span class="cc-msg-time">今日 15:55</span></div>
+                                    <div class="cc-msg-content">おめでとう！🎉 こうやって仲間で喜び合えるのがFX SPACEの良さ✨</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="comm-feature-link">詳しくはこちら →</a>
+            </div>
+
+            <!-- ④ 毎日開くだけで上手くなる -->
+            <div class="comm-feature" id="daily-chart">
+                <h3 class="comm-feature-headline"><img src="img/crayon-orange-4.png" alt="④" class="comm-feature-num">朝、すぐに相場が分かる</h3>
+                <div class="comm-feature-hero">
+                    <img src="images/community-hero-4-morning.png" alt="朝、すぐに相場が分かる">
+                </div>
+                <p class="comm-feature-sub">平日毎朝、よすがのシナリオ動画と3通貨ペアのチャート分析が自動配信。<br>経済指標やニュースもすべて届きます。</p>
+                <div class="comm-feature-visual">
+                    <div class="community-chat static-chat">
+                        <div class="cc-header"><span class="cc-header-hash">#</span><span class="cc-header-name">朝のシナリオ公開</span></div>
+                        <div class="cc-body">
+                            <div class="cc-messages">
+                                <div class="cc-msg">
+                                    <div class="cc-avatar" style="background:#5865f2;">🤖</div>
+                                    <div class="cc-msg-body">
+                                        <div class="cc-msg-header"><span class="cc-msg-name" style="color:#5865f2;">FX SPACE</span><span class="cc-bot-badge">BOT</span><span class="cc-msg-time">今日 07:00</span></div>
+                                        <div class="cc-msg-content">📅 <strong>今日のポイント</strong><br>🔴 英国休場（GBP注意）<br>📊 21:30 米・雇用統計（予想: +18万人）<br>📰 FRB議事録タカ派 → ドル高継続か</div>
+                                    </div>
+                                </div>
+                                <div class="cc-msg">
+                                    <div class="cc-avatar cc-avatar-yosuga"></div>
+                                    <div class="cc-msg-body">
+                                        <div class="cc-msg-header"><span class="cc-msg-name" style="color:#ed4245;">よすが</span><span class="cc-msg-time">今日 07:30</span></div>
+                                        <div class="cc-msg-content">@everyone おはようございます！📈 今日の3通貨ペアのシナリオ公開しました</div>
+                                        <div class="cc-yt-embed">
+                                            <div class="cc-yt-thumb">
+                                                <img src="images/chart-usdjpy.png" alt="動画サムネイル" style="width:100%;height:100%;object-fit:cover;border-radius:4px;">
+                                                <div class="cc-yt-play" style="position:absolute;">▶</div>
+                                            </div>
+                                            <div class="cc-yt-info">
+                                                <span class="cc-yt-title">朝のシナリオ構築 XAUUSD・USDJPY・GBPUSD</span>
+                                                <span class="cc-yt-channel">よすが FX SPACE</span>
+                                            </div>
+                                        </div>
+                                        <div class="cc-chart-grid">
+                                            <div class="cc-chart-item">
+                                                <img src="images/chart-xauusd.png" alt="XAUUSD">
+                                                <span class="cc-chart-label">XAUUSD</span>
+                                            </div>
+                                            <div class="cc-chart-item">
+                                                <img src="images/chart-usdjpy.png" alt="USDJPY">
+                                                <span class="cc-chart-label">USD/JPY</span>
+                                            </div>
+                                            <div class="cc-chart-item">
+                                                <img src="images/chart-gbpusd.png" alt="GBPUSD">
+                                                <span class="cc-chart-label">GBP/USD</span>
+                                            </div>
+                                        </div>
+                                        <div class="cc-reactions"><span class="cc-reaction">🔥 <span class="cc-reaction-count">34</span></span><span class="cc-reaction">📝 <span class="cc-reaction-count">18</span></span><span class="cc-reaction">🙏 <span class="cc-reaction-count">25</span></span></div>
+                                    </div>
+                                </div>
+                                <div class="cc-msg">
+                                    <div class="cc-avatar" style="background:#57f287;">M</div>
+                                    <div class="cc-msg-body">
+                                        <div class="cc-msg-header"><span class="cc-msg-name" style="color:#57f287;">Mochi</span><span class="cc-msg-time">今日 07:45</span></div>
+                                        <div class="cc-msg-content">動画見ました！USDJPYのシナリオ、今日の狙い所すごく腑に落ちました🙏</div>
+                                    </div>
+                                </div>
+                                <div class="cc-msg">
+                                    <div class="cc-avatar" style="background:#5865f2;">🤖</div>
+                                    <div class="cc-msg-body">
+                                        <div class="cc-msg-header"><span class="cc-msg-name" style="color:#5865f2;">FX SPACE</span><span class="cc-bot-badge">BOT</span><span class="cc-msg-time">今日 15:32</span></div>
+                                        <div class="cc-msg-content">⚡ <strong>ドル円が急に動きました！</strong>　15分で80pips下落中。注目ライン付近に接近しています。</div>
+                                        <div class="cc-reactions"><span class="cc-reaction">👀 <span class="cc-reaction-count">22</span></span><span class="cc-reaction">🔥 <span class="cc-reaction-count">14</span></span></div>
+                                    </div>
+                                </div>
+                                <div class="cc-msg">
+                                    <div class="cc-avatar" style="background:#c084fc;">K</div>
+                                    <div class="cc-msg-body">
+                                        <div class="cc-msg-header"><span class="cc-msg-name" style="color:#c084fc;">Kenta</span><span class="cc-msg-time">今日 15:45</span></div>
+                                        <div class="cc-msg-content">朝のシナリオ通りに動いた…！動画で言ってた利確ポイントでちゃんと取れました🙌</div>
+                                        <div class="cc-reactions"><span class="cc-reaction">🎉 <span class="cc-reaction-count">18</span></span><span class="cc-reaction">👏 <span class="cc-reaction-count">12</span></span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="comm-feature-link">詳しくはこちら →</a>
+            </div>
+
+            <!-- ⑤ 初心者でも安心して相談できる -->
+            <div class="comm-feature">
+                <h3 class="comm-feature-headline"><img src="img/crayon-orange-5.png" alt="⑤" class="comm-feature-num">はじめてでも、大丈夫</h3>
+                <div class="comm-feature-hero">
+                    <img src="images/community-hero-5-beginner.png" alt="はじめてでも、大丈夫">
+                </div>
+                <p class="comm-feature-sub">「こんなこと聞いていいのかな…」という悩みも大歓迎。<br>どんな質問にも、よすが本人が直接答えてくれます。</p>
+                <div class="comm-feature-visual">
+                    <div class="community-chat static-chat">
+                        <div class="cc-header"><span class="cc-header-hash">#</span><span class="cc-header-name">初心者応援</span></div>
+                        <div class="cc-body">
+                            <div class="cc-messages">
+                                <div class="cc-msg">
+                                    <div class="cc-avatar" style="background:#f97316;">ば</div>
+                                    <div class="cc-msg-body">
+                                        <div class="cc-msg-header"><span class="cc-msg-name" style="color:#f97316;">ばたー</span><span class="cc-msg-time">02/16 12:18</span></div>
+                                        <div class="cc-msg-content">何度も資金を溶かしました… 成功してる方は何が違うのでしょう？😢</div>
+                                        <div class="cc-reactions"><span class="cc-reaction">😢 <span class="cc-reaction-count">3</span></span></div>
+                                    </div>
+                                </div>
+                                <div class="cc-msg">
+                                    <div class="cc-avatar cc-avatar-yosuga"></div>
+                                    <div class="cc-msg-body">
+                                        <div class="cc-msg-header"><span class="cc-msg-name" style="color:#ed4245;">よすが</span><span class="cc-msg-time">02/16 12:30</span></div>
+                                        <div class="cc-reply-quote">何度も資金を溶かしました… 成功してる方は何が違う？</div><div class="cc-msg-content">センスは不要。決められた通りにできるかがポイント。シナリオ構築を続けよう🔥</div>
+                                        <div class="cc-reactions"><span class="cc-reaction">❤️ <span class="cc-reaction-count">22</span></span><span class="cc-reaction">🙏 <span class="cc-reaction-count">15</span></span></div>
+                                    </div>
+                                </div>
+                                <div class="cc-msg">
+                                    <div class="cc-avatar" style="background:#eb459e;">H</div>
+                                    <div class="cc-msg-body">
+                                        <div class="cc-msg-header"><span class="cc-msg-name" style="color:#eb459e;">HiU</span><span class="cc-msg-time">02/16 13:02</span></div>
+                                        <div class="cc-reply-quote">何度も資金を溶かしました…</div><div class="cc-msg-content">私も最初は全然でした💦 6ヶ月デモで練習して、4H足でトレンド揃えてから入るようにしたら勝率上がりましたよ！焦らず一緒に頑張りましょう💪</div>
+                                        <div class="cc-reactions"><span class="cc-reaction">💪 <span class="cc-reaction-count">9</span></span><span class="cc-reaction">🔥 <span class="cc-reaction-count">6</span></span></div>
+                                    </div>
+                                </div>
+                                <div class="cc-msg">
+                                    <div class="cc-avatar" style="background:#f97316;">ば</div>
+                                    <div class="cc-msg-body">
+                                        <div class="cc-msg-header"><span class="cc-msg-name" style="color:#f97316;">ばたー</span><span class="cc-msg-time">02/16 13:15</span></div>
+                                        <div class="cc-msg-content">皆さん本当にありがとうございます😭 こんな初歩的な質問に丁寧に答えてもらえるなんて…もう一度ちゃんと練習します🙏</div>
+                                    </div>
+                                </div>
+                                <div class="cc-msg">
+                                    <div class="cc-avatar cc-avatar-yosuga"></div>
+                                    <div class="cc-msg-body">
+                                        <div class="cc-msg-header"><span class="cc-msg-name" style="color:#ed4245;">よすが</span><span class="cc-msg-time">02/16 13:22</span></div>
+                                        <div class="cc-msg-content">「負けてはいけない」をまず疑おう👍 今日はこうだった→次こうしよう、でOK。振り返りを続けられる人が勝てるようになります</div>
+                                        <div class="cc-reactions"><span class="cc-reaction">❤️ <span class="cc-reaction-count">31</span></span><span class="cc-reaction">🙏 <span class="cc-reaction-count">18</span></span></div>
+                                    </div>
+                                </div>
+                                <div class="cc-msg">
+                                    <div class="cc-avatar" style="background:#57f287;">M</div>
+                                    <div class="cc-msg-body">
+                                        <div class="cc-msg-header"><span class="cc-msg-name" style="color:#57f287;">Mochi</span><span class="cc-msg-time">今日 09:15</span></div>
+                                        <div class="cc-msg-content">私も初心者ですが今月から参加しました！fundra3万円プラン、今月負けなしで続けられてます🙏 このチャンネルで皆さんに支えられてます</div>
+                                        <div class="cc-reactions"><span class="cc-reaction">🎉 <span class="cc-reaction-count">14</span></span><span class="cc-reaction">👏 <span class="cc-reaction-count">11</span></span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="comm-feature-link">詳しくはこちら →</a>
+            </div>
+
+        </div>
+
+        <!-- CTA -->
+        <div class="comm-cta" style="text-align:center;margin-top:4rem;">
+            <p style="color:#f2f3f5;font-size:1.125rem;font-weight:800;margin-bottom:0.5rem;">さあ、あなたも仲間になりませんか？</p>
+            <p style="color:#d1d5db;font-size:0.875rem;margin-bottom:1.5rem;">12,000人以上のトレーダーがあなたを待っています。</p>
+            <a href="https://discord.gg/CcUtqSdRDZ" target="_blank" class="btn btn-crayon-rect-orange">コミュニティに今すぐ参加 →</a>
+        </div>
+
+    </div>
+</section>
+</div><!-- /zp-community-reveal -->
+</div><!-- /zp-community-pin -->

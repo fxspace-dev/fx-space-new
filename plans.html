@@ -1,1566 +1,747 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FX SPACE プレミアム - リアルタイムでプロと並走する</title>
-<meta property="og:title" content="FX SPACE プレミアム">
-<meta property="og:description" content="よすがのライブチャート分析に、その場で参加。">
-<meta property="og:type" content="website">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;800;900&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-<style>
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  font-family:'Inter','Noto Sans JP',sans-serif;
-  background:#f9fafb;
-  color:#111827;
-  line-height:1.6;
-  -webkit-font-smoothing:antialiased;
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-}
-a{color:inherit;text-decoration:none}
-img{max-width:100%;display:block}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FX SPACE - サブスクリプション</title>
+    <meta property="og:title" content="FX SPACE - サブスクリプション">
+    <meta property="og:description" content="スタンダードとプレミアム、それぞれで使える機能を紹介します。">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://plans-preview--fx-space-community-preview-1775890548.netlify.app/img/og-plans.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://plans-preview--fx-space-community-preview-1775890548.netlify.app/img/og-plans.png">
+    <link rel="stylesheet" href="css/style.css?v=20260414m">
+    <style>
+      /* ===== Japanese line-break rules (apply globally) ===== */
+      html{
+        line-break:strict;
+      }
+      body{
+        background:#fff;
+        word-break:auto-phrase;
+        overflow-wrap:break-word;
+      }
+      h1,h2,h3,h4,p,li,span,div{
+        text-wrap:pretty;
+      }
+      /* Utility: keep compound term on one line */
+      .nowrap{display:inline-block;white-space:nowrap;}
+      .plans-page-footer{
+        text-align:center;
+        padding:2rem 1rem;
+        font-size:0.8125rem;
+        color:#9ca3af;
+        border-top:1px solid #f0f0f0;
+        background:#fff;
+      }
+      .plans-page-footer a{color:#6b7280;text-decoration:none;}
+      .plans-page-footer a:hover{color:#4f46e5;}
+      /* Title with wave underline under each line */
+      .pricing-title-wavy{
+        text-align:center;
+        margin-bottom:1.5rem;
+      }
+      .pricing-title-wavy .ttl-line{
+        display:inline-block;
+        position:relative;
+        margin:0.25rem auto 1rem;
+        padding-bottom:1rem;
+      }
+      .pricing-title-wavy .ttl-line::after{
+        content:'';
+        position:absolute;
+        left:0;right:0;bottom:-4px;
+        height:24px;
+        background:url('img/underline-wave.png') center/100% 100% no-repeat;
+        opacity:0.95;
+      }
+      /* Force each ttl-line to its own row */
+      .pricing-title-wavy .ttl-line{display:block;width:fit-content;}
 
-/* ===== Section Badge (with \/ decoration) ===== */
-.sec-badge-wrap{
-  display:block;
-  text-align:center;
-  margin-bottom:0.75rem;
-}
-.sec-badge{
-  display:inline-flex;
-  align-items:center;
-  gap:0.5rem;
-  font-size:0.8125rem;
-  font-weight:800;
-  letter-spacing:0.08em;
-  color:#4f46e5;
-}
-.sec-badge img{
-  height:1.4em;
-  width:auto;
-}
-.sec-badge--orange{color:#92400e;}
+      /* FAQ */
+      .pl-faq-section{
+        max-width:680px;
+        margin:0 auto;
+        padding:3rem 1.25rem 4rem;
+      }
+      .pl-faq-title{
+        font-size:clamp(1.25rem,3vw,1.5rem);
+        font-weight:900;
+        color:#1e1b4b;
+        text-align:center;
+        margin-bottom:1.5rem;
+      }
+      .pl-faq-item{
+        border-bottom:1px solid #f3f4f6;
+        padding:1rem 0;
+        text-align:left;
+      }
+      .pl-faq-item:last-child{border-bottom:none;}
+      .pl-faq-q{
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:1rem;
+        cursor:pointer;
+        font-size:0.9375rem;
+        font-weight:700;
+        color:#1e1b4b;
+        line-height:1.5;
+        user-select:none;
+      }
+      .pl-faq-q::before{
+        content:'Q';
+        flex-shrink:0;
+        width:24px;height:24px;
+        border-radius:6px;
+        background:rgba(79,70,229,0.08);
+        color:#4f46e5;
+        font-size:0.6875rem;
+        font-weight:800;
+        display:flex;align-items:center;justify-content:center;
+      }
+      .pl-faq-toggle{
+        flex-shrink:0;
+        width:24px;height:24px;
+        border-radius:50%;
+        background:#f3f4f6;
+        display:flex;align-items:center;justify-content:center;
+        font-size:0.75rem;
+        color:#6b7280;
+        transition:transform 0.3s, background 0.3s;
+      }
+      .pl-faq-item.open .pl-faq-toggle{
+        transform:rotate(180deg);
+        background:rgba(79,70,229,0.08);
+        color:#4f46e5;
+      }
+      .pl-faq-a{
+        max-height:0;
+        overflow:hidden;
+        transition:max-height 0.35s ease, padding 0.35s ease;
+        padding:0 0 0 2.25rem;
+      }
+      .pl-faq-item.open .pl-faq-a{
+        max-height:400px;
+        padding:0.75rem 0 0.25rem 2.25rem;
+      }
+      .pl-faq-a p{
+        font-size:0.8125rem;
+        color:#6b7280;
+        line-height:1.9;
+      }
+      .pl-faq-a strong{color:#1e1b4b;font-weight:800;}
 
-/* ===== Intro overview (bridges header → 01/02) ===== */
-.intro-overview{
-  background:#fff;
-  border-radius:20px;
-  box-shadow:0 2px 16px rgba(0,0,0,0.06);
-  padding:2rem 1.75rem 1.75rem;
-  margin-bottom:1.25rem;
-  text-align:center;
-  animation:obFadeIn 0.5s ease both;
-}
-.intro-title{
-  font-size:clamp(1.125rem,3vw,1.375rem);
-  font-weight:900;
-  color:#1e1b4b;
-  line-height:1.5;
-  margin-bottom:0.625rem;
-}
-.intro-title .emph{color:#4f46e5;}
-.intro-desc{
-  font-size:0.8125rem;
-  color:#6b7280;
-  line-height:1.9;
-  max-width:460px;
-  margin:0 auto 1.5rem;
-}
-.intro-tiles{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:0.75rem;
-  margin-bottom:1rem;
-}
-.intro-tile{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:0.375rem;
-  padding:1rem 0.75rem 0.875rem;
-  border-radius:14px;
-  border:2px solid;
-  transition:transform 0.2s, box-shadow 0.2s;
-  text-decoration:none;
-  position:relative;
-}
-.intro-tile.n1{background:#fef2f2;border-color:#fecaca;}
-.intro-tile.n2{background:#eff6ff;border-color:#bfdbfe;}
-.intro-tile:hover{
-  transform:translateY(-2px);
-  box-shadow:0 6px 16px rgba(0,0,0,0.08);
-}
-.intro-tile-num{
-  position:absolute;
-  top:0.5rem;right:0.625rem;
-  font-size:0.6875rem;
-  font-weight:900;
-  letter-spacing:0.04em;
-}
-.intro-tile.n1 .intro-tile-num{color:#dc2626;}
-.intro-tile.n2 .intro-tile-num{color:#2563eb;}
-.intro-tile-icon{
-  width:44px;height:44px;
-  border-radius:12px;
-  display:flex;align-items:center;justify-content:center;
-  background:#fff;
-  border:1.5px solid;
-  margin-bottom:0.125rem;
-}
-.intro-tile.n1 .intro-tile-icon{border-color:#fecaca;color:#dc2626;}
-.intro-tile.n2 .intro-tile-icon{border-color:#bfdbfe;color:#2563eb;}
-.intro-tile-icon .ic{width:22px;height:22px;}
-.intro-tile-name{
-  font-size:0.9375rem;
-  font-weight:800;
-  color:#1e1b4b;
-  line-height:1.3;
-  text-align:center;
-}
-.intro-tile-sub{
-  font-size:0.75rem;
-  color:#6b7280;
-  line-height:1.5;
-  text-align:center;
-}
-.intro-arrow{
-  display:inline-flex;
-  align-items:center;
-  gap:0.5rem;
-  font-size:0.8125rem;
-  font-weight:700;
-  color:#4f46e5;
-}
-.intro-arrow::before,
-.intro-arrow::after{
-  content:'';
-  width:24px;
-  height:1px;
-  background:#c7d2fe;
-}
+      /* Center the Premium CTA button text properly */
+      .plan-card .btn-solid-blue,
+      .plan-card .plan-cta{
+        display:block;
+        width:100%;
+        text-align:center;
+      }
+      /* Premium feature card titles in purple to make them stand out */
+      .prem-feature-card h4{
+        color:#4f46e5;
+      }
 
-/* ===== Experience numbered hero (2 UI showcases) ===== */
-.exp-hero{
-  background:#fff;
-  border-radius:20px;
-  box-shadow:0 2px 16px rgba(0,0,0,0.06);
-  padding:2.25rem 1.75rem 2rem;
-  margin-bottom:1.25rem;
-  position:relative;
-  overflow:hidden;
-  animation:obFadeIn 0.5s ease both;
-}
-.exp-hero-num{
-  position:absolute;
-  top:-18px;
-  right:-14px;
-  font-size:8rem;
-  font-weight:900;
-  letter-spacing:-0.06em;
-  line-height:1;
-  pointer-events:none;
-  user-select:none;
-  font-family:'Inter',sans-serif;
-  z-index:0;
-}
-.exp-hero-num.n1{color:#fef2f2;}
-.exp-hero-num.n2{color:#eff6ff;}
-.exp-hero-inner{
-  position:relative;
-  z-index:1;
-  text-align:center;
-}
-.exp-hero-chip{
-  display:inline-flex;
-  align-items:center;
-  gap:0.45rem;
-  padding:0.3rem 0.9rem 0.3rem 0.3rem;
-  border-radius:100px;
-  font-size:0.75rem;
-  font-weight:800;
-  letter-spacing:0.04em;
-  margin-bottom:0.75rem;
-}
-.exp-hero-chip.n1{background:#fef2f2;color:#dc2626;}
-.exp-hero-chip.n2{background:#eff6ff;color:#2563eb;}
-.exp-hero-chip-num{
-  width:24px;height:24px;
-  border-radius:50%;
-  display:inline-flex;align-items:center;justify-content:center;
-  font-size:0.8125rem;
-  font-weight:900;
-  color:#fff;
-}
-.exp-hero-chip.n1 .exp-hero-chip-num{background:#dc2626;}
-.exp-hero-chip.n2 .exp-hero-chip-num{background:#2563eb;}
-.exp-hero-title{
-  font-size:clamp(1.375rem,4vw,1.625rem);
-  font-weight:900;
-  color:#1e1b4b;
-  line-height:1.4;
-  margin-bottom:0.625rem;
-}
-.exp-hero-title .emph-red{color:#dc2626;}
-.exp-hero-title .emph-blue{color:#2563eb;}
-.exp-hero-desc{
-  font-size:0.875rem;
-  color:#6b7280;
-  line-height:1.9;
-  max-width:460px;
-  margin:0 auto 1.5rem;
-}
+      /* ===== Feature tooltips (generic .has-tip) ===== */
+      /* Desktop: hover on the ⓘ icon triggers the tooltip
+         Mobile: tap on the wrapper toggles (handled by JS) */
+      .has-tip{
+        position:relative;
+      }
+      /* Info icon */
+      .feat-info{
+        margin-left:auto;
+        flex-shrink:0;
+        width:18px;height:18px;
+        color:#9ca3af;
+        display:inline-flex;align-items:center;justify-content:center;
+        transition:color 0.2s;
+        cursor:pointer;
+      }
+      .feat-info svg{width:100%;height:100%;}
+      .feat-info:hover,
+      .has-tip.tip-open .feat-info{
+        color:#4f46e5;
+      }
+      @media(max-width:768px){
+        .feat-info{width:22px;height:22px;}
+        /* On mobile, whole wrapper is tappable */
+        .has-tip{cursor:pointer;}
+      }
 
-/* Plus Standard note (between UIs and pricing) */
-.plus-std{
-  background:#ecfdf5;
-  border:1.5px solid #a7f3d0;
-  border-radius:16px;
-  padding:1.25rem 1.25rem;
-  margin-bottom:1.25rem;
-  display:flex;
-  align-items:center;
-  gap:0.875rem;
-  animation:obFadeIn 0.5s 0.2s ease both;
-}
-.plus-std-icon{
-  flex-shrink:0;
-  width:40px;height:40px;
-  border-radius:50%;
-  background:#059669;
-  color:#fff;
-  display:flex;align-items:center;justify-content:center;
-  font-size:1.375rem;
-  font-weight:900;
-  line-height:1;
-}
-.plus-std-body{flex:1;min-width:0;}
-.plus-std-title{
-  font-size:0.9375rem;
-  font-weight:800;
-  color:#065f46;
-  margin-bottom:0.25rem;
-}
-.plus-std-desc{
-  font-size:0.75rem;
-  color:#047857;
-  line-height:1.7;
-}
-
-/* ===== Inline SVG icon utility (Feather/Lucide style) ===== */
-.ic{
-  width:1em;height:1em;
-  stroke:currentColor;fill:none;
-  stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
-  flex-shrink:0;
-  display:inline-block;
-}
-
-/* ===== Header ===== */
-.ob-header{
-  text-align:center;
-  padding:3rem 1.5rem 2.5rem;
-  background:#fff;
-  border-bottom:1px solid #f0f0f0;
-}
-.ob-logo{
-  width:140px;height:auto;
-  margin:0 auto 1.25rem;
-}
-.ob-welcome{
-  display:inline-block;
-  font-size:clamp(1.5rem,4.8vw,2.125rem);
-  font-weight:900;
-  color:#1e1b4b;
-  letter-spacing:-0.02em;
-  line-height:1.3;
-  margin-bottom:1rem;
-  white-space:nowrap;
-}
-.ob-welcome .accent{color:#4f46e5;}
-.ob-welcome::after{
-  content:'';
-  display:block;
-  width:100%;
-  height:22px;
-  margin-top:0.25rem;
-  background:url('img/underline-wave.png') center/100% 100% no-repeat;
-  opacity:0.9;
-}
-.ob-welcome-sub{
-  font-size:0.9375rem;
-  color:#6b7280;
-  max-width:500px;
-  margin:0 auto;
-  line-height:1.9;
-}
-@media(max-width:480px){
-  .ob-welcome{white-space:normal;font-size:1.4rem;}
-  .ob-welcome::after{height:16px;}
-}
-
-/* ===== Main ===== */
-.plans-main{
-  flex:1;
-  padding:2rem 1rem 3rem;
-  max-width:780px;
-  width:100%;
-  margin:0 auto;
-}
-
-/* ===== Section base ===== */
-.sec{
-  background:#fff;
-  border-radius:20px;
-  box-shadow:0 2px 16px rgba(0,0,0,0.06);
-  padding:2rem 1.75rem;
-  margin-bottom:1.25rem;
-  text-align:center;
-  animation:obFadeIn 0.5s ease both;
-}
-.sec-title{
-  font-size:clamp(1.25rem,3.5vw,1.5rem);
-  font-weight:900;
-  color:#1e1b4b;
-  line-height:1.45;
-  margin-bottom:0.5rem;
-}
-.sec-title .emph{color:#4f46e5;}
-.sec-sub{
-  font-size:0.875rem;
-  color:#6b7280;
-  line-height:1.8;
-  max-width:480px;
-  margin:0 auto 1.5rem;
-}
-
-/* ===== Before/After comparison ===== */
-.ba-grid{
-  display:grid;
-  grid-template-columns:1fr 24px 1fr;
-  gap:0.5rem;
-  align-items:stretch;
-  margin-top:1rem;
-}
-.ba-card{
-  position:relative;
-  background:#fff;
-  border:1.5px solid #e5e7eb;
-  border-radius:14px;
-  padding:1.5rem 0.875rem 1.125rem;
-  text-align:center;
-}
-.ba-card.after{
-  border-color:#4f46e5;
-  border-width:2px;
-  box-shadow:0 6px 20px rgba(79,70,229,0.12);
-  background:#fafbff;
-}
-.ba-label{
-  position:absolute;
-  top:-0.625rem;
-  left:50%;
-  transform:translateX(-50%);
-  padding:0.2rem 0.75rem;
-  background:#fff;
-  border:1.5px solid #e5e7eb;
-  border-radius:999px;
-  font-size:0.625rem;
-  font-weight:800;
-  letter-spacing:0.04em;
-  white-space:nowrap;
-  line-height:1.2;
-}
-.ba-label.before{color:#6b7280;}
-.ba-label.after{
-  color:#fff;
-  border-color:#4f46e5;
-  background:#4f46e5;
-}
-.ba-icon{
-  width:52px;height:52px;
-  margin:0 auto 0.5rem;
-  border-radius:14px;
-  display:flex;align-items:center;justify-content:center;
-  border:1.5px solid;
-}
-.ba-icon.before{
-  background:#f9fafb;
-  border-color:#e5e7eb;
-  color:#9ca3af;
-}
-.ba-icon.after{
-  background:#eef2ff;
-  border-color:#c7d2fe;
-  color:#4f46e5;
-}
-.ba-icon .ic{width:26px;height:26px;}
-.ba-text{
-  font-size:0.875rem;
-  font-weight:800;
-  color:#1e1b4b;
-  line-height:1.45;
-  margin-bottom:0.25rem;
-}
-.ba-sub{
-  font-size:0.75rem;
-  color:#6b7280;
-  line-height:1.6;
-}
-.ba-arrow{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#4f46e5;
-  font-size:1.5rem;
-  font-weight:900;
-}
-
-/* ===== 3 Experience cards ===== */
-.exp-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:0.875rem;
-  margin-top:0.5rem;
-}
-.exp-card{
-  background:#fafbff;
-  border:2px solid #eef2ff;
-  border-radius:16px;
-  padding:1.5rem 1rem 1.25rem;
-  text-align:center;
-}
-.exp-icon-box{
-  width:56px;height:56px;
-  margin:0 auto 0.625rem;
-  border-radius:16px;
-  display:flex;align-items:center;justify-content:center;
-  border:1.5px solid;
-}
-.exp-icon-box.live{
-  background:#fef2f2;border-color:#fecaca;color:#dc2626;
-}
-.exp-icon-box.talk{
-  background:#eff6ff;border-color:#bfdbfe;color:#2563eb;
-}
-.exp-icon-box.all{
-  background:#ecfdf5;border-color:#a7f3d0;color:#059669;
-}
-.exp-icon-box .ic{width:28px;height:28px;}
-.exp-tag{
-  display:inline-block;
-  font-size:0.625rem;
-  font-weight:800;
-  padding:0.15rem 0.625rem;
-  border-radius:100px;
-  background:#4f46e5;
-  color:#fff;
-  letter-spacing:0.04em;
-  margin-bottom:0.5rem;
-}
-.exp-tag--std{
-  background:#10b981;
-}
-.exp-name{
-  font-size:1rem;
-  font-weight:800;
-  color:#1e1b4b;
-  margin-bottom:0.375rem;
-}
-.exp-oneliner{
-  font-size:0.8125rem;
-  color:#6b7280;
-  line-height:1.7;
-}
-
-/* ===== Discord chat preview ===== */
-.dc-preview{
-  background:#2b2d31;
-  border-radius:14px;
-  padding:0.875rem 0.75rem;
-  margin-top:1rem;
-  text-align:left;
-  box-shadow:0 4px 16px rgba(0,0,0,0.15);
-  max-width:460px;
-  margin-left:auto;
-  margin-right:auto;
-}
-.dc-header{
-  display:flex;
-  align-items:center;
-  gap:0.5rem;
-  padding:0.375rem 0.25rem 0.625rem;
-  border-bottom:1px solid #3f4147;
-  margin-bottom:0.625rem;
-  color:#b5bac1;
-  font-size:0.8125rem;
-  font-weight:700;
-}
-.dc-header .hash{color:#949ba4;}
-.dc-msg{
-  display:flex;
-  gap:0.625rem;
-  padding:0.375rem 0.25rem;
-  margin-bottom:0.25rem;
-}
-.dc-avatar{
-  flex-shrink:0;
-  width:32px;height:32px;
-  border-radius:50%;
-  background:url('images/chat_photo_1.png') center/cover no-repeat;
-}
-.dc-avatar-letter{
-  background:#ed4245;
-  color:#fff;
-  font-size:0.75rem;
-  font-weight:800;
-  display:flex;align-items:center;justify-content:center;
-}
-.dc-avatar-k{background:#22c55e;}
-.dc-avatar-m{background:#3b82f6;}
-.dc-avatar-r{background:#a855f7;}
-
-/* Name colors for community members */
-.dc-name-green{color:#57f287;}
-.dc-name-blue{color:#5bc0ff;}
-.dc-name-purple{color:#c084fc;}
-
-/* Tag beside name (community rank badge) */
-.dc-tag{
-  display:inline-flex;
-  align-items:center;
-  gap:0.2rem;
-  font-size:0.6rem;
-  font-weight:800;
-  padding:0.05rem 0.4rem;
-  border-radius:4px;
-  background:rgba(88,101,242,0.25);
-  color:#c9cdfb;
-  letter-spacing:0.04em;
-}
-
-/* Reaction color variants */
-.dc-react-yellow{background:rgba(251,191,36,0.15);border-color:rgba(251,191,36,0.35);color:#fcd34d;}
-
-/* Discord-style reply preview (small quote above a reply message) */
-.dc-reply-preview{
-  position:relative;
-  display:flex;
-  align-items:center;
-  gap:0.375rem;
-  margin-left:56px;
-  margin-top:0.375rem;
-  margin-bottom:0.125rem;
-  padding-right:0.5rem;
-  font-size:0.6875rem;
-  color:#949ba4;
-  line-height:1.2;
-  min-height:14px;
-}
-/* L-shaped connector line linking the reply to the parent message space */
-.dc-reply-preview::before{
-  content:'';
-  position:absolute;
-  left:-38px;
-  top:50%;
-  width:34px;
-  height:18px;
-  border-left:2px solid #4e5058;
-  border-top:2px solid #4e5058;
-  border-top-left-radius:8px;
-}
-.dc-reply-preview .rp-avatar{
-  width:16px;height:16px;
-  border-radius:50%;
-  flex-shrink:0;
-  font-size:0.5625rem;
-  font-weight:800;
-  color:#fff;
-  display:flex;align-items:center;justify-content:center;
-}
-.dc-reply-preview .rp-name{
-  font-weight:600;
-  color:#dbdee1;
-  white-space:nowrap;
-}
-.dc-reply-preview .rp-text{
-  color:#b5bac1;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-  max-width:260px;
-  min-width:0;
-}
-.dc-reply-preview .rp-text::before{
-  content:'@';
-  display:none;
-}
-.dc-body{flex:1;min-width:0;}
-.dc-head{
-  display:flex;
-  align-items:baseline;
-  gap:0.5rem;
-  margin-bottom:0.125rem;
-}
-.dc-name{
-  color:#ed4245;
-  font-size:0.8125rem;
-  font-weight:700;
-}
-.dc-time{
-  color:#949ba4;
-  font-size:0.6875rem;
-}
-.dc-text{
-  color:#dbdee1;
-  font-size:0.8125rem;
-  line-height:1.5;
-}
-.dc-text .mention{
-  background:rgba(88,101,242,0.25);
-  color:#c9cdfb;
-  padding:0 0.25rem;
-  border-radius:3px;
-}
-.dc-reactions{
-  display:flex;
-  gap:0.25rem;
-  margin-top:0.375rem;
-}
-.dc-react{
-  display:inline-flex;
-  align-items:center;
-  gap:0.25rem;
-  padding:0.125rem 0.5rem;
-  background:rgba(88,101,242,0.1);
-  border:1px solid rgba(88,101,242,0.3);
-  border-radius:8px;
-  font-size:0.6875rem;
-  color:#c9cdfb;
-  font-weight:700;
-}
-.dc-chart{
-  margin-top:0.5rem;
-  border-radius:8px;
-  overflow:hidden;
-  background:#1e1f22;
-}
-.dc-chart img{
-  width:100%;
-  height:auto;
-  display:block;
-}
-.dc-caption{
-  font-size:0.75rem;
-  color:#6b7280;
-  text-align:center;
-  margin-top:0.75rem;
-  line-height:1.7;
-}
-
-/* ===== Pricing ===== */
-.price-card{
-  border:2.5px solid #4f46e5;
-  border-radius:20px;
-  padding:1.75rem 1.5rem;
-  background:#fafbff;
-  position:relative;
-  margin-top:1rem;
-}
-.price-ribbon{
-  position:absolute;
-  top:-14px;
-  left:50%;
-  transform:translateX(-50%);
-  background:#4f46e5;
-  color:#fff;
-  font-size:0.6875rem;
-  font-weight:800;
-  padding:0.35rem 1rem;
-  border-radius:100px;
-  letter-spacing:0.04em;
-  white-space:nowrap;
-  box-shadow:0 4px 12px rgba(79,70,229,0.3);
-}
-.price-toggle{
-  display:flex;
-  gap:0.25rem;
-  background:#f3f4f6;
-  padding:0.25rem;
-  border-radius:12px;
-  margin:0 auto 1.25rem;
-  max-width:320px;
-}
-.price-toggle button{
-  flex:1;
-  padding:0.625rem 0.75rem;
-  border:none;
-  border-radius:9px;
-  background:transparent;
-  font-family:inherit;
-  font-weight:700;
-  font-size:0.8125rem;
-  color:#6b7280;
-  cursor:pointer;
-  transition:all 0.2s;
-}
-.price-toggle button.active{
-  background:#fff;
-  color:#1e1b4b;
-  box-shadow:0 1px 4px rgba(0,0,0,0.08);
-}
-.price-toggle .save{
-  display:inline-block;
-  font-size:0.625rem;
-  font-weight:800;
-  padding:0.1rem 0.4rem;
-  border-radius:100px;
-  background:#fef3c7;
-  color:#92400e;
-  margin-left:0.3rem;
-  vertical-align:1px;
-}
-.price-amount{
-  font-size:clamp(2.5rem,7vw,3.25rem);
-  font-weight:900;
-  color:#1e1b4b;
-  letter-spacing:-0.03em;
-  line-height:1;
-}
-.price-period{
-  font-size:0.9375rem;
-  font-weight:700;
-  color:#6b7280;
-  margin-left:0.125rem;
-}
-.price-note{
-  font-size:0.75rem;
-  color:#6b7280;
-  line-height:1.7;
-  margin:0.75rem auto 1.25rem;
-}
-.price-note .hl{color:#d97706;font-weight:800;}
-.price-cta{
-  display:block;
-  padding:1rem;
-  border-radius:14px;
-  background:#4f46e5;
-  color:#fff;
-  text-align:center;
-  font-size:1rem;
-  font-weight:800;
-  box-shadow:0 6px 20px rgba(79,70,229,0.3);
-  transition:all 0.2s;
-}
-.price-cta:hover{
-  background:#4338ca;
-  transform:translateY(-2px);
-  box-shadow:0 10px 28px rgba(79,70,229,0.4);
-}
-
-.youtube-note{
-  margin-top:1rem;
-  padding:0.875rem 1rem;
-  background:#fef9f3;
-  border-radius:12px;
-  display:flex;
-  align-items:center;
-  gap:0.75rem;
-  text-align:left;
-}
-.youtube-note-icon{
-  flex-shrink:0;
-  width:32px;height:32px;
-  border-radius:8px;
-  background:rgba(255,0,0,0.08);
-  display:flex;align-items:center;justify-content:center;
-}
-.youtube-note-text{
-  font-size:0.75rem;
-  color:#6b7280;
-  line-height:1.6;
-}
-.youtube-note-text strong{color:#1e1b4b;font-weight:700;}
-
-/* ===== Standard alt (small) ===== */
-.std-alt{
-  background:#fff;
-  border:1px dashed #d1d5db;
-  border-radius:14px;
-  padding:1.25rem 1.25rem;
-  margin-bottom:1.25rem;
-  display:flex;
-  align-items:center;
-  gap:1rem;
-  animation:obFadeIn 0.5s 0.2s ease both;
-}
-.std-alt-icon{
-  flex-shrink:0;
-  width:44px;height:44px;
-  border-radius:12px;
-  background:#ecfdf5;
-  border:1.5px solid #a7f3d0;
-  color:#059669;
-  display:flex;align-items:center;justify-content:center;
-}
-.std-alt-icon .ic{width:22px;height:22px;}
-.std-alt-body{flex:1;min-width:0;}
-.std-alt-title{
-  font-size:0.875rem;
-  font-weight:800;
-  color:#1e1b4b;
-  margin-bottom:0.125rem;
-}
-.std-alt-desc{
-  font-size:0.75rem;
-  color:#6b7280;
-  line-height:1.6;
-}
-.std-alt-link{
-  flex-shrink:0;
-  font-size:0.8125rem;
-  font-weight:700;
-  color:#4f46e5;
-  white-space:nowrap;
-}
-
-/* ===== Comparison ===== */
-.compare-table{
-  width:100%;
-  border-collapse:separate;
-  border-spacing:0;
-  font-size:0.875rem;
-  margin-top:0.5rem;
-}
-.compare-table thead th{
-  padding:0.75rem 0.5rem;
-  font-weight:800;
-  font-size:0.8125rem;
-  text-align:center;
-  border-bottom:2px solid #e5e7eb;
-  color:#1e1b4b;
-  background:#fff;
-}
-.compare-table thead th:first-child{
-  text-align:left;
-  color:#6b7280;
-  font-weight:700;
-}
-.compare-table thead th.prm{
-  background:#eef2ff;
-  color:#4f46e5;
-  border-top-left-radius:8px;
-  border-top-right-radius:8px;
-}
-.compare-table thead th .th-price{
-  display:block;
-  font-size:0.6875rem;
-  font-weight:600;
-  color:#9ca3af;
-  margin-top:0.125rem;
-}
-.compare-table thead th.prm .th-price{color:#818cf8;}
-.compare-table tbody td{
-  padding:0.75rem 0.5rem;
-  border-bottom:1px solid #f3f4f6;
-  text-align:center;
-  color:#374151;
-}
-.compare-table tbody td:first-child{
-  text-align:left;
-  font-weight:600;
-  color:#1e1b4b;
-}
-.compare-table tbody td.prm{
-  background:rgba(79,70,229,0.04);
-}
-.compare-table tbody tr:last-child td{border-bottom:none;}
-.compare-table tbody tr:last-child td.prm{
-  border-bottom-left-radius:8px;
-  border-bottom-right-radius:8px;
-}
-
-/* Feature name cell with icon */
-.feat-cell{
-  display:flex;
-  align-items:center;
-  gap:0.625rem;
-}
-.feat-cell-icon{
-  flex-shrink:0;
-  width:32px;height:32px;
-  border-radius:9px;
-  display:flex;align-items:center;justify-content:center;
-  border:1.5px solid;
-}
-.feat-cell-icon .ic{width:16px;height:16px;}
-.feat-cell-icon.prm{background:#fef2f2;border-color:#fecaca;color:#dc2626;}
-.feat-cell-icon.talk{background:#eff6ff;border-color:#bfdbfe;color:#2563eb;}
-.feat-cell-icon.edu{background:#fffbeb;border-color:#fde68a;color:#d97706;}
-.feat-cell-icon.tool{background:#ecfdf5;border-color:#a7f3d0;color:#059669;}
-.feat-cell-icon.sup{background:#f5f3ff;border-color:#ddd6fe;color:#7c3aed;}
-.feat-cell-name{
-  font-size:0.875rem;
-  font-weight:700;
-  color:#1e1b4b;
-  line-height:1.3;
-}
-
-/* Check/cross indicators - bigger and friendly */
-.compare-table .ck,
-.compare-table .ck-p,
-.compare-table .cx{
-  display:inline-flex;
-  align-items:center;justify-content:center;
-  width:28px;height:28px;
-  border-radius:50%;
-  font-weight:900;
-  font-size:0.9375rem;
-}
-.compare-table .ck{background:rgba(16,185,129,0.1);color:#059669;}
-.compare-table .ck-p{background:rgba(79,70,229,0.12);color:#4f46e5;}
-.compare-table .cx{background:#f3f4f6;color:#9ca3af;font-size:1rem;}
-
-/* Category header row - soft tint with colored left accent */
-.compare-table .cat td{
-  padding:0.625rem 0.875rem;
-  border-bottom:none;
-  text-align:left;
-  font-size:0.75rem;
-  font-weight:800;
-  letter-spacing:0.04em;
-  border-radius:8px;
-  border-left:3px solid;
-}
-.compare-table .cat.cat-prm td{
-  background:#f5f3ff;
-  color:#4f46e5;
-  border-left-color:#4f46e5;
-}
-.compare-table .cat.cat-edu td{
-  background:#fffbeb;
-  color:#b45309;
-  border-left-color:#d97706;
-}
-.compare-table .cat.cat-tool td{
-  background:#ecfdf5;
-  color:#047857;
-  border-left-color:#059669;
-}
-.compare-table .cat .cat-inner{
-  display:inline-flex;
-  align-items:center;
-  gap:0.4rem;
-}
-.compare-table .cat .cat-icon{
-  width:18px;height:18px;
-  display:inline-flex;align-items:center;justify-content:center;
-  flex-shrink:0;
-}
-.compare-table .cat .cat-icon .ic{width:14px;height:14px;stroke-width:2.2;}
-.compare-table tbody tr.cat:not(:first-child) td{
-  padding-top:0.625rem;
-}
-/* Add breathing room above category rows */
-.compare-table tbody tr.cat td{
-  margin-top:0.5rem;
-}
-
-/* ===== FAQ ===== */
-.faq-item{
-  border-bottom:1px solid #f3f4f6;
-  padding:1rem 0;
-  text-align:left;
-}
-.faq-item:last-child{border-bottom:none;}
-.faq-q{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:1rem;
-  cursor:pointer;
-  font-size:0.9375rem;
-  font-weight:700;
-  color:#1e1b4b;
-  line-height:1.5;
-}
-.faq-q::before{
-  content:'Q';
-  flex-shrink:0;
-  width:24px;height:24px;
-  border-radius:6px;
-  background:rgba(79,70,229,0.08);
-  color:#4f46e5;
-  font-size:0.6875rem;
-  font-weight:800;
-  display:flex;align-items:center;justify-content:center;
-}
-.faq-toggle{
-  flex-shrink:0;
-  width:24px;height:24px;
-  border-radius:50%;
-  background:#f3f4f6;
-  display:flex;align-items:center;justify-content:center;
-  font-size:0.75rem;
-  color:#6b7280;
-  transition:transform 0.3s;
-}
-.faq-item.open .faq-toggle{
-  transform:rotate(180deg);
-  background:rgba(79,70,229,0.08);
-  color:#4f46e5;
-}
-.faq-a{
-  max-height:0;
-  overflow:hidden;
-  transition:max-height 0.35s ease, padding 0.35s ease;
-  padding:0 0 0 2.25rem;
-}
-.faq-item.open .faq-a{
-  max-height:300px;
-  padding:0.75rem 0 0.25rem 2.25rem;
-}
-.faq-a p{
-  font-size:0.8125rem;
-  color:#6b7280;
-  line-height:1.9;
-}
-
-/* ===== Final CTA ===== */
-.final-cta{
-  background:#4f46e5;
-  border-radius:20px;
-  padding:2.25rem 1.75rem;
-  text-align:center;
-  color:#fff;
-  margin-bottom:1rem;
-  animation:obFadeIn 0.5s ease both;
-}
-.final-cta h2{
-  font-size:clamp(1.25rem,3.5vw,1.5rem);
-  font-weight:900;
-  line-height:1.4;
-  margin-bottom:0.75rem;
-}
-.final-cta p{
-  font-size:0.875rem;
-  color:rgba(255,255,255,0.85);
-  line-height:1.8;
-  margin-bottom:1.5rem;
-}
-.final-cta-btn{
-  display:inline-block;
-  padding:1rem 2.5rem;
-  border-radius:14px;
-  background:#fff;
-  color:#4f46e5;
-  font-weight:900;
-  font-size:1rem;
-  margin-bottom:0.875rem;
-  transition:transform 0.2s, box-shadow 0.2s;
-  box-shadow:0 4px 16px rgba(0,0,0,0.15);
-}
-.final-cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.2);}
-.final-cta-std{
-  display:block;
-  font-size:0.75rem;
-  color:rgba(255,255,255,0.85);
-  text-decoration:underline;
-  text-underline-offset:3px;
-}
-
-/* ===== Footer ===== */
-.ob-footer{
-  text-align:center;
-  padding:2rem 1rem;
-  font-size:0.8125rem;
-  color:#9ca3af;
-  border-top:1px solid #f0f0f0;
-  background:#fff;
-}
-.ob-footer a{color:#6b7280;}
-.ob-footer a:hover{color:#4f46e5;}
-
-@keyframes obFadeIn{
-  from{opacity:0;transform:translateY(16px)}
-  to{opacity:1;transform:translateY(0)}
-}
-
-@media(max-width:540px){
-  .ba-grid{grid-template-columns:1fr;}
-  .ba-arrow{transform:rotate(90deg);padding:0.25rem 0;}
-  .std-alt{flex-wrap:wrap;}
-  .std-alt-link{width:100%;text-align:center;padding:0.5rem;background:#fff;border-radius:10px;border:1px solid #d1d5db;}
-  .compare-section{overflow-x:auto;}
-  .compare-table{min-width:380px;}
-}
-</style>
+      /* Premium feature card title wrapper (for tooltip on h4 titles) */
+      .prem-title-wrap{
+        display:flex;
+        align-items:center;
+        gap:0.4rem;
+        margin-bottom:0.25rem;
+        flex-wrap:nowrap;
+      }
+      .prem-title-wrap h4{
+        margin:0 !important;
+        white-space:nowrap;
+      }
+      .prem-title-wrap .feat-info{
+        margin-left:0;
+        width:18px;height:18px;
+        flex-shrink:0;
+      }
+      /* Purchase card titles: centered + slightly smaller h4 */
+      .purchase-card .prem-title-wrap{
+        justify-content:center;
+      }
+      .purchase-card .prem-title-wrap h4{
+        font-size:0.95rem;
+      }
+      /* Mobile: stack purchase cards vertically so titles don't overflow */
+      @media(max-width:640px){
+        .purchase-cards{grid-template-columns:1fr !important;}
+      }
+      .feat-tip{
+        position:absolute;
+        bottom:calc(100% + 10px);
+        left:50%;
+        transform:translateX(-50%);
+        width:240px;
+        background:#1e1b4b;
+        color:#fff;
+        padding:0.75rem 0.875rem;
+        border-radius:10px;
+        font-size:0.75rem;
+        line-height:1.7;
+        opacity:0;
+        visibility:hidden;
+        pointer-events:none;
+        /* On hide, wait 0.4s before disappearing so the cursor has time to enter the tooltip */
+        transition:opacity 0.2s ease 0.35s, visibility 0s linear 0.55s;
+        z-index:100;
+        text-align:left;
+        box-shadow:0 8px 24px rgba(0,0,0,0.25);
+        white-space:normal;
+      }
+      .feat-tip::after{
+        content:'';
+        position:absolute;
+        top:100%;
+        left:50%;
+        transform:translateX(-50%);
+        border:6px solid transparent;
+        border-top-color:#1e1b4b;
+      }
+      .feat-tip a{
+        color:#a5b4fc;
+        text-decoration:underline;
+        text-underline-offset:2px;
+        font-weight:700;
+      }
+      .feat-tip a:hover{color:#c7d2fe;}
+      /* PC: hover on the ⓘ icon OR on the tooltip itself shows tooltip */
+      @media(hover:hover){
+        /* Position tooltip above the icon (right-aligned), so mouse travel is short */
+        .feat-tip{
+          right:0;
+          left:auto;
+          transform:none;
+        }
+        .feat-tip::after{
+          left:auto;
+          right:8px;
+          transform:none;
+        }
+        .has-tip .feat-info:hover ~ .feat-tip,
+        .has-tip .feat-tip:hover{
+          opacity:1;
+          visibility:visible;
+          pointer-events:auto;
+          /* Show instantly, no delay */
+          transition:opacity 0.15s ease, visibility 0s;
+        }
+        /* Wide invisible bridge between tooltip bottom and icon area – makes mouse travel safe */
+        .feat-tip::before{
+          content:'';
+          position:absolute;
+          top:100%;
+          left:0;
+          right:0;
+          height:18px;
+        }
+      }
+      /* Mobile / tap-toggled state */
+      .has-tip.tip-open .feat-tip{
+        opacity:1;
+        visibility:visible;
+        pointer-events:auto;
+      }
+      /* Mobile: position tooltip below if there's no room above */
+      @media(max-width:768px){
+        .feat-tip{
+          width:min(260px, 80vw);
+          bottom:auto;
+          top:calc(100% + 10px);
+        }
+        .feat-tip::after{
+          top:auto;
+          bottom:100%;
+          border-top-color:transparent;
+          border-bottom-color:#1e1b4b;
+        }
+      }
+    </style>
 </head>
-<body>
+<body style="scroll-behavior: auto;">
 
-<!-- ===== Header ===== -->
-<header class="ob-header">
-  <img src="img/fxspace-logo-horizontal.png" alt="FX SPACE" class="ob-logo">
-  <div class="sec-badge-wrap">
-    <span class="sec-badge sec-badge--orange">
-      <img src="img/title-side-orange-left.png" alt="">
-      FX SPACE PREMIUM
-      <img src="img/title-side-orange-right.png" alt="">
-    </span>
+<!-- PLANS & PREMIUM UPSELL (extracted from intro page) -->
+<section class="pricing-section" id="pricing-section">
+    <div class="pricing-bg-glow pricing-bg-glow-1"></div>
+    <div class="pricing-bg-glow pricing-bg-glow-2"></div>
+    <div class="pricing-inner">
+
+        <!-- Header -->
+        <div class="pricing-header pricing-reveal revealed">
+            <h2 class="pricing-title-wavy">
+              <span class="ttl-line"><span class="pricing-h2-accent">すべての機能を</span>解放して</span>
+              <span class="ttl-line">最速でプロへ</span>
+            </h2>
+            <p class="pricing-sub">スタンダードでほぼ全機能が使えます。<br>プレミアムならリアルタイムで分析＆トレーダー交流も。</p>
+        </div>
+
+        <!-- 利用規約リンク -->
+        <div style="text-align:center; margin-bottom:3rem;">
+            <a href="https://drive.google.com/file/d/17vbSozToeLWHQO9s_eBHcceYGh80ryCQ/view?usp=sharing" target="_blank" rel="noopener" style="color:#9ca3af; font-size:0.8125rem; text-decoration:underline; text-underline-offset:3px;">利用規約はこちら</a>
+        </div>
+
+        <!-- 3 Plan Cards (Carousel) -->
+        <div class="plan-carousel" id="plan-carousel">
+            <div class="plan-carousel-track">
+                <!-- Free -->
+                <div class="plan-carousel-slide">
+                    <div class="plan-card">
+                        <div class="plan-name" style="color:#9ca3af;">フリー</div>
+                        <div class="plan-desc plan-desc-light">まずは無料で体験</div>
+                        <div class="plan-price-wrap">
+                            <div class="plan-price-free">¥0</div>
+                        </div>
+                        <div class="plan-divider"></div>
+                        <ul class="plan-features">
+                            <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">速攻プロフローチャート</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">トレード判断に迷ったときにまずチェック。プロの思考順序をフローチャートで可視化したガイドです。<br><a href="https://discord.com/channels/1039824083208126474/1238825339849801749" target="_blank">Discordで見る →</a></span></li>
+                        </ul>
+                        <a href="https://discord.gg/CcUtqSdRDZ" target="_blank" class="btn plan-cta plan-cta-outline">無料で始める</a>
+                    </div>
+                </div>
+
+                <!-- Standard -->
+                <div class="plan-carousel-slide">
+                    <div class="plan-card">
+                        <div class="plan-name">スタンダード</div>
+                        <div class="plan-desc plan-desc-light">ほぼ全機能が使い放題</div>
+                        <div class="plan-price-wrap">
+                            <span class="plan-price-amount">¥2,900</span><span class="plan-price-period">/月</span>
+                        </div>
+                        <div class="plan-divider"></div>
+                        <ul class="plan-features">
+                            <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">速攻プロフローチャート</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">トレード判断に迷ったときにまずチェック。プロの思考順序をフローチャートで可視化したガイドです。<br><a href="https://discord.com/channels/1039824083208126474/1238825339849801749" target="_blank">Discordで見る →</a></span></li>
+                            <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">AIサポート</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">FXに関する疑問に24時間いつでも答えてくれるAIアシスタント。気軽に相談できます。<br><a href="https://discord.com/channels/1039824083208126474/1416640423396511804" target="_blank">Discordで見る →</a></span></li>
+                            <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">毎日のシナリオ動画（3通貨ペア）</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">毎朝、よすががその日のシナリオを動画で解説。スタンダードでは主要3通貨ペアの分析が届きます。<br><a href="https://discord.com/channels/1039824083208126474/1048136270582382592" target="_blank">Discordで見る →</a></span></li>
+                            <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">深掘解説等の限定動画</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">会員限定の特別解説動画。テーマ別に基礎から応用まで深く学べます。</span></li>
+                            <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">サポートツール YTT</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">よすが式チャート分析ツール。複雑なテクニカル分析を直感的に行え、エントリー判断の精度が上がります。<br><a href="https://discord.com/channels/1039824083208126474/1447939661186990173" target="_blank">Discordで見る →</a></span></li>
+                            <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">3か月プロ企画 ゼロプロ90参加権利</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">90日間でゼロからプロを目指す集中プログラム。3か月に1回の募集タイミングで参加できます。<br><a href="https://discord.com/channels/1039824083208126474/1171706488234979378" target="_blank">Discordで見る →</a></span></li>
+                            <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">プロトレーダー ASTRO</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">プロトレーダーASTROの相場観・分析にアクセス可能。実践的な視点を学べます。<br><a href="https://discord.com/channels/1039824083208126474/1136925665099251753" target="_blank">Discordで見る →</a></span></li>
+                            <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">プロに相談</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">困ったときにプロトレーダーに直接相談できる窓口。学習や実トレードの疑問をすぐ解消できます。<br><a href="https://discord.com/channels/1039824083208126474/1181536360398590003" target="_blank">Discordで見る →</a></span></li>
+                        </ul>
+                        <a href="https://discord.com/oauth2/authorize?client_id=1132937165379211284&amp;response_type=code&amp;redirect_uri=https%3A%2F%2Ffx-space.com%2Fpp_sub_standard.php&amp;scope=identify" class="btn plan-cta plan-cta-outline" style="border-color:var(--primary); color:var(--primary);">スタンダードに加入 →</a>
+                    </div>
+                </div>
+
+                <!-- Premium -->
+                <div class="plan-carousel-slide">
+                    <div class="plan-card plan-premium-card">
+                        <div class="plan-badge plan-badge-prem">全機能解放</div>
+                        <div class="plan-name" style="color:var(--primary);">プレミアム</div>
+                        <div class="plan-desc plan-desc-light">スタンダード全機能＋ライブ＆交流</div>
+                        <div class="plan-price-wrap">
+                            <span class="plan-price-amount" id="premium-price">¥5,410</span><span class="plan-price-period" id="premium-period">/月</span>
+                            <div class="plan-price-sub" id="premium-sub"><span class="nowrap">年額 ¥64,900（月あたり¥5,410）</span> / <span class="nowrap">月額 ¥5,900</span></div>
+                        </div>
+                        <div class="plan-divider"></div>
+                        <ul class="plan-features">
+                            <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">スタンダードの全機能</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">上記スタンダードプランの全機能をそのまま利用できます。基礎から実践まで全てカバー。</span></li>
+                            <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text" style="font-weight:700;">ライブチャート分析</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">よすががチャンスと感じた相場をリアルタイム通知。プレミアム会員だけが見られる専用チャンネル。<br><a href="https://discord.com/channels/1039824083208126474/1282259603903615047" target="_blank">Discordで見る →</a></span></li>
+                            <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text" style="font-weight:700;">トレード交流</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">メンバー同士でトレードを共有・議論する場。利確・損切報告で切磋琢磨できます。<br><a href="https://discord.com/channels/1039824083208126474/1282260695538339851" target="_blank">Discordで見る →</a></span></li>
+                            <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text" style="font-weight:700;">毎日のシナリオ動画（主要全通貨ペア）</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">主要全通貨ペアの毎朝シナリオが届きます（スタンダードは3通貨のみ）。<br><a href="https://discord.com/channels/1039824083208126474/1356783303105183916" target="_blank">Discordで見る →</a></span></li>
+                        </ul>
+                        <a href="https://discord.com/oauth2/authorize?client_id=1132937165379211284&amp;response_type=code&amp;redirect_uri=https%3A%2F%2Ffx-space.com%2Fpp_sub_premium_year.php&amp;scope=identify" id="premium-cta" class="btn btn-solid-blue btn-solid-md">プレミアムに加入（年額） →</a>
+                        <a href="https://discord.com/oauth2/authorize?client_id=1132937165379211284&amp;response_type=code&amp;redirect_uri=https%3A%2F%2Ffx-space.com%2Fpp_sub_premium.php&amp;scope=identify" id="premium-year-link" class="plan-year-link plan-year-link-light">月額プランで加入 →</a>
+                        <p style="font-size:0.6875rem; color:#9ca3af; margin-top:0.75rem; text-align:center;">※ プレミアム加入でスタンダードは自動解約される安心設計です</p>
+                    </div>
+                </div>
+            </div>
+            <button class="plan-carousel-arrow plan-carousel-prev" id="plan-carousel-prev" aria-label="前のプラン">&#8249;</button>
+            <button class="plan-carousel-arrow plan-carousel-next" id="plan-carousel-next" aria-label="次のプラン">&#8250;</button>
+        </div>
+
+        <div style="margin-top:2.5rem; margin-bottom:2.5rem; padding:1.5rem 1.75rem; border:1px solid #9ca3af; border-radius:0.75rem; max-width:36rem; margin-left:auto; margin-right:auto; text-align:center;">
+            <p style="color:#1f2937; font-size:0.9rem; font-weight:600; margin:0 0 0.75rem;">YouTubeメンバーシップにご登録されている方へ</p>
+
+            <p style="color:#4b5563; font-size:0.8125rem; line-height:1.6; margin:0 0 0.625rem;">YouTubeメンバーシップでも同じ特典が受けられます。</p>
+            <div style="display:inline-block; text-align:center; margin:0 auto 1rem; background:#f9fafb; border-radius:0.5rem; padding:0.625rem 1.25rem; font-size:0.8125rem; color:#374151; line-height:1.8;">
+                <span class="nowrap">よすが式FXメンバー（¥2,990/月）</span> → <span class="nowrap">スタンダード相当</span><br>
+                <span class="nowrap">ライブチャート分析（¥6,000/月）</span> → <span class="nowrap">プレミアム相当</span>
+            </div>
+
+            <div style="border-top:1px solid #d1d5db; padding-top:0.875rem; margin-top:0.25rem;">
+                <p style="color:#4b5563; font-size:0.8125rem; line-height:1.6; margin:0 0 0.5rem;">接続がまだの方はこちら</p>
+                <a href="https://fx-space.com/intro/yt-connect.html" target="_blank" rel="noopener" style="color:#2563eb; font-size:0.8125rem; font-weight:500; text-decoration:underline; text-underline-offset:3px;">接続ガイドを見る →</a>
+            </div>
+
+            <div style="border-top:1px solid #d1d5db; padding-top:0.875rem; margin-top:0.875rem;">
+                <a href="https://discord.com/oauth2/authorize?client_id=1132937165379211284&amp;response_type=code&amp;redirect_uri=https%3A%2F%2Ffx-space.com%2Fpp_sub_cancel.php&amp;scope=identify" target="_blank" rel="noopener" style="color:#6b7280; font-size:0.75rem; text-decoration:underline; text-underline-offset:3px;">退会はこちら →</a>
+            </div>
+        </div>
+
+        <!-- Premium Feature Showcase -->
+        <div class="prem-showcase">
+            <div class="prem-showcase-header pricing-reveal revealed">
+                <h3>プレミアムだけの<span class="pricing-h2-accent" style="color:#f97316;">特別体験</span></h3>
+                <p>スタンダードの全機能に加え、プレミアムではリアルタイムの学びと繋がりが手に入ります</p>
+            </div>
+
+            <div class="prem-features-grid">
+                <!-- Live Chart Analysis -->
+                <div class="prem-feature-card prem-card-live pricing-reveal revealed">
+                    <div class="prem-mock-chat community-chat" id="prem-live-chat">
+                        <div class="cc-header"><span class="cc-header-hash">#</span><span class="cc-header-name">ライブチャート分析</span></div>
+                        <div class="cc-body">
+                            <div class="cc-messages" id="prem-live-msgs">
+                                <div class="cc-msg" data-delay="0">
+                                    <div class="cc-avatar cc-avatar-yosuga"></div>
+                                    <div class="cc-msg-body">
+                                        <div class="cc-msg-header"><span class="cc-msg-name" style="color:#ed4245;">よすが</span><span class="cc-msg-time">02/13 09:32</span></div>
+                                        <div class="cc-msg-content"><span class="mention">@everyone</span> USDCHF見ていきたい</div>
+                                        <div class="prem-mock-chart"><svg viewBox="0 0 200 180" preserveAspectRatio="none"><rect width="200" height="180" fill="#111214"></rect><g stroke="#2b2d31" stroke-width="0.5"><line x1="0" y1="36" x2="200" y2="36"></line><line x1="0" y1="72" x2="200" y2="72"></line><line x1="0" y1="108" x2="200" y2="108"></line><line x1="0" y1="144" x2="200" y2="144"></line><line x1="50" y1="0" x2="50" y2="180"></line><line x1="100" y1="0" x2="100" y2="180"></line><line x1="150" y1="0" x2="150" y2="180"></line></g><line x1="4.0" y1="160.0" x2="4.0" y2="175.0" stroke="#22c55e" stroke-width="1"></line><rect x="1.5" y="163.1" width="5" height="7.0" fill="#22c55e"></rect><line x1="12.3" y1="160.0" x2="12.3" y2="173.7" stroke="#ef4444" stroke-width="1"></line><rect x="9.8" y="162.6" width="5" height="7.0" fill="#ef4444"></rect><line x1="20.7" y1="157.3" x2="20.7" y2="174.5" stroke="#22c55e" stroke-width="1"></line><rect x="18.2" y="158.7" width="5" height="14.7" fill="#22c55e"></rect><line x1="29.0" y1="146.8" x2="29.0" y2="161.0" stroke="#22c55e" stroke-width="1"></line><rect x="26.5" y="151.5" width="5" height="7.1" fill="#22c55e"></rect><line x1="37.4" y1="135.8" x2="37.4" y2="153.6" stroke="#22c55e" stroke-width="1"></line><rect x="34.9" y="142.8" width="5" height="8.5" fill="#22c55e"></rect><line x1="45.7" y1="112.2" x2="45.7" y2="144.3" stroke="#22c55e" stroke-width="1"></line><rect x="43.2" y="113.8" width="5" height="28.6" fill="#22c55e"></rect><line x1="54.1" y1="94.3" x2="54.1" y2="115.8" stroke="#22c55e" stroke-width="1"></line><rect x="51.6" y="94.7" width="5" height="19.0" fill="#22c55e"></rect><line x1="62.4" y1="78.1" x2="62.4" y2="90.4" stroke="#ef4444" stroke-width="1"></line><rect x="59.9" y="81.1" width="5" height="7.9" fill="#ef4444"></rect><line x1="70.8" y1="51.6" x2="70.8" y2="92.0" stroke="#22c55e" stroke-width="1"></line><rect x="68.3" y="53.9" width="5" height="35.3" fill="#22c55e"></rect><line x1="79.1" y1="41.8" x2="79.1" y2="65.1" stroke="#22c55e" stroke-width="1"></line><rect x="76.6" y="43.6" width="5" height="10.4" fill="#22c55e"></rect><line x1="87.5" y1="23.9" x2="87.5" y2="68.1" stroke="#22c55e" stroke-width="1"></line><rect x="85.0" y="37.9" width="5" height="7.0" fill="#22c55e"></rect><line x1="95.8" y1="37.5" x2="95.8" y2="78.4" stroke="#ef4444" stroke-width="1"></line><rect x="93.3" y="39.1" width="5" height="31.0" fill="#ef4444"></rect><line x1="104.2" y1="67.6" x2="104.2" y2="89.4" stroke="#22c55e" stroke-width="1"></line><rect x="101.7" y="73.2" width="5" height="7.0" fill="#22c55e"></rect><line x1="112.5" y1="39.3" x2="112.5" y2="76.1" stroke="#22c55e" stroke-width="1"></line><rect x="110.0" y="51.1" width="5" height="24.2" fill="#22c55e"></rect><line x1="120.9" y1="41.8" x2="120.9" y2="67.0" stroke="#ef4444" stroke-width="1"></line><rect x="118.4" y="51.0" width="5" height="7.0" fill="#ef4444"></rect><line x1="129.2" y1="54.5" x2="129.2" y2="83.2" stroke="#ef4444" stroke-width="1"></line><rect x="126.7" y="57.8" width="5" height="24.5" fill="#ef4444"></rect><line x1="137.6" y1="48.4" x2="137.6" y2="93.5" stroke="#22c55e" stroke-width="1"></line><rect x="135.1" y="50.4" width="5" height="31.8" fill="#22c55e"></rect><line x1="145.9" y1="22.1" x2="145.9" y2="52.1" stroke="#22c55e" stroke-width="1"></line><rect x="143.4" y="25.6" width="5" height="25.4" fill="#22c55e"></rect><line x1="154.3" y1="24.3" x2="154.3" y2="34.2" stroke="#ef4444" stroke-width="1"></line><rect x="151.8" y="25.4" width="5" height="7.0" fill="#ef4444"></rect><line x1="162.6" y1="6.5" x2="162.6" y2="32.1" stroke="#22c55e" stroke-width="1"></line><rect x="160.1" y="12.1" width="5" height="20.0" fill="#22c55e"></rect><line x1="171.0" y1="5.0" x2="171.0" y2="30.0" stroke="#ef4444" stroke-width="1"></line><rect x="168.5" y="12.1" width="5" height="14.2" fill="#ef4444"></rect><line x1="179.3" y1="22.5" x2="179.3" y2="41.5" stroke="#ef4444" stroke-width="1"></line><rect x="176.8" y="24.8" width="5" height="7.0" fill="#ef4444"></rect><line x1="187.7" y1="22.9" x2="187.7" y2="34.3" stroke="#22c55e" stroke-width="1"></line><rect x="185.2" y="28.8" width="5" height="7.0" fill="#22c55e"></rect><line x1="196.0" y1="25.2" x2="196.0" y2="47.0" stroke="#22c55e" stroke-width="1"></line><rect x="193.5" y="25.5" width="5" height="7.0" fill="#22c55e"></rect></svg></div>
+                                        <div class="cc-reactions"><span class="cc-reaction" data-delay="1800">🔥 <span class="cc-reaction-count">3</span></span></div>
+                                    </div>
+                                </div>
+                                <div class="cc-msg" data-delay="1600">
+                                    <div class="cc-avatar cc-avatar-yosuga"></div>
+                                    <div class="cc-msg-body">
+                                        <div class="cc-msg-header"><span class="cc-msg-name" style="color:#ed4245;">よすが</span><span class="cc-msg-time">02/15 14:38</span></div>
+                                        <div class="cc-msg-content"><span class="mention">@everyone</span> XAUUSD 安値更新</div>
+                                        <div class="prem-mock-chart"><svg viewBox="0 0 200 180" preserveAspectRatio="none"><rect width="200" height="180" fill="#111214"></rect><g stroke="#2b2d31" stroke-width="0.5"><line x1="0" y1="36" x2="200" y2="36"></line><line x1="0" y1="72" x2="200" y2="72"></line><line x1="0" y1="108" x2="200" y2="108"></line><line x1="0" y1="144" x2="200" y2="144"></line><line x1="50" y1="0" x2="50" y2="180"></line><line x1="100" y1="0" x2="100" y2="180"></line><line x1="150" y1="0" x2="150" y2="180"></line></g><line x1="4.0" y1="142.5" x2="4.0" y2="149.8" stroke="#ef4444" stroke-width="1"></line><rect x="1.5" y="140.3" width="5" height="7.0" fill="#ef4444"></rect><line x1="12.3" y1="144.2" x2="12.3" y2="156.0" stroke="#ef4444" stroke-width="1"></line><rect x="9.8" y="143.5" width="5" height="7.0" fill="#ef4444"></rect><line x1="20.7" y1="134.2" x2="20.7" y2="149.7" stroke="#22c55e" stroke-width="1"></line><rect x="18.2" y="136.1" width="5" height="7.0" fill="#22c55e"></rect><line x1="29.0" y1="123.4" x2="29.0" y2="138.6" stroke="#22c55e" stroke-width="1"></line><rect x="26.5" y="123.8" width="5" height="12.7" fill="#22c55e"></rect><line x1="37.4" y1="106.1" x2="37.4" y2="124.7" stroke="#22c55e" stroke-width="1"></line><rect x="34.9" y="113.9" width="5" height="9.7" fill="#22c55e"></rect><line x1="45.7" y1="98.5" x2="45.7" y2="122.3" stroke="#22c55e" stroke-width="1"></line><rect x="43.2" y="99.1" width="5" height="14.6" fill="#22c55e"></rect><line x1="54.1" y1="91.5" x2="54.1" y2="104.3" stroke="#22c55e" stroke-width="1"></line><rect x="51.6" y="92.0" width="5" height="7.0" fill="#22c55e"></rect><line x1="62.4" y1="74.3" x2="62.4" y2="92.6" stroke="#22c55e" stroke-width="1"></line><rect x="59.9" y="85.1" width="5" height="7.0" fill="#22c55e"></rect><line x1="70.8" y1="62.9" x2="70.8" y2="88.1" stroke="#22c55e" stroke-width="1"></line><rect x="68.3" y="64.5" width="5" height="23.5" fill="#22c55e"></rect><line x1="79.1" y1="30.2" x2="79.1" y2="67.5" stroke="#22c55e" stroke-width="1"></line><rect x="76.6" y="30.7" width="5" height="33.5" fill="#22c55e"></rect><line x1="87.5" y1="5.0" x2="87.5" y2="74.4" stroke="#ef4444" stroke-width="1"></line><rect x="85.0" y="29.1" width="5" height="7.0" fill="#ef4444"></rect><line x1="95.8" y1="25.6" x2="95.8" y2="134.3" stroke="#ef4444" stroke-width="1"></line><rect x="93.3" y="35.9" width="5" height="75.8" fill="#ef4444"></rect><line x1="104.2" y1="106.5" x2="104.2" y2="175.0" stroke="#ef4444" stroke-width="1"></line><rect x="101.7" y="120.6" width="5" height="17.8" fill="#ef4444"></rect><line x1="112.5" y1="90.9" x2="112.5" y2="137.4" stroke="#22c55e" stroke-width="1"></line><rect x="110.0" y="97.6" width="5" height="39.8" fill="#22c55e"></rect><line x1="120.9" y1="76.9" x2="120.9" y2="110.6" stroke="#22c55e" stroke-width="1"></line><rect x="118.4" y="92.8" width="5" height="7.0" fill="#22c55e"></rect><line x1="129.2" y1="86.7" x2="129.2" y2="124.2" stroke="#ef4444" stroke-width="1"></line><rect x="126.7" y="94.4" width="5" height="27.1" fill="#ef4444"></rect><line x1="137.6" y1="94.1" x2="137.6" y2="139.1" stroke="#22c55e" stroke-width="1"></line><rect x="135.1" y="96.7" width="5" height="22.7" fill="#22c55e"></rect><line x1="145.9" y1="77.8" x2="145.9" y2="96.7" stroke="#22c55e" stroke-width="1"></line><rect x="143.4" y="81.7" width="5" height="9.8" fill="#22c55e"></rect><line x1="154.3" y1="78.8" x2="154.3" y2="91.4" stroke="#ef4444" stroke-width="1"></line><rect x="151.8" y="80.4" width="5" height="7.0" fill="#ef4444"></rect><line x1="162.6" y1="73.2" x2="162.6" y2="86.9" stroke="#22c55e" stroke-width="1"></line><rect x="160.1" y="77.9" width="5" height="8.2" fill="#22c55e"></rect><line x1="171.0" y1="75.8" x2="171.0" y2="107.3" stroke="#ef4444" stroke-width="1"></line><rect x="168.5" y="77.3" width="5" height="23.9" fill="#ef4444"></rect><line x1="179.3" y1="83.5" x2="179.3" y2="106.0" stroke="#22c55e" stroke-width="1"></line><rect x="176.8" y="85.3" width="5" height="14.8" fill="#22c55e"></rect><line x1="187.7" y1="85.0" x2="187.7" y2="94.8" stroke="#ef4444" stroke-width="1"></line><rect x="185.2" y="84.5" width="5" height="7.0" fill="#ef4444"></rect><line x1="196.0" y1="90.0" x2="196.0" y2="111.8" stroke="#ef4444" stroke-width="1"></line><rect x="193.5" y="91.1" width="5" height="16.4" fill="#ef4444"></rect></svg></div>
+                                        <div class="cc-reactions"><span class="cc-reaction" data-delay="2000">🔥 <span class="cc-reaction-count">7</span></span></div>
+                                    </div>
+                                </div>
+                                <div class="cc-msg grouped" data-delay="1200">
+                                    <div class="cc-avatar cc-avatar-yosuga"></div>
+                                    <div class="cc-msg-body">
+                                        <div class="cc-msg-header"><span class="cc-msg-name" style="color:#ed4245;">よすが</span><span class="cc-msg-time">02/15 14:40</span></div>
+                                        <div class="cc-msg-content">ショート利確 🎊 朝のシナリオ通りの展開でしたね</div>
+                                        <div class="cc-reactions"><span class="cc-reaction" data-delay="1800">🔥 <span class="cc-reaction-count">12</span></span><span class="cc-reaction" data-delay="2200">👏 <span class="cc-reaction-count">8</span></span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cc-typing" id="prem-live-typing"><div class="cc-typing-dots"><span class="cc-typing-dot"></span><span class="cc-typing-dot"></span><span class="cc-typing-dot"></span></div>よすが が入力中…</div>
+                        </div>
+                        <div class="cc-input"><span class="cc-input-plus">＋</span><span class="cc-input-text">#ライブチャート分析 でメッセージを送信</span></div>
+                    </div>
+                    <div class="prem-title-wrap has-tip">
+                      <h4>ライブチャート分析</h4>
+                      <span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span>
+                      <span class="feat-tip">よすががチャンスと感じた相場をリアルタイム通知。プレミアム会員だけが見られる専用チャンネル。<br><a href="https://discord.com/channels/1039824083208126474/1282259603903615047" target="_blank">Discordで見る →</a></span>
+                    </div>
+                    <span class="card-tip">メンバーとリアルタイムでチャート分析・議論できます。</span>
+                    <p>よすがのチャート解説や相場観をリアルタイムで直接学べます。</p>
+                    <ul class="prem-card-highlights">
+                        <li>リアルタイムの相場解説</li>
+                        <li>エントリー根拠をその場で共有</li>
+                        <li>質問もその場でOK</li>
+                    </ul>
+                </div>
+
+                <!-- Trade Community -->
+                <div class="prem-feature-card prem-card-community pricing-reveal revealed">
+                    <div class="prem-mock-chat community-chat" id="prem-trade-chat">
+                        <div class="cc-header"><span class="cc-header-hash">#</span><span class="cc-header-name">トレード談話</span></div>
+                        <div class="cc-body">
+                            <div class="cc-messages" id="prem-trade-msgs">
+                                <div class="cc-msg" data-delay="0">
+                                    <div class="cc-avatar" style="background:#eb459e;">R</div>
+                                    <div class="cc-msg-body">
+                                        <div class="cc-msg-header"><span class="cc-msg-name" style="color:#eb459e;">RyoFX</span><span class="cc-msg-time">02/15 10:04</span></div>
+                                        <div class="cc-msg-content">ショートスキャ利確 💰</div>
+                                        <div class="prem-mock-chart"><svg viewBox="0 0 200 180" preserveAspectRatio="none"><rect width="200" height="180" fill="#111214"></rect><g stroke="#2b2d31" stroke-width="0.5"><line x1="0" y1="36" x2="200" y2="36"></line><line x1="0" y1="72" x2="200" y2="72"></line><line x1="0" y1="108" x2="200" y2="108"></line><line x1="0" y1="144" x2="200" y2="144"></line><line x1="50" y1="0" x2="50" y2="180"></line><line x1="100" y1="0" x2="100" y2="180"></line><line x1="150" y1="0" x2="150" y2="180"></line></g><line x1="4.0" y1="152.6" x2="4.0" y2="171.1" stroke="#ef4444" stroke-width="1"></line><rect x="1.5" y="153.2" width="5" height="13.0" fill="#ef4444"></rect><line x1="12.3" y1="159.4" x2="12.3" y2="173.9" stroke="#ef4444" stroke-width="1"></line><rect x="9.8" y="164.1" width="5" height="7.0" fill="#ef4444"></rect><line x1="20.7" y1="152.0" x2="20.7" y2="175.0" stroke="#22c55e" stroke-width="1"></line><rect x="18.2" y="153.0" width="5" height="22.0" fill="#22c55e"></rect><line x1="29.0" y1="111.6" x2="29.0" y2="157.5" stroke="#22c55e" stroke-width="1"></line><rect x="26.5" y="126.9" width="5" height="26.1" fill="#22c55e"></rect><line x1="37.4" y1="119.7" x2="37.4" y2="142.5" stroke="#ef4444" stroke-width="1"></line><rect x="34.9" y="126.7" width="5" height="12.7" fill="#ef4444"></rect><line x1="45.7" y1="114.7" x2="45.7" y2="144.5" stroke="#22c55e" stroke-width="1"></line><rect x="43.2" y="115.1" width="5" height="24.4" fill="#22c55e"></rect><line x1="54.1" y1="91.2" x2="54.1" y2="124.6" stroke="#22c55e" stroke-width="1"></line><rect x="51.6" y="92.7" width="5" height="22.1" fill="#22c55e"></rect><line x1="62.4" y1="63.6" x2="62.4" y2="88.0" stroke="#ef4444" stroke-width="1"></line><rect x="59.9" y="67.8" width="5" height="7.0" fill="#ef4444"></rect><line x1="70.8" y1="5.0" x2="70.8" y2="82.6" stroke="#22c55e" stroke-width="1"></line><rect x="68.3" y="16.7" width="5" height="55.9" fill="#22c55e"></rect><line x1="79.1" y1="15.7" x2="79.1" y2="67.1" stroke="#ef4444" stroke-width="1"></line><rect x="76.6" y="16.0" width="5" height="30.4" fill="#ef4444"></rect><line x1="87.5" y1="32.8" x2="87.5" y2="63.4" stroke="#22c55e" stroke-width="1"></line><rect x="85.0" y="40.6" width="5" height="7.0" fill="#22c55e"></rect><line x1="95.8" y1="40.1" x2="95.8" y2="81.7" stroke="#ef4444" stroke-width="1"></line><rect x="93.3" y="42.1" width="5" height="39.6" fill="#ef4444"></rect><line x1="104.2" y1="74.4" x2="104.2" y2="108.3" stroke="#ef4444" stroke-width="1"></line><rect x="101.7" y="82.8" width="5" height="20.7" fill="#ef4444"></rect><line x1="112.5" y1="90.2" x2="112.5" y2="106.8" stroke="#22c55e" stroke-width="1"></line><rect x="110.0" y="93.8" width="5" height="9.5" fill="#22c55e"></rect><line x1="120.9" y1="87.1" x2="120.9" y2="103.2" stroke="#ef4444" stroke-width="1"></line><rect x="118.4" y="92.2" width="5" height="7.0" fill="#ef4444"></rect><line x1="129.2" y1="92.7" x2="129.2" y2="108.6" stroke="#ef4444" stroke-width="1"></line><rect x="126.7" y="97.9" width="5" height="8.4" fill="#ef4444"></rect><line x1="137.6" y1="91.1" x2="137.6" y2="111.8" stroke="#22c55e" stroke-width="1"></line><rect x="135.1" y="92.4" width="5" height="13.9" fill="#22c55e"></rect><line x1="145.9" y1="56.6" x2="145.9" y2="96.6" stroke="#22c55e" stroke-width="1"></line><rect x="143.4" y="61.3" width="5" height="33.3" fill="#22c55e"></rect><line x1="154.3" y1="55.8" x2="154.3" y2="70.1" stroke="#ef4444" stroke-width="1"></line><rect x="151.8" y="61.2" width="5" height="7.5" fill="#ef4444"></rect><line x1="162.6" y1="56.4" x2="162.6" y2="88.3" stroke="#ef4444" stroke-width="1"></line><rect x="160.1" y="68.0" width="5" height="7.0" fill="#ef4444"></rect><line x1="171.0" y1="69.2" x2="171.0" y2="82.0" stroke="#ef4444" stroke-width="1"></line><rect x="168.5" y="71.3" width="5" height="7.0" fill="#ef4444"></rect><line x1="179.3" y1="71.4" x2="179.3" y2="83.7" stroke="#22c55e" stroke-width="1"></line><rect x="176.8" y="71.3" width="5" height="7.0" fill="#22c55e"></rect><line x1="187.7" y1="74.5" x2="187.7" y2="84.1" stroke="#ef4444" stroke-width="1"></line><rect x="185.2" y="75.8" width="5" height="7.0" fill="#ef4444"></rect><line x1="196.0" y1="81.1" x2="196.0" y2="98.3" stroke="#22c55e" stroke-width="1"></line><rect x="193.5" y="78.5" width="5" height="7.0" fill="#22c55e"></rect><circle cx="71" cy="5" r="4" fill="none" stroke="#22c55e" stroke-width="1.5"></circle><circle cx="129" cy="109" r="4" fill="none" stroke="#ef4444" stroke-width="1.5"></circle><line x1="71" y1="5" x2="129" y2="109" stroke="#fbbf24" stroke-width="0.8" stroke-dasharray="3,2" opacity="0.5"></line></svg></div>
+                                        <div class="cc-reactions"><span class="cc-reaction" data-delay="1800">👍 <span class="cc-reaction-count">5</span></span><span class="cc-reaction" data-delay="2200">🔥 <span class="cc-reaction-count">3</span></span></div>
+                                    </div>
+                                </div>
+                                <div class="cc-msg" data-delay="1400">
+                                    <div class="cc-avatar" style="background:#5865f2;">H</div>
+                                    <div class="cc-msg-body">
+                                        <div class="cc-msg-header"><span class="cc-msg-name" style="color:#5865f2;">Hiro</span><span class="cc-msg-time">02/15 10:33</span></div>
+                                        <div class="cc-msg-content">M1が直近上昇転換ですかね？</div>
+                                        <div class="prem-mock-chart"><svg viewBox="0 0 200 180" preserveAspectRatio="none"><rect width="200" height="180" fill="#111214"></rect><g stroke="#2b2d31" stroke-width="0.5"><line x1="0" y1="36" x2="200" y2="36"></line><line x1="0" y1="72" x2="200" y2="72"></line><line x1="0" y1="108" x2="200" y2="108"></line><line x1="0" y1="144" x2="200" y2="144"></line><line x1="50" y1="0" x2="50" y2="180"></line><line x1="100" y1="0" x2="100" y2="180"></line><line x1="150" y1="0" x2="150" y2="180"></line></g><line x1="4.0" y1="142.5" x2="4.0" y2="149.8" stroke="#ef4444" stroke-width="1"></line><rect x="1.5" y="140.3" width="5" height="7.0" fill="#ef4444"></rect><line x1="12.3" y1="144.2" x2="12.3" y2="156.0" stroke="#ef4444" stroke-width="1"></line><rect x="9.8" y="143.5" width="5" height="7.0" fill="#ef4444"></rect><line x1="20.7" y1="134.2" x2="20.7" y2="149.7" stroke="#22c55e" stroke-width="1"></line><rect x="18.2" y="136.1" width="5" height="7.0" fill="#22c55e"></rect><line x1="29.0" y1="123.4" x2="29.0" y2="138.6" stroke="#22c55e" stroke-width="1"></line><rect x="26.5" y="123.8" width="5" height="12.7" fill="#22c55e"></rect><line x1="37.4" y1="106.1" x2="37.4" y2="124.7" stroke="#22c55e" stroke-width="1"></line><rect x="34.9" y="113.9" width="5" height="9.7" fill="#22c55e"></rect><line x1="45.7" y1="98.5" x2="45.7" y2="122.3" stroke="#22c55e" stroke-width="1"></line><rect x="43.2" y="99.1" width="5" height="14.6" fill="#22c55e"></rect><line x1="54.1" y1="91.5" x2="54.1" y2="104.3" stroke="#22c55e" stroke-width="1"></line><rect x="51.6" y="92.0" width="5" height="7.0" fill="#22c55e"></rect><line x1="62.4" y1="74.3" x2="62.4" y2="92.6" stroke="#22c55e" stroke-width="1"></line><rect x="59.9" y="85.1" width="5" height="7.0" fill="#22c55e"></rect><line x1="70.8" y1="62.9" x2="70.8" y2="88.1" stroke="#22c55e" stroke-width="1"></line><rect x="68.3" y="64.5" width="5" height="23.5" fill="#22c55e"></rect><line x1="79.1" y1="30.2" x2="79.1" y2="67.5" stroke="#22c55e" stroke-width="1"></line><rect x="76.6" y="30.7" width="5" height="33.5" fill="#22c55e"></rect><line x1="87.5" y1="5.0" x2="87.5" y2="74.4" stroke="#ef4444" stroke-width="1"></line><rect x="85.0" y="29.1" width="5" height="7.0" fill="#ef4444"></rect><line x1="95.8" y1="25.6" x2="95.8" y2="134.3" stroke="#ef4444" stroke-width="1"></line><rect x="93.3" y="35.9" width="5" height="75.8" fill="#ef4444"></rect><line x1="104.2" y1="106.5" x2="104.2" y2="175.0" stroke="#ef4444" stroke-width="1"></line><rect x="101.7" y="120.6" width="5" height="17.8" fill="#ef4444"></rect><line x1="112.5" y1="90.9" x2="112.5" y2="137.4" stroke="#22c55e" stroke-width="1"></line><rect x="110.0" y="97.6" width="5" height="39.8" fill="#22c55e"></rect><line x1="120.9" y1="76.9" x2="120.9" y2="110.6" stroke="#22c55e" stroke-width="1"></line><rect x="118.4" y="92.8" width="5" height="7.0" fill="#22c55e"></rect><line x1="129.2" y1="86.7" x2="129.2" y2="124.2" stroke="#ef4444" stroke-width="1"></line><rect x="126.7" y="94.4" width="5" height="27.1" fill="#ef4444"></rect><line x1="137.6" y1="94.1" x2="137.6" y2="139.1" stroke="#22c55e" stroke-width="1"></line><rect x="135.1" y="96.7" width="5" height="22.7" fill="#22c55e"></rect><line x1="145.9" y1="77.8" x2="145.9" y2="96.7" stroke="#22c55e" stroke-width="1"></line><rect x="143.4" y="81.7" width="5" height="9.8" fill="#22c55e"></rect><line x1="154.3" y1="78.8" x2="154.3" y2="91.4" stroke="#ef4444" stroke-width="1"></line><rect x="151.8" y="80.4" width="5" height="7.0" fill="#ef4444"></rect><line x1="162.6" y1="73.2" x2="162.6" y2="86.9" stroke="#22c55e" stroke-width="1"></line><rect x="160.1" y="77.9" width="5" height="8.2" fill="#22c55e"></rect><line x1="171.0" y1="75.8" x2="171.0" y2="107.3" stroke="#ef4444" stroke-width="1"></line><rect x="168.5" y="77.3" width="5" height="23.9" fill="#ef4444"></rect><line x1="179.3" y1="83.5" x2="179.3" y2="106.0" stroke="#22c55e" stroke-width="1"></line><rect x="176.8" y="85.3" width="5" height="14.8" fill="#22c55e"></rect><line x1="187.7" y1="85.0" x2="187.7" y2="94.8" stroke="#ef4444" stroke-width="1"></line><rect x="185.2" y="84.5" width="5" height="7.0" fill="#ef4444"></rect><line x1="196.0" y1="90.0" x2="196.0" y2="111.8" stroke="#ef4444" stroke-width="1"></line><rect x="193.5" y="91.1" width="5" height="16.4" fill="#ef4444"></rect><polygon points="104,181 100,188 108,188" fill="#22c55e" opacity="0.8"></polygon><text x="180" y="12" fill="#aaa" font-size="7" font-family="Arial">M1</text></svg></div>
+                                    </div>
+                                </div>
+                                <div class="cc-msg" data-delay="1200">
+                                    <div class="cc-avatar" style="background:#ffb347;color:#000;">は</div>
+                                    <div class="cc-msg-body">
+                                        <div class="cc-msg-header"><span class="cc-msg-name" style="color:#ffb347;">はるぴー</span><span class="cc-msg-time">昨日 10:40</span></div>
+                                        <div class="cc-msg-content">そろそろ上昇転換きてほしい</div>
+                                        <div class="cc-reactions"><span class="cc-reaction" data-delay="1600">🔥 <span class="cc-reaction-count">2</span></span></div>
+                                    </div>
+                                </div>
+                                <div class="cc-msg" data-delay="1600">
+                                    <div class="cc-avatar" style="background:#eb459e;">R</div>
+                                    <div class="cc-msg-body">
+                                        <div class="cc-msg-header"><span class="cc-msg-name" style="color:#eb459e;">RyoFX</span><span class="cc-msg-time">昨日 10:42</span></div>
+                                        <div class="cc-msg-content">RR合うくらい落ちてきたらスキャれるかもしれないですけど、根拠がM1の上昇転換なので期待値そこまでなので触らないです</div>
+                                        <div class="cc-reactions"><span class="cc-reaction" data-delay="2000">👍 <span class="cc-reaction-count">4</span></span></div>
+                                    </div>
+                                </div>
+                                <div class="cc-msg" data-delay="1800">
+                                    <div class="cc-avatar" style="background:#5865f2;">H</div>
+                                    <div class="cc-msg-body">
+                                        <div class="cc-msg-header"><span class="cc-msg-name" style="color:#5865f2;">Hiro</span><span class="cc-msg-time">今日 11:05</span></div>
+                                        <div class="cc-msg-content">今USD/JPY下降転換した！チャンス！ 🔥</div>
+                                        <div class="prem-mock-chart"><svg viewBox="0 0 200 180" preserveAspectRatio="none"><rect width="200" height="180" fill="#111214"></rect><g stroke="#2b2d31" stroke-width="0.5"><line x1="0" y1="36" x2="200" y2="36"></line><line x1="0" y1="72" x2="200" y2="72"></line><line x1="0" y1="108" x2="200" y2="108"></line><line x1="0" y1="144" x2="200" y2="144"></line><line x1="50" y1="0" x2="50" y2="180"></line><line x1="100" y1="0" x2="100" y2="180"></line><line x1="150" y1="0" x2="150" y2="180"></line></g><line x1="4.0" y1="13.1" x2="4.0" y2="28.5" stroke="#22c55e" stroke-width="1"></line><rect x="1.5" y="19.1" width="5" height="8.2" fill="#22c55e"></rect><line x1="12.3" y1="17.5" x2="12.3" y2="38.2" stroke="#ef4444" stroke-width="1"></line><rect x="9.8" y="19.9" width="5" height="12.3" fill="#ef4444"></rect><line x1="20.7" y1="30.2" x2="20.7" y2="47.8" stroke="#22c55e" stroke-width="1"></line><rect x="18.2" y="31.3" width="5" height="7.0" fill="#22c55e"></rect><line x1="29.0" y1="19.7" x2="29.0" y2="46.1" stroke="#22c55e" stroke-width="1"></line><rect x="26.5" y="27.3" width="5" height="7.0" fill="#22c55e"></rect><line x1="37.4" y1="21.4" x2="37.4" y2="40.0" stroke="#22c55e" stroke-width="1"></line><rect x="34.9" y="25.0" width="5" height="7.0" fill="#22c55e"></rect><line x1="45.7" y1="12.7" x2="45.7" y2="29.7" stroke="#22c55e" stroke-width="1"></line><rect x="43.2" y="21.9" width="5" height="7.0" fill="#22c55e"></rect><line x1="54.1" y1="5.0" x2="54.1" y2="89.4" stroke="#ef4444" stroke-width="1"></line><rect x="51.6" y="24.3" width="5" height="61.9" fill="#ef4444"></rect><line x1="62.4" y1="97.5" x2="62.4" y2="146.0" stroke="#ef4444" stroke-width="1"></line><rect x="59.9" y="116.7" width="5" height="9.3" fill="#ef4444"></rect><line x1="70.8" y1="108.7" x2="70.8" y2="175.0" stroke="#ef4444" stroke-width="1"></line><rect x="68.3" y="125.7" width="5" height="44.5" fill="#ef4444"></rect><line x1="79.1" y1="128.5" x2="79.1" y2="170.9" stroke="#22c55e" stroke-width="1"></line><rect x="76.6" y="143.4" width="5" height="26.9" fill="#22c55e"></rect><line x1="87.5" y1="140.8" x2="87.5" y2="160.9" stroke="#ef4444" stroke-width="1"></line><rect x="85.0" y="143.4" width="5" height="10.0" fill="#ef4444"></rect><line x1="95.8" y1="111.0" x2="95.8" y2="156.6" stroke="#22c55e" stroke-width="1"></line><rect x="93.3" y="111.0" width="5" height="42.2" fill="#22c55e"></rect><line x1="104.2" y1="86.9" x2="104.2" y2="116.4" stroke="#22c55e" stroke-width="1"></line><rect x="101.7" y="92.1" width="5" height="7.0" fill="#22c55e"></rect><line x1="112.5" y1="79.8" x2="112.5" y2="98.3" stroke="#22c55e" stroke-width="1"></line><rect x="110.0" y="86.4" width="5" height="7.0" fill="#22c55e"></rect><line x1="120.9" y1="59.2" x2="120.9" y2="88.9" stroke="#22c55e" stroke-width="1"></line><rect x="118.4" y="62.1" width="5" height="25.5" fill="#22c55e"></rect><line x1="129.2" y1="49.9" x2="129.2" y2="69.1" stroke="#22c55e" stroke-width="1"></line><rect x="126.7" y="56.1" width="5" height="7.0" fill="#22c55e"></rect><line x1="137.6" y1="54.3" x2="137.6" y2="69.1" stroke="#22c55e" stroke-width="1"></line><rect x="135.1" y="52.8" width="5" height="7.0" fill="#22c55e"></rect><line x1="145.9" y1="42.3" x2="145.9" y2="93.0" stroke="#ef4444" stroke-width="1"></line><rect x="143.4" y="46.6" width="5" height="38.6" fill="#ef4444"></rect><line x1="154.3" y1="74.8" x2="154.3" y2="128.3" stroke="#ef4444" stroke-width="1"></line><rect x="151.8" y="85.2" width="5" height="34.7" fill="#ef4444"></rect><line x1="162.6" y1="114.5" x2="162.6" y2="164.1" stroke="#ef4444" stroke-width="1"></line><rect x="160.1" y="119.9" width="5" height="30.4" fill="#ef4444"></rect><line x1="171.0" y1="135.5" x2="171.0" y2="170.8" stroke="#ef4444" stroke-width="1"></line><rect x="168.5" y="150.3" width="5" height="9.9" fill="#ef4444"></rect><line x1="179.3" y1="137.6" x2="179.3" y2="163.1" stroke="#22c55e" stroke-width="1"></line><rect x="176.8" y="156.3" width="5" height="7.0" fill="#22c55e"></rect><line x1="187.7" y1="138.3" x2="187.7" y2="161.6" stroke="#22c55e" stroke-width="1"></line><rect x="185.2" y="141.0" width="5" height="20.4" fill="#22c55e"></rect><line x1="196.0" y1="131.8" x2="196.0" y2="160.6" stroke="#ef4444" stroke-width="1"></line><rect x="193.5" y="140.6" width="5" height="7.0" fill="#ef4444"></rect><circle cx="54" cy="5" r="5" fill="none" stroke="#fbbf24" stroke-width="1.5"></circle><polygon points="54,23 50,17 58,17" fill="#ef4444" opacity="0.8"></polygon><text x="180" y="12" fill="#aaa" font-size="7" font-family="Arial">M5</text></svg></div>
+                                        <div class="cc-reactions"><span class="cc-reaction" data-delay="2200">🔥 <span class="cc-reaction-count">6</span></span><span class="cc-reaction" data-delay="2600">👀 <span class="cc-reaction-count">3</span></span></div>
+                                    </div>
+                                </div>
+                                <div class="cc-msg" data-delay="1400">
+                                    <div class="cc-avatar" style="background:#57f287;">M</div>
+                                    <div class="cc-msg-body">
+                                        <div class="cc-msg-header"><span class="cc-msg-name" style="color:#57f287;">naoki_trade</span><span class="cc-msg-time">今日 11:08</span></div>
+                                        <div class="cc-msg-content">おお！ラインもちょうど効いてる。ショートで入ります 💪</div>
+                                        <div class="cc-reactions"><span class="cc-reaction" data-delay="1800">💪 <span class="cc-reaction-count">4</span></span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cc-typing" id="prem-trade-typing"><div class="cc-typing-dots"><span class="cc-typing-dot"></span><span class="cc-typing-dot"></span><span class="cc-typing-dot"></span></div>複数人が入力中…</div>
+                        </div>
+                        <div class="cc-input"><span class="cc-input-plus">＋</span><span class="cc-input-text">#トレード談話 でメッセージを送信</span></div>
+                    </div>
+                    <div class="prem-title-wrap has-tip">
+                      <h4>トレード交流</h4>
+                      <span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span>
+                      <span class="feat-tip">メンバー同士でトレードを共有・議論する場。利確・損切報告で切磋琢磨できます。<br><a href="https://discord.com/channels/1039824083208126474/1282260695538339851" target="_blank">Discordで見る →</a></span>
+                    </div>
+                    <p>通貨ペアごとの専用チャンネルで、チャート分析や利確・損切り報告をリアルタイムに共有できます。</p>
+                    <ul class="prem-card-highlights">
+                        <li>チャート付きでエントリー根拠を共有</li>
+                        <li>ショート利確・ロング判断をリアルタイム議論</li>
+                        <li>転換点やスキャルピングの意見交換</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="prem-cta-row pricing-reveal revealed">
+                <a href="https://discord.com/oauth2/authorize?client_id=1132937165379211284&amp;response_type=code&amp;redirect_uri=https%3A%2F%2Ffx-space.com%2Fpp_sub_premium_year.php&amp;scope=identify" class="btn btn-solid-blue">プレミアムに加入（年額） →</a>
+                <a href="https://discord.com/oauth2/authorize?client_id=1132937165379211284&amp;response_type=code&amp;redirect_uri=https%3A%2F%2Ffx-space.com%2Fpp_sub_premium.php&amp;scope=identify" class="plan-year-link">月額プランで加入 →</a>
+            </div>
+        </div>
+
+        <!-- Purchase Cards (Side by side) -->
+        <div class="purchase-section pricing-reveal revealed">
+            <div class="purchase-section-header">
+                <h3>購入（買い切り）</h3>
+            </div>
+            <div class="purchase-cards">
+                <div class="purchase-card pricing-reveal revealed">
+                    <div class="prem-title-wrap has-tip">
+                      <h4>超実践FX問題集</h4>
+                      <span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span>
+                      <span class="feat-tip">実際のチャートを使った全50問の問題集。知識だけでなく実践的な判断力を鍛えられます。<br><a href="https://discord.com/channels/1039824083208126474/1246768528506486836" target="_blank">Discordで見る →</a></span>
+                    </div>
+                    <div class="purchase-type">買い切り</div>
+                    <div class="purchase-price">¥30,000</div>
+                    <div class="purchase-note">実践力を鍛える問題集</div>
+                    <a href="https://discord.com/oauth2/authorize?client_id=1132937165379211284&amp;response_type=code&amp;redirect_uri=https%3A%2F%2Ffx-space.com%2Fpp_mondai_kaikiri.php&amp;scope=identify" class="btn plan-cta plan-cta-outline btn-sm">購入する →</a>
+                </div>
+                <div class="purchase-card pricing-reveal revealed">
+                    <div class="prem-title-wrap has-tip">
+                      <h4>YTT（よすが式トレードツール）</h4>
+                      <span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span>
+                      <span class="feat-tip">よすが式チャート分析ツールを買い切りで購入できます。サブスク不要でツールだけ使いたい方に。<br><a href="https://discord.com/channels/1039824083208126474/1161882625519140874/1194128730411511909" target="_blank">Discordで見る →</a></span>
+                    </div>
+                    <div class="purchase-type">買い切り</div>
+                    <div class="purchase-price">¥110,000</div>
+                    <div class="purchase-note">YTTのみ使いたい方に</div>
+                    <p class="purchase-note" style="font-size:0.75rem; color:#6b7280; margin-top:0.25rem;">※ スタンダード・プレミアム加入でもご利用いただけます</p>
+                    <a href="https://discord.com/oauth2/authorize?client_id=1132937165379211284&amp;response_type=code&amp;redirect_uri=https%3A%2F%2Ffx-space.com%2Fpp_ytt_kaikiri.php&amp;scope=identify" class="btn plan-cta plan-cta-outline btn-sm">購入する →</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- FAQ -->
+<section class="pl-faq-section">
+  <h2 class="pl-faq-title">よくある質問</h2>
+
+  <div class="pl-faq-item">
+    <div class="pl-faq-q" onclick="togglePlFaq(this)"><span>どちらのプランから始めるのがいい？</span><span class="pl-faq-toggle">▼</span></div>
+    <div class="pl-faq-a"><p>まずスタンダードで基礎を固めてからプレミアムにアップグレードでもOK、最初からプレミアムで一気に学ぶのもOK。いつでもプラン変更できるので、気軽に始めてみてください。</p></div>
   </div>
-  <h1 class="ob-welcome">リアルタイムで<span class="accent">プロと並走</span>する</h1>
-  <p class="ob-welcome-sub">
-    FX SPACEの<strong style="color:#1e1b4b;">プレミアム</strong>は、YouTubeでよすがを見ている方にぴったりのプランです。
-  </p>
-</header>
-
-<!-- ===== Main ===== -->
-<main class="plans-main">
-
-  <!-- 目次: 2つの体験の概要 -->
-  <section class="intro-overview">
-    <h2 class="intro-title">プレミアムに加入すると、<br><span class="emph">この2つ</span>ができるようになります</h2>
-    <p class="intro-desc">
-      いつものYouTubeから一歩踏み込んで、ライブに参加したり仲間と議論したりできるようになります。
-    </p>
-    <div class="intro-tiles">
-      <a href="#exp1" class="intro-tile n1">
-        <span class="intro-tile-num">01</span>
-        <div class="intro-tile-icon">
-          <svg class="ic" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
-        </div>
-        <div class="intro-tile-name">ライブチャート分析</div>
-        <div class="intro-tile-sub">よすがの生解説に<br>リアルタイム参加</div>
-      </a>
-      <a href="#exp2" class="intro-tile n2">
-        <span class="intro-tile-num">02</span>
-        <div class="intro-tile-icon">
-          <svg class="ic" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-        </div>
-        <div class="intro-tile-name">トレード交流</div>
-        <div class="intro-tile-sub">仲間とトレードを<br>語りあう</div>
-      </a>
-    </div>
-    <span class="intro-arrow">まずは1つめから</span>
-  </section>
-
-  <!-- 体験1: ライブチャート分析 -->
-  <section class="exp-hero" id="exp1">
-    <div class="exp-hero-num n1">01</div>
-    <div class="exp-hero-inner">
-      <span class="exp-hero-chip n1">
-        <span class="exp-hero-chip-num">1</span>
-        LIVE CHART
-      </span>
-      <h2 class="exp-hero-title">よすがのライブ分析に、<br><span class="emph-red">あなたも参加</span>できる</h2>
-      <p class="exp-hero-desc">
-        よすがが相場を解説するライブ配信に、プレミアム会員だけが参加できます。<br>
-        <strong style="color:#1e1b4b;">実際のチャットはこんな感じ</strong>👇
-      </p>
-
-      <div class="dc-preview">
-      <div class="dc-header"><span class="hash">#</span>ライブチャート分析</div>
-      <div class="dc-msg">
-        <div class="dc-avatar"></div>
-        <div class="dc-body">
-          <div class="dc-head"><span class="dc-name">よすが</span><span class="dc-time">今日 09:32</span></div>
-          <div class="dc-text"><span class="mention">@everyone</span> USDJPY見ていきたい</div>
-          <div class="dc-chart">
-            <img src="images/plans-chart-preview.png" alt="チャート分析">
-          </div>
-          <div class="dc-reactions">
-            <span class="dc-react">🔥 12</span>
-            <span class="dc-react">👀 8</span>
-          </div>
-        </div>
-      </div>
-    </div>
-      <p class="dc-caption">質問やリアクションもその場で送れる。<br>「なぜそこ？」が、すぐ解消される。</p>
-    </div>
-  </section>
-
-  <!-- 体験2: トレード交流 -->
-  <section class="exp-hero" id="exp2">
-    <div class="exp-hero-num n2">02</div>
-    <div class="exp-hero-inner">
-      <span class="exp-hero-chip n2">
-        <span class="exp-hero-chip-num">2</span>
-        TRADE TALK
-      </span>
-      <h2 class="exp-hero-title"><span class="emph-blue">仲間とトレード</span>を<br>語りあえる</h2>
-      <p class="exp-hero-desc">
-        勝ったら報告してたたえあい、負けても「次いこう！」と応援しあう場所。<br>
-        <strong style="color:#1e1b4b;">実際の会話はこんな感じ</strong>👇
-      </p>
-
-      <div class="dc-preview">
-      <div class="dc-header"><span class="hash">#</span>トレード交流</div>
-
-      <div class="dc-msg">
-        <div class="dc-avatar dc-avatar-letter dc-avatar-k">T</div>
-        <div class="dc-body">
-          <div class="dc-head">
-            <span class="dc-name dc-name-green">タケ</span>
-            <span class="dc-tag">JUPITER</span>
-            <span class="dc-time">今日 08:42</span>
-          </div>
-          <div class="dc-text">GBPUSD ショート <strong>利確です</strong> 🎉</div>
-          <div class="dc-chart">
-            <img src="images/chart-gbpusd.png" alt="GBPUSD チャート">
-          </div>
-          <div class="dc-reactions">
-            <span class="dc-react">👏 9</span>
-            <span class="dc-react">🎉 5</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="dc-reply-preview">
-        <span class="rp-avatar dc-avatar-k">T</span>
-        <span class="rp-name">@タケ</span>
-        <span class="rp-text">GBPUSD ショート 利確です 🎉</span>
-      </div>
-      <div class="dc-msg">
-        <div class="dc-avatar dc-avatar-letter dc-avatar-m">Y</div>
-        <div class="dc-body">
-          <div class="dc-head">
-            <span class="dc-name dc-name-blue">ユキ</span>
-            <span class="dc-tag">MARS</span>
-            <span class="dc-time">今日 08:45</span>
-          </div>
-          <div class="dc-text">すごい！私はエントリーする勇気なかった… 根拠教えてほしいです🙏</div>
-        </div>
-      </div>
-
-      <div class="dc-reply-preview">
-        <span class="rp-avatar dc-avatar-m">Y</span>
-        <span class="rp-name">@ユキ</span>
-        <span class="rp-text">すごい！私はエントリーする勇気なかった… 根拠教えてほしいです🙏</span>
-      </div>
-      <div class="dc-msg">
-        <div class="dc-avatar dc-avatar-letter dc-avatar-k">T</div>
-        <div class="dc-body">
-          <div class="dc-head">
-            <span class="dc-name dc-name-green">タケ</span>
-            <span class="dc-tag">JUPITER</span>
-            <span class="dc-time">今日 08:50</span>
-          </div>
-          <div class="dc-text">M15の上昇転換からの戻り売り狙いでした！</div>
-        </div>
-      </div>
-
-      <div class="dc-msg">
-        <div class="dc-avatar dc-avatar-letter dc-avatar-r">R</div>
-        <div class="dc-body">
-          <div class="dc-head">
-            <span class="dc-name dc-name-purple">Rintaro</span>
-            <span class="dc-tag">SATURN</span>
-            <span class="dc-time">今日 10:03</span>
-          </div>
-          <div class="dc-text">XAUUSD <strong>建値撤退</strong> 😅 次を狙います🔥</div>
-          <div class="dc-chart">
-            <img src="images/chart-xauusd.png" alt="XAUUSD チャート">
-          </div>
-          <div class="dc-reactions">
-            <span class="dc-react">💪 11</span>
-            <span class="dc-react">🔥 4</span>
-          </div>
-        </div>
-      </div>
-    </div>
-      <p class="dc-caption">勝ちも負けも、仲間と共有できる。<br>一人じゃ気づけなかったシナリオにも出会えます。</p>
-    </div>
-  </section>
-
-  <!-- + スタンダード全機能 -->
-  <div class="plus-std">
-    <div class="plus-std-icon">＋</div>
-    <div class="plus-std-body">
-      <div class="plus-std-title">もちろん、スタンダードの全機能もぜんぶ使えます</div>
-      <div class="plus-std-desc">速攻プロフローチャート／毎日のシナリオ動画／YTT／ゼロプロ90参加権利／プロに相談／AIサポート など</div>
-    </div>
+  <div class="pl-faq-item">
+    <div class="pl-faq-q" onclick="togglePlFaq(this)"><span>スタンダードからプレミアムに変更したらどうなる？</span><span class="pl-faq-toggle">▼</span></div>
+    <div class="pl-faq-a"><p>プレミアム加入と同時にスタンダードは<strong>自動で解約</strong>されます。二重払いになる心配はないので、安心してアップグレードできます。逆にプレミアムからスタンダードへの変更もいつでも可能です。</p></div>
   </div>
-
-  <!-- 料金 -->
-  <section class="sec" id="pricing">
-    <div class="sec-badge-wrap">
-      <span class="sec-badge">
-        <img src="img/title-side-left.png" alt="">
-        PRICING
-        <img src="img/title-side-right.png" alt="">
-      </span>
-    </div>
-    <h2 class="sec-title">プレミアムの料金</h2>
-    <p class="sec-sub">年額なら月あたり¥5,410。月額より年間 ¥5,880 おトクです。</p>
-
-    <div class="price-card">
-      <div class="price-ribbon">全機能解放プラン</div>
-
-      <div class="price-toggle">
-        <button type="button" class="active" onclick="setPlan('year', this)">
-          年額<span class="save">お得</span>
-        </button>
-        <button type="button" onclick="setPlan('month', this)">月額</button>
-      </div>
-
-      <div>
-        <span class="price-amount" id="priceAmount">¥5,410</span>
-        <span class="price-period">/月</span>
-      </div>
-      <p class="price-note" id="priceNote">
-        <span class="hl">年額 ¥64,900</span>（一括払い）<br>
-        月額プランより年間 ¥5,880 おトク
-      </p>
-
-      <a href="#" class="price-cta" id="priceCta">プレミアム（年額）に加入する →</a>
-
-      <div class="youtube-note">
-        <div class="youtube-note-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="#ff0000"><path d="M23.5 6.2c-.3-1-1-1.8-2-2.1C19.6 3.5 12 3.5 12 3.5s-7.6 0-9.5.6c-1 .3-1.7 1-2 2.1C0 8.1 0 12 0 12s0 3.9.5 5.8c.3 1 1 1.8 2 2.1 1.9.6 9.5.6 9.5.6s7.6 0 9.5-.6c1-.3 1.7-1 2-2.1.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
-        </div>
-        <div class="youtube-note-text">
-          <strong>YouTubeメンバーシップからもOK</strong><br>
-          「ライブチャート分析」（¥6,000/月）がプレミアム相当です
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Standard alt -->
-  <div class="std-alt">
-    <div class="std-alt-icon">
-      <svg class="ic" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-    </div>
-    <div class="std-alt-body">
-      <div class="std-alt-title">ライブ配信は今はいらない方へ</div>
-      <div class="std-alt-desc">動画教材だけのスタンダード（¥2,900/月）もあります。あとでアップグレードOK。</div>
-    </div>
-    <a href="#compare" class="std-alt-link">比較を見る →</a>
+  <div class="pl-faq-item">
+    <div class="pl-faq-q" onclick="togglePlFaq(this)"><span>FXを全く知らなくても大丈夫？</span><span class="pl-faq-toggle">▼</span></div>
+    <div class="pl-faq-a"><p>どちらのプランも基礎の動画教材や速攻プロフローチャートから学べるので安心です。わからないことはプロに相談やAIサポートで聞けます。</p></div>
   </div>
-
-  <!-- 比較 -->
-  <section class="sec" id="compare">
-    <div class="sec-badge-wrap">
-      <span class="sec-badge">
-        <img src="img/title-side-left.png" alt="">
-        COMPARE
-        <img src="img/title-side-right.png" alt="">
-      </span>
-    </div>
-    <h2 class="sec-title">プラン比較</h2>
-
-    <table class="compare-table">
-      <thead>
-        <tr>
-          <th>機能</th>
-          <th>スタンダード<span class="th-price">¥2,900/月</span></th>
-          <th class="prm">プレミアム<span class="th-price">¥5,410〜/月</span></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="cat cat-prm">
-          <td colspan="3">
-            <span class="cat-inner">
-              <span class="cat-icon">
-                <svg class="ic" viewBox="0 0 24 24"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5 12 2"/></svg>
-              </span>
-              プレミアム限定
-            </span>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div class="feat-cell">
-              <div class="feat-cell-icon prm">
-                <svg class="ic" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
-              </div>
-              <span class="feat-cell-name">ライブチャート分析</span>
-            </div>
-          </td>
-          <td><span class="cx">—</span></td>
-          <td class="prm"><span class="ck-p">✓</span></td>
-        </tr>
-        <tr>
-          <td>
-            <div class="feat-cell">
-              <div class="feat-cell-icon talk">
-                <svg class="ic" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-              </div>
-              <span class="feat-cell-name">トレード交流</span>
-            </div>
-          </td>
-          <td><span class="cx">—</span></td>
-          <td class="prm"><span class="ck-p">✓</span></td>
-        </tr>
-
-        <tr class="cat cat-edu">
-          <td colspan="3">
-            <span class="cat-inner">
-              <span class="cat-icon">
-                <svg class="ic" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-              </span>
-              学習コンテンツ
-            </span>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div class="feat-cell">
-              <div class="feat-cell-icon edu">
-                <svg class="ic" viewBox="0 0 24 24"><polyline points="4 4 10 4 10 10 4 10 4 4"/><polyline points="14 4 20 4 20 10 14 10 14 4"/><polyline points="4 14 10 14 10 20 4 20 4 14"/><polyline points="14 14 20 14 20 20 14 20 14 14"/><line x1="10" y1="7" x2="14" y2="7"/><line x1="7" y1="10" x2="7" y2="14"/><line x1="17" y1="10" x2="17" y2="14"/><line x1="10" y1="17" x2="14" y2="17"/></svg>
-              </div>
-              <span class="feat-cell-name">速攻プロフローチャート</span>
-            </div>
-          </td>
-          <td><span class="ck">✓</span></td>
-          <td class="prm"><span class="ck-p">✓</span></td>
-        </tr>
-        <tr>
-          <td>
-            <div class="feat-cell">
-              <div class="feat-cell-icon edu">
-                <svg class="ic" viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
-              </div>
-              <span class="feat-cell-name">毎日のシナリオ動画</span>
-            </div>
-          </td>
-          <td><span class="ck">✓</span></td>
-          <td class="prm"><span class="ck-p">✓</span></td>
-        </tr>
-        <tr>
-          <td>
-            <div class="feat-cell">
-              <div class="feat-cell-icon edu">
-                <svg class="ic" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-              </div>
-              <span class="feat-cell-name">深掘解説等の限定動画</span>
-            </div>
-          </td>
-          <td><span class="ck">✓</span></td>
-          <td class="prm"><span class="ck-p">✓</span></td>
-        </tr>
-        <tr>
-          <td>
-            <div class="feat-cell">
-              <div class="feat-cell-icon edu">
-                <svg class="ic" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-              </div>
-              <span class="feat-cell-name">ゼロプロ90 参加権利</span>
-            </div>
-          </td>
-          <td><span class="ck">✓</span></td>
-          <td class="prm"><span class="ck-p">✓</span></td>
-        </tr>
-
-        <tr class="cat cat-tool">
-          <td colspan="3">
-            <span class="cat-inner">
-              <span class="cat-icon">
-                <svg class="ic" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-              </span>
-              ツール・サポート
-            </span>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div class="feat-cell">
-              <div class="feat-cell-icon tool">
-                <svg class="ic" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-              </div>
-              <span class="feat-cell-name">サポートツール YTT</span>
-            </div>
-          </td>
-          <td><span class="ck">✓</span></td>
-          <td class="prm"><span class="ck-p">✓</span></td>
-        </tr>
-        <tr>
-          <td>
-            <div class="feat-cell">
-              <div class="feat-cell-icon sup">
-                <svg class="ic" viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
-              </div>
-              <span class="feat-cell-name">AIサポート / プロに相談</span>
-            </div>
-          </td>
-          <td><span class="ck">✓</span></td>
-          <td class="prm"><span class="ck-p">✓</span></td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
-
-  <!-- FAQ -->
-  <section class="sec">
-    <div class="sec-badge-wrap">
-      <span class="sec-badge">
-        <img src="img/title-side-left.png" alt="">
-        FAQ
-        <img src="img/title-side-right.png" alt="">
-      </span>
-    </div>
-    <h2 class="sec-title">よくある質問</h2>
-
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)"><span>年額と月額、どっち？</span><span class="faq-toggle">▼</span></div>
-      <div class="faq-a"><p>迷ったら年額。月額より年間¥5,880おトクです。</p></div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)"><span>ライブ配信の頻度は？</span><span class="faq-toggle">▼</span></div>
-      <div class="faq-a"><p>相場が動くタイミングを中心に不定期で配信。事前アナウンスされるので通知をONにしておけばOK。アーカイブも残ります。</p></div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)"><span>FXを全く知らなくても大丈夫？</span><span class="faq-toggle">▼</span></div>
-      <div class="faq-a"><p>大丈夫です。基礎の動画教材や速攻プロフローチャートも全部使えるので、基礎を学びながらライブにも参加できます。</p></div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)"><span>途中解約はできる？</span><span class="faq-toggle">▼</span></div>
-      <div class="faq-a"><p>いつでもワンクリックで解約OK。解約金はかかりません。</p></div>
-    </div>
-  </section>
-
-  <!-- Final CTA -->
-  <div class="final-cta">
-    <h2>今日から、<br>ライブに参加しよう</h2>
-    <p>動画を見る側から、プロと並走する側へ。</p>
-    <a href="#pricing" class="final-cta-btn">プレミアムに加入する →</a>
-    <a href="#pricing" class="final-cta-std">まずはスタンダード（¥2,900/月）から始める</a>
+  <div class="pl-faq-item">
+    <div class="pl-faq-q" onclick="togglePlFaq(this)"><span>プレミアムの年額と月額はどう違う？</span><span class="pl-faq-toggle">▼</span></div>
+    <div class="pl-faq-a"><p>特典内容は同じです。年額（¥64,900 / 月あたり¥5,410）は月額（¥5,900）より年間 ¥5,880 おトク。しっかり続けるつもりなら年額のほうが割安になります。</p></div>
   </div>
+  <div class="pl-faq-item">
+    <div class="pl-faq-q" onclick="togglePlFaq(this)"><span>途中解約はできる？</span><span class="pl-faq-toggle">▼</span></div>
+    <div class="pl-faq-a"><p>いつでもワンクリックで解約できます。解約金などの追加費用は一切かかりません。</p></div>
+  </div>
+</section>
 
-</main>
-
-<footer class="ob-footer">
-  <a href="lp.html">FX SPACE トップへ →</a>
+<!-- Footer -->
+<footer class="plans-page-footer">
+  &copy; FX SPACE
 </footer>
 
 <script>
-function toggleFaq(el){
-  var item = el.closest('.faq-item');
+function togglePlFaq(el){
+  var item = el.closest('.pl-faq-item');
   var wasOpen = item.classList.contains('open');
-  document.querySelectorAll('.faq-item.open').forEach(function(i){ i.classList.remove('open'); });
+  document.querySelectorAll('.pl-faq-item.open').forEach(function(i){ i.classList.remove('open'); });
   if(!wasOpen) item.classList.add('open');
 }
 
-function setPlan(type, btn){
-  document.querySelectorAll('.price-toggle button').forEach(function(b){ b.classList.remove('active'); });
-  btn.classList.add('active');
-  var amount = document.getElementById('priceAmount');
-  var note = document.getElementById('priceNote');
-  var cta = document.getElementById('priceCta');
-  if(type === 'year'){
-    amount.textContent = '¥5,410';
-    note.innerHTML = '<span class="hl">年額 ¥64,900</span>（一括払い）<br>月額プランより年間 ¥5,880 おトク';
-    cta.textContent = 'プレミアム（年額）に加入する →';
+// Feature tooltip:
+//  - PC (hover-capable): only icon hover triggers, no click handling
+//  - Mobile (touch): tap on the row toggles the tooltip
+document.addEventListener('DOMContentLoaded', function(){
+  var isHoverDevice = window.matchMedia('(hover: hover)').matches;
+
+  if(isHoverDevice){
+    // PC: hovering one icon should close any tap-opened tooltips elsewhere
+    document.querySelectorAll('.feat-info').forEach(function(icon){
+      icon.addEventListener('mouseenter', function(){
+        document.querySelectorAll('.has-tip.tip-open').forEach(function(l){ l.classList.remove('tip-open'); });
+      });
+    });
   } else {
-    amount.textContent = '¥5,900';
-    note.innerHTML = '月額プラン（毎月払い）<br>いつでも解約OK';
-    cta.textContent = 'プレミアム（月額）に加入する →';
+    // Mobile: tap to toggle, tap outside to close
+    document.querySelectorAll('.has-tip').forEach(function(li){
+      li.addEventListener('click', function(e){
+        if(e.target.tagName === 'A') return;
+        e.stopPropagation();
+        var wasOpen = li.classList.contains('tip-open');
+        document.querySelectorAll('.has-tip.tip-open').forEach(function(l){ l.classList.remove('tip-open'); });
+        if(!wasOpen) li.classList.add('tip-open');
+      });
+    });
+    document.addEventListener('click', function(){
+      document.querySelectorAll('.has-tip.tip-open').forEach(function(l){ l.classList.remove('tip-open'); });
+    });
   }
-}
+});
+
+// Plan carousel (self-contained, extracted from animations.js)
+(function() {
+    function initPlanCarousel() {
+        var slides = document.querySelectorAll('.plan-carousel-slide');
+        var track = document.querySelector('.plan-carousel-track');
+        var prevBtn = document.getElementById('plan-carousel-prev');
+        var nextBtn = document.getElementById('plan-carousel-next');
+        if (!slides.length || !track) return;
+
+        var current = 1; // Standard centered initially
+        var total = slides.length;
+        var isAnimating = false;
+
+        function getLayout() {
+            var isMobile = track.offsetWidth < 700;
+            return {
+                activeW: isMobile ? 300 : 420,
+                inactiveW: isMobile ? 240 : 340,
+                gap: isMobile ? 16 : 28,
+                sideScale: isMobile ? 0.88 : 0.9
+            };
+        }
+
+        function updateArrows() {
+            if (prevBtn) prevBtn.style.display = current <= 0 ? 'none' : '';
+            if (nextBtn) nextBtn.style.display = current >= total - 1 ? 'none' : '';
+        }
+
+        function positionSlides() {
+            var L = getLayout();
+            var prevIdx = current - 1;
+            var nextIdx = current + 1;
+            var sideOffset = L.activeW / 2 + L.gap + (L.inactiveW * L.sideScale) / 2;
+
+            slides.forEach(function(s, i) {
+                s.classList.toggle('is-active', i === current);
+
+                if (i === current) {
+                    s.style.transform = 'translate(-50%, -50%)';
+                    s.style.opacity = '1';
+                    s.style.zIndex = '2';
+                    s.style.filter = 'none';
+                } else if (i === prevIdx) {
+                    s.style.transform = 'translate(calc(-50% - ' + sideOffset + 'px), -50%) scale(' + L.sideScale + ')';
+                    s.style.opacity = '0.45';
+                    s.style.zIndex = '1';
+                    s.style.filter = 'blur(1.5px)';
+                } else if (i === nextIdx) {
+                    s.style.transform = 'translate(calc(-50% + ' + sideOffset + 'px), -50%) scale(' + L.sideScale + ')';
+                    s.style.opacity = '0.45';
+                    s.style.zIndex = '1';
+                    s.style.filter = 'blur(1.5px)';
+                } else {
+                    s.style.transform = 'translate(-50%, -50%) scale(0.8)';
+                    s.style.opacity = '0';
+                    s.style.zIndex = '0';
+                    s.style.filter = 'blur(4px)';
+                }
+            });
+            updateArrows();
+        }
+
+        function goTo(idx) {
+            if (isAnimating || idx < 0 || idx >= total) return;
+            isAnimating = true;
+            current = idx;
+            positionSlides();
+            setTimeout(function() { isAnimating = false; }, 750);
+        }
+
+        if (prevBtn) prevBtn.addEventListener('click', function() { goTo(current - 1); });
+        if (nextBtn) nextBtn.addEventListener('click', function() { goTo(current + 1); });
+
+        // Click on inactive slide to make it active
+        slides.forEach(function(s, i) {
+            s.addEventListener('click', function() {
+                if (i !== current) goTo(i);
+            });
+        });
+
+        // Reposition on resize
+        var resizeTimer;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(positionSlides, 150);
+        });
+
+        positionSlides();
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initPlanCarousel);
+    } else {
+        initPlanCarousel();
+    }
+})();
 </script>
 </body>
 </html>

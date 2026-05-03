@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YTT（よすがトレードツール）— FX SPACE</title>
+    <meta property="og:title" content="YTT（よすがトレードツール）— FX SPACE">
+    <meta property="og:description" content="よすが独自開発のトレード支援ツール。シナリオ構築・予約注文・相場分析まで、これひとつで完結。">
+    <meta property="og:image" content="https://69f61cd8c3b3c2eb30f11827--fx-space-community-preview-1775890548.netlify.app/img/og-ytt-tokusetu.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:image" content="https://69f61cd8c3b3c2eb30f11827--fx-space-community-preview-1775890548.netlify.app/img/og-ytt-tokusetu.png">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="stylesheet" href="css/style.css?v=20260414m">
+    <style>
+        /* ===== YTT特設ページ固有スタイル ===== */
+        .ytt-sp-nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            background: rgba(255,255,255,0.95); backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e5e7eb;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0.875rem 2rem; gap: 1rem;
+        }
+        .ytt-sp-nav-logo {
+            display: flex; align-items: center; gap: 0.75rem;
+            text-decoration: none; color: inherit;
+        }
+        .ytt-sp-nav-logo img { height: 28px; width: auto; }
+        .ytt-sp-nav-logo span {
+            font-size: 0.8125rem; font-weight: 700; color: #6b7280;
+            border-left: 1px solid #e5e7eb; padding-left: 0.75rem;
+        }
+        .ytt-sp-nav-cta {
+            display: flex; gap: 0.75rem; align-items: center;
+        }
+        @media (max-width: 600px) {
+            .ytt-sp-nav { padding: 0.75rem 1rem; }
+            .ytt-sp-nav-logo span { display: none; }
+        }
+
+        /* Hero */
+        .ytt-sp-hero {
+            padding: 8rem 2rem 5rem;
+            text-align: center;
+            background: #fff;
+        }
+        .ytt-sp-hero-logo {
+            max-width: 160px; width: auto; height: auto;
+            display: block; margin: 0 auto 1.25rem;
+        }
+        .ytt-sp-hero-badge {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: #fff7ed; color: #c2410c;
+            border: 1px solid #fed7aa;
+            border-radius: 100px; padding: 0.375rem 1.25rem;
+            font-size: 0.8125rem; font-weight: 700; margin-bottom: 1.25rem;
+        }
+        .ytt-sp-hero-badge::before { content: '🛠️'; }
+        .ytt-sp-hero-title {
+            font-size: clamp(1.3rem, 5vw, 3rem);
+            font-weight: 900; color: #1e1b4b;
+            line-height: 1.3; letter-spacing: -0.02em;
+            margin: 0 0 1rem;
+        }
+        .ytt-sp-title-line {
+            display: block;
+            text-align: center;
+        }
+        .ytt-sp-title-line > span.line-text {
+            display: inline-block;
+            white-space: nowrap;
+            position: relative;
+        }
+        .ytt-sp-title-line .ytt-title-wave {
+            display: block;
+            width: 100%;
+            height: clamp(14px, 3vw, 22px);
+            object-fit: fill;
+            margin: 0.1rem 0 0.5rem;
+        }
+        .ytt-sp-hero-lead {
+            font-size: clamp(0.9375rem, 2vw, 1.125rem);
+            color: #6b7280; line-height: 1.8;
+            max-width: 560px; margin: 0 auto 2rem;
+        }
+        .ytt-sp-hero-btns {
+            display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+        }
+        .ytt-sp-hero-stats {
+            display: flex; gap: 2.5rem; justify-content: center; flex-wrap: wrap;
+            margin-top: 3rem; padding-top: 2rem;
+            border-top: 1px solid #f0f0f0;
+        }
+        .ytt-sp-hero-stat { text-align: center; }
+        .ytt-sp-hero-stat-num {
+            font-size: clamp(1.5rem, 4vw, 2.25rem);
+            font-weight: 900; color: #f97316; line-height: 1;
+        }
+        .ytt-sp-hero-stat-label {
+            font-size: 0.8125rem; color: #9ca3af; margin-top: 0.25rem; font-weight: 600;
+        }
+
+        /* Section titles */
+        .ytt-sp-section-header {
+            text-align: center;
+            padding: 4rem 2rem 2rem;
+        }
+        .ytt-sp-section-header h2 {
+            font-size: clamp(1.5rem, 4vw, 2.25rem);
+            font-weight: 900; color: #1e1b4b; margin: 0.5rem 0;
+        }
+        .ytt-sp-section-header p {
+            font-size: clamp(0.875rem, 1.8vw, 1.0625rem);
+            color: #6b7280; line-height: 1.8;
+            max-width: 560px; margin: 0.75rem auto 0;
+        }
+
+        /* Features anchor */
+        #features-anchor { display: block; height: 72px; margin-top: -72px; }
+
+        /* Demo section wrapper */
+        .ytt-sp-demo-wrap {
+            background: #f3f4f6;
+        }
+
+        /* More features teaser */
+        .ytt-more-features {
+            background: #fff;
+            padding: 3.5rem 2rem 3rem;
+            text-align: center;
+        }
+        .ytt-more-features-inner { max-width: 760px; margin: 0 auto; }
+        .ytt-more-features-label {
+            display: inline-block;
+            font-size: 0.8125rem; font-weight: 800;
+            color: #f97316; letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+        .ytt-more-features h3 {
+            font-size: clamp(1.1rem, 3vw, 1.5rem);
+            font-weight: 900; color: #1e1b4b;
+            margin: 0 0 0.5rem;
+        }
+        .ytt-more-features-sub {
+            font-size: 0.9rem; color: #6b7280;
+            margin: 0 0 2rem; line-height: 1.7;
+        }
+        .ytt-more-features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.875rem;
+            text-align: left;
+        }
+        @media (max-width: 640px) {
+            .ytt-more-features-grid { grid-template-columns: 1fr; }
+            .ytt-feat-item { padding: 0.875rem 1rem; }
+        }
+        .ytt-feat-item {
+            background: #f9fafb;
+            border-radius: 12px;
+            padding: 1rem 1.125rem;
+            display: flex; align-items: flex-start; gap: 0.625rem;
+        }
+        .ytt-feat-item-icon {
+            flex-shrink: 0;
+            width: 36px; height: 36px;
+        }
+        .ytt-feat-item-icon img { width: 100%; height: 100%; object-fit: contain; }
+        .ytt-feat-item-text {
+            font-size: 0.8125rem; font-weight: 700;
+            color: #1e1b4b; line-height: 1.5;
+        }
+        .ytt-feat-item-sub {
+            font-size: 0.72rem; color: #9ca3af;
+            font-weight: 400; display: block;
+            margin-top: 0.15rem; line-height: 1.4;
+        }
+
+        /* Pricing section */
+        .ytt-sp-pricing {
+            padding: 5rem 2rem;
+            background: #f9fafb;
+            overflow: hidden;
+        }
+        .ytt-sp-pricing-inner { max-width: 960px; margin: 0 auto; }
+        .ytt-sp-plans {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1.25rem;
+            margin-top: 2.5rem;
+        }
+        @media (max-width: 960px) {
+            .ytt-sp-plans { grid-template-columns: 1fr; width: 100%; max-width: 480px; margin-left: auto; margin-right: auto; }
+        }
+        @media (max-width: 480px) {
+            .ytt-sp-pricing { padding: 3rem 1rem; }
+            .ytt-sp-plan-card { padding: 1.25rem 1rem; }
+        }
+        p, h1, h2, h3, h4, li,
+        .ytt-sp-plan-desc, .ytt-sp-plan-features li {
+            overflow-wrap: break-word;
+        }
+        .ytt-panel-text { min-width: 0; }
+        .br-sp { display: none; }
+        @media (max-width: 600px) { .br-sp { display: block; } }
+        .ytt-sp-plan-card {
+            background: #fff;
+            border: 1.5px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 1.75rem 1.5rem;
+            display: flex; flex-direction: column; gap: 0;
+            position: relative;
+            min-width: 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .ytt-sp-plan-card.is-featured {
+            padding-top: 2.5rem;
+        }
+        .ytt-sp-plan-card.is-featured {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79,70,229,0.08);
+        }
+        .ytt-sp-plan-badge {
+            position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+            background: var(--primary); color: white;
+            font-size: 0.75rem; font-weight: 800;
+            padding: 0.25rem 1rem; border-radius: 100px;
+            white-space: nowrap;
+        }
+        .ytt-sp-plan-name {
+            font-size: 1rem; font-weight: 800; color: #374151; margin-bottom: 0.25rem;
+        }
+        .ytt-sp-plan-name.accent { color: var(--primary); }
+        .ytt-sp-plan-desc {
+            font-size: 0.8125rem; color: #9ca3af; margin-bottom: 1rem;
+        }
+        .ytt-sp-plan-price {
+            font-size: 0; margin-bottom: 1rem;
+        }
+        .ytt-sp-plan-price-free {
+            font-size: 2rem; font-weight: 900; color: #374151;
+        }
+        .ytt-sp-plan-price-amount {
+            font-size: 1.75rem; font-weight: 900; color: #374151;
+        }
+        .ytt-sp-plan-price-period {
+            font-size: 0.875rem; color: #9ca3af; font-weight: 600;
+        }
+        .ytt-sp-plan-price-sub {
+            font-size: 0.75rem; color: #9ca3af; margin-top: 0.25rem; line-height: 1.5;
+        }
+        .ytt-sp-plan-divider {
+            height: 1px; background: #f0f0f0; margin: 1rem 0;
+        }
+        .ytt-sp-plan-features {
+            list-style: none; padding: 0; margin: 0 0 1.5rem; flex: 1;
+        }
+        .ytt-sp-plan-features li {
+            display: flex; align-items: flex-start; gap: 0.5rem;
+            font-size: 0.875rem; color: #4b5563; padding: 0.35rem 0;
+        }
+        .ytt-sp-plan-features li img {
+            width: 16px; height: 16px; margin-top: 1px; flex-shrink: 0;
+        }
+        .ytt-sp-plan-features li.highlight { font-weight: 700; color: #1e1b4b; }
+        .ytt-sp-plan-cta {
+            display: block; text-align: center;
+            padding: 0.75rem 1.5rem; border-radius: 10px;
+            font-weight: 800; font-size: 0.9375rem; text-decoration: none;
+            border: 2px solid var(--primary); color: var(--primary);
+            transition: all 0.2s; white-space: nowrap;
+        }
+        .ytt-sp-plan-cta:hover { background: var(--primary); color: white; }
+        .ytt-sp-plan-cta.solid {
+            background: var(--primary); color: white;
+        }
+        .ytt-sp-plan-cta.solid:hover { opacity: 0.9; }
+        .ytt-sp-plan-cta.free {
+            border-color: #e5e7eb; color: #6b7280;
+        }
+        .ytt-sp-plan-cta.free:hover { border-color: #9ca3af; color: #374151; }
+        .ytt-sp-yt-note {
+            margin-top: 2rem;
+            border: 1px solid #e5e7eb; border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            background: #fff;
+            text-align: center; max-width: 560px; margin-left: auto; margin-right: auto;
+        }
+        .ytt-sp-yt-note p { font-size: 0.875rem; color: #6b7280; line-height: 1.7; margin: 0; }
+        .ytt-sp-yt-note strong { color: #374151; }
+
+        /* Detail link section */
+        .ytt-sp-detail {
+            padding: 4rem 2rem;
+            background: #fff;
+            text-align: center;
+        }
+        .ytt-sp-detail-inner { max-width: 640px; margin: 0 auto; }
+        .ytt-sp-detail h2 {
+            font-size: clamp(1.25rem, 3vw, 1.75rem);
+            font-weight: 900; color: #1e1b4b; margin-bottom: 0.75rem;
+        }
+        .ytt-sp-detail p {
+            font-size: 0.9375rem; color: #6b7280; line-height: 1.8; margin-bottom: 1.75rem;
+        }
+        .ytt-sp-detail-btn {
+            display: inline-flex; align-items: center; gap: 0.625rem;
+            background: #1e1b4b; color: white;
+            padding: 1rem 2.5rem; border-radius: 12px;
+            font-size: 1rem; font-weight: 800; text-decoration: none;
+            transition: opacity 0.2s;
+        }
+        .ytt-sp-detail-btn:hover { opacity: 0.85; }
+        .ytt-sp-detail-btn svg { flex-shrink: 0; }
+
+        /* CTA footer */
+        .ytt-sp-footer-cta {
+            padding: 5rem 2rem;
+            text-align: center;
+            background: #1e1b4b;
+        }
+        .ytt-sp-footer-cta h2 {
+            font-size: clamp(1.5rem, 4vw, 2.25rem);
+            font-weight: 900; color: #fff;
+            margin-bottom: 0.75rem;
+        }
+        .ytt-sp-footer-cta p {
+            font-size: clamp(0.9rem, 1.8vw, 1.0625rem);
+            color: rgba(255,255,255,0.7); line-height: 1.8; margin-bottom: 2rem;
+        }
+        .ytt-sp-footer-cta-btns {
+            display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+        }
+        .btn-white-outline {
+            background: transparent; color: white;
+            border: 2px solid rgba(255,255,255,0.4);
+            padding: 0.875rem 2rem; border-radius: 10px;
+            font-size: 0.9375rem; font-weight: 700;
+            text-decoration: none; transition: all 0.2s; white-space: nowrap;
+        }
+        .btn-white-outline:hover { border-color: white; background: rgba(255,255,255,0.08); }
+        .btn-white-solid {
+            background: white; color: #1e1b4b;
+            border: 2px solid white;
+            padding: 0.875rem 2rem; border-radius: 10px;
+            font-size: 0.9375rem; font-weight: 800;
+            text-decoration: none; transition: all 0.2s; white-space: nowrap;
+        }
+        .btn-white-solid:hover { background: #f0f0f0; }
+
+        /* 通常ボタン（手書き風を上書き） */
+        .btn-sq-blue {
+            display: inline-flex; align-items: center; gap: 0.375rem;
+            background: var(--primary); color: #fff;
+            border: none; border-radius: 10px;
+            padding: 0.75rem 1.75rem;
+            font-size: 1rem; font-weight: 800; text-decoration: none;
+            cursor: pointer; transition: opacity 0.2s; white-space: nowrap;
+        }
+        .btn-sq-blue:hover { opacity: 0.88; }
+        .btn-sq-blue.sm { font-size: 0.875rem; padding: 0.5rem 1.25rem; }
+        .btn-sq-white {
+            display: inline-flex; align-items: center;
+            background: #fff; color: var(--primary);
+            border: 2px solid var(--primary); border-radius: 10px;
+            padding: 0.75rem 1.75rem;
+            font-size: 1rem; font-weight: 800; text-decoration: none;
+            cursor: pointer; transition: all 0.2s; white-space: nowrap;
+        }
+        .btn-sq-white:hover { background: var(--primary); color: #fff; }
+
+        /* page footer */
+        .ytt-sp-page-footer {
+            padding: 1.75rem 2rem;
+            text-align: center;
+            font-size: 0.8125rem; color: #9ca3af;
+            border-top: 1px solid #f0f0f0;
+            background: #fff;
+        }
+        .ytt-sp-page-footer a { color: #9ca3af; text-decoration: underline; }
+
+        /* Demo section full-height on desktop */
+        @media (min-width: 769px) {
+            .ytt-sp-demo-wrap .ytt-demo {
+                min-height: 100vh;
+            }
+        }
+
+        /* ===== Tooltips ===== */
+        .nowrap { display: inline-block; white-space: nowrap; }
+        .has-tip { position: relative; }
+        .feat-info {
+            margin-left: auto; flex-shrink: 0;
+            width: 18px; height: 18px; color: #9ca3af;
+            display: inline-flex; align-items: center; justify-content: center;
+            transition: color 0.2s; cursor: pointer;
+        }
+        .feat-info svg { width: 100%; height: 100%; }
+        .feat-info:hover, .has-tip.tip-open .feat-info { color: #4f46e5; }
+        @media(max-width:768px) {
+            .feat-info { width: 22px; height: 22px; }
+            .has-tip { cursor: pointer; }
+        }
+        .feat-tip {
+            position: absolute; bottom: calc(100% + 10px); left: 50%;
+            transform: translateX(-50%); width: 240px;
+            background: #1e1b4b; color: #fff;
+            padding: 0.75rem 0.875rem; border-radius: 10px;
+            font-size: 0.75rem; line-height: 1.7;
+            opacity: 0; visibility: hidden; pointer-events: none;
+            transition: opacity 0.2s ease 0.35s, visibility 0s linear 0.55s;
+            z-index: 100; text-align: left;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.25); white-space: normal;
+        }
+        .feat-tip::after {
+            content: ''; position: absolute; top: 100%; left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent; border-top-color: #1e1b4b;
+        }
+        .feat-tip a { color: #a5b4fc; text-decoration: underline; text-underline-offset: 2px; font-weight: 700; }
+        .feat-tip a:hover { color: #c7d2fe; }
+        @media(hover:hover) {
+            .feat-tip { right: 0; left: auto; transform: none; }
+            .feat-tip::after { left: auto; right: 8px; transform: none; }
+            .has-tip .feat-info:hover ~ .feat-tip,
+            .has-tip .feat-tip:hover { opacity: 1; visibility: visible; pointer-events: auto; transition: opacity 0.15s ease, visibility 0s; }
+            .feat-tip::before { content: ''; position: absolute; top: 100%; left: 0; right: 0; height: 18px; }
+        }
+        .has-tip.tip-open .feat-tip { opacity: 1; visibility: visible; pointer-events: auto; }
+        @media(max-width:768px) {
+            .feat-tip { width: min(260px, 80vw); bottom: auto; top: calc(100% + 10px); }
+            .feat-tip::after { top: auto; bottom: 100%; border-top-color: transparent; border-bottom-color: #1e1b4b; }
+        }
+    </style>
+</head>
+<body style="scroll-behavior: smooth;">
+
+<!-- NAV -->
+<nav class="ytt-sp-nav">
+    <a href="index.html" class="ytt-sp-nav-logo">
+        <img src="img/ytt-nav-logo.png" alt="FX SPACE">
+    </a>
+    <div class="ytt-sp-nav-cta">
+        <a href="#standard" class="btn-sq-blue sm">加入する →</a>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="ytt-sp-hero">
+    <img src="images/ytt-logo.png" alt="YTT" class="ytt-sp-hero-logo">
+    <h1 class="ytt-sp-hero-title">
+        <span class="ytt-sp-title-line"><span class="line-text">シナリオ構築から決済まで<img class="ytt-title-wave" src="img/wave-yellow.png" alt=""></span></span>
+        <span class="ytt-sp-title-line"><span class="line-text">これひとつで完結<img class="ytt-title-wave" src="img/wave-yellow.png" alt=""></span></span>
+    </h1>
+    <p class="ytt-sp-hero-lead">
+        よすがが独自に開発したトレード支援ツール。<br>
+        注文・分析・リスク管理を一気通貫でサポートします。
+    </p>
+    <div class="ytt-sp-hero-btns">
+        <a href="#features-anchor" class="btn-sq-blue">機能を見る →</a>
+        <a href="#demo" class="btn-sq-white">デモを試す</a>
+    </div>
+</section>
+
+<!-- FEATURES SECTION -->
+<span id="features-anchor"></span>
+<section class="ytt-section" id="ytt-section">
+    <div class="ytt-sp-section-header">
+        <span class="section-title-badge section-title-badge--orange">
+            <img class="hero-title-side hero-title-side--left" src="img/title-side-orange-left.png" alt="">
+            メイン機能
+            <img class="hero-title-side hero-title-side--right" src="img/title-side-orange-right.png" alt="">
+        </span>
+        <div style="text-align:center; margin-bottom:0.25rem;">
+            <div style="display:inline-block; white-space:nowrap;">
+                <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">YTT(よすがトレードツール)とは？</h2>
+                <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
+            </div>
+        </div>
+        <p>よすがが独自に開発したトレード支援ツール。<br>シナリオ構築・予約注文・相場分析まで、これひとつで完結。</p>
+    </div>
+
+    <div class="ytt-showcase">
+        <!-- Panel 1: 直感的な注文 -->
+        <div class="ytt-panel" id="ytt-p1">
+            <div class="ytt-panel-inner">
+                <div class="ytt-panel-text">
+                    <img src="img/crayon-1.png" alt="①" class="ytt-panel-num-img">
+                    <h3>直感的な注文・決済</h3>
+                    <p>ロット数を指定してBUY/SELLボタンで即座に注文。多彩な決済機能でポジション管理も自在。</p>
+                    <ul>
+                        <li>BUY / SELL ワンタッチ注文</li>
+                        <li>全決済・1/2決済ボタン</li>
+                        <li>複数ポジション個別管理</li>
+                        <li>リアルタイム損益表示</li>
+                    </ul>
+                </div>
+                <div class="ytt-panel-scene" id="scene-ytt-p1">
+                    <svg viewBox="0 0 280 220" preserveAspectRatio="xMidYMid meet">
+                        <rect id="p1-panel" x="50" y="5" width="180" height="210" rx="8" fill="#2b2d31" opacity="0"></rect>
+                        <text id="p1-title" x="140" y="22" fill="rgba(255,255,255,0.5)" text-anchor="middle" font-size="8" font-weight="600" font-family="Inter" opacity="0">注文パネル</text>
+                        <g id="p1-lot" opacity="0">
+                            <rect x="68" y="28" width="26" height="27" rx="4" fill="#3f4147"></rect>
+                            <text x="81" y="40" fill="rgba(255,255,255,0.7)" text-anchor="middle" font-size="9" font-family="Inter">▲</text>
+                            <text x="81" y="51" fill="rgba(255,255,255,0.7)" text-anchor="middle" font-size="9" font-family="Inter">▼</text>
+                            <rect x="98" y="28" width="80" height="27" rx="4" fill="#1e1f22" stroke="#3f4147" stroke-width="0.8"></rect>
+                            <text x="138" y="47" fill="white" text-anchor="middle" font-size="16" font-weight="800" font-family="Inter">0.01</text>
+                            <rect x="182" y="28" width="30" height="27" rx="4" fill="#3f4147"></rect>
+                            <rect x="190" y="40" width="3" height="10" rx="0.5" fill="rgba(255,255,255,0.5)"></rect>
+                            <rect x="195" y="36" width="3" height="14" rx="0.5" fill="rgba(255,255,255,0.5)"></rect>
+                            <rect x="200" y="42" width="3" height="8" rx="0.5" fill="rgba(255,255,255,0.5)"></rect>
+                            <polygon points="202,40 206,40 204,36" fill="rgba(255,255,255,0.5)"></polygon>
+                        </g>
+                        <g id="p1-sell" opacity="0">
+                            <rect x="58" y="60" width="82" height="36" rx="5" fill="#8B1A1A"></rect>
+                            <text x="99" y="77" fill="white" text-anchor="middle" font-size="14" font-weight="900" font-family="Inter">SELL</text>
+                            <text x="99" y="90" fill="rgba(255,255,255,0.5)" text-anchor="middle" font-size="8" font-family="Inter">0.01 lot</text>
+                        </g>
+                        <g id="p1-buy" opacity="0">
+                            <rect x="144" y="60" width="82" height="36" rx="5" fill="#1D5FB6"></rect>
+                            <text x="185" y="77" fill="white" text-anchor="middle" font-size="14" font-weight="900" font-family="Inter">BUY</text>
+                            <text x="185" y="90" fill="rgba(255,255,255,0.5)" text-anchor="middle" font-size="8" font-family="Inter">0.01 lot</text>
+                        </g>
+                        <g id="p1-cls" opacity="0">
+                            <rect x="58" y="101" width="168" height="26" rx="5" fill="#C8A200"></rect>
+                            <text x="142" y="118" fill="#1e1f22" text-anchor="middle" font-size="11" font-weight="700" font-family="Inter">全決済</text>
+                        </g>
+                        <g id="p1-half" opacity="0">
+                            <rect x="58" y="131" width="168" height="26" rx="5" fill="#2B8C44"></rect>
+                            <text x="142" y="148" fill="#1e1f22" text-anchor="middle" font-size="11" font-weight="700" font-family="Inter">1/2決済</text>
+                        </g>
+                        <g id="p1-pl" opacity="0">
+                            <rect x="58" y="163" width="168" height="44" rx="6" fill="#1e1f22" stroke="#3f4147" stroke-width="0.5"></rect>
+                            <circle id="p1-pl-dot" cx="68" cy="176" r="3" fill="#4ade80"></circle>
+                            <text x="76" y="179" fill="rgba(255,255,255,0.6)" font-size="8" font-weight="600" font-family="Inter">USDJPY  Buy 0.01</text>
+                            <text x="66" y="199" fill="rgba(255,255,255,0.4)" font-size="7.5" font-weight="600" font-family="Inter">損益</text>
+                            <text id="p1-pl-val" x="218" y="200" fill="#4ade80" text-anchor="end" font-size="15" font-weight="900" font-family="Inter">+0 円</text>
+                        </g>
+                    </svg>
+                    <div class="ytt-anim-ctrl" data-panel="0">
+                        <button class="ytt-stop-btn" title="停止">■</button>
+                        <button class="ytt-play-btn" title="再生">▶</button>
+                        <button class="ytt-replay-btn" title="もう一度再生">↻</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel 2: Yトレード・シナリオ -->
+        <div class="ytt-panel" id="ytt-p2">
+            <div class="ytt-panel-inner">
+                <div class="ytt-panel-text">
+                    <img src="img/crayon-2.png" alt="②" class="ytt-panel-num-img">
+                    <h3>Yトレード・シナリオ機能</h3>
+                    <p>注文前にチャート上でTP/SLを視覚的に設定。朝にシナリオをセットすればチャートに張り付かずにトレード可能。</p>
+                    <ul>
+                        <li>TP/SLラインをドラッグで設定</li>
+                        <li>複雑な予約注文を朝セット</li>
+                        <li>ピラミッティング・自動建値</li>
+                        <li>リスクリワード比を即座に確認</li>
+                    </ul>
+                </div>
+                <div class="ytt-panel-scene scene-candle" id="scene-ytt">
+                    <svg viewBox="0 0 280 160" preserveAspectRatio="xMidYMid meet">
+                        <line class="grid-line" x1="0" y1="40" x2="280" y2="40"></line>
+                        <line class="grid-line" x1="0" y1="80" x2="280" y2="80"></line>
+                        <line class="grid-line" x1="0" y1="120" x2="280" y2="120"></line>
+                        <g class="candle" style="opacity:0;"><line x1="14" y1="128" x2="14" y2="142" stroke="#ef4444" stroke-width="1"></line><rect x="12" y="130" width="4" height="8" rx="0.5" fill="#ef4444"></rect></g>
+                        <g class="candle" style="opacity:0;"><line x1="21" y1="124" x2="21" y2="140" stroke="#22c55e" stroke-width="1"></line><rect x="19" y="126" width="4" height="10" rx="0.5" fill="#22c55e"></rect></g>
+                        <g class="candle" style="opacity:0;"><line x1="28" y1="126" x2="28" y2="144" stroke="#ef4444" stroke-width="1"></line><rect x="26" y="130" width="4" height="10" rx="0.5" fill="#ef4444"></rect></g>
+                        <g class="candle" style="opacity:0;"><line x1="35" y1="122" x2="35" y2="138" stroke="#22c55e" stroke-width="1"></line><rect x="33" y="124" width="4" height="10" rx="0.5" fill="#22c55e"></rect></g>
+                        <g class="candle" style="opacity:0;"><line x1="42" y1="126" x2="42" y2="140" stroke="#ef4444" stroke-width="1"></line><rect x="40" y="128" width="4" height="8" rx="0.5" fill="#ef4444"></rect></g>
+                        <g class="candle" style="opacity:0;"><line x1="49" y1="120" x2="49" y2="142" stroke="#22c55e" stroke-width="1"></line><rect x="47" y="124" width="4" height="12" rx="0.5" fill="#22c55e"></rect></g>
+                        <g class="candle" style="opacity:0;"><line x1="56" y1="118" x2="56" y2="140" stroke="#ef4444" stroke-width="1"></line><rect x="54" y="122" width="4" height="14" rx="0.5" fill="#ef4444"></rect></g>
+                        <g class="candle" style="opacity:0;"><line x1="63" y1="112" x2="63" y2="138" stroke="#22c55e" stroke-width="1"></line><rect x="61" y="116" width="4" height="15" rx="0.5" fill="#22c55e"></rect></g>
+                        <g class="candle" style="opacity:0;"><line x1="70" y1="110" x2="70" y2="136" stroke="#ef4444" stroke-width="1"></line><rect x="68" y="114" width="4" height="16" rx="0.5" fill="#ef4444"></rect></g>
+                        <g class="candle" style="opacity:0;"><line x1="77" y1="112" x2="77" y2="140" stroke="#22c55e" stroke-width="1"></line><rect x="75" y="116" width="4" height="16" rx="0.5" fill="#22c55e"></rect></g>
+                        <g class="candle" style="opacity:0;"><line x1="84" y1="108" x2="84" y2="134" stroke="#ef4444" stroke-width="1"></line><rect x="82" y="112" width="4" height="16" rx="0.5" fill="#ef4444"></rect></g>
+                        <g class="candle" style="opacity:0;"><line x1="91" y1="106" x2="91" y2="132" stroke="#22c55e" stroke-width="1"></line><rect x="89" y="110" width="4" height="14" rx="0.5" fill="#22c55e"></rect></g>
+                        <g class="candle" style="opacity:0;"><line x1="98" y1="108" x2="98" y2="136" stroke="#ef4444" stroke-width="1"></line><rect x="96" y="112" width="4" height="18" rx="0.5" fill="#ef4444"></rect></g>
+                        <g class="candle" style="opacity:0;"><line x1="105" y1="104" x2="105" y2="130" stroke="#22c55e" stroke-width="1"></line><rect x="103" y="108" width="4" height="14" rx="0.5" fill="#22c55e"></rect></g>
+                        <path class="scenario-path" d="M 107,108 L 155,35 L 192,75 L 250,10" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="300" stroke-dashoffset="300" style="opacity:0;"></path>
+                        <g id="ytt-buy" opacity="0"><rect x="184" y="67" width="16" height="16" rx="2" fill="rgba(0,0,0,0.7)" stroke="#facc15" stroke-width="1.2"></rect><text x="192" y="79" fill="#facc15" font-size="11" text-anchor="middle" font-weight="900" font-family="Inter">↑</text></g>
+                        <g id="ytt-tp" opacity="0"><rect x="240" y="17" width="16" height="16" rx="2" fill="rgba(0,0,0,0.7)" stroke="#facc15" stroke-width="1.2"></rect><text x="248" y="29" fill="#4ade80" font-size="11" text-anchor="middle" font-weight="900" font-family="Inter">✓</text></g>
+                        <g id="ytt-sl" opacity="0"><rect x="240" y="117" width="16" height="16" rx="2" fill="rgba(0,0,0,0.7)" stroke="#facc15" stroke-width="1.2"></rect><text x="248" y="130" fill="#facc15" font-size="11" text-anchor="middle" font-weight="900" font-family="Inter">✗</text></g>
+                        <text class="ytt-status" x="140" y="155" fill="rgba(255,255,255,0.45)" font-size="6.5" text-anchor="middle" font-family="Inter" font-weight="600" opacity="0">シナリオ完成</text>
+                    </svg>
+                    <div class="ytt-anim-ctrl" data-panel="1">
+                        <button class="ytt-stop-btn" title="停止">■</button>
+                        <button class="ytt-play-btn" title="再生">▶</button>
+                        <button class="ytt-replay-btn" title="もう一度再生">↻</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel 3: 分析サポート -->
+        <div class="ytt-panel" id="ytt-p3">
+            <div class="ytt-panel-inner">
+                <div class="ytt-panel-text">
+                    <img src="img/crayon-3.png" alt="③" class="ytt-panel-num-img">
+                    <h3>分析サポート・オートライン</h3>
+                    <p>独自ロジックで重要ラインを自動描画。トレンド判断や経済指標もチャート上に可視化。</p>
+                    <ul>
+                        <li>重要度別に色分けされた水平線</li>
+                        <li>チャネルライン自動描画</li>
+                        <li>トレンド方向・強さを表示</li>
+                        <li>経済指標の予定を縦線で警告</li>
+                    </ul>
+                </div>
+                <div class="ytt-panel-scene" id="scene-ytt-p3">
+                    <svg viewBox="0 0 280 210" preserveAspectRatio="xMidYMid meet">
+                        <line x1="0" y1="52" x2="280" y2="52" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"></line>
+                        <line x1="0" y1="105" x2="280" y2="105" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"></line>
+                        <line x1="0" y1="158" x2="280" y2="158" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"></line>
+                        <g id="p3-candles" opacity="0">
+                            <rect x="18" y="130" width="4" height="18" rx="0.5" fill="#22c55e"></rect>
+                            <rect x="32" y="140" width="4" height="15" rx="0.5" fill="#ef4444"></rect>
+                            <rect x="46" y="120" width="4" height="20" rx="0.5" fill="#22c55e"></rect>
+                            <rect x="60" y="128" width="4" height="14" rx="0.5" fill="#ef4444"></rect>
+                            <rect x="74" y="105" width="4" height="22" rx="0.5" fill="#22c55e"></rect>
+                            <rect x="88" y="115" width="4" height="16" rx="0.5" fill="#ef4444"></rect>
+                            <rect x="102" y="90" width="4" height="24" rx="0.5" fill="#22c55e"></rect>
+                            <rect x="116" y="100" width="4" height="18" rx="0.5" fill="#ef4444"></rect>
+                            <rect x="130" y="78" width="4" height="20" rx="0.5" fill="#22c55e"></rect>
+                            <rect x="144" y="85" width="4" height="15" rx="0.5" fill="#ef4444"></rect>
+                            <rect x="158" y="60" width="4" height="25" rx="0.5" fill="#22c55e"></rect>
+                            <rect x="172" y="70" width="4" height="18" rx="0.5" fill="#ef4444"></rect>
+                            <rect x="186" y="48" width="4" height="22" rx="0.5" fill="#22c55e"></rect>
+                        </g>
+                        <line id="p3-hl1" x1="10" y1="38" x2="205" y2="38" stroke="#ef4444" stroke-width="2" stroke-dasharray="195" stroke-dashoffset="195"></line>
+                        <text id="p3-hl1-lbl" x="207" y="41" fill="#ef4444" font-size="6.5" font-weight="800" font-family="Inter" opacity="0">強</text>
+                        <line id="p3-hl2" x1="10" y1="82" x2="205" y2="82" stroke="#22d3ee" stroke-width="1.5" stroke-dasharray="195" stroke-dashoffset="195"></line>
+                        <text id="p3-hl2-lbl" x="207" y="85" fill="#22d3ee" font-size="6.5" font-weight="700" font-family="Inter" opacity="0">中</text>
+                        <line id="p3-hl3" x1="10" y1="130" x2="205" y2="130" stroke="#22d3ee" stroke-width="1" stroke-dasharray="4,3" opacity="0"></line>
+                        <text id="p3-hl3-lbl" x="207" y="133" fill="#22d3ee" font-size="6.5" font-weight="700" font-family="Inter" opacity="0">弱</text>
+                        <line id="p3-hl4" x1="10" y1="165" x2="205" y2="165" stroke="rgba(255,255,255,0.45)" stroke-width="0.8" stroke-dasharray="3,4" opacity="0"></line>
+                        <line id="p3-ch1" x1="4" y1="126" x2="202" y2="41" stroke="#a78bfa" stroke-width="1.2" stroke-dasharray="220" stroke-dashoffset="220"></line>
+                        <line id="p3-ch2" x1="4" y1="168" x2="202" y2="83" stroke="#a78bfa" stroke-width="1.2" stroke-dasharray="220" stroke-dashoffset="220"></line>
+                        <g id="p3-trend" opacity="0">
+                            <rect x="215" y="8" width="58" height="82" rx="5" fill="rgba(0,0,0,0.8)" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"></rect>
+                            <g id="p3-tr1" opacity="0">
+                                <text x="223" y="28" fill="rgba(255,255,255,0.55)" font-size="8.5" font-weight="700" font-family="Inter">H4</text>
+                                <rect x="252" y="18" width="15" height="13" rx="2.5" fill="rgba(239,68,68,0.2)"></rect>
+                                <text x="259.5" y="28.5" fill="#ef4444" text-anchor="middle" font-size="10" font-weight="900" font-family="Inter">↓</text>
+                            </g>
+                            <g id="p3-tr2" opacity="0">
+                                <text x="223" y="46" fill="rgba(255,255,255,0.55)" font-size="8.5" font-weight="700" font-family="Inter">H1</text>
+                                <rect x="252" y="36" width="15" height="13" rx="2.5" fill="rgba(34,211,238,0.2)"></rect>
+                                <text x="259.5" y="46.5" fill="#22d3ee" text-anchor="middle" font-size="10" font-weight="900" font-family="Inter">→</text>
+                            </g>
+                            <g id="p3-tr3" opacity="0">
+                                <text x="223" y="64" fill="rgba(255,255,255,0.55)" font-size="8.5" font-weight="700" font-family="Inter">M15</text>
+                                <rect x="252" y="54" width="15" height="13" rx="2.5" fill="rgba(74,222,128,0.2)"></rect>
+                                <text x="259.5" y="64.5" fill="#4ade80" text-anchor="middle" font-size="10" font-weight="900" font-family="Inter">↑</text>
+                            </g>
+                            <g id="p3-tr4" opacity="0">
+                                <text x="223" y="82" fill="rgba(255,255,255,0.55)" font-size="8.5" font-weight="700" font-family="Inter">M5</text>
+                                <rect x="252" y="72" width="15" height="13" rx="2.5" fill="rgba(74,222,128,0.2)"></rect>
+                                <text x="259.5" y="82.5" fill="#4ade80" text-anchor="middle" font-size="10" font-weight="900" font-family="Inter">↑</text>
+                            </g>
+                        </g>
+                        <line id="p3-econ" x1="148" y1="5" x2="148" y2="190" stroke="#ef4444" stroke-width="0.8" opacity="0"></line>
+                        <text id="p3-econ-t" x="153" y="10" fill="#ef4444" font-size="7" font-weight="700" font-family="Inter" writing-mode="tb" opacity="0">雇用統計</text>
+                    </svg>
+                    <div class="ytt-anim-ctrl" data-panel="2">
+                        <button class="ytt-stop-btn" title="停止">■</button>
+                        <button class="ytt-play-btn" title="再生">▶</button>
+                        <button class="ytt-replay-btn" title="もう一度再生">↻</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel 4: リスク管理 -->
+        <div class="ytt-panel" id="ytt-p5">
+            <div class="ytt-panel-inner">
+                <div class="ytt-panel-text">
+                    <img src="img/crayon-4.png" alt="④" class="ytt-panel-num-img">
+                    <h3>リスク管理</h3>
+                    <p>損失率を設定するだけでロットを自動計算。1回のトレードで冒すリスクを常に一定に保てます。</p>
+                    <ul>
+                        <li>損失率固定モードでリスクを一定に管理</li>
+                        <li>残高に応じてロットを自動算出</li>
+                        <li>Lot固定・SL固定の2種類に対応</li>
+                    </ul>
+                </div>
+                <div class="ytt-panel-scene" id="scene-ytt-p5">
+                    <svg viewBox="0 0 280 210" preserveAspectRatio="xMidYMid meet">
+                        <rect x="5" y="5" width="270" height="200" rx="4" fill="#0f1523" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+                        <g id="p5-scene1">
+                            <text id="p5-title" x="140" y="38" fill="rgba(255,255,255,0.7)" text-anchor="middle" font-size="12" font-weight="800" font-family="Inter" opacity="0">損失率固定モード</text>
+                            <g id="p5-balance" opacity="0">
+                                <text x="60" y="68" fill="rgba(255,255,255,0.4)" font-size="8" font-family="Inter">残高</text>
+                                <text x="220" y="68" fill="rgba(255,255,255,0.8)" text-anchor="end" font-size="12" font-weight="800" font-family="Inter">1,000,000 円</text>
+                                <line x1="50" y1="75" x2="230" y2="75" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+                            </g>
+                            <g id="p5-rate" opacity="0">
+                                <text x="60" y="95" fill="rgba(255,255,255,0.4)" font-size="8" font-family="Inter">許容損失率</text>
+                                <text x="220" y="95" fill="#fbbf24" text-anchor="end" font-size="14" font-weight="900" font-family="Inter">2.0 %</text>
+                                <line x1="50" y1="102" x2="230" y2="102" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+                            </g>
+                            <text id="p5-arrow" x="140" y="122" fill="rgba(255,255,255,0.25)" text-anchor="middle" font-size="14" font-family="Inter" opacity="0">↓</text>
+                            <g id="p5-maxloss" opacity="0">
+                                <text x="60" y="145" fill="rgba(255,255,255,0.4)" font-size="8" font-family="Inter">最大損失額</text>
+                                <text x="220" y="145" fill="#ef4444" text-anchor="end" font-size="13" font-weight="800" font-family="Inter">20,000 円</text>
+                                <line x1="50" y1="152" x2="230" y2="152" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+                            </g>
+                            <g id="p5-lot" opacity="0">
+                                <rect x="59" y="160" width="180" height="30" rx="6" fill="rgba(74,222,128,0.08)" stroke="#4ade80" stroke-width="0.8"/>
+                                <text x="69" y="180" fill="rgba(74,222,128,0.6)" font-size="9" font-weight="600" font-family="Inter">推奨ロット</text>
+                                <text x="229" y="181" fill="#4ade80" text-anchor="end" font-size="16" font-weight="900" font-family="Inter">0.15</text>
+                            </g>
+                        </g>
+                    </svg>
+                    <div class="ytt-anim-ctrl" data-panel="3">
+                        <button class="ytt-stop-btn" title="停止">■</button>
+                        <button class="ytt-play-btn" title="再生">▶</button>
+                        <button class="ytt-replay-btn" title="もう一度再生">↻</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- More features teaser -->
+        <div class="ytt-more-features">
+            <div class="ytt-more-features-inner">
+                <span class="ytt-more-features-label">\ 他にもこんな機能が /</span>
+                <div style="text-align:center; margin-bottom:0.25rem;">
+                    <div style="display:inline-block; white-space:nowrap;">
+                        <h3 style="margin:0; white-space:nowrap;">様々なトレードをあらかじめセットできる</h3>
+                        <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(12px,2.5vw,18px);object-fit:fill;margin:0.15rem 0 0.5rem;">
+                    </div>
+                </div>
+                <p class="ytt-more-features-sub">朝にまとめてセットして、あとはチャートに張り付かなくてOK。</p>
+                <div class="ytt-more-features-grid">
+                    <div class="ytt-feat-item">
+                        <span class="ytt-feat-item-icon"><img src="img/icon-clock.png" alt=""></span>
+                        <span class="ytt-feat-item-text">予約注文を朝にまとめてセット<span class="ytt-feat-item-sub">起きてすぐ設定、あとはほったらかし</span></span>
+                    </div>
+                    <div class="ytt-feat-item">
+                        <span class="ytt-feat-item-icon"><img src="img/icon-target.png" alt=""></span>
+                        <span class="ytt-feat-item-text">TP/SLをドラッグで視覚的に設定<span class="ytt-feat-item-sub">チャート上で直感的に決済ラインを引く</span></span>
+                    </div>
+                    <div class="ytt-feat-item">
+                        <span class="ytt-feat-item-icon"><img src="img/icon-pyramid.png" alt=""></span>
+                        <span class="ytt-feat-item-text">ピラミッティング・自動建値<span class="ytt-feat-item-sub">複数ポジションの管理も簡単</span></span>
+                    </div>
+                    <div class="ytt-feat-item">
+                        <span class="ytt-feat-item-icon"><img src="img/icon-chart.png" alt=""></span>
+                        <span class="ytt-feat-item-text">リスクリワード比を即座に確認<span class="ytt-feat-item-sub">エントリー前に損益バランスを可視化</span></span>
+                    </div>
+                    <div class="ytt-feat-item">
+                        <span class="ytt-feat-item-icon"><img src="img/icon-lock.png" alt=""></span>
+                        <span class="ytt-feat-item-text">損益固定モード<span class="ytt-feat-item-sub">利益・損失をあらかじめ金額で固定</span></span>
+                    </div>
+                    <div class="ytt-feat-item">
+                        <span class="ytt-feat-item-icon"><img src="img/icon-monitor.png" alt=""></span>
+                        <span class="ytt-feat-item-text">MT4 / MT5 / cTrader 対応<span class="ytt-feat-item-sub">MT4推奨。MT5・cTraderは基本機能で利用可</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Demo section -->
+        <div class="ytt-demo" id="demo">
+            <div class="ytt-demo-header">
+                <h2 style="position:relative;display:inline-block;">
+                    <img class="try-it-deco try-it-deco--ytt" src="img/try-it-left.png" alt="やってみよう" style="right:auto; left:-20vw; bottom:-3vw;">
+                    YTTを実際に操作してみよう
+                </h2>
+                <p>チュートリアルに沿って<span class="br-sp"></span>トレードの流れを体験できます</p>
+            </div>
+            <div class="ytt-demo-frame" id="ytt-demo-frame-2">
+                <div class="ytt-demo-mobile-msg">
+                    <p style="font-size:1.1rem;font-weight:800;margin-bottom:0.5rem;">🖥️ PC専用コンテンツです</p>
+                    <p style="font-size:0.85rem;color:rgba(255,255,255,0.7);line-height:1.7;">このシミュレーターはPCでのみ<br>ご利用いただけます。<br>パソコンからアクセスしてください。</p>
+                </div>
+                <iframe src="ytt-simulator-reserve.html" loading="lazy"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <div class="ytt-footer">
+        <h3>YTTをもっと知る</h3>
+        <p>よすが式トレードツールの詳細や<span class="br-sp"></span>導入方法はこちら</p>
+        <div class="ytt-buttons">
+            <a href="https://discord.com/channels/1039824083208126474/1447939661186990173" target="_blank" class="btn-sq-blue">YTTを今すぐ使う →</a>
+        </div>
+        <p style="margin-top:1.25rem;font-size:0.85rem;color:#6b7280;">
+            <a href="https://www.canva.com/design/DAF_Wqy7hQc/IJKV8x4ruUtEpWdzpuJ4wg/edit" target="_blank" rel="noopener" style="color:#6b7280;text-decoration:underline;text-underline-offset:3px;">全機能の詳細を確認する →</a>
+        </p>
+    </div>
+</section>
+
+<!-- PRICING -->
+<section class="ytt-sp-pricing" id="pricing">
+    <div class="ytt-sp-pricing-inner">
+        <div class="ytt-sp-section-header" style="padding-top:0;">
+            <span class="section-title-badge section-title-badge--blue">
+                <img class="hero-title-side hero-title-side--left" src="img/title-side-blue-left.png" alt="">
+                PLANS &amp; PRICING
+                <img class="hero-title-side hero-title-side--right" src="img/title-side-blue-right.png" alt="">
+            </span>
+            <div style="display:block; text-align:center;">
+                <span style="display:inline-block;">
+                    <h2 style="margin:0;">料金まとめ</h2>
+                    <img class="ytt-title-wave" src="img/wave-orange.png" alt="" style="display:block;width:100%;height:22px;object-fit:fill;margin:0.25rem 0 0.5rem;">
+                </span>
+            </div>
+            <p>YTTはスタンダード以上のプランで<span class="br-sp"></span>ご利用いただけます。</p>
+        </div>
+
+        <div class="ytt-sp-plans">
+            <!-- フリー -->
+            <div class="ytt-sp-plan-card">
+                <div class="ytt-sp-plan-name" style="color:#9ca3af;">フリー</div>
+                <div class="ytt-sp-plan-desc">まずは無料で体験</div>
+                <div class="ytt-sp-plan-price">
+                    <span class="ytt-sp-plan-price-free">¥0</span>
+                </div>
+                <div class="ytt-sp-plan-divider"></div>
+                <ul class="ytt-sp-plan-features">
+                    <li class="has-tip"><img src="img/check-orange.png" alt="✓"><span>速攻プロフローチャート</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">トレード判断に迷ったときにまずチェック。プロの思考順序をフローチャートで可視化したガイドです。<br><a href="https://discord.com/channels/1039824083208126474/1238825339849801749" target="_blank">Discordで見る →</a></span></li>
+                    <li style="color:#d1d5db; text-decoration:line-through;">YTT</li>
+                </ul>
+                <a href="https://discord.gg/CcUtqSdRDZ" target="_blank" class="ytt-sp-plan-cta free">無料で始める</a>
+            </div>
+
+            <!-- スタンダード -->
+            <div class="ytt-sp-plan-card is-featured" id="standard">
+                <div class="ytt-sp-plan-badge">YTT 使い放題</div>
+                <div class="ytt-sp-plan-name">スタンダード</div>
+                <div class="ytt-sp-plan-desc">ほぼ全機能が使い放題</div>
+                <div class="ytt-sp-plan-price">
+                    <span class="ytt-sp-plan-price-amount">¥2,900</span><span class="ytt-sp-plan-price-period">/月</span>
+                </div>
+                <div class="ytt-sp-plan-divider"></div>
+                <ul class="ytt-sp-plan-features">
+                    <li class="has-tip"><img src="img/check-orange.png" alt="✓"><span>速攻プロフローチャート</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">トレード判断に迷ったときにまずチェック。プロの思考順序をフローチャートで可視化したガイドです。<br><a href="https://discord.com/channels/1039824083208126474/1238825339849801749" target="_blank">Discordで見る →</a></span></li>
+                    <li class="has-tip"><img src="img/check-orange.png" alt="✓"><span>AIサポート</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">FXに関する疑問に24時間いつでも答えてくれるAIアシスタント。気軽に相談できます。<br><a href="https://discord.com/channels/1039824083208126474/1416640423396511804" target="_blank">Discordで見る →</a></span></li>
+                    <li class="has-tip"><img src="img/check-orange.png" alt="✓"><span>毎日のシナリオ動画</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">毎朝、よすががその日のシナリオを動画で解説。スタンダードでは主要3通貨ペアの分析が届きます。<br><a href="https://discord.com/channels/1039824083208126474/1048136270582382592" target="_blank">Discordで見る →</a></span></li>
+                    <li class="has-tip"><img src="img/check-orange.png" alt="✓"><span>深掘解説等の限定動画</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">会員限定の特別解説動画。テーマ別に基礎から応用まで深く学べます。</span></li>
+                    <li class="has-tip highlight"><img src="img/check-orange.png" alt="✓"><span>サポートツール YTT</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">よすが式チャート分析ツール。複雑なテクニカル分析を直感的に行え、エントリー判断の精度が上がります。<br><a href="https://discord.com/channels/1039824083208126474/1447939661186990173" target="_blank">Discordで見る →</a></span></li>
+                    <li class="has-tip"><img src="img/check-orange.png" alt="✓"><span>3か月プロ企画 ゼロプロ90</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">90日間でゼロからプロを目指す集中プログラム。3か月に1回の募集タイミングで参加できます。<br><a href="https://discord.com/channels/1039824083208126474/1171706488234979378" target="_blank">Discordで見る →</a></span></li>
+                    <li class="has-tip"><img src="img/check-orange.png" alt="✓"><span>プロトレーダー ASTRO</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">プロトレーダーASTROの相場観・分析にアクセス可能。実践的な視点を学べます。<br><a href="https://discord.com/channels/1039824083208126474/1136925665099251753" target="_blank">Discordで見る →</a></span></li>
+                    <li class="has-tip"><img src="img/check-orange.png" alt="✓"><span>プロに相談</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">困ったときにプロトレーダーに直接相談できる窓口。学習や実トレードの疑問をすぐ解消できます。<br><a href="https://discord.com/channels/1039824083208126474/1181536360398590003" target="_blank">Discordで見る →</a></span></li>
+                </ul>
+                <a href="https://discord.com/oauth2/authorize?client_id=1132937165379211284&response_type=code&redirect_uri=https%3A%2F%2Ffx-space.com%2Fpp_sub_standard.php&scope=identify" class="ytt-sp-plan-cta">スタンダードに加入 →</a>
+            </div>
+
+            <!-- プレミアム -->
+            <div class="ytt-sp-plan-card is-featured">
+                <div class="ytt-sp-plan-badge">YTT 使い放題</div>
+                <div class="ytt-sp-plan-name accent">プレミアム</div>
+                <div class="ytt-sp-plan-desc">スタンダード全機能＋ライブ＆交流</div>
+                <div class="ytt-sp-plan-price">
+                    <span class="ytt-sp-plan-price-amount">¥5,410</span><span class="ytt-sp-plan-price-period">/月</span>
+                    <div class="ytt-sp-plan-price-sub">年額 ¥64,900 / 月額 ¥5,900</div>
+                </div>
+                <div class="ytt-sp-plan-divider"></div>
+                <ul class="ytt-sp-plan-features">
+                    <li class="has-tip"><img src="img/check-orange.png" alt="✓"><span>スタンダードの全機能</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">上記スタンダードプランの全機能をそのまま利用できます。基礎から実践まで全てカバー。</span></li>
+                    <li class="has-tip highlight"><img src="img/check-orange.png" alt="✓"><span>ライブチャート分析</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">よすががチャンスと感じた相場をリアルタイム通知。プレミアム会員だけが見られる専用チャンネル。<br><a href="https://discord.com/channels/1039824083208126474/1282259603903615047" target="_blank">Discordで見る →</a></span></li>
+                    <li class="has-tip highlight"><img src="img/check-orange.png" alt="✓"><span>トレード交流</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">メンバー同士でトレードを共有・議論する場。利確・損切報告で切磋琢磨できます。<br><a href="https://discord.com/channels/1039824083208126474/1282260695538339851" target="_blank">Discordで見る →</a></span></li>
+                </ul>
+                <a href="https://discord.com/oauth2/authorize?client_id=1132937165379211284&response_type=code&redirect_uri=https%3A%2F%2Ffx-space.com%2Fpp_sub_premium_year.php&scope=identify" class="ytt-sp-plan-cta solid">プレミアムに加入（年額） →</a>
+                <a href="https://discord.com/oauth2/authorize?client_id=1132937165379211284&response_type=code&redirect_uri=https%3A%2F%2Ffx-space.com%2Fpp_sub_premium.php&scope=identify" style="display:block;text-align:center;margin-top:0.625rem;font-size:0.8125rem;color:#6b7280;text-decoration:underline;">月額プランで加入 →</a>
+            </div>
+        </div>
+
+        <div style="margin-top:2.5rem; margin-bottom:2.5rem; padding:1.5rem 1.75rem; border:1px solid #9ca3af; border-radius:0.75rem; max-width:36rem; margin-left:auto; margin-right:auto; text-align:center;">
+            <p style="color:#1f2937; font-size:0.9rem; font-weight:600; margin:0 0 0.75rem;">YouTubeメンバーシップにご登録されている方へ</p>
+            <p style="color:#4b5563; font-size:0.8125rem; line-height:1.6; margin:0 0 0.625rem;">YouTubeメンバーシップでも同じ特典が受けられます。</p>
+            <div style="display:inline-block; text-align:center; margin:0 auto 1rem; background:#f9fafb; border-radius:0.5rem; padding:0.625rem 1.25rem; font-size:0.8125rem; color:#374151; line-height:1.8;">
+                <span class="nowrap">よすが式FXメンバー（¥2,990/月）</span> → <span class="nowrap">スタンダード相当</span><br>
+                <span class="nowrap">ライブチャート分析（¥6,000/月）</span> → <span class="nowrap">プレミアム相当</span>
+            </div>
+            <div style="border-top:1px solid #d1d5db; padding-top:0.875rem; margin-top:0.25rem;">
+                <p style="color:#4b5563; font-size:0.8125rem; line-height:1.6; margin:0 0 0.5rem;">接続がまだの方はこちら</p>
+                <a href="https://fx-space.com/intro/yt-connect.html" target="_blank" rel="noopener" style="color:#2563eb; font-size:0.8125rem; font-weight:500; text-decoration:underline; text-underline-offset:3px;">接続ガイドを見る →</a>
+            </div>
+            <div style="border-top:1px solid #d1d5db; padding-top:0.875rem; margin-top:0.875rem;">
+                <a href="https://discord.com/oauth2/authorize?client_id=1132937165379211284&amp;response_type=code&amp;redirect_uri=https%3A%2F%2Ffx-space.com%2Fpp_sub_cancel.php&amp;scope=identify" target="_blank" rel="noopener" style="color:#6b7280; font-size:0.75rem; text-decoration:underline; text-underline-offset:3px;">退会はこちら →</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER CTA -->
+<section class="ytt-sp-footer-cta">
+    <h2>YTTを今すぐ使い始めよう</h2>
+    <p>
+        スタンダードプランに加入するだけで、<br>
+        すべての機能がすぐに使えます。
+    </p>
+    <div class="ytt-sp-footer-cta-btns">
+        <a href="https://discord.com/oauth2/authorize?client_id=1132937165379211284&response_type=code&redirect_uri=https%3A%2F%2Ffx-space.com%2Fpp_sub_standard.php&scope=identify" class="btn-white-solid">スタンダードに加入 →</a>
+    </div>
+</section>
+
+<!-- PAGE FOOTER -->
+<footer class="ytt-sp-page-footer">
+    <p>© FX SPACE — <a href="index.html">トップページ</a> / <a href="https://drive.google.com/file/d/17vbSozToeLWHQO9s_eBHcceYGh80ryCQ/view?usp=sharing" target="_blank">利用規約</a></p>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="js/gsap.min.js"></script>
+<script src="js/ScrollTrigger.min.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+// ===== YTT アニメーション =====
+var candleTl = null, yttP1Tl = null, yttP3Tl = null, yttP5Tl = null;
+var yttAnimFuncs = [null, null, null, null];
+var yttAnimPaused = [false, false, false, false];
+var yttAnimDone = [false, false, false, false];
+
+function yttShowStop(idx) {
+    yttAnimDone[idx] = false;
+    yttAnimPaused[idx] = false;
+    var ctrl = document.querySelectorAll('.ytt-anim-ctrl')[idx];
+    if (ctrl) {
+        var playBtn = ctrl.querySelector('.ytt-play-btn');
+        if (playBtn) playBtn.style.display = 'none';
+    }
+}
+function yttTogglePause(idx) {
+    var tls = [yttP1Tl, candleTl, yttP3Tl, yttP5Tl];
+    var tl = tls[idx];
+    if (!tl) return;
+    var ctrl = document.querySelectorAll('.ytt-anim-ctrl')[idx];
+    var playBtn = ctrl ? ctrl.querySelector('.ytt-play-btn') : null;
+    if (yttAnimPaused[idx]) {
+        tl.resume(); yttAnimPaused[idx] = false;
+        if (playBtn) playBtn.style.display = 'none';
+    } else {
+        tl.pause(); yttAnimPaused[idx] = true;
+        if (playBtn) playBtn.style.display = 'flex';
+    }
+}
+function yttReplayAnim(idx) {
+    yttAnimDone[idx] = false; yttAnimPaused[idx] = false;
+    var ctrl = document.querySelectorAll('.ytt-anim-ctrl')[idx];
+    if (ctrl) ctrl.querySelector('.ytt-replay-btn').style.display = 'none';
+    if (yttAnimFuncs[idx]) yttAnimFuncs[idx]();
+}
+document.addEventListener('click', function(e) {
+    var replayBtn = e.target.closest('.ytt-replay-btn');
+    if (replayBtn) { yttReplayAnim(+replayBtn.parentElement.dataset.panel); return; }
+    var playBtn = e.target.closest('.ytt-play-btn');
+    if (playBtn) { yttTogglePause(+playBtn.parentElement.dataset.panel); return; }
+    var scene = e.target.closest('.ytt-panel-scene');
+    if (scene) {
+        var panel = scene.querySelector('.ytt-anim-ctrl');
+        if (!panel) return;
+        var idx = +panel.dataset.panel;
+        if (yttAnimDone[idx]) return;
+        yttTogglePause(idx);
+    }
+});
+
+function animateYttP1() {
+    if (yttP1Tl) yttP1Tl.kill();
+    yttShowStop(0);
+    var panel=document.getElementById('p1-panel'),title=document.getElementById('p1-title'),
+        buy=document.getElementById('p1-buy'),sell=document.getElementById('p1-sell'),
+        lot=document.getElementById('p1-lot'),cls=document.getElementById('p1-cls'),
+        half=document.getElementById('p1-half'),pl=document.getElementById('p1-pl');
+    var plVal=document.getElementById('p1-pl-val'), plDot=document.getElementById('p1-pl-dot');
+    var plCounter={v:0};
+    yttP1Tl = gsap.timeline({repeat:-1,repeatDelay:2});
+    yttP1Tl.set([panel,title,buy,sell,lot,cls,half,pl],{opacity:0});
+    yttP1Tl.set(plCounter,{v:0});
+    yttP1Tl.to(panel,{opacity:1,duration:0.4},0.2);
+    yttP1Tl.to(title,{opacity:1,duration:0.3},0.4);
+    yttP1Tl.to(lot,{opacity:1,duration:0.3},0.7);
+    yttP1Tl.to([sell,buy],{opacity:1,duration:0.3,stagger:0.1,ease:'back.out(2)'},1.1);
+    yttP1Tl.to([cls,half],{opacity:1,duration:0.3,stagger:0.15,ease:'back.out(1.5)'},1.6);
+    yttP1Tl.to(buy,{scale:0.93,duration:0.1,transformOrigin:'center center'},2.3);
+    yttP1Tl.to(buy,{scale:1,duration:0.15},2.4);
+    yttP1Tl.to(pl,{opacity:1,duration:0.4,ease:'power2.out'},2.6);
+    yttP1Tl.to(plDot,{opacity:0.3,duration:0.3,yoyo:true,repeat:19},2.8);
+    var plSteps=[0,3200,-1500,4800,-800,7200,5100,9600,12500];
+    plSteps.forEach(function(v,i){
+        yttP1Tl.to(plCounter,{v:v,duration:0.6,ease:'power1.inOut',onUpdate:function(){
+            if(!plVal) return;
+            var n=Math.round(plCounter.v),color=n>=0?'#4ade80':'#ef4444',sign=n>=0?'+':'';
+            plVal.textContent=sign+n.toLocaleString()+' 円';
+            plVal.setAttribute('fill',color);
+        }},3.0+i*0.8);
+    });
+    var clsTime=3.0+plSteps.length*0.8+0.3;
+    yttP1Tl.to(cls,{scale:0.93,duration:0.1,transformOrigin:'center center'},clsTime);
+    yttP1Tl.to(cls,{scale:1,duration:0.15},clsTime+0.1);
+    yttP1Tl.to(plVal,{attr:{'font-size':17},duration:0.15,yoyo:true,repeat:1},clsTime+0.2);
+}
+
+function animateCandles() {
+    if (candleTl) candleTl.kill();
+    yttShowStop(1);
+    var candles=document.querySelectorAll('#scene-ytt .candle');
+    var scenarioPath=document.querySelector('#scene-ytt .scenario-path');
+    var buyMarker=document.getElementById('ytt-buy'),tpMarker=document.getElementById('ytt-tp'),slMarker=document.getElementById('ytt-sl');
+    var status=document.querySelector('#scene-ytt .ytt-status');
+    candleTl=gsap.timeline({repeat:-1,repeatDelay:2});
+    candleTl.set(candles,{opacity:0});
+    candleTl.set(scenarioPath,{strokeDashoffset:300,opacity:0});
+    candleTl.set([buyMarker,tpMarker,slMarker],{opacity:0,scale:1});
+    candleTl.set(status,{opacity:0});
+    candles.forEach(function(c,i){candleTl.to(c,{opacity:1,duration:0.08},0.15+i*0.05);});
+    candleTl.call(function(){status.textContent='シナリオ作成中...';});
+    candleTl.to(status,{opacity:1,duration:0.3},'+=0.15');
+    candleTl.to(scenarioPath,{strokeDashoffset:0,opacity:1,duration:1,ease:'power1.inOut'},'+=0.15');
+    candleTl.to(buyMarker,{opacity:1,duration:0.25,ease:'back.out(2.5)'},'+=0.05');
+    candleTl.to(tpMarker,{opacity:1,duration:0.25,ease:'back.out(2.5)'},'+=0.05');
+    candleTl.to(slMarker,{opacity:1,duration:0.25,ease:'back.out(2.5)'},'+=0.05');
+    candleTl.call(function(){status.textContent='シナリオ完成';});
+}
+
+function animateYttP3() {
+    if (yttP3Tl) yttP3Tl.kill();
+    yttShowStop(2);
+    var candles=document.getElementById('p3-candles');
+    var hl1=document.getElementById('p3-hl1'),hl1Lbl=document.getElementById('p3-hl1-lbl');
+    var hl2=document.getElementById('p3-hl2'),hl2Lbl=document.getElementById('p3-hl2-lbl');
+    var hl3=document.getElementById('p3-hl3'),hl3Lbl=document.getElementById('p3-hl3-lbl');
+    var hl4=document.getElementById('p3-hl4');
+    var ch1=document.getElementById('p3-ch1'),ch2=document.getElementById('p3-ch2');
+    var trend=document.getElementById('p3-trend');
+    var tr1=document.getElementById('p3-tr1'),tr2=document.getElementById('p3-tr2'),tr3=document.getElementById('p3-tr3'),tr4=document.getElementById('p3-tr4');
+    var econ=document.getElementById('p3-econ'),econT=document.getElementById('p3-econ-t');
+    yttP3Tl=gsap.timeline({repeat:-1,repeatDelay:2});
+    yttP3Tl.set(candles,{opacity:0});
+    yttP3Tl.set([hl1Lbl,hl2Lbl,hl3,hl3Lbl,hl4,trend,tr1,tr2,tr3,tr4,econ,econT],{opacity:0});
+    yttP3Tl.set([hl1,hl2],{attr:{'stroke-dashoffset':195}});
+    yttP3Tl.set([ch1,ch2],{attr:{'stroke-dashoffset':220}});
+    yttP3Tl.to(candles,{opacity:0.25,duration:0.5},0.2);
+    yttP3Tl.to(hl1,{attr:{'stroke-dashoffset':0},duration:0.8,ease:'power1.inOut'},0.8);
+    yttP3Tl.to(hl1Lbl,{opacity:1,duration:0.25},1.4);
+    yttP3Tl.to(hl2,{attr:{'stroke-dashoffset':0},duration:0.7,ease:'power1.inOut'},1.7);
+    yttP3Tl.to(hl2Lbl,{opacity:1,duration:0.25},2.2);
+    yttP3Tl.to(hl3,{opacity:1,duration:0.5},2.5);
+    yttP3Tl.to(hl3Lbl,{opacity:1,duration:0.25},2.8);
+    yttP3Tl.to(hl4,{opacity:1,duration:0.5},3.1);
+    yttP3Tl.to(ch1,{attr:{'stroke-dashoffset':0},duration:0.9,ease:'power1.inOut'},3.6);
+    yttP3Tl.to(ch2,{attr:{'stroke-dashoffset':0},duration:0.9,ease:'power1.inOut'},3.8);
+    yttP3Tl.fromTo(trend,{opacity:0,x:20},{opacity:1,x:0,duration:0.4,ease:'power2.out'},4.8);
+    yttP3Tl.to(tr1,{opacity:1,duration:0.2},5.1);
+    yttP3Tl.to(tr2,{opacity:1,duration:0.2},5.3);
+    yttP3Tl.to(tr3,{opacity:1,duration:0.2},5.5);
+    yttP3Tl.to(tr4,{opacity:1,duration:0.2},5.7);
+    yttP3Tl.to(econ,{opacity:0.7,duration:0.4},6.1);
+    yttP3Tl.to(econT,{opacity:1,duration:0.3},6.3);
+}
+
+function animateYttP5() {
+    if (yttP5Tl) yttP5Tl.kill();
+    yttShowStop(3);
+    var title=document.getElementById('p5-title'),balance=document.getElementById('p5-balance'),
+        rate=document.getElementById('p5-rate'),arrow=document.getElementById('p5-arrow'),
+        maxloss=document.getElementById('p5-maxloss'),lot=document.getElementById('p5-lot');
+    yttP5Tl=gsap.timeline({repeat:-1,repeatDelay:2});
+    yttP5Tl.set([title,balance,rate,arrow,maxloss,lot],{opacity:0});
+    yttP5Tl.to(title,{opacity:1,duration:0.8},0.5);
+    yttP5Tl.to(balance,{opacity:1,duration:0.8},1.8);
+    yttP5Tl.to(rate,{opacity:1,duration:0.8},3.0);
+    yttP5Tl.to(arrow,{opacity:1,duration:0.5},4.2);
+    yttP5Tl.to(maxloss,{opacity:1,duration:0.8},5.0);
+    yttP5Tl.fromTo(lot,{opacity:0,scale:0.9},{opacity:1,scale:1,duration:0.8,ease:'back.out(1.5)',transformOrigin:'center center'},6.2);
+}
+
+yttAnimFuncs = [animateYttP1, animateCandles, animateYttP3, animateYttP5];
+
+// パネルスライドイン（左から）＋シーンフェードイン
+var yttPanelIds  = ['#ytt-p1', '#ytt-p2', '#ytt-p3', '#ytt-p5'];
+var yttSceneIds  = ['#scene-ytt-p1', '#scene-ytt', '#scene-ytt-p3', '#scene-ytt-p5'];
+var yttPanelAnims = [animateYttP1, animateCandles, animateYttP3, animateYttP5];
+var yttAnimPlayed = [false, false, false, false];
+
+yttPanelIds.forEach(function(panelId, idx) {
+    var tl = gsap.timeline({
+        scrollTrigger: {
+            trigger: panelId,
+            start: idx === 0 ? 'top 80%' : 'top 40%',
+            end:   idx === 0 ? 'top 30%' : 'top top',
+            scrub: 0.8
+        }
+    });
+    tl.fromTo(panelId + ' .ytt-panel-text', { opacity: 0, x: -60 }, { opacity: 1, x: 0, duration: 1, ease: 'power2.out' }, 0);
+    tl.fromTo(yttSceneIds[idx], { opacity: 0, scale: 0.92 }, { opacity: 1, scale: 1, duration: 1, ease: 'power2.out' }, 0.1);
+
+    ScrollTrigger.create({
+        trigger: panelId,
+        start: idx === 0 ? 'top 60%' : 'top 30%',
+        once: true,
+        onEnter: (function(i) { return function() {
+            if (!yttAnimPlayed[i]) { yttAnimPlayed[i] = true; yttPanelAnims[i](); }
+        }; })(idx)
+    });
+});
+
+// pricing reveal
+gsap.utils.toArray('.ytt-sp-plan-card').forEach(function(card) {
+    gsap.fromTo(card, {opacity:0, y:24}, {opacity:1, y:0, duration:0.5, ease:'power2.out',
+        scrollTrigger: {trigger: card, start: 'top 85%', once: true}});
+});
+
+// Tooltip behavior
+(function() {
+    var isHoverDevice = window.matchMedia('(hover: hover)').matches;
+    if (isHoverDevice) {
+        document.querySelectorAll('.feat-info').forEach(function(icon) {
+            icon.addEventListener('mouseenter', function() {
+                document.querySelectorAll('.has-tip.tip-open').forEach(function(l) { l.classList.remove('tip-open'); });
+            });
+        });
+    } else {
+        document.querySelectorAll('.has-tip').forEach(function(li) {
+            li.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') return;
+                e.stopPropagation();
+                var wasOpen = li.classList.contains('tip-open');
+                document.querySelectorAll('.has-tip.tip-open').forEach(function(l) { l.classList.remove('tip-open'); });
+                if (!wasOpen) li.classList.add('tip-open');
+            });
+        });
+        document.addEventListener('click', function() {
+            document.querySelectorAll('.has-tip.tip-open').forEach(function(l) { l.classList.remove('tip-open'); });
+        });
+    }
+})();
+</script>
+</body>
+</html>

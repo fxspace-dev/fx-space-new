@@ -254,6 +254,24 @@
         .ytt-sp-plan-divider {
             height: 1px; background: #f0f0f0; margin: 1rem 0;
         }
+        /* YTT highlight row inside plan card */
+        .ytt-plan-ytt-row {
+            display: flex; align-items: center; gap: 0.625rem;
+            padding: 0.375rem 0;
+            margin-bottom: 0.875rem;
+        }
+        .ytt-plan-ytt-row > img { width: 30px; height: 30px; flex-shrink: 0; }
+        .ytt-plan-ytt-row-text {
+            font-size: 1.25rem; font-weight: 900; color: var(--primary); line-height: 1.2;
+        }
+        .ytt-plan-ytt-row--disabled img { opacity: 0.25; }
+        .ytt-plan-ytt-row--disabled .ytt-plan-ytt-row-text {
+            color: #9ca3af; text-decoration: line-through; font-weight: 700;
+        }
+        .ytt-plan-also-label {
+            font-size: 0.75rem; color: #9ca3af; font-weight: 600;
+            margin: 0 0 0.375rem;
+        }
         .ytt-sp-plan-features {
             list-style: none; padding: 0; margin: 0 0 1.5rem; flex: 1;
         }
@@ -822,28 +840,39 @@
                     <span class="ytt-sp-plan-price-free">¥0</span>
                 </div>
                 <div class="ytt-sp-plan-divider"></div>
+                <div class="ytt-plan-ytt-row ytt-plan-ytt-row--disabled">
+                    <img src="img/check-orange.png" alt="">
+                    <span class="ytt-plan-ytt-row-text">YTT（利用不可）</span>
+                </div>
+                <div class="ytt-plan-also-label">このプランに含まれる機能</div>
                 <ul class="ytt-sp-plan-features">
                     <li class="has-tip"><img src="img/check-orange.png" alt="✓"><span>速攻プロフローチャート</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">トレード判断に迷ったときにまずチェック。プロの思考順序をフローチャートで可視化したガイドです。<br><a href="https://discord.com/channels/1039824083208126474/1238825339849801749" target="_blank">Discordで見る →</a></span></li>
-                    <li style="color:#d1d5db; text-decoration:line-through;">YTT</li>
                 </ul>
                 <a href="https://discord.gg/CcUtqSdRDZ" target="_blank" class="ytt-sp-plan-cta free">無料で始める</a>
             </div>
 
             <!-- スタンダード -->
             <div class="ytt-sp-plan-card is-featured" id="standard">
-                <div class="ytt-sp-plan-badge">YTT 使い放題</div>
+                <div class="ytt-sp-plan-badge">おすすめ</div>
                 <div class="ytt-sp-plan-name">スタンダード</div>
                 <div class="ytt-sp-plan-desc">ほぼ全機能が使い放題</div>
                 <div class="ytt-sp-plan-price">
                     <span class="ytt-sp-plan-price-amount">¥2,900</span><span class="ytt-sp-plan-price-period">/月</span>
                 </div>
                 <div class="ytt-sp-plan-divider"></div>
+                <div class="ytt-plan-ytt-row">
+                    <img src="img/check-orange.png" alt="">
+                    <span style="display:inline-flex; flex-direction:column; align-items:center;">
+                        <span class="ytt-plan-ytt-row-text">YTT使用可能</span>
+                        <img src="img/underline-double.png" alt="" class="ytt-double-underline" style="height:26px;object-fit:fill;margin-top:2px;">
+                    </span>
+                </div>
+                <div class="ytt-plan-also-label">さらにこれも含まれる</div>
                 <ul class="ytt-sp-plan-features">
                     <li class="has-tip"><img src="img/check-orange.png" alt="✓"><span>速攻プロフローチャート</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">トレード判断に迷ったときにまずチェック。プロの思考順序をフローチャートで可視化したガイドです。<br><a href="https://discord.com/channels/1039824083208126474/1238825339849801749" target="_blank">Discordで見る →</a></span></li>
                     <li class="has-tip"><img src="img/check-orange.png" alt="✓"><span>AIサポート</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">FXに関する疑問に24時間いつでも答えてくれるAIアシスタント。気軽に相談できます。<br><a href="https://discord.com/channels/1039824083208126474/1416640423396511804" target="_blank">Discordで見る →</a></span></li>
                     <li class="has-tip"><img src="img/check-orange.png" alt="✓"><span>毎日のシナリオ動画</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">毎朝、よすががその日のシナリオを動画で解説。スタンダードでは主要3通貨ペアの分析が届きます。<br><a href="https://discord.com/channels/1039824083208126474/1048136270582382592" target="_blank">Discordで見る →</a></span></li>
                     <li class="has-tip"><img src="img/check-orange.png" alt="✓"><span>深掘解説等の限定動画</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">会員限定の特別解説動画。テーマ別に基礎から応用まで深く学べます。</span></li>
-                    <li class="has-tip highlight"><img src="img/check-orange.png" alt="✓"><span>サポートツール YTT</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">よすが式チャート分析ツール。複雑なテクニカル分析を直感的に行え、エントリー判断の精度が上がります。<br><a href="https://discord.com/channels/1039824083208126474/1447939661186990173" target="_blank">Discordで見る →</a></span></li>
                     <li class="has-tip"><img src="img/check-orange.png" alt="✓"><span>3か月プロ企画 ゼロプロ90</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">90日間でゼロからプロを目指す集中プログラム。3か月に1回の募集タイミングで参加できます。<br><a href="https://discord.com/channels/1039824083208126474/1171706488234979378" target="_blank">Discordで見る →</a></span></li>
                     <li class="has-tip"><img src="img/check-orange.png" alt="✓"><span>プロトレーダー ASTRO</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">プロトレーダーASTROの相場観・分析にアクセス可能。実践的な視点を学べます。<br><a href="https://discord.com/channels/1039824083208126474/1136925665099251753" target="_blank">Discordで見る →</a></span></li>
                     <li class="has-tip"><img src="img/check-orange.png" alt="✓"><span>プロに相談</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">困ったときにプロトレーダーに直接相談できる窓口。学習や実トレードの疑問をすぐ解消できます。<br><a href="https://discord.com/channels/1039824083208126474/1181536360398590003" target="_blank">Discordで見る →</a></span></li>
@@ -853,7 +882,6 @@
 
             <!-- プレミアム -->
             <div class="ytt-sp-plan-card is-featured">
-                <div class="ytt-sp-plan-badge">YTT 使い放題</div>
                 <div class="ytt-sp-plan-name accent">プレミアム</div>
                 <div class="ytt-sp-plan-desc">スタンダード全機能＋ライブ＆交流</div>
                 <div class="ytt-sp-plan-price">
@@ -861,6 +889,14 @@
                     <div class="ytt-sp-plan-price-sub">年額 ¥64,900 / 月額 ¥5,900</div>
                 </div>
                 <div class="ytt-sp-plan-divider"></div>
+                <div class="ytt-plan-ytt-row">
+                    <img src="img/check-orange.png" alt="">
+                    <span style="display:inline-flex; flex-direction:column; align-items:center;">
+                        <span class="ytt-plan-ytt-row-text">YTT使用可能</span>
+                        <img src="img/underline-double.png" alt="" class="ytt-double-underline" style="height:26px;object-fit:fill;margin-top:2px;">
+                    </span>
+                </div>
+                <div class="ytt-plan-also-label">さらにこれも含まれる</div>
                 <ul class="ytt-sp-plan-features">
                     <li class="has-tip"><img src="img/check-orange.png" alt="✓"><span>スタンダードの全機能</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">上記スタンダードプランの全機能をそのまま利用できます。基礎から実践まで全てカバー。</span></li>
                     <li class="has-tip highlight"><img src="img/check-orange.png" alt="✓"><span>ライブチャート分析</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">よすががチャンスと感じた相場をリアルタイム通知。プレミアム会員だけが見られる専用チャンネル。<br><a href="https://discord.com/channels/1039824083208126474/1282259603903615047" target="_blank">Discordで見る →</a></span></li>
@@ -1132,6 +1168,19 @@ gsap.utils.toArray('.ytt-sp-plan-card').forEach(function(card) {
         });
     }
 })();
+
+// Size YTT double underline to match text width
+function sizeYttUnderlines() {
+    document.querySelectorAll('.ytt-plan-ytt-row:not(.ytt-plan-ytt-row--disabled)').forEach(function(row) {
+        var text = row.querySelector('.ytt-plan-ytt-row-text');
+        var underline = row.querySelector('.ytt-double-underline');
+        if (text && underline) {
+            underline.style.width = text.offsetWidth + 'px';
+        }
+    });
+}
+document.addEventListener('DOMContentLoaded', sizeYttUnderlines);
+window.addEventListener('resize', sizeYttUnderlines);
 </script>
 </body>
 </html>

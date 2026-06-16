@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>24時間お試しスタート — YTT（よすがトレードツール）</title>
+    <meta name="robots" content="noindex">
+    <link rel="stylesheet" href="css/style.css?v=20260414m">
+    <style>
+        body {
+            background: #f8f9fc;
+            /* BudouX が挿入する wbr を活かすため文字単位の折りを抑制 */
+            word-break: keep-all;
+            overflow-wrap: anywhere;
+            line-break: strict;
+        }
+
+        /* NAV */
+        .ytt-sp-nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            background: rgba(255,255,255,0.95); backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e5e7eb;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0.875rem 2rem; gap: 1rem;
+        }
+        .ytt-sp-nav-logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: inherit; }
+        .ytt-sp-nav-logo img { height: 28px; width: auto; }
+        .ytt-sp-nav-back {
+            font-size: 0.8125rem; font-weight: 700; color: #6b7280;
+            text-decoration: none;
+        }
+        .ytt-sp-nav-back:hover { color: #1e1b4b; }
+        @media (max-width: 600px) {
+            .ytt-sp-nav { padding: 0.625rem 0.875rem; gap: 0.5rem; }
+            .ytt-sp-nav-logo img { height: 24px; }
+            .ytt-sp-nav-back { font-size: 0.75rem; }
+        }
+
+        /* HERO */
+        .ytt-sp-hero {
+            padding: 5rem 2rem 1rem;
+            text-align: center;
+            background: #fff;
+        }
+        /* ヒーローの 24h アイコン */
+        .hero-24h-icon {
+            display: block;
+            margin: -1rem auto -0.75rem;
+            width: 340px;
+            max-width: 85%;
+            height: auto;
+            filter: drop-shadow(0 6px 14px rgba(249, 115, 22, 0.18));
+        }
+        @media (max-width: 600px) {
+            .hero-24h-icon { width: 250px; max-width: 70%; }
+        }
+        .ytt-sp-hero-title {
+            font-size: clamp(1.3rem, 4.5vw, 2.125rem);
+            font-weight: 900; color: #1e1b4b;
+            line-height: 1.4; letter-spacing: -0.02em;
+            margin: 0 0 1rem;
+        }
+        .ytt-sp-title-line { display: block; text-align: center; }
+        .ytt-sp-title-line > span.line-text { display: inline-block; white-space: nowrap; position: relative; }
+        .ytt-sp-title-line .ytt-title-wave {
+            display: block; width: 100%;
+            height: clamp(14px, 3vw, 22px);
+            object-fit: fill; margin: 0.1rem 0 0.5rem;
+        }
+        .ytt-sp-hero-lead {
+            font-size: clamp(0.875rem, 1.8vw, 1rem);
+            color: #6b7280; line-height: 1.85;
+            max-width: 460px; margin: 0 auto;
+        }
+
+        /* プログレスステッパー */
+        .progress-stepper {
+            display: flex; align-items: center;
+            justify-content: center;
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 2rem 1rem 0.5rem;
+        }
+        /* +α ステップは少し控えめに */
+        .prog-step-alpha .prog-step-label { color: #f97316; }
+        .prog-step-alpha:not(.is-active):not(.is-done) .prog-step-label { color: #fdba74; }
+        .prog-step {
+            display: flex; flex-direction: column;
+            align-items: center; gap: 0.4rem;
+            flex-shrink: 0;
+            position: relative;
+        }
+        .prog-step-icon {
+            width: 44px; height: 44px;
+            position: relative;
+            transition: filter 0.4s ease, opacity 0.4s ease;
+        }
+        .prog-step-icon img { width: 100%; height: auto; display: block; }
+        .prog-step:not(.is-active):not(.is-done) .prog-step-icon {
+            filter: grayscale(1) brightness(1.6);
+            opacity: 0.35;
+        }
+        .prog-step.is-active .prog-step-icon {
+            filter: none;
+            transform: scale(1.08);
+            transition: filter 0.4s ease, transform 0.3s ease;
+        }
+        .prog-step.is-done .prog-step-icon img { opacity: 0.85; }
+        .prog-step .prog-step-done-mark {
+            position: absolute;
+            top: -4px; right: -6px;
+            width: 22px; height: 22px;
+            background: #fff;
+            border-radius: 50%;
+            display: none;
+            align-items: center; justify-content: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .prog-step.is-done .prog-step-done-mark { display: inline-flex; }
+        .prog-step .prog-step-done-mark img { width: 16px; height: 16px; }
+        .prog-step-label {
+            font-size: 0.6875rem;
+            font-weight: 800;
+            color: #9ca3af;
+            white-space: nowrap;
+            transition: color 0.3s ease;
+        }
+        .prog-step.is-active .prog-step-label { color: #1e1b4b; }
+        .prog-step.is-done .prog-step-label { color: #6b7280; }
+        .prog-line {
+            flex: 1; height: 2px;
+            background: #e5e7eb;
+            max-width: 80px;
+            margin: 0 0.5rem;
+            margin-bottom: 1.4rem;
+            transition: background 0.4s ease;
+            border-radius: 1px;
+        }
+        .prog-line.is-done { background: #9ca3af; }
+        @media (max-width: 600px) {
+            .progress-stepper { padding: 1.5rem 0.75rem 0.5rem; }
+            .prog-step-icon { width: 36px; height: 36px; }
+            .prog-step.is-done .prog-step-done-mark { width: 18px; height: 18px; top: -3px; right: -4px; }
+            .prog-step.is-done .prog-step-done-mark img { width: 13px; height: 13px; }
+            .prog-step-label { font-size: 0.625rem; }
+            .prog-line { max-width: 28px; margin: 0 0.25rem; margin-bottom: 1.3rem; }
+        }
+
+        /* STEPS FLOW */
+        .steps-flow {
+            padding: 1.5rem 1.5rem 4rem;
+            max-width: 720px; margin: 0 auto;
+        }
+        .step-card {
+            background: #fff;
+            border: 1.5px solid #e5e7eb;
+            border-radius: 16px;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        /* STEP +α のみ：シミュレータがはみ出せるようoverflow解除 */
+        .step-card[data-step="alpha"] { overflow: visible; }
+        .step-card:not([data-step="alpha"]) { overflow: hidden; }
+        /* +α 識別バッジ */
+        .step-card-alpha {
+            border-color: #fed7aa !important;
+        }
+        .step-card-alpha.is-active {
+            border-color: #f97316 !important;
+            box-shadow: none !important;
+        }
+        .step-alpha-badge {
+            position: absolute;
+            top: -16px; left: 24px;
+            background: #f97316;
+            color: #fff;
+            font-size: 0.9375rem;
+            font-weight: 900;
+            padding: 0.5rem 1.125rem;
+            border-radius: 6px;
+            letter-spacing: 0.06em;
+        }
+        .step-card.is-hidden { display: none; }
+        .step-card.is-active {
+            border-color: var(--primary);
+            box-shadow: 0 8px 24px rgba(79,70,229,0.07);
+        }
+        /* 完了状態はグレー */
+        .step-card.is-done {
+            border-color: #e5e7eb;
+            background: #fafafa;
+        }
+        .step-card.is-done .step-info h2,
+        .step-card.is-done .step-info p {
+            opacity: 0.7;
+        }
+
+        .step-card-body {
+            padding: 1.5rem 1.5rem 1.25rem;
+            display: flex; gap: 1.5rem;
+            align-items: center;
+        }
+        @media (max-width: 600px) {
+            .step-card-body { flex-direction: column; padding: 1.5rem 1.25rem 1.25rem; gap: 1rem; }
+        }
+
+        /* 右上に完了マーク */
+        .step-card-done-corner {
+            position: absolute;
+            top: 0.875rem; right: 1rem;
+            display: none;
+            align-items: center; gap: 0.375rem;
+            font-size: 0.75rem; font-weight: 800;
+            color: #6b7280;
+        }
+        .step-card.is-done .step-card-done-corner { display: inline-flex; }
+        .step-card-done-corner img { width: 16px; height: 16px; }
+
+        /* プレビューエリア */
+        .step-preview {
+            flex-shrink: 0;
+            width: 280px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        @media (max-width: 600px) {
+            .step-preview { width: 100%; height: auto; }
+        }
+
+        /* 規約プレビュー (書類風) */
+        .preview-doc {
+            width: 100px; height: 130px;
+            background: #fff;
+            border: 1.5px solid #e5e7eb;
+            border-radius: 6px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+            padding: 11px 9px;
+            transform: rotate(-3deg);
+            position: relative;
+        }
+        .preview-doc-tab {
+            position: absolute;
+            top: 8px; right: 8px;
+            width: 22px; height: 5px;
+            background: #f97316;
+            border-radius: 1px;
+        }
+        .preview-doc-h {
+            font-size: 0.5rem; font-weight: 900;
+            color: #1e1b4b;
+            margin: 4px 0 8px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid #f0f0f0;
+            letter-spacing: 0.02em;
+        }
+        .preview-doc-line {
+            height: 3px;
+            background: #e5e7eb;
+            border-radius: 1px;
+            margin-bottom: 4px;
+        }
+        .preview-doc-line.s { width: 60%; }
+        .preview-doc-line.m { width: 85%; }
+        .preview-doc-line.l { width: 100%; }
+
+        /* 段ボール箱プレビュー */
+        .preview-box {
+            width: 105px; height: 130px;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            gap: 0.5rem;
+            position: relative;
+        }
+        .preview-box-icon {
+            width: 76px; height: 70px;
+            position: relative;
+        }
+        .preview-box-icon svg {
+            width: 100%; height: 100%;
+            display: block;
+            filter: drop-shadow(0 4px 8px rgba(120, 65, 30, 0.18));
+        }
+        .preview-box-label {
+            font-size: 0.6875rem; font-weight: 800;
+            color: #1e1b4b;
+            text-align: center;
+        }
+        .preview-box-size {
+            font-size: 0.5625rem;
+            color: #9ca3af;
+            font-weight: 600;
+            text-align: center;
+            margin-top: -0.25rem;
+        }
+        .preview-box-badge {
+            position: absolute;
+            bottom: 14px; right: -2px;
+            width: 30px; height: 30px;
+            border-radius: 50%;
+            background: var(--primary); color: #fff;
+            display: inline-flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 10px rgba(79,70,229,0.3);
+            border: 2px solid #fff;
+        }
+        .preview-box-badge svg { width: 14px; height: 14px; }
+
+        /* マニュアル プレビュー — 実スクショ（傾きなし＆大きく） */
+        .preview-manual {
+            width: 260px;
+            aspect-ratio: 1087 / 937;
+            border-radius: 10px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+            overflow: hidden;
+            background: #fff;
+        }
+        .preview-manual img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* シミュレータ プレビュー — YTT注文パネル（ほぼ正方形 495x522） */
+        .preview-sim {
+            width: 240px;
+            aspect-ratio: 495 / 522;
+            border-radius: 10px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+            overflow: hidden;
+            background: #1e1b4b;
+        }
+        .preview-sim img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        @media (max-width: 600px) {
+            .preview-manual { width: 280px; }
+            .preview-sim { width: 240px; }
+        }
+
+        /* STEP本文 */
+        .step-info {
+            flex: 1; min-width: 0;
+            display: flex; flex-direction: column;
+            justify-content: center;
+        }
+        .step-info p {
+            font-size: 0.875rem;
+            color: #6b7280;
+            line-height: 1.85;
+            margin: 0 0 1rem;
+        }
+
+        /* タイトル + 文字幅に合わせたオレンジ波線 */
+        .step-title-h2 {
+            font-size: clamp(1rem, 2.2vw, 1.1875rem);
+            font-weight: 900;
+            color: #1e1b4b;
+            margin: 0 0 0.625rem;
+            line-height: 1.55;
+            text-align: left;
+        }
+        @media (max-width: 600px) {
+            .step-info { text-align: center; }
+            .step-title-h2 { text-align: center; }
+        }
+        .step-title-text {
+            display: inline-block;
+            position: relative;
+        }
+        .step-title-wave {
+            display: block;
+            width: 100%;
+            height: 13px;
+            object-fit: fill;
+            margin-top: 2px;
+        }
+
+        /* アクションボタン群 */
+        .step-actions {
+            display: flex; gap: 0.625rem; flex-wrap: wrap;
+        }
+        @media (max-width: 600px) {
+            .step-actions { justify-content: center; }
+        }
+        .btn-outline-step {
+            display: inline-flex; align-items: center; gap: 0.375rem;
+            background: #fff; color: var(--primary);
+            border: 1.5px solid var(--primary); border-radius: 10px;
+            padding: 0.6rem 1.25rem;
+            font-size: 0.875rem; font-weight: 800;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .btn-outline-step:hover { background: var(--primary); color: #fff; }
+        .btn-solid-step {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: var(--primary); color: #fff;
+            border: 1.5px solid var(--primary); border-radius: 10px;
+            padding: 0.7rem 1.5rem;
+            font-size: 0.9375rem; font-weight: 800;
+            text-decoration: none;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        .btn-solid-step:hover { opacity: 0.88; }
+        .btn-solid-step .dl-icon {
+            width: 18px; height: 18px;
+            display: inline-flex; align-items: center; justify-content: center;
+        }
+        .btn-solid-step .dl-icon svg { width: 100%; height: 100%; }
+        @keyframes dl-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(2px); }
+        }
+        .btn-solid-step .dl-icon { animation: dl-bounce 2.4s ease-in-out infinite; }
+        @media (prefers-reduced-motion: reduce) {
+            .btn-solid-step .dl-icon { animation: none; }
+        }
+
+        /* シミュレータ用 */
+        .sim-intro {
+            padding: 0 1.5rem 0.5rem;
+            font-size: 0.8125rem;
+            color: #6b7280;
+            line-height: 1.8;
+            text-align: center;
+        }
+        .sim-intro strong { color: #1e1b4b; }
+
+        /* ============================================
+         * シミュレータ — intro/ と同じ ytt-demo 仕組み
+         * CSSは style.css 既存定義（.ytt-demo / .ytt-demo-frame.is-fullscreen 等）を使用
+         * 独立ラッパーで GSAP transform残骸の影響を回避
+         * 初期は max-height: 0 で隠す（iframe は読み込み済み）
+         * ============================================ */
+        .trial-sim-wrap {
+            margin: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+        .trial-sim-wrap.is-visible {
+            max-height: 200vh;
+            margin-bottom: 0;
+        }
+
+        /* 次へ進むボタン (各stepの下) */
+        .step-next {
+            text-align: right;
+            padding: 0 1.5rem 1.25rem;
+        }
+        @media (max-width: 600px) {
+            .step-next { text-align: center; }
+        }
+        .btn-next-step {
+            display: inline-flex; align-items: center; gap: 0.375rem;
+            background: var(--primary); color: #fff;
+            border: none; border-radius: 10px;
+            padding: 0.65rem 1.5rem;
+            font-size: 0.875rem; font-weight: 800;
+            text-decoration: none;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        .btn-next-step:hover { opacity: 0.88; }
+
+        /* 完了バナー — 濃紺紫セクション */
+        .complete-banner {
+            text-align: center;
+            padding: 3.5rem 1.5rem 4rem;
+            background: #3730a3;
+            color: #fff;
+            margin: 0;
+            display: none;
+        }
+        .complete-banner.is-visible { display: block; }
+        .complete-banner-check {
+            width: 64px; height: 64px;
+            margin: 0 auto 1rem;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: inline-flex; align-items: center; justify-content: center;
+        }
+        .complete-banner-check img { width: 36px; height: 36px; }
+        .complete-banner h2 {
+            font-size: clamp(1.125rem, 3vw, 1.5rem);
+            font-weight: 900; color: #fff;
+            margin: 0 0 0.5rem;
+        }
+        .complete-banner p {
+            font-size: 0.875rem; color: rgba(255,255,255,0.78);
+            line-height: 1.85; margin: 0 auto 1.5rem;
+            max-width: 460px;
+        }
+        /* サポートリンク 2枚カード（初期のシンプル版） */
+        .complete-links {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            max-width: 600px;
+            margin: 0.5rem auto 0;
+        }
+        @media (max-width: 600px) {
+            .complete-links { grid-template-columns: 1fr; max-width: 360px; }
+        }
+        .complete-link-card {
+            background: #fff;
+            border: 1.5px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1.25rem 1.125rem;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+        }
+        .complete-link-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 18px rgba(0,0,0,0.07);
+            border-color: var(--primary);
+        }
+        .complete-link-title {
+            font-size: 0.9375rem;
+            font-weight: 900;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        .complete-link-desc {
+            font-size: 0.75rem;
+            color: #6b7280;
+            line-height: 1.75;
+        }
+
+        .ytt-sp-page-footer {
+            padding: 1.5rem 2rem;
+            text-align: center;
+            font-size: 0.8125rem; color: #9ca3af;
+            border-top: 1px solid #f0f0f0;
+            background: #fff;
+        }
+        .ytt-sp-page-footer a { color: #9ca3af; text-decoration: underline; }
+
+        [data-anim] { opacity: 0; }
+    </style>
+</head>
+<body>
+
+<!--
+====================================================================
+  ①FX SPACE加入者で24時間お試しを押した後のページ
+  ytt-trial-start.html
+
+  【本番反映前TODO】
+  [1] #href-tbd-ytt-download
+      → STEP2「YTTをダウンロード」ボタンの遷移先URL（計1箇所）
+  [2] ytt-trial-terms.html
+      → 仮の規約ページ。よすが用意の正式版が出来たら差し替え
+
+  【チュートリアルの流れ】
+  STEP1 利用規約 → 仮規約ページで最下部までスクロール
+       → 同意UI出現 → 決定で ?agreed=1 で戻り、STEP2 出現
+  STEP2 ダウンロード → ボタンクリックで STEP3 出現
+  STEP3 導入マニュアル → 「導入できたら次へ」で STEP4 出現
+  STEP4 使い方マニュアル → 「マスターしたら次へ」で STEP+α と完了バナー出現
+  STEP+α シミュレーター → intro/と同じ ytt-demo 仕組み（全画面ON/OFF可）
+====================================================================
+-->
+
+<nav class="ytt-sp-nav">
+    <a href="ytt-tokusetu.html" class="ytt-sp-nav-logo">
+        <img src="img/ytt-nav-logo.png" alt="YTT — FX SPACE">
+    </a>
+    <a href="ytt-tokusetu.html" class="ytt-sp-nav-back">← YTT特設ページに戻る</a>
+</nav>
+
+<!-- HERO -->
+<section class="ytt-sp-hero">
+    <img class="hero-24h-icon" src="img/icon-24h-hero.png" alt="24時間" data-anim>
+    <h1 class="ytt-sp-hero-title" data-anim>
+        <span class="ytt-sp-title-line"><span class="line-text">24時間お試しを<img class="ytt-title-wave" src="img/wave-yellow.png" alt=""></span></span>
+        <span class="ytt-sp-title-line"><span class="line-text">スタートしましょう<img class="ytt-title-wave" src="img/wave-yellow.png" alt=""></span></span>
+    </h1>
+    <p class="ytt-sp-hero-lead" data-anim>
+        下のステップを上から順番に進めるだけで<wbr>セットアップが完了します。
+    </p>
+</section>
+
+<!-- プログレスステッパー -->
+<div class="progress-stepper" data-anim>
+    <div class="prog-step is-active" data-prog="1">
+        <div class="prog-step-icon">
+            <img src="img/crayon-1.png" alt="1">
+            <span class="prog-step-done-mark"><img src="img/check-orange.png" alt="✓"></span>
+        </div>
+        <span class="prog-step-label">規約同意</span>
+    </div>
+    <div class="prog-line" data-prog-line="1"></div>
+    <div class="prog-step" data-prog="2">
+        <div class="prog-step-icon">
+            <img src="img/crayon-2.png" alt="2">
+            <span class="prog-step-done-mark"><img src="img/check-orange.png" alt="✓"></span>
+        </div>
+        <span class="prog-step-label">ダウンロード</span>
+    </div>
+    <div class="prog-line" data-prog-line="2"></div>
+    <div class="prog-step" data-prog="3">
+        <div class="prog-step-icon">
+            <img src="img/crayon-3.png" alt="3">
+            <span class="prog-step-done-mark"><img src="img/check-orange.png" alt="✓"></span>
+        </div>
+        <span class="prog-step-label">導入</span>
+    </div>
+    <div class="prog-line" data-prog-line="3"></div>
+    <div class="prog-step" data-prog="4">
+        <div class="prog-step-icon">
+            <img src="img/crayon-4.png" alt="4">
+            <span class="prog-step-done-mark"><img src="img/check-orange.png" alt="✓"></span>
+        </div>
+        <span class="prog-step-label">使い方</span>
+    </div>
+    <div class="prog-line" data-prog-line="4"></div>
+    <div class="prog-step prog-step-alpha" data-prog="alpha">
+        <div class="prog-step-icon">
+            <img src="img/crayon-orange-5.png" alt="+α">
+            <span class="prog-step-done-mark"><img src="img/check-orange.png" alt="✓"></span>
+        </div>
+        <span class="prog-step-label">+α 練習</span>
+    </div>
+</div>
+
+<!-- STEPSフロー -->
+<section class="steps-flow">
+
+    <!-- STEP 1 -->
+    <article class="step-card is-active" data-step="1">
+        <span class="step-card-done-corner"><img src="img/check-orange.png" alt="">完了</span>
+        <div class="step-card-body">
+            <div class="step-preview">
+                <div class="preview-doc">
+                    <span class="preview-doc-tab"></span>
+                    <div class="preview-doc-h">YTT 利用規約</div>
+                    <div class="preview-doc-line l"></div>
+                    <div class="preview-doc-line l"></div>
+                    <div class="preview-doc-line m"></div>
+                    <div class="preview-doc-line l"></div>
+                    <div class="preview-doc-line s"></div>
+                    <div class="preview-doc-line l"></div>
+                    <div class="preview-doc-line m"></div>
+                    <div class="preview-doc-line l"></div>
+                    <div class="preview-doc-line s"></div>
+                </div>
+            </div>
+            <div class="step-info">
+                <h2 class="step-title-h2">
+                    <span class="step-title-text">
+                        利用規約をご確認ください
+                        <img src="img/wave-orange.png" alt="" class="step-title-wave">
+                    </span>
+                </h2>
+                <p>YTTの利用条件・サポート範囲・<wbr>禁止事項などが記載されています。<br>規約の最下部にある「同意する」へお進みください。</p>
+                <div class="step-actions">
+                    <a href="ytt-trial-terms.html" class="btn-solid-step" id="termsLink">
+                        利用規約を読む →
+                    </a>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- STEP 2 (初期は非表示) -->
+    <article class="step-card is-hidden" data-step="2">
+        <span class="step-card-done-corner"><img src="img/check-orange.png" alt="">完了</span>
+        <div class="step-card-body">
+            <div class="step-preview">
+                <div class="preview-box">
+                    <div class="preview-box-icon">
+                        <svg viewBox="0 0 76 74" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <clipPath id="boxTopClip">
+                                    <polygon points="6,20 38,5 70,20 38,35"/>
+                                </clipPath>
+                            </defs>
+                            <!-- Soft ground shadow -->
+                            <ellipse cx="38" cy="70" rx="26" ry="2" fill="#000" opacity="0.08"/>
+                            <!-- Top face (lightest brown) -->
+                            <polygon points="6,20 38,5 70,20 38,35" fill="#d29457" stroke="#6b3f17" stroke-width="1.4" stroke-linejoin="round"/>
+                            <!-- Left front face -->
+                            <polygon points="6,20 6,52 38,67 38,35" fill="#a76b30" stroke="#6b3f17" stroke-width="1.4" stroke-linejoin="round"/>
+                            <!-- Right front face -->
+                            <polygon points="70,20 70,52 38,67 38,35" fill="#8b541e" stroke="#6b3f17" stroke-width="1.4" stroke-linejoin="round"/>
+                            <!-- Tape across the seam: from middle of LEFT edge to middle of RIGHT edge (clipped to top face) -->
+                            <g clip-path="url(#boxTopClip)">
+                                <polygon points="21,15 53,30 55,25 23,10" fill="#b07d3e" opacity="0.95"/>
+                            </g>
+                        </svg>
+                        <span class="preview-box-badge">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                        </span>
+                    </div>
+                    <div class="preview-box-label">YTT.zip</div>
+                    <div class="preview-box-size">約 1.2 MB</div>
+                </div>
+            </div>
+            <div class="step-info">
+                <h2 class="step-title-h2">
+                    <span class="step-title-text">
+                        YTTをダウンロード
+                        <img src="img/wave-orange.png" alt="" class="step-title-wave">
+                    </span>
+                </h2>
+                <p>下のボタンからzipファイルを保存してください。<wbr>ダウンロードが終わったら次のステップに進みます。</p>
+                <div class="step-actions">
+                    <a href="#href-tbd-ytt-download" class="btn-solid-step" id="dlBtn">
+                        <span class="dl-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="3" x2="12" y2="15"/></svg></span>
+                        YTTをダウンロード
+                    </a>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- STEP 3 (初期は非表示) -->
+    <article class="step-card is-hidden" data-step="3">
+        <span class="step-card-done-corner"><img src="img/check-orange.png" alt="">完了</span>
+        <div class="step-card-body">
+            <div class="step-preview">
+                <div class="preview-manual install">
+                    <img src="img/manual-install-preview.png" alt="導入方法マニュアル">
+                </div>
+            </div>
+            <div class="step-info">
+                <h2 class="step-title-h2">
+                    <span class="step-title-text">
+                        マニュアルを見ながら導入
+                        <img src="img/wave-orange.png" alt="" class="step-title-wave">
+                    </span>
+                </h2>
+                <p>ダウンロードしたファイルを、<wbr>お使いのプラットフォームに導入します。<wbr>導入方法マニュアルが図解で案内します。</p>
+                <div class="step-actions">
+                    <a href="https://www.canva.com/design/DAF1unsWf4o/2r40mzmK0qw0eZA9k4MP9Q/edit" class="btn-outline-step" target="_blank" rel="noopener" id="installManualLink">
+                        導入方法マニュアルを開く →
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="step-next">
+            <button class="btn-next-step" id="step3Next">導入できたら次へ →</button>
+        </div>
+    </article>
+
+    <!-- STEP 4: 使い方マニュアル (初期は非表示) -->
+    <article class="step-card is-hidden" data-step="4">
+        <span class="step-card-done-corner"><img src="img/check-orange.png" alt="">完了</span>
+        <div class="step-card-body">
+            <div class="step-preview">
+                <div class="preview-manual usage">
+                    <img src="img/manual-usage-preview.png" alt="使い方マニュアル">
+                </div>
+            </div>
+            <div class="step-info">
+                <h2 class="step-title-h2">
+                    <span class="step-title-text">
+                        使い方マニュアルでマスターしよう
+                        <img src="img/wave-orange.png" alt="" class="step-title-wave">
+                    </span>
+                </h2>
+                <p>各機能の使い方を画像つきで分かりやすく解説。<wbr>初心者でもすぐに使えるようになります。</p>
+                <div class="step-actions">
+                    <a href="https://www.canva.com/design/DAF_Wqy7hQc/IJKV8x4ruUtEpWdzpuJ4wg/edit" class="btn-outline-step" target="_blank" rel="noopener">
+                        使い方マニュアルを開く →
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="step-next">
+            <button class="btn-next-step" id="step4Next">マスターしたら次へ →</button>
+        </div>
+    </article>
+
+    <!-- STEP +α: シミュレーターで予約練習 (初期は非表示) -->
+    <article class="step-card is-hidden step-card-alpha" data-step="alpha">
+        <span class="step-card-done-corner"><img src="img/check-orange.png" alt="">完了</span>
+        <span class="step-alpha-badge">+α</span>
+        <div class="step-card-body">
+            <div class="step-preview">
+                <div class="preview-sim">
+                    <img src="img/ytt-order-panel.png" alt="YTTシミュレータ">
+                </div>
+            </div>
+            <div class="step-info">
+                <h2 class="step-title-h2">
+                    <span class="step-title-text">
+                        困ったらシミュレーターで予約練習
+                        <img src="img/wave-orange.png" alt="" class="step-title-wave">
+                    </span>
+                </h2>
+                <p>導入後、いきなり本番チャートを動かすのは不安…<wbr>という方は、まず下のシミュレーターで<wbr>予約注文の動きを体験してみましょう。</p>
+            </div>
+        </div>
+        <p class="sim-intro">
+            <strong>下のシミュレータで、まずは一度操作してみましょう。</strong><br>
+            本番のチャートで動かす前に、ここで操作感を掴めます。<br>
+            シミュレーター内の<wbr><strong>「⛶ 全画面表示」</strong>ボタンを押すと<wbr>画面いっぱいで操作できます。
+        </p>
+    </article>
+
+</section>
+
+<!-- シミュレーター ytt-demo — step-card 外に出してGSAP transformの影響を回避（DOMは常時存在、max-heightで表示制御） -->
+<div class="trial-sim-wrap" id="trial-sim-wrap">
+    <div class="ytt-demo" id="ytt-demo-trial">
+        <div class="ytt-demo-frame" id="ytt-demo-frame-trial">
+            <div class="ytt-demo-mobile-msg">
+                <p style="font-size:1.1rem;font-weight:800;margin-bottom:0.5rem;">PC専用コンテンツです</p>
+                <p style="font-size:0.85rem;color:rgba(255,255,255,0.7);line-height:1.7;">このシミュレーターはPCでのみ<br>ご利用いただけます。<br>パソコンからアクセスしてください。</p>
+            </div>
+            <iframe src="ytt-simulator-reserve.html" title="YTTシミュレータ"></iframe>
+        </div>
+        <button class="ytt-demo-exit-btn" id="ytt-demo-exit-btn-trial" type="button" onclick="closeYttDemoTrial()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><path d="M18 6L6 18M6 6l12 12"></path></svg>
+            デモを閉じる
+        </button>
+    </div>
+</div>
+
+<!-- 完了バナー -->
+<div class="complete-banner" id="completeBanner">
+    <div class="complete-banner-check"><img src="img/check-orange.png" alt="✓"></div>
+    <h2>準備完了！</h2>
+    <p>
+        ここまでお疲れさまでした。<br>
+        分からないことがあれば、<wbr>下のチャンネルからお気軽にどうぞ。
+    </p>
+    <div class="complete-links">
+        <a class="complete-link-card" href="https://discordapp.com/channels/1039824083208126474/1181497563992576051" target="_blank" rel="noopener">
+            <span class="complete-link-title">YTT質問フォーラム</span>
+            <span class="complete-link-desc">過去にメンバーが質問した内容が<br>すべて残っています</span>
+        </a>
+        <a class="complete-link-card" href="https://discordapp.com/channels/1039824083208126474/1151440259553439784" target="_blank" rel="noopener">
+            <span class="complete-link-title">YTTサポート</span>
+            <span class="complete-link-desc">YTT開発者やAIが<br>問題をすべて解決してくれます</span>
+        </a>
+    </div>
+</div>
+
+<footer class="ytt-sp-page-footer">
+    <p>© FX SPACE — <a href="ytt-tokusetu.html">YTT特設ページ</a> / <a href="index.html">トップページ</a></p>
+</footer>
+
+<script src="js/gsap.min.js?v=20260301a"></script>
+<script src="js/ScrollTrigger.min.js?v=20260301a"></script>
+<script>
+(function() {
+    var hasGsap = typeof gsap !== 'undefined';
+    if (hasGsap) {
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.utils.toArray('[data-anim]').forEach(function(el, i) {
+            gsap.fromTo(el, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.6, delay: 0.05 + i * 0.08, ease: 'power2.out' });
+        });
+    } else {
+        document.querySelectorAll('[data-anim]').forEach(function(el) { el.style.opacity = 1; });
+    }
+
+    var stepCards = {};
+    document.querySelectorAll('.step-card').forEach(function(card) {
+        stepCards[card.getAttribute('data-step')] = card;
+    });
+
+    function setProgState(n, state) {
+        var ps = document.querySelector('.prog-step[data-prog="' + n + '"]');
+        if (!ps) return;
+        ps.classList.remove('is-active', 'is-done');
+        if (state === 'active') ps.classList.add('is-active');
+        else if (state === 'done') ps.classList.add('is-done');
+    }
+    function setProgLine(n, done) {
+        var pl = document.querySelector('.prog-line[data-prog-line="' + n + '"]');
+        if (pl) pl.classList[done ? 'add' : 'remove']('is-done');
+    }
+    function setStepStatus(n, status) {
+        var card = stepCards[n];
+        if (!card) return;
+        card.classList.remove('is-active', 'is-done');
+        if (status === 'active') card.classList.add('is-active');
+        else if (status === 'done') card.classList.add('is-done');
+    }
+    function revealStep(n, instant) {
+        var card = stepCards[n];
+        if (!card) return;
+        card.classList.remove('is-hidden');
+        if (hasGsap) {
+            gsap.fromTo(card, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' });
+        }
+        setStepStatus(n, 'active');
+        setProgState(n, 'active');
+        // step +α なら独立シミュレーターラッパーも表示（is-visibleで max-height アニメ）
+        if (n === 'alpha') {
+            var simWrap = document.getElementById('trial-sim-wrap');
+            if (simWrap) simWrap.classList.add('is-visible');
+        }
+        if (!instant) {
+            setTimeout(function() {
+                card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 400);
+        }
+    }
+
+    // STEP 1 → 規約ページから戻ってきた場合（?agreed=1）
+    var step1Done = false, step2Done = false, step3Done = false, step4Done = false;
+    var urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('agreed') === '1') {
+        // STEP1完了状態でSTEP2を表示
+        step1Done = true;
+        setStepStatus(1, 'done');
+        setProgState(1, 'done');
+        setProgLine(1, true);
+        revealStep(2);
+        // URLからパラメータを削除
+        if (history.replaceState) {
+            history.replaceState(null, '', 'ytt-trial-start.html');
+        }
+    }
+
+    // STEP 2: ダウンロードクリック → STEP 3出現
+    var dlBtn = document.getElementById('dlBtn');
+    if (dlBtn) {
+        dlBtn.addEventListener('click', function() {
+            if (step2Done) return;
+            step2Done = true;
+            setStepStatus(2, 'done');
+            setProgState(2, 'done');
+            setProgLine(2, true);
+            revealStep(3);
+        });
+    }
+
+    // STEP 3: 次へボタン → STEP 4出現
+    var step3Next = document.getElementById('step3Next');
+    if (step3Next) {
+        step3Next.addEventListener('click', function() {
+            if (step3Done) return;
+            step3Done = true;
+            setStepStatus(3, 'done');
+            setProgState(3, 'done');
+            setProgLine(3, true);
+            revealStep(4);
+        });
+    }
+
+    var completeBanner = document.getElementById('completeBanner');
+
+    // STEP 4: 使い方マスターしたらボタン → STEP +α 出現 + 完了バナー表示
+    var step4Next = document.getElementById('step4Next');
+    if (step4Next) {
+        step4Next.addEventListener('click', function() {
+            if (step4Done) return;
+            step4Done = true;
+            setStepStatus(4, 'done');
+            setProgState(4, 'done');
+            setProgLine(4, true);
+            revealStep('alpha');
+            if (completeBanner) {
+                completeBanner.classList.add('is-visible');
+                if (hasGsap) {
+                    gsap.fromTo(completeBanner, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' });
+                }
+            }
+        });
+    }
+
+    // STEP +α: シミュレータカードが見えたら is-done
+    var stepAlphaCard = stepCards['alpha'];
+    if (hasGsap && stepAlphaCard) {
+        ScrollTrigger.create({
+            trigger: stepAlphaCard,
+            start: 'bottom 85%',
+            once: true,
+            onEnter: function() {
+                if (step4Done) {
+                    setStepStatus('alpha', 'done');
+                    setProgState('alpha', 'done');
+                }
+            }
+        });
+    }
+
+    // シミュレータ — intro/ と同じ ytt-demo フルスクリーン仕組み
+    window.toggleYttFullscreenTrial = function() {
+        if (window.innerWidth <= 768) return;
+        var frame = document.getElementById('ytt-demo-frame-trial');
+        var exitBtn = document.getElementById('ytt-demo-exit-btn-trial');
+        if (!frame || !exitBtn) return;
+        var iframe = frame.querySelector('iframe');
+        var isFs = !frame.classList.contains('is-fullscreen');
+        if (isFs) {
+            frame.style.transition = 'none';
+            frame.style.opacity = '0';
+            frame.classList.add('is-fullscreen');
+            var ov = document.getElementById('ytt-fs-overlay');
+            if (!ov) {
+                ov = document.createElement('div');
+                ov.id = 'ytt-fs-overlay';
+                document.body.appendChild(ov);
+            }
+            requestAnimationFrame(function() {
+                requestAnimationFrame(function() {
+                    ov.classList.add('visible');
+                    frame.style.transition = 'opacity 0.35s ease';
+                    frame.style.opacity = '1';
+                });
+            });
+            exitBtn.classList.add('visible');
+            document.body.style.overflow = 'hidden';
+            if (iframe && iframe.contentWindow) iframe.contentWindow.postMessage({type:'ytt-fullscreen-state',fullscreen:true},'*');
+        } else {
+            frame.style.transition = 'opacity 0.25s ease';
+            frame.style.opacity = '0';
+            var ov2 = document.getElementById('ytt-fs-overlay');
+            if (ov2) ov2.classList.remove('visible');
+            setTimeout(function() {
+                frame.classList.remove('is-fullscreen');
+                frame.style.transition = '';
+                frame.style.opacity = '';
+                if (ov2) ov2.remove();
+            }, 300);
+            exitBtn.classList.remove('visible');
+            document.body.style.overflow = '';
+            if (iframe && iframe.contentWindow) iframe.contentWindow.postMessage({type:'ytt-fullscreen-state',fullscreen:false},'*');
+        }
+    };
+    window.closeYttDemoTrial = function() {
+        var frame = document.getElementById('ytt-demo-frame-trial');
+        if (frame && frame.classList.contains('is-fullscreen')) {
+            window.toggleYttFullscreenTrial();
+        }
+    };
+    // iframe からのメッセージを受信
+    window.addEventListener('message', function(e) {
+        if (e.data && e.data.type === 'ytt-go-fullscreen') {
+            var frame = document.getElementById('ytt-demo-frame-trial');
+            if (frame && !frame.classList.contains('is-fullscreen')) {
+                window.toggleYttFullscreenTrial();
+            }
+        }
+        if (e.data && e.data.type === 'ytt-close-fullscreen') {
+            window.closeYttDemoTrial();
+        }
+    });
+    // Escape キーで閉じる
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            var frame = document.getElementById('ytt-demo-frame-trial');
+            if (frame && frame.classList.contains('is-fullscreen')) {
+                window.closeYttDemoTrial();
+            }
+        }
+    });
+})();
+</script>
+<!-- BudouX — 日本語の自動文節改行（画面サイズに応じて最適な位置で折る） -->
+<script src="https://cdn.jsdelivr.net/npm/budoux/bundle/budoux-ja.min.js" defer></script>
+<script>
+window.addEventListener('DOMContentLoaded', function() {
+    if (window.budoux) {
+        try {
+            var parser = window.budoux.loadDefaultJapaneseParser();
+            parser.applyElement(document.body);
+        } catch (e) {}
+    }
+});
+</script>
+</body>
+</html>

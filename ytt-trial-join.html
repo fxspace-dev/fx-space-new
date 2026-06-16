@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YTTお試しの前に — FX SPACE Discordへご参加ください</title>
+    <meta name="robots" content="noindex">
+    <link rel="stylesheet" href="css/style.css?v=20260414m">
+    <style>
+        body {
+            background: #f8f9fc;
+            /* BudouX が挿入する wbr を活かすため文字単位の折りを抑制 */
+            word-break: keep-all;
+            overflow-wrap: anywhere;
+            line-break: strict;
+        }
+
+        /* NAV */
+        .ytt-sp-nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            background: rgba(255,255,255,0.95); backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e5e7eb;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0.875rem 2rem; gap: 1rem;
+        }
+        .ytt-sp-nav-logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: inherit; }
+        .ytt-sp-nav-logo img { height: 28px; width: auto; }
+        .ytt-sp-nav-back {
+            font-size: 0.8125rem; font-weight: 700; color: #6b7280;
+            text-decoration: none;
+        }
+        .ytt-sp-nav-back:hover { color: #1e1b4b; }
+        @media (max-width: 600px) {
+            .ytt-sp-nav { padding: 0.625rem 0.875rem; gap: 0.5rem; }
+            .ytt-sp-nav-logo img { height: 24px; }
+            .ytt-sp-nav-back { font-size: 0.75rem; }
+        }
+
+        /* HERO */
+        .ytt-sp-hero {
+            padding: 7rem 2rem 3rem;
+            text-align: center;
+            background: #fff;
+        }
+
+        /* FX SPACE × Discord ブランドアイコン */
+        .hero-brand-row {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.75rem;
+        }
+        .hero-fxspace-icon {
+            width: 68px; height: 68px;
+            border-radius: 16px;
+            box-shadow: 0 6px 16px rgba(30,27,75,0.18);
+            background: #1e1b4b;
+            display: inline-block;
+        }
+        .hero-fxspace-icon img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            border-radius: 16px;
+        }
+        .hero-brand-divider {
+            font-size: 1rem; font-weight: 900;
+            color: #9ca3af;
+            letter-spacing: 0.05em;
+        }
+        .hero-discord-icon {
+            width: 68px; height: 68px;
+            border-radius: 16px;
+            display: inline-block;
+            box-shadow: 0 6px 16px rgba(88,101,242,0.3);
+            overflow: hidden;
+        }
+        .hero-discord-icon img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            border-radius: 16px;
+            display: block;
+        }
+        @media (max-width: 600px) {
+            .hero-fxspace-icon, .hero-discord-icon { width: 56px; height: 56px; }
+        }
+
+        .ytt-sp-hero-title {
+            font-size: clamp(1.3rem, 5vw, 2.25rem);
+            font-weight: 900; color: #1e1b4b;
+            line-height: 1.4; letter-spacing: -0.02em;
+            margin: 0 0 1rem;
+        }
+        .ytt-sp-title-line { display: block; text-align: center; }
+        .ytt-sp-title-line > span.line-text {
+            display: inline-block;
+            white-space: nowrap;
+            position: relative;
+        }
+        .ytt-sp-title-line .ytt-title-wave {
+            display: block; width: 100%;
+            height: clamp(14px, 3vw, 22px);
+            object-fit: fill; margin: 0.1rem 0 0.5rem;
+        }
+        .ytt-sp-hero-lead {
+            font-size: clamp(0.9375rem, 2vw, 1.0625rem);
+            color: #6b7280; line-height: 1.85;
+            max-width: 540px; margin: 0 auto;
+        }
+
+        /* セクションヘッダー (intro/と同じ) */
+        .ytt-sp-section-header {
+            text-align: center;
+            padding: 4rem 2rem 1rem;
+        }
+        .ytt-sp-section-header h2 {
+            font-size: clamp(1.25rem, 3.5vw, 1.75rem);
+            font-weight: 900; color: #1e1b4b;
+            margin: 0;
+        }
+        .section-h-badge-row { display: block; }
+        .section-h-title-row {
+            display: block;
+            margin-top: 0.875rem;
+        }
+        .h2-with-wave {
+            display: inline-block;
+            position: relative;
+        }
+        .h2-title-wave {
+            display: block;
+            width: 100%;
+            height: clamp(14px, 2.5vw, 18px);
+            object-fit: fill;
+            margin-top: 4px;
+        }
+        .ytt-sp-section-header p {
+            font-size: clamp(0.875rem, 1.6vw, 1rem);
+            color: #6b7280; line-height: 1.9;
+            max-width: 540px; margin: 1rem auto 0;
+        }
+
+        /* 無料参加特典セクション — 青色背景 #4338ca */
+        .ytt-sp-section-header.is-free-benefits {
+            background: #4338ca;
+            margin-top: 0;
+        }
+        .ytt-sp-section-header.is-free-benefits h2 {
+            color: #fff;
+        }
+        .ytt-sp-section-header.is-free-benefits p {
+            color: rgba(255,255,255,0.85);
+        }
+        /* 黄色\/装飾＋白文字バッジ（青背景上で見やすく） */
+        .section-title-badge--yellow {
+            color: #fff;
+        }
+        .benefits-section {
+            padding: 1.5rem 1.5rem 3rem;
+            background: #4338ca;
+        }
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.75rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        @media (max-width: 720px) {
+            .benefits-grid {
+                grid-template-columns: 1fr;
+                max-width: 460px;
+                margin: 0 auto;
+                gap: 1.75rem;
+            }
+        }
+        .benefit-card {
+            position: relative;
+            background: #fff;
+            border: 1.5px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 1.5rem 1.25rem 1.5rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .benefit-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+        }
+        .benefit-num {
+            position: absolute;
+            top: -14px; left: -14px;
+            width: 48px; height: 48px;
+            transform: rotate(-6deg);
+        }
+        .benefit-preview {
+            background: #f9fafb;
+            border-radius: 12px;
+            height: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.125rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .benefit-title {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            font-size: 1rem;
+            font-weight: 900;
+            color: #1e1b4b;
+            margin: 0 0 0.625rem;
+            line-height: 1.5;
+        }
+        .benefit-title .check-icon {
+            width: 22px; height: 22px;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+        .benefit-card p {
+            font-size: 0.8125rem;
+            color: #6b7280;
+            line-height: 1.85;
+            margin: 0;
+        }
+
+        /* プレビュー1: YTT 24時間お試し — オレンジ背景 */
+        .preview-ytt {
+            background: #fff7ed;
+            overflow: visible;
+        }
+        .preview-ytt-logo {
+            width: 90px;
+            height: auto;
+            animation: gentle-bounce 3s ease-in-out infinite;
+        }
+        @keyframes gentle-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+        }
+        /* 24時間バッジ（時計風アイコン画像） */
+        .preview-24h-badge {
+            position: absolute;
+            top: calc(8px - 1.5cm);
+            right: calc(6px - 1.1cm);
+            width: 141px; height: 141px;
+            z-index: 5;
+            filter: drop-shadow(0 4px 10px rgba(0,0,0,0.18));
+            animation: clock-bob 3s ease-in-out infinite;
+        }
+        @keyframes clock-bob {
+            0%, 100% { transform: translateY(0) rotate(-2deg); }
+            50%      { transform: translateY(-3px) rotate(2deg); }
+        }
+        .preview-24h-badge img {
+            width: 100%; height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .preview-24h-badge { animation: none; }
+        }
+
+        /* プレビュー2: フローチャート — オレンジ背景 */
+        .preview-flow {
+            background: #fff7ed;
+            padding: 0;
+            overflow: hidden;
+        }
+        .preview-flow-img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            filter: blur(1.8px) saturate(1.05);
+            transform: scale(1.04);
+        }
+        .preview-flow-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(30,27,75,0.04);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .preview-flow-stamp {
+            background: rgba(255,255,255,0.92);
+            border: 2px solid #f97316;
+            border-radius: 100px;
+            padding: 0.4rem 1.1rem;
+            font-size: 0.8125rem;
+            font-weight: 900;
+            color: #c2410c;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transform: rotate(-3deg);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .preview-ytt-logo { animation: none; }
+        }
+
+        /* CTA */
+        .join-cta {
+            padding: 4.5rem 2rem 4.5rem;
+            text-align: center;
+            background: #1e1b4b;
+        }
+        .join-cta-inner { max-width: 480px; margin: 0 auto; }
+        .join-cta h2 {
+            font-size: clamp(1.25rem, 3vw, 1.625rem);
+            font-weight: 900; color: #fff;
+            margin: 0 0 0.625rem;
+        }
+        .join-cta p {
+            font-size: 0.9375rem;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.85;
+            margin: 0 0 1.75rem;
+        }
+        .btn-discord {
+            display: inline-flex; align-items: center; gap: 0.875rem;
+            background: #5865F2; color: #fff;
+            border: none; border-radius: 12px;
+            padding: 1rem 2.25rem 1rem 1.25rem;
+            font-size: 1.0625rem; font-weight: 800;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+        .btn-discord:hover { opacity: 0.9; }
+        .btn-discord img {
+            width: 44px; height: 44px;
+            border-radius: 8px;
+            object-fit: cover;
+            display: block;
+        }
+        .join-cta p.join-cta-sub {
+            margin: 2.5rem 0 0;
+            font-size: 0.8125rem;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .ytt-sp-page-footer {
+            padding: 1.5rem 2rem;
+            text-align: center;
+            font-size: 0.8125rem; color: #9ca3af;
+            border-top: 1px solid #f0f0f0;
+            background: #fff;
+        }
+        .ytt-sp-page-footer a { color: #9ca3af; text-decoration: underline; }
+
+        [data-anim] { opacity: 0; }
+    </style>
+</head>
+<body>
+
+<!--
+====================================================================
+  ②FX SPACE未加入者で24時間お試しを押した後のページ
+  ytt-trial-join.html
+
+  【本番反映前TODO】
+  [1] Discord招待リンク: https://discord.gg/CcUtqSdRDZ
+      → 差し替え不要ならそのまま
+  [2] 【安田さん依頼】Discord参加後に ytt-trial-start.html へ遷移する処理
+      → バックエンド側で Discord 加入を検知 → 自動遷移/リダイレクト
+
+  【ページの流れ】
+  ヒーロー（参加が必要）
+   ↓
+  無料参加特典セクション（24h試用 + フローチャート）
+   ↓
+  参加してみる（CTA: Discord招待ボタン）
+====================================================================
+-->
+
+<nav class="ytt-sp-nav">
+    <a href="ytt-tokusetu.html" class="ytt-sp-nav-logo">
+        <img src="img/ytt-nav-logo.png" alt="YTT — FX SPACE">
+    </a>
+    <a href="ytt-tokusetu.html" class="ytt-sp-nav-back">← YTT特設ページに戻る</a>
+</nav>
+
+<!-- HERO -->
+<section class="ytt-sp-hero">
+    <div class="hero-brand-row" data-anim>
+        <span class="hero-fxspace-icon">
+            <img src="images/fxspace-icon.png" alt="FX SPACE">
+        </span>
+        <span class="hero-brand-divider">×</span>
+        <span class="hero-discord-icon">
+            <img src="img/icon-discord-brand.png" alt="Discord">
+        </span>
+    </div>
+    <h1 class="ytt-sp-hero-title" data-anim>
+        <span class="ytt-sp-title-line"><span class="line-text">FX SPACEのDiscord<img class="ytt-title-wave" src="img/wave-yellow.png" alt=""></span></span>
+        <span class="ytt-sp-title-line"><span class="line-text">への参加が必要です<img class="ytt-title-wave" src="img/wave-yellow.png" alt=""></span></span>
+    </h1>
+    <p class="ytt-sp-hero-lead" data-anim>
+        24時間お試しは、<wbr>FX SPACEのコミュニティに<wbr>参加されている方限定の特典です。<br>
+        Discordアカウントがあれば、<wbr><strong style="color:#1e1b4b;">無料</strong>ですぐに参加できます。
+    </p>
+</section>
+
+<!-- BENEFITS SECTION — 青セクション #4338ca -->
+<div class="ytt-sp-section-header is-free-benefits" data-anim>
+    <div class="section-h-badge-row">
+        <span class="section-title-badge section-title-badge--yellow">
+            <img class="hero-title-side hero-title-side--left" src="img/title-side-yellow-left.png" alt="">
+            無料参加特典
+            <img class="hero-title-side hero-title-side--right" src="img/title-side-yellow-right.png" alt="">
+        </span>
+    </div>
+    <div class="section-h-title-row">
+        <span class="h2-with-wave">
+            <h2>無料参加でできるようになること</h2>
+            <img class="h2-title-wave" src="img/wave-orange.png" alt="">
+        </span>
+    </div>
+</div>
+
+<section class="benefits-section">
+    <div class="benefits-grid">
+
+        <!-- Card 1: YTT 24時間お試し -->
+        <div class="benefit-card" data-anim>
+            <img src="img/crayon-1.png" alt="①" class="benefit-num">
+            <div class="benefit-preview preview-ytt">
+                <img src="images/ytt-logo.png" alt="YTT" class="preview-ytt-logo">
+                <!-- 24時間アイコン -->
+                <div class="preview-24h-badge">
+                    <img src="img/icon-24h.png" alt="24時間">
+                </div>
+            </div>
+            <h3 class="benefit-title">
+                <img src="img/check-orange.png" alt="" class="check-icon">
+                <span>YTT 24時間お試し体験</span>
+            </h3>
+            <p>本契約前にYTTの全機能を1日試せます。<wbr>導入から実際の操作までじっくり確認できます。</p>
+        </div>
+
+        <!-- Card 2: フローチャート -->
+        <div class="benefit-card" data-anim>
+            <img src="img/crayon-2.png" alt="②" class="benefit-num">
+            <div class="benefit-preview preview-flow">
+                <img src="img/yosuga-flowchart.png" alt="プロトレーダーまでのフローチャート" class="preview-flow-img">
+                <div class="preview-flow-overlay">
+                    <span class="preview-flow-stamp">参加後に閲覧可</span>
+                </div>
+            </div>
+            <h3 class="benefit-title">
+                <img src="img/check-orange.png" alt="" class="check-icon">
+                <span>プロトレーダーまでのフローチャート</span>
+            </h3>
+            <p>ゼロからプロを目指すための学習ルートを確認できます。<wbr>自分が今どの段階にいるかが分かります。</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- CTA -->
+<!--
+====================================================================
+  TODO: 安田さん依頼
+  Discord参加後に ytt-trial-start.html へ遷移する処理をバックエンド側で
+  実装してください（Discord 加入の検知 → 自動遷移 or リダイレクト）。
+====================================================================
+-->
+<section class="join-cta">
+    <div class="join-cta-inner" data-anim>
+        <h2>参加してみる</h2>
+        <p>FX SPACEのDiscordに参加して、<br>YTTの24時間お試しを始めましょう。</p>
+        <a href="https://discord.gg/CcUtqSdRDZ" target="_blank" rel="noopener" class="btn-discord">
+            <img src="img/icon-discord-cta.png" alt="">
+            Discordに参加する
+        </a>
+        <p class="join-cta-sub">※ Discordアカウントがない場合は、<wbr>遷移先で作成できます</p>
+    </div>
+</section>
+
+<footer class="ytt-sp-page-footer">
+    <p>© FX SPACE — <a href="ytt-tokusetu.html">YTT特設ページ</a> / <a href="index.html">トップページ</a></p>
+</footer>
+
+<script src="js/gsap.min.js?v=20260301a"></script>
+<script src="js/ScrollTrigger.min.js?v=20260301a"></script>
+<script>
+(function() {
+    var hasGsap = typeof gsap !== 'undefined';
+    if (!hasGsap) {
+        document.querySelectorAll('[data-anim]').forEach(function(el) { el.style.opacity = 1; });
+    } else {
+        gsap.registerPlugin(ScrollTrigger);
+
+        // HERO
+        gsap.utils.toArray('.ytt-sp-hero [data-anim]').forEach(function(el, i) {
+            gsap.fromTo(el, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.7, delay: 0.05 + i * 0.1, ease: 'power2.out' });
+        });
+
+        // セクションヘッダー
+        gsap.utils.toArray('.ytt-sp-section-header[data-anim]').forEach(function(h) {
+            gsap.fromTo(h, { opacity: 0, y: 18 }, {
+                opacity: 1, y: 0, duration: 0.6, ease: 'power2.out',
+                scrollTrigger: { trigger: h, start: 'top 88%', once: true }
+            });
+        });
+
+        // ベネフィットカード
+        gsap.utils.toArray('.benefit-card').forEach(function(card, i) {
+            gsap.fromTo(card, { opacity: 0, y: 24 }, {
+                opacity: 1, y: 0, duration: 0.7, delay: i * 0.12, ease: 'power2.out',
+                scrollTrigger: { trigger: card, start: 'top 88%', once: true }
+            });
+        });
+
+        // フローチャートのアニメ
+        var flowChart = document.getElementById('flowChart');
+        if (flowChart) {
+            ScrollTrigger.create({
+                trigger: flowChart,
+                start: 'top 75%',
+                once: true,
+                onEnter: function() {
+                    var tl = gsap.timeline();
+                    tl.to('[data-flow-step="1"]', { opacity: 1, duration: 0.4, ease: 'power2.out' })
+                      .to('[data-flow-arrow="1"]', { opacity: 1, duration: 0.3 }, '+=0.05')
+                      .to('[data-flow-step="2"]', { opacity: 1, duration: 0.4 }, '+=0.05')
+                      .to('[data-flow-arrow="2"]', { opacity: 1, duration: 0.3 }, '+=0.05')
+                      .to('[data-flow-step="3"]', { opacity: 1, duration: 0.4 }, '+=0.05')
+                      .to('[data-flow-arrow="3"]', { opacity: 1, duration: 0.3 }, '+=0.05')
+                      .to('[data-flow-step="4"]', { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(2)' }, '+=0.1');
+                }
+            });
+        }
+
+        // CTA
+        var ctaInner = document.querySelector('.join-cta [data-anim]');
+        if (ctaInner) {
+            gsap.fromTo(ctaInner, { opacity: 0, y: 16 }, {
+                opacity: 1, y: 0, duration: 0.7, ease: 'power2.out',
+                scrollTrigger: { trigger: '.join-cta', start: 'top 82%', once: true }
+            });
+        }
+    }
+
+})();
+</script>
+<!-- BudouX — 日本語の自動文節改行（画面サイズに応じて最適な位置で折る） -->
+<script src="https://cdn.jsdelivr.net/npm/budoux/bundle/budoux-ja.min.js" defer></script>
+<script>
+window.addEventListener('DOMContentLoaded', function() {
+    if (window.budoux) {
+        try {
+            var parser = window.budoux.loadDefaultJapaneseParser();
+            parser.applyElement(document.body);
+        } catch (e) {}
+    }
+});
+</script>
+</body>
+</html>

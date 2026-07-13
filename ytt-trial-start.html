@@ -81,9 +81,6 @@
             margin: 0 auto;
             padding: 2rem 1rem 0.5rem;
         }
-        /* +α ステップは少し控えめに */
-        .prog-step-alpha .prog-step-label { color: #f97316; }
-        .prog-step-alpha:not(.is-active):not(.is-done) .prog-step-label { color: #fdba74; }
         .prog-step {
             display: flex; flex-direction: column;
             align-items: center; gap: 0.4rem;
@@ -158,28 +155,9 @@
             margin-bottom: 1.5rem;
             position: relative;
         }
-        /* STEP +α のみ：シミュレータがはみ出せるようoverflow解除 */
-        .step-card[data-step="alpha"] { overflow: visible; }
-        .step-card:not([data-step="alpha"]) { overflow: hidden; }
-        /* +α 識別バッジ */
-        .step-card-alpha {
-            border-color: #fed7aa !important;
-        }
-        .step-card-alpha.is-active {
-            border-color: #f97316 !important;
-            box-shadow: none !important;
-        }
-        .step-alpha-badge {
-            position: absolute;
-            top: -16px; left: 24px;
-            background: #f97316;
-            color: #fff;
-            font-size: 0.9375rem;
-            font-weight: 900;
-            padding: 0.5rem 1.125rem;
-            border-radius: 6px;
-            letter-spacing: 0.06em;
-        }
+        /* STEP6 のみ：シミュレータがはみ出せるようoverflow解除 */
+        .step-card[data-step="6"] { overflow: visible; }
+        .step-card:not([data-step="6"]) { overflow: hidden; }
         .step-card.is-hidden { display: none; }
         .step-card.is-active {
             border-color: var(--primary);
@@ -418,6 +396,18 @@
             .btn-solid-step .dl-icon { animation: none; }
         }
 
+        /* FX SPACE ロゴプレビュー (STEP1) */
+        .preview-fxspace-logo {
+            width: 128px;
+        }
+        .preview-fxspace-logo img {
+            width: 100%; height: auto;
+            display: block;
+        }
+
+        /* 「FX SPACE」等、絶対に改行させない語 */
+        .nowrap { white-space: nowrap; }
+
         /* シミュレータ用 */
         .sim-intro {
             padding: 0 1.5rem 0.5rem;
@@ -554,17 +544,19 @@
 
   【本番反映前TODO】
   [1] #href-tbd-ytt-download
-      → STEP2「YTTをダウンロード」ボタンの遷移先URL（計1箇所）
+      → STEP3「YTTをダウンロード」ボタンの遷移先URL（計1箇所）
   [2] ytt-trial-terms.html
       → 仮の規約ページ。よすが用意の正式版が出来たら差し替え
 
   【チュートリアルの流れ】
-  STEP1 利用規約 → 仮規約ページで最下部までスクロール
-       → 同意UI出現 → 決定で ?agreed=1 で戻り、STEP2 出現
-  STEP2 ダウンロード → ボタンクリックで STEP3 出現
-  STEP3 導入マニュアル → 「導入できたら次へ」で STEP4 出現
-  STEP4 使い方マニュアル → 「マスターしたら次へ」で STEP+α と完了バナー出現
-  STEP+α シミュレーター → intro/と同じ ytt-demo 仕組み（全画面ON/OFF可）
+  STEP1 Discord加入 → 未加入者は ytt-trial-join.html へ誘導
+       → 「参加できたら次へ」で STEP2 出現
+  STEP2 利用規約 → 仮規約ページで最下部までスクロール
+       → 同意UI出現 → 決定で ?agreed=1 で戻り、STEP1・2完了扱いで STEP3 出現
+  STEP3 ダウンロード → ボタンクリックで STEP4 出現
+  STEP4 導入マニュアル → 「導入できたら次へ」で STEP5 出現
+  STEP5 使い方マニュアル → 「マスターしたら次へ」で STEP6 と完了バナー出現
+  STEP6 シミュレーター → intro/と同じ ytt-demo 仕組み（全画面ON/OFF可）
 ====================================================================
 -->
 
@@ -594,7 +586,7 @@
             <img src="img/crayon-1.png" alt="1">
             <span class="prog-step-done-mark"><img src="img/check-orange.png" alt="✓"></span>
         </div>
-        <span class="prog-step-label">規約同意</span>
+        <span class="prog-step-label">Discord参加</span>
     </div>
     <div class="prog-line" data-prog-line="1"></div>
     <div class="prog-step" data-prog="2">
@@ -602,7 +594,7 @@
             <img src="img/crayon-2.png" alt="2">
             <span class="prog-step-done-mark"><img src="img/check-orange.png" alt="✓"></span>
         </div>
-        <span class="prog-step-label">ダウンロード</span>
+        <span class="prog-step-label">規約同意</span>
     </div>
     <div class="prog-line" data-prog-line="2"></div>
     <div class="prog-step" data-prog="3">
@@ -610,7 +602,7 @@
             <img src="img/crayon-3.png" alt="3">
             <span class="prog-step-done-mark"><img src="img/check-orange.png" alt="✓"></span>
         </div>
-        <span class="prog-step-label">導入</span>
+        <span class="prog-step-label">ダウンロード</span>
     </div>
     <div class="prog-line" data-prog-line="3"></div>
     <div class="prog-step" data-prog="4">
@@ -618,23 +610,60 @@
             <img src="img/crayon-4.png" alt="4">
             <span class="prog-step-done-mark"><img src="img/check-orange.png" alt="✓"></span>
         </div>
-        <span class="prog-step-label">使い方</span>
+        <span class="prog-step-label">導入</span>
     </div>
     <div class="prog-line" data-prog-line="4"></div>
-    <div class="prog-step prog-step-alpha" data-prog="alpha">
+    <div class="prog-step" data-prog="5">
         <div class="prog-step-icon">
-            <img src="img/crayon-orange-5.png" alt="+α">
+            <img src="img/crayon-5.png" alt="5">
             <span class="prog-step-done-mark"><img src="img/check-orange.png" alt="✓"></span>
         </div>
-        <span class="prog-step-label">+α 練習</span>
+        <span class="prog-step-label">使い方</span>
+    </div>
+    <div class="prog-line" data-prog-line="5"></div>
+    <div class="prog-step" data-prog="6">
+        <div class="prog-step-icon">
+            <img src="img/crayon-6.png" alt="6">
+            <span class="prog-step-done-mark"><img src="img/check-orange.png" alt="✓"></span>
+        </div>
+        <span class="prog-step-label">練習</span>
     </div>
 </div>
 
 <!-- STEPSフロー -->
 <section class="steps-flow">
 
-    <!-- STEP 1 -->
+    <!-- STEP 1: Discord加入 -->
     <article class="step-card is-active" data-step="1">
+        <span class="step-card-done-corner"><img src="img/check-orange.png" alt="">完了</span>
+        <div class="step-card-body">
+            <div class="step-preview">
+                <div class="preview-fxspace-logo">
+                    <img src="img/fxspace-logo-tate.png" alt="FX SPACE">
+                </div>
+            </div>
+            <div class="step-info">
+                <h2 class="step-title-h2">
+                    <span class="step-title-text">
+                        <span class="nowrap">FX SPACE</span>に参加
+                        <img src="img/wave-orange.png" alt="" class="step-title-wave">
+                    </span>
+                </h2>
+                <p>24時間お試しのご利用には、<wbr><span class="nowrap">FX SPACE</span>のDiscordコミュニティへの<wbr>参加（無料）が必要です。<br>まだ参加されていない方は、<wbr>下のボタンからお進みください。</p>
+                <div class="step-actions">
+                    <a href="ytt-trial-join.html" class="btn-outline-step" id="joinLink">
+                        <span class="nowrap">FX SPACE</span>の紹介ページを見る →
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="step-next">
+            <button class="btn-next-step" id="step1Next">参加できたら次へ →</button>
+        </div>
+    </article>
+
+    <!-- STEP 2: 利用規約 (初期は非表示) -->
+    <article class="step-card is-hidden" data-step="2">
         <span class="step-card-done-corner"><img src="img/check-orange.png" alt="">完了</span>
         <div class="step-card-body">
             <div class="step-preview">
@@ -669,8 +698,8 @@
         </div>
     </article>
 
-    <!-- STEP 2 (初期は非表示) -->
-    <article class="step-card is-hidden" data-step="2">
+    <!-- STEP 3: ダウンロード (初期は非表示) -->
+    <article class="step-card is-hidden" data-step="3">
         <span class="step-card-done-corner"><img src="img/check-orange.png" alt="">完了</span>
         <div class="step-card-body">
             <div class="step-preview">
@@ -721,8 +750,8 @@
         </div>
     </article>
 
-    <!-- STEP 3 (初期は非表示) -->
-    <article class="step-card is-hidden" data-step="3">
+    <!-- STEP 4: 導入マニュアル (初期は非表示) -->
+    <article class="step-card is-hidden" data-step="4">
         <span class="step-card-done-corner"><img src="img/check-orange.png" alt="">完了</span>
         <div class="step-card-body">
             <div class="step-preview">
@@ -746,12 +775,12 @@
             </div>
         </div>
         <div class="step-next">
-            <button class="btn-next-step" id="step3Next">導入できたら次へ →</button>
+            <button class="btn-next-step" id="step4Next">導入できたら次へ →</button>
         </div>
     </article>
 
-    <!-- STEP 4: 使い方マニュアル (初期は非表示) -->
-    <article class="step-card is-hidden" data-step="4">
+    <!-- STEP 5: 使い方マニュアル (初期は非表示) -->
+    <article class="step-card is-hidden" data-step="5">
         <span class="step-card-done-corner"><img src="img/check-orange.png" alt="">完了</span>
         <div class="step-card-body">
             <div class="step-preview">
@@ -775,14 +804,13 @@
             </div>
         </div>
         <div class="step-next">
-            <button class="btn-next-step" id="step4Next">マスターしたら次へ →</button>
+            <button class="btn-next-step" id="step5Next">マスターしたら次へ →</button>
         </div>
     </article>
 
-    <!-- STEP +α: シミュレーターで予約練習 (初期は非表示) -->
-    <article class="step-card is-hidden step-card-alpha" data-step="alpha">
+    <!-- STEP 6: シミュレーターで予約練習 (初期は非表示) -->
+    <article class="step-card is-hidden" data-step="6">
         <span class="step-card-done-corner"><img src="img/check-orange.png" alt="">完了</span>
-        <span class="step-alpha-badge">+α</span>
         <div class="step-card-body">
             <div class="step-preview">
                 <div class="preview-sim">
@@ -895,8 +923,8 @@
         }
         setStepStatus(n, 'active');
         setProgState(n, 'active');
-        // step +α なら独立シミュレーターラッパーも表示（is-visibleで max-height アニメ）
-        if (n === 'alpha') {
+        // STEP6 なら独立シミュレーターラッパーも表示（is-visibleで max-height アニメ）
+        if (n === 6) {
             var simWrap = document.getElementById('trial-sim-wrap');
             if (simWrap) simWrap.classList.add('is-visible');
         }
@@ -907,39 +935,46 @@
         }
     }
 
-    // STEP 1 → 規約ページから戻ってきた場合（?agreed=1）
-    var step1Done = false, step2Done = false, step3Done = false, step4Done = false;
+    var step1Done = false, step2Done = false, step3Done = false, step4Done = false, step5Done = false;
+
+    // STEP 2 → 規約ページから戻ってきた場合（?agreed=1）
     var urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get('agreed') === '1') {
-        // STEP1完了状態でSTEP2を表示
+        // STEP1・2完了状態でSTEP3を表示
         step1Done = true;
+        step2Done = true;
         setStepStatus(1, 'done');
         setProgState(1, 'done');
         setProgLine(1, true);
-        revealStep(2);
+        var step2Card = stepCards['2'];
+        if (step2Card) step2Card.classList.remove('is-hidden');
+        setStepStatus(2, 'done');
+        setProgState(2, 'done');
+        setProgLine(2, true);
+        revealStep(3);
         // URLからパラメータを削除
         if (history.replaceState) {
             history.replaceState(null, '', 'ytt-trial-start.html');
         }
     }
 
-    // STEP 2: ダウンロードクリック → STEP 3出現
-    var dlBtn = document.getElementById('dlBtn');
-    if (dlBtn) {
-        dlBtn.addEventListener('click', function() {
-            if (step2Done) return;
-            step2Done = true;
-            setStepStatus(2, 'done');
-            setProgState(2, 'done');
-            setProgLine(2, true);
-            revealStep(3);
+    // STEP 1: 参加できたらボタン → STEP 2出現
+    var step1Next = document.getElementById('step1Next');
+    if (step1Next) {
+        step1Next.addEventListener('click', function() {
+            if (step1Done) return;
+            step1Done = true;
+            setStepStatus(1, 'done');
+            setProgState(1, 'done');
+            setProgLine(1, true);
+            revealStep(2);
         });
     }
 
-    // STEP 3: 次へボタン → STEP 4出現
-    var step3Next = document.getElementById('step3Next');
-    if (step3Next) {
-        step3Next.addEventListener('click', function() {
+    // STEP 3: ダウンロードクリック → STEP 4出現
+    var dlBtn = document.getElementById('dlBtn');
+    if (dlBtn) {
+        dlBtn.addEventListener('click', function() {
             if (step3Done) return;
             step3Done = true;
             setStepStatus(3, 'done');
@@ -949,9 +984,7 @@
         });
     }
 
-    var completeBanner = document.getElementById('completeBanner');
-
-    // STEP 4: 使い方マスターしたらボタン → STEP +α 出現 + 完了バナー表示
+    // STEP 4: 次へボタン → STEP 5出現
     var step4Next = document.getElementById('step4Next');
     if (step4Next) {
         step4Next.addEventListener('click', function() {
@@ -960,7 +993,22 @@
             setStepStatus(4, 'done');
             setProgState(4, 'done');
             setProgLine(4, true);
-            revealStep('alpha');
+            revealStep(5);
+        });
+    }
+
+    var completeBanner = document.getElementById('completeBanner');
+
+    // STEP 5: 使い方マスターしたらボタン → STEP 6出現 + 完了バナー表示
+    var step5Next = document.getElementById('step5Next');
+    if (step5Next) {
+        step5Next.addEventListener('click', function() {
+            if (step5Done) return;
+            step5Done = true;
+            setStepStatus(5, 'done');
+            setProgState(5, 'done');
+            setProgLine(5, true);
+            revealStep(6);
             if (completeBanner) {
                 completeBanner.classList.add('is-visible');
                 if (hasGsap) {
@@ -970,17 +1018,17 @@
         });
     }
 
-    // STEP +α: シミュレータカードが見えたら is-done
-    var stepAlphaCard = stepCards['alpha'];
-    if (hasGsap && stepAlphaCard) {
+    // STEP 6: シミュレータカードが見えたら is-done
+    var step6Card = stepCards['6'];
+    if (hasGsap && step6Card) {
         ScrollTrigger.create({
-            trigger: stepAlphaCard,
+            trigger: step6Card,
             start: 'bottom 85%',
             once: true,
             onEnter: function() {
-                if (step4Done) {
-                    setStepStatus('alpha', 'done');
-                    setProgState('alpha', 'done');
+                if (step5Done) {
+                    setStepStatus(6, 'done');
+                    setProgState(6, 'done');
                 }
             }
         });

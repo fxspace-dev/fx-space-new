@@ -6,10 +6,10 @@
     <title>YTT（よすがトレードツール）— FX SPACE</title>
     <meta property="og:title" content="YTT（よすがトレードツール）— FX SPACE">
     <meta property="og:description" content="よすが独自開発のトレード支援ツール。シナリオ構築・予約注文・相場分析まで、これひとつで完結。">
-    <meta property="og:image" content="https://69f61cd8c3b3c2eb30f11827--fx-space-community-preview-1775890548.netlify.app/img/og-ytt-tokusetu.png">
+    <meta property="og:image" content="https://fx-space.com/intro/img/og-ytt-tokusetu.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta name="twitter:image" content="https://69f61cd8c3b3c2eb30f11827--fx-space-community-preview-1775890548.netlify.app/img/og-ytt-tokusetu.png">
+    <meta name="twitter:image" content="https://fx-space.com/intro/img/og-ytt-tokusetu.png">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="stylesheet" href="css/style.css?v=20260414m">
@@ -94,9 +94,9 @@
         .ytt-sp-title-line .ytt-title-wave {
             display: block;
             width: 100%;
-            height: clamp(14px, 3vw, 22px);
+            height: clamp(15px, 3.2vw, 23px);
             object-fit: fill;
-            margin: 0.1rem 0 0.5rem;
+            margin: 0.15rem 0 0.5rem;
         }
         .ytt-sp-hero-lead {
             font-size: clamp(0.9375rem, 2vw, 1.125rem);
@@ -149,15 +149,15 @@
 
         /* More features teaser */
         .ytt-more-features {
-            background: #fff;
+            background: #f4f6f9;
             padding: 3.5rem 2rem 3rem;
             text-align: center;
         }
         .ytt-more-features-inner { max-width: 760px; margin: 0 auto; }
         .ytt-more-features-label {
-            display: inline-block;
-            font-size: 0.8125rem; font-weight: 800;
-            color: #f97316; letter-spacing: 0.05em;
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            font-size: 0.8125rem; font-weight: 700;
+            color: #92400e; letter-spacing: 0.08em;
             margin-bottom: 0.75rem;
         }
         .ytt-more-features h3 {
@@ -203,7 +203,7 @@
         /* Pricing section */
         .ytt-sp-pricing {
             padding: 5rem 2rem;
-            background: #f9fafb;
+            background: #f4f6f9;
             overflow: hidden;
         }
         .ytt-sp-pricing-inner { max-width: 760px; margin: 0 auto; }
@@ -267,7 +267,7 @@
             white-space: nowrap;
         }
         .ytt-sp-plan-name {
-            font-size: 1rem; font-weight: 800; color: #374151; margin-bottom: 0.25rem;
+            font-size: 1.3rem; font-weight: 800; color: #374151; margin-bottom: 0.25rem;
         }
         .ytt-sp-plan-name.accent { color: var(--primary); }
         .ytt-sp-plan-desc {
@@ -315,6 +315,129 @@
             background: var(--primary); color: white;
         }
         .ytt-sp-plan-cta.solid:hover { opacity: 0.9; }
+        /* 買い切り（サブスクの下に配置。ツールだけ欲しい方向けに程よくアピール） */
+        .ytt-sp-buyout { max-width: 40rem; margin: 0 auto; }
+        .ytt-sp-buyout-lead { text-align: center; margin-bottom: 1.125rem; }
+        .ytt-sp-buyout-eyebrow {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            font-size: 0.8125rem; font-weight: 700; color: var(--primary);
+            letter-spacing: 0.08em; margin-bottom: 0.5rem;
+        }
+        .ytt-sp-buyout-title { font-size: 1.375rem; font-weight: 800; color: #374151; margin: 0; }
+        .ytt-sp-buyout-card {
+            position: relative;
+            display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
+            background: #fff; border: 1.5px solid #e5e7eb; border-radius: 16px;
+            padding: 1.5rem 1.75rem;
+        }
+        .ytt-sp-buyout-info { min-width: 0; }
+        .ytt-sp-buyout-name {
+            display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;
+            font-size: 1rem; font-weight: 800; color: #374151; margin-bottom: 0.75rem;
+        }
+        .ytt-sp-buyout-badge {
+            position: absolute; top: -12px; left: 18px;
+            font-size: 0.75rem; font-weight: 800; color: #fff; background: var(--primary);
+            border-radius: 100px; padding: 0.25rem 1rem; white-space: nowrap;
+        }
+        .ytt-sp-buyout-benefits { list-style: none; padding: 0; margin: 0; }
+        .ytt-sp-buyout-benefits li {
+            display: flex; align-items: flex-start; gap: 0.5rem;
+            font-size: 0.8125rem; color: #4b5563; padding: 0.2rem 0;
+        }
+        .ytt-sp-buyout-benefits li img { width: 15px; height: 15px; margin-top: 2px; flex-shrink: 0; }
+        .ytt-sp-buyout-fine { font-size: 0.75rem; color: #9ca3af; margin-top: 0.625rem; line-height: 1.5; }
+        .ytt-sp-buyout-action { flex-shrink: 0; text-align: center; }
+        .ytt-sp-buyout-price { line-height: 1; margin-bottom: 0.625rem; white-space: nowrap; }
+        .ytt-sp-buyout-amount { font-size: 1.625rem; font-weight: 900; color: #1e1b4b; }
+        .ytt-sp-buyout-cta {
+            display: block; text-align: center; white-space: nowrap;
+            padding: 0.7rem 1.75rem; border-radius: 10px; font-weight: 800; font-size: 0.9375rem;
+            text-decoration: none; background: var(--primary); color: #fff; border: 2px solid var(--primary);
+            transition: all 0.2s;
+        }
+        .ytt-sp-buyout-cta:hover { opacity: 0.9; }
+        @media (max-width: 560px) {
+            .ytt-sp-buyout-card { flex-direction: column; align-items: stretch; }
+            .ytt-sp-buyout-action { margin-top: 0.25rem; padding-top: 1rem; border-top: 1px solid #f0f0f0; }
+        }
+
+        /* ===== 追加セクション（FTO / FAQ / サポート） ===== */
+        .ytt-add-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+        .ytt-add-grid.cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 500px; margin-left: auto; margin-right: auto; }
+        @media (max-width: 680px) {
+            .ytt-add-grid, .ytt-add-grid.cols-2 { grid-template-columns: 1fr; max-width: 460px; margin-left: auto; margin-right: auto; }
+        }
+        .ytt-add-card {
+            background: #fff; border: 1.5px solid #e5e7eb; border-radius: 14px;
+            padding: 1.25rem; text-align: left; min-width: 0;
+        }
+        .ytt-add-card h3 {
+            font-size: 0.95rem; font-weight: 800; color: #1e1b4b; margin: 0 0 0.45rem;
+            display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap;
+        }
+        .ytt-add-card p { font-size: 0.8125rem; color: #4b5563; line-height: 1.75; margin: 0; }
+        /* FTO 訴求 */
+        .ytt-fto-biglogo { display: block; height: 88px; width: auto; max-width: 100%; margin: 1.1rem auto 0; }
+        @media (max-width: 600px) { .ytt-fto-biglogo { height: 64px; } }
+        .ytt-spec-inner.ytt-fto-wide { max-width: 1100px; }
+        .ytt-fto2 {
+            display: grid; grid-template-columns: minmax(0,1.55fr) minmax(0,1fr); gap: 2.5rem; align-items: center;
+            background: #fff; border: 1.5px solid #e5e7eb; border-radius: 20px;
+            padding: 1.75rem; margin-top: 1.5rem;
+        }
+        @media (max-width: 860px) { .ytt-fto2 { grid-template-columns: 1fr; gap: 1.25rem; } }
+        @media (max-width: 600px) { .ytt-fto2 { padding: 1rem; } }
+        .ytt-fto2-visual { min-width: 0; }
+        .ytt-fto-chart { width: 100%; height: auto; display: block; border-radius: 12px; border: 1px solid #e5e7eb; }
+        .ytt-fto-credit { font-size: 0.68rem; color: #9ca3af; margin: 0.4rem 0 0; text-align: right; }
+        .ytt-fto-credit a { color: #9ca3af; text-decoration: underline; text-underline-offset: 2px; }
+        .ytt-fto2-content { min-width: 0; }
+        .ytt-fto2-head { font-size: 1.15rem; font-weight: 800; color: #1e1b4b; line-height: 1.55; margin: 0 0 1rem; }
+        .ytt-fto2-head .accent { color: var(--primary); }
+        .ytt-fto-list { list-style: none; padding: 0; margin: 0 0 1rem; }
+        .ytt-fto-list li { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.9rem; font-weight: 700; color: #374151; padding: 0.4rem 0; }
+        .ytt-fto-list li img { width: 18px; height: 18px; margin-top: 2px; flex-shrink: 0; }
+        .ytt-fto-attention { border-left: 3px solid #f59e0b; padding: 0.35rem 0 0.35rem 0.8rem; margin: 0 0 1.1rem; font-size: 0.85rem; font-weight: 700; color: #92400e; line-height: 1.6; }
+        .ytt-fto2-btns { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+        .ytt-fto2-note { font-size: 0.72rem; color: #9ca3af; line-height: 1.6; margin: 0.9rem 0 0; }
+        .ytt-fto2-note a { color: #2563eb; text-decoration: underline; text-underline-offset: 2px; }
+        .ytt-fto-detail {
+            display: inline-block; margin-top: 0.75rem;
+            padding: 0.4rem 1.1rem; border-radius: 8px;
+            border: 1px solid #1f2937; color: #1f2937; background: #fff;
+            font-size: 0.8rem; font-weight: 600; text-decoration: none;
+            transition: all 0.15s; white-space: nowrap;
+        }
+        .ytt-fto-detail:hover { background: #1f2937; color: #fff; }
+        /* FAQ */
+        details.ytt-faq { background: #f9fafb; border: 1.5px solid #e5e7eb; border-radius: 14px; margin-top: 0.875rem; overflow: hidden; }
+        details.ytt-faq[open] { background: #fff; border-color: #d1d5db; }
+        details.ytt-faq > summary {
+            list-style: none; cursor: pointer; padding: 1rem 1.25rem;
+            font-size: 0.9375rem; font-weight: 800; color: #1e1b4b;
+            display: flex; align-items: center; justify-content: space-between; gap: 0.75rem;
+        }
+        details.ytt-faq > summary::-webkit-details-marker { display: none; }
+        .ytt-faq-q { display: flex; align-items: flex-start; gap: 0.5rem; text-align: left; }
+        .ytt-faq-q::before { content: "Q"; color: var(--primary); font-weight: 900; flex-shrink: 0; }
+        .ytt-faq-chev {
+            width: 22px; height: 22px; background: #4f46e5; color: #fff; border-radius: 50%;
+            display: inline-flex; align-items: center; justify-content: center;
+            font-size: 0.7rem; font-weight: 900; transition: transform 0.25s; flex-shrink: 0;
+        }
+        details.ytt-faq[open] .ytt-faq-chev { transform: rotate(180deg); }
+        .ytt-faq-a { padding: 0 1.25rem 1.25rem; font-size: 0.8125rem; color: #4b5563; line-height: 1.85; border-top: 1px dashed #e5e7eb; }
+        .ytt-faq-a p { margin: 0.75rem 0 0; }
+        .ytt-faq-a a { color: #2563eb; text-decoration: underline; text-underline-offset: 2px; }
+        /* サポート窓口 */
+        .ytt-support-card { text-align: center; }
+        .ytt-support-card h3 { justify-content: center; }
+        .ytt-support-card .sup-img { display: block; width: 48px; height: 48px; object-fit: contain; margin: 0 auto 0.7rem; }
+        .ytt-support-card .sup-link {
+            display: inline-block; margin-top: 0.75rem; font-size: 0.8125rem; font-weight: 700;
+            color: var(--primary); text-decoration: underline; text-underline-offset: 3px;
+        }
         .ytt-sp-yt-note {
             margin-top: 2rem;
             border: 1px solid #e5e7eb; border-radius: 12px;
@@ -720,30 +843,14 @@
 </head>
 <body style="scroll-behavior: smooth;">
 
-<!--
-====================================================================
-  TODO: 本番反映前に差し替えが必要なURLプレースホルダー
-====================================================================
-  下記2つの仮URLを実URLに差し替えてください（計6箇所）
-
-  [1] #href-tbd-download （3箇所: NAV / HERO / フッターCTA）
-      → 「今すぐダウンロード」ボタンの遷移先
-      → 想定: 利用規約 → ダウンロードページ への遷移URL
-
-  [2] #trial-24h （3箇所: NAV / HERO / フッターCTA）
-      → 「24時間無料でお試し」ボタンの遷移先
-      → 想定: 24時間お試しの申込/開始フローURL
-====================================================================
--->
-
 <!-- NAV -->
 <nav class="ytt-sp-nav">
     <a href="index.html" class="ytt-sp-nav-logo">
         <img src="img/ytt-nav-logo.png" alt="FX SPACE">
     </a>
     <div class="ytt-sp-nav-cta">
-        <a href="#href-tbd-download" class="btn-sq-blue sm"><span class="dl-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="3" x2="12" y2="15"/></svg></span>ダウンロード</a>
-        <a href="#trial-24h" class="btn-sq-white sm"><span class="ytt-nav-btn-label">24時間お試し</span><span class="ytt-nav-btn-label-sp">お試し</span></a>
+        <a href="https://discord.com/oauth2/authorize?client_id=1132937165379211284&amp;response_type=code&amp;redirect_uri=https%3A%2F%2Ffx-space.com%2FYTTDL.php&amp;scope=identify" class="btn-sq-blue sm"><span class="dl-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="3" x2="12" y2="15"/></svg></span>ダウンロード</a>
+        <a href="https://fx-space.com/intro/ytt-trial-start.html" class="btn-sq-white sm"><span class="ytt-nav-btn-label">24時間お試し</span><span class="ytt-nav-btn-label-sp">お試し</span></a>
     </div>
 </nav>
 
@@ -751,17 +858,17 @@
 <section class="ytt-sp-hero">
     <img src="images/ytt-logo.png" alt="YTT" class="ytt-sp-hero-logo">
     <h1 class="ytt-sp-hero-title">
-        <span class="ytt-sp-title-line"><span class="line-text">シナリオ構築から決済まで<img class="ytt-title-wave" src="img/wave-yellow.png" alt=""></span></span>
-        <span class="ytt-sp-title-line"><span class="line-text">これひとつで完結<img class="ytt-title-wave" src="img/wave-yellow.png" alt=""></span></span>
+        <span class="ytt-sp-title-line"><span class="line-text">シナリオ構築から決済まで<img class="ytt-title-wave" src="img/wave-yellow-bold.png" alt=""></span></span>
+        <span class="ytt-sp-title-line"><span class="line-text">これひとつで完結<img class="ytt-title-wave" src="img/wave-yellow-bold.png" alt=""></span></span>
     </h1>
     <p class="ytt-sp-hero-lead">
         よすがが独自に開発したトレード支援ツール。<br>
         注文・分析・リスク管理を一気通貫でサポートします。
     </p>
     <div class="ytt-sp-hero-btns">
-        <a href="#href-tbd-download" class="btn-sq-blue ytt-dl-btn-main"><span class="dl-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="3" x2="12" y2="15"/></svg></span>今すぐダウンロード</a>
+        <a href="https://discord.com/oauth2/authorize?client_id=1132937165379211284&amp;response_type=code&amp;redirect_uri=https%3A%2F%2Ffx-space.com%2FYTTDL.php&amp;scope=identify" class="btn-sq-blue ytt-dl-btn-main"><span class="dl-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="3" x2="12" y2="15"/></svg></span>今すぐダウンロード</a>
         <div class="ytt-trial-wrap">
-            <a href="#trial-24h" class="btn-sq-white">24時間無料でお試し</a>
+            <a href="https://fx-space.com/intro/ytt-trial-start.html" class="btn-sq-white">24時間無料でお試し</a>
             <span class="ytt-trial-bubble">サブスク加入前に<br>全機能を1日試せます</span>
         </div>
     </div>
@@ -1030,7 +1137,7 @@
         <!-- More features teaser -->
         <div class="ytt-more-features">
             <div class="ytt-more-features-inner">
-                <span class="ytt-more-features-label">\ 他にもこんな機能が /</span>
+                <span class="ytt-more-features-label"><img class="hero-title-side hero-title-side--left" src="img/title-side-orange-left.png" alt="">他にもこんな機能が<img class="hero-title-side hero-title-side--right" src="img/title-side-orange-right.png" alt=""></span>
                 <div style="text-align:center; margin-bottom:0.25rem;">
                     <div style="display:inline-block; white-space:nowrap;">
                         <h3 style="margin:0; white-space:nowrap;">様々なトレードをあらかじめセットできる</h3>
@@ -1090,7 +1197,7 @@
 </section>
 
 <!-- 必要スペック -->
-<section class="ytt-spec-section">
+<section class="ytt-spec-section" style="background:#f4f6f9;">
     <div class="ytt-spec-inner">
         <div class="ytt-spec-header">
             <span class="section-title-badge section-title-badge--orange">
@@ -1147,7 +1254,7 @@
                         </tr>
                         <tr>
                             <th>使用可能者</th>
-                            <td class="spec-val">メンバーシップ or サブスク加入者</td>
+                            <td class="spec-val">メンバーシップ／サブスク／買い切り購入者</td>
                             <td class="spec-note">—</td>
                         </tr>
                         <tr>
@@ -1160,6 +1267,47 @@
             </div>
         </details>
 
+    </div>
+</section>
+
+<!-- FTO（フォレックステスターオンライン） -->
+<section class="ytt-spec-section" style="background:#fff;">
+    <div class="ytt-spec-inner ytt-fto-wide">
+        <div class="ytt-spec-header">
+            <span class="section-title-badge section-title-badge--blue">
+                <img class="hero-title-side hero-title-side--left" src="img/title-side-blue-left.png" alt="">
+                過去相場でトレード練習
+                <img class="hero-title-side hero-title-side--right" src="img/title-side-blue-right.png" alt="">
+            </span>
+            <div style="text-align:center; margin-bottom:0.25rem;">
+                <div style="display:inline-block; white-space:nowrap;">
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">YTTが「FTO」に搭載</h2>
+                    <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
+                </div>
+            </div>
+            <img class="ytt-fto-biglogo" src="img/forextester-online-logo.png" alt="Forex Tester Online（FTO）">
+            <p>FTO（フォレックステスターオンライン）は、過去の実際のチャートを使って<br>トレードの練習・検証ができるツールです。</p>
+            <a href="https://www.forextester.com/idevaffiliate/idevaffiliate.php?id=4203_20_3_36" target="_blank" rel="noopener" class="ytt-fto-detail">詳細を見る →</a>
+        </div>
+
+        <div class="ytt-fto2">
+            <div class="ytt-fto2-visual">
+                <img class="ytt-fto-chart" src="img/fto-speed-of-testing.gif" alt="FTOで過去の相場を巻き戻してテストしている画面">
+                <p class="ytt-fto-credit"><a href="https://forextester.jp/" target="_blank" rel="noopener">Forex Tester 公式サイト</a>より</p>
+            </div>
+            <div class="ytt-fto2-content">
+                <h3 class="ytt-fto2-head">過去の相場を巻き戻して、<br><span class="accent">YTTで練習</span></h3>
+                <ul class="ytt-fto-list">
+                    <li><img src="img/check-orange.png" alt="">短い時間でたくさん経験を積める</li>
+                    <li><img src="img/check-orange.png" alt="">本番と同じYTT操作で検証</li>
+                    <li><img src="img/check-orange.png" alt="">ブラウザで完結（iPad / Mac / Win）</li>
+                </ul>
+                <div class="ytt-fto2-btns">
+                    <a href="https://discord.com/channels/1039824083208126474/1161882625519140874/1528047675658731570" target="_blank" rel="noopener" class="btn-sq-blue">FTOの始め方を見る</a>
+                </div>
+                <p class="ytt-fto2-note">※ YTTの利用にはFTOのProプランが必要です。</p>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -1239,6 +1387,114 @@
                 <a href="https://discord.com/oauth2/authorize?client_id=1132937165379211284&amp;response_type=code&amp;redirect_uri=https%3A%2F%2Ffx-space.com%2Fpp_sub_cancel.php&amp;scope=identify" target="_blank" rel="noopener" style="color:#6b7280; font-size:0.75rem; text-decoration:underline; text-underline-offset:3px;">退会はこちら →</a>
             </div>
         </div>
+
+        <!-- 購入（買い切り）：サブスクは不要でYTTだけ欲しい方向けに程よくアピール -->
+        <div class="ytt-sp-buyout">
+            <div class="ytt-sp-buyout-lead">
+                <span class="ytt-sp-buyout-eyebrow"><img class="hero-title-side hero-title-side--left" src="img/title-side-orange-left.png" alt="">サブスクは不要、YTTだけ必要な方へ<img class="hero-title-side hero-title-side--right" src="img/title-side-orange-right.png" alt=""></span>
+                <div style="text-align:center;">
+                    <span style="display:inline-block;">
+                        <h3 class="ytt-sp-buyout-title">YTTを買い切りで手に入れる</h3>
+                        <img src="img/wave-yellow-bold.png" alt="" style="display:block;width:100%;height:clamp(8px,1.8vw,13px);object-fit:fill;margin:0.25rem 0 0;">
+                    </span>
+                </div>
+            </div>
+            <div class="ytt-sp-buyout-card">
+                <span class="ytt-sp-buyout-badge">買い切り</span>
+                <div class="ytt-sp-buyout-info">
+                    <div class="ytt-sp-buyout-name">YTT（よすが式トレードツール）</div>
+                    <ul class="ytt-sp-buyout-benefits">
+                        <li><img src="img/check-orange.png" alt="✓"><span>月額費用なし・ずっと使える</span></li>
+                        <li><img src="img/check-orange.png" alt="✓"><span>最新アップデートも無料で更新</span></li>
+                        <li><img src="img/check-orange.png" alt="✓"><span>AIサポート1年間つき</span></li>
+                    </ul>
+                    <div class="ytt-sp-buyout-fine">※ スタンダード・プレミアム加入中の方もご利用いただけます</div>
+                </div>
+                <div class="ytt-sp-buyout-action">
+                    <div class="ytt-sp-buyout-price"><span class="ytt-sp-buyout-amount">¥110,000</span></div>
+                    <a href="https://discord.com/oauth2/authorize?client_id=1132937165379211284&amp;response_type=code&amp;redirect_uri=https%3A%2F%2Ffx-space.com%2Fpp_ytt_kaikiri.php&amp;scope=identify" target="_blank" rel="noopener" class="ytt-sp-buyout-cta">購入する →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section class="ytt-spec-section" style="background:#fff;">
+    <div class="ytt-spec-inner">
+        <div class="ytt-spec-header">
+            <span class="section-title-badge section-title-badge--blue">
+                <img class="hero-title-side hero-title-side--left" src="img/title-side-blue-left.png" alt="">
+                よくある質問
+                <img class="hero-title-side hero-title-side--right" src="img/title-side-blue-right.png" alt="">
+            </span>
+            <div style="text-align:center; margin-bottom:0.25rem;">
+                <div style="display:inline-block; white-space:nowrap;">
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">はじめる前の疑問を解消</h2>
+                    <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
+                </div>
+            </div>
+        </div>
+
+        <details class="ytt-faq">
+            <summary><span class="ytt-faq-q">買い切りとサブスク、どっちを選べばいい？</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
+            <div class="ytt-faq-a"><p>ツールだけ使えれば十分なら<strong>買い切り</strong>がおすすめ。月額なしでずっと使え、アップデートの更新も無料、AIサポートも1年間ついてきます。毎日のシナリオ動画やライブチャート分析、コミュニティで学びながら使いたいなら<strong>サブスク（スタンダード／プレミアム）</strong>が向いています。</p></div>
+        </details>
+        <details class="ytt-faq">
+            <summary><span class="ytt-faq-q">MT4・MT5・cTrader、どれを使えばいい？</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
+            <div class="ytt-faq-a"><p>もっとも安定して全機能が使える<strong>MT4を推奨</strong>しています。MT5・cTraderは基本機能のみの対応で、特にMT5は環境によって動作が重くなることがあります。</p></div>
+        </details>
+        <details class="ytt-faq">
+            <summary><span class="ytt-faq-q">YTT導入時に「認証エラー」が出たときは？</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
+            <div class="ytt-faq-a">
+                <p>次のいずれかが原因のことが多いです。ひとつずつ確認してみてください。</p>
+                <p>①MT4口座番号の登録漏れ・間違い<br>②自動売買の許可<br>③DLLの使用許可<br>④MT4の再起動<br>⑤メンバーシップ／サブスクの加入状況<br>⑥DiscordとYouTubeの連携</p>
+                <p>解決しないときは<a href="https://discord.com/channels/1039824083208126474/1151440259553439784/1490345736083083284" target="_blank" rel="noopener">AIサポート</a>もしくは<a href="https://discord.com/channels/1039824083208126474/1151440259553439784/1490345379613642853" target="_blank" rel="noopener">YTTサポート</a>をご利用ください。</p>
+            </div>
+        </details>
+        <details class="ytt-faq">
+            <summary><span class="ytt-faq-q">試してから決められる？</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
+            <div class="ytt-faq-a"><p>はい。<strong>24時間無料でお試し</strong>できます。サブスク加入前に全機能を1日じっくり試せるので、自分に合うか確かめてから決められます。<a href="https://fx-space.com/intro/ytt-trial-start.html">お試しを始める →</a></p></div>
+        </details>
+        <details class="ytt-faq">
+            <summary><span class="ytt-faq-q">解約・退会はできる？</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
+            <div class="ytt-faq-a"><p>サブスクはいつでも解約でき、追加費用はかかりません。スタンダード⇄プレミアムはプラン加入と同時に自動で切り替わるので二重払いの心配もありません。買い切りは解約不要で、購入後はずっとお使いいただけます。</p></div>
+        </details>
+    </div>
+</section>
+
+<!-- サポート窓口 -->
+<section class="ytt-spec-section" style="background:#f4f6f9;">
+    <div class="ytt-spec-inner">
+        <div class="ytt-spec-header">
+            <span class="section-title-badge section-title-badge--orange">
+                <img class="hero-title-side hero-title-side--left" src="img/title-side-orange-left.png" alt="">
+                困ったときは
+                <img class="hero-title-side hero-title-side--right" src="img/title-side-orange-right.png" alt="">
+            </span>
+            <div style="text-align:center; margin-bottom:0.25rem;">
+                <div style="display:inline-block; white-space:nowrap;">
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">サポート窓口</h2>
+                    <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
+                </div>
+            </div>
+            <p>導入や使い方で迷っても、ここから解決できます。</p>
+        </div>
+
+        <div class="ytt-add-grid cols-2">
+            <div class="ytt-add-card ytt-support-card">
+                <img class="sup-img" src="img/icon-ytt-ai-support.png" alt="">
+                <h3>YTT AIサポート</h3>
+                <p>導入・使い方の疑問に24時間いつでも回答。まずはここで解決できます。</p>
+                <a class="sup-link" href="https://discord.com/channels/1039824083208126474/1151440259553439784/1490345736083083284" target="_blank" rel="noopener">Discordで開く →</a>
+            </div>
+            <div class="ytt-add-card ytt-support-card">
+                <img class="sup-img" src="img/icon-ytt-support.png" alt="">
+                <h3>YTTサポート</h3>
+                <p>YTT開発のエンジニアが直接返信対応します。技術的な質問はこちら。</p>
+                <a class="sup-link" href="https://discord.com/channels/1039824083208126474/1151440259553439784/1490345379613642853" target="_blank" rel="noopener">Discordで開く →</a>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -1250,8 +1506,8 @@
         すぐにトレード環境に組み込めます。
     </p>
     <div class="ytt-sp-footer-cta-btns">
-        <a href="#href-tbd-download" class="btn-white-solid"><span class="dl-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="3" x2="12" y2="15"/></svg></span>今すぐダウンロード</a>
-        <a href="#trial-24h" class="btn-white-outline">24時間無料でお試し</a>
+        <a href="https://discord.com/oauth2/authorize?client_id=1132937165379211284&amp;response_type=code&amp;redirect_uri=https%3A%2F%2Ffx-space.com%2FYTTDL.php&amp;scope=identify" class="btn-white-solid"><span class="dl-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="3" x2="12" y2="15"/></svg></span>今すぐダウンロード</a>
+        <a href="https://fx-space.com/intro/ytt-trial-start.html" class="btn-white-outline">24時間無料でお試し</a>
     </div>
     <div class="ytt-footer-cta-manuals">
         <a href="https://www.canva.com/design/DAF1unsWf4o/2r40mzmK0qw0eZA9k4MP9Q/edit" target="_blank" rel="noopener">導入方法マニュアル →</a>

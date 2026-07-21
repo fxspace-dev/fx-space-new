@@ -36,6 +36,12 @@
 @media (max-width:640px){ .rsec--map{ --tip:34px; } }
 .rsec--night{ background:#3932a9; }  /* 速攻でプロを目指す（ゼロプロ90） */
 .rsec--deep{ background:#3730a3; }   /* 質問・相談したい */
+/* 前後が濃い色（#0f1035 / #3730a3）なので、ここだけ薄く抜いて区切りを作る */
+.rsec--tools{ background:#eeedf9; }  /* どちらのルートでも使うもの */
+/* YTTのマークは細いので、他のアイコンより一回り大きく。
+   ただしアイコンの高さは揃えて、2枚のカードの見出しが同じ高さに来るようにする */
+.rsec--tools .help-card > img{ height:58px; width:auto; max-width:58px; object-fit:contain; }
+.rsec--tools .help-card .tools-logo{ max-width:64px; }
 
 /* 濃い背景のセクションは、白地前提の文字色をまとめて反転させる */
 .rsec--map, .rsec--night, .rsec--deep{ color:#fff; }
@@ -116,6 +122,8 @@
 
 /* ===== 全体マップ（フローチャート図） ===== */
 .fc{ max-width:760px; margin:0 auto; background:#fff; border:1px solid #e0e0e0; border-radius:16px; padding:1.5rem 0.9rem 1.6rem; }
+/* 右に縦レールが並ぶぶん、本線が細くならないよう図全体を広げる */
+@media (min-width:761px){ .fc{ max-width:946px; } }
 .fc-col{ display:flex; flex-direction:column; align-items:center; }
 .fc .node{ width:100%; max-width:300px; text-align:center; border-radius:12px; padding:0.6rem 0.7rem; font-size:0.85rem; font-weight:800; line-height:1.4; }
 .fc .node small{ display:block; font-size:0.68rem; font-weight:600; margin-top:0.12rem; }
@@ -151,6 +159,59 @@
   .fc-merge{ height:22px; }
   .fc-merge .h,.fc-merge .d{ display:none; }
   .fc-merge .c{ top:0; }
+}
+/* 全ルート共通で使うもの（YTT／コミュニティ）は、図の右に縦のレールとして添える。
+   道の途中に挟むと「順番がある」ように誤読されるため、本線とは別の列にする */
+.fc-body{ display:grid; grid-template-columns:1fr 150px; gap:1.1rem; align-items:stretch; }
+.fc-main{ display:flex; flex-direction:column; min-width:0; }
+.fc-always{
+  position:relative; padding-left:30px;   /* 左端の括弧とラベルのぶんを空ける */
+  display:flex; flex-direction:column; justify-content:center;
+}
+/* 左に開いた括弧「]」。図の高さいっぱいに伸びて、本線ぜんぶを抱える。
+   箱はこの線より右側に置く */
+.fc-always-brace{
+  position:absolute; top:2%; bottom:2%; left:0; width:22px;
+  background:url("img/brace-crayon-left.svg") 0 0 / 100% 100% no-repeat;
+}
+/* ラベルは括弧の線に重ねて縦書きで置き、線を白で抜く。
+   線（SVG内の縦棒）は括弧の左端から18pxの位置にあるので、そこを中心に置く */
+.fc-always-label{
+  position:absolute; top:50%; left:18px; transform:translate(-50%,-50%);
+  writing-mode:vertical-rl; text-orientation:upright;
+  background:#fff; padding:0.5rem 0.1rem; white-space:nowrap;
+  font-size:0.7rem; font-weight:900; color:#6b66b8; letter-spacing:0.04em;
+}
+.fc-always-items{ display:flex; flex-direction:column; gap:0.7rem; }
+.fc-always-item{
+  display:flex; flex-direction:column; align-items:center; text-align:center;
+  padding:0.8rem 0.4rem 0.75rem;
+  border:0; border-radius:0;
+  background:url("img/frame-crayon-slate.svg") 0 0 / 100% 100% no-repeat;
+}
+.fc-always-item img{ width:30px; height:30px; object-fit:contain; margin-bottom:0.35rem; }
+/* YTTのマークは細い棒グラフで小さく見えるので、こちらだけ大きく・少し下げる */
+.fc-always-item img[src*="ytt-logo"]{ width:54px; height:54px; margin-top:0.3rem; margin-bottom:0.25rem; }
+.fc-always-item b{ font-size:0.82rem; font-weight:900; color:#1e1b4b; }
+/* 幅が足りない画面では縦レールが潰れるので、図の下に横並びで置く */
+@media (max-width:760px){
+  .fc-body{ display:block; }
+  .fc-always{
+    padding-left:0; padding-top:1.15rem; margin-top:1.3rem; display:block;
+  }
+  .fc-always-brace{
+    top:0; bottom:auto; left:2%; right:2%; width:auto; height:16px;
+    background-image:url("img/brace-crayon-up.svg");
+  }
+  .fc-always-label{
+    top:5px; left:50%; right:auto; transform:translateX(-50%);
+    writing-mode:horizontal-tb; padding:0 0.5rem; font-size:0.66rem;
+  }
+  .fc-always-items{ display:grid; grid-template-columns:1fr 1fr; gap:0.55rem; margin-top:0.7rem; }
+  .fc-always-item{ padding:0.7rem 0.35rem 0.65rem; }
+  .fc-always-item img{ width:26px; height:26px; }
+  .fc-always-item img[src*="ytt-logo"]{ width:46px; height:46px; margin-top:0.25rem; margin-bottom:0.2rem; }
+  .fc-always-item b{ font-size:0.78rem; }
 }
 /* 合流後の横長ノード */
 .fc .node.wide{ max-width:none; }
@@ -561,6 +622,8 @@
     <p class="rsec-lead">まずはこの図で全体像を。詳しくは下に続きます。</p>
   </div>
   <div class="fc rv">
+   <div class="fc-body">
+    <div class="fc-main">
     <div class="fc-col">
       <div class="node start">経験ゼロ からスタート</div>
     </div>
@@ -599,6 +662,25 @@
       <div class="conn"><i></i></div>
       <div class="node goal wide">プロトレーダー</div>
     </div>
+    </div><!-- /fc-main -->
+
+    <!-- YTTとコミュニティは「道のりのどこか」ではなく、全ルートを通して使うもの。
+         道の途中に挟むと順番があるように誤読されるので、図の右に縦のレールとして添える -->
+    <aside class="fc-always">
+      <span class="fc-always-brace" aria-hidden="true"></span>
+      <span class="fc-always-label">ずっと使う</span>
+      <div class="fc-always-items">
+        <div class="fc-always-item">
+          <img src="img/ytt-logo-gold.png" alt="">
+          <b>YTT</b>
+        </div>
+        <div class="fc-always-item">
+          <img src="img/icon-people.svg" alt="">
+          <b>コミュニティ</b>
+        </div>
+      </div>
+    </aside>
+   </div><!-- /fc-body -->
   </div>
 </section>
 
@@ -1399,6 +1481,32 @@
       <h3>プロにも<b>ランク</b>があります</h3>
       <img class="astro-rank-img" src="img/astro-ranks.png" alt="ASTRO Traders ランク一覧：MARS・JUPITER・SATURN・URANUS・NEPTUNE・VOYAGER" width="873" height="487">
       <p class="astro-goal">プロの最高峰 <b>VOYAGER</b> を目指そう</p>
+    </div>
+  </div>
+</section>
+<!-- ===== ルート全体で使うもの（YTT／コミュニティ） ===== -->
+<section class="rsec rsec--tools">
+  <div class="rsec-head rv">
+    <span class="section-title-badge section-title-badge--blue">
+      <img class="hero-title-side hero-title-side--left" src="img/title-side-blue-left.png" alt="">
+      ずっと使う
+      <img class="hero-title-side hero-title-side--right" src="img/title-side-blue-right.png" alt="">
+    </span>
+    <div><span class="tw"><h2>どちらのルートでも使うもの</h2><img src="img/wave-orange.png" alt=""></span></div>
+    <p class="rsec-lead">この2つは、ゴールまでずっと一緒です。</p>
+  </div>
+  <div class="help-grid">
+    <div class="help-card rv">
+      <img class="tools-logo" src="img/ytt-logo-gold.png" alt="">
+      <h3>YTT</h3>
+      <p>よすが式のトレードツール。ラインが自動で引かれ、チャートを読む作業がぐっと楽になります。STEP Aのライン引きから実戦まで、どの場面でも使います。</p>
+      <a class="rs-vid" href="https://youtu.be/x6CJtJN3Ces" target="_blank" rel="noopener"><img src="img/icon-youtube-crayon.svg" alt="">YTT解説 →</a>
+    </div>
+    <div class="help-card rv">
+      <img src="img/icon-people.svg" alt="">
+      <h3>コミュニティ</h3>
+      <p>同じゴールを目指す仲間がいる場所。毎朝のシナリオ、ライブでのチャート分析、利確の速報まで、ひとりで抱えずに進められます。</p>
+      <a class="rs-vid" href="https://discord.com/channels/1039824083208126474/1282263648886329396" target="_blank" rel="noopener"><img src="img/icon-discord-crayon.svg" alt="">ライブチャート分析 →</a>
     </div>
   </div>
 </section>

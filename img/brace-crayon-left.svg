@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 400" preserveAspectRatio="none">
+  <defs>
+    <filter id="cr" x="-40%" y="-4%" width="180%" height="108%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.05 0.06" numOctaves="2" seed="7" result="wob"/>
+      <feDisplacementMap in="SourceGraphic" in2="wob" scale="3" xChannelSelector="R" yChannelSelector="G" result="rough"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.9 1.1" numOctaves="4" seed="11" result="grain"/>
+      <feColorMatrix in="grain" type="matrix"
+        values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.6 2.1" result="grainA"/>
+      <feComposite in="rough" in2="grainA" operator="in"/>
+    </filter>
+  </defs>
+  <!-- 左に開いた括弧「]」。背骨が右、上下の腕が左へ伸びて図全体を抱える -->
+  <path d="M4 4 L14 4 Q20 4 20 12 L20 388 Q20 396 14 396 L4 396"
+        fill="none" stroke="#7c78bd" stroke-width="5" stroke-linecap="round"
+        vector-effect="non-scaling-stroke" filter="url(#cr)"/>
+</svg>

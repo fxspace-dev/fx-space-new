@@ -1659,9 +1659,19 @@
   try{ embedded = (window.self !== window.top); }catch(e){ embedded = true; }
   if(!embedded && location.search.indexOf('embed=1')<0) return;
   document.documentElement.classList.add('is-embed');
-  /* 高さが変わるたびに親へ伝えて、iframeの高さを合わせてもらう */
+  /* 高さが変わるたびに親へ伝えて、iframeの高さを合わせてもらう。
+     documentElement.scrollHeight は縮小前の図の高さを引きずって実際の倍近くになり、
+     iframeの下に大きな余白ができてしまうので、表示している中身の下端から測る */
   function tell(){
-    var h=Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
+    var h=0;
+    [].forEach.call(document.body.children, function(el){
+      if(getComputedStyle(el).display==='none') return;
+      var b=el.getBoundingClientRect();
+      var bottom=b.bottom+window.pageYOffset;
+      if(bottom>h) h=bottom;
+    });
+    h=Math.ceil(h);
+    if(!h) return;
     try{ parent.postMessage({ type:'route-height', height:h }, '*'); }catch(e){}
   }
   window.addEventListener('load', tell);

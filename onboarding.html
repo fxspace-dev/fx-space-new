@@ -1957,6 +1957,54 @@ a{color:inherit;text-decoration:none}
   .ob-card,.ob-result{padding:2rem 1.25rem;}
   .ob-choice{padding:0.875rem 1rem;}
 }
+
+/* ===== 診断結果の下：プロトレーダーへの最短ルート（全体マップ） ===== */
+.ob-route-detail{width:100%;background:linear-gradient(180deg,#f8f8fd 0%,#f1f1fa 100%);border-top:1px solid #ecebf6;padding:3rem 1.25rem 3.25rem;margin-top:2.5rem;}
+.ob-route-detail[hidden]{display:none;}
+.obrd-inner{max-width:600px;margin:0 auto;text-align:center;}
+.obrd-badge{display:inline-block;font-size:0.72rem;font-weight:800;letter-spacing:0.08em;color:#4f46e5;background:rgba(79,70,229,0.08);padding:0.34rem 0.9rem;border-radius:100px;margin-bottom:0.7rem;}
+.obrd-title{font-size:clamp(1.35rem,4.2vw,1.8rem);font-weight:900;color:#1e1b4b;line-height:1.35;margin-bottom:0.55rem;letter-spacing:-0.01em;}
+.obrd-title .obrd-em{color:#4f46e5;}
+.obrd-lead{font-size:0.9rem;color:#6b7280;line-height:1.75;margin-bottom:1.6rem;}
+.obrd-viz{max-width:330px;margin:0 auto 2rem;}
+.obrd-viz svg{width:100%;height:auto;display:block;}
+
+/* 縦ロードマップ */
+.obrd-road{list-style:none;padding:0;margin:0 0 1.5rem;text-align:left;}
+.obrd-stage{position:relative;display:grid;grid-template-columns:44px 1fr;gap:0.9rem;padding-bottom:1.4rem;}
+.obrd-stage:not(:last-child)::before{content:"";position:absolute;left:21px;top:46px;bottom:0;width:2px;background:linear-gradient(180deg,#d8d5f2,#e9e7f7);}
+.obrd-mark{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.05rem;font-weight:900;color:#fff;flex-shrink:0;z-index:1;box-shadow:0 4px 12px rgba(79,70,229,0.22);}
+.obrd-mark-1{background:#6366f1;}
+.obrd-mark-2{background:#8b5cf6;box-shadow:0 4px 12px rgba(139,92,246,0.26);}
+.obrd-mark-3{background:#0891b2;box-shadow:0 4px 12px rgba(8,145,178,0.26);}
+.obrd-body{background:#fff;border:1.5px solid #eceaf6;border-radius:16px;padding:1rem 1.15rem 1.1rem;box-shadow:0 4px 14px rgba(30,27,75,0.04);}
+.obrd-kicker{display:block;font-size:0.68rem;font-weight:800;letter-spacing:0.1em;color:#9ca3af;margin-bottom:0.15rem;}
+.obrd-body h3{font-size:1.1rem;font-weight:900;color:#1e1b4b;margin:0 0 0.45rem;display:flex;align-items:baseline;gap:0.5rem;flex-wrap:wrap;}
+.obrd-body h3 .obrd-h3sub{font-size:0.78rem;font-weight:700;color:#8b8f9c;}
+.obrd-body p{font-size:0.85rem;color:#4b5563;line-height:1.7;margin:0 0 0.65rem;}
+.obrd-paths{list-style:none;padding:0;margin:0 0 0.65rem;}
+.obrd-paths li{font-size:0.82rem;color:#374151;line-height:1.6;padding:0.28rem 0 0.28rem 1.05rem;position:relative;}
+.obrd-paths li::before{content:"›";position:absolute;left:0;color:#a5a1e0;font-weight:900;}
+.obrd-paths li b{color:#4f46e5;font-weight:800;}
+.obrd-mile{display:inline-flex;align-items:center;gap:0.35rem;font-size:0.74rem;font-weight:800;color:#92400e;background:rgba(245,158,11,0.1);border-radius:100px;padding:0.28rem 0.7rem;margin-bottom:0.65rem;}
+.obrd-links{display:flex;flex-wrap:wrap;gap:0.45rem;}
+.obrd-links a{font-size:0.78rem;font-weight:800;color:#4f46e5;background:rgba(79,70,229,0.07);border:1px solid rgba(79,70,229,0.15);border-radius:9px;padding:0.35rem 0.75rem;text-decoration:none;transition:all 0.15s;}
+.obrd-links a:hover{background:#4f46e5;color:#fff;}
+
+/* 関門（PRO TEST） */
+.obrd-gate{background:#1e1b4b;border-radius:16px;padding:1.3rem 1.25rem;text-align:center;margin:0 0 1rem;}
+.obrd-gate-badge{display:inline-block;font-size:0.68rem;font-weight:800;letter-spacing:0.12em;color:#fcd34d;margin-bottom:0.5rem;}
+.obrd-gate-cond{font-size:0.9rem;font-weight:800;color:#fff;line-height:1.65;margin:0 0 0.45rem;}
+.obrd-gate-cond b{color:#fcd34d;}
+.obrd-gate-note{font-size:0.76rem;color:#c7c3e8;line-height:1.6;margin:0;}
+
+/* ゴール（Voyager） */
+.obrd-goal{display:flex;align-items:center;justify-content:center;gap:0.6rem;margin-bottom:1.6rem;}
+.obrd-goal svg{width:28px;height:28px;flex-shrink:0;}
+.obrd-goal-txt{text-align:left;}
+.obrd-goal-txt strong{display:block;font-size:0.95rem;font-weight:900;color:#1e1b4b;line-height:1.3;}
+.obrd-goal-txt span{font-size:0.78rem;color:#6b7280;}
+.obrd-cta{margin-top:0.25rem;}
 </style>
 </head>
 <body>
@@ -2194,17 +2242,17 @@ a{color:inherit;text-decoration:none}
         </div>
       </div>
 
-      <!-- Step 2: トレードルーム見学 -->
+      <!-- Step 2: ライブチャート分析見学 -->
       <div class="ob-vstep">
         <div class="ob-vstep-head">
           <span class="ob-vstep-num"><img src="img/crayon-2.png" alt="2"></span>
-          <span class="ob-vstep-title"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg><a href="https://discord.com/channels/1039824083208126474/1356783303105183916" target="_blank" class="ob-link">トレードルーム</a>で先輩のトレードを見学</span>
+          <span class="ob-vstep-title"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg><a href="https://discord.com/channels/1039824083208126474/1282263648886329396" target="_blank" class="ob-link">ライブチャート分析</a>で先輩のトレードを見学</span>
         </div>
         <div class="ob-vstep-viz">
           <div class="community-chat static-chat">
             <div class="cc-header">
               <span class="cc-header-hash">#</span>
-              <span class="cc-header-name">あなたのトレードルーム</span>
+              <span class="cc-header-name">ライブチャート分析</span>
             </div>
             <div class="cc-body">
               <div class="cc-messages">
@@ -2260,7 +2308,7 @@ a{color:inherit;text-decoration:none}
 
     </div>
     <div class="ob-result-actions">
-      <a href="https://discord.com/channels/1039824083208126474/1356783303105183916" target="_blank" class="ob-btn">トレードルームを覗いてみる →</a>
+      <a href="https://discord.com/channels/1039824083208126474/1282263648886329396" target="_blank" class="ob-btn">ライブチャート分析を覗いてみる →</a>
       <button class="ob-btn ob-btn-outline" onclick="obReset()">もう一度診断する</button>
     </div>
     <div class="ob-allroutes">
@@ -2398,11 +2446,11 @@ a{color:inherit;text-decoration:none}
         </div>
       </div>
 
-      <!-- Step 3: トレードルームで実戦 -->
+      <!-- Step 3: ライブチャート分析で実戦 -->
       <div class="ob-vstep">
         <div class="ob-vstep-head">
           <span class="ob-vstep-num"><img src="img/crayon-3.png" alt="3"></span>
-          <span class="ob-vstep-title"><svg class="ob-ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg><a href="https://discord.com/channels/1039824083208126474/1356783303105183916" target="_blank" class="ob-link">トレードルーム</a>で実戦を始める</span>
+          <span class="ob-vstep-title"><svg class="ob-ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg><a href="https://discord.com/channels/1039824083208126474/1282263648886329396" target="_blank" class="ob-link">ライブチャート分析</a>で実戦を始める</span>
         </div>
         <div class="ob-vstep-viz">
           <div class="comm-embed-wrap">
@@ -2737,7 +2785,7 @@ a{color:inherit;text-decoration:none}
           <div class="community-chat static-chat">
             <div class="cc-header">
               <span class="cc-header-hash">#</span>
-              <span class="cc-header-name">トレードルーム</span>
+              <span class="cc-header-name">ライブチャート分析</span>
             </div>
             <div class="cc-body">
               <div class="cc-messages">
@@ -2782,24 +2830,24 @@ a{color:inherit;text-decoration:none}
   <div class="ob-result" id="ob-r-community" hidden>
     <div class="ob-result-icon"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
     <h2 class="ob-result-title">コミュニティで成長する</h2>
-    <p class="ob-result-desc">少人数トレードルームで仲間と毎日学ぶ。</p>
+    <p class="ob-result-desc">ライブチャート分析で仲間と毎日リアルタイムに学ぶ。</p>
     <div class="ob-hero-logo community">
       <img src="images/community-logo.png" alt="コミュニティ">
     </div>
     <div class="ob-vsteps">
       <h4>コミュニティの歩き方</h4>
 
-      <!-- Step 1: トレードルームを覗く -->
+      <!-- Step 1: ライブチャート分析を覗く -->
       <div class="ob-vstep">
         <div class="ob-vstep-head">
           <span class="ob-vstep-num"><img src="img/crayon-1.png" alt="1"></span>
-          <span class="ob-vstep-title"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M13 4h3a2 2 0 0 1 2 2v14"/><path d="M2 20h3"/><path d="M13 20h9"/><path d="M10 12v.01"/><path d="M13 4.562v16.157a1 1 0 0 1-1.242.97L5 20V5.562a2 2 0 0 1 1.515-1.94l4-1A2 2 0 0 1 13 4.561Z"/></svg><a href="https://discord.com/channels/1039824083208126474/1356783303105183916" target="_blank" class="ob-link">トレードルーム</a>を覗いてみる</span>
+          <span class="ob-vstep-title"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M13 4h3a2 2 0 0 1 2 2v14"/><path d="M2 20h3"/><path d="M13 20h9"/><path d="M10 12v.01"/><path d="M13 4.562v16.157a1 1 0 0 1-1.242.97L5 20V5.562a2 2 0 0 1 1.515-1.94l4-1A2 2 0 0 1 13 4.561Z"/></svg><a href="https://discord.com/channels/1039824083208126474/1282263648886329396" target="_blank" class="ob-link">ライブチャート分析</a>を覗いてみる</span>
         </div>
         <div class="ob-vstep-viz">
           <div class="community-chat static-chat">
             <div class="cc-header">
               <span class="cc-header-hash">#</span>
-              <span class="cc-header-name">あなたのトレードルーム</span>
+              <span class="cc-header-name">ライブチャート分析</span>
               <span class="ob-room-meta">● 今のメンバー 14人</span>
             </div>
             <div class="cc-body">
@@ -2867,7 +2915,7 @@ a{color:inherit;text-decoration:none}
       <div class="ob-vstep">
         <div class="ob-vstep-head">
           <span class="ob-vstep-num"><img src="img/crayon-3.png" alt="3"></span>
-          <span class="ob-vstep-title"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg><a href="https://discord.com/channels/1039824083208126474/1356783303105183916" target="_blank" class="ob-link">トレードルーム</a>で自分のトレードを共有</span>
+          <span class="ob-vstep-title"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg><a href="https://discord.com/channels/1039824083208126474/1282263648886329396" target="_blank" class="ob-link">ライブチャート分析</a>で自分のトレードを共有</span>
         </div>
         <div class="ob-vstep-viz">
           <div class="comm-embed-wrap">
@@ -2909,7 +2957,7 @@ a{color:inherit;text-decoration:none}
 
     </div>
     <div class="ob-result-actions">
-      <a href="https://discord.com/channels/1039824083208126474/1356783303105183916" target="_blank" class="ob-btn">トレードルームを覗く →</a>
+      <a href="https://discord.com/channels/1039824083208126474/1282263648886329396" target="_blank" class="ob-btn">ライブチャート分析を覗く →</a>
       <button class="ob-btn ob-btn-outline" onclick="obReset()">もう一度診断する</button>
     </div>
     <div class="ob-allroutes">
@@ -3065,6 +3113,92 @@ a{color:inherit;text-decoration:none}
 
 </main>
 
+<!-- 診断結果の下：プロトレーダーへの最短ルート（全体マップ） -->
+<section class="ob-route-detail" id="ob-route-detail" hidden>
+  <div class="obrd-inner">
+    <span class="obrd-badge">プロトレーダーへの最短ルート</span>
+    <h2 class="obrd-title">ゴールまでの<span class="obrd-em">全体マップ</span></h2>
+    <p class="obrd-lead">診断結果はスタート地点。ここから先の道のりは、<br>大きく3ステップです。</p>
+
+    <!-- 成長カーブ -->
+    <div class="obrd-viz">
+      <svg viewBox="0 0 240 150" xmlns="http://www.w3.org/2000/svg">
+        <rect width="240" height="150" rx="12" fill="#ffffff" stroke="#eef0f4" stroke-width="1"/>
+        <defs>
+          <linearGradient id="obrd-line" x1="0" y1="1" x2="1" y2="0"><stop offset="0%" stop-color="#a78bfa"/><stop offset="100%" stop-color="#4338ca"/></linearGradient>
+          <linearGradient id="obrd-fill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#7c3aed" stop-opacity="0.13"/><stop offset="100%" stop-color="#7c3aed" stop-opacity="0.01"/></linearGradient>
+        </defs>
+        <text x="9" y="103" fill="#4338ca" font-size="30" font-weight="900" font-family="Inter,system-ui,sans-serif" opacity="0.1">0</text>
+        <path d="M24,96 C65,94 140,72 220,34 L220,108 L24,108 Z" fill="url(#obrd-fill)" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.8s" begin="0.5s" fill="freeze"/></path>
+        <path d="M24,96 C65,94 140,72 220,34" fill="none" stroke="url(#obrd-line)" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="260" stroke-dashoffset="260"><animate attributeName="stroke-dashoffset" from="260" to="0" dur="1.8s" begin="0.5s" fill="freeze"/></path>
+        <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="0.7s" fill="freeze"/><circle cx="24" cy="96" r="4" fill="white" stroke="#a78bfa" stroke-width="1.6"/><text x="24" y="86" fill="#4c1d95" font-size="8" text-anchor="middle" font-weight="800" font-family="Inter,system-ui,sans-serif">学ぶ</text></g>
+        <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="1.2s" fill="freeze"/><circle cx="118" cy="74" r="4" fill="white" stroke="#7558da" stroke-width="1.6"/><text x="118" y="64" fill="#4c1d95" font-size="8" text-anchor="middle" font-weight="800" font-family="Inter,system-ui,sans-serif">鍛える</text></g>
+        <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="1.8s" fill="freeze"/><circle cx="220" cy="34" r="5" fill="#4338ca" stroke="#fff" stroke-width="1.6"/><text x="220" y="24" fill="#4338ca" font-size="8.5" text-anchor="middle" font-weight="900" font-family="Inter,system-ui,sans-serif">挑戦</text></g>
+        <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="2.2s" fill="freeze"/><text x="120" y="132" fill="#9ca3af" font-size="7.5" text-anchor="middle" font-weight="700" font-family="Inter,system-ui,sans-serif">ゼロからプロへ、一直線</text></g>
+      </svg>
+    </div>
+
+    <!-- 縦ロードマップ -->
+    <ol class="obrd-road">
+      <li class="obrd-stage">
+        <div class="obrd-mark obrd-mark-1">1</div>
+        <div class="obrd-body">
+          <span class="obrd-kicker">STEP 1</span>
+          <h3>学ぶ<span class="obrd-h3sub">土台をつくる</span></h3>
+          <p>FXの基礎・チャートの見方・よすが式の考え方を、動画でインプット。</p>
+          <div class="obrd-links">
+            <a href="https://discord.com/channels/1039824083208126474/1238304478453825557" target="_blank" rel="noopener">初心者コンテンツ</a>
+            <a href="https://discord.com/channels/1039824083208126474/1238304552294289428" target="_blank" rel="noopener">中級者コンテンツ</a>
+          </div>
+        </div>
+      </li>
+      <li class="obrd-stage">
+        <div class="obrd-mark obrd-mark-2">2</div>
+        <div class="obrd-body">
+          <span class="obrd-kicker">STEP 2</span>
+          <h3>鍛える<span class="obrd-h3sub">実力をつける</span></h3>
+          <p>2つの道があり、ゴールは同じ。過去相場の練習はFTO×YTTで。</p>
+          <ul class="obrd-paths">
+            <li><b>最速</b>／ゼロプロ90 … よすが指導で3か月、毎日添削</li>
+            <li><b>自分のペース</b>／Yカリキュラム … ライン→ナウキャスト・シナリオ→タイミング→過去相場検証</li>
+          </ul>
+          <span class="obrd-mile">🎯 各段階を正答率90〜95%でクリア</span>
+          <div class="obrd-links">
+            <a href="https://discord.com/channels/1039824083208126474/1171706488234979378" target="_blank" rel="noopener">ゼロプロ90</a>
+          </div>
+        </div>
+      </li>
+      <li class="obrd-stage">
+        <div class="obrd-mark obrd-mark-3">3</div>
+        <div class="obrd-body">
+          <span class="obrd-kicker">STEP 3</span>
+          <h3>挑戦する<span class="obrd-h3sub">Fintokeiに合格する</span></h3>
+          <p>Fintokeiに挑戦。合格すると仮想資金の提供を受けてトレードできます。</p>
+          <span class="obrd-mile">🛡 損失率2%固定で堅実に</span>
+          <div class="obrd-links">
+            <a href="https://my.fintokei.com/affiliate/jp/55" target="_blank" rel="noopener">Fintokei</a>
+          </div>
+        </div>
+      </li>
+    </ol>
+
+    <!-- 関門 -->
+    <div class="obrd-gate">
+      <span class="obrd-gate-badge">プロの関門</span>
+      <p class="obrd-gate-cond"><b>Fintokeiに合格</b><br>または<b>月利8%以上・最大DD10%以内</b>を2か月連続</p>
+      <p class="obrd-gate-note">達成したら「ASTRO（プロ）申請」へ。プロトレーダーの一員です。</p>
+    </div>
+
+    <!-- ゴール -->
+    <div class="obrd-goal">
+      <svg viewBox="0 0 24 24" fill="#f59e0b" xmlns="http://www.w3.org/2000/svg"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      <div class="obrd-goal-txt"><strong>GOAL — VOYAGER</strong><span>プロの最高峰を目指そう。</span></div>
+    </div>
+
+    <a href="route.html" class="ob-btn obrd-cta">最短ルートを詳しく見る →</a>
+  </div>
+</section>
+
 <footer class="ob-footer">
   <a href="index.html">FX SPACE チュートリアルへ →</a>
 </footer>
@@ -3210,6 +3344,11 @@ function startYttAnimations() {
   var dots = progress.querySelectorAll('.ob-dot');
   var lines = progress.querySelectorAll('.ob-dot-line');
 
+  function routeDetail(visible) {
+    var rd = document.getElementById('ob-route-detail');
+    if (rd) rd.hidden = !visible;
+  }
+
   function show(id) {
     allCards.forEach(function(c){ c.hidden = true; });
     var el = document.getElementById('ob-' + id);
@@ -3237,6 +3376,7 @@ function startYttAnimations() {
 
   window.obAnswer = function(q, val) {
     state.answers['q' + q] = val;
+    routeDetail(false);
     if (q === 1) {
       var nextStep = 'q2a';
       if (val === 'beginner') nextStep = 'q2b';
@@ -3254,11 +3394,13 @@ function startYttAnimations() {
     updateProgress(2, true);
     // Hide progress on result
     progress.style.display = 'none';
+    routeDetail(true);
     if (route === 'ytt') startYttAnimations();
   };
 
   window.obBack = function(target) {
     state.step = target;
+    routeDetail(false);
     show(target);
     if (target === 'q1') updateProgress(1, false);
     else updateProgress(2, false);
@@ -3269,12 +3411,14 @@ function startYttAnimations() {
     show('q1');
     updateProgress(1, false);
     progress.style.display = '';
+    routeDetail(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   window.obShowResult = function(route) {
     state.answers.route = route;
     show('r-' + route);
+    routeDetail(true);
     if (route === 'ytt') startYttAnimations();
   };
 

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 70" fill="#141414">
+  <!-- 左（後ろ） -->
+  <circle cx="21" cy="25" r="12"/>
+  <path d="M2,62 A19,19 0 0 1 40,62 Z"/>
+  <!-- 右（後ろ） -->
+  <circle cx="79" cy="25" r="12"/>
+  <path d="M60,62 A19,19 0 0 1 98,62 Z"/>
+  <!-- 中央（前・白フチで区切り） -->
+  <g stroke="#fff" stroke-width="3.4" stroke-linejoin="round">
+    <circle cx="50" cy="18" r="16"/>
+    <path d="M23,67 A27,27 0 0 1 77,67 Z"/>
+  </g>
+</svg>

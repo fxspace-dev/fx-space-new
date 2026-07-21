@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28.57 20">
+  <defs>
+    <filter id="ytcrayon" x="-12%" y="-16%" width="124%" height="132%">
+      <!-- 手描きのゆらぎ -->
+      <feTurbulence type="fractalNoise" baseFrequency="0.3 0.38" numOctaves="3" seed="5" result="wob"/>
+      <feDisplacementMap in="SourceGraphic" in2="wob" scale="0.8"
+                         xChannelSelector="R" yChannelSelector="G" result="rough"/>
+      <!-- クレヨンのかすれ（小さく表示しても潰れないよう控えめ） -->
+      <feTurbulence type="fractalNoise" baseFrequency="1.6 1.25" numOctaves="4" seed="23" result="grain"/>
+      <feColorMatrix in="grain" type="matrix"
+        values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -3.2 2.85" result="grainA"/>
+      <feComposite in="rough" in2="grainA" operator="in"/>
+    </filter>
+  </defs>
+  <!-- 本体と再生マークを1つのパスにして、三角は「穴」として抜く -->
+  <path filter="url(#ytcrayon)" fill="#f01c1c" fill-rule="evenodd"
+        d="M27.97 3.12A3.58 3.58 0 0 0 25.45.59C23.22 0 14.28 0 14.28 0S5.35 0 3.12.59A3.58 3.58 0 0 0 .6 3.12 37.3 37.3 0 0 0 0 10a37.3 37.3 0 0 0 .6 6.88 3.58 3.58 0 0 0 2.52 2.53c2.23.59 11.16.59 11.16.59s8.94 0 11.17-.59a3.58 3.58 0 0 0 2.52-2.53A37.3 37.3 0 0 0 28.57 10a37.3 37.3 0 0 0-.6-6.88z
+           M11.43 14.29 18.85 10l-7.42-4.29z"/>
+</svg>

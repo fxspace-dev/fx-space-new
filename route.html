@@ -160,19 +160,20 @@
 .fc .conn i{ display:block; width:2px; height:14px; background:#9ca3af; position:relative; margin-bottom:6px; }
 .fc .conn i::after{ content:""; position:absolute; left:50%; bottom:-4px; transform:translateX(-50%); border-left:4px solid transparent; border-right:4px solid transparent; border-top:5px solid #9ca3af; }
 .fc .conn.sm i{ height:8px; }
-/* 分岐コネクタ（スタート→2レーン）: 枠に一切かぶらない専用ブロック */
-.fc-branch{ position:relative; width:100%; height:30px; margin-top:5px; }
-.fc-branch::before{ content:""; position:absolute; left:50%; top:0; transform:translateX(-50%); width:3px; height:12px; background:#9ca3af; }
-.fc-branch .h{ position:absolute; top:12px; left:calc(25% - 0.2rem - 1.5px); right:calc(25% - 0.2rem - 1.5px); height:3px; background:#9ca3af; border-radius:2px; }
-.fc-branch .d{ position:absolute; top:12px; width:3px; height:9px; background:#9ca3af; transform:translateX(-50%); }
-.fc-branch .d::after{ content:""; position:absolute; left:50%; bottom:-4px; transform:translateX(-50%); border-left:4px solid transparent; border-right:4px solid transparent; border-top:5px solid #9ca3af; }
-.fc-branch .d1{ left:calc(25% - 0.2rem); }
-.fc-branch .d2{ left:calc(75% + 0.2rem); }
-.fc-split{ display:grid; grid-template-columns:1fr 1fr; gap:0.8rem; width:100%; align-items:stretch; }
+/* 分岐コネクタ（スタート→2レーン）: 枠に一切かぶらない専用ブロック。
+   窮屈に見えないよう、縦の線・横の渡り・下ろしの矢印をそれぞれ十分に伸ばす */
+.fc-fork{ position:relative; width:100%; height:78px; margin-top:14px; }
+.fc-fork::before{ content:""; position:absolute; left:50%; top:0; transform:translateX(-50%); width:3px; height:32px; background:#9ca3af; }
+.fc-fork .h{ position:absolute; top:32px; left:calc(25% - 0.2rem - 1.5px); right:calc(25% - 0.2rem - 1.5px); height:3px; background:#9ca3af; border-radius:2px; }
+.fc-fork .d{ position:absolute; top:32px; width:3px; height:36px; background:#9ca3af; transform:translateX(-50%); }
+.fc-fork .d::after{ content:""; position:absolute; left:50%; bottom:-7px; transform:translateX(-50%); border-left:6px solid transparent; border-right:6px solid transparent; border-top:8px solid #9ca3af; }
+.fc-fork .d1{ left:calc(25% - 0.2rem); }
+.fc-fork .d2{ left:calc(75% + 0.2rem); }
+.fc-two{ display:grid; grid-template-columns:1fr 1fr; gap:0.8rem; width:100%; align-items:stretch; }
 /* 短いレーンの下端を、合流点まで縦線で延ばす */
 .fc .fc-fill{ flex:1 1 auto; width:100%; display:flex; justify-content:center; align-items:stretch; min-height:10px; }
 .fc .fc-fill i{ display:block; width:3px; background:#9ca3af; border-radius:2px; }
-/* 合流コネクタ（2レーン→1本）: fc-branch の上下反転 */
+/* 合流コネクタ（2レーン→1本）: fc-fork の上下反転 */
 .fc-merge{ position:relative; width:100%; height:34px; }
 .fc-merge .d{ position:absolute; top:0; width:3px; height:12px; background:#9ca3af; border-radius:2px; transform:translateX(-50%); }
 /* レーンの中心は「列幅の半分」＝ 25%から列間gap(0.8rem)の1/4だけ内側 */
@@ -214,7 +215,7 @@
 }
 .fc-always-item img{ width:30px; height:30px; object-fit:contain; margin-bottom:0.35rem; }
 /* YTTのマークは細い棒グラフで小さく見えるので、こちらだけ大きく・少し下げる */
-.fc-always-item img[src*="ytt-logo"]{ width:54px; height:54px; margin-top:0.3rem; margin-bottom:0.25rem; }
+.fc-always-item img[src*="ytt-mark"]{ width:54px; height:54px; margin-top:0.3rem; margin-bottom:0.25rem; }
 .fc-always-item b{ font-size:0.82rem; font-weight:900; color:#1e1b4b; }
 /* 合流後の横長ノード */
 .fc .node.wide{ max-width:none; }
@@ -370,9 +371,9 @@
 
 /* コネクタを太めに・端を丸めて柔らかく */
 .fc .conn i{ width:3px; border-radius:2px; }
-.fc-branch::before,
-.fc-branch .h,
-.fc-branch .d{ border-radius:2px; }
+.fc-fork::before,
+.fc-fork .h,
+.fc-fork .d{ border-radius:2px; }
 
 /* STEPの風船文字をわずかに傾けて手作り感を出す */
 .rs-stepmark .rs-alpha{ transform:rotate(-4deg); }
@@ -435,19 +436,22 @@
 .fc .fc-group{
   position:relative;
   width:100%; max-width:300px;
-  border:2px solid #4ea9f0;
-  border-radius:16px 20px 17px 22px / 20px 16px 22px 17px;
+  border:2px dashed #2563eb;
+  border-radius:14px;
   padding:1.5rem 0.55rem 0.7rem;
   display:flex; flex-direction:column; align-items:stretch; gap:0;
 }
+/* 速攻ルート側のまとまりは、そのルートの色（オレンジ）で揃える */
+.fc .fc-group--fast{ border-color:#ea580c; }
 .fc .fc-group .node{ width:auto; max-width:none; }
 /* 見出しは傾けず、白背景で枠線を切り取って文字の下に線が通らないようにする */
 .fc .fc-group-label{
   position:absolute; top:-0.68rem; left:50%; transform:translateX(-50%);
-  background:#fff; color:#1e6fb8; white-space:nowrap;
+  background:#eef5ff; color:#1d4ed8; white-space:nowrap;
   font-size:0.76rem; font-weight:900; letter-spacing:0.03em;
   padding:0 0.6rem;
 }
+.fc .fc-group--fast .fc-group-label{ background:#fff4ec; color:#c2410c; }
 
 /* フローチャート内の記号（画像版） */
 .fc .fc-mark{ height:20px; width:auto; vertical-align:-5px; margin-right:0.3rem; }
@@ -474,11 +478,19 @@
   background-color:#fff; background-image:none;
   padding:0.7rem 0.95rem;
 }
-.fc .node.step{ border-color:#3b82f6; }
-.fc .node.alt{ border-color:#059669; }
-.fc .node.gate{ border-color:#059669; border-width:2.5px; }
+/* 色 ＝ どのルートのものか。塗り ＝ ゴールだけ。緑の太枠 ＝ 通過条件。
+   この3つだけを守ることで、ぱっと見の意味が揃う */
+.fc .node.start{ border-color:#6b7280; color:#374151; }
+.fc .node.step{ border-color:#2563eb; }
 .fc .node.zeropro{ border-color:#ea580c; }
+.fc .node.alt{ border-color:#059669; }
+/* Fintokei はページ内に専用セクションを持つ主要ステップなので、紫で独立させる */
 .fc .node.fintokei{ border-color:#6d28d9; }
+/* 関門だけは役割が違う（通過するための条件）ので、薄緑＋太い緑枠で形から区別する */
+.fc .node.gate{
+  position:relative; border:3px solid #047857; border-radius:16px;
+  background:#f0fdf6;
+}
 /* 枠どうしが近すぎないよう間隔を少し空ける */
 .fc .fc-group .conn.sm i{ height:10px; }
 .fc .fc-choice{ gap:0.45rem; }
@@ -490,15 +502,36 @@
 .fc .node.goal{
   background-image:none; border-radius:10px;
 }
-/* 自力ルート＝水色／速攻ルート＝オレンジ（下のルート選択ボタンと同じ色分け） */
-/* 白文字が読める濃さまで落とした水色・オレンジ（どちらも4.5:1以上） */
+/* ルートの見出しだけは塗る（そのルートの「表札」なので） */
 .fc .lane-main{ background-color:#1565c0; color:#fff; }
 .fc .lane-alt{ background-color:#047857; color:#fff; }
 .fc .lane-fast{ background-color:#c2410c; color:#fff; }
 .fc .lane-tag{ background-color:#ffd21e; color:#1e1b4b; padding:0.26rem 0.8rem; }
-.fc .node.astro{ background-color:#2563eb; color:#fff; padding:0.7rem 0.95rem; }
-/* ゴールは黄色。文字は濃紺で読みやすくする */
-.fc .node.goal{ background-color:#ffd21e; padding:0.7rem 0.95rem; color:#1e1b4b; }
+/* ASTRO申請は共通パートの一歩。塗らずに紺の枠にして、ゴールと目立ち合わせない */
+.fc .node.astro{
+  background:#fff; color:#1e1b4b; border:2px solid #1e1b4b;
+  padding:0.7rem 0.95rem; font-weight:800;
+}
+/* 塗りつぶすのはゴールだけ。図の中でいちばん目立つものを1つに絞る */
+.fc .node.goal{
+  background-color:#ffd21e; color:#1e1b4b; border:0;
+  padding:0.95rem; font-size:1rem; font-weight:900; letter-spacing:0.04em;
+  box-shadow:0 4px 14px rgba(202,138,4,0.35);
+}
+
+/* ===== ルートの陣地：どこからどこまでが同じルートか一目で分かるように ===== */
+.fc-zone{ border-radius:14px; padding:0.7rem 0.7rem 0; }
+.fc-zone--self{ background:#eef5ff; }
+.fc-zone--fast{ background:#fff4ec; }
+.fc-zone .lane{ max-width:none; }
+
+/* 分岐と合流に言葉を添えて、図の意味を取り違えないようにする */
+.fc-fork-label{
+  position:absolute; left:50%; transform:translateX(-50%);
+  background:#fff; color:#6b7280; font-size:0.68rem; font-weight:900;
+  padding:0 0.5rem; white-space:nowrap; z-index:2;
+}
+.fc-fork-label{ top:24px; }
 
 /* ===== 各四角の説明（PCはマウスを乗せる／スマホはタップ） ===== */
 .fc [data-tip]{ position:relative; cursor:help; }
@@ -662,9 +695,9 @@
     <div class="fc-col">
       <div class="node start" data-tip="FXの知識ゼロ・口座なしの状態からで大丈夫です。">経験ゼロ からスタート</div>
     </div>
-    <div class="fc-branch"><span class="h"></span><span class="d d1"></span><span class="d d2"></span></div>
-    <div class="fc-split">
-      <div class="fc-col">
+    <div class="fc-fork"><span class="fc-fork-label">どちらかを選ぶ</span><span class="h"></span><span class="d d1"></span><span class="d d2"></span></div>
+    <div class="fc-two">
+      <div class="fc-col fc-zone fc-zone--self">
         <div class="lane lane-main" data-tip="自分のペースで無料の動画カリキュラムを進めるルート。費用をかけずに始められます。">自力でプロを目指す</div>
         <div class="conn"><i></i></div>
         <div class="fc-group">
@@ -679,16 +712,19 @@
         </div>
         <div class="fc-fill"><i></i></div>
       </div>
-      <div class="fc-col">
+      <div class="fc-col fc-zone fc-zone--fast">
         <div class="lane lane-fast" data-tip="よすがの直接指導で3か月集中。最短でプロレベルを目指すルートです。">速攻でプロを目指す</div>
         <div class="conn"><i></i></div>
-        <div class="node zeropro" data-tip="3か月間、毎日課題を出してよすがが動画で添削。7つのステージを順にクリアします。">ゼロプロ90に参加する</div>
+        <div class="fc-group fc-group--fast">
+          <span class="fc-group-label">3か月で仕上げる</span>
+          <div class="node zeropro" data-tip="3か月間、毎日課題を出してよすがが動画で添削。7つのステージを順にクリアします。">ゼロプロ90に参加する</div>
+        </div>
         <div class="fc-fill"><i></i></div>
       </div>
     </div>
     <!-- 2つのルートがここで合流する -->
     <div class="fc-merge"><span class="d d1"></span><span class="d d2"></span><span class="h"></span><span class="c"></span></div>
-    <div class="fc-col">
+    <div class="fc-col fc-common">
       <div class="node fintokei wide" data-tip="テストに合格すると仮想資金の提供を受けてトレードできます。">Fintokeiに挑戦</div>
       <div class="conn"><i></i></div>
       <div class="node gate wide" data-tip="ここを超えるとプロとして認められます。2つのうちどちらかを達成すればOKです。">プロの関門<small>【Fintokei合格】 または【月利8%・最大DD率10％以内を2か月連続】</small></div>
@@ -706,7 +742,7 @@
       <span class="fc-always-label">ずっと使う</span>
       <div class="fc-always-items">
         <div class="fc-always-item" data-tip="チャートを読むための道具。どのステップでも使います。">
-          <img src="img/ytt-logo-gold.png" alt="">
+          <img src="img/ytt-mark.png" alt="">
           <b>YTT</b>
         </div>
         <div class="fc-always-item" data-tip="仲間と一緒に進める場所。ゴールまでずっと使います。">
@@ -1535,7 +1571,7 @@
   </div>
   <div class="help-grid">
     <div class="help-card rv">
-      <img class="tools-logo" src="img/ytt-logo-gold.png" alt="">
+      <img class="tools-logo" src="img/ytt-mark.png" alt="">
       <h3>YTT</h3>
       <p>よすが式のトレードツール。ラインが自動で引かれ、チャートを読む作業がぐっと楽になります。STEP Aのライン引きから実戦まで、どの場面でも使います。</p>
       <a class="rs-vid" href="https://youtu.be/x6CJtJN3Ces" target="_blank" rel="noopener"><img src="img/icon-youtube-crayon.svg" alt="">YTT解説 →</a>
@@ -1645,6 +1681,9 @@
 
   function layout(){
     var avail=stage.clientWidth;
+    /* 診断ページに埋め込まれたときは、まだ非表示の状態で読み込まれることがある。
+       幅が測れないうちに縮小率を出すと0倍になって図が消えるので、そのときは何もしない */
+    if(!avail) return;
     scale=Math.min(1, avail/W);
     var h=chart.offsetHeight;
     if(scale<1){
@@ -1659,6 +1698,13 @@
   }
   window.addEventListener('load', layout);
   window.addEventListener('resize', layout);
+  /* 埋め込み先では、非表示のまま読み込まれて幅が0のことがある。
+     幅が付いたタイミングを取りこぼさないよう、監視と遅延の両方で測り直す */
+  if(window.ResizeObserver){
+    var ro=new ResizeObserver(layout);
+    ro.observe(stage); ro.observe(document.documentElement);
+  }
+  [0,150,500,1500].forEach(function(t){ setTimeout(layout, t); });
   layout();
 
   /* ---- 全画面 ---- */
@@ -1680,6 +1726,12 @@
     mx=cx-(cx-mx)*r; my=cy-(cy-my)*r;
     apply();
   }
+  /* 診断ページに埋め込まれているときは、この中だけで全画面にしてもiframeの大きさに
+     閉じ込められてしまう。親に伝えて、iframeごと画面いっぱいに広げてもらう */
+  function tellParent(open){
+    if(!document.documentElement.classList.contains('is-embed')) return;
+    try{ parent.postMessage({ type:'route-modal', open:open }, '*'); }catch(e){}
+  }
   function open(){
     clone=chart.cloneNode(true);
     clone.removeAttribute('id');
@@ -1687,9 +1739,15 @@
     canvas.innerHTML=''; canvas.appendChild(clone);
     modal.hidden=false;
     document.body.style.overflow='hidden';
+    tellParent(true);
+    setTimeout(fitAll, 0);
     fitAll();
   }
-  function close(){ modal.hidden=true; canvas.innerHTML=''; clone=null; document.body.style.overflow=''; }
+  function close(){
+    modal.hidden=true; canvas.innerHTML=''; clone=null;
+    document.body.style.overflow='';
+    tellParent(false);
+  }
 
   fit.addEventListener('click', function(e){ if(fit.classList.contains('is-scaled')){ e.preventDefault(); open(); } });
   document.querySelector('.fc-hint').addEventListener('click', open);

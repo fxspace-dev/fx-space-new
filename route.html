@@ -120,10 +120,38 @@
 .rs-credit{ font-size:0.68rem; color:#9ca3af; margin:0.4rem 0 0; text-align:right; }
 .rs-credit a{ color:#9ca3af; text-decoration:underline; text-underline-offset:2px; }
 
-/* ===== 全体マップ（フローチャート図） ===== */
-.fc{ max-width:760px; margin:0 auto; background:#fff; border:1px solid #e0e0e0; border-radius:16px; padding:1.5rem 0.9rem 1.6rem; }
-/* 右に縦レールが並ぶぶん、本線が細くならないよう図全体を広げる */
-@media (min-width:761px){ .fc{ max-width:946px; } }
+/* ===== 全体マップ（フローチャート図） =====
+   図はいつも同じ形・同じ文字サイズ。幅に合わせて畳むと分岐と合流という図の要が
+   消えてしまうため、狭い画面では全体を縮小して見せ、タップで全画面に開いて読んでもらう */
+.fc-stage{ position:relative; }
+.fc-fit{ overflow:hidden; }
+.fc{ width:946px; background:#fff; border:1px solid #e0e0e0; border-radius:16px;
+     padding:1.5rem 0.9rem 5.5rem;   /* 下の余白は説明の吹き出しが収まるぶん */
+     transform-origin:top left; margin:0 auto; }
+/* 縮小表示中は文字が読めないので、四角の説明は出さない（全画面で読んでもらう） */
+.fc-fit.is-scaled .fc{ margin:0; }
+.fc-fit.is-scaled [data-tip]::before,
+.fc-fit.is-scaled [data-tip]::after{ display:none; }
+.fc-hint{ display:none; cursor:pointer; font-size:0.75rem; font-weight:800; color:#ffd21e; text-align:center; margin:0.6rem 0 0; }
+.fc-stage.is-scaled .fc-hint{ display:block; }
+
+/* ===== 全画面の拡大表示 ===== */
+.fc-modal{ position:fixed; inset:0; z-index:200; background:#4338ca; display:flex; flex-direction:column; }
+.fc-modal[hidden]{ display:none; }
+.fc-modal-bar{
+  flex:0 0 auto; display:flex; align-items:center; gap:0.6rem; justify-content:space-between;
+  padding:0.6rem 0.8rem; background:#151338; color:#fff;
+}
+.fc-modal-tip{ font-size:0.72rem; font-weight:700; color:#c9c6ea; }
+@media (max-width:560px){ .fc-modal-tip{ display:none; } }
+.fc-modal-zoom{ display:flex; gap:0.35rem; }
+.fc-modal-bar button{
+  cursor:pointer; font-family:inherit; font-weight:900; color:#1e1b4b;
+  background:#fff; border:0; border-radius:8px; padding:0.4rem 0.8rem; font-size:0.82rem;
+}
+.fc-modal-close{ background:#ffd21e; }
+.fc-modal-canvas{ flex:1 1 auto; position:relative; overflow:hidden; touch-action:none; }
+.fc-modal-canvas .fc{ position:absolute; top:0; left:0; margin:0; will-change:transform; }
 .fc-col{ display:flex; flex-direction:column; align-items:center; }
 .fc .node{ width:100%; max-width:300px; text-align:center; border-radius:12px; padding:0.6rem 0.7rem; font-size:0.85rem; font-weight:800; line-height:1.4; }
 .fc .node small{ display:block; font-size:0.68rem; font-weight:600; margin-top:0.12rem; }
@@ -140,7 +168,6 @@
 .fc-branch .d::after{ content:""; position:absolute; left:50%; bottom:-4px; transform:translateX(-50%); border-left:4px solid transparent; border-right:4px solid transparent; border-top:5px solid #9ca3af; }
 .fc-branch .d1{ left:calc(25% - 0.2rem); }
 .fc-branch .d2{ left:calc(75% + 0.2rem); }
-@media (max-width:600px){ .fc-branch{ height:16px; } .fc-branch::before{ height:12px; } .fc-branch .h,.fc-branch .d{ display:none; } }
 .fc-split{ display:grid; grid-template-columns:1fr 1fr; gap:0.8rem; width:100%; align-items:stretch; }
 /* 短いレーンの下端を、合流点まで縦線で延ばす */
 .fc .fc-fill{ flex:1 1 auto; width:100%; display:flex; justify-content:center; align-items:stretch; min-height:10px; }
@@ -155,11 +182,6 @@
 .fc-merge .h{ position:absolute; top:12px; left:calc(25% - 0.2rem - 1.5px); right:calc(25% - 0.2rem - 1.5px); height:3px; background:#9ca3af; border-radius:2px; }
 .fc-merge .c{ position:absolute; top:12px; left:50%; transform:translateX(-50%); width:3px; height:16px; background:#9ca3af; border-radius:2px; }
 .fc-merge .c::after{ content:""; position:absolute; left:50%; bottom:-5px; transform:translateX(-50%); border-left:5px solid transparent; border-right:5px solid transparent; border-top:6px solid #9ca3af; }
-@media (max-width:600px){
-  .fc-merge{ height:22px; }
-  .fc-merge .h,.fc-merge .d{ display:none; }
-  .fc-merge .c{ top:0; }
-}
 /* 全ルート共通で使うもの（YTT／コミュニティ）は、図の右に縦のレールとして添える。
    道の途中に挟むと「順番がある」ように誤読されるため、本線とは別の列にする */
 .fc-body{ display:grid; grid-template-columns:1fr 150px; gap:1.1rem; align-items:stretch; }
@@ -172,7 +194,8 @@
    箱はこの線より右側に置く */
 .fc-always-brace{
   position:absolute; top:2%; bottom:2%; left:0; width:22px;
-  background:url("img/brace-crayon-left.svg") 0 0 / 100% 100% no-repeat;
+  border:2.5px solid #7c78bd; border-left:0;
+  border-radius:0 10px 10px 0;
 }
 /* ラベルは括弧の線に重ねて縦書きで置き、線を白で抜く。
    線（SVG内の縦棒）は括弧の左端から18pxの位置にあるので、そこを中心に置く */
@@ -186,36 +209,15 @@
 .fc-always-item{
   display:flex; flex-direction:column; align-items:center; text-align:center;
   padding:0.8rem 0.4rem 0.75rem;
-  border:0; border-radius:0;
-  background:url("img/frame-crayon-slate.svg") 0 0 / 100% 100% no-repeat;
+  border:2px solid #7c78bd; border-radius:10px;
+  background:#fff; color:#1e1b4b;
 }
 .fc-always-item img{ width:30px; height:30px; object-fit:contain; margin-bottom:0.35rem; }
 /* YTTのマークは細い棒グラフで小さく見えるので、こちらだけ大きく・少し下げる */
 .fc-always-item img[src*="ytt-logo"]{ width:54px; height:54px; margin-top:0.3rem; margin-bottom:0.25rem; }
 .fc-always-item b{ font-size:0.82rem; font-weight:900; color:#1e1b4b; }
-/* 幅が足りない画面では縦レールが潰れるので、図の下に横並びで置く */
-@media (max-width:760px){
-  .fc-body{ display:block; }
-  .fc-always{
-    padding-left:0; padding-top:1.15rem; margin-top:1.3rem; display:block;
-  }
-  .fc-always-brace{
-    top:0; bottom:auto; left:2%; right:2%; width:auto; height:16px;
-    background-image:url("img/brace-crayon-up.svg");
-  }
-  .fc-always-label{
-    top:5px; left:50%; right:auto; transform:translateX(-50%);
-    writing-mode:horizontal-tb; padding:0 0.5rem; font-size:0.66rem;
-  }
-  .fc-always-items{ display:grid; grid-template-columns:1fr 1fr; gap:0.55rem; margin-top:0.7rem; }
-  .fc-always-item{ padding:0.7rem 0.35rem 0.65rem; }
-  .fc-always-item img{ width:26px; height:26px; }
-  .fc-always-item img[src*="ytt-logo"]{ width:46px; height:46px; margin-top:0.25rem; margin-bottom:0.2rem; }
-  .fc-always-item b{ font-size:0.78rem; }
-}
 /* 合流後の横長ノード */
 .fc .node.wide{ max-width:none; }
-@media (max-width:600px){ .fc-split{ grid-template-columns:1fr; gap:0.2rem; } }
 .fc .lane{ position:relative; color:#fff; font-size:0.83rem; border-radius:12px; padding:0.55rem; width:100%; max-width:300px; text-align:center; font-weight:900; }
 .fc .lane-main{ background:var(--primary); }
 .fc .lane-alt{ background:#047857; }
@@ -458,57 +460,71 @@
 .rs-visual svg > rect:first-child{ rx:18; }
 
 
-/* ===== フローチャートの四角：手描きのクレヨン枠＋押せるボタン ===== */
+/* ===== フローチャートの四角：見やすさ優先の色分け =====
+   手描き風の枠は小さく表示するとかすれが潰れてノイズになるので、図の中だけは
+   輪郭のはっきりした線に統一する（ページの他の部分は手描き風のまま） */
 .fc .node.start,
 .fc .node.step,
 .fc .node.alt,
 .fc .node.zeropro,
 .fc .node.fintokei,
 .fc .node.gate{
-  border:0; border-radius:0;
+  border:2px solid #1e1b4b; border-radius:10px;
   color:#1e1b4b; font-size:0.85rem; font-weight:800; text-align:center; line-height:1.4;
-  background-color:#fff;
-  background-repeat:no-repeat; background-position:0 0; background-size:100% 100%;
+  background-color:#fff; background-image:none;
   padding:0.7rem 0.95rem;
 }
-.fc .node.start{ background-image:url("img/frame-crayon-navy.svg"); }
-.fc .node.step{ background-image:url("img/frame-crayon-skyblue.svg"); }
-.fc .node.alt{ background-image:url("img/frame-crayon-green.svg"); }
-.fc .node.gate{ background-image:url("img/frame-crayon-green.svg"); }
-.fc .node.zeropro{ background-image:url("img/frame-crayon-orange.svg"); }
-.fc .node.fintokei{ background-image:url("img/frame-crayon-purple.svg"); }
-/* 横長・大きい箱は、引き伸ばしでザラつきが粗くならないよう専用サイズの枠を使う */
-.fc .node.gate.wide{ background-image:url("img/frame-crayon-green-wide.svg"); }
-.fc .node.fintokei.wide{ background-image:url("img/frame-crayon-purple-wide.svg"); }
-@media (max-width:600px){
-  .fc .node.gate.wide{ background-image:url("img/frame-crayon-green.svg"); }
-  .fc .node.fintokei.wide{ background-image:url("img/frame-crayon-purple.svg"); }
-}
+.fc .node.step{ border-color:#3b82f6; }
+.fc .node.alt{ border-color:#059669; }
+.fc .node.gate{ border-color:#059669; border-width:2.5px; }
+.fc .node.zeropro{ border-color:#ea580c; }
+.fc .node.fintokei{ border-color:#6d28d9; }
 /* 枠どうしが近すぎないよう間隔を少し空ける */
 .fc .fc-group .conn.sm i{ height:10px; }
 .fc .fc-choice{ gap:0.45rem; }
 
-/* ===== 塗りつぶしの四角も手描きのクレヨンに ===== */
+/* ===== 塗りつぶしの四角：はっきりした単色で ===== */
 .fc .lane,
 .fc .lane-tag,
 .fc .node.astro,
 .fc .node.goal{
-  background-color:transparent; border-radius:0;
-  background-repeat:no-repeat; background-position:0 0; background-size:100% 100%;
+  background-image:none; border-radius:10px;
 }
-/* 自力ルートのレーン帯：水色塗り（明るいので文字は濃紺） */
-.fc .lane-main{ background-image:url("img/fill-crayon-skyblue.svg"); color:#1e1b4b; }
-.fc .lane-alt{ background-image:url("img/fill-crayon-green.svg"); }
-/* 速攻ルートのレーン帯：オレンジ塗り（明るいので文字は濃紺） */
-.fc .lane-fast{ background-image:url("img/fill-crayon-orange.svg"); color:#1e1b4b; }
-.fc .lane-tag{ background-image:url("img/fill-crayon-yellow.svg"); color:#1e1b4b; padding:0.26rem 0.8rem; }
-.fc .node.astro{ background-image:url("img/fill-crayon-blue-wide.svg"); padding:0.7rem 0.95rem; }
+/* 自力ルート＝水色／速攻ルート＝オレンジ（下のルート選択ボタンと同じ色分け） */
+/* 白文字が読める濃さまで落とした水色・オレンジ（どちらも4.5:1以上） */
+.fc .lane-main{ background-color:#1565c0; color:#fff; }
+.fc .lane-alt{ background-color:#047857; color:#fff; }
+.fc .lane-fast{ background-color:#c2410c; color:#fff; }
+.fc .lane-tag{ background-color:#ffd21e; color:#1e1b4b; padding:0.26rem 0.8rem; }
+.fc .node.astro{ background-color:#2563eb; color:#fff; padding:0.7rem 0.95rem; }
 /* ゴールは黄色。文字は濃紺で読みやすくする */
-.fc .node.goal{ background-image:url("img/fill-crayon-yellow-wide.svg"); padding:0.7rem 0.95rem; color:#1e1b4b; }
-@media (max-width:600px){
-  .fc .node.astro{ background-image:url("img/fill-crayon-blue.svg"); }
-  .fc .node.goal{ background-image:url("img/fill-crayon-yellow.svg"); }
+.fc .node.goal{ background-color:#ffd21e; padding:0.7rem 0.95rem; color:#1e1b4b; }
+
+/* ===== 各四角の説明（PCはマウスを乗せる／スマホはタップ） ===== */
+.fc [data-tip]{ position:relative; cursor:help; }
+.fc [data-tip]::before{
+  content:attr(data-tip);
+  position:absolute; top:calc(100% + 9px); left:50%; transform:translateX(-50%);
+  width:246px; max-width:246px; z-index:6;
+  background:#1e1b4b; color:#fff; text-align:left;
+  font-size:0.72rem; font-weight:600; line-height:1.65; letter-spacing:0;
+  padding:0.6rem 0.75rem; border-radius:10px;
+  box-shadow:0 6px 18px rgba(30,27,75,0.28);
+  opacity:0; visibility:hidden; transition:opacity .15s ease;
+  pointer-events:none;
 }
+/* 吹き出しの三角 */
+.fc [data-tip]::after{
+  content:""; position:absolute; top:calc(100% + 3px); left:50%; transform:translateX(-50%);
+  border-left:6px solid transparent; border-right:6px solid transparent;
+  border-bottom:6px solid #1e1b4b; z-index:7;
+  opacity:0; visibility:hidden; transition:opacity .15s ease; pointer-events:none;
+}
+.fc [data-tip]:hover::before, .fc [data-tip]:hover::after,
+.fc [data-tip].tip-on::before, .fc [data-tip].tip-on::after{ opacity:1; visibility:visible; }
+/* 右端・左端の箱は、吹き出しが図からはみ出さないよう内側に寄せる */
+.fc .fc-always-item[data-tip]::before{ left:auto; right:0; transform:none; }
+.fc .fc-always-item[data-tip]::after{ left:auto; right:26px; transform:none; }
 
 /* 四角は図として見せるだけ。押せそうに見えるホバー／押し込みの動きは付けない */
 
@@ -638,46 +654,48 @@
     <div><span class="tw"><h2>プロまでのフローチャート</h2><img src="img/wave-orange.png" alt=""></span></div>
     <p class="rsec-lead">まずはこの図で全体像を。詳しくは下に続きます。</p>
   </div>
-  <div class="fc rv">
+  <div class="fc-stage rv">
+   <div class="fc-fit" id="fc-fit">
+   <div class="fc" id="fc-chart">
    <div class="fc-body">
     <div class="fc-main">
     <div class="fc-col">
-      <div class="node start">経験ゼロ からスタート</div>
+      <div class="node start" data-tip="FXの知識ゼロ・口座なしの状態からで大丈夫です。">経験ゼロ からスタート</div>
     </div>
     <div class="fc-branch"><span class="h"></span><span class="d d1"></span><span class="d d2"></span></div>
     <div class="fc-split">
       <div class="fc-col">
-        <div class="lane lane-main">自力でプロを目指す</div>
+        <div class="lane lane-main" data-tip="自分のペースで無料の動画カリキュラムを進めるルート。費用をかけずに始められます。">自力でプロを目指す</div>
         <div class="conn"><i></i></div>
         <div class="fc-group">
           <span class="fc-group-label">Yカリキュラムで学ぶ</span>
-          <div class="node step"><img class="fc-mark fc-mark--alpha" src="img/step-a.svg" alt="A">ライン</div>
+          <div class="node step" data-tip="チャートに引く線の技術。ここがすべての土台になります。"><img class="fc-mark fc-mark--alpha" src="img/step-a.svg" alt="A">ライン</div>
           <div class="conn sm"><i></i></div>
-          <div class="node step"><img class="fc-mark fc-mark--alpha" src="img/step-b.svg" alt="B">ナウキャスト・シナリオ</div>
+          <div class="node step" data-tip="相場が今どこにいるかを読み、この先の値動きの筋書きを立てます。"><img class="fc-mark fc-mark--alpha" src="img/step-b.svg" alt="B">ナウキャスト・シナリオ</div>
           <div class="conn sm"><i></i></div>
-          <div class="node step"><img class="fc-mark fc-mark--alpha" src="img/step-c.svg" alt="C">タイミング</div>
+          <div class="node step" data-tip="シナリオ通りに動いたとき、どこで入ってどこで出るかを決めます。"><img class="fc-mark fc-mark--alpha" src="img/step-c.svg" alt="C">タイミング</div>
           <div class="conn sm"><i></i></div>
-          <div class="node step"><img class="fc-mark fc-mark--alpha" src="img/step-d.svg" alt="D">過去相場検証</div>
+          <div class="node step" data-tip="過去のチャートを巻き戻して、何度も練習・検証します。"><img class="fc-mark fc-mark--alpha" src="img/step-d.svg" alt="D">過去相場検証</div>
         </div>
         <div class="fc-fill"><i></i></div>
       </div>
       <div class="fc-col">
-        <div class="lane lane-fast">速攻でプロを目指す</div>
+        <div class="lane lane-fast" data-tip="よすがの直接指導で3か月集中。最短でプロレベルを目指すルートです。">速攻でプロを目指す</div>
         <div class="conn"><i></i></div>
-        <div class="node zeropro">ゼロプロ90に参加する</div>
+        <div class="node zeropro" data-tip="3か月間、毎日課題を出してよすがが動画で添削。7つのステージを順にクリアします。">ゼロプロ90に参加する</div>
         <div class="fc-fill"><i></i></div>
       </div>
     </div>
     <!-- 2つのルートがここで合流する -->
     <div class="fc-merge"><span class="d d1"></span><span class="d d2"></span><span class="h"></span><span class="c"></span></div>
     <div class="fc-col">
-      <div class="node fintokei wide">Fintokeiに挑戦</div>
+      <div class="node fintokei wide" data-tip="テストに合格すると仮想資金の提供を受けてトレードできます。">Fintokeiに挑戦</div>
       <div class="conn"><i></i></div>
-      <div class="node gate wide">プロの関門<small>【Fintokei合格】 または【月利8%・最大DD率10％以内を2か月連続】</small></div>
+      <div class="node gate wide" data-tip="ここを超えるとプロとして認められます。2つのうちどちらかを達成すればOKです。">プロの関門<small>【Fintokei合格】 または【月利8%・最大DD率10％以内を2か月連続】</small></div>
       <div class="conn"><i></i></div>
-      <div class="node astro wide">ASTRO（プロ）申請</div>
+      <div class="node astro wide" data-tip="プロトレーダー集団ASTROに申請します。">ASTRO（プロ）申請</div>
       <div class="conn"><i></i></div>
-      <div class="node goal wide">プロトレーダー</div>
+      <div class="node goal wide" data-tip="ランクはMARSからVOYAGERまで。最高峰を目指しましょう。">プロトレーダー</div>
     </div>
     </div><!-- /fc-main -->
 
@@ -687,17 +705,20 @@
       <span class="fc-always-brace" aria-hidden="true"></span>
       <span class="fc-always-label">ずっと使う</span>
       <div class="fc-always-items">
-        <div class="fc-always-item">
+        <div class="fc-always-item" data-tip="チャートを読むための道具。どのステップでも使います。">
           <img src="img/ytt-logo-gold.png" alt="">
           <b>YTT</b>
         </div>
-        <div class="fc-always-item">
+        <div class="fc-always-item" data-tip="仲間と一緒に進める場所。ゴールまでずっと使います。">
           <img src="img/icon-people.svg" alt="">
           <b>コミュニティ</b>
         </div>
       </div>
     </aside>
    </div><!-- /fc-body -->
+   </div><!-- /fc -->
+   </div><!-- /fc-fit -->
+   <p class="fc-hint">画像をタップして拡大</p>
   </div>
 </section>
 
@@ -1570,6 +1591,20 @@
   </div>
 </div><!-- /common-zone -->
 
+<!-- フローチャートの拡大表示：ピンチで拡大、スワイプで移動 -->
+<div class="fc-modal" id="fc-modal" hidden>
+  <div class="fc-modal-bar">
+    <span class="fc-modal-tip">ピンチで拡大／スワイプで移動</span>
+    <span class="fc-modal-zoom">
+      <button type="button" id="fc-zoom-out" aria-label="縮小">−</button>
+      <button type="button" id="fc-zoom-in" aria-label="拡大">＋</button>
+      <button type="button" id="fc-zoom-reset">全体</button>
+    </span>
+    <button type="button" class="fc-modal-close" id="fc-modal-close" aria-label="閉じる">✕ 閉じる</button>
+  </div>
+  <div class="fc-modal-canvas" id="fc-modal-canvas"></div>
+</div>
+
 <footer class="route-foot">
   <a href="index.html">FX SPACE チュートリアルへ →</a>
 </footer>
@@ -1599,6 +1634,121 @@
   document.addEventListener('click', function(){ setTimeout(tell,60); setTimeout(tell,400); });
   setInterval(tell, 1000);
 })();
+/* ===== フローチャートを縮小表示＋全画面で拡大 =====
+   図は946px固定。入りきらない画面では全体を縮小して形だけ見せ、
+   タップで全画面に開いてピンチで読んでもらう */
+(function(){
+  var stage=document.querySelector('.fc-stage'), fit=document.getElementById('fc-fit'),
+      chart=document.getElementById('fc-chart');
+  if(!stage||!fit||!chart) return;
+  var W=946, scale=1;
+
+  function layout(){
+    var avail=stage.clientWidth;
+    scale=Math.min(1, avail/W);
+    var h=chart.offsetHeight;
+    if(scale<1){
+      chart.style.transform='scale('+scale+')';
+      fit.style.height=Math.round(h*scale)+'px';
+      fit.classList.add('is-scaled'); stage.classList.add('is-scaled');
+    }else{
+      chart.style.transform='none';
+      fit.style.height='';
+      fit.classList.remove('is-scaled'); stage.classList.remove('is-scaled');
+    }
+  }
+  window.addEventListener('load', layout);
+  window.addEventListener('resize', layout);
+  layout();
+
+  /* ---- 全画面 ---- */
+  var modal=document.getElementById('fc-modal'), canvas=document.getElementById('fc-modal-canvas');
+  var mScale=1, mx=0, my=0, clone=null;
+
+  function apply(){ if(clone) clone.style.transform='translate('+mx+'px,'+my+'px) scale('+mScale+')'; }
+  function fitAll(){
+    if(!clone) return;
+    var cw=canvas.clientWidth, ch=canvas.clientHeight, h=clone.offsetHeight;
+    mScale=Math.min(cw/W, ch/h, 1);
+    mx=Math.max(0,(cw-W*mScale)/2); my=Math.max(0,(ch-h*mScale)/2);
+    apply();
+  }
+  function zoom(f, cx, cy){
+    var prev=mScale;
+    mScale=Math.min(4, Math.max(0.2, mScale*f));
+    var r=mScale/prev;
+    mx=cx-(cx-mx)*r; my=cy-(cy-my)*r;
+    apply();
+  }
+  function open(){
+    clone=chart.cloneNode(true);
+    clone.removeAttribute('id');
+    clone.style.transform='none';
+    canvas.innerHTML=''; canvas.appendChild(clone);
+    modal.hidden=false;
+    document.body.style.overflow='hidden';
+    fitAll();
+  }
+  function close(){ modal.hidden=true; canvas.innerHTML=''; clone=null; document.body.style.overflow=''; }
+
+  fit.addEventListener('click', function(e){ if(fit.classList.contains('is-scaled')){ e.preventDefault(); open(); } });
+  document.querySelector('.fc-hint').addEventListener('click', open);
+  document.getElementById('fc-modal-close').addEventListener('click', close);
+  document.getElementById('fc-zoom-in').addEventListener('click', function(){ zoom(1.3, canvas.clientWidth/2, canvas.clientHeight/2); });
+  document.getElementById('fc-zoom-out').addEventListener('click', function(){ zoom(1/1.3, canvas.clientWidth/2, canvas.clientHeight/2); });
+  document.getElementById('fc-zoom-reset').addEventListener('click', fitAll);
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape' && !modal.hidden) close(); });
+  window.addEventListener('resize', function(){ if(!modal.hidden) fitAll(); });
+
+  /* 指の操作：1本＝移動、2本＝ピンチ拡大。ホイールでも拡大できるようにする */
+  var pts={}, startDist=0, startScale=1, lastX=0, lastY=0;
+  function dist(){ var k=Object.keys(pts); if(k.length<2) return 0;
+    var a=pts[k[0]], b=pts[k[1]]; return Math.hypot(a.x-b.x, a.y-b.y); }
+  function mid(){ var k=Object.keys(pts); var a=pts[k[0]], b=pts[k[1]];
+    return {x:(a.x+b.x)/2, y:(a.y+b.y)/2}; }
+  canvas.addEventListener('pointerdown', function(e){
+    canvas.setPointerCapture(e.pointerId);
+    pts[e.pointerId]={x:e.clientX,y:e.clientY};
+    lastX=e.clientX; lastY=e.clientY;
+    if(Object.keys(pts).length===2){ startDist=dist(); startScale=mScale; }
+  });
+  canvas.addEventListener('pointermove', function(e){
+    if(!pts[e.pointerId]) return;
+    pts[e.pointerId]={x:e.clientX,y:e.clientY};
+    var n=Object.keys(pts).length;
+    if(n===1){ mx+=e.clientX-lastX; my+=e.clientY-lastY; lastX=e.clientX; lastY=e.clientY; apply(); }
+    else if(n===2 && startDist>0){
+      var m=mid(), r=canvas.getBoundingClientRect();
+      var prev=mScale;
+      mScale=Math.min(4, Math.max(0.2, startScale*(dist()/startDist)));
+      var k=mScale/prev, cx=m.x-r.left, cy=m.y-r.top;
+      mx=cx-(cx-mx)*k; my=cy-(cy-my)*k; apply();
+    }
+  });
+  function up(e){ delete pts[e.pointerId]; startDist=0; }
+  canvas.addEventListener('pointerup', up);
+  canvas.addEventListener('pointercancel', up);
+  canvas.addEventListener('wheel', function(e){
+    e.preventDefault(); var r=canvas.getBoundingClientRect();
+    zoom(e.deltaY<0?1.12:1/1.12, e.clientX-r.left, e.clientY-r.top);
+  }, {passive:false});
+})();
+
+/* フローチャートの説明：スマホにはマウスオーバーがないので、タップでも開けるようにする。
+   PCはCSSの :hover が効くので、ここではタップ操作だけを面倒みる */
+(function(){
+  var fc=document.querySelector('.fc');
+  if(!fc) return;
+  function closeAll(){ document.querySelectorAll('.tip-on').forEach(function(el){ el.classList.remove('tip-on'); }); }
+  document.addEventListener('click', function(e){
+    var t=e.target.closest('[data-tip]');
+    if(!t){ closeAll(); return; }
+    var open=t.classList.contains('tip-on');
+    closeAll();
+    if(!open) t.classList.add('tip-on');
+  });
+})();
+
 (function(){
   var io=new IntersectionObserver(function(es){
     es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); } });

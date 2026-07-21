@@ -562,6 +562,23 @@
 .rt-switch-btn.is-on{ opacity:1; }
 .rt-switch-btn:hover{ opacity:1; transform:translateY(-1px); }
 
+/* ===== 埋め込みモード（onboarding.html の診断結果の下に読み込まれるとき） =====
+   要約を別に作ると必ず内容がズレるので、このページ自体をそのまま見せる。
+   埋め込み先では大見出しとフッターだけ外し、固定バーは先頭に置くだけにする */
+/* 埋め込み先で見せるのは全体マップ（フローチャート）だけ。続きは本ページで読んでもらう */
+.is-embed .route-head,
+.is-embed .route-foot,
+.is-embed .route-pick,
+.is-embed .route-zone,
+.is-embed .common-zone{ display:none !important; }
+.is-embed.js-route.route-chosen body{ padding-top:0; }
+.is-embed body{ background:#fff; }
+/* 診断ページ側に続きのボタンが並ぶので、下の尖りとその余白は要らない */
+.is-embed .rsec--map{ clip-path:none; padding-bottom:2.5rem; }
+/* iframe内は自前のスクロールを持たないため出現アニメーションが発火しない。
+   埋め込み時は最初からすべて表示する */
+.is-embed .rv{ opacity:1; transform:none; }
+
 /* ===== ルート本体 ===== */
 /* JSが動かない場合は両方表示（.js-route が付いたときだけ切り替え動作） */
 .js-route .route-panel{ display:none; }
@@ -1561,6 +1578,27 @@
 <script src="js/ScrollTrigger.min.js?v=20260301a"></script>
 <script src="js/animations.js?v=20260301a"></script>
 <script>
+/* onboarding.html に埋め込まれたとき（?embed=1）は、ページの見出しとフッターを外して
+   中身だけを見せる。診断ページ側と内容・デザインを完全に同じに保つため、
+   要約を作り直すのではなく、このページ自体をそのまま読み込ませている */
+(function(){
+  /* iframeの中にいるかどうかで判定する。?embed=1 はサーバーのリダイレクトで
+     消えることがあるので、クエリ文字列には頼らない */
+  var embedded;
+  try{ embedded = (window.self !== window.top); }catch(e){ embedded = true; }
+  if(!embedded && location.search.indexOf('embed=1')<0) return;
+  document.documentElement.classList.add('is-embed');
+  /* 高さが変わるたびに親へ伝えて、iframeの高さを合わせてもらう */
+  function tell(){
+    var h=Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
+    try{ parent.postMessage({ type:'route-height', height:h }, '*'); }catch(e){}
+  }
+  window.addEventListener('load', tell);
+  window.addEventListener('resize', tell);
+  if(window.ResizeObserver) new ResizeObserver(tell).observe(document.body);
+  document.addEventListener('click', function(){ setTimeout(tell,60); setTimeout(tell,400); });
+  setInterval(tell, 1000);
+})();
 (function(){
   var io=new IntersectionObserver(function(es){
     es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); } });

@@ -770,18 +770,22 @@
 @media (max-width:600px){ .home-nav{ height:46px; padding:0 0.875rem; } .home-nav-logo img{ height:22px; } }
 /* 固定ヘッダーの分だけ本文を下げる */
 body{ padding-top:50px; }
+/* ルート切替バーは左上ナビと同じ1段に重ねる（ロゴ左・切替ボタン右。YTT特設ページと同様）。
+   透明オーバーレイにして、ボタン以外はクリックがロゴ側へ通るようにする */
 .rt-switch{
-  position:fixed; left:0; right:0; top:50px; z-index:60;
-  display:flex; justify-content:center; align-items:center; gap:0.6rem;
-  padding:0.6rem 1rem;
-  background:rgba(255,255,255,0.96);
-  backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
-  border-bottom:1px solid #ececf5;
-  box-shadow:0 4px 14px rgba(30,27,75,0.08);
+  position:fixed; left:0; right:0; top:0; z-index:1002;
+  display:flex; justify-content:flex-end; align-items:center; gap:0.6rem;
+  height:50px; padding:0 1.5rem;
+  background:transparent; border:0; box-shadow:none;
+  pointer-events:none;
 }
-/* 固定バーの下に本文が潜り込まないよう、上に余白を足す（ホームナビ50px＋切替バー56px） */
-.js-route.route-chosen body{ padding-top:106px; }
+@media (max-width:600px){
+  .rt-switch{ height:46px; padding:0 0.875rem; gap:0.4rem; }
+}
+/* 左上ナビと切替バーは同じ1段に重ねたので、本文の余白はナビ1段分(50px)でよい */
+.js-route.route-chosen body{ padding-top:50px; }
 .rt-switch-btn{
+  pointer-events:auto;
   cursor:pointer; font-family:inherit; font-size:0.85rem; font-weight:900; color:#1e1b4b;
   border:0; border-radius:0; background-color:transparent;
   background-repeat:no-repeat; background-position:0 0; background-size:100% 100%;
@@ -793,6 +797,10 @@ body{ padding-top:50px; }
 .rt-switch-btn[data-route="fast"]{ background-image:url("img/fill-crayon-orange.svg"); }
 .rt-switch-btn.is-on{ opacity:1; }
 .rt-switch-btn:hover{ opacity:1; transform:translateY(-1px); }
+/* スマホでは切替ボタンを小さくして、左のロゴと重ならないようにする（基本ルールの後に置いて確実に適用） */
+@media (max-width:600px){
+  .rt-switch-btn{ font-size:0.72rem; padding:0.4rem 0.9rem; }
+}
 
 /* ===== 埋め込みモード（onboarding.html の診断結果の下に読み込まれるとき） =====
    要約を別に作ると必ず内容がズレるので、このページ自体をそのまま見せる。

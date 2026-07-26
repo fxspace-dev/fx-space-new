@@ -761,8 +761,17 @@
 .pick-btn-sub{ display:block; font-size:0.8rem; font-weight:700; color:#1e1b4b; opacity:0.8; margin-top:0.3rem; }
 
 /* ===== ルート切り替え（画面上に固定。どこまでスクロールしても押せる） ===== */
+/* 左上：FX SPACEロゴ→トップページ（YTT特設ページと同じ固定ヘッダー） */
+.home-nav{ position:fixed; top:0; left:0; right:0; z-index:1001; height:50px;
+  background:rgba(255,255,255,0.95); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid #e5e7eb; display:flex; align-items:center; padding:0 1.5rem; }
+.home-nav-logo{ display:inline-flex; align-items:center; text-decoration:none; }
+.home-nav-logo img{ height:26px; width:auto; display:block; }
+@media (max-width:600px){ .home-nav{ height:46px; padding:0 0.875rem; } .home-nav-logo img{ height:22px; } }
+/* 固定ヘッダーの分だけ本文を下げる */
+body{ padding-top:50px; }
 .rt-switch{
-  position:fixed; left:0; right:0; top:0; z-index:60;
+  position:fixed; left:0; right:0; top:50px; z-index:60;
   display:flex; justify-content:center; align-items:center; gap:0.6rem;
   padding:0.6rem 1rem;
   background:rgba(255,255,255,0.96);
@@ -770,8 +779,8 @@
   border-bottom:1px solid #ececf5;
   box-shadow:0 4px 14px rgba(30,27,75,0.08);
 }
-/* 固定バーの下に本文が潜り込まないよう、上に余白を足す */
-.js-route.route-chosen body{ padding-top:56px; }
+/* 固定バーの下に本文が潜り込まないよう、上に余白を足す（ホームナビ50px＋切替バー56px） */
+.js-route.route-chosen body{ padding-top:106px; }
 .rt-switch-btn{
   cursor:pointer; font-family:inherit; font-size:0.85rem; font-weight:900; color:#1e1b4b;
   border:0; border-radius:0; background-color:transparent;
@@ -796,7 +805,9 @@
 .is-embed .common-zone,
 .is-embed .content-section{ display:none !important; }
 .is-embed.js-route.route-chosen body{ padding-top:0; }
-.is-embed body{ background:#fff; }
+.is-embed body{ background:#fff; padding-top:0; }
+/* 埋め込み(診断ページのiframe)内では左上ナビは出さない */
+.is-embed .home-nav{ display:none; }
 /* 診断ページ側に続きのボタンが並ぶので、下の尖りとその余白は要らない */
 .is-embed .rsec--map{ clip-path:none; padding-bottom:2.5rem; }
 /* iframe内は自前のスクロールを持たないため出現アニメーションが発火しない。
@@ -840,6 +851,8 @@
 </style>
 </head>
 <body>
+
+<nav class="home-nav"><a href="index.html" class="home-nav-logo"><img src="img/ytt-nav-logo.png" alt="FX SPACE"></a></nav>
 
 <!-- ===== HEADER ===== -->
 <header class="route-head">

@@ -60,6 +60,16 @@ body::after{
 body > *{position:relative;z-index:1;}
 a{color:inherit;text-decoration:none}
 
+/* 左上：FX SPACEロゴ→トップページ（YTT特設ページと同じ固定ヘッダー） */
+.home-nav{ position:fixed; top:0; left:0; right:0; z-index:1001; height:50px;
+  background:rgba(255,255,255,0.95); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid #e5e7eb; display:flex; align-items:center; padding:0 1.5rem; }
+.home-nav-logo{ display:inline-flex; align-items:center; text-decoration:none; }
+.home-nav-logo img{ height:26px; width:auto; display:block; }
+@media (max-width:600px){ .home-nav{ height:46px; padding:0 0.875rem; } .home-nav-logo img{ height:22px; } }
+/* 固定ヘッダーの分だけ本文を下げる */
+body{ padding-top:50px; }
+
 /* ===== Header ===== */
 .ob-header{
   text-align:center;
@@ -1963,6 +1973,8 @@ a{color:inherit;text-decoration:none}
 </style>
 </head>
 <body>
+
+<nav class="home-nav"><a href="index.html" class="home-nav-logo"><img src="img/ytt-nav-logo.png" alt="FX SPACE"></a></nav>
 
 <!-- Header -->
 <header class="ob-header">

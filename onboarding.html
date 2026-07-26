@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FX SPACE - あなたに合う学び方が見つかる</title>
+<link rel="icon" type="image/png" href="img/favicon.png">
+<link rel="apple-touch-icon" href="img/favicon.png">
 <meta name="description" content="かんたんな質問に答えるだけで、あなたにぴったりの学習ルートが見つかります。FX SPACE 新メンバー向け診断ページ。">
 <meta property="og:title" content="FX SPACE - あなたに合う学び方が見つかる">
 <meta property="og:description" content="かんたんな質問に答えるだけで、あなたにぴったりの学習ルートが見つかります。">
@@ -1583,65 +1585,6 @@ a{color:inherit;text-decoration:none}
   text-decoration:underline;
   text-underline-offset:2px;
 }
-/* Coming Soon notice (hero alternative for unreleased content) */
-.ob-coming{
-  position:relative;
-  background:#fafbfc;
-  background-image:
-    radial-gradient(circle, rgba(79,70,229,0.06) 1px, transparent 1px);
-  background-size:14px 14px;
-  border:1.5px dashed rgba(79,70,229,0.28);
-  border-radius:18px;
-  padding:2rem 1.5rem 1.75rem;
-  margin:0.25rem auto 1.5rem;
-  max-width:420px;
-  text-align:center;
-  overflow:hidden;
-}
-.ob-coming::before{
-  content:'';
-  position:absolute;
-  inset:0;
-  background:linear-gradient(135deg, rgba(79,70,229,0.04) 0%, transparent 50%, rgba(245,158,11,0.04) 100%);
-  pointer-events:none;
-}
-.ob-coming > *{position:relative;z-index:1;}
-.ob-coming-badge{
-  display:inline-block;
-  padding:0.3rem 0.875rem;
-  background:#1e1b4b;
-  color:#fff;
-  font-size:0.6875rem;
-  font-weight:900;
-  letter-spacing:0.12em;
-  border-radius:100px;
-  margin-bottom:1rem;
-  box-shadow:0 2px 0 rgba(30,27,75,0.3), 0 4px 10px rgba(30,27,75,0.15);
-}
-.ob-coming-icon{
-  font-size:2.5rem;
-  line-height:1;
-  margin-bottom:0.625rem;
-  animation:obComingFloat 2.8s ease-in-out infinite;
-}
-@keyframes obComingFloat{
-  0%,100%{transform:translateY(0) rotate(-4deg);}
-  50%{transform:translateY(-6px) rotate(4deg);}
-}
-.ob-coming-title{
-  font-size:1rem;
-  font-weight:900;
-  color:#1e1b4b;
-  margin-bottom:0.5rem;
-  letter-spacing:-0.01em;
-}
-.ob-coming-desc{
-  font-size:0.8125rem;
-  color:#6b7280;
-  line-height:1.7;
-  max-width:320px;
-  margin:0 auto;
-}
 .ob-notice{
   display:flex;
   align-items:stretch;
@@ -1876,7 +1819,6 @@ a{color:inherit;text-decoration:none}
 .ob-flow-icon .ob-ic{width:26px;height:26px;}
 .ob-timeline-icon .ob-ic{width:18px;height:18px;}
 .ob-notice-icon .ob-ic{width:30px;height:30px;}
-.ob-coming-icon .ob-ic{width:40px;height:40px;}
 .ob-vstep-title .ob-ic{width:18px;height:18px;margin-right:0.35em;color:#f59e0b;}
 .ob-route-chip .ob-ic{width:14px;height:14px;margin-right:0.25em;vertical-align:-0.18em;}
 
@@ -1957,6 +1899,67 @@ a{color:inherit;text-decoration:none}
   .ob-card,.ob-result{padding:2rem 1.25rem;}
   .ob-choice{padding:0.875rem 1rem;}
 }
+
+/* ===== 診断結果の下：プロトレーダーへの最短ルート（全体マップ） ===== */
+.ob-route-detail{width:100%;background:linear-gradient(180deg,#f8f8fd 0%,#f1f1fa 100%);border-top:1px solid #ecebf6;padding:3rem 1.25rem 3.25rem;margin-top:2.5rem;}
+.ob-route-detail[hidden]{display:none;}
+.obrd-inner{max-width:600px;margin:0 auto;text-align:center;}
+.obrd-badge{display:inline-block;font-size:0.72rem;font-weight:800;letter-spacing:0.08em;color:#4f46e5;background:rgba(79,70,229,0.08);padding:0.34rem 0.9rem;border-radius:100px;margin-bottom:0.7rem;}
+.obrd-title{font-size:clamp(1.35rem,4.2vw,1.8rem);font-weight:900;color:#1e1b4b;line-height:1.35;margin-bottom:0.55rem;letter-spacing:-0.01em;}
+.obrd-title .obrd-em{color:#4f46e5;}
+.obrd-lead{font-size:0.9rem;color:#6b7280;line-height:1.75;margin-bottom:1.6rem;}
+/* ルートページ本体をそのまま埋め込む。高さはJSで中身に合わせる（内部スクロールなし） */
+.obrd-frame{display:block;width:100%;border:0;height:600px;background:#fff;
+  border-radius:16px;box-shadow:0 6px 22px rgba(30,27,75,0.08);margin-bottom:1.6rem;}
+/* 図を拡大したときは、iframeごと画面いっぱいに広げる */
+.obrd-frame.is-full{position:fixed;inset:0;width:100vw;height:100vh;
+  max-width:none;margin:0;border-radius:0;box-shadow:none;z-index:9999;}
+.obrd-cta{margin-top:0.25rem;}
+
+/* ===== 目的別コンテンツ一覧：route.html と全く同じ見た目（バッジ＋波線見出し・白背景） ===== */
+#ob-content-all .rsec-head{ text-align:center; margin-bottom:1.75rem; }
+#ob-content-all .rsec-head h2{ font-size:clamp(1.4rem,4vw,2rem); font-weight:900; color:#1e1b4b; margin:0.5rem 0 0; }
+#ob-content-all .tw{ display:inline-block; }
+#ob-content-all .tw img{ display:block; width:100%; height:clamp(11px,2.4vw,16px); object-fit:fill; margin-top:2px; }
+#ob-content-all.content-section--light .content-card{ border:1px solid #e7e6f4; box-shadow:0 4px 14px rgba(30,27,75,0.06); }
+/* 「すべて」タブは枚数が多いので折りたたむ：PCは12枚・スマホは4枚だけ見せる。
+   「すべてを見る／折りたたむ」でいつでも開閉できる（route.htmlと同じ挙動） */
+.content-grid.is-collapsed .content-card:nth-child(n+13){ display:none !important; }
+@media (max-width:760px){
+  .content-grid.is-collapsed .content-card:nth-child(n+5){ display:none !important; }
+}
+.content-more{ text-align:center; margin-top:1.2rem; }
+.content-more[hidden]{ display:none; }
+/* ボタンらしい装飾はせず、控えめなテキストリンク風にする */
+.content-more button{
+  background:none; border:0; cursor:pointer; font-family:inherit;
+  font-size:0.85rem; font-weight:700; color:#6b7280;
+  text-decoration:underline; text-underline-offset:3px; padding:0.4rem 0.8rem;
+}
+
+/* ===== Yカリキュラムの結果：このページの ob-vstep 形式に合わせる ===== */
+/* モックはステップカードの幅いっぱいに大きく表示（他の結果と同じ見せ方） */
+.yc-steps .ob-vstep-viz{ background:#0d1020; padding:0; }
+.yc-steps .ob-vstep-viz img{ width:100%; height:auto; display:block; }
+/* 各ステップの説明文 */
+.yc-desc{ font-size:0.8125rem; color:#4b5563; line-height:1.7; margin:0 0 0.7rem; }
+.yc-desc b{ color:#4f46e5; font-weight:800; }
+/* 動画リンク：このページの青リンク（.ob-link）をボタン状に並べる */
+.yc-links{ display:flex; flex-wrap:wrap; gap:0.4rem; margin:0 0 0.7rem; }
+.yc-links .ob-link{
+  display:inline-flex; align-items:center;
+  background:rgba(79,70,229,0.07); border:1px solid rgba(79,70,229,0.2);
+  border-radius:8px; padding:0.35rem 0.7rem; font-size:0.75rem;
+  text-decoration:none !important; font-weight:700;
+}
+.yc-links .ob-link:hover{ background:rgba(79,70,229,0.14); }
+/* 合格ライン：ページのオレンジ系アクセントに合わせた控えめなバッジ */
+.yc-pass{ display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap; font-size:0.78rem; font-weight:700; color:#1e1b4b; line-height:1.6; margin:0; }
+.yc-pass .yc-pass-badge{ flex-shrink:0; background:#f59e0b; color:#1e1b4b; font-size:0.7rem; font-weight:900; letter-spacing:0.06em; padding:0.2rem 0.6rem; border-radius:6px; }
+.yc-pass b{ color:#b45309; }
+/* FTOのクレジット（モックの直下・右寄せ・控えめ） */
+.yc-credit{ font-size:0.68rem; color:#9ca3af; margin:0.35rem 0 0.7rem; text-align:right; }
+.yc-credit a{ color:#9ca3af !important; text-decoration:underline !important; text-underline-offset:2px; }
 </style>
 </head>
 <body>
@@ -2023,7 +2026,7 @@ a{color:inherit;text-decoration:none}
           <span class="ob-choice-icon"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg></span>
           <span class="ob-choice-text">
             <span class="ob-choice-main">基礎をしっかり学びたい</span>
-            <span class="ob-choice-sub">億トレアカデミーで体系的に</span>
+            <span class="ob-choice-sub">Yカリキュラムで体系的に</span>
           </span>
           <span class="ob-choice-arrow">›</span>
         </button>
@@ -2126,147 +2129,79 @@ a{color:inherit;text-decoration:none}
 
   <!-- ===== Results ===== -->
 
-  <!-- Result: 億トレアカデミー -->
+  <!-- Result: Yカリキュラム -->
   <div class="ob-result" id="ob-r-elearning" hidden>
     <div class="ob-result-icon"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg></div>
-    <h2 class="ob-result-title">億トレアカデミー</h2>
-    <p class="ob-result-desc">全12章で勝てる手法を体系的にマスター。</p>
-    <div class="ob-coming">
-      <div class="ob-coming-badge">COMING SOON</div>
-      <div class="ob-coming-icon"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
-      <div class="ob-coming-title">現在、鋭意製作中</div>
-      <div class="ob-coming-desc">公開までは下記で準備しておきましょう。</div>
-    </div>
-    <div class="ob-vsteps">
-      <h4>公開までの間におすすめ</h4>
-
-      <!-- Step 1: シナリオ動画視聴 -->
+    <h2 class="ob-result-title">Yカリキュラム</h2>
+    <p class="ob-result-desc">動画で学び、答え合わせで合格していく4ステップ。自分のペースで、費用をかけずに始められます。</p>
+    <div class="ob-vsteps yc-steps">
+      <!-- STEP A -->
       <div class="ob-vstep">
         <div class="ob-vstep-head">
           <span class="ob-vstep-num"><img src="img/crayon-1.png" alt="1"></span>
-          <span class="ob-vstep-title"><svg class="ob-ic" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"/><polyline points="17 2 12 7 7 2"/></svg>平日毎朝の<a href="https://discord.com/channels/1039824083208126474/1048136270582382592" target="_blank" class="ob-link">よすがシナリオ動画</a>を視聴</span>
+          <span class="ob-vstep-title">ラインの習得</span>
         </div>
-        <div class="ob-vstep-viz">
-          <div class="community-chat static-chat">
-            <div class="cc-header">
-              <span class="cc-header-hash">#</span>
-              <span class="cc-header-name">朝のシナリオ公開</span>
-            </div>
-            <div class="cc-body">
-              <div class="cc-messages">
-                <div class="cc-msg visible">
-                  <div class="cc-avatar cc-avatar-yosuga"></div>
-                  <div class="cc-msg-body">
-                    <div class="cc-msg-header">
-                      <span class="cc-msg-name" style="color:#ed4245;">よすが</span>
-                      <span class="cc-msg-time">毎朝配信</span>
-                    </div>
-                    <div class="cc-msg-content">@everyone おはようございます！今日の3通貨ペアのシナリオ公開しました📈</div>
-                    <div class="cc-yt-embed">
-                      <div class="cc-yt-thumb">
-                        <img src="images/chart-usdjpy.png" alt="動画サムネイル" style="width:100%;height:100%;object-fit:cover;border-radius:4px;">
-                        <div class="cc-yt-play" style="position:absolute;">▶</div>
-                      </div>
-                      <div class="cc-yt-info">
-                        <span class="cc-yt-title">朝のシナリオ構築 XAU/USD・USD/JPY・GBP/USD</span>
-                        <span class="cc-yt-channel">よすが FX SPACE</span>
-                      </div>
-                    </div>
-                    <div class="cc-chart-grid">
-                      <div class="cc-chart-item">
-                        <img src="images/chart-xauusd.png" alt="XAU/USD">
-                        <span class="cc-chart-label">XAU/USD</span>
-                      </div>
-                      <div class="cc-chart-item">
-                        <img src="images/chart-usdjpy.png" alt="USD/JPY">
-                        <span class="cc-chart-label">USD/JPY</span>
-                      </div>
-                      <div class="cc-chart-item">
-                        <img src="images/chart-gbpusd.png" alt="GBP/USD">
-                        <span class="cc-chart-label">GBP/USD</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="ob-vstep-viz"><img src="img/step-a-chart.png" alt="実際のチャートに引いた上昇チャネル"></div>
+        <p class="yc-desc">動画を見て、YTTのオートラインと同じラインを引けるように練習します。</p>
+        <div class="yc-links">
+          <a href="https://youtu.be/YSOMB0J4VwI" target="_blank" rel="noopener" class="ob-link">習得編1章 ライン →</a>
+          <a href="https://youtu.be/x6CJtJN3Ces" target="_blank" rel="noopener" class="ob-link">YTT解説 →</a>
         </div>
+        <p class="yc-pass"><span class="yc-pass-badge">合格</span>1週間を通して<b>正答率95%以上</b></p>
       </div>
 
-      <!-- Step 2: トレードルーム見学 -->
+      <!-- STEP B -->
       <div class="ob-vstep">
         <div class="ob-vstep-head">
           <span class="ob-vstep-num"><img src="img/crayon-2.png" alt="2"></span>
-          <span class="ob-vstep-title"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg><a href="https://discord.com/channels/1039824083208126474/1356783303105183916" target="_blank" class="ob-link">トレードルーム</a>で先輩のトレードを見学</span>
+          <span class="ob-vstep-title">ナウキャスト・シナリオ</span>
         </div>
-        <div class="ob-vstep-viz">
-          <div class="community-chat static-chat">
-            <div class="cc-header">
-              <span class="cc-header-hash">#</span>
-              <span class="cc-header-name">あなたのトレードルーム</span>
-            </div>
-            <div class="cc-body">
-              <div class="cc-messages">
-                <div class="cc-msg visible">
-                  <div class="cc-avatar" style="background:#57f287;">M</div>
-                  <div class="cc-msg-body">
-                    <div class="cc-msg-header"><span class="cc-msg-name" style="color:#57f287;">Mochi</span><span class="cc-msg-time">今日 08:32</span></div>
-                    <div class="cc-msg-content">USD/JPY ロング エントリーしました📈 H4の押し目バッチリでした</div>
-                  </div>
-                </div>
-                <div class="cc-msg visible">
-                  <div class="cc-avatar" style="background:#ed4245;">Y</div>
-                  <div class="cc-msg-body">
-                    <div class="cc-msg-header"><span class="cc-msg-name" style="color:#ed4245;">よすが</span><span class="cc-pro-badge">主宰</span><span class="cc-msg-time">今日 08:35</span></div>
-                    <div class="cc-msg-content">いい判断！H4上目線と一致してますね👍</div>
-                  </div>
-                </div>
-                <div class="cc-msg visible">
-                  <div class="cc-avatar" style="background:#fee75c;color:#000;">S</div>
-                  <div class="cc-msg-body">
-                    <div class="cc-msg-header"><span class="cc-msg-name" style="color:#fee75c;">Sat</span><span class="cc-msg-time">今日 08:40</span></div>
-                    <div class="cc-msg-content">参考にさせてもらいます！僕もちょうど見てたところです🙏</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="ob-vstep-viz"><img src="img/step-b-chart.png" alt="実際のチャートに引いたチャネルとシナリオ"></div>
+        <p class="yc-desc">4通貨でシナリオを構築し、毎日の解説動画で答え合わせします。</p>
+        <div class="yc-links">
+          <a href="https://youtu.be/0KBM6hNhdzY" target="_blank" rel="noopener" class="ob-link">シナリオ構築完全解説 →</a>
+          <a href="https://youtu.be/6VHINPwHyq8" target="_blank" rel="noopener" class="ob-link">習得編2章 →</a>
+          <a href="https://youtu.be/EsX9nU4nmuI" target="_blank" rel="noopener" class="ob-link">習得編3章 →</a>
         </div>
+        <p class="yc-pass"><span class="yc-pass-badge">合格</span>1週間を通して<b>正答率90%以上</b></p>
       </div>
 
-      <!-- Step 3: 問題集で実践テスト -->
+      <!-- STEP C -->
       <div class="ob-vstep">
         <div class="ob-vstep-head">
           <span class="ob-vstep-num"><img src="img/crayon-3.png" alt="3"></span>
-          <span class="ob-vstep-title"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M12 22H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9l5 5v5"/><polyline points="13 2 13 9 20 9"/><path d="M10.4 12.6a2 2 0 1 1 3 3L8 21l-4 1 1-4 5.4-5.4Z"/></svg><a href="https://discord.com/channels/1039824083208126474/1246768528506486836" target="_blank" class="ob-link">超実践FX問題集</a>で知識を試す</span>
+          <span class="ob-vstep-title">タイミングの習得</span>
         </div>
-        <div class="ob-vstep-viz">
-          <div class="ob-quiz-card">
-            <div class="ob-quiz-card-q">
-              <div class="ob-quiz-card-qhead">
-                <span class="ob-quiz-card-qcat">シナリオ問題</span>
-                <span class="ob-quiz-card-qtf">H4</span>
-                <span class="ob-quiz-card-qnum">Q.12</span>
-              </div>
-              <div class="ob-quiz-card-chart">
-                <img src="images/zp-qa-chart1.png" alt="チャート問題">
-              </div>
-              <div class="ob-quiz-card-prompt">このチャートでシナリオを描いてみよう</div>
-            </div>
-          </div>
-        </div>
+        <div class="ob-vstep-viz"><img src="img/step-c-chart.png" alt="実際のチャートでのエントリータイミング"></div>
+        <p class="yc-desc">シナリオ通りに動いたら、M5でエントリー／イグジット。お手本トレード（ピンク印）と答え合わせします。</p>
+        <p class="yc-pass"><span class="yc-pass-badge">合格</span>1週間を通して<b>正答率90%以上</b></p>
       </div>
 
+      <!-- STEP D -->
+      <div class="ob-vstep">
+        <div class="ob-vstep-head">
+          <span class="ob-vstep-num"><img src="img/crayon-4.png" alt="4"></span>
+          <span class="ob-vstep-title">過去相場検証</span>
+        </div>
+        <div class="ob-vstep-viz"><img src="img/fto-speed-of-testing.gif" alt="FTOで過去の相場を巻き戻して検証している画面"></div>
+        <p class="yc-credit"><a href="https://forextester.jp/" target="_blank" rel="noopener">Forex Tester 公式サイト</a>より</p>
+        <p class="yc-desc">過去の相場を巻き戻して、何度もトレードを練習・検証します。おすすめは<b>Forex Tester Online（FTO）</b>。</p>
+        <div class="yc-links">
+          <a href="https://youtu.be/DSYvHwfkojI" target="_blank" rel="noopener" class="ob-link">検証 理論 →</a>
+          <a href="https://youtu.be/mUdZW69kogs" target="_blank" rel="noopener" class="ob-link">検証 実践 →</a>
+          <a href="https://discord.com/channels/1039824083208126474/1161882625519140874/1528047675658731570" target="_blank" rel="noopener" class="ob-link">FTOの始め方を見る →</a>
+        </div>
+        <p class="yc-pass"><span class="yc-pass-badge">合格</span><b>〇率90%・月利3%・DD10%以内</b>を6か月連続</p>
+      </div>
     </div>
     <div class="ob-result-actions">
-      <a href="https://discord.com/channels/1039824083208126474/1356783303105183916" target="_blank" class="ob-btn">トレードルームを覗いてみる →</a>
+      <a href="https://fx-space.com/intro/y-curriculum.html" target="_blank" class="ob-btn">Yカリキュラムを見る →</a>
       <button class="ob-btn ob-btn-outline" onclick="obReset()">もう一度診断する</button>
     </div>
     <div class="ob-allroutes">
       <div class="ob-allroutes-title">他のルートも見てみる</div>
       <div class="ob-route-chips">
-        <button class="ob-route-chip current"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>億トレアカデミー</button>
+        <button class="ob-route-chip current"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>Yカリキュラム</button>
         <button class="ob-route-chip" onclick="obShowResult('zeropro')"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>ゼロプロ90</button>
         <button class="ob-route-chip" onclick="obShowResult('ytt')"><svg class="ob-ic" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>YTT</button>
         <button class="ob-route-chip" onclick="obShowResult('community')"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>コミュニティ</button>
@@ -2291,53 +2226,68 @@ a{color:inherit;text-decoration:none}
       </div>
     </div>
     <div class="ob-vsteps">
-      <h4>募集までの待ち時間を「最高の準備期間」に</h4>
-      <p class="ob-vsteps-lead">スタート前にやっておくと伸びが段違い。</p>
+      <h4>ゼロプロ90の90日間はこう進む</h4>
+      <p class="ob-vsteps-lead">課題提出 → 動画添削 → 認識アップデートを、ほぼ隔日で回し続ける。</p>
 
-      <!-- Step 1: シナリオ動画視聴 -->
+      <!-- Step 1: 課題提出 -->
       <div class="ob-vstep">
         <div class="ob-vstep-head">
           <span class="ob-vstep-num"><img src="img/crayon-1.png" alt="1"></span>
-          <span class="ob-vstep-title"><svg class="ob-ic" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"/><polyline points="17 2 12 7 7 2"/></svg>平日毎朝の<a href="https://discord.com/channels/1039824083208126474/1048136270582382592" target="_blank" class="ob-link">よすがシナリオ動画</a>を視聴</span>
+          <span class="ob-vstep-title"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>シナリオを立てて課題を提出</span>
         </div>
         <div class="ob-vstep-viz">
           <div class="community-chat static-chat">
             <div class="cc-header">
               <span class="cc-header-hash">#</span>
-              <span class="cc-header-name">朝のシナリオ公開</span>
+              <span class="cc-header-name">課題提出</span>
+            </div>
+            <div class="cc-body">
+              <div class="cc-messages">
+                <div class="cc-msg visible">
+                  <div class="cc-avatar" style="background:#5865f2;">T</div>
+                  <div class="cc-msg-body">
+                    <div class="cc-msg-header"><span class="cc-msg-name" style="color:#5865f2;">Takumi</span><span class="cc-msg-time">今日 07:40</span></div>
+                    <div class="cc-msg-content">添削よろしくお願いします🙏<br>■課題：シナリオ構築（7回目）<br>■ナウキャスト（USD/JPY）<br>H4：上昇トレンド、赤ライン遠方<br>H1：下降トレンド、ラインブレイク<br>M15：下降ブレイク → M15でロング構築</div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;margin-top:6px;">
+                      <img src="images/zp-chart-h4-b.png" alt="H4チャート" style="width:100%;border-radius:4px;">
+                      <img src="images/zp-chart-h1-b.png" alt="H1チャート" style="width:100%;border-radius:4px;">
+                      <img src="images/zp-chart-m15-b.png" alt="M15チャート" style="width:100%;border-radius:4px;">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2: 動画添削 -->
+      <div class="ob-vstep">
+        <div class="ob-vstep-head">
+          <span class="ob-vstep-num"><img src="img/crayon-2.png" alt="2"></span>
+          <span class="ob-vstep-title"><svg class="ob-ic" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"/><polyline points="17 2 12 7 7 2"/></svg>よすがが<strong>全員分の課題を動画で添削</strong></span>
+        </div>
+        <div class="ob-vstep-viz">
+          <div class="community-chat static-chat">
+            <div class="cc-header">
+              <span class="cc-header-hash">#</span>
+              <span class="cc-header-name">添削フィードバック</span>
             </div>
             <div class="cc-body">
               <div class="cc-messages">
                 <div class="cc-msg visible">
                   <div class="cc-avatar cc-avatar-yosuga"></div>
                   <div class="cc-msg-body">
-                    <div class="cc-msg-header">
-                      <span class="cc-msg-name" style="color:#ed4245;">よすが</span>
-                      <span class="cc-msg-time">毎朝配信</span>
-                    </div>
-                    <div class="cc-msg-content">@everyone おはようございます！今日の3通貨ペアのシナリオ公開しました📈</div>
+                    <div class="cc-msg-header"><span class="cc-msg-name" style="color:#ed4245;">よすが</span><span class="cc-msg-time">今日 21:30</span></div>
+                    <div class="cc-msg-content" style="color:#00a8fc;">https://youtu.be/xK9mP2nQr4s</div>
                     <div class="cc-yt-embed">
                       <div class="cc-yt-thumb">
-                        <img src="images/chart-usdjpy.png" alt="動画サムネイル" style="width:100%;height:100%;object-fit:cover;border-radius:4px;">
+                        <img src="images/zp-chart-h4.png" alt="添削動画のサムネイル" style="width:100%;height:100%;object-fit:cover;border-radius:4px;">
                         <div class="cc-yt-play" style="position:absolute;">▶</div>
                       </div>
                       <div class="cc-yt-info">
-                        <span class="cc-yt-title">朝のシナリオ構築 XAU/USD・USD/JPY・GBP/USD</span>
-                        <span class="cc-yt-channel">よすが FX SPACE</span>
-                      </div>
-                    </div>
-                    <div class="cc-chart-grid">
-                      <div class="cc-chart-item">
-                        <img src="images/chart-xauusd.png" alt="XAU/USD">
-                        <span class="cc-chart-label">XAU/USD</span>
-                      </div>
-                      <div class="cc-chart-item">
-                        <img src="images/chart-usdjpy.png" alt="USD/JPY">
-                        <span class="cc-chart-label">USD/JPY</span>
-                      </div>
-                      <div class="cc-chart-item">
-                        <img src="images/chart-gbpusd.png" alt="GBP/USD">
-                        <span class="cc-chart-label">GBP/USD</span>
+                        <span class="cc-yt-title">【ゼロプロ添削】まとめて動画で徹底解説</span>
+                        <span class="cc-yt-channel">よすが｜FX SPACE</span>
                       </div>
                     </div>
                   </div>
@@ -2348,90 +2298,25 @@ a{color:inherit;text-decoration:none}
         </div>
       </div>
 
-      <!-- Step 2: YTT導入 -->
-      <div class="ob-vstep">
-        <div class="ob-vstep-head">
-          <span class="ob-vstep-num"><img src="img/crayon-2.png" alt="2"></span>
-          <span class="ob-vstep-title"><svg class="ob-ic" viewBox="0 0 24 24"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/><line x1="3" y1="20" x2="21" y2="20"/></svg><a href="https://discord.com/channels/1039824083208126474/1447939661186990173" target="_blank" class="ob-link">YTT</a>を自分のチャートに導入する</span>
-        </div>
-        <div class="ob-vstep-viz">
-          <svg viewBox="0 0 360 140" xmlns="http://www.w3.org/2000/svg">
-            <rect width="360" height="140" rx="10" fill="#1e1b4b"/>
-            <!-- Chart area -->
-            <g>
-              <line x1="14" y1="40" x2="240" y2="40" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
-              <line x1="14" y1="80" x2="240" y2="80" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
-              <rect x="30" y="70" width="6" height="20" fill="#22c55e"/>
-              <rect x="45" y="65" width="6" height="22" fill="#22c55e"/>
-              <rect x="60" y="68" width="6" height="14" fill="#ef4444"/>
-              <rect x="75" y="58" width="6" height="22" fill="#22c55e"/>
-              <rect x="90" y="50" width="6" height="20" fill="#22c55e"/>
-              <rect x="105" y="55" width="6" height="14" fill="#ef4444"/>
-              <rect x="120" y="44" width="6" height="22" fill="#22c55e"/>
-              <rect x="135" y="38" width="6" height="20" fill="#22c55e"/>
-              <rect x="150" y="42" width="6" height="14" fill="#ef4444"/>
-              <rect x="165" y="32" width="6" height="22" fill="#22c55e"/>
-              <rect x="180" y="26" width="6" height="20" fill="#22c55e"/>
-              <rect x="195" y="30" width="6" height="14" fill="#ef4444"/>
-              <rect x="210" y="20" width="6" height="20" fill="#22c55e"/>
-              <line x1="14" y1="22" x2="240" y2="22" stroke="#ef4444" stroke-width="1" stroke-dasharray="4,3"/>
-              <line x1="14" y1="100" x2="240" y2="100" stroke="#22d3ee" stroke-width="1" stroke-dasharray="4,3"/>
-            </g>
-            <!-- YTT Panel -->
-            <rect x="252" y="14" width="94" height="112" rx="6" fill="#2b2d31" stroke="rgba(255,255,255,0.1)"/>
-            <rect x="258" y="20" width="46" height="12" rx="6" fill="#7c3aed"/>
-            <text x="281" y="29" fill="#fff" font-size="8" font-weight="800" text-anchor="middle" font-family="Inter,sans-serif">YTT</text>
-            <text x="316" y="29" fill="#22c55e" font-size="7" font-weight="700" font-family="Inter,sans-serif">起動中</text>
-            <rect x="258" y="40" width="82" height="16" rx="3" fill="#1e1f22"/>
-            <text x="263" y="51" fill="rgba(255,255,255,0.6)" font-size="7" font-family="Inter,sans-serif">Lot 0.01</text>
-            <rect x="258" y="60" width="38" height="20" rx="3" fill="#1D5FB6"/>
-            <text x="277" y="74" fill="#fff" font-size="9" font-weight="900" text-anchor="middle" font-family="Inter,sans-serif">BUY</text>
-            <rect x="302" y="60" width="38" height="20" rx="3" fill="#8B1A1A"/>
-            <text x="321" y="74" fill="#fff" font-size="9" font-weight="900" text-anchor="middle" font-family="Inter,sans-serif">SELL</text>
-            <rect x="258" y="84" width="82" height="16" rx="3" fill="#C8A200"/>
-            <text x="299" y="95" fill="#1e1f22" font-size="8" font-weight="800" text-anchor="middle" font-family="Inter,sans-serif">全決済</text>
-            <rect x="258" y="104" width="82" height="16" rx="3" fill="#2B8C44"/>
-            <text x="299" y="115" fill="#fff" font-size="8" font-weight="800" text-anchor="middle" font-family="Inter,sans-serif">1/2決済</text>
-            <!-- MT4 label -->
-            <text x="14" y="135" fill="rgba(255,255,255,0.4)" font-size="7" font-weight="700" font-family="Inter,sans-serif">MT4 / TradingView</text>
-          </svg>
-        </div>
-      </div>
-
-      <!-- Step 3: トレードルームで実戦 -->
+      <!-- Step 3: 認識アップデート → 隔日で繰り返す -->
       <div class="ob-vstep">
         <div class="ob-vstep-head">
           <span class="ob-vstep-num"><img src="img/crayon-3.png" alt="3"></span>
-          <span class="ob-vstep-title"><svg class="ob-ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg><a href="https://discord.com/channels/1039824083208126474/1356783303105183916" target="_blank" class="ob-link">トレードルーム</a>で実戦を始める</span>
+          <span class="ob-vstep-title"><svg class="ob-ic" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>指摘を反映して<strong>認識をアップデート</strong>し、次の課題へ</span>
         </div>
         <div class="ob-vstep-viz">
-          <div class="comm-embed-wrap">
-            <div class="comm-embed-head">
-              <div class="comm-embed-head-av">🤖</div>
-              <span class="comm-embed-head-name">FX SPACE<span class="cc-bot-badge">BOT</span></span>
-              <span class="comm-embed-head-time">今日 11:42</span>
+          <div class="ob-timeline">
+            <div class="ob-timeline-item">
+              <div class="ob-timeline-icon"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+              <div class="ob-timeline-text"><strong>よすがからの指摘</strong>を次の課題に反映し、学ぶ</div>
             </div>
-            <div class="comm-embed-card">
-              <div class="comm-embed-title">🎉 利確達成</div>
-              <div class="comm-embed-amount">+8,400円</div>
-              <div class="comm-embed-symbol">USD/JPY · Long</div>
-              <div class="comm-embed-fields">
-                <div>
-                  <div class="comm-embed-field-label">トレーダー</div>
-                  <div class="comm-embed-field-value">あなた</div>
-                </div>
-                <div>
-                  <div class="comm-embed-field-label">保有時間</div>
-                  <div class="comm-embed-field-value">2時間14分</div>
-                </div>
-                <div>
-                  <div class="comm-embed-field-label">今月勝率</div>
-                  <div class="comm-embed-field-value">68%</div>
-                </div>
-              </div>
-              <div class="comm-embed-footer">
-                <span>🚀 <strong>プロトレーダー</strong>に昇格しました</span>
-              </div>
+            <div class="ob-timeline-item">
+              <div class="ob-timeline-icon"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></div>
+              <div class="ob-timeline-text"><strong>ステージをクリア</strong>すると次の段階へ進める</div>
+            </div>
+            <div class="ob-timeline-item ob-timeline-you">
+              <div class="ob-timeline-icon"><svg class="ob-ic" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15A9 9 0 1 1 5.64 5.64L1 10"/></svg></div>
+              <div class="ob-timeline-text"><strong>このサイクルをほぼ隔日で繰り返す × 90日間</strong></div>
             </div>
           </div>
         </div>
@@ -2444,7 +2329,7 @@ a{color:inherit;text-decoration:none}
     <div class="ob-allroutes">
       <div class="ob-allroutes-title">他のルートも見てみる</div>
       <div class="ob-route-chips">
-        <button class="ob-route-chip" onclick="obShowResult('elearning')"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>億トレアカデミー</button>
+        <button class="ob-route-chip" onclick="obShowResult('elearning')"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>Yカリキュラム</button>
         <button class="ob-route-chip current"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>ゼロプロ90</button>
         <button class="ob-route-chip" onclick="obShowResult('ytt')"><svg class="ob-ic" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>YTT</button>
         <button class="ob-route-chip" onclick="obShowResult('community')"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>コミュニティ</button>
@@ -2654,122 +2539,14 @@ a{color:inherit;text-decoration:none}
 
     </div>
 
-    <div class="ob-vsteps">
-      <h4>YTTをチャートに導入する手順</h4>
-
-      <!-- Step 1: 導入ガイド確認 -->
-      <div class="ob-vstep">
-        <div class="ob-vstep-head">
-          <span class="ob-vstep-num"><img src="img/crayon-1.png" alt="1"></span>
-          <span class="ob-vstep-title"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><a href="https://discord.com/channels/1039824083208126474/1447939661186990173" target="_blank" class="ob-link">YTTチャンネル</a>で導入方法を確認</span>
-        </div>
-        <div class="ob-vstep-viz">
-          <div class="community-chat static-chat">
-            <div class="cc-header">
-              <span class="cc-header-hash">#</span>
-              <span class="cc-header-name">YTT · 導入ガイド 📌</span>
-            </div>
-            <div class="cc-body">
-              <div class="cc-messages">
-                <div class="cc-msg visible">
-                  <div class="cc-avatar cc-avatar-yosuga"></div>
-                  <div class="cc-msg-body">
-                    <div class="cc-msg-header">
-                      <span class="cc-msg-name" style="color:#ed4245;">よすが</span>
-                      <span class="cc-pro-badge">主宰</span>
-                      <span class="cc-msg-time">📌 ピン留め</span>
-                    </div>
-                    <div class="cc-msg-content">📘 <strong>YTT セットアップガイド</strong><br>MT4版の導入手順を動画付きでまとめています。お使いの環境に合わせて進めてください。</div>
-                    <div class="cc-yt-embed">
-                      <div class="cc-yt-thumb">
-                        <img src="images/chart-usdjpy.png" alt="MT4導入動画" style="width:100%;height:100%;object-fit:cover;border-radius:4px;">
-                        <div class="cc-yt-play" style="position:absolute;">▶</div>
-                      </div>
-                      <div class="cc-yt-info">
-                        <span class="cc-yt-title">YTT MT4版 セットアップ完全ガイド</span>
-                        <span class="cc-yt-channel">よすが FX SPACE · 5:32</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Step 2: 自分のチャートにセットアップ -->
-      <div class="ob-vstep">
-        <div class="ob-vstep-head">
-          <span class="ob-vstep-num"><img src="img/crayon-2.png" alt="2"></span>
-          <span class="ob-vstep-title"><svg class="ob-ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v3"/><path d="M12 20v3"/><path d="M4.22 4.22l2.12 2.12"/><path d="M17.66 17.66l2.12 2.12"/><path d="M1 12h3"/><path d="M20 12h3"/><path d="M4.22 19.78l2.12-2.12"/><path d="M17.66 6.34l2.12-2.12"/></svg>自分のチャートに<a href="https://discord.com/channels/1039824083208126474/1161882625519140874" target="_blank" class="ob-link">セットアップ</a></span>
-        </div>
-        <div class="ob-vstep-viz">
-          <div class="ob-flow">
-            <div class="ob-flow-item">
-              <div class="ob-flow-icon"><svg class="ob-ic" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
-              <div class="ob-flow-name">環境を選ぶ</div>
-              <div class="ob-flow-desc">MT4 または<br>TradingView</div>
-            </div>
-            <div class="ob-flow-arrow">→</div>
-            <div class="ob-flow-item">
-              <div class="ob-flow-icon"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
-              <div class="ob-flow-name">ファイル追加</div>
-              <div class="ob-flow-desc">ガイドに沿って<br>配置するだけ</div>
-            </div>
-            <div class="ob-flow-arrow">→</div>
-            <div class="ob-flow-item ob-flow-goal">
-              <div class="ob-flow-icon"><svg class="ob-ic" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
-              <div class="ob-flow-name">完了</div>
-              <div class="ob-flow-desc">数分で<br>使える</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Step 3: 実戦で使う -->
-      <div class="ob-vstep">
-        <div class="ob-vstep-head">
-          <span class="ob-vstep-num"><img src="img/crayon-3.png" alt="3"></span>
-          <span class="ob-vstep-title"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>実戦で使ってみる</span>
-        </div>
-        <div class="ob-vstep-viz">
-          <div class="community-chat static-chat">
-            <div class="cc-header">
-              <span class="cc-header-hash">#</span>
-              <span class="cc-header-name">トレードルーム</span>
-            </div>
-            <div class="cc-body">
-              <div class="cc-messages">
-                <div class="cc-msg visible">
-                  <div class="cc-avatar" style="background:#57f287;">M</div>
-                  <div class="cc-msg-body">
-                    <div class="cc-msg-header"><span class="cc-msg-name" style="color:#57f287;">Mochi</span><span class="cc-msg-time">今日 15:40</span></div>
-                    <div class="cc-msg-content">今日も朝セットしたYTTのシナリオ通りTP到達しました🎉 +15,200円<br>張り付き不要でほんと楽…</div>
-                    <div class="cc-reactions"><span class="cc-reaction visible">🎉 <span class="cc-reaction-count">12</span></span><span class="cc-reaction visible">🔥 <span class="cc-reaction-count">7</span></span></div>
-                  </div>
-                </div>
-                <div class="cc-msg visible">
-                  <div class="cc-avatar cc-avatar-yosuga"></div>
-                  <div class="cc-msg-body">
-                    <div class="cc-msg-header"><span class="cc-msg-name" style="color:#ed4245;">よすが</span><span class="cc-pro-badge">主宰</span><span class="cc-msg-time">今日 15:45</span></div>
-                    <div class="cc-msg-content">朝セットして放置できるのがYTTの真骨頂ですね👍</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
     <div class="ob-result-actions">
-      <a href="https://discord.com/channels/1039824083208126474/1447939661186990173" target="_blank" class="ob-btn">YTTチャンネルで導入方法を見る →</a>
+      <a href="https://fx-space.com/intro/ytt-tokusetu.html" target="_blank" class="ob-btn">YTTを詳しく見る →</a>
       <button class="ob-btn ob-btn-outline" onclick="obReset()">もう一度診断する</button>
     </div>
     <div class="ob-allroutes">
       <div class="ob-allroutes-title">他のルートも見てみる</div>
       <div class="ob-route-chips">
-        <button class="ob-route-chip" onclick="obShowResult('elearning')"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>億トレアカデミー</button>
+        <button class="ob-route-chip" onclick="obShowResult('elearning')"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>Yカリキュラム</button>
         <button class="ob-route-chip" onclick="obShowResult('zeropro')"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>ゼロプロ90</button>
         <button class="ob-route-chip current"><svg class="ob-ic" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>YTT</button>
         <button class="ob-route-chip" onclick="obShowResult('community')"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>コミュニティ</button>
@@ -2782,140 +2559,92 @@ a{color:inherit;text-decoration:none}
   <div class="ob-result" id="ob-r-community" hidden>
     <div class="ob-result-icon"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
     <h2 class="ob-result-title">コミュニティで成長する</h2>
-    <p class="ob-result-desc">少人数トレードルームで仲間と毎日学ぶ。</p>
+    <p class="ob-result-desc">毎朝のシナリオと仲間との交流で、毎日成長するリズムを作る。</p>
     <div class="ob-hero-logo community">
       <img src="images/community-logo.png" alt="コミュニティ">
     </div>
     <div class="ob-vsteps">
       <h4>コミュニティの歩き方</h4>
 
-      <!-- Step 1: トレードルームを覗く -->
+      <!-- Step 1: 毎朝のシナリオでよすがの思考を学ぶ（毎日の習慣に） -->
       <div class="ob-vstep">
         <div class="ob-vstep-head">
           <span class="ob-vstep-num"><img src="img/crayon-1.png" alt="1"></span>
-          <span class="ob-vstep-title"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M13 4h3a2 2 0 0 1 2 2v14"/><path d="M2 20h3"/><path d="M13 20h9"/><path d="M10 12v.01"/><path d="M13 4.562v16.157a1 1 0 0 1-1.242.97L5 20V5.562a2 2 0 0 1 1.515-1.94l4-1A2 2 0 0 1 13 4.561Z"/></svg><a href="https://discord.com/channels/1039824083208126474/1356783303105183916" target="_blank" class="ob-link">トレードルーム</a>を覗いてみる</span>
-        </div>
-        <div class="ob-vstep-viz">
-          <div class="community-chat static-chat">
-            <div class="cc-header">
-              <span class="cc-header-hash">#</span>
-              <span class="cc-header-name">あなたのトレードルーム</span>
-              <span class="ob-room-meta">● 今のメンバー 14人</span>
-            </div>
-            <div class="cc-body">
-              <div class="cc-messages">
-                <div class="cc-msg visible">
-                  <div class="cc-avatar" style="background:#57f287;">M</div>
-                  <div class="cc-msg-body">
-                    <div class="cc-msg-header"><span class="cc-msg-name" style="color:#57f287;">Mochi</span><span class="cc-msg-time">今日 08:15</span></div>
-                    <div class="cc-msg-content">おはようございます！ドル円の赤ライン付近、気になってます。皆さんどう見てますか？</div>
-                  </div>
-                </div>
-                <div class="cc-msg visible">
-                  <div class="cc-avatar" style="background:#c084fc;">K</div>
-                  <div class="cc-msg-body">
-                    <div class="cc-msg-header"><span class="cc-msg-name" style="color:#c084fc;">Kenta</span><span class="cc-msg-time">今日 08:22</span></div>
-                    <div class="cc-msg-content">僕もそこ見てます！4H足でダウ転換しそうな形ですよね</div>
-                  </div>
-                </div>
-                <div class="cc-msg visible">
-                  <div class="cc-avatar" style="background:#eb459e;">H</div>
-                  <div class="cc-msg-body">
-                    <div class="cc-msg-header"><span class="cc-msg-name" style="color:#eb459e;">HiU</span><span class="cc-msg-time">今日 08:25</span></div>
-                    <div class="cc-msg-content">日足の流れ的にまだ戻り売り優勢かなと🤔 私は売り目線で待ってます</div>
-                  </div>
-                </div>
-                <div class="cc-msg visible">
-                  <div class="cc-avatar" style="background:#ed4245;">S</div>
-                  <div class="cc-msg-body">
-                    <div class="cc-msg-header"><span class="cc-msg-name" style="color:#ed4245;">Sato</span><span class="cc-pro-badge">プロ</span><span class="cc-msg-time">今日 08:30</span></div>
-                    <div class="cc-msg-content">3人ともいい目の付け所👍 赤ラインは意識されやすいから、反応を見てから入るのが正解</div>
-                    <div class="cc-reactions"><span class="cc-reaction visible">🔥 <span class="cc-reaction-count">8</span></span><span class="cc-reaction visible">👍 <span class="cc-reaction-count">5</span></span></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Step 2: 朝の情報チェックして宣言 -->
-      <div class="ob-vstep">
-        <div class="ob-vstep-head">
-          <span class="ob-vstep-num"><img src="img/crayon-2.png" alt="2"></span>
-          <span class="ob-vstep-title"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M17 18a5 5 0 0 0-10 0"/><line x1="12" y1="2" x2="12" y2="9"/><line x1="4.22" y1="10.22" x2="5.64" y2="11.64"/><line x1="1" y1="18" x2="3" y2="18"/><line x1="21" y1="18" x2="23" y2="18"/><line x1="18.36" y1="11.64" x2="19.78" y2="10.22"/><line x1="23" y1="22" x2="1" y2="22"/><polyline points="8 6 12 2 16 6"/></svg><a href="https://discord.com/channels/1039824083208126474/1048136270582382592" target="_blank" class="ob-link">毎朝の情報</a>をチェックして宣言</span>
+          <span class="ob-vstep-title"><svg class="ob-ic" viewBox="0 0 24 24"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/><line x1="3" y1="20" x2="21" y2="20"/></svg><a href="https://discord.com/channels/1039824083208126474/1048136270582382592" target="_blank" class="ob-link">毎朝のシナリオ</a>でよすがの思考を学ぶ</span>
         </div>
         <div class="ob-vstep-viz">
           <div class="ob-timeline">
-            <div class="ob-timeline-item">
-              <div class="ob-timeline-icon"><svg class="ob-ic" viewBox="0 0 24 24"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/><line x1="3" y1="20" x2="21" y2="20"/></svg></div>
-              <div class="ob-timeline-text"><strong>経済指標・ニュース</strong>を自動配信</div>
-            </div>
             <div class="ob-timeline-item">
               <div class="ob-timeline-icon"><svg class="ob-ic" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"/><polyline points="17 2 12 7 7 2"/></svg></div>
               <div class="ob-timeline-text"><strong>よすがのシナリオ動画</strong>が公開</div>
             </div>
             <div class="ob-timeline-item ob-timeline-you">
               <div class="ob-timeline-icon"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
-              <div class="ob-timeline-text"><strong>あなたも通貨ペアを宣言</strong>して参加</div>
+              <div class="ob-timeline-text"><strong>自分でもシナリオを立ててみる</strong></div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Step 3: 自分のトレードを共有 -->
+      <!-- Step 2: 疑問はその日のうちに解消（初心者応援・フォーラム・AIサポート） -->
       <div class="ob-vstep">
         <div class="ob-vstep-head">
-          <span class="ob-vstep-num"><img src="img/crayon-3.png" alt="3"></span>
-          <span class="ob-vstep-title"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg><a href="https://discord.com/channels/1039824083208126474/1356783303105183916" target="_blank" class="ob-link">トレードルーム</a>で自分のトレードを共有</span>
+          <span class="ob-vstep-num"><img src="img/crayon-2.png" alt="2"></span>
+          <span class="ob-vstep-title"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>疑問はその日のうちに解消：<a href="https://discord.com/channels/1039824083208126474/1426033560644747264" target="_blank" class="ob-link">初心者応援</a>・<a href="https://discord.com/channels/1039824083208126474/1181506867944501321" target="_blank" class="ob-link">フォーラム</a>・<a href="https://discordapp.com/channels/1039824083208126474/1416640423396511804/1490342419982454924" target="_blank" class="ob-link">AIサポート</a></span>
         </div>
         <div class="ob-vstep-viz">
-          <div class="comm-embed-wrap">
-            <div class="comm-embed-head">
-              <div class="comm-embed-head-av">🤖</div>
-              <span class="comm-embed-head-name">FX SPACE<span class="cc-bot-badge">BOT</span></span>
-              <span class="comm-embed-head-time">今日 15:45</span>
+          <div class="community-chat static-chat">
+            <div class="cc-header">
+              <span class="cc-header-hash">#</span>
+              <span class="cc-header-name">雑談-初心者応援</span>
             </div>
-            <div class="comm-embed-card">
-              <div class="comm-embed-title">🎉 利確達成</div>
-              <div class="comm-embed-amount">+12,000円</div>
-              <div class="comm-embed-symbol">USD/JPY · Long</div>
-              <div class="comm-embed-fields">
-                <div>
-                  <div class="comm-embed-field-label">トレーダー</div>
-                  <div class="comm-embed-field-value">あなた</div>
+            <div class="cc-body">
+              <div class="cc-messages">
+                <div class="cc-msg visible">
+                  <div class="cc-avatar" style="background:#57f287;">Y</div>
+                  <div class="cc-msg-body">
+                    <div class="cc-msg-header"><span class="cc-msg-name" style="color:#57f287;">Yui</span><span class="cc-msg-time">今日 09:10</span></div>
+                    <div class="cc-msg-content">初歩的な質問すみません…🙏 「ダウ理論の押し目」ってどこを見れば分かるんでしょうか？</div>
+                  </div>
                 </div>
-                <div>
-                  <div class="comm-embed-field-label">保有時間</div>
-                  <div class="comm-embed-field-value">3時間14分</div>
+                <div class="cc-msg visible">
+                  <div class="cc-avatar" style="background:#c084fc;">R</div>
+                  <div class="cc-msg-body">
+                    <div class="cc-msg-header"><span class="cc-msg-name" style="color:#c084fc;">Ryo</span><span class="cc-msg-time">今日 09:14</span></div>
+                    <div class="cc-msg-content">自分も最初そこでつまずきました！高値・安値の切り上げが続いてる中での一時的な下げ、って感じで見てます👀</div>
+                  </div>
                 </div>
-                <div>
-                  <div class="comm-embed-field-label">今月勝率</div>
-                  <div class="comm-embed-field-value">72%</div>
+                <div class="cc-msg visible">
+                  <div class="cc-avatar" style="background:#ed4245;">S</div>
+                  <div class="cc-msg-body">
+                    <div class="cc-msg-header"><span class="cc-msg-name" style="color:#ed4245;">Sato</span><span class="cc-pro-badge">プロ</span><span class="cc-msg-time">今日 09:20</span></div>
+                    <div class="cc-msg-content">いい質問です👍 まずは上位足でトレンド方向を確認 → その方向に戻ったところが押し目。習得編の動画がそのまま参考になりますよ📺</div>
+                    <div class="cc-reactions"><span class="cc-reaction visible">🙏 <span class="cc-reaction-count">7</span></span><span class="cc-reaction visible">👍 <span class="cc-reaction-count">6</span></span></div>
+                  </div>
+                </div>
+                <div class="cc-msg visible">
+                  <div class="cc-avatar" style="background:#57f287;">Y</div>
+                  <div class="cc-msg-body">
+                    <div class="cc-msg-header"><span class="cc-msg-name" style="color:#57f287;">Yui</span><span class="cc-msg-time">今日 09:23</span></div>
+                    <div class="cc-msg-content">なるほど…！すごく腑に落ちました。ありがとうございます、動画見てみます😊</div>
+                  </div>
                 </div>
               </div>
-              <div class="comm-embed-footer">
-                <span>🚀 <strong>プロトレーダー</strong>に昇格しました</span>
-              </div>
-            </div>
-            <div class="comm-embed-reacts">
-              <span class="comm-embed-react">🎉 18</span>
-              <span class="comm-embed-react">👏 12</span>
-              <span class="comm-embed-react">🚀 9</span>
             </div>
           </div>
         </div>
       </div>
+
 
     </div>
     <div class="ob-result-actions">
-      <a href="https://discord.com/channels/1039824083208126474/1356783303105183916" target="_blank" class="ob-btn">トレードルームを覗く →</a>
+      <a href="https://discord.com/channels/1039824083208126474/1048136270582382592" target="_blank" class="ob-btn">朝のシナリオを見る →</a>
       <button class="ob-btn ob-btn-outline" onclick="obReset()">もう一度診断する</button>
     </div>
     <div class="ob-allroutes">
       <div class="ob-allroutes-title">他のルートも見てみる</div>
       <div class="ob-route-chips">
-        <button class="ob-route-chip" onclick="obShowResult('elearning')"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>億トレアカデミー</button>
+        <button class="ob-route-chip" onclick="obShowResult('elearning')"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>Yカリキュラム</button>
         <button class="ob-route-chip" onclick="obShowResult('zeropro')"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>ゼロプロ90</button>
         <button class="ob-route-chip" onclick="obShowResult('ytt')"><svg class="ob-ic" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>YTT</button>
         <button class="ob-route-chip current"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>コミュニティ</button>
@@ -2946,7 +2675,7 @@ a{color:inherit;text-decoration:none}
       <div class="ob-vstep">
         <div class="ob-vstep-head">
           <span class="ob-vstep-num"><img src="img/crayon-1.png" alt="1"></span>
-          <span class="ob-vstep-title"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><a href="https://www.fintokei.com/jp/?affiliate=55" target="_blank" class="ob-link">公式サイト</a>で仕組みを理解する</span>
+          <span class="ob-vstep-title"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><a href="https://my.fintokei.com/affiliate/jp/55" target="_blank" class="ob-link">公式サイト</a>で仕組みを理解する</span>
         </div>
         <div class="ob-vstep-viz">
           <div class="ob-browser">
@@ -2987,19 +2716,19 @@ a{color:inherit;text-decoration:none}
         </div>
       </div>
 
-      <!-- Step 2: 10%オフクーポン（YOSUGA10 初回限定 / FINTO5KEI 2回目以降） -->
+      <!-- Step 2: 30%オフクーポン（30ysg 新規ユーザー限定・常設 / FINTO5KEI 2回目以降） -->
       <div class="ob-vstep">
         <div class="ob-vstep-head">
           <span class="ob-vstep-num"><img src="img/crayon-2.png" alt="2"></span>
-          <span class="ob-vstep-title"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/></svg>限定クーポンでプラン購入時に10%オフ</span>
+          <span class="ob-vstep-title"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/></svg>限定クーポンでプラン購入時に30%オフ</span>
         </div>
         <div class="ob-vstep-viz">
           <div class="ob-coupon">
-            <div class="ob-coupon-ribbon">FX SPACEメンバー限定 / 初回チャレンジ</div>
-            <div class="ob-coupon-off">10<span class="ob-coupon-pct">%</span> <span class="ob-coupon-off-label">OFF</span></div>
+            <div class="ob-coupon-ribbon">FX SPACEメンバー限定 / 新規ユーザー限定</div>
+            <div class="ob-coupon-off">30<span class="ob-coupon-pct">%</span> <span class="ob-coupon-off-label">OFF</span></div>
             <div class="ob-coupon-label">クーポンコード</div>
-            <div class="ob-coupon-code"><span>YOSUGA10</span></div>
-            <div class="ob-coupon-hint"><a href="https://www.fintokei.com/jp/?affiliate=55" target="_blank" class="ob-link">Fintokei公式サイト</a>でチャレンジプランを購入する際、決済画面でこのコードを入力するとプラン購入金額が10%オフになります。</div>
+            <div class="ob-coupon-code"><span>30ysg</span></div>
+            <div class="ob-coupon-hint"><a href="https://my.fintokei.com/affiliate/jp/55" target="_blank" class="ob-link">Fintokei公式サイト</a>でプランを購入する際、購入画面で「クーポン所持」にチェックを入れてこのコードを入力すると、購入金額が30%オフになります。（新規ユーザー限定・1回限り・JPY建て全プラン対象）</div>
           </div>
           <div class="ob-coupon-sub">
             <div class="ob-coupon-sub-label">2回目以降のチャレンジの方へ</div>
@@ -3012,49 +2741,15 @@ a{color:inherit;text-decoration:none}
         </div>
       </div>
 
-      <!-- Step 3: 挑戦開始 -->
-      <div class="ob-vstep">
-        <div class="ob-vstep-head">
-          <span class="ob-vstep-num"><img src="img/crayon-3.png" alt="3"></span>
-          <span class="ob-vstep-title"><svg class="ob-ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>プランを選んで挑戦開始</span>
-        </div>
-        <div class="ob-vstep-viz">
-          <div class="community-chat static-chat">
-            <div class="cc-header">
-              <span class="cc-header-hash">#</span>
-              <span class="cc-header-name">合格報告</span>
-            </div>
-            <div class="cc-body">
-              <div class="cc-messages">
-                <div class="cc-msg visible">
-                  <div class="cc-avatar" style="background:#5865f2;">K</div>
-                  <div class="cc-msg-body">
-                    <div class="cc-msg-header"><span class="cc-msg-name" style="color:#5865f2;">Kenta</span><span class="cc-msg-time">今日 21:05</span></div>
-                    <div class="cc-msg-content">Fintokeiの入門プラン合格しました！🎉<br>1万円スタートでここまで来れるのは夢あります</div>
-                    <div class="cc-reactions"><span class="cc-reaction visible">🎉 <span class="cc-reaction-count">18</span></span><span class="cc-reaction visible">🔥 <span class="cc-reaction-count">9</span></span></div>
-                  </div>
-                </div>
-                <div class="cc-msg visible">
-                  <div class="cc-avatar cc-avatar-yosuga"></div>
-                  <div class="cc-msg-body">
-                    <div class="cc-msg-header"><span class="cc-msg-name" style="color:#ed4245;">よすが</span><span class="cc-pro-badge">主宰</span><span class="cc-msg-time">今日 21:10</span></div>
-                    <div class="cc-msg-content">おめでとうございます🎊 ここからが本番ですね。次はチャレンジプランに挑戦しましょう💪</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
     <div class="ob-result-actions">
-      <a href="https://www.fintokei.com/jp/?affiliate=55" target="_blank" class="ob-btn">Fintokei公式ページを見る →</a>
+      <a href="https://my.fintokei.com/affiliate/jp/55" target="_blank" class="ob-btn">Fintokei公式ページを見る →</a>
       <button class="ob-btn ob-btn-outline" onclick="obReset()">もう一度診断する</button>
     </div>
     <div class="ob-allroutes">
       <div class="ob-allroutes-title">他のルートも見てみる</div>
       <div class="ob-route-chips">
-        <button class="ob-route-chip" onclick="obShowResult('elearning')"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>億トレアカデミー</button>
+        <button class="ob-route-chip" onclick="obShowResult('elearning')"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>Yカリキュラム</button>
         <button class="ob-route-chip" onclick="obShowResult('zeropro')"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>ゼロプロ90</button>
         <button class="ob-route-chip" onclick="obShowResult('ytt')"><svg class="ob-ic" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>YTT</button>
         <button class="ob-route-chip" onclick="obShowResult('community')"><svg class="ob-ic" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>コミュニティ</button>
@@ -3065,12 +2760,99 @@ a{color:inherit;text-decoration:none}
 
 </main>
 
+<!-- 診断結果の下：プロトレーダーへの最短ルート（全体マップ） -->
+<section class="ob-route-detail" id="ob-route-detail" hidden>
+  <div class="obrd-inner">
+    <span class="obrd-badge">プロトレーダーへの最短ルート</span>
+    <h2 class="obrd-title">診断結果は<span class="obrd-em">スタート地点</span></h2>
+    <p class="obrd-lead">ここから先、ゴールまでの道のりはこうなっています。</p>
+  </div>
+  <!-- 要約を別に作ると必ず内容がズレるので、route.html をそのまま読み込む。
+       route.html を直せば、この診断ページの表示も自動で同じになる -->
+  <iframe class="obrd-frame" id="obrd-frame" src="route.html" title="プロトレーダーになるための最短ルート" loading="lazy" scrolling="no"></iframe>
+  <div class="obrd-inner">
+    <a href="route.html" target="_blank" rel="noopener" class="ob-btn obrd-cta">最短ルートの詳細を開く →</a>
+  </div>
+</section>
+
+<!-- ===== 目的別コンテンツ一覧（intro「すべてのコンテンツ」を移植・診断結果と一緒に表示） ===== -->
+<section class="content-section content-section--light" id="ob-content-all" style="background:#fff;" hidden>
+    <div class="content-inner">
+        <div class="rsec-head">
+          <span class="section-title-badge section-title-badge--blue">
+            <img class="hero-title-side hero-title-side--left" src="img/title-side-blue-left.png" alt="">
+            目的別
+            <img class="hero-title-side hero-title-side--right" src="img/title-side-blue-right.png" alt="">
+          </span>
+          <div><span class="tw"><h2>すべてのコンテンツ</h2><img src="img/wave-orange.png" alt=""></span></div>
+        </div>
+        <div class="content-tabs" id="content-tabs" style="margin-top:1.5rem;">
+            <button class="content-tab active" onclick="filterContent('all',this)">すべて</button>
+            <button class="content-tab" onclick="filterContent('learn',this)">学習</button>
+            <button class="content-tab" onclick="filterContent('community',this)">交流</button>
+            <button class="content-tab" onclick="filterContent('trade',this)">実践</button>
+            <button class="content-tab" onclick="filterContent('support',this)">困ったとき</button>
+        </div>
+        <p class="card-longpress-hint">長押しで説明を表示できます</p>
+        <div class="content-grid is-collapsed" id="content-grid">
+            <a class="content-card" data-cat="learn" data-rec="zeropro" href="https://discord.com/channels/1039824083208126474/1171706488234979378" target="_blank"><div class="card-emoji">🎓</div><h4>ゼロプロ90</h4><span class="card-tip">3か月間よすがが動画で毎日添削する集中育成プログラム。7段階のカリキュラムで初心者からプロレベルへ。</span><p>90日集中育成プログラム</p><span class="card-link">参加 →</span></a>
+            <a class="content-card coming-soon" data-cat="learn" data-rec="elearning" href="https://fx-space.learnworlds.com/course/zeroprokiso" target="_blank"><div class="card-emoji">💻</div><h4>億トレアカデミー</h4><span class="card-tip">全12章の動画カリキュラム。基礎知識からチャート分析・資金管理まで体系的に学べます。章末クイズ付き。</span><p>全12章で基礎から体系的に学習</p><span class="card-link">始める →</span></a>
+            <a class="content-card" data-cat="learn" data-rec="elearning,community" href="https://discord.com/channels/1039824083208126474/1238309633139937330" target="_blank"><div class="card-emoji">📚</div><h4>トレード学習</h4><span class="card-tip">初級・中級・上級に分かれたカリキュラム。自分のレベルに合わせてステップアップできます。</span><p>初級〜上級カリキュラム</p><span class="card-link">学習 →</span></a>
+            <a class="content-card" data-cat="learn" data-rec="elearning" href="https://fx-space.com/intro/y-curriculum.html" target="_blank"><div class="card-emoji">📖</div><h4>Yカリキュラム</h4><span class="card-tip">ライン→シナリオ→タイミング→過去検証。動画で学び、答え合わせで合格していく、よすが式の学習ロードマップ。</span><p>学習ロードマップ</p><span class="card-link">見る →</span></a>
+            <a class="content-card" data-cat="learn" data-rec="community,ytt" href="https://discord.com/channels/1039824083208126474/1246768528506486836" target="_blank"><div class="card-emoji">📝</div><h4>超実践FX問題集</h4><span class="card-tip">ライン・ナウキャスト・シナリオを詳細解説付きで演習できる全56問。知識だけでなく実践的な判断力を鍛えられます。</span><p>全56問の実力テスト</p><span class="card-link">挑戦 →</span></a>
+            <a class="content-card" data-cat="learn" data-rec="elearning" href="https://discord.com/channels/1039824083208126474/1462665754934640680" target="_blank"><div class="card-emoji">🔍</div><h4>トレード学習ナビ</h4><span class="card-tip">過去のすべての学習動画をキーワードで検索。スマホからも使えます。</span><p>動画をキーワード検索・スマホ対応</p><span class="card-link">検索 →</span></a>
+            <a class="content-card" data-cat="community" data-rec="elearning" href="https://discord.com/channels/1039824083208126474/1181506867944501321" target="_blank"><div class="card-emoji">💬</div><h4>フォーラム</h4><span class="card-tip">FXに関するあらゆる質問ができる掲示板。初心者の基本的な質問も大歓迎です。</span><p>何でも質問OK</p><span class="card-link">質問 →</span></a>
+            <a class="content-card" data-cat="community" data-rec="elearning" href="https://discord.com/channels/1039824083208126474/1181536360398590003" target="_blank"><div class="card-emoji">🧑‍🏫</div><h4>astroへ質問</h4><span class="card-tip">ASTROのプロトレーダーに直接質問できるチャンネル。実践的なアドバイスがもらえます。</span><p>プロトレーダーに直接質問</p><span class="card-link">質問 →</span></a>
+            <a class="content-card" data-cat="community" data-rec="ytt,community,zeropro" href="https://discord.com/channels/1039824083208126474/1282263648886329396" target="_blank"><div class="card-emoji">📡</div><h4>ライブチャート分析</h4><span class="card-tip">メンバーとリアルタイムでチャート分析・議論できます。</span><p>リアルタイムで交流</p><span class="card-link">参加 →</span></a>
+            <a class="content-card" data-cat="community" href="https://discord.com/channels/1039824083208126474/1426177028058517607" target="_blank"><div class="card-emoji">☕</div><h4>雑談</h4><span class="card-tip">初心者応援・今日のできごと・マネートピックなど、テーマ別に雑談できるチャンネル。</span><p>テーマ別の雑談チャンネル</p><span class="card-link">入室 →</span></a>
+            <a class="content-card" data-cat="trade" data-rec="ytt,community,zeropro" href="https://discord.com/channels/1039824083208126474/1048136270582382592" target="_blank"><div class="card-emoji">📊</div><h4>毎朝のシナリオ</h4><span class="card-tip">平日毎朝よすがが更新するシナリオ構築動画。3通貨（スタンダード）と15通貨（プレミアム）の2本立て。</span><p>平日毎日更新（3通貨＋15通貨）</p><span class="card-link">見る →</span></a>
+            <a class="content-card" data-cat="trade" data-rec="ytt,community,zeropro" href="https://discord.com/channels/1039824083208126474/1521088083158896651" target="_blank"><div class="card-emoji">🎯</div><h4>利確速報</h4><span class="card-tip">メンバーの利確をリアルタイムで通知。どの通貨・時間帯でどれくらい利確したのかがわかり、みんなでトレードしている一体感が生まれます。</span><p>リアルタイム利確通知</p><span class="card-link">見る →</span></a>
+            <a class="content-card" data-cat="trade" href="https://discord.com/channels/1039824083208126474/1194299754088247298" target="_blank"><div class="card-emoji">🏆</div><h4>合格・出金報告</h4><span class="card-tip">合格報告・出金・残高増加など、仲間の成功が集まるチャンネル。モチベーションに。</span><p>仲間の成功体験</p><span class="card-link">見る →</span></a>
+            <a class="content-card" data-cat="trade" href="https://discord.com/channels/1039824083208126474/1161882625519140874" target="_blank"><div class="card-emoji">🔁</div><h4>FTO（過去相場検証）</h4><span class="card-tip">過去の相場を巻き戻して何度も検証できるツール。2026年7月よりYTTがFTOに搭載（サブスク限定先行）。</span><p>過去相場を巻き戻して検証</p><span class="card-link">見る →</span></a>
+            <a class="content-card" data-cat="trade" href="https://fx-space.com/intro/ytt-tokusetu.html" target="_blank"><div class="card-emoji">🛰️</div><h4>YTT</h4><span class="card-tip">学んだことをすぐ実践できるトレードツール。分析サポート・自動ライン描画・シナリオ機能などを搭載。</span><p>実践トレードツール</p><span class="card-link">詳しく →</span></a>
+            <a class="content-card" data-cat="trade" data-rec="zeropro" href="https://discord.com/channels/1039824083208126474/1136925665099251753" target="_blank"><div class="card-emoji">🌟</div><h4>ASTRO</h4><span class="card-tip">プロップ合格などプロ実績を持つトレーダーの申請制チーム。申請・昇格でランクが上がります。</span><p>申請制のプロトレーダーチーム</p><span class="card-link">詳細 →</span></a>
+            <a class="content-card" data-cat="support" href="https://discordapp.com/channels/1039824083208126474/1416640423396511804/1490341286773915758" target="_blank"><div class="card-emoji">✉️</div><h4>お問い合わせ</h4><span class="card-tip">分からないこと・要望など、運営（サポーター）への問い合わせ窓口。Ticketチャンネルが作成され、本人と運営のみ閲覧できます。</span><p>運営に直接問い合わせ</p><span class="card-link">問い合わせ →</span></a>
+            <a class="content-card" data-cat="support" href="https://discordapp.com/channels/1039824083208126474/1416640423396511804/1490342419982454924" target="_blank"><div class="card-emoji">🤖</div><h4>AIサポート</h4><span class="card-tip">FX SPACE全般のAIへのお問い合わせ。すぐ返答が来ますが、内容は必ずしも正確ではない点にご注意ください。</span><p>全般をAIに質問（即答）</p><span class="card-link">AIに聞く →</span></a>
+            <a class="content-card" data-cat="support" href="https://discordapp.com/channels/1039824083208126474/1151440259553439784/1490345379613642853" target="_blank"><div class="card-emoji">🛠️</div><h4>YTTサポート</h4><span class="card-tip">YTTに関するサポート。お問い合わせから運営（サポーター）が対応します。</span><p>YTTの困りごとを運営に相談</p><span class="card-link">問い合わせ →</span></a>
+            <a class="content-card" data-cat="support" href="https://discordapp.com/channels/1039824083208126474/1151440259553439784/1490345736083083284" target="_blank"><div class="card-emoji">🤖</div><h4>YTT AIサポート</h4><span class="card-tip">YTTに関するAIへのお問い合わせ。すぐ返答が来ますが、内容は必ずしも正確ではない点にご注意ください。</span><p>YTTのことをAIに質問（即答）</p><span class="card-link">AIに聞く →</span></a>
+        </div>
+        <div class="content-more" id="content-more"><button type="button" onclick="toggleAllContent(this)">すべてを見る ▼</button></div>
+    </div>
+</section>
+
 <footer class="ob-footer">
   <a href="index.html">FX SPACE チュートリアルへ →</a>
 </footer>
 
 <script src="js/gsap.min.js?v=20260301a"></script>
 <script>
+/* ===== 目的別コンテンツ一覧のフィルタ（intro の filterContent を移植） ===== */
+function filterContent(cat,btn) {
+    document.querySelectorAll('.content-tab').forEach(function(t){t.classList.remove('active');});
+    if(btn) btn.classList.add('active');
+    // 「すべて」タブは折りたたむ（PC12枚・スマホ4枚。「すべてを見る／折りたたむ」で開閉）。
+    // 他のタブでは折りたたまない（route.htmlと同じ挙動）
+    var grid=document.getElementById('content-grid'), more=document.getElementById('content-more');
+    if(grid&&more){
+        if(cat==='all'){
+            grid.classList.add('is-collapsed'); more.hidden=false;
+            var mb=more.querySelector('button'); if(mb) mb.textContent='すべてを見る ▼';
+        }
+        else{ grid.classList.remove('is-collapsed'); more.hidden=true; }
+    }
+    document.querySelectorAll('.content-card').forEach(function(card){
+        if(cat==='all'||card.dataset.cat===cat){card.style.display='';gsap.fromTo(card,{opacity:0,scale:0.97},{opacity:1,scale:1,duration:0.25});}
+        else{card.style.display='none';}
+    });
+}
+/* 「すべてを見る／折りたたむ」：折りたたみをいつでも開閉できるトグル */
+function toggleAllContent(btn){
+    var grid=document.getElementById('content-grid');
+    if(!grid) return;
+    var collapsed=grid.classList.toggle('is-collapsed');
+    if(btn) btn.textContent = collapsed ? 'すべてを見る ▼' : '折りたたむ ▲';
+    if(!collapsed && window.gsap) gsap.fromTo('#content-grid .content-card',{opacity:0,scale:0.97},{opacity:1,scale:1,duration:0.25,stagger:0.02});
+}
 /* ===== YTT animation (ported from index.html) ===== */
 var yttP1Tl=null, candleTl=null, yttP3Tl=null, yttP5Tl=null;
 var yttAnimPlayed = { p1:false, p2:false, p3:false, p5:false };
@@ -3210,6 +2992,50 @@ function startYttAnimations() {
   var dots = progress.querySelectorAll('.ob-dot');
   var lines = progress.querySelectorAll('.ob-dot-line');
 
+  function routeDetail(visible) {
+    var rd = document.getElementById('ob-route-detail');
+    if (rd) rd.hidden = !visible;
+    /* 目的別コンテンツ一覧も診断結果と一緒に出す */
+    var cc = document.getElementById('ob-content-all');
+    if (cc) cc.hidden = !visible;
+    /* 埋め込んだ図は、非表示のまま読み込まれると幅が測れず縮小率を決められない。
+       表示に切り替えたことを中へ伝えて、測り直してもらう */
+    if (visible) {
+      var f = document.getElementById('obrd-frame');
+      if (f && f.contentWindow) {
+        [0, 150, 600].forEach(function (t) {
+          setTimeout(function () {
+            try { f.contentWindow.dispatchEvent(new Event('resize')); } catch (e) {}
+          }, t);
+        });
+      }
+    }
+  }
+
+  /* 埋め込んだ route.html から送られてくる高さに合わせて、iframeを伸ばす。
+     こうしないと中でスクロールが二重になる */
+  window.addEventListener('message', function (e) {
+    if (!e.data) return;
+    var f = document.getElementById('obrd-frame');
+    if (!f) return;
+    if (e.data.type === 'route-height') {
+      /* 全画面のあいだは中身の高さを反映しない（画面の高さに合わせるため） */
+      if (e.data.height > 0 && !f.classList.contains('is-full')) f.style.height = e.data.height + 'px';
+      return;
+    }
+    /* 図の拡大表示。iframeの中だけで全画面にしても枠に収まってしまうので、
+       iframeそのものを画面いっぱいに広げる */
+    if (e.data.type === 'route-modal') {
+      f.classList.toggle('is-full', !!e.data.open);
+      document.body.style.overflow = e.data.open ? 'hidden' : '';
+      /* 高さはJSでインラインに入れているので、全画面のあいだは外して画面の高さに任せる */
+      if (e.data.open) { f.style.height = ''; }
+      else {
+        try { f.contentWindow.dispatchEvent(new Event('resize')); } catch (err) {}
+      }
+    }
+  });
+
   function show(id) {
     allCards.forEach(function(c){ c.hidden = true; });
     var el = document.getElementById('ob-' + id);
@@ -3237,6 +3063,7 @@ function startYttAnimations() {
 
   window.obAnswer = function(q, val) {
     state.answers['q' + q] = val;
+    routeDetail(false);
     if (q === 1) {
       var nextStep = 'q2a';
       if (val === 'beginner') nextStep = 'q2b';
@@ -3254,11 +3081,13 @@ function startYttAnimations() {
     updateProgress(2, true);
     // Hide progress on result
     progress.style.display = 'none';
+    routeDetail(true);
     if (route === 'ytt') startYttAnimations();
   };
 
   window.obBack = function(target) {
     state.step = target;
+    routeDetail(false);
     show(target);
     if (target === 'q1') updateProgress(1, false);
     else updateProgress(2, false);
@@ -3269,18 +3098,27 @@ function startYttAnimations() {
     show('q1');
     updateProgress(1, false);
     progress.style.display = '';
+    routeDetail(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   window.obShowResult = function(route) {
     state.answers.route = route;
     show('r-' + route);
+    routeDetail(true);
     if (route === 'ytt') startYttAnimations();
+    // 「他のルートも見てみる」でカード先頭へスムーズスクロール
+    var card = document.getElementById('ob-r-' + route);
+    if (card) {
+      requestAnimationFrame(function() {
+        card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
   };
 
   window.obShare = function(route) {
     var routeNames = {
-      elearning: '億トレアカデミー',
+      elearning: 'Yカリキュラム',
       zeropro: 'ゼロプロ90',
       ytt: 'YTT（よすが式トレードツール）',
       community: 'コミュニティで成長',

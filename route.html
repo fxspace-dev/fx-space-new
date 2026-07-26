@@ -1,0 +1,2705 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FX SPACE - プロトレーダーになるための最短ルート</title>
+<link rel="icon" type="image/png" href="img/favicon.png">
+<link rel="apple-touch-icon" href="img/favicon.png">
+<meta name="description" content="FX未経験からプロトレーダーへ。Yカリキュラムから資金拡大までの最短ルートを1ページで。">
+<meta property="og:title" content="プロトレーダーになるための最短ルート｜FX SPACE">
+<meta property="og:description" content="経験ゼロからプロトレーダーへ。最短ルートを1ページに。">
+<meta property="og:image" content="https://fx-space.com/intro/img/og-preview-v2.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="css/style.css?v=20260414m">
+<style>
+/* ===== Route page（index.html と同一コンポーネントで構成） ===== */
+
+/* header */
+.route-head{ text-align:center; padding:3.25rem 1.5rem 1.75rem; background:#fff; }
+.route-head .route-logo{ width:132px; height:auto; margin:0 auto 1.1rem; display:block; }
+.route-head h1{ margin:0.6rem 0 0; }
+.route-head .accent{ color:var(--primary); }
+.tw{ display:inline-block; }
+.tw img{ display:block; width:100%; height:clamp(12px,2.8vw,20px); object-fit:fill; margin-top:2px; }
+.route-head .route-sub{ color:var(--text-muted); font-size:clamp(0.9rem,1.8vw,1.02rem); line-height:1.8; max-width:520px; margin:1.1rem auto 0; }
+
+/* section shells（セクションごとに背景を変えて切り替わりを分かるようにする） */
+.rsec{ padding:3.25rem 1.5rem; }
+.rsec--soft{ background:#f9fafb; }
+/* 全体マップ（※下向きの尖り＝「背景の矢印」は2026-07-23に削除。次のセクションと導線が繋がって見えないため） */
+.rsec--map{ background:#4338ca; }
+/* 背景の矢印：下辺中央を下向きに尖らせ、次のセクションへの流れを見せる
+   （Yカリキュラム→Fintokei→ゴール／ゼロプロ→Fintokei→ゴール。ゴール自体には付けない） */
+.rsec--arrowdown{
+  --tip:48px;
+  padding-bottom:calc(3.25rem + var(--tip));
+  clip-path:polygon(0 0, 100% 0, 100% calc(100% - var(--tip)), 50% 100%, 0 calc(100% - var(--tip)));
+}
+/* ゼロプロ90は元がpadding:0のため、尖りの分だけ下余白を確保 */
+.zp-section.rsec--arrowdown{ padding-bottom:var(--tip); }
+/* Fintokei（白背景）→ゴール（濃紺）の「背景の矢印」。
+   以前は白い三角をゴールに重ねていたが、重なりの境界に薄い線が出てしまうため、
+   ゴールセクション自身の上辺を下向きに切り欠いて矢印を作る（重ね無し＝境界線が出ない）。
+   切り欠いた中央は背景（白）が透けて、上のFintokei白背景と繋がって見える */
+#pro-gate{
+  --tip:48px;
+  clip-path:polygon(0 0, 50% var(--tip), 100% 0, 100% 100%, 0 100%);
+  /* 尖りが食い込む分、上に余白を足して窮屈にならないようにする */
+  padding-top:calc(3.25rem + 60px);
+}
+@media (max-width:640px){
+  .rsec--arrowdown{ --tip:30px; }
+  #pro-gate{ --tip:30px; padding-top:calc(3.25rem + 40px); }
+}
+.rsec--night{ background:#3932a9; }  /* 速攻でプロを目指す（ゼロプロ90） */
+.rsec--deep{ background:#3730a3; }   /* 質問・相談したい */
+/* 前後が濃い色（#0f1035 / #3730a3）なので、ここだけ白く抜いて区切りを作る */
+.rsec--tools{ background:#fff; }  /* どちらのルートでも使うもの */
+/* ===== 「どちらのルートでも使うもの」：文字ではなくアニメ／モックで見せる ===== */
+/* YTT・コミュニティのカードは横並び（狭い画面では縦積み） */
+.rsec--tools .tools-wrap{ max-width:960px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; align-items:stretch; }
+@media (max-width:760px){ .rsec--tools .tools-wrap{ grid-template-columns:1fr; } }
+.tools-block{ background:#fff; border-radius:18px; border:1px solid #e0e0e0; box-shadow:0 5px 16px rgba(30,27,75,0.07); padding:1.4rem 1.2rem 1.5rem; display:flex; flex-direction:column; min-width:0; }
+/* YTTの横長ロゴ（56px）に合わせて、コミュニティ側のアイコン・文字も同じ高さに揃える
+   （ヘッダーの高さを一致させ、下のモックの位置ずれを防ぐ） */
+.tools-block-head{ display:flex; align-items:center; justify-content:center; gap:0.6rem; height:56px; }
+.tools-block-head img{ height:56px; width:auto; object-fit:contain; }
+.tools-block-head h3{ font-size:1.5rem; font-weight:900; color:#1e1b4b; margin:0; }
+/* カード下端のボタン：塗りつぶしの四角（クレヨン）。文字は濃紺で読みやすく */
+.tools-btn{ display:inline-flex; align-items:center; justify-content:center; gap:0.45rem;
+  text-decoration:none; color:#1e1b4b; font-size:0.86rem; font-weight:900; letter-spacing:0.02em;
+  min-width:220px; padding:0.75rem 1.4rem; margin:1.3rem auto 0;
+  background-repeat:no-repeat; background-position:0 0; background-size:100% 100%;
+  transition:transform .15s ease, filter .15s ease; }
+.tools-btn:hover{ transform:translateY(-2px); filter:brightness(1.04); }
+.tools-btn:active{ transform:translateY(1px); }
+.tools-btn img{ height:16px; width:auto; display:block; }
+/* ボタンを縦に2つ並べたときは間隔を詰める */
+.tools-btn + .tools-btn{ margin-top:0.7rem; }
+/* 黄色の塗りつぶし。アイコン（赤いYouTube・青紫のDiscord）がはっきり見えて、文字も読みやすい */
+.tools-btn--yt,
+.tools-btn--dc,
+.tools-btn--tokusetu{ background-image:url("img/fill-crayon-yellow.svg"); }
+/* Orbit（bot）のアバターをロゴ画像に */
+.rsec--tools .cc-avatar-orbit{ background:#fff url("img/orbit-icon.png") center / 82% no-repeat; }
+
+/* 2カードのキャプション（各カードの一言） */
+/* ルート選択の「選ぶと、あなたのルートの…」（.rsec-lead）と同じ文字サイズ・色に合わせる */
+.tools-cap{ text-align:center; font-size:clamp(0.875rem,1.8vw,1rem); font-weight:400; color:#6b7280; margin:0.6rem 0 0.9rem; line-height:1.8; }
+
+/* YTT／コミュニティの中身は「同じ大きさ」に揃える（バランスのため高さを360pxに固定） */
+.rsec--tools .ob-ytt-anim-item{ background:linear-gradient(180deg,#1a1d2e 0%,#0f1523 100%); border:1px solid rgba(124,58,237,0.22); border-radius:14px; padding:1rem 1rem 1.1rem; height:360px; display:flex; flex-direction:column; }
+.ob-ytt-anim-head{ display:flex; align-items:center; gap:0.5rem; margin-bottom:0.35rem; }
+.ob-ytt-anim-title{ font-size:0.92rem; font-weight:800; color:#f2f3f5; line-height:1.3; }
+.ob-ytt-anim-desc{ font-size:0.74rem; color:rgba(255,255,255,0.6); line-height:1.55; margin:0 0 0.7rem; }
+.rsec--tools .ob-ytt-anim-scene{ flex:1 1 auto; min-height:0; background:#0a0f1a; border-radius:8px; overflow:hidden; border:1px solid rgba(255,255,255,0.05); }
+.ob-ytt-anim-scene svg{ width:100%; height:100%; display:block; }
+
+/* コミュニティのDiscord風モックも同じ360pxに揃える（ヘッダー＋本文＋入力欄で構成） */
+.rsec--tools .community-chat{ height:360px; display:flex; flex-direction:column; box-shadow:none; }
+/* コミュニティはボタンが1つなので、YTT（2ボタン）と高さを揃えたうえで余白の中央に置く（横並び時のみ） */
+@media (min-width:761px){ .rsec--tools #comm-ch-btn{ margin-top:auto; margin-bottom:auto; } }
+.rsec--tools .community-chat .cc-body{ flex:1 1 auto; min-height:0; max-height:none; }
+.rsec--tools .community-chat .tm-embed{ margin-top:0.15rem; }
+.tm-mock{ background:#313338; border-radius:12px; overflow:hidden; box-shadow:0 4px 14px rgba(0,0,0,0.18); text-align:left; }
+.tm-mock-head{ display:flex; align-items:center; gap:0.3rem; padding:0.5rem 0.7rem; background:#2b2d31; border-bottom:1px solid rgba(255,255,255,0.06); }
+.tm-mock-head .hash{ color:#8a8f98; font-weight:900; font-size:0.82rem; }
+.tm-mock-head b{ color:#f2f3f5; font-size:0.76rem; font-weight:800; }
+.tm-body{ padding:0.65rem 0.7rem; display:flex; flex-direction:column; gap:0.6rem; }
+.tm-msg{ display:flex; gap:0.45rem; }
+.tm-av{ width:28px; height:28px; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:0.78rem; font-weight:900; color:#fff; }
+.tm-msg-b{ min-width:0; flex:1; }
+.tm-line{ display:flex; align-items:baseline; gap:0.3rem; flex-wrap:wrap; }
+.tm-name{ font-size:0.74rem; font-weight:800; }
+.tm-badge{ font-size:0.55rem; font-weight:900; color:#fff; background:#5865f2; border-radius:4px; padding:0.05rem 0.28rem; }
+.tm-time{ font-size:0.58rem; color:#8a8f98; }
+.tm-text{ font-size:0.72rem; color:#dbdee1; line-height:1.5; margin-top:0.1rem; }
+.tm-embed{ border-left:3px solid #57f287; background:#2b2d31; border-radius:0 5px 5px 0; padding:0.45rem 0.6rem; margin-top:0.3rem; }
+.tm-embed-t{ font-size:0.72rem; font-weight:900; color:#f2f3f5; line-height:1.4; }
+.tm-embed-r{ font-size:0.68rem; color:#c9ccd1; margin-top:0.16rem; line-height:1.4; }
+.tm-embed-amt{ font-weight:900; color:#57f287; font-size:0.86rem; }
+.tm-embed-meta{ font-size:0.6rem; color:#8a8f98; margin-top:0.22rem; }
+
+/* ===== 横スライドのカルーセル（YTT機能・コミュニティのモックを1つずつ順番に） ===== */
+.fcar{ position:relative; margin-top:0.9rem; }
+.fcar-view{ overflow:hidden; }
+.fcar-track{ display:flex; align-items:stretch; transition:transform .45s cubic-bezier(.4,0,.2,1); }
+.fcar-slide{ flex:0 0 100%; min-width:0; padding:0 0.25rem; }
+.fcar-nav{ position:absolute; top:50%; transform:translateY(-50%); width:34px; height:34px; border-radius:50%;
+  border:0; background:#fff; box-shadow:0 3px 12px rgba(30,27,75,0.2); color:#1e1b4b;
+  font-size:1.3rem; font-weight:900; line-height:1; cursor:pointer; z-index:3;
+  display:flex; align-items:center; justify-content:center; padding:0; }
+.fcar-nav:hover{ background:#f3f2fb; }
+.fcar-prev{ left:-4px; } .fcar-next{ right:-4px; }
+.fcar-dots{ display:flex; justify-content:center; gap:0.4rem; margin-top:0.8rem; }
+.fcar-dot{ width:8px; height:8px; border-radius:50%; border:0; background:#cbc9e6; cursor:pointer; padding:0; transition:all .2s; }
+.fcar-dot.is-on{ background:#5b45c9; width:22px; border-radius:4px; }
+@media (max-width:520px){ .fcar-nav{ width:30px; height:30px; font-size:1.15rem; } .fcar-prev{ left:0; } .fcar-next{ right:0; } }
+
+/* 濃い背景のセクションは、白地前提の文字色をまとめて反転させる */
+.rsec--map, .rsec--night, .rsec--deep{ color:#fff; }
+.rsec--map .rsec-head h2,
+.rsec--night .rsec-head h2,
+.rsec--deep .rsec-head h2{ color:#fff; }
+.rsec--map .rsec-head .rsec-lead,
+.rsec--night .rsec-head .rsec-lead,
+.rsec--deep .rsec-head .rsec-lead,
+.rsec--space .rsec-head .rsec-lead{ color:#d7d5f2; }
+.rsec--map .section-title-badge,
+.rsec--night .section-title-badge,
+.rsec--deep .section-title-badge{ color:#fff; }
+/* 濃い背景の斜め線は黄色版の画像に差し替え済み（色変換フィルタは不要） */
+/* 枠だけのボタンは中が透けて濃い背景に沈むため、白で塗る */
+.rsec--map .rs-vid,
+.rsec--night .rs-vid,
+.rsec--deep .rs-vid{ background-color:#fff; }
+/* ピルは淡色を使わず濃い単色で塗る */
+.route-steps .step-badge{ background:#4f46e5; color:#fff; }
+.rsec-head{ text-align:center; margin-bottom:1.75rem; }
+.rsec-head h2{ font-size:clamp(1.4rem,4vw,2rem); font-weight:900; color:#1e1b4b; margin:0.5rem 0 0; }
+.rsec-head .tw img{ height:clamp(11px,2.4vw,16px); }
+.rsec-head .rsec-lead{ font-size:clamp(0.875rem,1.8vw,1rem); color:#6b7280; line-height:1.8; margin:0.75rem auto 0; max-width:520px; }
+
+/* STEPマーク（風船文字画像） */
+.rs-stepmark{ display:flex; align-items:center; gap:0.5rem; margin-bottom:0.7rem; }
+.rs-stepmark .rs-alpha{ width:auto; height:80px; display:block; }
+.rs-stepmark .rs-step-txt{ font-size:0.9rem; font-weight:900; letter-spacing:0.16em; color:#6b7280; }
+@media (max-width:640px){
+  .rs-stepmark .rs-alpha{ height:65px; }
+  .rs-stepmark .rs-step-txt{ font-size:0.8rem; }
+}
+
+/* step 内パーツ */
+.rs-vids{ display:flex; flex-wrap:wrap; gap:0.5rem; margin:0.25rem 0 0.75rem; }
+.rs-vid{ display:inline-flex; align-items:center; gap:0.42rem; padding:0.4rem 1.1rem; border-radius:8px; border:1px solid #1f2937; color:#1f2937; background:#fff; font-size:0.8rem; font-weight:600; text-decoration:none; transition:all 0.15s; white-space:nowrap; }
+.rs-vid img{ height:13px; width:auto; display:block; }
+.rs-vid:hover{ background:#1f2937; color:#fff; }
+/* 合格ライン：囲みも縦線もなし。「合格」バッジ＋条件テキストのみ */
+.rs-pass{
+  display:flex; align-items:center; gap:0.55rem; flex-wrap:wrap;
+  font-size:0.8rem; font-weight:700; color:#1e1b4b; line-height:1.6;
+  padding:0.35rem 0; margin-top:0.4rem;
+}
+.rs-pass .rs-pass-badge{
+  flex-shrink:0; color:#1e1b4b; font-size:0.76rem; font-weight:900; letter-spacing:0.08em;
+  padding:0.26rem 0.8rem;
+  background:url("img/fill-crayon-orange-badge.svg") 0 0 / 100% 100% no-repeat;
+}
+.rs-pass .rs-pass-txt{ flex:1 1 0; min-width:0; }
+.rs-pass b{ color:#b45309; }
+.rs-visual svg{ width:100%; height:auto; display:block; }
+
+/* Yカリキュラムも濃紺背景（#3932a9）になったので、白地前提の文字色を反転させる */
+.rsec--curr .route-step-item{ border-bottom-color:rgba(255,255,255,0.18); }
+.rsec--curr .route-step-item h3{ color:#fff; }
+.rsec--curr .route-step-item p{ color:#d7d5f2; }
+.rsec--curr .rs-stepmark .rs-step-txt{ color:#c9c6ea; }
+/* 風船文字は青のままだと紫背景に沈むため、白く抜く（クレヨンのかすれは保たれる） */
+.rsec--curr .rs-stepmark .rs-alpha{ filter:brightness(0) invert(1); }
+.rsec--curr .rs-pass{ color:#fff; }
+.rsec--curr .rs-pass b{ color:#ffd21e; }
+.rsec--curr .rs-credit,
+.rsec--curr .rs-credit a{ color:#b9b7e0; }
+.rsec--curr .rs-visual .rs-shot{ border-color:rgba(255,255,255,0.35); }
+
+/* 実チャートのスクリーンショット */
+.rs-visual .rs-shot{
+  width:100%; height:auto; display:block;
+  border-radius:16px 20px 17px 22px / 20px 16px 22px 17px;
+  border:2px solid #1e1b4b;
+  box-shadow:0 5px 16px rgba(30,27,75,0.14);
+}
+/* FTOのアニメーションは白背景の画面なので、枠は控えめにする */
+.rs-visual .rs-shot--gif{ border-color:#d7d5e8; }
+.rs-credit{ font-size:0.68rem; color:#9ca3af; margin:0.4rem 0 0; text-align:right; }
+.rs-credit a{ color:#9ca3af; text-decoration:underline; text-underline-offset:2px; }
+
+/* ===== 全体マップ（フローチャート図） =====
+   図はいつも同じ形・同じ文字サイズ。幅に合わせて畳むと分岐と合流という図の要が
+   消えてしまうため、狭い画面では全体を縮小して見せ、タップで全画面に開いて読んでもらう */
+.fc-stage{ position:relative; }
+.fc-fit{ overflow:hidden; }
+.fc{ width:850px; background:#fff; border:1px solid #e0e0e0; border-radius:16px;
+     padding:1.5rem 0.9rem 5.5rem;   /* 下の余白は説明の吹き出しが収まるぶん */
+     transform-origin:top left; margin:0 auto; }
+/* 縮小表示中は文字が読めないので、四角の説明は出さない（全画面で読んでもらう） */
+.fc-fit.is-scaled .fc{ margin:0; }
+.fc-fit.is-scaled [data-tip]::before,
+.fc-fit.is-scaled [data-tip]::after{ display:none; }
+/* 案内文字は控えめなグレー系で小さく（黄色だと主張が強すぎるため）。左に虫眼鏡アイコン */
+.fc-hint{ display:none; cursor:pointer; font-size:0.7rem; font-weight:600; color:#c9c6ea; text-align:center; margin:0.6rem 0 0; }
+.fc-hint img, .rank-zoom-hint img{ height:0.95em; width:auto; vertical-align:-0.12em; margin-right:0.3em; display:inline-block; }
+.fc-stage.is-scaled .fc-hint{ display:block; }
+
+/* ===== 全画面の拡大表示 ===== */
+.fc-modal{ position:fixed; inset:0; z-index:200; background:#4338ca; display:flex; flex-direction:column; }
+.fc-modal[hidden]{ display:none; }
+.fc-modal-bar{
+  flex:0 0 auto; display:flex; align-items:center; gap:0.6rem; justify-content:space-between;
+  padding:0.6rem 0.8rem; background:#151338; color:#fff;
+}
+.fc-modal-tip{ font-size:0.72rem; font-weight:700; color:#c9c6ea; }
+@media (max-width:560px){ .fc-modal-tip{ display:none; } }
+.fc-modal-zoom{ display:flex; gap:0.35rem; }
+.fc-modal-bar button{
+  cursor:pointer; font-family:inherit; font-weight:900; color:#1e1b4b;
+  background:#fff; border:0; border-radius:8px; padding:0.4rem 0.8rem; font-size:0.82rem;
+}
+.fc-modal-close{ background:#ffd21e; }
+.fc-modal-canvas{ flex:1 1 auto; position:relative; overflow:hidden; touch-action:none; }
+.fc-modal-canvas .fc{ position:absolute; top:0; left:0; margin:0; will-change:transform; }
+.fc-col{ display:flex; flex-direction:column; align-items:center; }
+.fc .node{ width:100%; max-width:300px; text-align:center; border-radius:12px; padding:0.6rem 0.7rem; font-size:0.85rem; font-weight:800; line-height:1.4; }
+.fc .node small{ display:block; font-size:0.68rem; font-weight:600; margin-top:0.12rem; }
+.fc .node.start{ background:#fff; color:#1e1b4b; border:2px solid #1e1b4b; }
+.fc .conn{ width:100%; display:flex; justify-content:center; }
+.fc .conn i{ display:block; width:2px; height:14px; background:#9ca3af; position:relative; margin-bottom:6px; }
+.fc .conn i::after{ content:""; position:absolute; left:50%; bottom:-4px; transform:translateX(-50%); border-left:4px solid transparent; border-right:4px solid transparent; border-top:5px solid #9ca3af; }
+.fc .conn.sm i{ height:8px; }
+/* 分岐コネクタ（スタート→2レーン）: 枠に一切かぶらない専用ブロック。
+   窮屈に見えないよう、縦の線・横の渡り・下ろしの矢印をそれぞれ十分に伸ばす */
+.fc-fork{ position:relative; width:100%; height:78px; margin-top:14px; }
+.fc-fork::before{ content:""; position:absolute; left:50%; top:0; transform:translateX(-50%); width:3px; height:32px; background:#9ca3af; }
+.fc-fork .h{ position:absolute; top:32px; left:calc(25% - 0.2rem - 1.5px); right:calc(25% - 0.2rem - 1.5px); height:3px; background:#9ca3af; border-radius:2px; }
+.fc-fork .d{ position:absolute; top:32px; width:3px; height:36px; background:#9ca3af; transform:translateX(-50%); }
+.fc-fork .d::after{ content:""; position:absolute; left:50%; bottom:-7px; transform:translateX(-50%); border-left:6px solid transparent; border-right:6px solid transparent; border-top:8px solid #9ca3af; }
+.fc-fork .d1{ left:calc(25% - 0.2rem); }
+.fc-fork .d2{ left:calc(75% + 0.2rem); }
+.fc-two{ display:grid; grid-template-columns:1fr 1fr; gap:0.8rem; width:100%; align-items:stretch; }
+/* 短いレーンの下端を、合流点まで縦線で延ばす */
+.fc .fc-fill{ flex:1 1 auto; width:100%; display:flex; justify-content:center; align-items:stretch; min-height:10px; }
+.fc .fc-fill i{ display:block; width:3px; background:#9ca3af; border-radius:2px; }
+/* 合流コネクタ（2レーン→1本）: fc-fork の上下反転 */
+.fc-merge{ position:relative; width:100%; height:34px; }
+.fc-merge .d{ position:absolute; top:0; width:3px; height:12px; background:#9ca3af; border-radius:2px; transform:translateX(-50%); }
+/* レーンの中心は「列幅の半分」＝ 25%から列間gap(0.8rem)の1/4だけ内側 */
+.fc-merge .d1{ left:calc(25% - 0.2rem); }
+.fc-merge .d2{ left:calc(75% + 0.2rem); }
+/* 線幅の半分(1.5px)だけ外に伸ばして、角に隙間ができないようにする */
+.fc-merge .h{ position:absolute; top:12px; left:calc(25% - 0.2rem - 1.5px); right:calc(25% - 0.2rem - 1.5px); height:3px; background:#9ca3af; border-radius:2px; }
+.fc-merge .c{ position:absolute; top:12px; left:50%; transform:translateX(-50%); width:3px; height:16px; background:#9ca3af; border-radius:2px; }
+.fc-merge .c::after{ content:""; position:absolute; left:50%; bottom:-5px; transform:translateX(-50%); border-left:5px solid transparent; border-right:5px solid transparent; border-top:6px solid #9ca3af; }
+/* 全ルート共通で使うもの（YTT／コミュニティ）は、図の右に縦のレールとして添える。
+   道の途中に挟むと「順番がある」ように誤読されるため、本線とは別の列にする */
+.fc-body{ display:grid; grid-template-columns:1fr 190px; gap:1rem; align-items:stretch; }
+.fc-main{ display:flex; flex-direction:column; min-width:0; }
+.fc-always{
+  position:relative; padding-left:22px;   /* 左端の括弧のぶんを空ける */
+  display:flex; flex-direction:column; justify-content:center;
+}
+/* 左に開いた括弧「]」。図の高さいっぱいに伸びて、本線ぜんぶを抱える。
+   「この2つは道の一部ではなく、全体をずっと使う」ことを示す */
+.fc-always-brace{
+  position:absolute; top:2%; bottom:2%; left:0; width:16px;
+  border:2.5px solid #7c78bd; border-left:0;
+  border-radius:0 10px 10px 0;
+}
+.fc-always-items{ display:flex; flex-direction:column; gap:0.7rem; }
+.fc-always-item{
+  display:flex; flex-direction:column; align-items:center; text-align:center;
+  padding:0.9rem 0.65rem 0.85rem;
+  border:2px solid #7c78bd; border-radius:12px;
+  background:#fff; color:#1e1b4b;
+}
+.fc-always-item img{ width:32px; height:32px; object-fit:contain; margin-bottom:0.3rem; }
+.fc-always-item img[src*="ytt-mark"]{ width:44px; height:44px; margin-top:0.1rem; margin-bottom:0.15rem; }
+.fc-always-item b{ font-size:0.9rem; font-weight:900; color:#1e1b4b; }
+/* 各カードに「何をしてくれるか」を一言。道具／場所を強調してカテゴリを分かりやすく */
+.fc-always-role{ display:block; margin-top:0.3rem; font-size:0.72rem; font-weight:700; color:#1e1b4b; line-height:1.55; }
+/* 2つをまとめる見出し（何なのかを淡々と） */
+.fc-always-note{
+  margin:0 0 0.7rem; text-align:center;
+  font-size:0.74rem; font-weight:900; color:#514c86; line-height:1.55;
+}
+/* 合流後の横長ノード */
+.fc .node.wide{ max-width:none; }
+.fc .lane{ position:relative; color:#fff; font-size:0.83rem; border-radius:12px; padding:0.55rem; width:100%; max-width:300px; text-align:center; font-weight:900; }
+.fc .lane-main{ background:var(--primary); }
+.fc .lane-alt{ background:#047857; }
+.fc .lane-tag{ position:absolute; top:-14px; left:-10px; background:#d97706; color:#fff; font-size:0.8rem; font-weight:900; letter-spacing:0.04em; padding:0.22rem 0.75rem; border-radius:8px; }
+.fc .node.step{ background:#fff; border:1.5px solid var(--primary); color:#1e1b4b; font-size:0.82rem; padding:0.5rem 0.55rem; }
+.fc .node.gate{ background:#fff; color:#1e1b4b; border:2.5px solid #d97706; font-size:0.83rem; }
+.fc .node.astro{ background:#312e81; color:#fff; font-size:0.8rem; }
+.fc .node.goal{ background:var(--accent); color:#fff; font-size:0.95rem; display:flex; align-items:center; justify-content:center; gap:0.35rem; }
+.fc .node.goal svg{ width:16px; height:16px; flex-shrink:0; }
+.fc .node.alt{ background:#fff; border:1.5px solid #047857; color:#1e1b4b; font-size:0.79rem; padding:0.5rem 0.55rem; }
+.fc-help{ text-align:center; font-size:0.8rem; color:#374151; margin-top:1.1rem; padding-top:0.95rem; border-top:1px solid #f0f0f0; display:flex; align-items:center; justify-content:center; gap:0.4rem; flex-wrap:wrap; font-weight:700; }
+.fc-help img{ width:22px; height:auto; }
+
+/* ===== ゴール：ASTRO ===== */
+/* ロゴもランク画像も宇宙（濃紺）向けなので、背景を宇宙色にする */
+.rsec--space{ background:#0f1035; color:#fff; }
+.rsec--space .section-title-badge{ color:#fff; }
+/* 「すべてのコンテンツ」（白背景）：カードの縁が背景に溶けないよう枠と影を付ける */
+.content-section--light .content-card{ border:1px solid #e7e6f4; box-shadow:0 4px 14px rgba(30,27,75,0.06); }
+/* 「すべて」タブは枚数が多いので折りたたむ：PCは12枚・スマホは4枚だけ見せる。
+   「すべてを見る／折りたたむ」でいつでも開閉できる。
+   学習・実践など他のタブでは折りたたまない（filterContent側でis-collapsedを外す） */
+.content-grid.is-collapsed .content-card:nth-child(n+13){ display:none !important; }
+@media (max-width:760px){
+  .content-grid.is-collapsed .content-card:nth-child(n+5){ display:none !important; }
+}
+.content-more{ text-align:center; margin-top:1.2rem; }
+.content-more[hidden]{ display:none; }
+/* ボタンらしい装飾はせず、控えめなテキストリンク風にする */
+.content-more button{
+  background:none; border:0; cursor:pointer; font-family:inherit;
+  font-size:0.85rem; font-weight:700; color:#6b7280;
+  text-decoration:underline; text-underline-offset:3px; padding:0.4rem 0.8rem;
+}
+.rsec--space .rsec-head h2{ color:#fff; }
+.astro-logo{ display:block; width:auto; height:clamp(165px,26vw,250px); margin:0.6rem auto 0; }
+
+.astro-wrap{ max-width:860px; margin:0 auto; }
+
+/* 条件 → プロ申請 */
+.astro-step-row{ display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:1rem; }
+.astro-cond{ display:flex; flex-direction:column; gap:0.35rem; flex:1 1 340px; max-width:420px; }
+.astro-cond-item{
+  background:#fff; color:#1e1b4b; text-align:center;
+  font-size:0.85rem; font-weight:700; line-height:1.6;
+  border-radius:12px 15px 13px 16px / 15px 12px 16px 13px;
+  padding:0.75rem 1rem;
+}
+.astro-cond-item b{ color:#1d4ed8; }
+.astro-or{ text-align:center; font-size:0.72rem; font-weight:900; color:#b9b7e0; }
+.astro-arrow{ font-size:1.3rem; font-weight:900; color:#b9b7e0; }
+@media (max-width:640px){ .astro-arrow{ width:100%; text-align:center; transform:rotate(90deg); } }
+.astro-apply{
+  flex-shrink:0; display:inline-block; text-decoration:none;
+  color:#1e1b4b; font-size:0.95rem; font-weight:900;
+  padding:0.95rem 1.9rem; min-width:220px; text-align:center;
+  background:url("img/fill-crayon-yellow.svg") 0 0 / 100% 100% no-repeat;
+  transition:transform .15s ease, filter .15s ease;
+}
+.astro-apply:hover{ transform:translateY(-2px); filter:brightness(1.04); }
+.astro-apply:active{ transform:translateY(1px); }
+/* ランク画像の下：ASTRO詳しく→プロ申請→小さな注記 の縦並び（2つのボタンは同じ大きさに揃える） */
+.astro-apply--stack{ margin-top:0.9rem; min-width:260px; }
+.rank-note{ font-size:0.75rem; color:#b9b7e0; line-height:1.8; max-width:480px; margin:1.1rem auto 0; }
+.rank-note a{ color:#d7d6ef; text-decoration:underline; text-underline-offset:2px; }
+.rank-note a:hover{ color:#fff; }
+
+/* ランク */
+.astro-rank{ margin-top:2.5rem; text-align:center; }
+.astro-rank h3{ font-size:clamp(1.05rem,2.6vw,1.3rem); font-weight:900; color:#fff; margin:0 0 1rem; }
+.astro-rank h3 b{ color:#ffd21e; }
+.astro-rank-img{
+  width:100%; height:auto; display:block; margin:1.5rem auto 0;
+  border-radius:16px 20px 17px 22px / 20px 16px 22px 17px;
+  border:2px solid rgba(255,255,255,0.18);
+}
+/* ランク画像の全画面表示はスマホなど小さい画面のみ（PCではそのまま読めるので不要）。
+   案内文字は控えめなグレー系で小さく */
+.rank-zoom-hint{ display:none; font-size:0.7rem; font-weight:600; color:#b9b7e0; text-align:center; margin:0.6rem 0 0; cursor:pointer; }
+@media (max-width:760px){
+  .astro-rank-img{ cursor:zoom-in; }
+  .rank-zoom-hint{ display:block; }
+}
+.fc-modal-canvas img.rank-modal-img{ position:absolute; top:0; left:0; max-width:none; transform-origin:top left; will-change:transform; }
+.astro-goal{ font-size:clamp(1rem,2.4vw,1.2rem); font-weight:900; color:#fff; margin:1.2rem 0 0; }
+.astro-goal b{ color:#ffd21e; }
+/* ASTROランク制（Moon→…→Voyager） */
+.astro-rank-lead{ font-size:0.86rem; line-height:1.85; color:#d7d6ef; max-width:640px; margin:0 auto 1.4rem; }
+.astro-rank-lead b{ color:#ffd21e; }
+.rank-flow{ display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:0.45rem 0.55rem; max-width:740px; margin:0 auto; }
+.rank-chip{ display:inline-flex; flex-direction:column; align-items:center; line-height:1.15;
+  font-size:0.92rem; font-weight:800; color:#fff; padding:0.5rem 0.95rem;
+  background:rgba(255,255,255,0.07); border:1.5px solid rgba(255,255,255,0.22);
+  border-radius:11px 13px 12px 14px / 13px 11px 14px 12px; }
+.rank-chip small{ font-size:0.6rem; font-weight:700; color:#b9b7e0; margin-top:2px; letter-spacing:0.04em; }
+.rank-chip--start{ border-color:#8ea2ff; }
+.rank-chip--start small{ color:#8ea2ff; }
+.rank-chip--goal{ color:#1e1b4b; background:#ffd21e; border-color:#ffd21e; }
+.rank-chip--goal small{ color:#7a5c00; }
+.rank-arrow{ color:#7c7aa8; font-weight:900; font-size:0.9rem; }
+.rank-auto{ margin-top:1.7rem; }
+.rank-auto-txt{ font-size:0.82rem; line-height:1.85; color:#d7d6ef; max-width:560px; margin:0 auto 0.8rem; }
+.rank-auto-txt b{ color:#ffd21e; }
+.rank-ytt-link,
+.rank-astro-link{ display:inline-block; text-decoration:none; color:#1e1b4b; font-size:0.85rem; font-weight:900;
+  padding:0.6rem 1.5rem; background:url("img/fill-crayon-yellow.svg") 0 0 / 100% 100% no-repeat;
+  transition:transform .15s ease, filter .15s ease; }
+.rank-astro-link{ margin-top:1.1rem; min-width:260px; padding:0.95rem 1.9rem; font-size:0.95rem; text-align:center; }
+.rank-ytt-link:hover, .rank-astro-link:hover{ transform:translateY(-2px); filter:brightness(1.04); }
+.rank-ytt-link:active, .rank-astro-link:active{ transform:translateY(1px); }
+@media (max-width:640px){
+  .rank-chip{ font-size:0.8rem; padding:0.4rem 0.7rem; }
+  .rank-chip small{ font-size:0.55rem; }
+  .rank-arrow{ font-size:0.72rem; }
+}
+/* スマホでは「ASTROについて詳しく」「プロ申請へ」を同じ大きさ（全幅）に揃える */
+@media (max-width:640px){
+  .astro-apply, .rank-astro-link{ width:100%; min-width:0; padding:0.9rem 1rem; font-size:0.95rem; }
+}
+
+/* ===== すぐ稼ぎたい ===== */
+.alt-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:1.25rem; max-width:680px; margin:0 auto; }
+@media (max-width:860px){ .alt-grid{ grid-template-columns:1fr; max-width:420px; } }
+.alt-card{ background:#fff; border-radius:16px; padding:1.75rem 1.4rem; border:1px solid #e0e0e0; text-align:center; }
+.alt-card .feature-tagline{ margin-bottom:0.25rem; }
+.alt-card h3{ font-size:1.05rem; font-weight:800; margin-bottom:0.5rem; color:#1e1b4b; }
+.alt-card p{ font-size:0.8125rem; color:var(--text-muted); line-height:1.7; margin:0; }
+.alt-card .alt-spec{ font-size:0.8rem; color:#374151; font-weight:700; margin-top:0.6rem; line-height:1.9; }
+.alt-card .alt-spec b{ color:var(--primary); }
+.alt-card .rs-vid{ margin-top:0.8rem; }
+/* ===== ゼロプロ90セクション =====
+   index.html のセクションを丸ごと移植。見た目も動きも基本は向こうに合わせるため、
+   css/style.css の .zp-* と js/animations.js に任せ、下の3点だけこのページ用に上書きする
+   （#route-fast で囲って index.html 側には影響させない） */
+
+/* ロゴ：光っているようなドロップシャドウを消す。
+   大きさはASTROのロゴと見た目を揃える（ASTROは余白込みの画像で、実際に見えている部分は
+   表示サイズの約7割。こちらは余白がないぶん数値を小さくして、目に映る大きさを合わせる） */
+#route-fast .zp-hero-logo{ filter:none; max-width:190px; }
+@media (max-width:640px){
+  #route-fast .zp-hero-logo{ max-width:min(40vw,130px); }
+}
+
+/* 「ゼロプロ90の詳細を見る」：このページで使っているオレンジ塗りつぶしのクレヨン四角に */
+#route-fast .zp-detail-btn{
+  display:inline-block; text-decoration:none;
+  color:#1e1b4b; font-size:1rem; font-weight:900; letter-spacing:0.02em;
+  padding:1rem 2.4rem; min-width:280px; text-align:center;
+  background:url("img/fill-crayon-orange.svg") 0 0 / 100% 100% no-repeat;
+  transition:transform .15s ease, filter .15s ease;
+}
+#route-fast .zp-detail-btn:hover{ transform:translateY(-2px); filter:brightness(1.04); }
+#route-fast .zp-detail-btn:active{ transform:translateY(1px); }
+@media (max-width:640px){
+  #route-fast .zp-detail-btn{ min-width:0; width:100%; padding:0.95rem 1.2rem; font-size:0.95rem; }
+}
+
+/* クーポン：手描きの紫枠で囲う（枠は箱の実寸に合わせた専用サイズ） */
+.alt-coupon{
+  max-width:520px; margin:1.75rem auto 0;
+  background-color:#fff;
+  background-image:url("img/frame-crayon-purple-box.svg");
+  background-repeat:no-repeat; background-position:0 0; background-size:100% 100%;
+  padding:1.5rem 1.4rem 1.4rem; text-align:center; color:#1e1b4b;
+}
+.alt-coupon .alt-coupon-ttl{
+  display:inline-block; font-size:1.05rem; font-weight:900; letter-spacing:0.08em;
+  color:#6a4fd0; margin-bottom:1rem;
+}
+.alt-coupon .cp-row{
+  display:flex; align-items:center; justify-content:center; flex-wrap:wrap;
+  gap:0.15rem 0.6rem; margin:0;
+}
+.alt-coupon .cp-row + .cp-row{ margin-top:0.75rem; }
+.alt-coupon .cp-who{ font-size:0.85rem; font-weight:800; color:#1e1b4b; }
+.alt-coupon .cp-code{ font-size:1.2rem; font-weight:900; color:#6a4fd0; letter-spacing:0.02em; }
+.alt-coupon .cp-arrow{ font-size:0.95rem; font-weight:900; color:#9ca3af; }
+.alt-coupon .cp-off{ font-size:1.15rem; font-weight:900; color:#fb8c1a; }
+@media (max-width:520px){
+  .alt-coupon .cp-who{ width:100%; }
+  .alt-coupon .cp-row{ gap:0.1rem 0.5rem; }
+}
+
+/* ===== 相談 ===== */
+.help-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:1.25rem; max-width:760px; margin:0 auto; }
+@media (max-width:640px){ .help-grid{ grid-template-columns:1fr; max-width:420px; } }
+.help-card{ background:#fff; border-radius:16px; padding:1.5rem 1.3rem; border:1px solid #e0e0e0; text-align:center; }
+.help-card img{ width:40px; height:auto; margin:0 auto 0.6rem; display:block; }
+.help-card h3{ font-size:1rem; font-weight:800; color:#1e1b4b; margin-bottom:0.35rem; }
+.help-card p{ font-size:0.8125rem; color:var(--text-muted); line-height:1.7; margin:0 0 0.8rem; }
+
+/* footer */
+.route-foot{ text-align:center; padding:2rem 1.5rem 2.5rem; font-size:0.78rem; color:#9ca3af; background:#fff; }
+.route-foot a{ color:#6b7280; text-decoration:underline; text-underline-offset:2px; }
+
+/* ===== 手書き感（親しみやすさ）の共通処理 ===== */
+/* 角をわずかに歪ませて「手で描いた囲み」に見せる */
+.fc,
+.alt-card,
+.help-card{ border-radius:16px 20px 17px 22px / 20px 16px 22px 17px; }
+/* 背の低いパーツは丸くなりすぎるので控えめに */
+.fc .node,
+.fc .lane,
+.rs-vid{ border-radius:10px 13px 11px 14px / 13px 10px 14px 11px; }
+.fc .lane-tag{ border-radius:10px 13px 11px 14px / 13px 10px 14px 11px; transform:rotate(-3deg); }
+/* 線を少しだけ太くして描いた感じを出す */
+.fc .node.step,
+.fc .node.alt{ border-width:2px; }
+
+/* コネクタを太めに・端を丸めて柔らかく */
+.fc .conn i{ width:3px; border-radius:2px; }
+.fc-fork::before,
+.fc-fork .h,
+.fc-fork .d{ border-radius:2px; }
+
+/* STEPの風船文字をわずかに傾けて手作り感を出す */
+.rs-stepmark .rs-alpha{ transform:rotate(-4deg); }
+
+/* リンクボタン：手描きのクレヨン枠に差し替え */
+.rs-vid{
+  border:0; border-radius:0;
+  background:url("img/frame-crayon-blue.svg") 0 0 / 100% 100% no-repeat;
+  color:#1560c4; font-weight:700;
+  padding:0.55rem 1.1rem; min-width:150px;
+  justify-content:center;
+}
+.rs-vid:hover{
+  background:url("img/frame-crayon-blue.svg") 0 0 / 100% 100% no-repeat;
+  color:#0d4a9e; transform:translateY(-2px);
+}
+.rs-vid img{ height:17px; }
+/* Yカリキュラムは濃紺背景。黄色の塗りつぶし四角にする。
+   文字は黄色の上なら濃紺が圧倒的に読みやすい（白は1.6:1、濃紺なら11.0:1） */
+.rsec--curr .rs-vid{
+  background:url("img/fill-crayon-yellow.svg") 0 0 / 100% 100% no-repeat;
+  color:#1e1b4b; font-weight:800;
+}
+.rsec--curr .rs-vid:hover{
+  background:url("img/fill-crayon-yellow.svg") 0 0 / 100% 100% no-repeat;
+  color:#1e1b4b; transform:translateY(-2px); filter:brightness(1.04);
+}
+
+/* カードを紙が浮いているように（枠線頼みの平坦さを解消） */
+.fc,
+.alt-card,
+.help-card{ box-shadow:0 5px 16px rgba(30,27,75,0.07); }
+
+/* 番号は手書き風のクレヨン数字画像に差し替え */
+.alt-card .alt-num{
+  display:block; width:auto; height:44px; margin:0 auto 0.5rem;
+  background:none; border-radius:0;
+}
+/* 見出し下に置くブランドロゴ（大きめ） */
+.rsec-head .rsec-brand{ display:block; width:auto; height:clamp(30px,6.5vw,46px); margin:1.1rem auto 0; }
+
+/* 見出し内のFintokeiロゴ（.tw img の下線用ルールに負けないよう詳細度を上げる）
+   ロゴであることが分かるよう、本文文字より少し大きめにする */
+.tw h2 img.brand-fintokei{
+  display:inline-block; width:auto; height:1.12em;
+  object-fit:contain; margin:0 0.08em 0 0; vertical-align:-0.18em;
+}
+
+/* 「どれか1つを選ぶ」グループ（順番ではなく選択肢であることを示す） */
+.fc .fc-choice{
+  width:100%; max-width:300px;
+  border:2px dashed #047857;
+  border-radius:14px 17px 15px 18px / 17px 14px 18px 15px;
+  padding:0.45rem 0.5rem 0.55rem;
+  display:flex; flex-direction:column; align-items:stretch; gap:0.3rem;
+}
+.fc .fc-choice .node{ width:auto; max-width:none; }
+.fc .fc-or{ font-size:0.66rem; font-weight:800; color:#047857; text-align:center; }
+
+/* A〜Eをひとまとめにして「Yカリキュラム」だと分かるようにする */
+.fc .fc-group{
+  position:relative;
+  width:100%; max-width:300px;
+  border:2px dashed #2563eb;
+  border-radius:14px;
+  padding:1.5rem 0.55rem 0.7rem;
+  display:flex; flex-direction:column; align-items:stretch; gap:0;
+}
+/* 速攻ルート側のまとまりは、そのルートの色（オレンジ）で揃える */
+.fc .fc-group--fast{ border-color:#ea580c; }
+.fc .fc-group .node{ width:auto; max-width:none; }
+/* 見出しは傾けず、白背景で枠線を切り取って文字の下に線が通らないようにする */
+.fc .fc-group-label{
+  position:absolute; top:-0.68rem; left:50%; transform:translateX(-50%);
+  background:#eef5ff; color:#1d4ed8; white-space:nowrap;
+  font-size:0.76rem; font-weight:900; letter-spacing:0.03em;
+  padding:0 0.6rem;
+}
+.fc .fc-group--fast .fc-group-label{ background:#fff4ec; color:#c2410c; }
+
+/* フローチャート内の記号（画像版） */
+.fc .fc-mark{ height:20px; width:auto; vertical-align:-5px; margin-right:0.3rem; }
+.fc .fc-mark--alpha{ height:22px; vertical-align:-6px; }
+
+
+/* チャート図：線端を丸めて、線の印象を柔らかく */
+.rs-visual svg line,
+.rs-visual svg polyline{ stroke-linecap:round; }
+.rs-visual svg > rect:first-child{ rx:18; }
+
+
+/* ===== フローチャートの四角：見やすさ優先の色分け =====
+   手描き風の枠は小さく表示するとかすれが潰れてノイズになるので、図の中だけは
+   輪郭のはっきりした線に統一する（ページの他の部分は手描き風のまま） */
+.fc .node.start,
+.fc .node.step,
+.fc .node.alt,
+.fc .node.zeropro,
+.fc .node.fintokei,
+.fc .node.gate{
+  border:2px solid #1e1b4b; border-radius:10px;
+  color:#1e1b4b; font-size:0.85rem; font-weight:800; text-align:center; line-height:1.4;
+  background-color:#fff; background-image:none;
+  padding:0.7rem 0.95rem;
+}
+/* 色 ＝ どのルートのものか。塗り ＝ ゴールだけ。緑の太枠 ＝ 通過条件。
+   この3つだけを守ることで、ぱっと見の意味が揃う */
+.fc .node.start{ border-color:#6b7280; color:#374151; }
+.fc .node.step{ border-color:#2563eb; }
+.fc .node.zeropro{ border-color:#ea580c; }
+.fc .node.alt{ border-color:#059669; }
+/* Fintokei はページ内に専用セクションを持つ主要ステップなので、紫で独立させる */
+.fc .node.fintokei{ border-color:#6d28d9; }
+/* 関門だけは役割が違う（通過するための条件）ので、薄緑＋太い緑枠で形から区別する */
+.fc .node.gate{
+  position:relative; border:3px solid #047857; border-radius:16px;
+  background:#f0fdf6; padding:0.8rem 0.95rem;
+}
+/* 「どちらか達成でOK」が一目で分かるよう、2つの条件をチップに分けて「または」で結ぶ */
+.fc .gate-ttl{ display:block; font-size:0.9rem; font-weight:900; color:#065f46; margin-bottom:0.5rem; }
+.fc .gate-conds{ display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:0.5rem; }
+.fc .gate-cond{
+  display:inline-flex; align-items:center; gap:0.35rem;
+  background:#fff; border:1.5px solid #9fd6bd; border-radius:9px;
+  padding:0.42rem 0.75rem; font-size:0.8rem; font-weight:800; color:#1e1b4b; line-height:1.3;
+}
+.fc .gate-check{ flex-shrink:0; color:#047857; font-weight:900; }
+.fc .gate-or{ font-size:0.74rem; font-weight:900; color:#6b7280; }
+/* 枠どうしが近すぎないよう間隔を少し空ける */
+.fc .fc-group .conn.sm i{ height:10px; }
+.fc .fc-choice{ gap:0.45rem; }
+
+/* ===== 塗りつぶしの四角：はっきりした単色で ===== */
+.fc .lane,
+.fc .lane-tag,
+.fc .node.astro,
+.fc .node.goal{
+  background-image:none; border-radius:10px;
+}
+/* ルートの見出しだけは塗る（そのルートの「表札」なので） */
+.fc .lane-main{ background-color:#1565c0; color:#fff; }
+.fc .lane-alt{ background-color:#047857; color:#fff; }
+.fc .lane-fast{ background-color:#c2410c; color:#fff; }
+.fc .lane-tag{ background-color:#ffd21e; color:#1e1b4b; padding:0.26rem 0.8rem; }
+/* ASTRO申請は共通パートの一歩。塗らずに紺の枠にして、ゴールと目立ち合わせない */
+.fc .node.astro{
+  background:#fff; color:#1e1b4b; border:2px solid #1e1b4b;
+  padding:0.7rem 0.95rem; font-weight:800;
+}
+/* 塗りつぶすのはゴールだけ。図の中でいちばん目立つものを1つに絞る */
+.fc .node.goal{
+  background-color:#ffd21e; color:#1e1b4b; border:0;
+  padding:0.95rem; font-size:1rem; font-weight:900; letter-spacing:0.04em;
+  box-shadow:0 4px 14px rgba(202,138,4,0.35);
+}
+
+/* ===== ルートの陣地：どこからどこまでが同じルートか一目で分かるように ===== */
+.fc-zone{ border-radius:14px; padding:0.7rem 0.7rem 0; }
+.fc-zone--self{ background:#eef5ff; }
+.fc-zone--fast{ background:#fff4ec; }
+.fc-zone .lane{ max-width:none; }
+
+/* 分岐と合流に言葉を添えて、図の意味を取り違えないようにする */
+.fc-fork-label{
+  position:absolute; left:50%; transform:translateX(-50%);
+  background:#fff; color:#6b7280; font-size:0.68rem; font-weight:900;
+  padding:0 0.5rem; white-space:nowrap; z-index:2;
+}
+.fc-fork-label{ top:24px; }
+
+/* ===== 各四角の説明（PCはマウスを乗せる／スマホはタップ） ===== */
+/* カーソルは「？」だとエラーのように見えるので、情報マーク（ⓘ）にする */
+.fc [data-tip]{ position:relative;
+  cursor:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='24'%20height='24'%20viewBox='0%200%2024%2024'%3E%3Ccircle%20cx='12'%20cy='12'%20r='10'%20fill='%231e1b4b'/%3E%3Ccircle%20cx='12'%20cy='7.6'%20r='1.4'%20fill='%23fff'/%3E%3Crect%20x='10.6'%20y='10.4'%20width='2.8'%20height='7.2'%20rx='1.4'%20fill='%23fff'/%3E%3C/svg%3E") 12 12, pointer;
+}
+.fc [data-tip]::before{
+  content:attr(data-tip);
+  position:absolute; top:calc(100% + 9px); left:50%; transform:translateX(-50%);
+  width:246px; max-width:246px; z-index:6;
+  background:#1e1b4b; color:#fff; text-align:left;
+  font-size:0.72rem; font-weight:600; line-height:1.65; letter-spacing:0;
+  padding:0.6rem 0.75rem; border-radius:10px;
+  box-shadow:0 6px 18px rgba(30,27,75,0.28);
+  opacity:0; visibility:hidden; transition:opacity .15s ease;
+  pointer-events:none;
+}
+/* 吹き出しの三角 */
+.fc [data-tip]::after{
+  content:""; position:absolute; top:calc(100% + 3px); left:50%; transform:translateX(-50%);
+  border-left:6px solid transparent; border-right:6px solid transparent;
+  border-bottom:6px solid #1e1b4b; z-index:7;
+  opacity:0; visibility:hidden; transition:opacity .15s ease; pointer-events:none;
+}
+.fc [data-tip]:hover::before, .fc [data-tip]:hover::after,
+.fc [data-tip].tip-on::before, .fc [data-tip].tip-on::after{ opacity:1; visibility:visible; }
+/* 右端・左端の箱は、吹き出しが図からはみ出さないよう内側に寄せる */
+.fc .fc-always-item[data-tip]::before{ left:auto; right:0; transform:none; }
+.fc .fc-always-item[data-tip]::after{ left:auto; right:26px; transform:none; }
+
+/* 四角は図として見せるだけ。押せそうに見えるホバー／押し込みの動きは付けない */
+
+/* 「プロの関門」セクションもクレヨン枠に */
+.route-gate{
+  border:0; border-radius:0;
+  background-color:#fff;
+  background-image:url("img/frame-crayon-green-lg.svg");
+  background-repeat:no-repeat; background-position:0 0; background-size:100% 100%;
+}
+
+/* ===== ルート選択 =====
+   直前の「すべてのコンテンツ」（白）とセクションの切り替わりが分かるよう淡いラベンダーに（2026-07-23） */
+.route-pick{ background:#eef0fa; padding-bottom:2.25rem; }
+/* ルート選択にも背景の矢印を付けて、選んだ先へ流れが繋がって見えるようにする。
+   元のpadding-bottomに尖りの分を足す */
+.route-pick.rsec--arrowdown{ padding-bottom:calc(2.25rem + var(--tip)); }
+.pick-btns{ display:flex; flex-wrap:wrap; justify-content:center; gap:1rem; max-width:760px; margin:0 auto; }
+.pick-btn{
+  flex:1 1 300px; max-width:360px; cursor:pointer;
+  border:0; border-radius:0; background-color:transparent;
+  background-repeat:no-repeat; background-position:0 0; background-size:100% 100%;
+  padding:1.4rem 1.2rem; text-align:center; font-family:inherit;
+  transition:transform .15s ease, filter .15s ease;
+}
+.pick-btn--self{ background-image:url("img/fill-crayon-skyblue.svg"); }
+.pick-btn--fast{ background-image:url("img/fill-crayon-orange.svg"); }
+.pick-btn:hover{ transform:translateY(-3px); filter:brightness(1.04); }
+.pick-btn:active{ transform:translateY(1px); }
+.pick-btn-ttl{ display:block; font-size:1.1rem; font-weight:900; color:#1e1b4b; }
+.pick-btn-sub{ display:block; font-size:0.8rem; font-weight:700; color:#1e1b4b; opacity:0.8; margin-top:0.3rem; }
+
+/* ===== ルート切り替え（画面上に固定。どこまでスクロールしても押せる） ===== */
+.rt-switch{
+  position:fixed; left:0; right:0; top:0; z-index:60;
+  display:flex; justify-content:center; align-items:center; gap:0.6rem;
+  padding:0.6rem 1rem;
+  background:rgba(255,255,255,0.96);
+  backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+  border-bottom:1px solid #ececf5;
+  box-shadow:0 4px 14px rgba(30,27,75,0.08);
+}
+/* 固定バーの下に本文が潜り込まないよう、上に余白を足す */
+.js-route.route-chosen body{ padding-top:56px; }
+.rt-switch-btn{
+  cursor:pointer; font-family:inherit; font-size:0.85rem; font-weight:900; color:#1e1b4b;
+  border:0; border-radius:0; background-color:transparent;
+  background-repeat:no-repeat; background-position:0 0; background-size:100% 100%;
+  padding:0.5rem 1.4rem; opacity:0.45;
+  transition:opacity .15s ease, transform .15s ease;
+}
+/* 選択ボタンと同じ色分け（自力＝水色／速攻＝オレンジ） */
+.rt-switch-btn[data-route="self"]{ background-image:url("img/fill-crayon-skyblue.svg"); }
+.rt-switch-btn[data-route="fast"]{ background-image:url("img/fill-crayon-orange.svg"); }
+.rt-switch-btn.is-on{ opacity:1; }
+.rt-switch-btn:hover{ opacity:1; transform:translateY(-1px); }
+
+/* ===== 埋め込みモード（onboarding.html の診断結果の下に読み込まれるとき） =====
+   要約を別に作ると必ず内容がズレるので、このページ自体をそのまま見せる。
+   埋め込み先では大見出しとフッターだけ外し、固定バーは先頭に置くだけにする */
+/* 埋め込み先で見せるのは全体マップ（フローチャート）だけ。続きは本ページで読んでもらう */
+.is-embed .route-head,
+.is-embed .route-foot,
+.is-embed .route-pick,
+.is-embed .route-zone,
+.is-embed .common-zone,
+.is-embed .content-section{ display:none !important; }
+.is-embed.js-route.route-chosen body{ padding-top:0; }
+.is-embed body{ background:#fff; }
+/* 診断ページ側に続きのボタンが並ぶので、下の尖りとその余白は要らない */
+.is-embed .rsec--map{ clip-path:none; padding-bottom:2.5rem; }
+/* iframe内は自前のスクロールを持たないため出現アニメーションが発火しない。
+   埋め込み時は最初からすべて表示する */
+.is-embed .rv{ opacity:1; transform:none; }
+
+/* ===== ルート本体 ===== */
+/* JSが動かない場合は両方表示（.js-route が付いたときだけ切り替え動作） */
+.js-route .route-panel{ display:none; }
+.js-route .route-panel.is-on{ display:block; }
+/* どちらか選ぶまでは切り替えタブも出さない（選択ボタンに集中させる） */
+.js-route .rt-switch{ display:none; }
+.js-route.route-chosen .rt-switch{ display:flex; }
+/* 共通パート（区切り／Fintokei／プロの関門／相談）も、ルートを選ぶまでは出さない */
+.js-route .common-zone{ display:none; }
+.js-route.route-chosen .common-zone{ display:block; }
+
+/* もう一方のルートへ（ページ最後のボタン） */
+.route-switch{ background:#fff; text-align:center; padding:2.5rem 1.5rem 3rem; }
+.switch-btn{
+  cursor:pointer; font-family:inherit; font-size:0.92rem; font-weight:900; color:#1e1b4b;
+  border:0; border-radius:0; background-color:transparent;
+  background-repeat:no-repeat; background-position:0 0; background-size:100% 100%;
+  padding:0.85rem 1.8rem; min-width:280px;
+  transition:transform .15s ease, filter .15s ease;
+}
+/* 上の固定バーと同じ色分け（自力＝水色／速攻＝オレンジ）。
+   data-route は「今見ていない方のルート」を指すので、飛び先の色と一致する */
+.switch-btn[data-route="self"]{ background-image:url("img/fill-crayon-skyblue.svg"); }
+.switch-btn[data-route="fast"]{ background-image:url("img/fill-crayon-orange.svg"); }
+.switch-btn:hover{ transform:translateY(-2px); filter:brightness(1.03); }
+.switch-btn:active{ transform:translateY(1px); }
+@media (max-width:640px){
+  .pick-btn{ flex:1 1 100%; }
+  .switch-btn{ min-width:0; width:100%; padding:0.85rem 1rem; }
+}
+
+/* reveal */
+.rv{ opacity:0; transform:translateY(24px); transition:opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1); }
+.rv.on{ opacity:1; transform:none; }
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="route-head">
+  <img class="route-logo" src="img/fxspace-symbol.png" alt="FX SPACE">
+  <h1 class="heading-lg">
+    <span class="tw">プロトレーダーになるための<img src="img/wave-yellow-bold.png" alt=""></span><br>
+    <span class="tw accent">最短ルート<img src="img/wave-yellow-bold.png" alt=""></span>
+  </h1>
+  <p class="route-sub">やることはシンプル。<br>実力をつけて、資金を大きくして、プロへ。</p>
+</header>
+
+<!-- ===== 全体マップ ===== -->
+<section class="rsec rsec--map">
+  <div class="rsec-head rv">
+    <span class="section-title-badge section-title-badge--blue">
+      <img class="hero-title-side hero-title-side--left" src="img/title-side-yellow-left.png" alt="">
+      全体マップ
+      <img class="hero-title-side hero-title-side--right" src="img/title-side-yellow-right.png" alt="">
+    </span>
+    <div><span class="tw"><h2>プロまでのフローチャート</h2><img src="img/wave-orange.png" alt=""></span></div>
+    <p class="rsec-lead">まずはこの図で全体像を。詳しくは下に続きます。</p>
+  </div>
+  <div class="fc-stage rv">
+   <div class="fc-fit" id="fc-fit">
+   <div class="fc" id="fc-chart">
+   <div class="fc-body">
+    <div class="fc-main">
+    <div class="fc-col">
+      <div class="node start" data-tip="FXの知識ゼロ・口座なしの状態からで大丈夫です。">経験ゼロ からスタート</div>
+    </div>
+    <div class="fc-fork"><span class="fc-fork-label">どちらかを選ぶ</span><span class="h"></span><span class="d d1"></span><span class="d d2"></span></div>
+    <div class="fc-two">
+      <div class="fc-col fc-zone fc-zone--self">
+        <div class="lane lane-main" data-tip="自分のペースで無料の動画カリキュラムを進めるルート。費用をかけずに始められます。">自力でプロを目指す</div>
+        <div class="conn"><i></i></div>
+        <div class="fc-group">
+          <span class="fc-group-label">Yカリキュラムで学ぶ</span>
+          <div class="node step" data-tip="チャートに引く線の技術。ここがすべての土台になります。"><img class="fc-mark fc-mark--alpha" src="img/step-a.svg" alt="A">ライン</div>
+          <div class="conn sm"><i></i></div>
+          <div class="node step" data-tip="相場が今どこにいるかを読み、この先の値動きの筋書きを立てます。"><img class="fc-mark fc-mark--alpha" src="img/step-b.svg" alt="B">ナウキャスト・シナリオ</div>
+          <div class="conn sm"><i></i></div>
+          <div class="node step" data-tip="シナリオ通りに動いたとき、どこで入ってどこで出るかを決めます。"><img class="fc-mark fc-mark--alpha" src="img/step-c.svg" alt="C">タイミング</div>
+          <div class="conn sm"><i></i></div>
+          <div class="node step" data-tip="過去のチャートを巻き戻して、何度も練習・検証します。"><img class="fc-mark fc-mark--alpha" src="img/step-d.svg" alt="D">過去相場検証</div>
+        </div>
+        <div class="fc-fill"><i></i></div>
+      </div>
+      <div class="fc-col fc-zone fc-zone--fast">
+        <div class="lane lane-fast" data-tip="よすがの直接指導で3か月集中。最短でプロレベルを目指すルートです。">速攻でプロを目指す</div>
+        <div class="conn"><i></i></div>
+        <div class="fc-group fc-group--fast">
+          <span class="fc-group-label">3か月で仕上げる</span>
+          <div class="node zeropro" data-tip="3か月間、毎日課題を出してよすがが動画で添削。7つのステージを順にクリアします。">ゼロプロ90に参加する</div>
+        </div>
+        <div class="fc-fill"><i></i></div>
+      </div>
+    </div>
+    <!-- 2つのルートがここで合流する -->
+    <div class="fc-merge"><span class="d d1"></span><span class="d d2"></span><span class="h"></span><span class="c"></span></div>
+    <div class="fc-col fc-common">
+      <div class="node fintokei wide" data-tip="テストに合格すると仮想資金の提供を受けてトレードできます。">Fintokeiに挑戦</div>
+      <div class="conn"><i></i></div>
+      <div class="node gate wide" data-tip="ここを超えるとプロとして認められます。下の2つのうち、どちらかを達成すればOKです。">
+        <span class="gate-ttl">プロの関門</span>
+        <div class="gate-conds">
+          <span class="gate-cond"><span class="gate-check">✓</span>Fintokei に合格</span>
+          <span class="gate-or">または</span>
+          <span class="gate-cond"><span class="gate-check">✓</span>月利3%以上・最大DD率10%以内を2か月連続</span>
+        </div>
+      </div>
+      <div class="conn"><i></i></div>
+      <div class="node goal wide" data-tip="ランクはMoonから始まり、最高峰はVoyager。飛び級あり・降格なし。">プロトレーダー</div>
+    </div>
+    </div><!-- /fc-main -->
+
+    <!-- YTTとコミュニティは「道のりのどこか」ではなく、全ルートを通して使うもの。
+         道の途中に挟むと順番があるように誤読されるので、図の右に縦のレールとして添える -->
+    <aside class="fc-always">
+      <span class="fc-always-brace" aria-hidden="true"></span>
+      <p class="fc-always-note">どちらのルートでも、<br>ずっと使う</p>
+      <div class="fc-always-items">
+        <div class="fc-always-item">
+          <img src="img/ytt-mark.png" alt="">
+          <b>YTT</b>
+          <span class="fc-always-role">学んだことをすぐ<br>実践できるトレードツール</span>
+        </div>
+        <div class="fc-always-item">
+          <img src="img/icon-people.svg" alt="">
+          <b>コミュニティ</b>
+          <span class="fc-always-role">仲間ができて、<br>続けられる場所</span>
+        </div>
+      </div>
+    </aside>
+   </div><!-- /fc-body -->
+   </div><!-- /fc -->
+   </div><!-- /fc-fit -->
+   <p class="fc-hint"><img src="img/zoom-icon.png" alt="">画像をタップして拡大</p>
+  </div>
+</section>
+
+<!-- ===== 目的別コンテンツ一覧（intro「すべてのコンテンツ」を移植・埋め込み時は非表示） ===== -->
+<section class="content-section content-section--light" style="background:#fff;">
+    <div class="content-inner">
+        <div class="rsec-head rv">
+          <span class="section-title-badge section-title-badge--blue">
+            <img class="hero-title-side hero-title-side--left" src="img/title-side-blue-left.png" alt="">
+            目的別
+            <img class="hero-title-side hero-title-side--right" src="img/title-side-blue-right.png" alt="">
+          </span>
+          <div><span class="tw"><h2>すべてのコンテンツ</h2><img src="img/wave-orange.png" alt=""></span></div>
+        </div>
+        <div class="content-tabs" id="content-tabs" style="margin-top:1.5rem;">
+            <button class="content-tab active" onclick="filterContent('all',this)">すべて</button>
+            <button class="content-tab" onclick="filterContent('learn',this)">学習</button>
+            <button class="content-tab" onclick="filterContent('community',this)">交流</button>
+            <button class="content-tab" onclick="filterContent('trade',this)">実践</button>
+            <button class="content-tab" onclick="filterContent('support',this)">困ったとき</button>
+        </div>
+        <p class="card-longpress-hint">長押しで説明を表示できます</p>
+        <div class="content-grid is-collapsed" id="content-grid">
+            <a class="content-card" data-cat="learn" data-rec="zeropro" href="https://discord.com/channels/1039824083208126474/1171706488234979378" target="_blank"><div class="card-emoji">🎓</div><h4>ゼロプロ90</h4><span class="card-tip">3か月間よすがが動画で毎日添削する集中育成プログラム。7段階のカリキュラムで初心者からプロレベルへ。</span><p>90日集中育成プログラム</p><span class="card-link">参加 →</span></a>
+            <a class="content-card coming-soon" data-cat="learn" data-rec="elearning" href="https://fx-space.learnworlds.com/course/zeroprokiso" target="_blank"><div class="card-emoji">💻</div><h4>億トレアカデミー</h4><span class="card-tip">全12章の動画カリキュラム。基礎知識からチャート分析・資金管理まで体系的に学べます。章末クイズ付き。</span><p>全12章で基礎から体系的に学習</p><span class="card-link">始める →</span></a>
+            <a class="content-card" data-cat="learn" data-rec="elearning,community" href="https://discord.com/channels/1039824083208126474/1238309633139937330" target="_blank"><div class="card-emoji">📚</div><h4>トレード学習</h4><span class="card-tip">初級・中級・上級に分かれたカリキュラム。自分のレベルに合わせてステップアップできます。</span><p>初級〜上級カリキュラム</p><span class="card-link">学習 →</span></a>
+            <a class="content-card" data-cat="learn" data-rec="elearning" href="https://fx-space.com/intro/y-curriculum.html" target="_blank"><div class="card-emoji">📖</div><h4>Yカリキュラム</h4><span class="card-tip">ライン→シナリオ→タイミング→過去検証。動画で学び、答え合わせで合格していく、よすが式の学習ロードマップ。</span><p>学習ロードマップ</p><span class="card-link">見る →</span></a>
+            <a class="content-card" data-cat="learn" data-rec="community,ytt" href="https://discord.com/channels/1039824083208126474/1246768528506486836" target="_blank"><div class="card-emoji">📝</div><h4>超実践FX問題集</h4><span class="card-tip">ライン・ナウキャスト・シナリオを詳細解説付きで演習できる全56問。知識だけでなく実践的な判断力を鍛えられます。</span><p>全56問の実力テスト</p><span class="card-link">挑戦 →</span></a>
+            <a class="content-card" data-cat="learn" data-rec="elearning" href="https://discord.com/channels/1039824083208126474/1462665754934640680" target="_blank"><div class="card-emoji">🔍</div><h4>トレード学習ナビ</h4><span class="card-tip">過去のすべての学習動画をキーワードで検索。スマホからも使えます。</span><p>動画をキーワード検索・スマホ対応</p><span class="card-link">検索 →</span></a>
+            <a class="content-card" data-cat="community" data-rec="elearning" href="https://discord.com/channels/1039824083208126474/1181506867944501321" target="_blank"><div class="card-emoji">💬</div><h4>フォーラム</h4><span class="card-tip">FXに関するあらゆる質問ができる掲示板。初心者の基本的な質問も大歓迎です。</span><p>何でも質問OK</p><span class="card-link">質問 →</span></a>
+            <a class="content-card" data-cat="community" data-rec="elearning" href="https://discord.com/channels/1039824083208126474/1181536360398590003" target="_blank"><div class="card-emoji">🧑‍🏫</div><h4>astroへ質問</h4><span class="card-tip">ASTROのプロトレーダーに直接質問できるチャンネル。実践的なアドバイスがもらえます。</span><p>プロトレーダーに直接質問</p><span class="card-link">質問 →</span></a>
+            <a class="content-card" data-cat="community" data-rec="ytt,community,zeropro" href="https://discord.com/channels/1039824083208126474/1282263648886329396" target="_blank"><div class="card-emoji">📡</div><h4>ライブチャート分析</h4><span class="card-tip">メンバーとリアルタイムでチャート分析・議論できます。</span><p>リアルタイムで交流</p><span class="card-link">参加 →</span></a>
+            <a class="content-card" data-cat="community" href="https://discord.com/channels/1039824083208126474/1426032246485291078" target="_blank"><div class="card-emoji">☕</div><h4>雑談</h4><span class="card-tip">初心者応援・今日のできごと・マネートピックなど、テーマ別に雑談できるチャンネル。</span><p>テーマ別の雑談チャンネル</p><span class="card-link">入室 →</span></a>
+            <a class="content-card" data-cat="trade" data-rec="ytt,community,zeropro" href="https://discord.com/channels/1039824083208126474/1048136270582382592" target="_blank"><div class="card-emoji">📊</div><h4>毎朝のシナリオ</h4><span class="card-tip">平日毎朝よすがが更新するシナリオ構築動画。3通貨（スタンダード）と15通貨（プレミアム）の2本立て。</span><p>平日毎日更新（3通貨＋15通貨）</p><span class="card-link">見る →</span></a>
+            <a class="content-card" data-cat="trade" data-rec="ytt,community,zeropro" href="https://discord.com/channels/1039824083208126474/1521088083158896651" target="_blank"><div class="card-emoji">🎯</div><h4>利確速報</h4><span class="card-tip">メンバーの利確をリアルタイムで通知。どの通貨・時間帯でどれくらい利確したのかがわかり、みんなでトレードしている一体感が生まれます。</span><p>リアルタイム利確通知</p><span class="card-link">見る →</span></a>
+            <a class="content-card" data-cat="trade" href="https://discord.com/channels/1039824083208126474/1194299754088247298" target="_blank"><div class="card-emoji">🏆</div><h4>合格・出金報告</h4><span class="card-tip">合格報告・出金・残高増加など、仲間の成功が集まるチャンネル。モチベーションに。</span><p>仲間の成功体験</p><span class="card-link">見る →</span></a>
+            <a class="content-card" data-cat="trade" href="https://discord.com/channels/1039824083208126474/1161882625519140874" target="_blank"><div class="card-emoji">🔁</div><h4>FTO（過去相場検証）</h4><span class="card-tip">過去の相場を巻き戻して何度も検証できるツール。2026年7月よりYTTがFTOに搭載（サブスク限定先行）。</span><p>過去相場を巻き戻して検証</p><span class="card-link">見る →</span></a>
+            <a class="content-card" data-cat="trade" href="https://fx-space.com/intro/ytt-tokusetu.html" target="_blank"><div class="card-emoji">🛰️</div><h4>YTT</h4><span class="card-tip">学んだことをすぐ実践できるトレードツール。分析サポート・自動ライン描画・シナリオ機能などを搭載。</span><p>実践トレードツール</p><span class="card-link">詳しく →</span></a>
+            <a class="content-card" data-cat="trade" data-rec="zeropro" href="https://discord.com/channels/1039824083208126474/1136925665099251753" target="_blank"><div class="card-emoji">🌟</div><h4>ASTRO</h4><span class="card-tip">プロップ合格などプロ実績を持つトレーダーの申請制チーム。申請・昇格でランクが上がります。</span><p>申請制のプロトレーダーチーム</p><span class="card-link">詳細 →</span></a>
+            <a class="content-card" data-cat="support" href="https://discordapp.com/channels/1039824083208126474/1416640423396511804/1490341286773915758" target="_blank"><div class="card-emoji">✉️</div><h4>お問い合わせ</h4><span class="card-tip">分からないこと・要望など、運営（サポーター）への問い合わせ窓口。Ticketチャンネルが作成され、本人と運営のみ閲覧できます。</span><p>運営に直接問い合わせ</p><span class="card-link">問い合わせ →</span></a>
+            <a class="content-card" data-cat="support" href="https://discordapp.com/channels/1039824083208126474/1416640423396511804/1490342419982454924" target="_blank"><div class="card-emoji">🤖</div><h4>AIサポート</h4><span class="card-tip">FX SPACE全般のAIへのお問い合わせ。すぐ返答が来ますが、内容は必ずしも正確ではない点にご注意ください。</span><p>全般をAIに質問（即答）</p><span class="card-link">AIに聞く →</span></a>
+            <a class="content-card" data-cat="support" href="https://discordapp.com/channels/1039824083208126474/1151440259553439784/1490345379613642853" target="_blank"><div class="card-emoji">🛠️</div><h4>YTTサポート</h4><span class="card-tip">YTTに関するサポート。お問い合わせから運営（サポーター）が対応します。</span><p>YTTの困りごとを運営に相談</p><span class="card-link">問い合わせ →</span></a>
+            <a class="content-card" data-cat="support" href="https://discordapp.com/channels/1039824083208126474/1151440259553439784/1490345736083083284" target="_blank"><div class="card-emoji">🤖</div><h4>YTT AIサポート</h4><span class="card-tip">YTTに関するAIへのお問い合わせ。すぐ返答が来ますが、内容は必ずしも正確ではない点にご注意ください。</span><p>YTTのことをAIに質問（即答）</p><span class="card-link">AIに聞く →</span></a>
+        </div>
+        <div class="content-more" id="content-more"><button type="button" onclick="toggleAllContent(this)">すべてを見る ▼</button></div>
+    </div>
+</section>
+
+<!-- ===== ルート選択 ===== -->
+<section class="rsec route-pick rsec--arrowdown">
+  <div class="rsec-head rv">
+    <div><span class="tw"><h2>あなたはどちらのルートを選ぶ？</h2><img src="img/wave-orange.png" alt=""></span></div>
+    <p class="rsec-lead">選ぶと、あなたのルートの詳細だけが表示されます。<br>あとからいつでも切り替えられます。</p>
+  </div>
+  <div class="pick-btns rv">
+    <button type="button" class="pick-btn pick-btn--self" data-route="self">
+      <span class="pick-btn-ttl">自力でプロを目指す</span>
+      <span class="pick-btn-sub">Yカリキュラムで学ぶ（王道）</span>
+    </button>
+    <button type="button" class="pick-btn pick-btn--fast" data-route="fast">
+      <span class="pick-btn-ttl">速攻でプロを目指す</span>
+      <span class="pick-btn-sub">ゼロプロ90で3か月集中</span>
+    </button>
+  </div>
+</section>
+
+<!-- ===== ルート本体（タブで切り替え） ===== -->
+<div class="route-zone" id="route-zone">
+  <div class="rt-switch" role="tablist">
+    <button type="button" class="rt-switch-btn" data-route="self" role="tab" aria-selected="false">自力ルート</button>
+    <button type="button" class="rt-switch-btn" data-route="fast" role="tab" aria-selected="false">速攻ルート</button>
+  </div>
+
+  <div class="route-panel" data-route="self" id="route-self">
+<!-- ===== Yカリキュラム ===== -->
+<section class="rsec rsec--night rsec--curr rsec--arrowdown">
+  <div class="rsec-head rv">
+    <span class="section-title-badge">
+      <img class="hero-title-side hero-title-side--left" src="img/title-side-yellow-left.png" alt="">
+      王道ルート
+      <img class="hero-title-side hero-title-side--right" src="img/title-side-yellow-right.png" alt="">
+    </span>
+    <div><span class="tw"><h2>Yカリキュラムで学ぶ</h2><img src="img/wave-orange.png" alt=""></span></div>
+    <p class="rsec-lead">動画で学び、答え合わせで合格していく5ステップ。</p>
+  </div>
+
+  <div class="route-steps">
+
+    <!-- A ライン -->
+    <div class="route-step-item rv" id="step-a">
+      <div>
+        <div class="rs-stepmark"><span class="rs-step-txt">STEP</span><img class="rs-alpha" src="img/step-a.svg" alt="A"></div>
+        <h3>ラインの習得</h3>
+        <p>動画を見て、YTTのオートラインと同じラインを引けるように練習します。</p>
+        <div class="rs-vids">
+          <a class="rs-vid" href="https://youtu.be/YSOMB0J4VwI" target="_blank" rel="noopener"><img src="img/icon-youtube-crayon.svg" alt="">習得編1章 ライン →</a>
+          <a class="rs-vid" href="https://youtu.be/x6CJtJN3Ces" target="_blank" rel="noopener"><img src="img/icon-youtube-crayon.svg" alt="">YTT解説 →</a>
+        </div>
+        <p class="rs-pass"><span class="rs-pass-badge">合格</span><span class="rs-pass-txt">1週間を通して<b>正答率95%以上</b></span></p>
+      </div>
+      <div class="rs-visual">
+        <img class="rs-shot" src="img/step-a-chart.png" alt="実際のチャートに引いた上昇チャネル" width="1200" height="712">
+      </div>
+    </div>
+
+    <!-- B ナウキャスト・シナリオ -->
+    <div class="route-step-item rv" id="step-b">
+      <div>
+        <div class="rs-stepmark"><span class="rs-step-txt">STEP</span><img class="rs-alpha" src="img/step-b.svg" alt="B"></div>
+        <h3>ナウキャスト・シナリオ</h3>
+        <p>4通貨でシナリオを構築し、毎日の解説動画で答え合わせします。</p>
+        <div class="rs-vids">
+          <a class="rs-vid" href="https://youtu.be/0KBM6hNhdzY" target="_blank" rel="noopener"><img src="img/icon-youtube-crayon.svg" alt="">シナリオ構築完全解説 →</a>
+          <a class="rs-vid" href="https://youtu.be/6VHINPwHyq8" target="_blank" rel="noopener"><img src="img/icon-youtube-crayon.svg" alt="">習得編2章 →</a>
+          <a class="rs-vid" href="https://youtu.be/EsX9nU4nmuI" target="_blank" rel="noopener"><img src="img/icon-youtube-crayon.svg" alt="">習得編3章 →</a>
+        </div>
+        <p class="rs-pass"><span class="rs-pass-badge">合格</span><span class="rs-pass-txt">1週間を通して<b>正答率90%以上</b></span></p>
+      </div>
+      <div class="rs-visual">
+        <img class="rs-shot" src="img/step-b-chart.png" alt="実際のチャートに引いたチャネルとシナリオ" width="700" height="350">
+      </div>
+    </div>
+
+    <!-- C タイミング -->
+    <div class="route-step-item rv" id="step-c">
+      <div>
+        <div class="rs-stepmark"><span class="rs-step-txt">STEP</span><img class="rs-alpha" src="img/step-c.svg" alt="C"></div>
+        <h3>タイミングの習得</h3>
+        <p>シナリオ通りに動いたら、M5でエントリー／イグジット。お手本トレード（ピンク印）と答え合わせします。</p>
+        <p class="rs-pass"><span class="rs-pass-badge">合格</span><span class="rs-pass-txt">1週間を通して<b>正答率90%以上</b></span></p>
+      </div>
+      <div class="rs-visual">
+        <img class="rs-shot" src="img/step-c-chart.png" alt="実際のチャートでのエントリータイミング" width="700" height="350">
+      </div>
+    </div>
+
+    <!-- D 過去相場検証 -->
+    <div class="route-step-item rv" id="step-d">
+      <div>
+        <div class="rs-stepmark"><span class="rs-step-txt">STEP</span><img class="rs-alpha" src="img/step-d.svg" alt="D"></div>
+        <h3>過去相場検証</h3>
+        <p>過去の相場を巻き戻して、何度もトレードを練習・検証します。おすすめは<b>Forex Tester Online（FTO）</b>。</p>
+        <div class="rs-vids">
+          <a class="rs-vid" href="https://youtu.be/DSYvHwfkojI" target="_blank" rel="noopener"><img src="img/icon-youtube-crayon.svg" alt="">検証 理論 →</a>
+          <a class="rs-vid" href="https://youtu.be/mUdZW69kogs" target="_blank" rel="noopener"><img src="img/icon-youtube-crayon.svg" alt="">検証 実践 →</a>
+          <a class="rs-vid" href="https://discord.com/channels/1039824083208126474/1161882625519140874/1528047675658731570" target="_blank" rel="noopener"><img src="img/icon-discord-crayon.svg" alt="">FTOの始め方を見る →</a>
+        </div>
+        <p class="rs-pass"><span class="rs-pass-badge">合格</span><span class="rs-pass-txt"><b>〇率90%・月利3%・DD10%以内</b>を6か月連続</span></p>
+      </div>
+      <div class="rs-visual">
+        <img class="rs-shot rs-shot--gif" src="img/fto-speed-of-testing.gif" alt="FTOで過去の相場を巻き戻して検証している画面" width="1182" height="652">
+        <p class="rs-credit"><a href="https://forextester.jp/" target="_blank" rel="noopener">Forex Tester 公式サイト</a>より</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+  </div>
+
+  <div class="route-panel" data-route="fast" id="route-fast">
+<!-- ===== 速攻でプロを目指す（ゼロプロ90）／index.html から丸ごと移植 ===== -->
+<section class="zp-section rsec--arrowdown" id="zeropro-section">
+
+    <!-- ===== OVERVIEW: ゼロプロ90とは？ ===== -->
+    <div class="zp-block" id="zp-overview" style="text-align:center;">
+        <span class="section-title-badge" style="display:inline-flex;transform:translateY(-1.6cm);margin-bottom:-1.6cm;"><img class="hero-title-side hero-title-side--left" src="img/title-side-left.png" alt="">本気で変わりたい方へ<img class="hero-title-side hero-title-side--right" src="img/title-side-right.png" alt=""></span>
+        <img src="images/zeropro90-logo.png" alt="ZERO PRO 90" class="zp-hero-logo">
+        <h2 class="zp-block-title">ゼロプロ90とは？</h2>
+        <img class="zp-title-wave" src="img/wave-yellow.png" alt="">
+        <p class="zp-block-lead" style="color:#fff;-webkit-text-fill-color:#fff;text-align:center;">よすがの直接指導のもと3か月間猛特訓。<br>経験ゼロからプロトレーダーレベルの実力を目指す育成プログラム。</p>
+
+        <!-- Journey Steps -->
+        <div class="zp-journey-steps" id="zp-journey">
+            <div class="zp-step" id="jStep0">
+                <div class="zp-step-num">0</div>
+                <div class="zp-step-body">
+                    <span class="zp-step-label">経験ゼロ</span>
+                    <span class="zp-step-desc">知識ゼロでもOK</span>
+                </div>
+            </div>
+            <div class="zp-step-arrow" id="jArrow1"><span>&rsaquo;</span></div>
+            <div class="zp-step" id="jStep1">
+                <div class="zp-step-num">1</div>
+                <div class="zp-step-body">
+                    <span class="zp-step-label">1か月目</span>
+                    <span class="zp-step-desc">基礎を叩き込む</span>
+                </div>
+            </div>
+            <div class="zp-step-arrow" id="jArrow2"><span>&rsaquo;</span></div>
+            <div class="zp-step" id="jStep2">
+                <div class="zp-step-num">2</div>
+                <div class="zp-step-body">
+                    <span class="zp-step-label">2か月目</span>
+                    <span class="zp-step-desc">実戦で鍛える</span>
+                </div>
+            </div>
+            <div class="zp-step-arrow" id="jArrow3"><span>&rsaquo;</span></div>
+            <div class="zp-step zp-step--goal" id="jStep3">
+                <div class="zp-step-num">&#10003;</div>
+                <div class="zp-step-body">
+                    <span class="zp-step-label">プロレベルへ</span>
+                    <span class="zp-step-desc">3か月で到達</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 7 STAGES ===== -->
+    <div class="zp-block zp-alt-bg" id="zp-stages">
+        <h2 class="zp-block-title">7つのステージを駆け上がれ</h2>
+        <p class="zp-block-lead" style="color:#fff;-webkit-text-fill-color:#fff;text-align:center;margin-bottom:calc(3rem + 1cm);">Yカリキュラム7段階を拡張した実戦カリキュラム。<br>各ステージをクリアしないと次に進めない。</p>
+        <div class="zp-stage-track" id="zp-stage-track">
+            <div class="zp-stage-line-bg"></div>
+            <div class="zp-stage-line-fill" id="zp-stage-line-fill"></div>
+            <div class="zp-stage" data-n="1">
+                <div class="zp-stage-dot"><span>1</span></div>
+                <div class="zp-stage-info">
+                    <h4>基礎の理解</h4>
+                    <p>チャートの読み方・基礎知識を固める</p>
+                </div>
+            </div>
+            <div class="zp-stage" data-n="2">
+                <div class="zp-stage-dot"><span>2</span></div>
+                <div class="zp-stage-info">
+                    <h4>ライン</h4>
+                    <p>ライン引きの技術を習得する</p>
+                </div>
+            </div>
+            <div class="zp-stage" data-n="3">
+                <div class="zp-stage-dot"><span>3</span></div>
+                <div class="zp-stage-info">
+                    <h4>シナリオ</h4>
+                    <p>過去相場においてシナリオ構築を行う</p>
+                </div>
+            </div>
+            <div class="zp-stage" data-n="4">
+                <div class="zp-stage-dot"><span>4</span></div>
+                <div class="zp-stage-info">
+                    <h4>理想タイミング</h4>
+                    <p>理想の値動きシナリオを描けるようになる</p>
+                </div>
+            </div>
+            <div class="zp-stage" data-n="5">
+                <div class="zp-stage-dot"><span>5</span></div>
+                <div class="zp-stage-info">
+                    <h4>現実タイミング</h4>
+                    <p>現実の値動きに対応するスキルを身につける</p>
+                </div>
+            </div>
+            <div class="zp-stage" data-n="6">
+                <div class="zp-stage-dot"><span>6</span></div>
+                <div class="zp-stage-info">
+                    <h4>データ&amp;デモ</h4>
+                    <p>デモトレードで実践力を検証する</p>
+                </div>
+            </div>
+            <div class="zp-stage zp-stage-final" data-n="7">
+                <div class="zp-stage-dot zp-stage-dot-final"><span>7</span></div>
+                <div class="zp-stage-info">
+                    <h4>リアル</h4>
+                    <p>リアルトレードで結果を出す — ゴールへ</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== PDCA CYCLE ===== -->
+    <div class="zp-block zp-alt-bg" id="zp-pdca">
+        <h2 class="zp-block-title">学習のサイクル</h2>
+        <p class="zp-block-lead" style="color:#fff;-webkit-text-fill-color:#fff;text-align:center;">シナリオを立て、提出し、添削を受け、認識をアップデートする。<br>このサイクルをほぼ隔日で回し続ける。</p>
+        <div class="zp-pdca-cycle" id="zp-pdca-cycle">
+            <svg class="zp-pdca-ring" viewBox="0 0 500 500" fill="none">
+                <defs>
+                    <marker id="zp-arr-i" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#818cf8"/></marker>
+                    <marker id="zp-arr-v" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#a78bfa"/></marker>
+                </defs>
+                <g class="zp-pdca-spin">
+                    <path class="zp-pdca-arc" d="M291,137 A120,120 0 0 1 363,209" stroke="#818cf8" stroke-width="3.5" stroke-linecap="round" marker-end="url(#zp-arr-i)"/>
+                    <path class="zp-pdca-arc" d="M363,291 A120,120 0 0 1 291,363" stroke="#a78bfa" stroke-width="3.5" stroke-linecap="round" marker-end="url(#zp-arr-v)"/>
+                    <path class="zp-pdca-arc" d="M209,363 A120,120 0 0 1 137,291" stroke="#818cf8" stroke-width="3.5" stroke-linecap="round" marker-end="url(#zp-arr-i)"/>
+                    <path class="zp-pdca-arc" d="M137,209 A120,120 0 0 1 209,137" stroke="#a78bfa" stroke-width="3.5" stroke-linecap="round" marker-end="url(#zp-arr-v)"/>
+                </g>
+            </svg>
+            <div class="zp-pdca-node zp-pdca-pos-top">
+                <div class="zp-pdca-step" id="zp-ps1">
+                    <div class="zp-pdca-letter" style="background:#4f46e5">P</div>
+                    <h4>PLAN</h4>
+                    <div class="zp-pdca-ja">チャート分析</div>
+                    <p>チャートを読み解き、根拠のある仮説を立てる</p>
+                </div>
+            </div>
+            <div class="zp-pdca-node zp-pdca-pos-right">
+                <div class="zp-pdca-step" id="zp-ps2">
+                    <div class="zp-pdca-letter" style="background:#7c3aed">D</div>
+                    <h4>DO</h4>
+                    <div class="zp-pdca-ja">課題提出</div>
+                    <p>フォーマットに沿ってDiscordに課題を投稿</p>
+                </div>
+            </div>
+            <div class="zp-pdca-node zp-pdca-pos-bottom">
+                <div class="zp-pdca-step" id="zp-ps3">
+                    <div class="zp-pdca-letter" style="background:#4f46e5">C</div>
+                    <h4>CHECK</h4>
+                    <div class="zp-pdca-ja">動画添削</div>
+                    <p>よすがが動画であなたの課題を徹底分析・指導</p>
+                </div>
+            </div>
+            <div class="zp-pdca-node zp-pdca-pos-left">
+                <div class="zp-pdca-step" id="zp-ps4">
+                    <div class="zp-pdca-letter" style="background:#7c3aed">A</div>
+                    <h4>ACT</h4>
+                    <div class="zp-pdca-ja">認識アップデート</div>
+                    <p>指摘を反映して自分の考え方を再構築する</p>
+                </div>
+            </div>
+        </div>
+        <div class="zp-pdca-repeat" id="zp-pdca-repeat">↻ このサイクルをほぼ隔日で繰り返す × 90日間</div>
+    </div>
+
+    <!-- ===== REVIEW PREVIEW: Discord-style 2 channels ===== -->
+    <div class="zp-block" id="zp-review">
+        <h2 class="zp-block-title">添削はこうやって進む</h2>
+        <p class="zp-block-lead" style="color:#fff;-webkit-text-fill-color:#fff;text-align:center;margin-bottom:calc(3rem + 1cm);">ステージごとの課題チャンネルに提出 → 翌日、よすがが全員分をまとめて動画で添削。<br>添削動画は専用チャンネルにアップされる。<br>課題と一緒に質問も投稿でき、よすがが添削動画内で回答してくれる。</p>
+        <div class="zp-dc-pair">
+            <!-- STEP 1: shield-shaped background -->
+            <div class="zp-dc-flow-submit" id="zp-dc-flow-submit">
+            <div class="zp-dc-col">
+                <div class="zp-dc-step-header" id="zp-dc-label1">
+                    <div class="zp-dc-step-num"><img src="img/num-1.png" alt="①" class="zp-dc-step-num-img"></div>
+                    <div class="zp-dc-step-info">
+                        <h3>課題を提出</h3>
+                        <p>ステージごとのチャンネルにチャートとシナリオを投稿</p>
+                    </div>
+                </div>
+            <div class="zp-dc-submit-row">
+            <!-- Discord channel sidebar -->
+            <div class="zp-dc-sidebar">
+                <div class="zp-dc-sb-cat">課題</div>
+                <div class="zp-dc-sb-ch">基礎の理解｜説明</div>
+                <div class="zp-dc-sb-ch"><span class="zp-dc-sb-dot" style="background:#9b59b6"></span>基礎の理解</div>
+                <div class="zp-dc-sb-sep"></div>
+                <div class="zp-dc-sb-ch">ライン｜説明</div>
+                <div class="zp-dc-sb-ch"><span class="zp-dc-sb-dot" style="background:#2ecc71"></span>ライン｜a</div>
+                <div class="zp-dc-sb-ch"><span class="zp-dc-sb-dot" style="background:#2ecc71"></span>ライン｜b</div>
+                <div class="zp-dc-sb-sep"></div>
+                <div class="zp-dc-sb-ch">シナリオ｜説明</div>
+                <div class="zp-dc-sb-ch zp-dc-sb-active"><span class="zp-dc-sb-dot" style="background:#3498db"></span>シナリオ｜a</div>
+                <div class="zp-dc-sb-ch"><span class="zp-dc-sb-dot" style="background:#3498db"></span>シナリオ｜b</div>
+                <div class="zp-dc-sb-sep"></div>
+                <div class="zp-dc-sb-ch">理想タイミング｜説明</div>
+                <div class="zp-dc-sb-ch"><span class="zp-dc-sb-dot" style="background:#f1c40f"></span>理想タイミング｜a</div>
+                <div class="zp-dc-sb-ch"><span class="zp-dc-sb-dot" style="background:#f1c40f"></span>理想タイミング｜b</div>
+                <div class="zp-dc-sb-sep"></div>
+                <div class="zp-dc-sb-ch">現実タイミング｜説明</div>
+                <div class="zp-dc-sb-ch"><span class="zp-dc-sb-dot" style="background:#e74c3c"></span>現実タイミング｜a</div>
+                <div class="zp-dc-sb-ch"><span class="zp-dc-sb-dot" style="background:#e74c3c"></span>現実タイミング｜b</div>
+                <div class="zp-dc-sb-sep"></div>
+                <div class="zp-dc-sb-ch">過去相場検証｜説明</div>
+                <div class="zp-dc-sb-ch"><span class="zp-dc-sb-dot" style="background:#9b59b6"></span>過去相場検証｜a</div>
+                <div class="zp-dc-sb-ch"><span class="zp-dc-sb-dot" style="background:#9b59b6"></span>過去相場検証｜b</div>
+                <div class="zp-dc-sb-sep"></div>
+                <div class="zp-dc-sb-ch">リアル｜説明</div>
+                <div class="zp-dc-sb-ch"><span class="zp-dc-sb-dot" style="background:#e74c3c"></span>リアル｜a</div>
+                <div class="zp-dc-sb-ch"><span class="zp-dc-sb-dot" style="background:#e74c3c"></span>リアル｜b</div>
+            </div>
+            <div class="zp-discord" id="zp-discord-submit">
+                <div class="zp-dc-header">
+                    <span class="zp-dc-hash">#</span> 🔵 シナリオ｜a
+                </div>
+                <div class="zp-dc-body">
+
+                    <!-- Date divider -->
+                    <div class="zp-dc-divider"><span>2026年2月16日</span></div>
+
+                    <div class="zp-dc-msg">
+                        <div class="zp-dc-avatar zp-dc-av-s">た</div>
+                        <div class="zp-dc-content">
+                            <div class="zp-dc-name">たくみ <span class="zp-dc-time">2026/02/16(月) 7:26</span></div>
+                            <div class="zp-dc-text">
+                                添削ありがとうございます。<br><br>
+                                ■課題：シナリオ構築<br>
+                                ■回数：7回目<br><br>
+                                ■ナウキャスト(GBPJPY　2026.2.6)<br>
+                                H4：上昇トレンド。赤ライン遠方<br>
+                                H1：下降トレンド。ラインブレイク<br>
+                                M15：下降トレンドブレイク。<br><br>
+                                ■シナリオ根拠(M15)<br>
+                                ・ロング<br>
+                                H4チャネル内、直近下降チャネルをブレイクしたのでロングにて構築。
+                            </div>
+                            <div class="zp-dc-images">
+                                <img src="images/zp-chart-h4-b.png" alt="H4チャート">
+                                <img src="images/zp-chart-h1-b.png" alt="H1チャート">
+                                <img src="images/zp-chart-m15-b.png" alt="M15チャート">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Date divider -->
+                    <div class="zp-dc-divider"><span>2026年2月18日</span></div>
+
+                    <div class="zp-dc-msg">
+                        <div class="zp-dc-avatar" style="background:#e67e22;">ゆ</div>
+                        <div class="zp-dc-content">
+                            <div class="zp-dc-name">ゆう <span class="zp-dc-time">2026/02/18(水) 8:52</span></div>
+                            <div class="zp-dc-text">
+                                添削よろしくお願いいたします。<br><br>
+                                ■課題：シナリオ4期添削<br>
+                                ■回数：2回目<br><br>
+                                ■ナウキャスト（AUDUSD 2023.11）<br>
+                                H4 ：下降トレンド減速（転換時期？）、ライン付近<br>
+                                H1 ：下降トレンド。チャネルライン付近<br>
+                                M15：上昇トレンド。チャネルと上昇ライン付近<br><br>
+                                ■シナリオ根拠(M15)<br>
+                                ・ショート<br>
+                                H4は下降トレンドが上昇・転換のきざしがあるが、ショートはまだ衰えていないのでキープ。<br>
+                                H1チャネル上限にあって、M15は上昇チャネル上限に乗ったところなので、<br>
+                                M15でまずくショート構築を。以上M15のチャネル上限ライン付近にて。<br><br>
+                                <span class="zp-dc-question">🔸🔸🔸<br>質問：H4が上昇転換しかけるようなので、M15の上昇チャネルと上方の赤チャネルを上抜けて上昇方向の動きがあればロングのシナリオ構築ができますでしょうか？よろしくお願いいたします。<br>🔸🔸🔸</span>
+                            </div>
+                            <div class="zp-dc-images">
+                                <img src="images/zp-chart-h4-c.png" alt="H4チャート">
+                                <img src="images/zp-chart-h1-c.png" alt="H1チャート">
+                                <img src="images/zp-chart-m15-c.png" alt="M15チャート">
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            </div><!-- /zp-dc-submit-row -->
+            </div><!-- /zp-dc-col STEP 1 -->
+            </div><!-- /zp-dc-flow-submit -->
+
+            <!-- STEP 2: review background -->
+            <div class="zp-dc-flow-review" id="zp-dc-flow-review">
+            <div class="zp-dc-col">
+                <div class="zp-dc-step-header" id="zp-dc-label2">
+                    <div class="zp-dc-step-num"><img src="img/num-2.png" alt="②" class="zp-dc-step-num-img"></div>
+                    <div class="zp-dc-step-info">
+                        <h3>動画で添削</h3>
+                        <p>よすがが全員分をまとめて動画で徹底指導</p>
+                    </div>
+                </div>
+            <div class="zp-dc-submit-row">
+            <!-- Discord channel sidebar (学習系) -->
+            <div class="zp-dc-sidebar">
+                <div class="zp-dc-sb-cat">📢 お知らせ</div>
+                <div class="zp-dc-sb-ch">🔑 はじめに</div>
+                <div class="zp-dc-sb-ch">使い方</div>
+                <div class="zp-dc-sb-ch">自己紹介</div>
+                <div class="zp-dc-sb-sep"></div>
+                <div class="zp-dc-sb-cat">ライブ</div>
+                <div class="zp-dc-sb-ch">📅 ライブ予定</div>
+                <div class="zp-dc-sb-ch">ライブ用テキスト</div>
+                <div class="zp-dc-sb-ch">💡 ライブ</div>
+                <div class="zp-dc-sb-sep"></div>
+                <div class="zp-dc-sb-cat">学習</div>
+                <div class="zp-dc-sb-ch zp-dc-sb-active">📎 添削</div>
+                <div class="zp-dc-sb-ch">📊 演習リスト</div>
+                <div class="zp-dc-sb-ch">🤝 相談雑談</div>
+                <div class="zp-dc-sb-ch">操作、使い方相談</div>
+                <div class="zp-dc-sb-ch">📦 アウトプット</div>
+                <div class="zp-dc-sb-ch">オフ会参加</div>
+            </div>
+            <!-- ② 添削動画チャンネル: 添削 -->
+            <div class="zp-discord" id="zp-discord-review">
+                <div class="zp-dc-header">
+                    <span class="zp-dc-hash">#</span> 📎 添削
+                </div>
+                <div class="zp-dc-body">
+
+                    <!-- Date divider -->
+                    <div class="zp-dc-divider"><span>2026年2月17日</span></div>
+
+                    <div class="zp-dc-msg">
+                        <div class="zp-dc-avatar zp-dc-av-yosuga"><img src="images/yosuga-avatar.png" alt="yosuga"></div>
+                        <div class="zp-dc-content">
+                            <div class="zp-dc-name" style="color:#e74c3c">yosuga <span class="zp-dc-time">2026/02/17(火) 12:48</span></div>
+                            <div class="zp-dc-text zp-dc-link">https://youtu.be/xK9mP2nQr4s</div>
+                            <div class="zp-dc-yt-embed">
+                                <div class="zp-dc-yt-left">
+                                    <div class="zp-dc-yt-label">YouTube</div>
+                                    <div class="zp-dc-yt-channel">よすが｜FX SPACE</div>
+                                    <div class="zp-dc-yt-title">B【2/17】ゼロプロ4期添削</div>
+                                </div>
+                                <div class="zp-dc-yt-thumb">
+                                    <img src="images/zp-chart-h4-b.png" alt="動画サムネイル">
+                                    <div class="zp-dc-yt-play">▶</div>
+                                </div>
+                            </div>
+                            <div class="zp-dc-reactions">
+                                <span class="zp-dc-react">😊 28</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Date divider -->
+                    <div class="zp-dc-divider"><span>2026年2月18日</span></div>
+
+                    <div class="zp-dc-msg">
+                        <div class="zp-dc-avatar zp-dc-av-yosuga"><img src="images/yosuga-avatar.png" alt="yosuga"></div>
+                        <div class="zp-dc-content">
+                            <div class="zp-dc-name" style="color:#e74c3c">yosuga <span class="zp-dc-time">2026/02/18(水) 11:35</span></div>
+                            <div class="zp-dc-text zp-dc-link">https://youtu.be/bT7vL3wYj8d</div>
+                            <div class="zp-dc-yt-embed">
+                                <div class="zp-dc-yt-left">
+                                    <div class="zp-dc-yt-label">YouTube</div>
+                                    <div class="zp-dc-yt-channel">よすが｜FX SPACE</div>
+                                    <div class="zp-dc-yt-title">A【2/18】ゼロプロ4期添削2</div>
+                                </div>
+                                <div class="zp-dc-yt-thumb">
+                                    <img src="images/zp-chart-h4.png" alt="動画サムネイル">
+                                    <div class="zp-dc-yt-play">▶</div>
+                                </div>
+                            </div>
+                            <div class="zp-dc-reactions">
+                                <span class="zp-dc-react">😊 24</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Date divider -->
+                    <div class="zp-dc-divider"><span>2026年2月19日</span></div>
+
+                    <div class="zp-dc-msg">
+                        <div class="zp-dc-avatar zp-dc-av-yosuga"><img src="images/yosuga-avatar.png" alt="yosuga"></div>
+                        <div class="zp-dc-content">
+                            <div class="zp-dc-name" style="color:#e74c3c">yosuga <span class="zp-dc-time">2026/02/19(木) 11:00</span></div>
+                            <div class="zp-dc-text zp-dc-link">https://youtu.be/hR5cN1fXo6e</div>
+                            <div class="zp-dc-yt-embed">
+                                <div class="zp-dc-yt-left">
+                                    <div class="zp-dc-yt-label">YouTube</div>
+                                    <div class="zp-dc-yt-channel">よすが｜FX SPACE</div>
+                                    <div class="zp-dc-yt-title">B【2/19】ゼロプロ4期添削</div>
+                                </div>
+                                <div class="zp-dc-yt-thumb">
+                                    <img src="images/zp-chart-h1-b.png" alt="動画サムネイル">
+                                    <div class="zp-dc-yt-play">▶</div>
+                                </div>
+                            </div>
+                            <div class="zp-dc-reactions">
+                                <span class="zp-dc-react">😊 28</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Date divider -->
+                    <div class="zp-dc-divider"><span>2026年2月20日</span></div>
+
+                    <div class="zp-dc-msg">
+                        <div class="zp-dc-avatar zp-dc-av-yosuga"><img src="images/yosuga-avatar.png" alt="yosuga"></div>
+                        <div class="zp-dc-content">
+                            <div class="zp-dc-name" style="color:#e74c3c">yosuga <span class="zp-dc-time">2026/02/20(金) 12:02</span></div>
+                            <div class="zp-dc-text zp-dc-link">https://youtu.be/gU4zA8iVk2p</div>
+                            <div class="zp-dc-yt-embed">
+                                <div class="zp-dc-yt-left">
+                                    <div class="zp-dc-yt-label">YouTube</div>
+                                    <div class="zp-dc-yt-channel">よすが｜FX SPACE</div>
+                                    <div class="zp-dc-yt-title">A【2/20】ゼロプロ4期添削2</div>
+                                </div>
+                                <div class="zp-dc-yt-thumb">
+                                    <img src="images/zp-chart-h1.png" alt="動画サムネイル">
+                                    <div class="zp-dc-yt-play">▶</div>
+                                </div>
+                            </div>
+                            <div class="zp-dc-reactions">
+                                <span class="zp-dc-react">😊 25</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            </div><!-- /zp-dc-submit-row -->
+            </div><!-- /zp-dc-col STEP 2 -->
+            </div><!-- /zp-dc-flow-review -->
+        </div>
+    </div>
+
+    <!-- ===== COMMUNITY ===== -->
+    <div class="zp-block zp-alt-bg" id="zp-community">
+        <h2 class="zp-block-title">一人じゃない。仲間がいる。</h2>
+        <p class="zp-block-lead" style="color:#fff;-webkit-text-fill-color:#fff;text-align:center;margin-bottom:calc(3rem + 1cm);">添削だけじゃない。ライブ配信、質問、仲間との交流で<br>孤独な独学とは真逆の環境で成長できる。</p>
+        <div class="zp-comm-carousel" id="zp-comm-carousel">
+            <!-- Carousel track -->
+            <button class="zp-carousel-arrow zp-carousel-prev" id="zp-carousel-prev" aria-label="前へ">&#8249;</button>
+            <div class="zp-carousel-track">
+
+            <!-- Card 1: ライブ配信 -->
+            <div class="zp-carousel-slide" data-label="🔴 ライブ配信" data-desc="参加者が自ら企画・開催するライブ。画面共有でお互いの課題を添削し合い、一人では気づけない視点が得られる。">
+            <div class="zp-discord">
+                <div class="zp-dc-header">
+                    <span class="zp-dc-hash">#</span> ライブ予定
+                </div>
+                <div class="zp-dc-body">
+                    <div class="zp-dc-msg">
+                        <div class="zp-dc-avatar zp-dc-av-b">H</div>
+                        <div class="zp-dc-content">
+                            <div class="zp-dc-name">Hiro<span class="zp-dc-time">2026/02/07</span></div>
+                            <div class="zp-dc-text">【開催ライブ】わからないところを皆で潰し合ってお互い高めていこうライブ<br>日程: 2/7(土) 21:00~22:00, 2/8(日) 21:00~22:00<br>ボイスあり・なし・チャット関わらず参加OK<br>画面共有しながらお互いのチャートを見て添削し合いましょう！初参加の方も大歓迎です🔥</div>
+                            <div class="zp-dc-reactions"><span class="zp-dc-react">🤩 18</span><span class="zp-dc-react">🔥 7</span></div>
+                        </div>
+                    </div>
+                    <div class="zp-dc-msg">
+                        <div class="zp-dc-avatar zp-dc-av-y">K</div>
+                        <div class="zp-dc-content">
+                            <div class="zp-dc-name">Kei<span class="zp-dc-time">2026/02/07</span></div>
+                            <div class="zp-dc-text">参加します！前回のライブで自分のラインの引き方の癖を指摘してもらえたのがすごく良かったので、今回も楽しみです😊</div>
+                        </div>
+                    </div>
+                    <div class="zp-dc-msg">
+                        <div class="zp-dc-avatar zp-dc-av-s">な</div>
+                        <div class="zp-dc-content">
+                            <div class="zp-dc-name">なつき<span class="zp-dc-time">2026/02/17</span></div>
+                            <div class="zp-dc-text">【開催ライブ】相互添削ライブ<br>2/17(火) 22:00-24:00<br>ランダムなチャートで相互に添削しましょう！アットホームなライブです。<br>前半はシナリオ作成、後半はお互いのシナリオを添削する流れで進めます。途中参加・途中退出OKです👌</div>
+                            <div class="zp-dc-reactions">
+                                <span class="zp-dc-react">👍 4</span>
+                                <span class="zp-dc-react">😊 5</span>
+                                <span class="zp-dc-react">🤩 3</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="zp-dc-msg">
+                        <div class="zp-dc-avatar zp-dc-av-y">あ</div>
+                        <div class="zp-dc-content">
+                            <div class="zp-dc-name">あおい<span class="zp-dc-time">2026/02/17</span></div>
+                            <div class="zp-dc-text">なつきさんの添削ライブ毎回学びが深い…！参加します！🙋‍♀️</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+            <!-- Card 2: 質問チャンネル -->
+            <div class="zp-carousel-slide" data-label="❓ 質問チャンネル" data-desc="カテゴリ別の質問チャンネルでいつでも質問OK。よすがや仲間が丁寧に回答してくれる。">
+            <div class="zp-discord">
+                <div class="zp-dc-header">
+                    <span class="zp-dc-hash">#</span> 操作、使い方相談
+                </div>
+                <div class="zp-dc-body">
+                    <div class="zp-dc-thread-title">質問：シナリオ作成にMT4（YTT）を使用する場合について</div>
+                    <div class="zp-dc-msg">
+                        <div class="zp-dc-avatar zp-dc-av-y">し</div>
+                        <div class="zp-dc-content">
+                            <div class="zp-dc-name">しゅん<span class="zp-dc-time">2026/01/27</span></div>
+                            <div class="zp-dc-text">チャネルラインのプロパティから点線に変更する方法は分かったのですが、TradingViewの場合はどうすればいいでしょうか？<br>MT4だとラインのスタイルを「点線」に変えるだけなんですが、TradingViewだと同じ設定項目が見つからなくて…</div>
+                            <div class="zp-dc-images" style="grid-template-columns:1fr">
+                                <img src="images/zp-qa-chart1.png" alt="チャート画像" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="zp-dc-msg">
+                        <div class="zp-dc-avatar zp-dc-av-yosuga"><img src="images/yosuga-avatar.png" alt="yosuga"></div>
+                        <div class="zp-dc-content">
+                            <div class="zp-dc-name" style="color:#e74c3c">yosuga<span class="zp-dc-time">2026/01/27</span></div>
+                            <div class="zp-dc-text">TradingViewの場合は、ラインを選択した状態で右側の設定パネルを開いて「スタイル」タブに切り替えてください。<br>そこに「線のスタイル」というドロップダウンがあるので、そこから「点線（Dotted）」を選べばOKです。<br>MT4のYTTとは設定の場所が違うだけで、やること自体は同じですね👍</div>
+                        </div>
+                    </div>
+                    <div class="zp-dc-msg">
+                        <div class="zp-dc-avatar zp-dc-av-y">し</div>
+                        <div class="zp-dc-content">
+                            <div class="zp-dc-name">しゅん<span class="zp-dc-time">2026/01/27</span></div>
+                            <div class="zp-dc-text">あ、スタイルタブだったんですね！ずっと「パラメータ」タブの中を探してました😅 ありがとうございます、できました！</div>
+                            <div class="zp-dc-reactions"><span class="zp-dc-react">👍 6</span></div>
+                        </div>
+                    </div>
+                    <div class="zp-dc-msg">
+                        <div class="zp-dc-avatar zp-dc-av-yosuga"><img src="images/yosuga-avatar.png" alt="yosuga"></div>
+                        <div class="zp-dc-content">
+                            <div class="zp-dc-name" style="color:#e74c3c">yosuga<span class="zp-dc-time">2026/01/27</span></div>
+                            <div class="zp-dc-text">よかったです！TradingViewは設定がタブで分かれてるので最初は迷いますよね。<br>ちなみに「お気に入りのデフォルト」に保存しておくと、次回から自動で点線になりますよ🙂</div>
+                            <div class="zp-dc-reactions"><span class="zp-dc-react">😊 3</span><span class="zp-dc-react">🙏 4</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+            <!-- Card 3: 相談雑談 -->
+            <div class="zp-carousel-slide" data-label="🤝 相談雑談" data-desc="ステージの悩みや日常のちょっとしたことまで。同じ目標を持つ仲間だから気軽に話せる。">
+            <div class="zp-discord" id="zp-chat-card">
+                <div class="zp-dc-header">
+                    <span class="zp-dc-hash">#</span> 相談雑談
+                </div>
+                <div class="zp-dc-body" id="zp-chat-body">
+                    <div class="zp-dc-msg zp-chat-msg">
+                        <div class="zp-dc-avatar zp-dc-av-y">K</div>
+                        <div class="zp-dc-content">
+                            <div class="zp-dc-name">Kei<span class="zp-dc-time">2026/02/10</span></div>
+                            <div class="zp-dc-text">ライン引きステージやっとクリアした…！😭🎉</div>
+                            <div class="zp-dc-reactions"><span class="zp-dc-react">🎉 12</span><span class="zp-dc-react">🔥 6</span></div>
+                        </div>
+                    </div>
+                    <div class="zp-dc-msg zp-chat-msg">
+                        <div class="zp-dc-avatar zp-dc-av-b">H</div>
+                        <div class="zp-dc-content">
+                            <div class="zp-dc-name">Hiro<span class="zp-dc-time">2026/02/10</span></div>
+                            <div class="zp-dc-text">おめでとう！🎊 ナウキャストステージ楽しいよ〜！</div>
+                        </div>
+                    </div>
+                    <div class="zp-dc-msg zp-chat-msg">
+                        <div class="zp-dc-avatar zp-dc-av-s">み</div>
+                        <div class="zp-dc-content">
+                            <div class="zp-dc-name">みく<span class="zp-dc-time">2026/02/10</span></div>
+                            <div class="zp-dc-text">Keiさんおめでとう！私まだ基礎ステージで課題の書き方が合ってるか不安なんですけど…皆さん最初どのくらいで慣れました？</div>
+                        </div>
+                    </div>
+                    <div class="zp-dc-msg zp-chat-msg">
+                        <div class="zp-dc-avatar zp-dc-av-y">K</div>
+                        <div class="zp-dc-content">
+                            <div class="zp-dc-name">Kei<span class="zp-dc-time">2026/02/10</span></div>
+                            <div class="zp-dc-text">私も最初ナウキャストの意味すら分からなかった😂 3回くらい提出したら添削で流れ掴めるよ！あと夜食にコンビニのプリン買ってきたから課題がんばる🍮</div>
+                            <div class="zp-dc-reactions"><span class="zp-dc-react">😂 5</span><span class="zp-dc-react">🍮 3</span></div>
+                        </div>
+                    </div>
+                    <div class="zp-dc-msg zp-chat-msg">
+                        <div class="zp-dc-avatar zp-dc-av-s">み</div>
+                        <div class="zp-dc-content">
+                            <div class="zp-dc-name">みく<span class="zp-dc-time">2026/02/10</span></div>
+                            <div class="zp-dc-text">3回か〜！まず出してみます。プリン私も買お笑</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+            </div><!-- /zp-carousel-track -->
+            <button class="zp-carousel-arrow zp-carousel-next" id="zp-carousel-next" aria-label="次へ">&#8250;</button>
+        </div>
+        <!-- Caption area -->
+        <div class="zp-carousel-caption" id="zp-carousel-caption">
+            <h4 id="zp-carousel-label"></h4>
+            <p id="zp-carousel-desc"></p>
+        </div>
+    </div>
+
+
+    <!-- ===== BOTTOM: Info + CTA ===== -->
+    <div class="zp-bottom">
+        <div class="zp-info-row" id="zp-card-deck">
+            <div class="zp-info-chip">
+                <span class="zp-chip-icon">&#9200;</span>
+                <div class="zp-chip-text">
+                    <span class="zp-chip-sub">必要な平均勉強時間</span>
+                    <span class="zp-chip-main">毎日1時間〜</span>
+                </div>
+            </div>
+            <div class="zp-info-divider"></div>
+            <div class="zp-info-chip">
+                <span class="zp-chip-icon">⭐</span>
+                <div class="zp-chip-text">
+                    <span class="zp-chip-sub">スタンダード・プレミアム会員が対象</span>
+                    <span class="zp-chip-main">メンバー限定プログラム</span>
+                </div>
+            </div>
+        </div>
+        <div class="zp-cta-area">
+            <p class="zp-cta-note">※ 応募多数の場合は選定・抽選となります。次回募集はDiscordの「ゼロプロ90」にてお知らせ。</p>
+            <a href="https://discord.com/channels/1039824083208126474/1171706488234979378" target="_blank" class="zp-detail-btn">ゼロプロ90の詳細を見る →</a>
+        </div>
+    </div>
+</section>
+  </div>
+</div>
+
+<!-- ===== ここから2ルート共通 ===== -->
+<!-- ===== ここから2ルート共通（ルートを選ぶまで非表示） ===== -->
+<div class="common-zone" id="common-zone">
+
+<!-- ===== Fintokeiに挑戦 ===== -->
+<section class="rsec" id="fintokei">
+  <div class="rsec-head rv">
+    <span class="section-title-badge section-title-badge--blue">
+      <img class="hero-title-side hero-title-side--left" src="img/title-side-blue-left.png" alt="">
+      仮想資金で挑戦
+      <img class="hero-title-side hero-title-side--right" src="img/title-side-blue-right.png" alt="">
+    </span>
+    <div><span class="tw"><h2><img class="brand-fintokei" src="img/fintokei-logo.png" alt="Fintokei">に挑戦</h2><img src="img/wave-orange.png" alt=""></span></div>
+    <p class="rsec-lead">Fintokeiのおすすめのプランは、この2つ。</p>
+  </div>
+  <div class="alt-grid">
+    <div class="alt-card rv">
+      <img class="alt-num" src="img/crayon-orange-1.png" alt="1">
+      <p class="feature-tagline">テストあり・高い取り分</p>
+      <h3>Fintokei チャレンジ</h3>
+      <p>2段階テストに合格して仮想資金提供。テストは最短1週間。</p>
+      <p class="alt-spec">資金 <b>200万〜5000万</b>／取り分 <b>80%</b></p>
+      <a class="rs-vid" href="https://my.fintokei.com/affiliate/jp/55" target="_blank" rel="noopener">Fintokei →</a>
+    </div>
+    <div class="alt-card rv">
+      <img class="alt-num" src="img/crayon-orange-2.png" alt="2">
+      <p class="feature-tagline">テストなし・即スタート</p>
+      <h3>Fintokei 速攻プロ</h3>
+      <p>申し込んだら即仮想資金提供。早く始めたい人向け。</p>
+      <p class="alt-spec">資金 <b>20万〜500万</b>／取り分 <b>50%</b></p>
+      <a class="rs-vid" href="https://my.fintokei.com/affiliate/jp/55" target="_blank" rel="noopener">Fintokei →</a>
+    </div>
+  </div>
+  <div class="alt-coupon rv">
+    <span class="alt-coupon-ttl">クーポンコード</span>
+    <p class="cp-row">
+      <span class="cp-who">初めて購入の方</span>
+      <b class="cp-code">30ysg</b>
+      <span class="cp-arrow">→</span>
+      <b class="cp-off">30%OFF</b>
+    </p>
+    <p class="cp-row">
+      <span class="cp-who">2回目以降の方</span>
+      <b class="cp-code">FINTO5KEI</b>
+      <span class="cp-arrow">→</span>
+      <b class="cp-off">5%OFF</b>
+    </p>
+  </div>
+</section>
+<!-- ===== ゴール：ASTRO ===== -->
+<section class="rsec rsec--space" id="pro-gate">
+  <div class="rsec-head rv">
+    <span class="section-title-badge">
+      <img class="hero-title-side hero-title-side--left" src="img/title-side-yellow-left.png" alt="">
+      ゴール
+      <img class="hero-title-side hero-title-side--right" src="img/title-side-yellow-right.png" alt="">
+    </span>
+    <div><span class="tw"><h2>プロトレーダー集団 ASTRO へ</h2><img src="img/wave-orange.png" alt=""></span></div>
+    <img class="astro-logo" src="img/astro-logo.png" alt="ASTRO TRADERS">
+    <p class="rsec-lead">プロの基準を満たしたトレーダーだけが参加できる、FX&nbsp;SPACEのプロチーム。<br>仲間と高め合いながら、さらに上のランクを目指します。</p>
+  </div>
+
+  <div class="astro-wrap">
+    <!-- ランク（ASTROランク制）：条件・説明は画像に任せ、テキストは最小限にする -->
+    <div class="astro-rank rv">
+      <img class="astro-rank-img" src="img/astro-rank-chart.png" alt="ASTRO TRADERS ランク一覧：個人口座ルートとプロップルート、KarmanからVoyagerまでの昇格条件" width="1080" height="1080" loading="lazy">
+      <p class="rank-zoom-hint" id="rank-zoom-hint"><img src="img/zoom-icon.png" alt="">画像をタップして拡大</p>
+      <p class="astro-goal">プロの最高峰 <b>Voyager</b> を目指そう</p>
+      <div><a class="rank-astro-link" href="https://discordapp.com/channels/1039824083208126474/1136925665099251753/1179699238481969162" target="_blank" rel="noopener">ASTROについて詳しく →</a></div>
+      <div><a class="astro-apply astro-apply--stack" href="https://discordapp.com/channels/1039824083208126474/1136925665099251753/1179699297105739846" target="_blank" rel="noopener">プロ申請へ →</a></div>
+      <p class="rank-note">※ YTTを入れてトレードしていれば、実績から自動で判定されるため申請は不要です。<a href="https://fx-space.com/intro/ytt-tokusetu.html" target="_blank" rel="noopener">YTTについて詳しく</a></p>
+    </div>
+  </div>
+</section>
+<!-- ===== ルート全体で使うもの（YTT／コミュニティ） ===== -->
+<section class="rsec rsec--tools">
+  <div class="rsec-head rv">
+    <span class="section-title-badge section-title-badge--blue">
+      <img class="hero-title-side hero-title-side--left" src="img/title-side-blue-left.png" alt="">
+      ずっと使う
+      <img class="hero-title-side hero-title-side--right" src="img/title-side-blue-right.png" alt="">
+    </span>
+    <div><span class="tw"><h2>どちらのルートでも使うもの</h2><img src="img/wave-orange.png" alt=""></span></div>
+    <p class="rsec-lead">ひとりで走りきるのは、大変。<br>この2つが、ゴールまで支えてくれます。</p>
+  </div>
+  <div class="tools-wrap">
+
+    <!-- YTT：機能アニメで見せる -->
+    <div class="tools-block rv">
+      <div class="tools-block-head"><img class="tools-ytt-logo" src="img/ytt-logo-wide.png" alt="YTT"></div>
+      <div class="tools-cap">学んだことをすぐ実践できるトレードツール</div>
+      <div class="fcar" id="ob-ytt-anim-wrap" data-auto="5000">
+       <div class="fcar-view"><div class="fcar-track">
+
+        <!-- 機能1: 直感的な注文・決済 -->
+        <div class="fcar-slide"><div class="ob-ytt-anim-item">
+          <div class="ob-ytt-anim-head"><div class="ob-ytt-anim-title">直感的な注文・決済</div></div>
+          <p class="ob-ytt-anim-desc">ロット数を指定してBUY/SELLで即座に注文。全決済・1/2決済も1クリック。</p>
+          <div class="ob-ytt-anim-scene" id="scene-ytt-p1">
+            <svg viewBox="0 0 280 220" preserveAspectRatio="xMidYMid meet">
+              <rect id="p1-panel" x="50" y="5" width="180" height="210" rx="8" fill="#2b2d31" opacity="0"></rect>
+              <text id="p1-title" x="140" y="22" fill="rgba(255,255,255,0.5)" text-anchor="middle" font-size="8" font-weight="600" font-family="Inter" opacity="0">注文パネル</text>
+              <g id="p1-lot" opacity="0">
+                <rect x="68" y="28" width="26" height="27" rx="4" fill="#3f4147"></rect>
+                <text x="81" y="40" fill="rgba(255,255,255,0.7)" text-anchor="middle" font-size="9" font-family="Inter">▲</text>
+                <text x="81" y="51" fill="rgba(255,255,255,0.7)" text-anchor="middle" font-size="9" font-family="Inter">▼</text>
+                <rect x="98" y="28" width="80" height="27" rx="4" fill="#1e1f22" stroke="#3f4147" stroke-width="0.8"></rect>
+                <text x="138" y="47" fill="white" text-anchor="middle" font-size="16" font-weight="800" font-family="Inter">0.01</text>
+                <rect x="182" y="28" width="30" height="27" rx="4" fill="#3f4147"></rect>
+                <rect x="190" y="40" width="3" height="10" rx="0.5" fill="rgba(255,255,255,0.5)"></rect>
+                <rect x="195" y="36" width="3" height="14" rx="0.5" fill="rgba(255,255,255,0.5)"></rect>
+                <rect x="200" y="42" width="3" height="8" rx="0.5" fill="rgba(255,255,255,0.5)"></rect>
+                <polygon points="202,40 206,40 204,36" fill="rgba(255,255,255,0.5)"></polygon>
+              </g>
+              <g id="p1-sell" opacity="0">
+                <rect x="58" y="60" width="82" height="36" rx="5" fill="#8B1A1A"></rect>
+                <text x="99" y="77" fill="white" text-anchor="middle" font-size="14" font-weight="900" font-family="Inter">SELL</text>
+                <text x="99" y="90" fill="rgba(255,255,255,0.5)" text-anchor="middle" font-size="8" font-family="Inter">0.01 lot</text>
+              </g>
+              <g id="p1-buy" opacity="0">
+                <rect x="144" y="60" width="82" height="36" rx="5" fill="#1D5FB6"></rect>
+                <text x="185" y="77" fill="white" text-anchor="middle" font-size="14" font-weight="900" font-family="Inter">BUY</text>
+                <text x="185" y="90" fill="rgba(255,255,255,0.5)" text-anchor="middle" font-size="8" font-family="Inter">0.01 lot</text>
+              </g>
+              <g id="p1-cls" opacity="0">
+                <rect x="58" y="101" width="168" height="26" rx="5" fill="#C8A200"></rect>
+                <text x="142" y="118" fill="#1e1f22" text-anchor="middle" font-size="11" font-weight="700" font-family="Inter">全決済</text>
+              </g>
+              <g id="p1-half" opacity="0">
+                <rect x="58" y="131" width="168" height="26" rx="5" fill="#2B8C44"></rect>
+                <text x="142" y="148" fill="#1e1f22" text-anchor="middle" font-size="11" font-weight="700" font-family="Inter">1/2決済</text>
+              </g>
+              <g id="p1-pl" opacity="0">
+                <rect x="58" y="163" width="168" height="44" rx="6" fill="#1e1f22" stroke="#3f4147" stroke-width="0.5"></rect>
+                <circle id="p1-pl-dot" cx="68" cy="176" r="3" fill="#4ade80"></circle>
+                <text x="76" y="179" fill="rgba(255,255,255,0.6)" font-size="8" font-weight="600" font-family="Inter">USDJPY  Buy 0.01</text>
+                <text x="66" y="199" fill="rgba(255,255,255,0.4)" font-size="7.5" font-weight="600" font-family="Inter">損益</text>
+                <text id="p1-pl-val" x="218" y="200" fill="#4ade80" text-anchor="end" font-size="15" font-weight="900" font-family="Inter">+0 円</text>
+              </g>
+            </svg>
+          </div>
+        </div></div>
+
+        <!-- 機能2: Yトレード・シナリオ機能 -->
+        <div class="fcar-slide"><div class="ob-ytt-anim-item">
+          <div class="ob-ytt-anim-head"><div class="ob-ytt-anim-title">Yトレード・シナリオ機能</div></div>
+          <p class="ob-ytt-anim-desc">チャート上でTP/SLを視覚的に設定。朝にシナリオを仕込んで張り付き不要に。</p>
+          <div class="ob-ytt-anim-scene" id="scene-ytt">
+            <svg viewBox="0 0 280 160" preserveAspectRatio="xMidYMid meet">
+              <line class="grid-line" x1="0" y1="40" x2="280" y2="40" stroke="rgba(255,255,255,0.05)"></line>
+              <line class="grid-line" x1="0" y1="80" x2="280" y2="80" stroke="rgba(255,255,255,0.05)"></line>
+              <line class="grid-line" x1="0" y1="120" x2="280" y2="120" stroke="rgba(255,255,255,0.05)"></line>
+              <g class="candle" style="opacity:0;"><line x1="14" y1="128" x2="14" y2="142" stroke="#ef4444" stroke-width="1"></line><rect x="12" y="130" width="4" height="8" rx="0.5" fill="#ef4444"></rect></g>
+              <g class="candle" style="opacity:0;"><line x1="21" y1="124" x2="21" y2="140" stroke="#22c55e" stroke-width="1"></line><rect x="19" y="126" width="4" height="10" rx="0.5" fill="#22c55e"></rect></g>
+              <g class="candle" style="opacity:0;"><line x1="28" y1="126" x2="28" y2="144" stroke="#ef4444" stroke-width="1"></line><rect x="26" y="130" width="4" height="10" rx="0.5" fill="#ef4444"></rect></g>
+              <g class="candle" style="opacity:0;"><line x1="35" y1="122" x2="35" y2="138" stroke="#22c55e" stroke-width="1"></line><rect x="33" y="124" width="4" height="10" rx="0.5" fill="#22c55e"></rect></g>
+              <g class="candle" style="opacity:0;"><line x1="42" y1="126" x2="42" y2="140" stroke="#ef4444" stroke-width="1"></line><rect x="40" y="128" width="4" height="8" rx="0.5" fill="#ef4444"></rect></g>
+              <g class="candle" style="opacity:0;"><line x1="49" y1="120" x2="49" y2="142" stroke="#22c55e" stroke-width="1"></line><rect x="47" y="124" width="4" height="12" rx="0.5" fill="#22c55e"></rect></g>
+              <g class="candle" style="opacity:0;"><line x1="56" y1="118" x2="56" y2="140" stroke="#ef4444" stroke-width="1"></line><rect x="54" y="122" width="4" height="14" rx="0.5" fill="#ef4444"></rect></g>
+              <g class="candle" style="opacity:0;"><line x1="63" y1="112" x2="63" y2="138" stroke="#22c55e" stroke-width="1"></line><rect x="61" y="116" width="4" height="15" rx="0.5" fill="#22c55e"></rect></g>
+              <g class="candle" style="opacity:0;"><line x1="70" y1="110" x2="70" y2="136" stroke="#ef4444" stroke-width="1"></line><rect x="68" y="114" width="4" height="16" rx="0.5" fill="#ef4444"></rect></g>
+              <g class="candle" style="opacity:0;"><line x1="77" y1="112" x2="77" y2="140" stroke="#22c55e" stroke-width="1"></line><rect x="75" y="116" width="4" height="16" rx="0.5" fill="#22c55e"></rect></g>
+              <g class="candle" style="opacity:0;"><line x1="84" y1="108" x2="84" y2="134" stroke="#ef4444" stroke-width="1"></line><rect x="82" y="112" width="4" height="16" rx="0.5" fill="#ef4444"></rect></g>
+              <g class="candle" style="opacity:0;"><line x1="91" y1="106" x2="91" y2="132" stroke="#22c55e" stroke-width="1"></line><rect x="89" y="110" width="4" height="14" rx="0.5" fill="#22c55e"></rect></g>
+              <g class="candle" style="opacity:0;"><line x1="98" y1="108" x2="98" y2="136" stroke="#ef4444" stroke-width="1"></line><rect x="96" y="112" width="4" height="18" rx="0.5" fill="#ef4444"></rect></g>
+              <g class="candle" style="opacity:0;"><line x1="105" y1="104" x2="105" y2="130" stroke="#22c55e" stroke-width="1"></line><rect x="103" y="108" width="4" height="14" rx="0.5" fill="#22c55e"></rect></g>
+              <path class="scenario-path" d="M 107,108 L 155,35 L 192,75 L 250,10" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="300" stroke-dashoffset="300" style="opacity:0;"></path>
+              <g id="ytt-buy" opacity="0"><rect x="184" y="67" width="16" height="16" rx="2" fill="rgba(0,0,0,0.7)" stroke="#facc15" stroke-width="1.2"></rect><text x="192" y="79" fill="#facc15" font-size="11" text-anchor="middle" font-weight="900" font-family="Inter">↑</text></g>
+              <g id="ytt-tp" opacity="0"><rect x="240" y="17" width="16" height="16" rx="2" fill="rgba(0,0,0,0.7)" stroke="#facc15" stroke-width="1.2"></rect><text x="248" y="29" fill="#4ade80" font-size="11" text-anchor="middle" font-weight="900" font-family="Inter">✓</text></g>
+              <g id="ytt-sl" opacity="0"><rect x="240" y="117" width="16" height="16" rx="2" fill="rgba(0,0,0,0.7)" stroke="#facc15" stroke-width="1.2"></rect><text x="248" y="130" fill="#facc15" font-size="11" text-anchor="middle" font-weight="900" font-family="Inter">✗</text></g>
+              <text class="ytt-status" x="140" y="155" fill="rgba(255,255,255,0.45)" font-size="6.5" text-anchor="middle" font-family="Inter" font-weight="600" opacity="0">シナリオ完成</text>
+            </svg>
+          </div>
+        </div></div>
+
+        <!-- 機能3: 分析サポート・オートライン -->
+        <div class="fcar-slide"><div class="ob-ytt-anim-item">
+          <div class="ob-ytt-anim-head"><div class="ob-ytt-anim-title">分析サポート・オートライン</div></div>
+          <p class="ob-ytt-anim-desc">独自ロジックで重要ラインを自動描画。トレンド方向も時間足ごとに可視化。</p>
+          <div class="ob-ytt-anim-scene" id="scene-ytt-p3">
+            <svg viewBox="0 0 280 210" preserveAspectRatio="xMidYMid meet">
+              <line x1="0" y1="52" x2="280" y2="52" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"></line>
+              <line x1="0" y1="105" x2="280" y2="105" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"></line>
+              <line x1="0" y1="158" x2="280" y2="158" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"></line>
+              <g id="p3-candles" opacity="0">
+                <rect x="18" y="130" width="4" height="18" rx="0.5" fill="#22c55e"></rect>
+                <rect x="32" y="140" width="4" height="15" rx="0.5" fill="#ef4444"></rect>
+                <rect x="46" y="120" width="4" height="20" rx="0.5" fill="#22c55e"></rect>
+                <rect x="60" y="128" width="4" height="14" rx="0.5" fill="#ef4444"></rect>
+                <rect x="74" y="105" width="4" height="22" rx="0.5" fill="#22c55e"></rect>
+                <rect x="88" y="115" width="4" height="16" rx="0.5" fill="#ef4444"></rect>
+                <rect x="102" y="90" width="4" height="24" rx="0.5" fill="#22c55e"></rect>
+                <rect x="116" y="100" width="4" height="18" rx="0.5" fill="#ef4444"></rect>
+                <rect x="130" y="78" width="4" height="20" rx="0.5" fill="#22c55e"></rect>
+                <rect x="144" y="85" width="4" height="15" rx="0.5" fill="#ef4444"></rect>
+                <rect x="158" y="60" width="4" height="25" rx="0.5" fill="#22c55e"></rect>
+                <rect x="172" y="70" width="4" height="18" rx="0.5" fill="#ef4444"></rect>
+                <rect x="186" y="48" width="4" height="22" rx="0.5" fill="#22c55e"></rect>
+              </g>
+              <line id="p3-hl1" x1="10" y1="38" x2="205" y2="38" stroke="#ef4444" stroke-width="2" stroke-dasharray="195" stroke-dashoffset="195"></line>
+              <text id="p3-hl1-lbl" x="207" y="41" fill="#ef4444" font-size="6.5" font-weight="800" font-family="Inter" opacity="0">強</text>
+              <line id="p3-hl2" x1="10" y1="82" x2="205" y2="82" stroke="#22d3ee" stroke-width="1.5" stroke-dasharray="195" stroke-dashoffset="195"></line>
+              <text id="p3-hl2-lbl" x="207" y="85" fill="#22d3ee" font-size="6.5" font-weight="700" font-family="Inter" opacity="0">中</text>
+              <line id="p3-hl3" x1="10" y1="130" x2="205" y2="130" stroke="#22d3ee" stroke-width="1" stroke-dasharray="4,3" opacity="0"></line>
+              <text id="p3-hl3-lbl" x="207" y="133" fill="#22d3ee" font-size="6.5" font-weight="700" font-family="Inter" opacity="0">弱</text>
+              <line id="p3-hl4" x1="10" y1="165" x2="205" y2="165" stroke="rgba(255,255,255,0.45)" stroke-width="0.8" stroke-dasharray="3,4" opacity="0"></line>
+              <line id="p3-ch1" x1="4" y1="126" x2="202" y2="41" stroke="#a78bfa" stroke-width="1.2" stroke-dasharray="220" stroke-dashoffset="220"></line>
+              <line id="p3-ch2" x1="4" y1="168" x2="202" y2="83" stroke="#a78bfa" stroke-width="1.2" stroke-dasharray="220" stroke-dashoffset="220"></line>
+              <g id="p3-trend" opacity="0">
+                <rect x="215" y="8" width="58" height="82" rx="5" fill="rgba(0,0,0,0.8)" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"></rect>
+                <g id="p3-tr1" opacity="0">
+                  <text x="223" y="28" fill="rgba(255,255,255,0.55)" font-size="8.5" font-weight="700" font-family="Inter">H4</text>
+                  <rect x="252" y="18" width="15" height="13" rx="2.5" fill="rgba(239,68,68,0.2)"></rect>
+                  <text x="259.5" y="28.5" fill="#ef4444" text-anchor="middle" font-size="10" font-weight="900" font-family="Inter">↓</text>
+                </g>
+                <g id="p3-tr2" opacity="0">
+                  <text x="223" y="46" fill="rgba(255,255,255,0.55)" font-size="8.5" font-weight="700" font-family="Inter">H1</text>
+                  <rect x="252" y="36" width="15" height="13" rx="2.5" fill="rgba(34,211,238,0.2)"></rect>
+                  <text x="259.5" y="46.5" fill="#22d3ee" text-anchor="middle" font-size="10" font-weight="900" font-family="Inter">→</text>
+                </g>
+                <g id="p3-tr3" opacity="0">
+                  <text x="223" y="64" fill="rgba(255,255,255,0.55)" font-size="8.5" font-weight="700" font-family="Inter">M15</text>
+                  <rect x="252" y="54" width="15" height="13" rx="2.5" fill="rgba(74,222,128,0.2)"></rect>
+                  <text x="259.5" y="64.5" fill="#4ade80" text-anchor="middle" font-size="10" font-weight="900" font-family="Inter">↑</text>
+                </g>
+                <g id="p3-tr4" opacity="0">
+                  <text x="223" y="82" fill="rgba(255,255,255,0.55)" font-size="8.5" font-weight="700" font-family="Inter">M5</text>
+                  <rect x="252" y="72" width="15" height="13" rx="2.5" fill="rgba(74,222,128,0.2)"></rect>
+                  <text x="259.5" y="82.5" fill="#4ade80" text-anchor="middle" font-size="10" font-weight="900" font-family="Inter">↑</text>
+                </g>
+              </g>
+              <line id="p3-econ" x1="148" y1="5" x2="148" y2="190" stroke="#ef4444" stroke-width="0.8" opacity="0"></line>
+              <text id="p3-econ-t" x="153" y="10" fill="#ef4444" font-size="7" font-weight="700" font-family="Inter" writing-mode="tb" opacity="0">雇用統計</text>
+            </svg>
+          </div>
+        </div></div>
+
+        <!-- 機能4: リスク管理・自動ロット計算 -->
+        <div class="fcar-slide"><div class="ob-ytt-anim-item">
+          <div class="ob-ytt-anim-head"><div class="ob-ytt-anim-title">リスク管理・自動ロット計算</div></div>
+          <p class="ob-ytt-anim-desc">損失率を決めるだけでロットを自動計算。1トレードのリスクを常に一定に。</p>
+          <div class="ob-ytt-anim-scene" id="scene-ytt-p5">
+            <svg viewBox="0 0 280 210" preserveAspectRatio="xMidYMid meet">
+              <rect x="5" y="5" width="270" height="200" rx="4" fill="#0f1523" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+              <g id="p5-scene1">
+                <text id="p5-title" x="140" y="38" fill="rgba(255,255,255,0.7)" text-anchor="middle" font-size="12" font-weight="800" font-family="Inter" opacity="0">損失率固定モード</text>
+                <g id="p5-balance" opacity="0">
+                  <text x="60" y="68" fill="rgba(255,255,255,0.4)" font-size="8" font-family="Inter">残高</text>
+                  <text x="220" y="68" fill="rgba(255,255,255,0.8)" text-anchor="end" font-size="12" font-weight="800" font-family="Inter">1,000,000 円</text>
+                  <line x1="50" y1="75" x2="230" y2="75" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+                </g>
+                <g id="p5-rate" opacity="0">
+                  <text x="60" y="95" fill="rgba(255,255,255,0.4)" font-size="8" font-family="Inter">許容損失率</text>
+                  <text x="220" y="95" fill="#fbbf24" text-anchor="end" font-size="14" font-weight="900" font-family="Inter">2.0 %</text>
+                  <line x1="50" y1="102" x2="230" y2="102" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+                </g>
+                <text id="p5-arrow" x="140" y="122" fill="rgba(255,255,255,0.25)" text-anchor="middle" font-size="14" font-family="Inter" opacity="0">↓</text>
+                <g id="p5-maxloss" opacity="0">
+                  <text x="60" y="145" fill="rgba(255,255,255,0.4)" font-size="8" font-family="Inter">最大損失額</text>
+                  <text x="220" y="145" fill="#ef4444" text-anchor="end" font-size="13" font-weight="800" font-family="Inter">20,000 円</text>
+                  <line x1="50" y1="152" x2="230" y2="152" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+                </g>
+                <g id="p5-lot" opacity="0">
+                  <rect x="59" y="160" width="180" height="30" rx="6" fill="rgba(74,222,128,0.08)" stroke="#4ade80" stroke-width="0.8"/>
+                  <text x="69" y="180" fill="rgba(74,222,128,0.6)" font-size="9" font-weight="600" font-family="Inter">推奨ロット</text>
+                  <text x="229" y="181" fill="#4ade80" text-anchor="end" font-size="16" font-weight="900" font-family="Inter">0.15</text>
+                </g>
+              </g>
+            </svg>
+          </div>
+        </div></div>
+
+       </div></div>
+       <button type="button" class="fcar-nav fcar-prev" aria-label="前へ">‹</button>
+       <button type="button" class="fcar-nav fcar-next" aria-label="次へ">›</button>
+       <div class="fcar-dots"></div>
+      </div>
+      <a class="tools-btn tools-btn--yt" href="https://youtu.be/x6CJtJN3Ces" target="_blank" rel="noopener"><img src="img/icon-youtube-crayon.svg" alt="">YTT解説 →</a>
+      <a class="tools-btn tools-btn--tokusetu" href="https://fx-space.com/intro/ytt-tokusetu.html" target="_blank" rel="noopener">YTTについて詳しく →</a>
+    </div>
+
+    <!-- コミュニティ：Discord風モックで見せる -->
+    <div class="tools-block rv">
+      <div class="tools-block-head"><img src="img/icon-people.svg" alt=""><h3>コミュニティ</h3></div>
+      <div class="tools-cap">仲間ができて、続けられる場所</div>
+      <div class="fcar" data-auto="5500" data-btn="#comm-ch-btn">
+       <div class="fcar-view"><div class="fcar-track">
+
+        <!-- 初心者応援（intro ページのモックをそのまま移植） -->
+        <div class="fcar-slide" data-href="https://discordapp.com/channels/1039824083208126474/1426033560644747264" data-label="初心者応援を見る">
+          <div class="community-chat static-chat">
+            <div class="cc-header"><span class="cc-header-hash">#</span><span class="cc-header-name">初心者応援</span></div>
+            <div class="cc-body">
+              <div class="cc-messages">
+                <div class="cc-msg">
+                  <div class="cc-avatar" style="background:#5865f2;">C</div>
+                  <div class="cc-msg-body">
+                    <div class="cc-msg-header"><span class="cc-msg-name" style="color:#5865f2;">craft beer</span><span class="cc-msg-time">02/16 12:18</span></div>
+                    <div class="cc-msg-content">何度も資金を溶かしました… 成功してる方は何が違うのでしょう？😢</div>
+                    <div class="cc-reactions"><span class="cc-reaction">😢 <span class="cc-reaction-count">3</span></span></div>
+                  </div>
+                </div>
+                <div class="cc-msg">
+                  <div class="cc-avatar cc-avatar-yosuga"></div>
+                  <div class="cc-msg-body">
+                    <div class="cc-msg-header"><span class="cc-msg-name" style="color:#ed4245;">よすが</span><span class="cc-msg-time">02/16 12:30</span></div>
+                    <div class="cc-reply-quote">何度も資金を溶かしました… 成功してる方は何が違う？</div><div class="cc-msg-content">センスは不要。決められた通りにできるかがポイント。シナリオ構築を続けよう🔥</div>
+                  </div>
+                </div>
+                <div class="cc-msg">
+                  <div class="cc-avatar" style="background:#eb459e;">H</div>
+                  <div class="cc-msg-body">
+                    <div class="cc-msg-header"><span class="cc-msg-name" style="color:#eb459e;">HiU</span><span class="cc-msg-time">02/16 13:02</span></div>
+                    <div class="cc-reply-quote">何度も資金を溶かしました…</div><div class="cc-msg-content">6ヶ月デモで練習して、4H足でトレンド揃えてから入ったら勝率上がったよ！</div>
+                    <div class="cc-reactions"><span class="cc-reaction">💪 <span class="cc-reaction-count">9</span></span><span class="cc-reaction">🔥 <span class="cc-reaction-count">6</span></span></div>
+                  </div>
+                </div>
+                <div class="cc-msg">
+                  <div class="cc-avatar cc-avatar-yosuga"></div>
+                  <div class="cc-msg-body">
+                    <div class="cc-msg-header"><span class="cc-msg-name" style="color:#ed4245;">よすが</span><span class="cc-msg-time">02/16 13:10</span></div>
+                    <div class="cc-msg-content">「負けてはいけない」をまず疑おう。今日はこうだった→次こうしよう、でOK👍</div>
+                    <div class="cc-reactions"><span class="cc-reaction">❤️ <span class="cc-reaction-count">22</span></span><span class="cc-reaction">🙏 <span class="cc-reaction-count">15</span></span></div>
+                  </div>
+                </div>
+                <div class="cc-msg">
+                  <div class="cc-avatar" style="background:#57f287;">M</div>
+                  <div class="cc-msg-body">
+                    <div class="cc-msg-header"><span class="cc-msg-name" style="color:#57f287;">Mochi</span><span class="cc-msg-time">今日 09:15</span></div>
+                    <div class="cc-msg-content">今月から参加！fundra3万円プラン今月負けなしです🙏</div>
+                    <div class="cc-reactions"><span class="cc-reaction">🎉 <span class="cc-reaction-count">14</span></span><span class="cc-reaction">👏 <span class="cc-reaction-count">11</span></span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="cc-input"><span class="cc-input-plus">＋</span><span class="cc-input-text">#初心者応援 でメッセージを送信</span></div>
+          </div>
+        </div>
+
+        <!-- astroへ質問（intro ページのモックを移植） -->
+        <div class="fcar-slide" data-href="https://discordapp.com/channels/1039824083208126474/1181536360398590003" data-label="astroへ質問を見る">
+          <div class="community-chat static-chat">
+            <div class="cc-header"><span class="cc-header-hash">#</span><span class="cc-header-name">astroへ質問</span></div>
+            <div class="cc-body">
+              <div class="cc-messages">
+                <div class="cc-msg">
+                  <div class="cc-avatar" style="background:#fee75c;color:#000;">K</div>
+                  <div class="cc-msg-body">
+                    <div class="cc-msg-header"><span class="cc-msg-name" style="color:#fee75c;">Kenta_FX</span><span class="cc-msg-time">02/13 20:14</span></div>
+                    <div class="cc-msg-content">チャネル上限にぶつかってるように見えるのですが🤔</div>
+                  </div>
+                </div>
+                <div class="cc-msg">
+                  <div class="cc-avatar" style="background:#ed4245;">r</div>
+                  <div class="cc-msg-body">
+                    <div class="cc-msg-header"><span class="cc-msg-name" style="color:#ed4245;">robuta</span><span class="cc-mars-badge">Mars</span><span class="cc-msg-time">02/13 21:30</span></div>
+                    <div class="cc-reply-quote">チャネル上限にぶつかってるように見える…</div><div class="cc-msg-content">「トレンド転換の確認」がキーですね💦</div>
+                  </div>
+                </div>
+                <div class="cc-msg">
+                  <div class="cc-avatar" style="background:#fee75c;color:#000;">K</div>
+                  <div class="cc-msg-body">
+                    <div class="cc-msg-header"><span class="cc-msg-name" style="color:#fee75c;">Kenta_FX</span><span class="cc-msg-time">02/14 08:22</span></div>
+                    <div class="cc-reply-quote">トレンド転換の確認がキー…</div><div class="cc-msg-content">1H足のシナリオ描画にすべき？上昇転換ポイントが掴めません…</div>
+                  </div>
+                </div>
+                <div class="cc-msg">
+                  <div class="cc-avatar" style="background:#ed4245;">r</div>
+                  <div class="cc-msg-body">
+                    <div class="cc-msg-header"><span class="cc-msg-name" style="color:#ed4245;">robuta</span><span class="cc-mars-badge">Mars</span><span class="cc-msg-time">02/14 09:05</span></div>
+                    <div class="cc-reply-quote">上昇転換ポイントが掴めません…</div><div class="cc-msg-content">日足で転換未確認。上昇トレンド内とは言えないです📝</div>
+                    <div class="cc-reactions"><span class="cc-reaction">🔥 <span class="cc-reaction-count">5</span></span><span class="cc-reaction">📝 <span class="cc-reaction-count">3</span></span></div>
+                  </div>
+                </div>
+                <div class="cc-msg">
+                  <div class="cc-avatar cc-avatar-yosuga"></div>
+                  <div class="cc-msg-body">
+                    <div class="cc-msg-header"><span class="cc-msg-name" style="color:#ed4245;">よすが</span><span class="cc-mars-badge">Mars</span><span class="cc-msg-time">02/14 12:40</span></div>
+                    <div class="cc-reply-quote">チャネル上限にぶつかってるように見える…</div><div class="cc-msg-content">日足も下降トレンドとします📉 ラインあらためて表示しますね。</div>
+                  </div>
+                </div>
+                <div class="cc-msg">
+                  <div class="cc-avatar" style="background:#fee75c;color:#000;">K</div>
+                  <div class="cc-msg-body">
+                    <div class="cc-msg-header"><span class="cc-msg-name" style="color:#fee75c;">Kenta_FX</span><span class="cc-msg-time">02/14 13:15</span></div>
+                    <div class="cc-reply-quote">日足も下降トレンドとします📉…</div><div class="cc-msg-content">シンプルでわかりやすいです！ありがとうございます🙏</div>
+                    <div class="cc-reactions"><span class="cc-reaction">😊 <span class="cc-reaction-count">7</span></span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="cc-input"><span class="cc-input-plus">＋</span><span class="cc-input-text">#astroへ質問 でメッセージを送信</span></div>
+          </div>
+        </div>
+
+        <!-- 雑談（intro ページのモックを移植） -->
+        <div class="fcar-slide" data-href="https://discordapp.com/channels/1039824083208126474/1426032246485291078" data-label="雑談を見る">
+          <div class="community-chat static-chat">
+            <div class="cc-header"><span class="cc-header-hash">#</span><span class="cc-header-name">雑談</span></div>
+            <div class="cc-body">
+              <div class="cc-messages">
+                <div class="cc-msg">
+                  <div class="cc-avatar" style="background:#eb459e;">熊</div>
+                  <div class="cc-msg-body">
+                    <div class="cc-msg-header"><span class="cc-msg-name" style="color:#eb459e;">熊</span><span class="cc-msg-time">02/14 11:20</span></div>
+                    <div class="cc-msg-content">塩分過剰摂取で血圧が上昇トレンドに🤣
+                      <div class="cc-photo"><div class="cc-photo-item"><img src="images/chat_photo_2.png" alt="ラーメン" style="width:100%;height:100%;object-fit:cover;"></div></div>
+                    </div>
+                    <div class="cc-reactions"><span class="cc-reaction">🤣 <span class="cc-reaction-count">15</span></span><span class="cc-reaction">👍 <span class="cc-reaction-count">3</span></span></div>
+                  </div>
+                </div>
+                <div class="cc-msg">
+                  <div class="cc-avatar" style="background:#5865F2;">S</div>
+                  <div class="cc-msg-body">
+                    <div class="cc-msg-header"><span class="cc-msg-name" style="color:#5865F2;">Sana</span><span class="cc-msg-time">02/14 11:52</span></div>
+                    <div class="cc-reply-quote">塩分過剰摂取で血圧が上昇トレンドに🤣</div><div class="cc-msg-content">おいしそう🤤</div>
+                    <div class="cc-reactions"><span class="cc-reaction">👍 <span class="cc-reaction-count">1</span></span></div>
+                  </div>
+                </div>
+                <div class="cc-msg">
+                  <div class="cc-avatar" style="background:#ffb347;color:#000;">や</div>
+                  <div class="cc-msg-body">
+                    <div class="cc-msg-header"><span class="cc-msg-name" style="color:#ffb347;">やまちゃん</span><span class="cc-msg-time">02/15 20:10</span></div>
+                    <div class="cc-msg-content">松島海岸へ🚅 寿司食べ放題コスパ最強！
+                      <div class="cc-photo"><div class="cc-photo-item"><img src="images/chat_photo_3.png" alt="お寿司" style="width:80%;height:80%;object-fit:contain;"></div></div>
+                    </div>
+                    <div class="cc-reactions"><span class="cc-reaction">🔥 <span class="cc-reaction-count">8</span></span><span class="cc-reaction">😋 <span class="cc-reaction-count">5</span></span></div>
+                  </div>
+                </div>
+                <div class="cc-msg">
+                  <div class="cc-avatar cc-avatar-yosuga"></div>
+                  <div class="cc-msg-body">
+                    <div class="cc-msg-header"><span class="cc-msg-name" style="color:#ed4245;">よすが</span><span class="cc-msg-time">02/15 20:25</span></div>
+                    <div class="cc-reply-quote">松島海岸へ🚅 寿司食べ放題コスパ最強！</div><div class="cc-msg-content">え！？こんなでかいのあるんすか！？</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="cc-input"><span class="cc-input-plus">＋</span><span class="cc-input-text">#雑談 でメッセージを送信</span></div>
+          </div>
+        </div>
+
+        <!-- 利確速報（同じDiscord風・同じ大きさで） -->
+        <div class="fcar-slide" data-href="https://discordapp.com/channels/1039824083208126474/1521088083158896651" data-label="利確速報を見る">
+          <div class="community-chat static-chat">
+            <div class="cc-header"><span class="cc-header-hash">#</span><span class="cc-header-name">利確速報</span></div>
+            <div class="cc-body">
+              <div class="cc-messages">
+                <div class="cc-msg">
+                  <div class="cc-avatar cc-avatar-orbit"></div>
+                  <div class="cc-msg-body">
+                    <div class="cc-msg-header"><span class="cc-msg-name" style="color:#c4b5fd;">Orbit</span><span class="cc-msg-time">11:50</span></div>
+                    <div class="tm-embed">
+                      <div class="tm-embed-t">🎉 利確速報 ― ナイストレード！</div>
+                      <div class="tm-embed-r">💹 XAU/USD ｜ Lot 1.40</div>
+                      <div class="tm-embed-r"><span class="tm-embed-amt">+¥275,423</span></div>
+                      <div class="tm-embed-meta">🕐 11:50 決済 ｜ Fintokei</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="cc-msg">
+                  <div class="cc-avatar cc-avatar-orbit"></div>
+                  <div class="cc-msg-body">
+                    <div class="cc-msg-header"><span class="cc-msg-name" style="color:#c4b5fd;">Orbit</span><span class="cc-msg-time">12:03</span></div>
+                    <div class="tm-embed">
+                      <div class="tm-embed-t">🎉 利確速報 ― コツコツが最強！</div>
+                      <div class="tm-embed-r">💹 JP225 ｜ Lot 0.10</div>
+                      <div class="tm-embed-r"><span class="tm-embed-amt">+¥17,006</span></div>
+                      <div class="tm-embed-meta">🕐 12:03 決済 ｜ Fintokei</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="cc-msg">
+                  <div class="cc-avatar cc-avatar-orbit"></div>
+                  <div class="cc-msg-body">
+                    <div class="cc-msg-header"><span class="cc-msg-name" style="color:#c4b5fd;">Orbit</span><span class="cc-msg-time">13:11</span></div>
+                    <div class="tm-embed">
+                      <div class="tm-embed-t">🎉 利確速報 ― ナイスエントリー！</div>
+                      <div class="tm-embed-r">💹 USD/JPY ｜ Lot 0.30</div>
+                      <div class="tm-embed-r"><span class="tm-embed-amt">+¥41,880</span></div>
+                      <div class="tm-embed-meta">🕐 13:11 決済 ｜ Fintokei</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="cc-input"><span class="cc-input-plus">＋</span><span class="cc-input-text">#利確速報</span></div>
+          </div>
+        </div>
+
+       </div></div>
+       <button type="button" class="fcar-nav fcar-prev" aria-label="前へ">‹</button>
+       <button type="button" class="fcar-nav fcar-next" aria-label="次へ">›</button>
+       <div class="fcar-dots"></div>
+      </div>
+      <a class="tools-btn tools-btn--dc" id="comm-ch-btn" href="https://discordapp.com/channels/1039824083208126474/1426033560644747264" target="_blank" rel="noopener"><img src="img/icon-discord-crayon.svg" alt="">初心者応援を見る →</a>
+    </div>
+
+  </div>
+</section>
+<!-- ===== 質問・相談 ===== -->
+<section class="rsec rsec--deep">
+  <div class="rsec-head rv">
+    <span class="section-title-badge section-title-badge--blue">
+      <img class="hero-title-side hero-title-side--left" src="img/title-side-yellow-left.png" alt="">
+      困ったら
+      <img class="hero-title-side hero-title-side--right" src="img/title-side-yellow-right.png" alt="">
+    </span>
+    <div><span class="tw"><h2>質問・相談したい</h2><img src="img/wave-orange.png" alt=""></span></div>
+    <p class="rsec-lead">FXに関するあらゆる質問を受付。<br>※個人情報・外部情報の持ち込みは禁止です。</p>
+  </div>
+  <div class="help-grid">
+    <div class="help-card rv">
+      <img src="img/icon-people.svg" alt="">
+      <h3>みんなに相談</h3>
+      <p>フォーラムで質問すると、志を同じくする仲間が回答してくれます。</p>
+      <a class="rs-vid" href="https://discord.com/channels/1039824083208126474/1181506867944501321" target="_blank" rel="noopener">フォーラム →</a>
+    </div>
+    <div class="help-card rv">
+      <img src="img/icon-astro.svg" alt="">
+      <h3>プロに相談</h3>
+      <p>プロトレーダーチームASTROに、専門的な内容を直接聞けます。</p>
+      <a class="rs-vid" href="https://discord.com/channels/1039824083208126474/1181536360398590003" target="_blank" rel="noopener">astroへ質問 →</a>
+    </div>
+    <div class="help-card rv">
+      <img src="img/icon-ytt-support.png" alt="">
+      <h3>YTTの相談</h3>
+      <p>YTTサポートAIが回答。初期設定などは ytt質問フォーラムへ。</p>
+      <a class="rs-vid" href="https://discord.com/channels/1039824083208126474/1181497563992576051" target="_blank" rel="noopener">ytt質問フォーラム →</a>
+    </div>
+    <div class="help-card rv">
+      <img src="img/icon-ytt-ai-support.png" alt="">
+      <h3>AI問い合わせ</h3>
+      <p>FX SPACE全般の質問に、サポートAIが回答してくれます。</p>
+      <a class="rs-vid" href="https://discordapp.com/channels/1039824083208126474/1151440259553439784/1490345736083083284" target="_blank" rel="noopener">サポートAIに聞く →</a>
+    </div>
+  </div>
+</section>
+  <div class="route-switch">
+    <button type="button" class="switch-btn" id="other-route-btn"></button>
+  </div>
+</div><!-- /common-zone -->
+
+<!-- フローチャートの拡大表示：ピンチで拡大、スワイプで移動 -->
+<div class="fc-modal" id="fc-modal" hidden>
+  <div class="fc-modal-bar">
+    <span class="fc-modal-tip">ピンチで拡大／スワイプで移動</span>
+    <span class="fc-modal-zoom">
+      <button type="button" id="fc-zoom-out" aria-label="縮小">−</button>
+      <button type="button" id="fc-zoom-in" aria-label="拡大">＋</button>
+      <button type="button" id="fc-zoom-reset">全体</button>
+    </span>
+    <button type="button" class="fc-modal-close" id="fc-modal-close" aria-label="閉じる">✕ 閉じる</button>
+  </div>
+  <div class="fc-modal-canvas" id="fc-modal-canvas"></div>
+</div>
+
+<!-- ASTROランク画像の全画面表示（フローチャートの全画面と同じ見た目・操作） -->
+<div class="fc-modal" id="rank-modal" hidden>
+  <div class="fc-modal-bar">
+    <span class="fc-modal-tip">ピンチで拡大／スワイプで移動</span>
+    <span class="fc-modal-zoom">
+      <button type="button" id="rank-zoom-out" aria-label="縮小">−</button>
+      <button type="button" id="rank-zoom-in" aria-label="拡大">＋</button>
+      <button type="button" id="rank-zoom-reset">全体</button>
+    </span>
+    <button type="button" class="fc-modal-close" id="rank-modal-close" aria-label="閉じる">✕ 閉じる</button>
+  </div>
+  <div class="fc-modal-canvas" id="rank-modal-canvas"></div>
+</div>
+
+<footer class="route-foot">
+  <a href="index.html">FX SPACE チュートリアルへ →</a>
+</footer>
+
+<script src="js/gsap.min.js?v=20260301a"></script>
+<script src="js/ScrollTrigger.min.js?v=20260301a"></script>
+<script src="js/animations.js?v=20260301a"></script>
+<script>
+/* onboarding.html に埋め込まれたとき（?embed=1）は、ページの見出しとフッターを外して
+   中身だけを見せる。診断ページ側と内容・デザインを完全に同じに保つため、
+   要約を作り直すのではなく、このページ自体をそのまま読み込ませている */
+(function(){
+  /* iframeの中にいるかどうかで判定する。?embed=1 はサーバーのリダイレクトで
+     消えることがあるので、クエリ文字列には頼らない */
+  var embedded;
+  try{ embedded = (window.self !== window.top); }catch(e){ embedded = true; }
+  if(!embedded && location.search.indexOf('embed=1')<0) return;
+  document.documentElement.classList.add('is-embed');
+  /* 高さが変わるたびに親へ伝えて、iframeの高さを合わせてもらう。
+     documentElement.scrollHeight は縮小前の図の高さを引きずって実際の倍近くになり、
+     iframeの下に大きな余白ができてしまうので、表示している中身の下端から測る */
+  function tell(){
+    var h=0;
+    [].forEach.call(document.body.children, function(el){
+      if(getComputedStyle(el).display==='none') return;
+      var b=el.getBoundingClientRect();
+      var bottom=b.bottom+window.pageYOffset;
+      if(bottom>h) h=bottom;
+    });
+    h=Math.ceil(h);
+    if(!h) return;
+    try{ parent.postMessage({ type:'route-height', height:h }, '*'); }catch(e){}
+  }
+  window.addEventListener('load', tell);
+  window.addEventListener('resize', tell);
+  if(window.ResizeObserver) new ResizeObserver(tell).observe(document.body);
+  document.addEventListener('click', function(){ setTimeout(tell,60); setTimeout(tell,400); });
+  setInterval(tell, 1000);
+})();
+/* ===== フローチャートを縮小表示＋全画面で拡大 =====
+   図は946px固定。入りきらない画面では全体を縮小して形だけ見せ、
+   タップで全画面に開いてピンチで読んでもらう */
+(function(){
+  var stage=document.querySelector('.fc-stage'), fit=document.getElementById('fc-fit'),
+      chart=document.getElementById('fc-chart');
+  if(!stage||!fit||!chart) return;
+  var W=850, scale=1;   /* .fc の width と必ず揃える */
+
+  function layout(){
+    var avail=stage.clientWidth;
+    /* 診断ページに埋め込まれたときは、まだ非表示の状態で読み込まれることがある。
+       幅が測れないうちに縮小率を出すと0倍になって図が消えるので、そのときは何もしない */
+    if(!avail) return;
+    scale=Math.min(1, avail/W);
+    var h=chart.offsetHeight;
+    if(scale<1){
+      chart.style.transform='scale('+scale+')';
+      fit.style.height=Math.round(h*scale)+'px';
+      fit.classList.add('is-scaled'); stage.classList.add('is-scaled');
+    }else{
+      chart.style.transform='none';
+      fit.style.height='';
+      fit.classList.remove('is-scaled'); stage.classList.remove('is-scaled');
+    }
+  }
+  window.addEventListener('load', layout);
+  window.addEventListener('resize', layout);
+  /* 埋め込み先では、非表示のまま読み込まれて幅が0のことがある。
+     幅が付いたタイミングを取りこぼさないよう、監視と遅延の両方で測り直す */
+  if(window.ResizeObserver){
+    var ro=new ResizeObserver(layout);
+    ro.observe(stage); ro.observe(document.documentElement);
+  }
+  [0,150,500,1500].forEach(function(t){ setTimeout(layout, t); });
+  layout();
+
+  /* ---- 全画面 ---- */
+  var modal=document.getElementById('fc-modal'), canvas=document.getElementById('fc-modal-canvas');
+  var mScale=1, mx=0, my=0, clone=null;
+
+  function apply(){ if(clone) clone.style.transform='translate('+mx+'px,'+my+'px) scale('+mScale+')'; }
+  function fitAll(){
+    if(!clone) return;
+    var cw=canvas.clientWidth, ch=canvas.clientHeight, h=clone.offsetHeight;
+    mScale=Math.min(cw/W, ch/h, 1);
+    mx=Math.max(0,(cw-W*mScale)/2); my=Math.max(0,(ch-h*mScale)/2);
+    apply();
+  }
+  function zoom(f, cx, cy){
+    var prev=mScale;
+    mScale=Math.min(4, Math.max(0.2, mScale*f));
+    var r=mScale/prev;
+    mx=cx-(cx-mx)*r; my=cy-(cy-my)*r;
+    apply();
+  }
+  /* 診断ページに埋め込まれているときは、この中だけで全画面にしてもiframeの大きさに
+     閉じ込められてしまう。親に伝えて、iframeごと画面いっぱいに広げてもらう */
+  function tellParent(open){
+    if(!document.documentElement.classList.contains('is-embed')) return;
+    try{ parent.postMessage({ type:'route-modal', open:open }, '*'); }catch(e){}
+  }
+  function open(){
+    clone=chart.cloneNode(true);
+    clone.removeAttribute('id');
+    clone.style.transform='none';
+    canvas.innerHTML=''; canvas.appendChild(clone);
+    modal.hidden=false;
+    document.body.style.overflow='hidden';
+    tellParent(true);
+    setTimeout(fitAll, 0);
+    fitAll();
+  }
+  function close(){
+    modal.hidden=true; canvas.innerHTML=''; clone=null;
+    document.body.style.overflow='';
+    tellParent(false);
+  }
+
+  fit.addEventListener('click', function(e){ if(fit.classList.contains('is-scaled')){ e.preventDefault(); open(); } });
+  document.querySelector('.fc-hint').addEventListener('click', open);
+  document.getElementById('fc-modal-close').addEventListener('click', close);
+  document.getElementById('fc-zoom-in').addEventListener('click', function(){ zoom(1.3, canvas.clientWidth/2, canvas.clientHeight/2); });
+  document.getElementById('fc-zoom-out').addEventListener('click', function(){ zoom(1/1.3, canvas.clientWidth/2, canvas.clientHeight/2); });
+  document.getElementById('fc-zoom-reset').addEventListener('click', fitAll);
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape' && !modal.hidden) close(); });
+  window.addEventListener('resize', function(){ if(!modal.hidden) fitAll(); });
+
+  /* 指の操作：1本＝移動、2本＝ピンチ拡大。ホイールでも拡大できるようにする */
+  var pts={}, startDist=0, startScale=1, lastX=0, lastY=0;
+  function dist(){ var k=Object.keys(pts); if(k.length<2) return 0;
+    var a=pts[k[0]], b=pts[k[1]]; return Math.hypot(a.x-b.x, a.y-b.y); }
+  function mid(){ var k=Object.keys(pts); var a=pts[k[0]], b=pts[k[1]];
+    return {x:(a.x+b.x)/2, y:(a.y+b.y)/2}; }
+  canvas.addEventListener('pointerdown', function(e){
+    canvas.setPointerCapture(e.pointerId);
+    pts[e.pointerId]={x:e.clientX,y:e.clientY};
+    lastX=e.clientX; lastY=e.clientY;
+    if(Object.keys(pts).length===2){ startDist=dist(); startScale=mScale; }
+  });
+  canvas.addEventListener('pointermove', function(e){
+    if(!pts[e.pointerId]) return;
+    pts[e.pointerId]={x:e.clientX,y:e.clientY};
+    var n=Object.keys(pts).length;
+    if(n===1){ mx+=e.clientX-lastX; my+=e.clientY-lastY; lastX=e.clientX; lastY=e.clientY; apply(); }
+    else if(n===2 && startDist>0){
+      var m=mid(), r=canvas.getBoundingClientRect();
+      var prev=mScale;
+      mScale=Math.min(4, Math.max(0.2, startScale*(dist()/startDist)));
+      var k=mScale/prev, cx=m.x-r.left, cy=m.y-r.top;
+      mx=cx-(cx-mx)*k; my=cy-(cy-my)*k; apply();
+    }
+  });
+  function up(e){ delete pts[e.pointerId]; startDist=0; }
+  canvas.addEventListener('pointerup', up);
+  canvas.addEventListener('pointercancel', up);
+  canvas.addEventListener('wheel', function(e){
+    e.preventDefault(); var r=canvas.getBoundingClientRect();
+    zoom(e.deltaY<0?1.12:1/1.12, e.clientX-r.left, e.clientY-r.top);
+  }, {passive:false});
+})();
+
+/* ---- ASTROランク画像の全画面表示（フローチャートの全画面と同じ操作感） ---- */
+(function(){
+  var img=document.querySelector('.astro-rank-img');
+  var modal=document.getElementById('rank-modal'), canvas=document.getElementById('rank-modal-canvas');
+  if(!img||!modal||!canvas) return;
+  var W=1080, H=1080;                    /* astro-rank-chart.png の実寸 */
+  var mScale=1, mx=0, my=0, clone=null;
+
+  function apply(){ if(clone) clone.style.transform='translate('+mx+'px,'+my+'px) scale('+mScale+')'; }
+  function fitAll(){
+    if(!clone) return;
+    var cw=canvas.clientWidth, ch=canvas.clientHeight;
+    mScale=Math.min(cw/W, ch/H);
+    mx=Math.max(0,(cw-W*mScale)/2); my=Math.max(0,(ch-H*mScale)/2);
+    apply();
+  }
+  function zoom(f, cx, cy){
+    var prev=mScale;
+    mScale=Math.min(4, Math.max(0.2, mScale*f));
+    var r=mScale/prev;
+    mx=cx-(cx-mx)*r; my=cy-(cy-my)*r;
+    apply();
+  }
+  /* 埋め込み時はiframeごと全画面にしてもらう（フローチャートの全画面と同じ仕組み） */
+  function tellParent(open){
+    if(!document.documentElement.classList.contains('is-embed')) return;
+    try{ parent.postMessage({ type:'route-modal', open:open }, '*'); }catch(e){}
+  }
+  function open(){
+    /* 全画面表示はスマホなど小さい画面のみ。PCではそのまま読めるので何もしない */
+    if(!window.matchMedia('(max-width:760px)').matches) return;
+    clone=document.createElement('img');
+    clone.src=img.currentSrc||img.src; clone.alt='';
+    clone.className='rank-modal-img';
+    clone.style.width=W+'px'; clone.style.height=H+'px';
+    canvas.innerHTML=''; canvas.appendChild(clone);
+    modal.hidden=false;
+    document.body.style.overflow='hidden';
+    tellParent(true);
+    setTimeout(fitAll, 0);
+    fitAll();
+  }
+  function close(){
+    modal.hidden=true; canvas.innerHTML=''; clone=null;
+    document.body.style.overflow='';
+    tellParent(false);
+  }
+
+  img.addEventListener('click', open);
+  var hint=document.getElementById('rank-zoom-hint');
+  if(hint) hint.addEventListener('click', open);
+  document.getElementById('rank-modal-close').addEventListener('click', close);
+  document.getElementById('rank-zoom-in').addEventListener('click', function(){ zoom(1.3, canvas.clientWidth/2, canvas.clientHeight/2); });
+  document.getElementById('rank-zoom-out').addEventListener('click', function(){ zoom(1/1.3, canvas.clientWidth/2, canvas.clientHeight/2); });
+  document.getElementById('rank-zoom-reset').addEventListener('click', fitAll);
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape' && !modal.hidden) close(); });
+  window.addEventListener('resize', function(){ if(!modal.hidden) fitAll(); });
+
+  /* 指の操作：1本＝移動、2本＝ピンチ拡大。ホイールでも拡大できるようにする */
+  var pts={}, startDist=0, startScale=1, lastX=0, lastY=0;
+  function dist(){ var k=Object.keys(pts); if(k.length<2) return 0;
+    var a=pts[k[0]], b=pts[k[1]]; return Math.hypot(a.x-b.x, a.y-b.y); }
+  function mid(){ var k=Object.keys(pts); var a=pts[k[0]], b=pts[k[1]];
+    return {x:(a.x+b.x)/2, y:(a.y+b.y)/2}; }
+  canvas.addEventListener('pointerdown', function(e){
+    canvas.setPointerCapture(e.pointerId);
+    pts[e.pointerId]={x:e.clientX,y:e.clientY};
+    lastX=e.clientX; lastY=e.clientY;
+    if(Object.keys(pts).length===2){ startDist=dist(); startScale=mScale; }
+  });
+  canvas.addEventListener('pointermove', function(e){
+    if(!pts[e.pointerId]) return;
+    pts[e.pointerId]={x:e.clientX,y:e.clientY};
+    var n=Object.keys(pts).length;
+    if(n===1){ mx+=e.clientX-lastX; my+=e.clientY-lastY; lastX=e.clientX; lastY=e.clientY; apply(); }
+    else if(n===2 && startDist>0){
+      var m=mid(), r=canvas.getBoundingClientRect();
+      var prev=mScale;
+      mScale=Math.min(4, Math.max(0.2, startScale*(dist()/startDist)));
+      var k=mScale/prev, cx=m.x-r.left, cy=m.y-r.top;
+      mx=cx-(cx-mx)*k; my=cy-(cy-my)*k; apply();
+    }
+  });
+  function up(e){ delete pts[e.pointerId]; startDist=0; }
+  canvas.addEventListener('pointerup', up);
+  canvas.addEventListener('pointercancel', up);
+  canvas.addEventListener('wheel', function(e){
+    e.preventDefault(); var r=canvas.getBoundingClientRect();
+    zoom(e.deltaY<0?1.12:1/1.12, e.clientX-r.left, e.clientY-r.top);
+  }, {passive:false});
+})();
+
+/* フローチャートの説明：
+   ・マウスは CSS の :hover に任せる（乗せると出る／離れると消える）。
+     クリックで固定されると離れても消えなくなるので、マウスでは固定しない。
+   ・スマホ／タブレットはホバーが無いので、タップで開閉できるようにする（touch/penのみ） */
+(function(){
+  function closeAll(){ document.querySelectorAll('.tip-on').forEach(function(el){ el.classList.remove('tip-on'); }); }
+  document.addEventListener('pointerup', function(e){
+    if(e.pointerType==='mouse') return;   // マウスは :hover に任せる（固定しない）
+    var t=e.target.closest('.fc [data-tip]');
+    if(!t){ closeAll(); return; }
+    var open=t.classList.contains('tip-on');
+    closeAll();
+    if(!open) t.classList.add('tip-on');
+  });
+})();
+
+(function(){
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); } });
+  },{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
+})();
+
+/* YTTの機能アニメ（診断ページから移植）を、セクションが見えたら一度だけ動かす。
+   アニメ関数（animateYttP1 など）は js/animations.js 内に定義済み・GSAPで動く */
+(function(){
+  var wrap=document.getElementById('ob-ytt-anim-wrap');
+  if(!wrap || typeof gsap==='undefined') return;
+  var played=false;
+  function play(){
+    if(played) return; played=true;
+    try{
+      if(typeof animateYttP1==='function') animateYttP1();
+      if(typeof animateCandles==='function') animateCandles();
+      if(typeof animateYttP3==='function') animateYttP3();
+      if(typeof animateYttP5==='function') animateYttP5();
+    }catch(e){}
+  }
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ play(); io.disconnect(); } });
+  },{threshold:0.15});
+  io.observe(wrap);
+})();
+
+/* 横スライドのカルーセル：自動送り＋矢印＋ドット。1つずつ順番に見せて疲れないように */
+(function(){
+  function initCarousel(car){
+    var track=car.querySelector('.fcar-track');
+    if(!track) return;
+    var slides=track.children, n=slides.length;
+    var dotsWrap=car.querySelector('.fcar-dots');
+    var auto=+car.getAttribute('data-auto')||0, idx=0, timer=null, dots=[];
+    /* スライドに合わせて変わるボタン（コミュニティのチャンネルボタン） */
+    var linkBtn=car.getAttribute('data-btn')?document.querySelector(car.getAttribute('data-btn')):null;
+    function syncBtn(){
+      if(!linkBtn) return;
+      var s=slides[idx], href=s.getAttribute('data-href'), label=s.getAttribute('data-label');
+      if(href) linkBtn.setAttribute('href',href);
+      if(label){ var img=linkBtn.querySelector('img');
+        linkBtn.textContent=label+' →'; if(img) linkBtn.insertBefore(img,linkBtn.firstChild); }
+    }
+    for(var i=0;i<n;i++){ (function(i){
+      var d=document.createElement('button'); d.type='button'; d.className='fcar-dot';
+      d.setAttribute('aria-label',(i+1)+'枚目');
+      d.addEventListener('click',function(){ go(i); restart(); });
+      dotsWrap.appendChild(d); dots.push(d);
+    })(i); }
+    function render(){ track.style.transform='translateX('+(-idx*100)+'%)';
+      for(var i=0;i<n;i++) dots[i].classList.toggle('is-on',i===idx); syncBtn(); }
+    function go(i){ idx=(i%n+n)%n; render(); }
+    function stop(){ if(timer){ clearInterval(timer); timer=null; } }
+    function start(){ if(auto>0 && n>1 && !timer) timer=setInterval(function(){ go(idx+1); },auto); }
+    function restart(){ stop(); start(); }
+    car.querySelector('.fcar-next').addEventListener('click',function(){ go(idx+1); restart(); });
+    car.querySelector('.fcar-prev').addEventListener('click',function(){ go(idx-1); restart(); });
+    render();
+    if(n<=1){ car.querySelectorAll('.fcar-nav').forEach(function(b){ b.style.display='none'; }); dotsWrap.style.display='none'; return; }
+    /* 見えている間だけ自動送り */
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(function(es){ es.forEach(function(e){ e.isIntersecting?start():stop(); }); },{threshold:0.25}).observe(car);
+    } else start();
+  }
+  document.querySelectorAll('.fcar').forEach(initCarousel);
+})();
+
+/* ゼロプロ90のアニメーション（index.html と同じ js/animations.js をそのまま使う）。
+   セクションが隠れている状態で組むと ScrollTrigger が位置を測れないため、
+   速攻ルートを開いてから一度だけ初期化する */
+var startZeropro = (function(){
+  var done=false;
+  return function(){
+    if(done) return;
+    if(typeof gsap==='undefined' || typeof ScrollTrigger==='undefined' || typeof initZpAnimations!=='function') return;
+    done=true;
+    initZpAnimations();
+    ScrollTrigger.refresh();
+  };
+})();
+
+/* ルート切り替え。JSが動く場合だけ片方表示にする（動かなければ両方出たまま） */
+(function(){
+  var zone=document.getElementById('route-zone');
+  if(!zone) return;
+  document.documentElement.classList.add('js-route');
+
+  var panels=zone.querySelectorAll('.route-panel');
+  var tabs=zone.querySelectorAll('.rt-switch-btn');
+
+  var bar=document.querySelector('.rt-switch');
+  var otherBtn=document.getElementById('other-route-btn');
+  var LABEL={ self:'自力ルート（Yカリキュラム）も見る →', fast:'速攻ルート（ゼロプロ90）も見る →' };
+
+  function show(route){
+    /* 一度どちらかを選んだら、以降は切り替えバーを出す */
+    document.documentElement.classList.add('route-chosen');
+    panels.forEach(function(p){ p.classList.toggle('is-on', p.dataset.route===route); });
+    tabs.forEach(function(t){
+      var on=t.dataset.route===route;
+      t.classList.toggle('is-on', on);
+      t.setAttribute('aria-selected', on?'true':'false');
+    });
+    /* ページ最後のボタンは、常に「今見ていない方」を指す */
+    if(otherBtn){
+      var other = route==='self' ? 'fast' : 'self';
+      otherBtn.dataset.route = other;
+      otherBtn.textContent = LABEL[other];
+    }
+    /* 切り替えで現れた要素は、出現アニメを待たずに見えるようにする */
+    zone.querySelectorAll('.route-panel.is-on .rv').forEach(function(el){ el.classList.add('on'); });
+
+    /* ゼロプロのGSAPアニメは、パネルが display:none の間だと位置を測れない。
+       速攻ルートを最初に開いたこの瞬間に組み立てる */
+    if(route==='fast') startZeropro();
+
+    /* 必ずルートの先頭まで戻す（固定バーの高さぶん手前で止める） */
+    /* requestAnimationFrame はタブが非表示扱いの環境で動かないため setTimeout を使う */
+    setTimeout(function(){
+      var goal = function(){
+        var offset = bar ? bar.getBoundingClientRect().height : 0;
+        return Math.max(0, zone.getBoundingClientRect().top + window.pageYOffset - offset);
+      };
+      try { window.scrollTo({ top:goal(), behavior:'smooth' }); }
+      catch(e){ window.scrollTo(0, goal()); }
+
+      /* なめらかスクロールが効かない環境でも必ず先頭へ戻す。
+         位置が止まったのに目標から離れていたら、その時点で即座に移動させる */
+      var last = null, tries = 0;
+      var timer = setInterval(function(){
+        var now = Math.round(window.pageYOffset), y = goal();
+        if(Math.abs(now - y) < 12){ clearInterval(timer); return; }   /* 到達 */
+        if(last !== null && now === last){ window.scrollTo(0, y); clearInterval(timer); return; } /* 止まった */
+        last = now;
+        if(++tries > 12) clearInterval(timer);
+      }, 120);
+    }, 0);
+  }
+
+  tabs.forEach(function(t){ t.addEventListener('click', function(){ show(t.dataset.route); }); });
+  document.querySelectorAll('.pick-btn').forEach(function(b){
+    b.addEventListener('click', function(){ show(b.dataset.route); });
+  });
+  if(otherBtn) otherBtn.addEventListener('click', function(){ show(otherBtn.dataset.route); });
+  /* フローチャートのレーン帯からも選べるようにする */
+  document.querySelectorAll('.fc .lane-main, .fc .lane-fast').forEach(function(el){
+    el.setAttribute('role','button');
+    el.setAttribute('tabindex','0');
+    el.style.cursor='pointer';
+    var route=el.classList.contains('lane-main')?'self':'fast';
+    el.addEventListener('click', function(){ show(route); });
+    el.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); show(route); } });
+  });
+})();
+</script>
+
+</body>
+</html>

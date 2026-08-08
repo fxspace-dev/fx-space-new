@@ -258,10 +258,11 @@
     right:max(12px, env(safe-area-inset-right));
   }
 }
-.fc-modal-canvas{ min-height:100%; display:flex; align-items:flex-start; justify-content:center;
-  padding:64px 12px 24px; }
-/* 図は幅850px固定。まず画面幅に収めて全体を見せ、あとはピンチで自由に拡大してもらう */
-.fc-modal-canvas .fc{ margin:0; flex:0 0 auto; transform-origin:top center; }
+.fc-modal-canvas{ min-height:100%; display:flex; padding:64px 12px; }
+/* 普通の画像ビューアと同じく画面の中央に置く。
+   margin:auto なら中身が画面より大きいときも上端・左端が切れない */
+.fc-modal-canvas > *{ margin:auto; flex:0 0 auto; }
+.fc-modal-canvas .fc{ margin:0; }
 .fc-modal-canvas img{ max-width:100%; height:auto; display:block; }
 .fc-col{ display:flex; flex-direction:column; align-items:center; }
 .fc .node{ width:100%; max-width:300px; text-align:center; border-radius:12px; padding:0.6rem 0.7rem; font-size:0.85rem; font-weight:800; line-height:1.4; }
@@ -2381,13 +2382,22 @@ body{ padding-top:50px; }
   function open(){
     var clone=chart.cloneNode(true);
     clone.removeAttribute('id');
-    canvas.innerHTML=''; canvas.appendChild(clone);
+    clone.style.transform='none';
+    /* 縮小しても場所の取り方が狂わないよう、縮小後の実寸と同じ大きさの入れ物で包む */
+    var box=document.createElement('div');
+    box.appendChild(clone);
+    canvas.innerHTML=''; canvas.appendChild(box);
     modal.hidden=false;
     /* 図(850px固定)を画面幅に収めて全体を見せる。ここから先はピンチで自由に拡大してもらう */
     var avail=canvas.clientWidth - 24;
     var k=Math.min(1, avail / W);
-    clone.style.transform = k<1 ? 'scale('+k+')' : 'none';
-    if(k<1){ clone.style.marginBottom = (-(clone.offsetHeight*(1-k))) + 'px'; }
+    var h=clone.offsetHeight;
+    if(k<1){
+      clone.style.transformOrigin='top left';
+      clone.style.transform='scale('+k+')';
+      box.style.width=(W*k)+'px';
+      box.style.height=(h*k)+'px';
+    }
     modal.scrollTop=0; modal.scrollLeft=0;
     document.body.style.overflow='hidden';
     tellParent(true);

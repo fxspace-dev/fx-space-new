@@ -243,11 +243,20 @@
 .fc-modal[hidden]{ display:none; }
 /* 閉じる✕は常に右上に浮かせて、拡大中でも必ず押せるようにする */
 .fc-modal-close{
-  position:fixed; top:max(12px, env(safe-area-inset-top)); right:12px; z-index:2010;
+  /* まず古い端末でも必ず効く指定（max()/env()非対応でもここは有効） */
+  position:fixed; top:12px; right:12px; z-index:2010;
   cursor:pointer; font-family:inherit; font-weight:900; color:#1e1b4b;
   background:#ffd21e; border:0; border-radius:999px;
   width:44px; height:44px; font-size:1.1rem; line-height:1;
   box-shadow:0 3px 12px rgba(0,0,0,0.28);
+  transform-origin:top right;
+}
+/* ノッチ・丸角のある端末（横向きのiPhone等）でも欠けないよう安全領域を足す */
+@supports (top: max(12px, env(safe-area-inset-top))){
+  .fc-modal-close{
+    top:max(12px, env(safe-area-inset-top));
+    right:max(12px, env(safe-area-inset-right));
+  }
 }
 .fc-modal-canvas{ min-height:100%; display:flex; align-items:flex-start; justify-content:center;
   padding:64px 12px 24px; }
@@ -2428,6 +2437,44 @@ body{ padding-top:50px; }
   if(hint) hint.addEventListener('click', open);
   document.getElementById('rank-modal-close').addEventListener('click', close);
   document.addEventListener('keydown', function(e){ if(e.key==='Escape' && !modal.hidden) close(); });
+})();
+
+/* ---- 閉じる✕を必ず画面内に保つ ----
+   ピンチで拡大すると position:fixed は「拡大前の画面」に貼り付くため、
+   端を拡大して見ているときに✕が画面の外へ出てしまう。
+   実際に見えている範囲（visualViewport）を見て、常に右上に置き直す。 */
+(function(){
+  var vv = window.visualViewport;
+  if(!vv) return;              /* 非対応ブラウザは拡大時も画面が動かないので従来どおりで問題なし */
+  var MARGIN = 12, SIZE = 44;
+
+  function update(){
+    var modal = document.querySelector('.fc-modal:not([hidden])');
+    if(!modal) return;
+    var b = modal.querySelector('.fc-modal-close');
+    if(!b) return;
+    var s = vv.scale || 1;
+    /* 拡大していない＆ずれていないときは、CSS側の指定（安全領域込み）に任せる */
+    if(s <= 1.01 && vv.offsetLeft < 1 && vv.offsetTop < 1){
+      b.style.left=''; b.style.top=''; b.style.right=''; b.style.transform='';
+      return;
+    }
+    /* 見えている範囲の右上へ。見た目の大きさが変わらないよう拡大率の逆数で縮める */
+    b.style.left = (vv.offsetLeft + vv.width - (SIZE + MARGIN)/s) + 'px';
+    b.style.top  = (vv.offsetTop + MARGIN/s) + 'px';
+    b.style.right = 'auto';
+    b.style.transform = 'scale(' + (1/s) + ')';
+  }
+
+  vv.addEventListener('resize', update);
+  vv.addEventListener('scroll', update);
+  /* モーダルの開閉に合わせても位置を入れ直す */
+  if(window.MutationObserver){
+    var mo = new MutationObserver(update);
+    document.querySelectorAll('.fc-modal').forEach(function(m){
+      mo.observe(m, {attributes:true, attributeFilter:['hidden']});
+    });
+  }
 })();
 
 /* フローチャートの説明：

@@ -234,23 +234,26 @@
 .fc-hint img, .rank-zoom-hint img{ height:0.95em; width:auto; vertical-align:-0.12em; margin-right:0.3em; display:inline-block; }
 .fc-stage.is-scaled .fc-hint{ display:block; }
 
-/* ===== 全画面の拡大表示 ===== */
-.fc-modal{ position:fixed; inset:0; z-index:200; background:#4338ca; display:flex; flex-direction:column; }
+/* ===== 全画面の拡大表示 =====
+   拡大・移動はブラウザ標準の操作（ピンチ／スクロール）に任せる。
+   独自のズーム処理は入れない（勝手に動いて見たい所が見えなくなるため） */
+/* 左上ナビ(1001)や切替バー(1002)より前面に出す。でないと✕ボタンが隠れて閉じられない */
+.fc-modal{ position:fixed; inset:0; z-index:2000; background:#fff;
+  overflow:auto; -webkit-overflow-scrolling:touch; touch-action:auto; }
 .fc-modal[hidden]{ display:none; }
-.fc-modal-bar{
-  flex:0 0 auto; display:flex; align-items:center; gap:0.6rem; justify-content:space-between;
-  padding:0.6rem 0.8rem; background:#151338; color:#fff;
-}
-.fc-modal-tip{ font-size:0.72rem; font-weight:700; color:#c9c6ea; }
-@media (max-width:560px){ .fc-modal-tip{ display:none; } }
-.fc-modal-zoom{ display:flex; gap:0.35rem; }
-.fc-modal-bar button{
+/* 閉じる✕は常に右上に浮かせて、拡大中でも必ず押せるようにする */
+.fc-modal-close{
+  position:fixed; top:max(12px, env(safe-area-inset-top)); right:12px; z-index:2010;
   cursor:pointer; font-family:inherit; font-weight:900; color:#1e1b4b;
-  background:#fff; border:0; border-radius:8px; padding:0.4rem 0.8rem; font-size:0.82rem;
+  background:#ffd21e; border:0; border-radius:999px;
+  width:44px; height:44px; font-size:1.1rem; line-height:1;
+  box-shadow:0 3px 12px rgba(0,0,0,0.28);
 }
-.fc-modal-close{ background:#ffd21e; }
-.fc-modal-canvas{ flex:1 1 auto; position:relative; overflow:hidden; touch-action:none; }
-.fc-modal-canvas .fc{ position:absolute; top:0; left:0; margin:0; will-change:transform; }
+.fc-modal-canvas{ min-height:100%; display:flex; align-items:flex-start; justify-content:center;
+  padding:64px 12px 24px; }
+/* 図は幅850px固定。まず画面幅に収めて全体を見せ、あとはピンチで自由に拡大してもらう */
+.fc-modal-canvas .fc{ margin:0; flex:0 0 auto; transform-origin:top center; }
+.fc-modal-canvas img{ max-width:100%; height:auto; display:block; }
 .fc-col{ display:flex; flex-direction:column; align-items:center; }
 .fc .node{ width:100%; max-width:300px; text-align:center; border-radius:12px; padding:0.6rem 0.7rem; font-size:0.85rem; font-weight:800; line-height:1.4; }
 .fc .node small{ display:block; font-size:0.68rem; font-weight:600; margin-top:0.12rem; }
@@ -399,7 +402,6 @@
   .astro-rank-img{ cursor:zoom-in; }
   .rank-zoom-hint{ display:block; }
 }
-.fc-modal-canvas img.rank-modal-img{ position:absolute; top:0; left:0; max-width:none; transform-origin:top left; will-change:transform; }
 .astro-goal{ font-size:clamp(1rem,2.4vw,1.2rem); font-weight:900; color:#fff; margin:1.2rem 0 0; }
 .astro-goal b{ color:#ffd21e; }
 /* ASTROランク制（Moon→…→Voyager） */
@@ -2270,29 +2272,13 @@ body{ padding-top:50px; }
 
 <!-- フローチャートの拡大表示：ピンチで拡大、スワイプで移動 -->
 <div class="fc-modal" id="fc-modal" hidden>
-  <div class="fc-modal-bar">
-    <span class="fc-modal-tip">ピンチで拡大／スワイプで移動</span>
-    <span class="fc-modal-zoom">
-      <button type="button" id="fc-zoom-out" aria-label="縮小">−</button>
-      <button type="button" id="fc-zoom-in" aria-label="拡大">＋</button>
-      <button type="button" id="fc-zoom-reset">全体</button>
-    </span>
-    <button type="button" class="fc-modal-close" id="fc-modal-close" aria-label="閉じる">✕ 閉じる</button>
-  </div>
+  <button type="button" class="fc-modal-close" id="fc-modal-close" aria-label="閉じる">✕</button>
   <div class="fc-modal-canvas" id="fc-modal-canvas"></div>
 </div>
 
 <!-- ASTROランク画像の全画面表示（フローチャートの全画面と同じ見た目・操作） -->
 <div class="fc-modal" id="rank-modal" hidden>
-  <div class="fc-modal-bar">
-    <span class="fc-modal-tip">ピンチで拡大／スワイプで移動</span>
-    <span class="fc-modal-zoom">
-      <button type="button" id="rank-zoom-out" aria-label="縮小">−</button>
-      <button type="button" id="rank-zoom-in" aria-label="拡大">＋</button>
-      <button type="button" id="rank-zoom-reset">全体</button>
-    </span>
-    <button type="button" class="fc-modal-close" id="rank-modal-close" aria-label="閉じる">✕ 閉じる</button>
-  </div>
+  <button type="button" class="fc-modal-close" id="rank-modal-close" aria-label="閉じる">✕</button>
   <div class="fc-modal-canvas" id="rank-modal-canvas"></div>
 </div>
 
@@ -2372,25 +2358,11 @@ body{ padding-top:50px; }
   [0,150,500,1500].forEach(function(t){ setTimeout(layout, t); });
   layout();
 
-  /* ---- 全画面 ---- */
+  /* ---- 全画面 ----
+     拡大・移動はブラウザ標準のピンチ／スクロールに任せる。
+     独自のズーム処理は入れない（勝手に動いて見たい所が見えなくなるため） */
   var modal=document.getElementById('fc-modal'), canvas=document.getElementById('fc-modal-canvas');
-  var mScale=1, mx=0, my=0, clone=null;
 
-  function apply(){ if(clone) clone.style.transform='translate('+mx+'px,'+my+'px) scale('+mScale+')'; }
-  function fitAll(){
-    if(!clone) return;
-    var cw=canvas.clientWidth, ch=canvas.clientHeight, h=clone.offsetHeight;
-    mScale=Math.min(cw/W, ch/h, 1);
-    mx=Math.max(0,(cw-W*mScale)/2); my=Math.max(0,(ch-h*mScale)/2);
-    apply();
-  }
-  function zoom(f, cx, cy){
-    var prev=mScale;
-    mScale=Math.min(4, Math.max(0.2, mScale*f));
-    var r=mScale/prev;
-    mx=cx-(cx-mx)*r; my=cy-(cy-my)*r;
-    apply();
-  }
   /* 診断ページに埋め込まれているときは、この中だけで全画面にしてもiframeの大きさに
      閉じ込められてしまう。親に伝えて、iframeごと画面いっぱいに広げてもらう */
   function tellParent(open){
@@ -2398,18 +2370,21 @@ body{ padding-top:50px; }
     try{ parent.postMessage({ type:'route-modal', open:open }, '*'); }catch(e){}
   }
   function open(){
-    clone=chart.cloneNode(true);
+    var clone=chart.cloneNode(true);
     clone.removeAttribute('id');
-    clone.style.transform='none';
     canvas.innerHTML=''; canvas.appendChild(clone);
     modal.hidden=false;
+    /* 図(850px固定)を画面幅に収めて全体を見せる。ここから先はピンチで自由に拡大してもらう */
+    var avail=canvas.clientWidth - 24;
+    var k=Math.min(1, avail / W);
+    clone.style.transform = k<1 ? 'scale('+k+')' : 'none';
+    if(k<1){ clone.style.marginBottom = (-(clone.offsetHeight*(1-k))) + 'px'; }
+    modal.scrollTop=0; modal.scrollLeft=0;
     document.body.style.overflow='hidden';
     tellParent(true);
-    setTimeout(fitAll, 0);
-    fitAll();
   }
   function close(){
-    modal.hidden=true; canvas.innerHTML=''; clone=null;
+    modal.hidden=true; canvas.innerHTML='';
     document.body.style.overflow='';
     tellParent(false);
   }
@@ -2417,70 +2392,16 @@ body{ padding-top:50px; }
   fit.addEventListener('click', function(e){ if(fit.classList.contains('is-scaled')){ e.preventDefault(); open(); } });
   document.querySelector('.fc-hint').addEventListener('click', open);
   document.getElementById('fc-modal-close').addEventListener('click', close);
-  document.getElementById('fc-zoom-in').addEventListener('click', function(){ zoom(1.3, canvas.clientWidth/2, canvas.clientHeight/2); });
-  document.getElementById('fc-zoom-out').addEventListener('click', function(){ zoom(1/1.3, canvas.clientWidth/2, canvas.clientHeight/2); });
-  document.getElementById('fc-zoom-reset').addEventListener('click', fitAll);
   document.addEventListener('keydown', function(e){ if(e.key==='Escape' && !modal.hidden) close(); });
-  window.addEventListener('resize', function(){ if(!modal.hidden) fitAll(); });
-
-  /* 指の操作：1本＝移動、2本＝ピンチ拡大。ホイールでも拡大できるようにする */
-  var pts={}, startDist=0, startScale=1, lastX=0, lastY=0;
-  function dist(){ var k=Object.keys(pts); if(k.length<2) return 0;
-    var a=pts[k[0]], b=pts[k[1]]; return Math.hypot(a.x-b.x, a.y-b.y); }
-  function mid(){ var k=Object.keys(pts); var a=pts[k[0]], b=pts[k[1]];
-    return {x:(a.x+b.x)/2, y:(a.y+b.y)/2}; }
-  canvas.addEventListener('pointerdown', function(e){
-    canvas.setPointerCapture(e.pointerId);
-    pts[e.pointerId]={x:e.clientX,y:e.clientY};
-    lastX=e.clientX; lastY=e.clientY;
-    if(Object.keys(pts).length===2){ startDist=dist(); startScale=mScale; }
-  });
-  canvas.addEventListener('pointermove', function(e){
-    if(!pts[e.pointerId]) return;
-    pts[e.pointerId]={x:e.clientX,y:e.clientY};
-    var n=Object.keys(pts).length;
-    if(n===1){ mx+=e.clientX-lastX; my+=e.clientY-lastY; lastX=e.clientX; lastY=e.clientY; apply(); }
-    else if(n===2 && startDist>0){
-      var m=mid(), r=canvas.getBoundingClientRect();
-      var prev=mScale;
-      mScale=Math.min(4, Math.max(0.2, startScale*(dist()/startDist)));
-      var k=mScale/prev, cx=m.x-r.left, cy=m.y-r.top;
-      mx=cx-(cx-mx)*k; my=cy-(cy-my)*k; apply();
-    }
-  });
-  function up(e){ delete pts[e.pointerId]; startDist=0; }
-  canvas.addEventListener('pointerup', up);
-  canvas.addEventListener('pointercancel', up);
-  canvas.addEventListener('wheel', function(e){
-    e.preventDefault(); var r=canvas.getBoundingClientRect();
-    zoom(e.deltaY<0?1.12:1/1.12, e.clientX-r.left, e.clientY-r.top);
-  }, {passive:false});
 })();
 
-/* ---- ASTROランク画像の全画面表示（フローチャートの全画面と同じ操作感） ---- */
+/* ---- ASTROランク画像の全画面表示（拡大・移動はブラウザ標準の操作に任せる） ---- */
 (function(){
   var img=document.querySelector('.astro-rank-img');
   var modal=document.getElementById('rank-modal'), canvas=document.getElementById('rank-modal-canvas');
   if(!img||!modal||!canvas) return;
-  var W=1080, H=1080;                    /* astro-rank-chart.png の実寸 */
-  var mScale=1, mx=0, my=0, clone=null;
 
-  function apply(){ if(clone) clone.style.transform='translate('+mx+'px,'+my+'px) scale('+mScale+')'; }
-  function fitAll(){
-    if(!clone) return;
-    var cw=canvas.clientWidth, ch=canvas.clientHeight;
-    mScale=Math.min(cw/W, ch/H);
-    mx=Math.max(0,(cw-W*mScale)/2); my=Math.max(0,(ch-H*mScale)/2);
-    apply();
-  }
-  function zoom(f, cx, cy){
-    var prev=mScale;
-    mScale=Math.min(4, Math.max(0.2, mScale*f));
-    var r=mScale/prev;
-    mx=cx-(cx-mx)*r; my=cy-(cy-my)*r;
-    apply();
-  }
-  /* 埋め込み時はiframeごと全画面にしてもらう（フローチャートの全画面と同じ仕組み） */
+  /* 埋め込み時はiframeごと全画面にしてもらう */
   function tellParent(open){
     if(!document.documentElement.classList.contains('is-embed')) return;
     try{ parent.postMessage({ type:'route-modal', open:open }, '*'); }catch(e){}
@@ -2488,19 +2409,16 @@ body{ padding-top:50px; }
   function open(){
     /* 全画面表示はスマホなど小さい画面のみ。PCではそのまま読めるので何もしない */
     if(!window.matchMedia('(max-width:760px)').matches) return;
-    clone=document.createElement('img');
+    var clone=document.createElement('img');
     clone.src=img.currentSrc||img.src; clone.alt='';
-    clone.className='rank-modal-img';
-    clone.style.width=W+'px'; clone.style.height=H+'px';
     canvas.innerHTML=''; canvas.appendChild(clone);
     modal.hidden=false;
+    modal.scrollTop=0; modal.scrollLeft=0;
     document.body.style.overflow='hidden';
     tellParent(true);
-    setTimeout(fitAll, 0);
-    fitAll();
   }
   function close(){
-    modal.hidden=true; canvas.innerHTML=''; clone=null;
+    modal.hidden=true; canvas.innerHTML='';
     document.body.style.overflow='';
     tellParent(false);
   }
@@ -2509,44 +2427,7 @@ body{ padding-top:50px; }
   var hint=document.getElementById('rank-zoom-hint');
   if(hint) hint.addEventListener('click', open);
   document.getElementById('rank-modal-close').addEventListener('click', close);
-  document.getElementById('rank-zoom-in').addEventListener('click', function(){ zoom(1.3, canvas.clientWidth/2, canvas.clientHeight/2); });
-  document.getElementById('rank-zoom-out').addEventListener('click', function(){ zoom(1/1.3, canvas.clientWidth/2, canvas.clientHeight/2); });
-  document.getElementById('rank-zoom-reset').addEventListener('click', fitAll);
   document.addEventListener('keydown', function(e){ if(e.key==='Escape' && !modal.hidden) close(); });
-  window.addEventListener('resize', function(){ if(!modal.hidden) fitAll(); });
-
-  /* 指の操作：1本＝移動、2本＝ピンチ拡大。ホイールでも拡大できるようにする */
-  var pts={}, startDist=0, startScale=1, lastX=0, lastY=0;
-  function dist(){ var k=Object.keys(pts); if(k.length<2) return 0;
-    var a=pts[k[0]], b=pts[k[1]]; return Math.hypot(a.x-b.x, a.y-b.y); }
-  function mid(){ var k=Object.keys(pts); var a=pts[k[0]], b=pts[k[1]];
-    return {x:(a.x+b.x)/2, y:(a.y+b.y)/2}; }
-  canvas.addEventListener('pointerdown', function(e){
-    canvas.setPointerCapture(e.pointerId);
-    pts[e.pointerId]={x:e.clientX,y:e.clientY};
-    lastX=e.clientX; lastY=e.clientY;
-    if(Object.keys(pts).length===2){ startDist=dist(); startScale=mScale; }
-  });
-  canvas.addEventListener('pointermove', function(e){
-    if(!pts[e.pointerId]) return;
-    pts[e.pointerId]={x:e.clientX,y:e.clientY};
-    var n=Object.keys(pts).length;
-    if(n===1){ mx+=e.clientX-lastX; my+=e.clientY-lastY; lastX=e.clientX; lastY=e.clientY; apply(); }
-    else if(n===2 && startDist>0){
-      var m=mid(), r=canvas.getBoundingClientRect();
-      var prev=mScale;
-      mScale=Math.min(4, Math.max(0.2, startScale*(dist()/startDist)));
-      var k=mScale/prev, cx=m.x-r.left, cy=m.y-r.top;
-      mx=cx-(cx-mx)*k; my=cy-(cy-my)*k; apply();
-    }
-  });
-  function up(e){ delete pts[e.pointerId]; startDist=0; }
-  canvas.addEventListener('pointerup', up);
-  canvas.addEventListener('pointercancel', up);
-  canvas.addEventListener('wheel', function(e){
-    e.preventDefault(); var r=canvas.getBoundingClientRect();
-    zoom(e.deltaY<0?1.12:1/1.12, e.clientX-r.left, e.clientY-r.top);
-  }, {passive:false});
 })();
 
 /* フローチャートの説明：

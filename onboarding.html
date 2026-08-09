@@ -28,7 +28,9 @@
 html{scroll-behavior:smooth}
 body{
   font-family:'Inter','Noto Sans JP',sans-serif;
-  background:#fdfcf9;
+  /* 他のページ（ルート・Yカリキュラム等）に合わせて背景は白のシンプルに。
+     以前あったクリーム地＋ドット模様＋四隅の色にじみは 2026-07-26 に削除 */
+  background:#fff;
   color:#111827;
   line-height:1.6;
   -webkit-font-smoothing:antialiased;
@@ -37,25 +39,6 @@ body{
   flex-direction:column;
   position:relative;
   overflow-x:hidden;
-}
-/* Background dots pattern */
-body::before{
-  content:'';
-  position:fixed;inset:0;z-index:0;
-  background-image:radial-gradient(circle, rgba(79,70,229,0.08) 1.2px, transparent 1.2px);
-  background-size:24px 24px;
-  pointer-events:none;
-}
-/* Background color blobs */
-body::after{
-  content:'';
-  position:fixed;inset:0;z-index:0;
-  pointer-events:none;
-  background:
-    radial-gradient(circle 420px at 8% 12%, rgba(245,158,11,0.08), transparent 60%),
-    radial-gradient(circle 480px at 92% 25%, rgba(139,92,246,0.09), transparent 60%),
-    radial-gradient(circle 380px at 15% 85%, rgba(16,185,129,0.07), transparent 60%),
-    radial-gradient(circle 450px at 88% 90%, rgba(236,72,153,0.06), transparent 60%);
 }
 body > *{position:relative;z-index:1;}
 a{color:inherit;text-decoration:none}
@@ -1911,7 +1894,7 @@ body{ padding-top:50px; }
 }
 
 /* ===== 診断結果の下：プロトレーダーへの最短ルート（全体マップ） ===== */
-.ob-route-detail{width:100%;background:linear-gradient(180deg,#f8f8fd 0%,#f1f1fa 100%);border-top:1px solid #ecebf6;padding:3rem 1.25rem 3.25rem;margin-top:2.5rem;}
+.ob-route-detail{width:100%;background:#fff;border-top:1px solid #ecebf6;padding:3rem 1.25rem 3.25rem;margin-top:2.5rem;}
 .ob-route-detail[hidden]{display:none;}
 .obrd-inner{max-width:600px;margin:0 auto;text-align:center;}
 .obrd-badge{display:inline-block;font-size:0.72rem;font-weight:800;letter-spacing:0.08em;color:#4f46e5;background:rgba(79,70,229,0.08);padding:0.34rem 0.9rem;border-radius:100px;margin-bottom:0.7rem;}
@@ -1924,6 +1907,25 @@ body{ padding-top:50px; }
 /* 図を拡大したときは、iframeごと画面いっぱいに広げる */
 .obrd-frame.is-full{position:fixed;inset:0;width:100vw;height:100vh;
   max-width:none;margin:0;border-radius:0;box-shadow:none;z-index:9999;}
+/* 親の .ob-route-detail が z-index:1 の重なり基準を作るため、そのままだと
+   iframeの9999が内側でしか効かず、左上ナビ(1001)の下に潜って✕が隠れてしまう。
+   全画面のあいだだけ基準を外し、ナビも隠す */
+body.is-figure-full .ob-route-detail{ z-index:auto; }
+body.is-figure-full .home-nav{ display:none; }
+/* 図の全画面用の閉じる✕（親ページ側に出す）。
+   iframeの中からは親の拡大率が分からず追従できないため、ここで出して常に見える位置に保つ */
+.obrd-close{
+  position:fixed; top:12px; right:12px; z-index:10000;
+  cursor:pointer; font-family:inherit; font-weight:900; color:#1e1b4b;
+  background:#ffd21e; border:0; border-radius:999px;
+  width:44px; height:44px; font-size:1.1rem; line-height:1;
+  box-shadow:0 3px 12px rgba(0,0,0,0.28);
+  transform-origin:top left;
+}
+.obrd-close[hidden]{ display:none; }
+@supports (top: max(12px, env(safe-area-inset-top))){
+  .obrd-close{ top:max(12px, env(safe-area-inset-top)); right:max(12px, env(safe-area-inset-right)); }
+}
 .obrd-cta{margin-top:0.25rem;}
 
 /* ===== 目的別コンテンツ一覧：route.html と全く同じ見た目（バッジ＋波線見出し・白背景） ===== */
@@ -2203,7 +2205,7 @@ body{ padding-top:50px; }
           <a href="https://discord.com/channels/1039824083208126474/1528174536175128767/1528247178957684829" target="_blank" rel="noopener" class="ob-link">検証 実践 →</a>
           <a href="https://discord.com/channels/1039824083208126474/1161882625519140874/1528047675658731570" target="_blank" rel="noopener" class="ob-link">FTOの始め方を見る →</a>
         </div>
-        <p class="yc-pass"><span class="yc-pass-badge">合格</span><b>〇率90%・月利3%・DD10%以内</b>を6か月連続</p>
+        <p class="yc-pass"><span class="yc-pass-badge">合格</span><b>月利3%・DD10%以内</b>を6か月分連続</p>
       </div>
     </div>
     <div class="ob-result-actions">
@@ -2787,6 +2789,9 @@ body{ padding-top:50px; }
   </div>
 </section>
 
+<!-- 図を全画面にしたときの閉じる✕（親ページ側に置く） -->
+<button type="button" class="obrd-close" id="obrd-close" aria-label="閉じる" hidden>✕</button>
+
 <!-- ===== 目的別コンテンツ一覧（intro「すべてのコンテンツ」を移植・診断結果と一緒に表示） ===== -->
 <section class="content-section content-section--light" id="ob-content-all" style="background:#fff;" hidden>
     <div class="content-inner">
@@ -3039,6 +3044,10 @@ function startYttAnimations() {
        iframeそのものを画面いっぱいに広げる */
     if (e.data.type === 'route-modal') {
       f.classList.toggle('is-full', !!e.data.open);
+      /* 全画面のあいだは親側の重なり基準を外し、左上ナビも隠す（✕が隠れないように） */
+      document.body.classList.toggle('is-figure-full', !!e.data.open);
+      var xbtn = document.getElementById('obrd-close');
+      if (xbtn) { xbtn.hidden = !e.data.open; if (window.obrdPinClose) window.obrdPinClose(); }
       document.body.style.overflow = e.data.open ? 'hidden' : '';
       /* 高さはJSでインラインに入れているので、全画面のあいだは外して画面の高さに任せる */
       if (e.data.open) { f.style.height = ''; }
@@ -3047,6 +3056,46 @@ function startYttAnimations() {
       }
     }
   });
+
+  /* ===== 図の全画面：親ページ側の閉じる✕ =====
+     iframeの中からは親の拡大率が分からないため、✕は親に置き、
+     実際に見えている範囲（visualViewport）に合わせて必ず画面内に保つ */
+  (function(){
+    var btn = document.getElementById('obrd-close');
+    if (!btn) return;
+    var MARGIN = 12, SIZE = 44;
+
+    function closeFigure(){
+      var f = document.getElementById('obrd-frame');
+      try { f.contentWindow.postMessage({ type:'route-modal-close' }, '*'); } catch(e){}
+    }
+    btn.addEventListener('click', closeFigure);
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape' && !btn.hidden) closeFigure();
+    });
+
+    var vv = window.visualViewport;
+    function pin(){
+      if (btn.hidden) return;
+      if (!vv) return;
+      var s = vv.scale || 1;
+      if (s <= 1.01 && vv.offsetLeft < 1 && vv.offsetTop < 1){
+        btn.style.left=''; btn.style.top=''; btn.style.right=''; btn.style.transform='';
+        return;
+      }
+      var w = SIZE/s, m = MARGIN/s;
+      var visL = vv.offsetLeft, visT = vv.offsetTop;
+      var visR = visL + vv.width, visB = visT + vv.height;
+      var left = Math.max(visL, Math.min(visR - w - m, visR - w));
+      var top  = Math.max(visT, Math.min(visT + m, visB - w));
+      btn.style.left = left + 'px';
+      btn.style.top = top + 'px';
+      btn.style.right = 'auto';
+      btn.style.transform = 'scale(' + (1/s) + ')';
+    }
+    window.obrdPinClose = pin;
+    if (vv){ vv.addEventListener('resize', pin); vv.addEventListener('scroll', pin); }
+  })();
 
   function show(id) {
     allCards.forEach(function(c){ c.hidden = true; });

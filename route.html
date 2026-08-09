@@ -249,7 +249,9 @@
   background:#ffd21e; border:0; border-radius:999px;
   width:44px; height:44px; font-size:1.1rem; line-height:1;
   box-shadow:0 3px 12px rgba(0,0,0,0.28);
-  transform-origin:top right;
+  /* 拡大中はJSが left/top を指定して縮めるので、基準点は左上に合わせる
+     （右上のままだと縮小方向がずれて右へはみ出す） */
+  transform-origin:top left;
 }
 /* ノッチ・丸角のある端末（横向きのiPhone等）でも欠けないよう安全領域を足す */
 @supports (top: max(12px, env(safe-area-inset-top))){
@@ -263,7 +265,10 @@
    margin:auto なら中身が画面より大きいときも上端・左端が切れない */
 .fc-modal-canvas > *{ margin:auto; flex:0 0 auto; }
 .fc-modal-canvas .fc{ margin:0; }
-.fc-modal-canvas img{ max-width:100%; height:auto; display:block; }
+/* 直下に置いた画像（ASTROランク図）だけを対象にする。
+   `img` 全体に効かせると、フローチャート内のA/B/C/D文字画像まで
+   ブロック表示になって改行してしまうため必ず直下(>)に限定する */
+.fc-modal-canvas > img{ max-width:100%; height:auto; display:block; }
 .fc-col{ display:flex; flex-direction:column; align-items:center; }
 .fc .node{ width:100%; max-width:300px; text-align:center; border-radius:12px; padding:0.6rem 0.7rem; font-size:0.85rem; font-weight:800; line-height:1.4; }
 .fc .node small{ display:block; font-size:0.68rem; font-weight:600; margin-top:0.12rem; }
@@ -828,6 +833,9 @@ body{ padding-top:50px; }
 .is-embed body{ background:#fff; padding-top:0; }
 /* 埋め込み(診断ページのiframe)内では左上ナビは出さない */
 .is-embed .home-nav{ display:none; }
+/* 埋め込み時の✕は親ページ側に出す。
+   iframeの中からは親の拡大率が分からず、拡大時に✕を画面内へ追従させられないため */
+.is-embed .fc-modal-close{ display:none; }
 /* 診断ページ側に続きのボタンが並ぶので、下の尖りとその余白は要らない */
 .is-embed .rsec--map{ clip-path:none; padding-bottom:2.5rem; }
 /* iframe内は自前のスクロールを持たないため出現アニメーションが発火しない。
@@ -1002,7 +1010,7 @@ body{ padding-top:50px; }
             <a class="content-card" data-cat="community" data-rec="elearning" href="https://discord.com/channels/1039824083208126474/1181506867944501321" target="_blank"><div class="card-emoji">💬</div><h4>フォーラム</h4><span class="card-tip">FXに関するあらゆる質問ができる掲示板。初心者の基本的な質問も大歓迎です。</span><p>何でも質問OK</p><span class="card-link">質問 →</span></a>
             <a class="content-card" data-cat="community" data-rec="elearning" href="https://discord.com/channels/1039824083208126474/1181536360398590003" target="_blank"><div class="card-emoji">🧑‍🏫</div><h4>astroへ質問</h4><span class="card-tip">ASTROのプロトレーダーに直接質問できるチャンネル。実践的なアドバイスがもらえます。</span><p>プロトレーダーに直接質問</p><span class="card-link">質問 →</span></a>
             <a class="content-card" data-cat="community" data-rec="ytt,community,zeropro" href="https://discord.com/channels/1039824083208126474/1282263648886329396" target="_blank"><div class="card-emoji">📡</div><h4>ライブチャート分析</h4><span class="card-tip">メンバーとリアルタイムでチャート分析・議論できます。</span><p>リアルタイムで交流</p><span class="card-link">参加 →</span></a>
-            <a class="content-card" data-cat="community" href="https://discord.com/channels/1039824083208126474/1426032246485291078" target="_blank"><div class="card-emoji">☕</div><h4>雑談</h4><span class="card-tip">初心者応援・今日のできごと・マネートピックなど、テーマ別に雑談できるチャンネル。</span><p>テーマ別の雑談チャンネル</p><span class="card-link">入室 →</span></a>
+            <a class="content-card" data-cat="community" href="https://discord.com/channels/1039824083208126474/1426177028058517607" target="_blank"><div class="card-emoji">☕</div><h4>雑談</h4><span class="card-tip">初心者応援・今日のできごと・マネートピックなど、テーマ別に雑談できるチャンネル。</span><p>テーマ別の雑談チャンネル</p><span class="card-link">入室 →</span></a>
             <a class="content-card" data-cat="trade" data-rec="ytt,community,zeropro" href="https://discord.com/channels/1039824083208126474/1048136270582382592" target="_blank"><div class="card-emoji">📊</div><h4>毎朝のシナリオ</h4><span class="card-tip">平日毎朝よすがが更新するシナリオ構築動画。3通貨（スタンダード）と15通貨（プレミアム）の2本立て。</span><p>平日毎日更新（3通貨＋15通貨）</p><span class="card-link">見る →</span></a>
             <a class="content-card" data-cat="trade" data-rec="ytt,community,zeropro" href="https://discord.com/channels/1039824083208126474/1521088083158896651" target="_blank"><div class="card-emoji">🎯</div><h4>利確速報</h4><span class="card-tip">メンバーの利確をリアルタイムで通知。どの通貨・時間帯でどれくらい利確したのかがわかり、みんなでトレードしている一体感が生まれます。</span><p>リアルタイム利確通知</p><span class="card-link">見る →</span></a>
             <a class="content-card" data-cat="trade" href="https://discord.com/channels/1039824083208126474/1194299754088247298" target="_blank"><div class="card-emoji">🏆</div><h4>合格・出金報告</h4><span class="card-tip">合格報告・出金・残高増加など、仲間の成功が集まるチャンネル。モチベーションに。</span><p>仲間の成功体験</p><span class="card-link">見る →</span></a>
@@ -1117,7 +1125,7 @@ body{ padding-top:50px; }
           <a class="rs-vid" href="https://discord.com/channels/1039824083208126474/1528174536175128767/1528247178957684829" target="_blank" rel="noopener"><img src="img/icon-discord-crayon.svg" alt="">検証 実践 →</a>
           <a class="rs-vid" href="https://discord.com/channels/1039824083208126474/1161882625519140874/1528047675658731570" target="_blank" rel="noopener"><img src="img/icon-discord-crayon.svg" alt="">FTOの始め方を見る →</a>
         </div>
-        <p class="rs-pass"><span class="rs-pass-badge">合格</span><span class="rs-pass-txt"><b>〇率90%・月利3%・DD10%以内</b>を6か月連続</span></p>
+        <p class="rs-pass"><span class="rs-pass-badge">合格</span><span class="rs-pass-txt"><b>月利3%・DD10%以内</b>を6か月分連続</span></p>
       </div>
       <div class="rs-visual">
         <img class="rs-shot rs-shot--gif" src="img/fto-speed-of-testing.gif" alt="FTOで過去の相場を巻き戻して検証している画面" width="1182" height="652">
@@ -2133,7 +2141,7 @@ body{ padding-top:50px; }
         </div>
 
         <!-- 雑談（intro ページのモックを移植） -->
-        <div class="fcar-slide" data-href="https://discordapp.com/channels/1039824083208126474/1426032246485291078" data-label="雑談を見る">
+        <div class="fcar-slide" data-href="https://discordapp.com/channels/1039824083208126474/1426177028058517607" data-label="雑談を見る">
           <div class="community-chat static-chat">
             <div class="cc-header"><span class="cc-header-hash">#</span><span class="cc-header-name">雑談</span></div>
             <div class="cc-body">
@@ -2412,6 +2420,10 @@ body{ padding-top:50px; }
   document.querySelector('.fc-hint').addEventListener('click', open);
   document.getElementById('fc-modal-close').addEventListener('click', close);
   document.addEventListener('keydown', function(e){ if(e.key==='Escape' && !modal.hidden) close(); });
+  /* 埋め込み時は親ページの✕から閉じる指示が来る */
+  window.addEventListener('message', function(e){
+    if(e.data && e.data.type==='route-modal-close' && !modal.hidden) close();
+  });
 })();
 
 /* ---- ASTROランク画像の全画面表示（拡大・移動はブラウザ標準の操作に任せる） ---- */
@@ -2447,6 +2459,10 @@ body{ padding-top:50px; }
   if(hint) hint.addEventListener('click', open);
   document.getElementById('rank-modal-close').addEventListener('click', close);
   document.addEventListener('keydown', function(e){ if(e.key==='Escape' && !modal.hidden) close(); });
+  /* 埋め込み時は親ページの✕から閉じる指示が来る */
+  window.addEventListener('message', function(e){
+    if(e.data && e.data.type==='route-modal-close' && !modal.hidden) close();
+  });
 })();
 
 /* ---- 閉じる✕を必ず画面内に保つ ----
@@ -2469,9 +2485,18 @@ body{ padding-top:50px; }
       b.style.left=''; b.style.top=''; b.style.right=''; b.style.transform='';
       return;
     }
-    /* 見えている範囲の右上へ。見た目の大きさが変わらないよう拡大率の逆数で縮める */
-    b.style.left = (vv.offsetLeft + vv.width - (SIZE + MARGIN)/s) + 'px';
-    b.style.top  = (vv.offsetTop + MARGIN/s) + 'px';
+    /* 見えている範囲の右上へ。見た目の大きさが変わらないよう拡大率の逆数で縮める。
+       基準点は左上(CSS: transform-origin)なので、縮小後の実寸は SIZE/s */
+    var w = SIZE/s, m = MARGIN/s;
+    var visL = vv.offsetLeft, visT = vv.offsetTop;
+    var visR = visL + vv.width, visB = visT + vv.height;
+    var left = visR - w - m;
+    var top  = visT + m;
+    /* 念のため、計算がずれても必ず見えている範囲に収める */
+    left = Math.max(visL, Math.min(left, visR - w));
+    top  = Math.max(visT, Math.min(top,  visB - w));
+    b.style.left = left + 'px';
+    b.style.top  = top + 'px';
     b.style.right = 'auto';
     b.style.transform = 'scale(' + (1/s) + ')';
   }

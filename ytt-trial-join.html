@@ -541,17 +541,39 @@
 
 })();
 </script>
-<!-- BudouX — 日本語の自動文節改行（画面サイズに応じて最適な位置で折る） -->
-<script src="https://cdn.jsdelivr.net/npm/budoux/bundle/budoux-ja.min.js" defer></script>
-<script>
-window.addEventListener('DOMContentLoaded', function() {
-    if (window.budoux) {
-        try {
-            var parser = window.budoux.loadDefaultJapaneseParser();
-            parser.applyElement(document.body);
-        } catch (e) {}
+<!-- BudouX — 日本語の自動文節改行（画面サイズに応じて最適な位置で自然に折る） -->
+<script type="module">
+import { loadDefaultJapaneseParser } from 'https://cdn.jsdelivr.net/npm/budoux/+esm';
+(function () {
+    var SKIP = { SCRIPT: 1, STYLE: 1, TEXTAREA: 1, NOSCRIPT: 1, CODE: 1, PRE: 1 };
+    function applyBudouX(parser, root) {
+        var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+            acceptNode: function (n) {
+                if (!n.nodeValue || !/[぀-ヿ㐀-鿿]/.test(n.nodeValue)) return NodeFilter.FILTER_REJECT;
+                var p = n.parentNode;
+                if (!p || SKIP[p.nodeName] || (p.closest && p.closest('svg'))) return NodeFilter.FILTER_REJECT;
+                return NodeFilter.FILTER_ACCEPT;
+            }
+        });
+        var nodes = [];
+        while (walker.nextNode()) nodes.push(walker.currentNode);
+        nodes.forEach(function (n) {
+            var segs = parser.parse(n.nodeValue);
+            if (segs.length < 2) return;
+            var frag = document.createDocumentFragment();
+            segs.forEach(function (s, i) {
+                frag.appendChild(document.createTextNode(s));
+                if (i < segs.length - 1) frag.appendChild(document.createElement('wbr'));
+            });
+            n.parentNode.replaceChild(frag, n);
+        });
     }
-});
+    function run() {
+        try { applyBudouX(loadDefaultJapaneseParser(), document.body); } catch (e) {}
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run);
+    else run();
+})();
 </script>
 </body>
 </html>

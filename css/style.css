@@ -25,6 +25,12 @@ body {
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
     background: var(--bg);
+    /* 日本語の自然な改行（BudouX + 文節単位で折り返し）
+       ※ overflow-wrap は break-word。anywhere だと flex/grid セルが内容以下に縮み、
+         「1,440万/円」のように数字や単語が任意位置で割れて縦長になるため。 */
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    line-break: strict;
 }
 
 .heading-xl { font-size: clamp(2.2rem, 5.5vw, 4rem); font-weight: 900; letter-spacing: -0.03em; line-height: 1.1; }
@@ -872,9 +878,6 @@ body {
     display: block; width: clamp(23.8rem, 63.4vw, 35.7rem); max-width: 100%; height: 23px;
     object-fit: fill; margin: 0 auto 0.75rem; position: relative; top: -0.2cm;
 }
-.ytt-block-title + .ytt-title-wave + .ytt-block-lead { /* keep spacing */ }
-    line-height: 1.3; letter-spacing: 0.02em;
-}
 .ytt-block-lead {
     font-size: clamp(0.9375rem, 2vw, 1.0625rem);
     color: #6b7280; text-align: center; line-height: 1.8;
@@ -929,6 +932,36 @@ body {
 }
 .ytt-panel-scene svg { width: 100%; height: 100%; }
 .ytt-panel-scene { cursor: pointer; }
+
+/* ⑤ FTO パネル — シーンは FTO公式のアニメーション(GIF)＋ロゴ */
+.ytt-fto-scene {
+    cursor: default;
+    /* ダークな縁が出ないよう、外枠も白にして余白を持たせない */
+    background: #fff;
+    padding: 0;
+    display: flex; align-items: center; justify-content: center;
+}
+.ytt-fto-scene-card {
+    width: 100%; height: 100%;
+    background: #fff; border-radius: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: clamp(0.5rem, 1.2vw, 0.9rem);
+    padding: clamp(0.9rem, 2vw, 1.5rem);
+    overflow: hidden;
+}
+.ytt-fto-scene-logo { width: min(45%, 200px); height: auto; flex-shrink: 0; }
+.ytt-fto-scene-gif {
+    display: block; width: 100%; height: auto; min-height: 0;
+    border-radius: 8px; border: 1px solid #e5e7eb;
+}
+.ytt-fto-scene-credit {
+    align-self: flex-end; font-size: 0.62rem; color: #9ca3af;
+    margin: 0; line-height: 1.4; flex-shrink: 0;
+}
+.ytt-fto-scene-credit a { color: #9ca3af; text-decoration: underline; text-underline-offset: 2px; }
+.ytt-panel-note { font-size: 0.75rem; color: #94a3b8; line-height: 1.6; margin-top: 0.9rem; }
+
 .ytt-anim-ctrl { position: absolute; inset: 0; pointer-events: none; z-index: 10; }
 .ytt-stop-btn { display: none !important; }
 .ytt-play-btn {
@@ -1068,6 +1101,11 @@ body {
 .section-bg-blue .content-tab, #content-section .content-tab { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.25); color: #fff; }
 .section-bg-blue .content-tab.active, #content-section .content-tab.active { background: #fff; color: var(--primary); border-color: #fff; }
 .content-inner { max-width: 960px; margin: 0 auto; }
+/* すべてのコンテンツ: タイトル下の波線（zp-title-waveと同仕様） */
+.content-title-wave {
+    display: block; width: clamp(13.4rem, 35.8vw, 20.1rem); max-width: 100%; height: 23px;
+    object-fit: fill; margin: 0 auto 0.75rem; position: relative; top: -0.2cm;
+}
 .content-tabs { display: flex; gap: 0.5rem; justify-content: center; margin-bottom: 2rem; flex-wrap: wrap; }
 .content-tab {
     padding: 0.5rem 1rem; border-radius: 100px;
@@ -1088,8 +1126,10 @@ body {
 .content-card[data-cat="learn"] .card-emoji { background: linear-gradient(135deg, #ede9fe, #e0e7ff); }
 .content-card[data-cat="community"] .card-emoji { background: linear-gradient(135deg, #fce7f3, #ede9fe); }
 .content-card[data-cat="trade"] .card-emoji { background: linear-gradient(135deg, #e0f2fe, #e0e7ff); }
-.content-card.recommended { border-color: #818cf8; }
-.content-card.recommended::before {
+/* 「あなたにおすすめ」ハイライト。クラス名は広告ブロッカーの
+   コスメティックフィルタ（.recommended 等を狙う）に誤検知されない名前にする */
+.content-card.card-osusume { border-color: #818cf8; }
+.content-card.card-osusume::before {
     content: 'あなたにおすすめ';
     position: absolute; top: 8px; right: 8px;
     background: linear-gradient(135deg, #6366f1, #818cf8);
@@ -2647,14 +2687,15 @@ body {
     position: relative;
     width: 100%;
     max-width: 620px;
-    aspect-ratio: 1;
+    /* 縦を少し伸ばして、回転する矢印リングとカード（特に文章が長いCHECK）が重ならないようにする */
+    aspect-ratio: 62 / 70;
     margin: 1cm auto 0;
 }
 .zp-pdca-ring {
     position: absolute;
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
-    width: 52%; height: 52%;
+    width: 48%; height: 48%;
     pointer-events: none;
 }
 .zp-pdca-arc { opacity: 0; }
@@ -3189,7 +3230,7 @@ body {
     .zp-hero { min-height: 500px; }
     .zp-block { padding: 4rem 1.25rem; }
     .zp-ov-phrase { font-size: 1.125rem; }
-    .zp-pdca-cycle { max-width: 320px; }
+    .zp-pdca-cycle { max-width: 320px; aspect-ratio: 1; }
     .zp-pdca-ring { width: 44%; height: 44%; }
     .zp-pdca-step { width: 105px; padding: 0.7rem 0.5rem; }
     .zp-pdca-step p { display: none; }
@@ -3939,4 +3980,952 @@ body {
     .cc-chart-grid { grid-template-columns: 1fr; gap: 0.5rem; }
     .cc-yt-embed { flex-direction: column; align-items: flex-start; }
     .cc-yt-thumb { width: 100%; height: 120px; }
+}
+
+/* ===== 診断クイズ（onboarding.html と同じ質問形式 / flowchart-section 内でのみ有効） ===== */
+.flowchart-section .ob-progress {
+    display: flex; align-items: center; justify-content: center;
+    gap: 0.5rem; padding: 1.5rem 1rem 0;
+}
+.flowchart-section .ob-dot {
+    width: 12px; height: 12px; border-radius: 50%;
+    background: #fff; border: 2px solid #e5e7eb; transition: all 0.3s;
+}
+.flowchart-section .ob-dot.active {
+    background: #4f46e5; border-color: #4f46e5;
+    transform: scale(1.3); box-shadow: 0 0 0 6px rgba(79,70,229,0.15);
+}
+.flowchart-section .ob-dot.done { background: #10b981; border-color: #10b981; }
+.flowchart-section .ob-dot-line {
+    width: 40px; height: 3px; background: #e5e7eb;
+    border-radius: 2px; transition: background 0.3s;
+}
+.flowchart-section .ob-dot-line.done { background: #10b981; }
+.flowchart-section .ob-quiz {
+    display: flex; align-items: center; justify-content: center;
+    padding: 2rem 1rem 0;
+}
+.flowchart-section .ob-card {
+    max-width: 500px; width: 100%;
+    display: flex; flex-direction: column; align-items: center; gap: 1rem;
+    animation: obFadeIn 0.4s ease;
+}
+.flowchart-section .ob-card[hidden] { display: none; }
+.flowchart-section .ob-card-body {
+    background: #fff; border-radius: 24px;
+    box-shadow: 0 4px 0 rgba(79,70,229,0.12), 0 12px 32px rgba(79,70,229,0.08), 0 2px 8px rgba(0,0,0,0.04);
+    padding: 2.75rem 2rem 2.5rem;
+    width: 100%; text-align: center; position: relative;
+    border: 1px solid rgba(79,70,229,0.08);
+}
+.flowchart-section .ob-card-body::before {
+    content: ''; position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+    width: 56px; height: 56px; background: #fff;
+    border: 3px solid #fde68a; border-radius: 50%;
+    box-shadow: 0 3px 0 rgba(245,158,11,0.15); z-index: 1;
+}
+.flowchart-section .ob-card-body::after {
+    content: attr(data-num); position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+    width: 56px; height: 56px; display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem; font-weight: 900; color: #f59e0b;
+    font-family: 'Inter', sans-serif; z-index: 2; letter-spacing: -0.02em;
+}
+@keyframes obFadeIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.flowchart-section .ob-q-title {
+    font-size: clamp(1.25rem, 3.5vw, 1.625rem); font-weight: 800; color: #1e1b4b;
+    margin: 1rem 0 1.75rem; line-height: 1.35;
+}
+.flowchart-section .ob-choices { display: flex; flex-direction: column; gap: 0.75rem; }
+.flowchart-section .ob-choice {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1rem 1.25rem;
+    border: 2px solid #e5e7eb; border-radius: 16px; background: #fff;
+    cursor: pointer; transition: all 0.2s; text-align: left;
+    font-family: inherit; font-size: 1rem;
+    box-shadow: 0 2px 0 rgba(0,0,0,0.04); position: relative;
+}
+.flowchart-section .ob-choice:nth-child(odd):hover { border-color: #f59e0b; background: rgba(245,158,11,0.04); box-shadow: 0 4px 0 rgba(245,158,11,0.2), 0 8px 20px rgba(245,158,11,0.12); }
+.flowchart-section .ob-choice:nth-child(even):hover { border-color: #4f46e5; background: rgba(79,70,229,0.04); box-shadow: 0 4px 0 rgba(79,70,229,0.2), 0 8px 20px rgba(79,70,229,0.12); }
+.flowchart-section .ob-choice:hover { transform: translateY(-2px); }
+.flowchart-section .ob-choice:active { transform: translateY(0); box-shadow: 0 1px 0 rgba(0,0,0,0.04); }
+.flowchart-section .ob-choice-icon {
+    font-size: 1.5rem; flex-shrink: 0;
+    width: 44px; height: 44px;
+    display: flex; align-items: center; justify-content: center;
+    background: #fff7ed; border-radius: 12px; border: 1.5px solid #fde68a;
+    transition: all 0.2s;
+}
+.flowchart-section .ob-choice:nth-child(even) .ob-choice-icon { background: #eef2ff; border-color: #c7d2fe; }
+.flowchart-section .ob-choice-text { flex: 1; }
+.flowchart-section .ob-choice-main { font-weight: 700; font-size: 1rem; color: #1e1b4b; display: block; }
+.flowchart-section .ob-choice-sub { font-size: 0.8125rem; color: #6b7280; display: block; margin-top: 0.125rem; }
+.flowchart-section .ob-choice-arrow { color: #d1d5db; font-size: 1.25rem; flex-shrink: 0; transition: color 0.2s; }
+.flowchart-section .ob-choice:hover .ob-choice-arrow { color: #4f46e5; }
+.flowchart-section .ob-ic {
+    width: 1em; height: 1em;
+    stroke: currentColor; fill: none;
+    stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    flex-shrink: 0; vertical-align: -0.14em;
+}
+.flowchart-section .ob-choice-icon .ob-ic { width: 24px; height: 24px; color: #f59e0b; }
+.flowchart-section .ob-choice:nth-child(even) .ob-choice-icon .ob-ic { color: #4f46e5; }
+.flowchart-section .ob-result-icon .ob-ic { width: 44px; height: 44px; stroke-width: 1.8; }
+.flowchart-section .ob-back {
+    display: inline-flex; align-items: center; gap: 0.375rem;
+    font-size: 0.875rem; font-weight: 700; color: #6b7280;
+    cursor: pointer; background: #fff; border: 1.5px solid #e5e7eb;
+    padding: 0.625rem 1.5rem; border-radius: 100px;
+    font-family: inherit; transition: all 0.2s;
+    box-shadow: 0 2px 0 rgba(0,0,0,0.04);
+}
+.flowchart-section .ob-back:hover {
+    color: #4f46e5; border-color: #c7d2fe; background: #eef2ff;
+    transform: translateY(-1px); box-shadow: 0 3px 0 rgba(79,70,229,0.1);
+}
+/* 「もう一度診断する」などの控えめなテキストリンク風ボタン */
+.flowchart-section .ob-again {
+    display: inline-block;
+    background: none; border: 0; cursor: pointer; font-family: inherit;
+    font-size: 0.875rem; font-weight: 700; color: #6b7280;
+    text-decoration: underline; text-underline-offset: 3px;
+    padding: 0.4rem 0.8rem; margin-top: 0.5rem;
+    transition: color 0.15s;
+}
+.flowchart-section .ob-again:hover { color: #4f46e5; }
+.flowchart-section .ob-allroutes { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #f3f4f6; }
+.flowchart-section .ob-allroutes-title {
+    font-size: 0.75rem; font-weight: 700; color: #9ca3af;
+    text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem;
+}
+.flowchart-section .ob-route-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
+.flowchart-section .ob-route-chip {
+    padding: 0.375rem 0.875rem; border-radius: 100px;
+    border: 1.5px solid #e5e7eb; font-size: 0.75rem; font-weight: 600; color: #6b7280;
+    cursor: pointer; background: #fff; font-family: inherit; transition: all 0.2s;
+}
+.flowchart-section .ob-route-chip:hover { border-color: #4f46e5; color: #4f46e5; }
+.flowchart-section .ob-route-chip.current {
+    border-color: #4f46e5; background: rgba(79,70,229,0.06);
+    color: #4f46e5; font-weight: 700;
+}
+@media (max-width: 480px) {
+    .flowchart-section .ob-choice { padding: 0.875rem 1rem; }
+}
+
+/* ===== すべてのコンテンツ：折りたたみ（route.html と同じ挙動） =====
+   「すべて」タブは枚数が多いので折りたたむ：PCは12枚・スマホは4枚だけ見せる。
+   他のタブでは filterContent 側で is-collapsed を外す */
+.content-grid.is-collapsed .content-card:nth-child(n+13) { display: none !important; }
+@media (max-width: 760px) {
+    .content-grid.is-collapsed .content-card:nth-child(n+5) { display: none !important; }
+}
+.content-more { text-align: center; margin-top: 1.2rem; }
+.content-more[hidden] { display: none; }
+.content-more button {
+    background: none; border: 0; cursor: pointer; font-family: inherit;
+    font-size: 0.85rem; font-weight: 700; color: rgba(255,255,255,0.85);
+    text-decoration: underline; text-underline-offset: 3px; padding: 0.4rem 0.8rem;
+}
+
+/* ===== FTO×YTT（YTTセクション ⑤パネルで使用） ===== */
+/* --- ボタン --- */
+.btn-sq-blue {
+    display: inline-flex; align-items: center; gap: 0.375rem;
+    background: var(--primary); color: #fff;
+    border: none; border-radius: 10px;
+    padding: 0.75rem 1.75rem;
+    font-size: 1rem; font-weight: 800; text-decoration: none;
+    cursor: pointer; transition: opacity 0.2s; white-space: nowrap;
+}
+.btn-sq-blue:hover { opacity: 0.88; }
+
+/* --- 控えめな「詳細を見る」リンク --- */
+.ytt-fto-detail {
+    display: inline-block;
+    padding: 0.4rem 1.1rem; border-radius: 8px;
+    border: 1px solid #1f2937; color: #1f2937; background: #fff;
+    font-size: 0.8rem; font-weight: 600; text-decoration: none;
+    transition: all 0.15s; white-space: nowrap;
+}
+.ytt-fto-detail:hover { background: #1f2937; color: #fff; }
+
+/* --- ⑤パネルのボタン行 --- */
+.ytt-panel-btns {
+    display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center;
+    margin-top: 1.5rem;
+}
+
+/* ===== 診断クイズ 結果カード（onboarding.html から移植 / flowchart-section スコープ） ===== */
+.flowchart-section .ob-result{
+  background:#fff;
+  border-radius:24px;
+  box-shadow:
+    0 4px 0 rgba(79,70,229,0.12),
+    0 12px 32px rgba(79,70,229,0.08),
+    0 2px 8px rgba(0,0,0,0.04);
+  padding:2.75rem 2rem 2.5rem;
+  max-width:540px;
+  width:100%;
+  text-align:center;
+  animation:obFadeIn 0.4s ease;
+  position:relative;
+  border:1px solid rgba(79,70,229,0.08);
+  overflow:hidden;
+}
+.flowchart-section .ob-result[hidden]{display:none;}
+.flowchart-section .ob-result-icon{
+  font-size:3.25rem;
+  margin-bottom:0.5rem;
+  display:inline-block;
+  padding:0.75rem;
+  background:#fff7ed;
+  border:2px dashed #fde68a;
+  border-radius:50%;
+  width:88px;height:88px;
+  line-height:1;
+  display:inline-flex;
+  align-items:center;justify-content:center;
+  box-shadow:0 4px 0 rgba(245,158,11,0.15);
+  animation:obWiggle 2.5s ease-in-out infinite;
+}
+.flowchart-section .ob-result-badge{
+  display:inline-block;
+  padding:0.375rem 1rem;
+  border-radius:100px;
+  font-size:0.75rem;
+  font-weight:800;
+  letter-spacing:0.04em;
+  margin-bottom:0.75rem;
+}
+.flowchart-section .ob-result-badge.elearning{background:rgba(16,185,129,0.1);color:#065f46;}
+.flowchart-section .ob-result-badge.zeropro{background:rgba(245,158,11,0.1);color:#92400e;}
+.flowchart-section .ob-result-badge.ytt{background:rgba(139,92,246,0.1);color:#5b21b6;}
+.flowchart-section .ob-result-badge.community{background:rgba(249,115,22,0.1);color:#9a3412;}
+.flowchart-section .ob-result-badge.fintokei{background:rgba(6,182,212,0.1);color:#155e75;}
+.flowchart-section .ob-result-type{
+  font-size:0.875rem;
+  font-weight:700;
+  color:#6b7280;
+  margin:0.75rem 0 0.25rem;
+}
+.flowchart-section .ob-result-type-desc{
+  font-size:0.8125rem;
+  color:#6b7280;
+  margin:0.625rem 0 0.875rem;
+  line-height:1.5;
+}
+.flowchart-section .ob-result-title{
+  font-size:clamp(1.375rem,4vw,1.75rem);
+  font-weight:900;
+  color:#1e1b4b;
+  margin-bottom:0.5rem;
+}
+.flowchart-section .ob-result-desc{
+  font-size:0.9375rem;
+  color:#6b7280;
+  line-height:1.7;
+  margin-bottom:1.75rem;
+  max-width:400px;
+  margin-left:auto;
+  margin-right:auto;
+}
+.flowchart-section .ob-hero-logo{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  max-width:420px;
+  margin:0.25rem auto 1.5rem;
+  padding:1rem;
+  min-height:130px;
+}
+.flowchart-section .ob-hero-logo img{
+  max-width:100%;
+  max-height:130px;
+  object-fit:contain;
+  display:block;
+}
+.flowchart-section .ob-hero-logo.ytt img{max-height:150px;max-width:160px;filter:drop-shadow(0 4px 16px rgba(200,170,50,0.25));}
+.flowchart-section .ob-hero-logo.fintokei img{max-height:110px;max-width:400px;}
+.flowchart-section .ob-hero-logo.zeropro img{max-height:140px;max-width:200px;}
+.flowchart-section .ob-hero-logo.academy img{max-height:140px;max-width:360px;}
+.flowchart-section .ob-hero-logo.community img{max-height:160px;max-width:180px;}
+.flowchart-section .ob-hero-logo.dark{
+  background:#0a0a1a;
+  border-radius:14px;
+  padding:1rem 1.5rem;
+}
+.flowchart-section .ob-hero-logo.scene{
+  padding:0;
+  border-radius:14px;
+  overflow:hidden;
+  max-width:420px;
+}
+.flowchart-section .ob-hero-logo.scene img{
+  max-height:none;
+  width:100%;
+  height:auto;
+}
+.flowchart-section .ob-vsteps{
+  text-align:left;
+  margin-bottom:1.5rem;
+}
+.flowchart-section .ob-vsteps h4{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:0.75rem;
+  font-size:1.25rem;
+  font-weight:900;
+  color:#1e1b4b;
+  letter-spacing:-0.02em;
+  line-height:1.4;
+  margin:1rem 0 1.375rem;
+}
+.flowchart-section .ob-vsteps h4::before, .flowchart-section .ob-vsteps h4::after{
+  content:'';
+  flex:0 0 auto;
+  width:7px;height:7px;
+  border-radius:50%;
+  background:#f59e0b;
+}
+.flowchart-section .ob-vsteps h4::before{
+  box-shadow:
+    -12px 0 0 -1px rgba(245,158,11,0.6),
+    -22px 0 0 -2px rgba(245,158,11,0.3);
+}
+.flowchart-section .ob-vsteps h4::after{
+  box-shadow:
+    12px 0 0 -1px rgba(245,158,11,0.6),
+    22px 0 0 -2px rgba(245,158,11,0.3);
+}
+.flowchart-section .ob-vsteps-lead{
+  font-size:0.8125rem;
+  color:#6b7280;
+  line-height:1.7;
+  margin:0.5rem auto 1.5rem;
+  text-align:center;
+  max-width:380px;
+}
+.flowchart-section .ob-vstep{
+  background:#fff;
+  border:1.5px solid #eef2ff;
+  border-radius:16px;
+  padding:0.875rem 0.875rem 1rem;
+  margin-bottom:0.75rem;
+  box-shadow:0 2px 0 rgba(79,70,229,0.06);
+}
+.flowchart-section .ob-vstep:last-child{margin-bottom:0;}
+.flowchart-section .ob-vstep-head{
+  display:flex;
+  align-items:center;
+  gap:0.625rem;
+  margin-bottom:0.625rem;
+}
+.flowchart-section .ob-vstep-num{
+  flex-shrink:0;
+  width:38px;height:38px;
+  display:flex;align-items:center;justify-content:center;
+}
+.flowchart-section .ob-vstep-num img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  display:block;
+}
+.flowchart-section .ob-vstep-title{
+  font-size:0.9375rem;
+  font-weight:800;
+  color:#1e1b4b;
+  line-height:1.3;
+  flex:1;
+}
+.flowchart-section .ob-vstep-viz{
+  width:100%;
+  border-radius:10px;
+  overflow:hidden;
+  margin-bottom:0.625rem;
+  background:#f9fafb;
+}
+.flowchart-section .ob-vstep-viz svg{width:100%;height:auto;display:block;}
+.flowchart-section .ob-vstep-viz .community-chat{box-shadow:none;border-radius:10px;}
+.flowchart-section .ob-vstep-viz .cc-body{min-height:auto;max-height:none;padding:0.625rem 0.875rem;}
+.flowchart-section .ob-vstep-viz .cc-msg{display:flex !important;opacity:1 !important;transform:none !important;padding:0.25rem 0;}
+.flowchart-section .ob-vstep-viz .cc-reaction{opacity:1 !important;transform:none !important;}
+.flowchart-section .ob-vstep-viz .cc-header{padding:0.5rem 0.875rem;}
+.flowchart-section .ob-vstep-viz .comm-embed-wrap{box-shadow:none;border-radius:10px;padding:0.75rem 0.875rem;max-width:100%;}
+.flowchart-section .ob-vstep-viz .comm-embed-card{margin-left:2.5rem;max-width:100%;}
+.flowchart-section .ob-vstep-viz .comm-embed-amount{font-size:1.75rem;}
+.flowchart-section .ob-vstep-viz .comm-embed-reacts{margin-left:2.5rem;}
+.flowchart-section .ob-vstep-viz .cc-yt-embed{max-width:100%;}
+.flowchart-section .ob-vstep-viz .cc-yt-thumb{height:90px;}
+.flowchart-section .ob-vstep-viz .cc-chart-grid{grid-template-columns:repeat(3,1fr);gap:4px;margin-top:0.5rem;}
+.flowchart-section .ob-vstep-viz .cc-msg-content{font-size:0.78rem;}
+.flowchart-section .ob-room-meta{
+  margin-left:auto;
+  font-size:0.6875rem;
+  color:#22c55e;
+  font-weight:700;
+}
+.flowchart-section .ob-flow{
+  display:flex;
+  align-items:stretch;
+  gap:0.25rem;
+  padding:0.625rem;
+  background:#fff;
+  border:1px solid rgba(99,102,241,0.12);
+  border-radius:12px;
+  box-shadow:0 2px 8px rgba(99,102,241,0.05);
+}
+.flowchart-section .ob-flow-item{
+  flex:1;
+  background:#f9fafb;
+  border:1px solid #f0f1f3;
+  border-radius:10px;
+  padding:0.625rem 0.375rem;
+  display:flex;flex-direction:column;align-items:center;
+  gap:0.25rem;
+  text-align:center;
+}
+.flowchart-section .ob-flow-item.ob-flow-goal{
+  background:linear-gradient(135deg, #fff7ed 0%, #fef3c7 100%);
+  border-color:#fbbf24;
+}
+.flowchart-section .ob-flow-icon{
+  font-size:1.5rem;
+  line-height:1.2;
+}
+.flowchart-section .ob-flow-name{
+  font-size:0.75rem;
+  font-weight:800;
+  color:#1e1b4b;
+}
+.flowchart-section .ob-flow-desc{
+  font-size:0.625rem;
+  color:#6b7280;
+  line-height:1.4;
+}
+.flowchart-section .ob-flow-goal .ob-flow-name{color:#92400e;}
+.flowchart-section .ob-flow-goal .ob-flow-desc{color:#b45309;font-weight:800;}
+.flowchart-section .ob-flow-arrow{
+  display:flex;align-items:center;
+  font-size:1rem;
+  font-weight:900;
+  color:#a5b4fc;
+}
+.flowchart-section .ob-flow-caption{
+  font-size:0.6875rem;
+  color:#6b7280;
+  text-align:center;
+  margin-top:0.5rem;
+}
+.flowchart-section .ob-browser{
+  background:#fff;
+  border-radius:10px;
+  overflow:hidden;
+  border:1px solid #e5e7eb;
+  box-shadow:0 4px 16px rgba(0,0,0,0.06);
+}
+.flowchart-section .ob-browser-bar{
+  display:flex;
+  align-items:center;
+  gap:0.75rem;
+  padding:0.625rem 0.875rem;
+  background:#f1f3f5;
+  border-bottom:1px solid #e5e7eb;
+}
+.flowchart-section .ob-browser-dots{
+  display:flex;gap:0.25rem;
+  flex-shrink:0;
+}
+.flowchart-section .ob-browser-dots span{
+  width:10px;height:10px;
+  border-radius:50%;
+  background:#d1d5db;
+}
+.flowchart-section .ob-browser-dots span:nth-child(1){background:#ef4444;}
+.flowchart-section .ob-browser-dots span:nth-child(2){background:#fbbf24;}
+.flowchart-section .ob-browser-dots span:nth-child(3){background:#22c55e;}
+.flowchart-section .ob-browser-url{
+  flex:1;
+  display:flex;
+  align-items:center;
+  gap:0.375rem;
+  background:#fff;
+  padding:0.25rem 0.625rem;
+  border-radius:6px;
+  font-size:0.75rem;
+  color:#6b7280;
+  border:1px solid #e5e7eb;
+}
+.flowchart-section .ob-browser-lock{font-size:0.75rem;}
+.flowchart-section .ob-browser-body{
+  padding:1.25rem 1rem 1.375rem;
+  text-align:center;
+  background:linear-gradient(180deg, #fafbfc 0%, #fff 100%);
+}
+.flowchart-section .ob-browser-logo{
+  height:36px;
+  width:auto;
+  display:block;
+  margin:0 auto 0.5rem;
+}
+.flowchart-section .ob-browser-tagline{
+  font-size:0.75rem;
+  color:#6b7280;
+  margin-bottom:1rem;
+  font-weight:600;
+}
+.flowchart-section .ob-browser-plans{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:0.5rem;
+}
+.flowchart-section .ob-browser-plan{
+  background:#fff;
+  border:1.5px solid #e5e7eb;
+  border-radius:10px;
+  padding:0.5rem 0.375rem 0.625rem;
+  text-align:center;
+  box-shadow:0 2px 6px rgba(0,0,0,0.03);
+}
+.flowchart-section .ob-browser-plan-tag{
+  display:inline-block;
+  padding:0.15rem 0.5rem;
+  border-radius:100px;
+  font-size:0.5625rem;
+  font-weight:800;
+  margin-bottom:0.375rem;
+  letter-spacing:0.02em;
+}
+.flowchart-section .ob-browser-plan-name{
+  font-size:0.8125rem;
+  font-weight:900;
+  color:#1e1b4b;
+  margin-bottom:0.25rem;
+  letter-spacing:-0.01em;
+}
+.flowchart-section .ob-browser-plan-price{
+  font-size:0.6875rem;
+  font-weight:800;
+  color:#4f46e5;
+  margin-bottom:0.25rem;
+}
+.flowchart-section .ob-browser-plan-capital{
+  font-size:0.625rem;
+  font-weight:700;
+  color:#6b7280;
+  padding-top:0.25rem;
+  border-top:1px dashed #e5e7eb;
+}
+.flowchart-section .ob-coupon{
+  position:relative;
+  padding:1.75rem 1.75rem 1.5rem;
+  background:#fffbf2;
+  border:1.5px solid #e0c897;
+  border-radius:14px;
+  text-align:center;
+  overflow:hidden;
+  box-shadow:0 2px 10px rgba(180,140,70,0.08);
+}
+.flowchart-section .ob-coupon-ribbon{
+  display:inline-block;
+  padding:0.3rem 0.95rem;
+  background:#78350f;
+  color:#fef9e7;
+  font-size:0.6875rem;
+  font-weight:700;
+  letter-spacing:0.12em;
+  border-radius:100px;
+  margin-bottom:1.25rem;
+}
+.flowchart-section .ob-coupon-off{
+  font-size:3.25rem;
+  font-weight:400;
+  color:#1e1b4b;
+  line-height:1;
+  letter-spacing:-0.04em;
+  margin-bottom:1rem;
+  font-family:'Inter',sans-serif;
+}
+.flowchart-section .ob-coupon-pct{
+  font-size:2.25rem;
+  font-weight:400;
+  margin-right:0.05em;
+  color:#1e1b4b;
+}
+.flowchart-section .ob-coupon-off-label{
+  font-size:0.9375rem;
+  font-weight:800;
+  letter-spacing:0.18em;
+  margin-left:0.6rem;
+  color:#b45309;
+  vertical-align:0.35em;
+}
+.flowchart-section .ob-coupon-label{
+  font-size:0.6875rem;
+  font-weight:600;
+  color:#a87c3e;
+  letter-spacing:0.28em;
+  margin-bottom:0.625rem;
+  text-transform:uppercase;
+  position:relative;
+  padding-top:1.25rem;
+}
+.flowchart-section .ob-coupon-label::before{
+  content:'';
+  position:absolute;
+  top:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:32px;
+  height:1px;
+  background:#e0c897;
+}
+.flowchart-section .ob-coupon-code{
+  display:inline-block;
+  padding:0.75rem 1.5rem;
+  background:#fff;
+  border:1px solid #ebd8b0;
+  border-radius:6px;
+  margin-bottom:1.125rem;
+  box-shadow:0 1px 2px rgba(180,140,70,0.04);
+}
+.flowchart-section .ob-coupon-code span{
+  font-family:'Inter',monospace;
+  font-size:1.375rem;
+  font-weight:700;
+  letter-spacing:0;
+  color:#1e1b4b;
+}
+.flowchart-section .ob-coupon-hint{
+  font-size:0.75rem;
+  color:#78716c;
+  line-height:1.75;
+  font-weight:400;
+  max-width:360px;
+  margin:0 auto;
+}
+.flowchart-section .ob-coupon-hint a{
+  color:#78350f;
+  text-decoration:underline;
+  text-underline-offset:2px;
+  font-weight:700;
+}
+.flowchart-section .ob-coupon-hint a:hover{color:#b45309;}
+.flowchart-section .ob-coupon-sub{
+  margin-top:0.875rem;
+  padding:0.875rem 1.125rem;
+  background:#fff;
+  border:1px dashed #e0c897;
+  border-radius:10px;
+  text-align:center;
+}
+.flowchart-section .ob-coupon-sub-label{
+  display:inline-block;
+  font-size:0.6875rem;
+  font-weight:700;
+  color:#a87c3e;
+  letter-spacing:0.06em;
+  margin-bottom:0.5rem;
+  padding:0.15rem 0.5rem;
+  background:#fffbf2;
+  border-radius:4px;
+}
+.flowchart-section .ob-coupon-sub-body{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:0.5rem;
+  margin-bottom:0.5rem;
+}
+.flowchart-section .ob-coupon-sub-off{
+  font-size:1rem;
+  font-weight:800;
+  color:#b45309;
+  letter-spacing:0.02em;
+}
+.flowchart-section .ob-coupon-sub-code{
+  display:inline-block;
+  padding:0.3rem 0.7rem;
+  background:#fffbf2;
+  border:1px solid #ebd8b0;
+  border-radius:5px;
+  font-family:'Inter',monospace;
+  font-size:0.8125rem;
+  font-weight:700;
+  letter-spacing:0;
+  color:#1e1b4b;
+}
+.flowchart-section .ob-coupon-sub-hint{
+  font-size:0.6875rem;
+  color:#78716c;
+  line-height:1.6;
+}
+.flowchart-section .ob-timeline{
+  background:#fff;
+  border:1px solid rgba(79,70,229,0.08);
+  border-radius:12px;
+  padding:0.875rem 1rem;
+  position:relative;
+}
+.flowchart-section .ob-timeline::before{
+  content:'';
+  position:absolute;
+  left:1.9rem;top:1.5rem;bottom:1.5rem;
+  width:2px;
+  background:linear-gradient(to bottom, #fcd34d, #f97316);
+  z-index:0;
+}
+.flowchart-section .ob-timeline-item{
+  display:flex;
+  align-items:center;
+  gap:0.75rem;
+  padding:0.5rem 0;
+  position:relative;
+  z-index:1;
+}
+.flowchart-section .ob-timeline-time{
+  flex-shrink:0;
+  width:38px;
+  font-size:0.75rem;
+  font-weight:900;
+  color:#9ca3af;
+  text-align:right;
+}
+.flowchart-section .ob-timeline-icon{
+  flex-shrink:0;
+  width:32px;height:32px;
+  display:flex;align-items:center;justify-content:center;
+  background:#fff;
+  border:1.5px solid #fcd34d;
+  border-radius:50%;
+  font-size:1rem;
+  line-height:1;
+}
+.flowchart-section .ob-timeline-you .ob-timeline-icon{
+  background:linear-gradient(135deg,#fef3c7,#fcd34d);
+  border-color:#f59e0b;
+}
+.flowchart-section .ob-timeline-you .ob-timeline-time{color:#f59e0b;font-size:0.875rem;}
+.flowchart-section .ob-timeline-text{
+  flex:1;
+  font-size:0.8125rem;
+  color:#374151;
+  line-height:1.5;
+}
+.flowchart-section .ob-timeline-text strong{
+  font-weight:800;
+  color:#1e1b4b;
+}
+.flowchart-section .ob-vstep-desc{
+  font-size:0.8125rem;
+  color:#4b5563;
+  line-height:1.6;
+}
+.flowchart-section .ob-vstep-desc a{
+  color:#2563eb;
+  font-weight:700;
+  text-decoration:underline;
+  text-underline-offset:2px;
+}
+.flowchart-section .ob-link, .flowchart-section .ob-vstep-title a, .flowchart-section .ob-result a:not(.ob-btn):not(.ob-btn-outline):not(.ob-share-btn):not(.ob-route-chip):not(.btn):not(.ob-again){
+  color:#2563eb !important;
+  text-decoration:underline !important;
+  text-underline-offset:2px;
+  font-weight:700;
+}
+.flowchart-section .ob-link:hover, .flowchart-section .ob-vstep-title a:hover{
+  color:#1d4ed8 !important;
+  text-decoration-thickness:2px;
+}
+.flowchart-section .ob-notice{
+  display:flex;
+  align-items:stretch;
+  gap:0;
+  background:#fff;
+  border:1px solid rgba(79,70,229,0.08);
+  border-radius:14px;
+  margin-bottom:1.5rem;
+  overflow:hidden;
+  position:relative;
+  box-shadow:
+    0 3px 0 rgba(245,158,11,0.18),
+    0 8px 24px rgba(245,158,11,0.08),
+    0 2px 6px rgba(0,0,0,0.03);
+}
+.flowchart-section .ob-notice::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;bottom:0;
+  width:5px;
+  background:linear-gradient(180deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+  z-index:1;
+}
+.flowchart-section .ob-notice::after{
+  content:'';
+  position:absolute;
+  top:-40%;right:-15%;
+  width:220px;height:220px;
+  background:radial-gradient(circle, rgba(245,158,11,0.08) 0%, transparent 65%);
+  pointer-events:none;
+}
+.flowchart-section .ob-notice-icon{
+  flex-shrink:0;
+  width:72px;
+  background:linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+  border-right:1px solid rgba(245,158,11,0.15);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.875rem;
+  line-height:1;
+  position:relative;
+  z-index:1;
+}
+.flowchart-section .ob-notice-text{
+  flex:1;
+  padding:1rem 1.25rem;
+  font-size:0.8125rem;
+  color:#4b5563;
+  line-height:1.7;
+  position:relative;
+  z-index:1;
+}
+.flowchart-section .ob-notice-text strong{
+  display:block;
+  font-size:1rem;
+  font-weight:900;
+  color:#1e1b4b;
+  margin-bottom:0.375rem;
+  letter-spacing:-0.02em;
+  line-height:1.35;
+}
+.flowchart-section .ob-notice-text a{
+  color:#92400e;
+  font-weight:800;
+  text-decoration:underline;
+  text-underline-offset:2px;
+  text-decoration-color:rgba(146,64,14,0.35);
+}
+.flowchart-section .ob-notice-text a:hover{text-decoration-color:#92400e;}
+.flowchart-section .ob-result-steps{
+  text-align:left;
+  margin-bottom:2rem;
+}
+.flowchart-section .ob-result-steps h4{
+  font-size:0.875rem;
+  font-weight:800;
+  color:#4f46e5;
+  letter-spacing:0.02em;
+  margin-bottom:0.375rem;
+}
+.flowchart-section .ob-notice-text a{
+  color:#92400e;
+  font-weight:700;
+  text-decoration:underline;
+  text-underline-offset:2px;
+}
+.flowchart-section .ob-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:0.5rem;
+  padding:0.95rem 2.25rem;
+  border-radius:14px;
+  background:#4f46e5;
+  color:#fff;
+  font-weight:800;
+  font-size:1rem;
+  border:none;
+  cursor:pointer;
+  transition:all 0.2s;
+  text-decoration:none;
+  font-family:inherit;
+  box-shadow:0 4px 0 #3730a3,0 6px 16px rgba(79,70,229,0.25);
+}
+.flowchart-section .ob-btn:hover{
+  background:#5b52ee;
+  transform:translateY(-2px);
+  box-shadow:0 6px 0 #3730a3,0 10px 24px rgba(79,70,229,0.3);
+}
+.flowchart-section .ob-btn:active{
+  transform:translateY(2px);
+  box-shadow:0 2px 0 #3730a3,0 3px 8px rgba(79,70,229,0.2);
+}
+.flowchart-section .ob-btn-outline{
+  background:transparent;
+  color:#4f46e5;
+  border:2px solid #e5e7eb;
+}
+.flowchart-section .ob-btn-outline:hover{
+  background:rgba(79,70,229,0.04);
+  border-color:#4f46e5;
+  box-shadow:none;
+  transform:translateY(-1px);
+}
+.flowchart-section .ob-result-actions{
+  display:flex;
+  flex-direction:column;
+  gap:0.75rem;
+  align-items:center;
+}
+.flowchart-section .ob-result-icon .ob-ic{width:44px;height:44px;stroke-width:1.8;}
+.flowchart-section .ob-flow-icon .ob-ic{width:26px;height:26px;}
+.flowchart-section .ob-timeline-icon .ob-ic{width:18px;height:18px;}
+.flowchart-section .ob-notice-icon .ob-ic{width:30px;height:30px;}
+.flowchart-section .ob-vstep-title .ob-ic{width:18px;height:18px;margin-right:0.35em;color:#f59e0b;}
+.flowchart-section #ob-r-elearning .ob-result-icon{color:#059669;}
+.flowchart-section #ob-r-zeropro .ob-result-icon{color:#d97706;}
+.flowchart-section #ob-r-ytt .ob-result-icon{color:#7c3aed;}
+.flowchart-section #ob-r-community .ob-result-icon{color:#ea580c;}
+.flowchart-section #ob-r-fintokei .ob-result-icon{color:#0891b2;}
+.flowchart-section .ob-ytt-anim-caption{
+  text-align:center;
+  font-size:0.75rem;
+  font-weight:700;
+  color:#a78bfa;
+  margin:0.75rem 0 0.25rem;
+  letter-spacing:0.04em;
+}
+.flowchart-section .ob-ytt-anim-caption-sub{
+  text-align:center;
+  font-size:0.7rem;
+  color:#6b7280;
+  line-height:1.6;
+  margin-bottom:0.75rem;
+}
+@media(max-width:480px){
+  .flowchart-section .ob-card, .flowchart-section .ob-result{padding:2rem 1.25rem;}
+}
+.flowchart-section .yc-steps .ob-vstep-viz{ background:#0d1020; padding:0; }
+.flowchart-section .yc-steps .ob-vstep-viz img{ width:100%; height:auto; display:block; }
+.flowchart-section .yc-desc{ font-size:0.8125rem; color:#4b5563; line-height:1.7; margin:0 0 0.7rem; }
+.flowchart-section .yc-desc b{ color:#4f46e5; font-weight:800; }
+.flowchart-section .yc-links{ display:flex; flex-wrap:wrap; gap:0.4rem; margin:0 0 0.7rem; }
+.flowchart-section .yc-links .ob-link{
+  display:inline-flex; align-items:center;
+  background:rgba(79,70,229,0.07); border:1px solid rgba(79,70,229,0.2);
+  border-radius:8px; padding:0.35rem 0.7rem; font-size:0.75rem;
+  text-decoration:none !important; font-weight:700;
+}
+.flowchart-section .yc-links .ob-link:hover{ background:rgba(79,70,229,0.14); }
+.flowchart-section .yc-pass{ display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap; font-size:0.78rem; font-weight:700; color:#1e1b4b; line-height:1.6; margin:0; }
+.flowchart-section .yc-pass .yc-pass-badge{ flex-shrink:0; background:#f59e0b; color:#1e1b4b; font-size:0.7rem; font-weight:900; letter-spacing:0.06em; padding:0.2rem 0.6rem; border-radius:6px; }
+.flowchart-section .yc-pass b{ color:#b45309; }
+.flowchart-section .yc-credit{ font-size:0.68rem; color:#9ca3af; margin:0.35rem 0 0.7rem; text-align:right; }
+.flowchart-section .yc-credit a{ color:#9ca3af !important; text-decoration:underline !important; text-underline-offset:2px; }
+
+@keyframes obWiggle{
+  0%,100%{transform:rotate(-3deg)}
+  50%{transform:rotate(3deg)}
+}
+
+/* YTTカード内：機能紹介への誘導（ID重複するアニメモックの代替） */
+.flowchart-section .ob-ytt-goto {
+    background: #f8fafc; border: 1.5px solid #e5e7eb; border-radius: 16px;
+    padding: 1.25rem 1.25rem 1.5rem; margin: 0.75rem 0 1.5rem;
+}
+.flowchart-section .ob-ytt-goto-text {
+    font-size: 0.8125rem; color: #6b7280; line-height: 1.7; margin: 0 0 0.75rem;
 }

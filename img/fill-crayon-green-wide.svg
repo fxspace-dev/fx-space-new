@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 730 40" preserveAspectRatio="none">
+  <defs>
+    <filter id="streak" x="-4%" y="-10%" width="108%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.02 1.4" numOctaves="3" seed="18" result="g"/>
+      <feColorMatrix in="g" type="matrix"
+        values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.7 1.15" result="ga"/>
+      <feComposite in="SourceGraphic" in2="ga" operator="in"/>
+    </filter>
+    <filter id="edge" x="-6%" y="-14%" width="112%" height="128%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.06 0.05" numOctaves="2" seed="21" result="w"/>
+      <feDisplacementMap in="SourceGraphic" in2="w" scale="2.5" xChannelSelector="R" yChannelSelector="G" result="r"/>
+      <feTurbulence type="fractalNoise" baseFrequency="1.1 0.9" numOctaves="4" seed="24" result="g2"/>
+      <feColorMatrix in="g2" type="matrix"
+        values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.9 2.45" result="g2a"/>
+      <feComposite in="r" in2="g2a" operator="in"/>
+    </filter>
+  </defs>
+  <!-- 下地はベタ塗り（文字が沈まないように） -->
+  <rect x="5" y="5" width="720" height="30" rx="4" fill="#118543"/>
+  <!-- 白い筋を薄く重ねてクレヨンの質感を出す -->
+  <g opacity="0.20"><rect x="5" y="5" width="720" height="30" rx="4" fill="#ffffff" filter="url(#streak)"/></g>
+  <rect x="5" y="5" width="720" height="30" rx="4" fill="none"
+        stroke="#118543" stroke-width="4" vector-effect="non-scaling-stroke" filter="url(#edge)"/>
+</svg>

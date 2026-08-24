@@ -792,10 +792,29 @@ function renderElSimResult() {
 function filterContent(cat,btn) {
     document.querySelectorAll('.content-tab').forEach(function(t){t.classList.remove('active');});
     if(btn) btn.classList.add('active');
+    // 「すべて」タブは折りたたむ（PC12枚・スマホ4枚。「すべてを見る／折りたたむ」で開閉）。
+    // 他のタブでは折りたたまない。#content-more が無いページ（intro等）では何もしない
+    var grid=document.getElementById('content-grid'), more=document.getElementById('content-more');
+    if(grid&&more){
+        if(cat==='all'){
+            grid.classList.add('is-collapsed'); more.hidden=false;
+            var mb=more.querySelector('button'); if(mb) mb.textContent='すべてを見る ▼';
+        }
+        else{ grid.classList.remove('is-collapsed'); more.hidden=true; }
+    }
     document.querySelectorAll('.content-card').forEach(function(card){
-        if(cat==='all'||card.dataset.cat===cat){card.style.display='';gsap.fromTo(card,{opacity:0,scale:0.97},{opacity:1,scale:1,duration:0.25});}
+        if(cat==='all'||card.dataset.cat===cat){card.style.display='';gsap.fromTo(card,{opacity:0,scale:0.97},{opacity:1,scale:1,duration:0.25,clearProps:'transform'});}
         else{card.style.display='none';}
     });
+}
+
+/* 「すべてを見る／折りたたむ」：折りたたみをいつでも開閉できるトグル */
+function toggleAllContent(btn){
+    var grid=document.getElementById('content-grid');
+    if(!grid) return;
+    var collapsed=grid.classList.toggle('is-collapsed');
+    if(btn) btn.textContent = collapsed ? 'すべてを見る ▼' : '折りたたむ ▲';
+    if(!collapsed && window.gsap) gsap.fromTo('#content-grid .content-card',{opacity:0,scale:0.97},{opacity:1,scale:1,duration:0.25,stagger:0.02,clearProps:'transform'});
 }
 
 var elPreviewTl = null;
@@ -850,10 +869,11 @@ function animateElPreview() {
 
 // Fintokei Simulator
 var fintokeiPlans = {
-    'sokko-bronze': { name: 'ブロンズ', balance: 2000000, rate: 1.00 },
-    'sokko-silver': { name: 'シルバー', balance: 5000000, rate: 1.00 },
-    'sokko-gold': { name: 'ゴールド', balance: 10000000, rate: 1.00 },
-    'sokko-platinum': { name: 'プラチナ', balance: 20000000, rate: 1.00 },
+    /* 2026-07-15 Fintokeiアップデート: 速攻プロの報酬は90%（ダイヤモンドのみ100%） */
+    'sokko-bronze': { name: 'ブロンズ', balance: 2000000, rate: 0.90 },
+    'sokko-silver': { name: 'シルバー', balance: 5000000, rate: 0.90 },
+    'sokko-gold': { name: 'ゴールド', balance: 10000000, rate: 0.90 },
+    'sokko-platinum': { name: 'プラチナ', balance: 20000000, rate: 0.90 },
     'sokko-diamond': { name: 'ダイヤモンド', balance: 35000000, rate: 1.00 },
     'challenge-crystal': { name: 'クリスタル', balance: 2000000, rate: 0.80 },
     'challenge-pearl': { name: 'パール', balance: 5000000, rate: 0.80 },

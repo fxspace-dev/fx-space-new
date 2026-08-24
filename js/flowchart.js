@@ -231,11 +231,11 @@ function revealHeroChart() {
                                 // Count-up
                                 var obj = { pros: 0, amount: 0 };
                                 t3.to(obj, {
-                                    pros: 430, duration: 1.4, ease: 'power2.out',
+                                    pros: 460, duration: 1.4, ease: 'power2.out',
                                     onUpdate: function() { prosEl.textContent = Math.round(obj.pros); }
                                 }, 0.9);
                                 t3.to(obj, {
-                                    amount: 1.2, duration: 1.4, ease: 'power2.out',
+                                    amount: 1.4, duration: 1.4, ease: 'power2.out',
                                     onUpdate: function() { amountEl.textContent = obj.amount.toFixed(1); }
                                 }, 0.9);
                             }
@@ -359,35 +359,84 @@ function revealFcSublevel(connId, qId, connSplitId, splitId) {
     }});
 }
 
-function fcAnswer(qId, answer) {
-    if (qId === 'q1') {
-        document.getElementById('fc-q1').classList.add('fc-active');
-        var branches = document.querySelectorAll('#fc-split1 > .fc-branch');
-        branches.forEach(function(b, i) {
-            var isSelected = (answer === 'none' && i === 0) || (answer === 'have' && i === 1);
-            if (!isSelected) b.classList.add('fc-path-dim');
-        });
-        if (answer === 'none') {
-            revealFcSublevel('fc-conn-q2a', 'fc-q2a', 'fc-conn-q2a-split', 'fc-split-q2a');
-            document.getElementById('fc-q2a').classList.add('fc-active');
-        } else if (answer === 'have') {
-            revealFcSublevel('fc-conn-q2b', 'fc-q2b', 'fc-conn-q2b-split', 'fc-split-q2b');
-            document.getElementById('fc-q2b').classList.add('fc-active');
-        }
-    } else if (qId === 'q2b') {
-        var branches2 = document.querySelectorAll('#fc-split-q2b > .fc-branch');
-        branches2.forEach(function(b, i) {
-            var isSelected = (answer === 'skillup' && i === 0) || (answer === 'pro' && i === 1);
-            if (!isSelected) b.classList.add('fc-path-dim');
-        });
-        if (answer === 'skillup') {
-            revealFcSublevel('fc-conn-q3a', 'fc-q3a', 'fc-conn-q3a-split', 'fc-split-q3a');
-            document.getElementById('fc-q3a').classList.add('fc-active');
-        } else if (answer === 'pro') {
-            revealFcSublevel('fc-conn-q3', 'fc-q3', 'fc-conn-q3-split', 'fc-split-q3');
-            document.getElementById('fc-q3').classList.add('fc-active');
-        }
+/* ===== 診断クイズ（onboarding.html と同じ質問形式） ===== */
+var OB_ROUTE_NAMES = {
+    'elearning': '📖 Yカリキュラム',
+    'zeropro': '🚀 ゼロプロ90',
+    'ytt': '📈 YTT',
+    'community': '💬 コミュニティ',
+    'fintokei': '💎 Fintokei挑戦'
+};
+
+function obShowCard(id) {
+    document.querySelectorAll('#ob-quiz .ob-card, #ob-quiz .ob-result').forEach(function(c) { c.hidden = true; });
+    var el = document.getElementById('ob-' + id);
+    if (el) {
+        el.hidden = false;
+        // フェードインを再トリガー
+        el.style.animation = 'none';
+        el.offsetHeight;
+        el.style.animation = '';
     }
+}
+
+function obProgress(step, isResult) {
+    var dots = document.querySelectorAll('#ob-progress .ob-dot');
+    var lines = document.querySelectorAll('#ob-progress .ob-dot-line');
+    dots.forEach(function(d, i) {
+        d.classList.remove('active', 'done');
+        if (i < step - 1) d.classList.add('done');
+        else if (i === step - 1) d.classList.add(isResult ? 'done' : 'active');
+    });
+    lines.forEach(function(l, i) {
+        l.classList.toggle('done', i < step - 1 || (isResult && i < step));
+    });
+}
+
+// コンテンツカードの「おすすめ」ハイライト（診断結果に連動）
+function obMarkRecommended(route) {
+    document.querySelectorAll('.content-card').forEach(function(card) {
+        card.classList.remove('card-osusume');
+        var rec = card.getAttribute('data-rec');
+        if (route && rec && rec.split(',').indexOf(route) !== -1) card.classList.add('card-osusume');
+    });
+}
+
+function obAnswer(q, val) {
+    if (q === 1) {
+        var next = (val === 'beginner') ? 'q2b' : (val === 'intermediate') ? 'q2c' : 'q2a';
+        obShowCard(next);
+        obProgress(2, false);
+    }
+}
+
+// 結果カードをクイズ内に表示（onboarding.html と同じ挙動）
+function obRoute(route) {
+    obShowCard('r-' + route);
+    obProgress(2, true);
+    var prog = document.getElementById('ob-progress');
+    if (prog) prog.style.display = 'none';
+    obMarkRecommended(route);
+}
+
+function obShowResult(route) {
+    obShowCard('r-' + route);
+    obMarkRecommended(route);
+}
+
+function obBack(target) {
+    obShowCard(target);
+    obProgress(target === 'q1' ? 1 : 2, false);
+}
+
+function obReset() {
+    obShowCard('q1');
+    obProgress(1, false);
+    var prog = document.getElementById('ob-progress');
+    if (prog) prog.style.display = '';
+    obMarkRecommended(null);
+    var sec = document.getElementById('flowchart');
+    if (sec) sec.scrollIntoView({ behavior: 'smooth' });
 }
 
 function revealAllResults(selectedId) {
@@ -395,8 +444,7 @@ function revealAllResults(selectedId) {
     // Reveal ALL hidden sublevels (other branches) dimmed
     var allSubs = ['fc-conn-q2a','fc-q2a','fc-conn-q2a-split','fc-split-q2a',
                    'fc-conn-q2b','fc-q2b','fc-conn-q2b-split','fc-split-q2b',
-                   'fc-conn-q3a','fc-q3a','fc-conn-q3a-split','fc-split-q3a',
-                   'fc-conn-q3','fc-q3','fc-conn-q3-split','fc-split-q3'];
+                   'fc-conn-q2c','fc-q2c','fc-conn-q2c-split','fc-split-q2c'];
     allSubs.forEach(function(id) {
         var el = document.getElementById(id);
         if (el && el.style.display === 'none') {
@@ -438,7 +486,8 @@ function selectRoute(route) {
         el.style.display = 'none';
         el.classList.remove('active');
     });
-    var resultRoute = (route === 'zeropro2') ? 'zeropro' : route;
+    // 'zeropro2' や 'community3' のような枝別サフィックスを外して結果セクションを引く
+    var resultRoute = route.replace(/\d+$/, '');
     var resultEl = document.getElementById('result-' + resultRoute);
     if (resultEl) {
         resultEl.style.display = 'block';
@@ -452,9 +501,9 @@ function selectRoute(route) {
 
     // 3. Content card recommendations
     document.querySelectorAll('.content-card').forEach(function(card) {
-        card.classList.remove('recommended');
+        card.classList.remove('card-osusume');
         var rec = card.getAttribute('data-rec');
-        if (rec && rec.split(',').indexOf(route) !== -1) card.classList.add('recommended');
+        if (rec && rec.split(',').indexOf(resultRoute) !== -1) card.classList.add('card-osusume');
     });
 }
 
@@ -472,8 +521,12 @@ function highlightFlowchartPath(route) {
         'zeropro': 'fc-r-zeropro',
         'zeropro2': 'fc-r-zeropro2',
         'ytt': 'fc-r-ytt',
+        'ytt2': 'fc-r-ytt2',
         'community': 'fc-r-community',
-        'fintokei': 'fc-r-fintokei'
+        'community2': 'fc-r-community2',
+        'community3': 'fc-r-community3',
+        'fintokei': 'fc-r-fintokei',
+        'fintokei2': 'fc-r-fintokei2'
     };
     var targetId = resultNodes[route];
     var targetNode = document.getElementById(targetId);
@@ -507,7 +560,7 @@ function resetFlowchartHighlight() {
     // Hide all sub-levels
     ['fc-conn-q2a','fc-q2a','fc-conn-q2a-split','fc-split-q2a',
      'fc-conn-q2b','fc-q2b','fc-conn-q2b-split','fc-split-q2b',
-     'fc-conn-q3','fc-q3','fc-conn-q3-split','fc-split-q3'].forEach(function(id) {
+     'fc-conn-q2c','fc-q2c','fc-conn-q2c-split','fc-split-q2c'].forEach(function(id) {
         var el = document.getElementById(id);
         if (el) { el.style.display = 'none'; el.classList.remove('fc-active'); }
     });
@@ -620,8 +673,8 @@ function resetRoute() {
         el.classList.remove('active');
     });
     // Kill route-specific timelines
-    if (mondaiTl) mondaiTl.kill();
-    if (zeroproTl) zeroproTl.kill();
+    if (typeof mondaiTl !== 'undefined' && mondaiTl) mondaiTl.kill();
+    if (typeof zeroproTl !== 'undefined' && zeroproTl) zeroproTl.kill();
     // Reset flowchart
     resetFlowchartHighlight();
     // Reset wizard state for mobile
@@ -648,12 +701,14 @@ function setupAnimations() {
         gsap.fromTo('.feature-card', { opacity: 0, y: 120, rotationX: 40, transformPerspective: 800 }, { opacity: 1, y: 0, rotationX: 0, stagger: 0.2, duration: 0.8, ease: "power3.out", delay: 0.3, onComplete: animateFeatureCards });
     }, once: true }));
 
-    // E-learning: 画面全体がズームインして現れる
+    // E-learning: 画面全体がズームインして現れる（このページに該当セクションが無ければスキップ）
+    if (document.getElementById('elearning-section')) {
     scrollTriggerInstances.push(ScrollTrigger.create({ trigger: '#elearning-section', start: triggerStart, onEnter: function() {
         gsap.fromTo('.elearning-text', { opacity: 0, y: 60, scale: 0.85 }, { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "power3.out" });
         gsap.fromTo('.el-sim', { opacity: 0, scale: 0.5, rotation: -3 }, { opacity: 1, scale: 1, rotation: 0, duration: 1, ease: "elastic.out(1, 0.6)", delay: 0.25 });
         if (!document.getElementById('elearning-section').classList.contains('coming-soon-section')) { initElSim(); }
     }, once: true }));
+    }
 
     // Zeropro 90
     if (document.getElementById('zeropro-section')) {
@@ -672,23 +727,28 @@ function setupAnimations() {
 
     // Flowchart: 見出しがタイプライター風に、質問ノードがバウンスイン
     scrollTriggerInstances.push(ScrollTrigger.create({ trigger: '#flowchart', start: triggerStart, onEnter: function() {
-        gsap.fromTo('#flowchart .heading-lg', { opacity: 0, letterSpacing: '0.5em', filter: 'blur(8px)' }, { opacity: 1, letterSpacing: 'normal', filter: 'blur(0px)', duration: 0.8, ease: 'power3.out' });
-        gsap.fromTo('#flowchart > p', { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4, delay: 0.4 });
-        gsap.fromTo('#fc-q1', { opacity: 0, scale: 0, rotation: 10 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.7, ease: "elastic.out(1, 0.5)", delay: 0.6, onComplete: function() { revealFcLevel1(); } });
+        gsap.fromTo('#flowchart .section-title-badge', { opacity: 0, y: -14 }, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' });
+        gsap.fromTo('#flowchart .ytt-block-title', { opacity: 0, letterSpacing: '0.5em', filter: 'blur(8px)' }, { opacity: 1, letterSpacing: 'normal', filter: 'blur(0px)', duration: 0.8, ease: 'power3.out' });
+        gsap.fromTo('#flowchart .ytt-block-lead', { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4, delay: 0.4 });
+        gsap.fromTo('#ob-q1', { opacity: 0, y: 30, scale: 0.95 }, { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: 'back.out(1.4)', delay: 0.55 });
     }, once: true }));
 
-    // All routes: タブが横からスライドイン
+    // All routes: タブが横からスライドイン（このページに該当セクションが無ければスキップ）
+    if (document.getElementById('all-routes')) {
     scrollTriggerInstances.push(ScrollTrigger.create({ trigger: '#all-routes', start: triggerStart, onEnter: function() {
         gsap.fromTo('#all-routes .heading-lg', { opacity: 0, x: -80 }, { opacity: 1, x: 0, duration: 0.6, ease: 'power3.out' });
         gsap.fromTo('.route-tabs .route-tab', { opacity: 0, x: 60, rotation: 5 }, { opacity: 1, x: 0, rotation: 0, stagger: 0.12, duration: 0.5, ease: 'back.out(1.5)', delay: 0.2 });
     }, once: true }));
+    }
 
-    var yttPanelAnims = [animateYttP1, animateCandles, animateYttP3, animateYttP5];
-    var yttSceneIds = ['#scene-ytt-p1', '#scene-ytt', '#scene-ytt-p3', '#scene-ytt-p5'];
-    var yttAnimPlayed = [false, false, false, false];
-    for (var pi = 0; pi < 4; pi++) {
+    // パネルidは連番ではない（④=ytt-p5, ⑤=ytt-p6）ので明示的に列挙する
+    var yttPanelIds = ['#ytt-p1', '#ytt-p2', '#ytt-p3', '#ytt-p5', '#ytt-p6'];
+    var yttPanelAnims = [animateYttP1, animateCandles, animateYttP3, animateYttP5, null]; // ⑤はGIFなのでSVGアニメなし
+    var yttSceneIds = ['#scene-ytt-p1', '#scene-ytt', '#scene-ytt-p3', '#scene-ytt-p5', '#scene-ytt-p6'];
+    var yttAnimPlayed = [false, false, false, false, false];
+    for (var pi = 0; pi < yttPanelIds.length; pi++) {
         (function(idx) {
-            var panelId = '#ytt-p' + (idx + 1);
+            var panelId = yttPanelIds[idx];
             var tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: panelId,
@@ -700,10 +760,12 @@ function setupAnimations() {
             tl.fromTo(panelId + ' .ytt-panel-text', { opacity: 0, x: -60 }, { opacity: 1, x: 0, duration: 1, ease: 'power2.out' }, 0);
             tl.fromTo(yttSceneIds[idx], { opacity: 0, scale: 0.92 }, { opacity: 1, scale: 1, duration: 1, ease: 'power2.out' }, 0.1);
             scrollTriggerInstances.push(tl.scrollTrigger);
-            var st = ScrollTrigger.create({ trigger: panelId, start: idx === 0 ? 'top 60%' : 'top 30%', onEnter: function() {
-                if (!yttAnimPlayed[idx]) { yttAnimPlayed[idx] = true; yttPanelAnims[idx](); }
-            }, once: true });
-            scrollTriggerInstances.push(st);
+            if (yttPanelAnims[idx]) {
+                var st = ScrollTrigger.create({ trigger: panelId, start: idx === 0 ? 'top 60%' : 'top 30%', onEnter: function() {
+                    if (!yttAnimPlayed[idx]) { yttAnimPlayed[idx] = true; yttPanelAnims[idx](); }
+                }, once: true });
+                scrollTriggerInstances.push(st);
+            }
         })(pi);
     }
 
@@ -752,7 +814,7 @@ function setupAnimations() {
             var dist = 60 + Math.random() * 40;
             var dx = Math.sin(angle * Math.PI / 180) * dist;
             var dy = dist;
-            gsap.fromTo(card, { opacity: 0, x: dx, y: dy, scale: 0.7, rotation: (Math.random() - 0.5) * 10 }, { opacity: 1, x: 0, y: 0, scale: 1, rotation: 0, duration: 0.6, delay: 0.4 + i * 0.06, ease: 'back.out(1.2)' });
+            gsap.fromTo(card, { opacity: 0, x: dx, y: dy, scale: 0.7, rotation: (Math.random() - 0.5) * 10 }, { opacity: 1, x: 0, y: 0, scale: 1, rotation: 0, duration: 0.6, delay: 0.4 + i * 0.06, ease: 'back.out(1.2)', clearProps: 'transform' });
         });
     }, once: true }));
 
@@ -776,11 +838,10 @@ function setupAnimations() {
 var wizardState = { currentStep: '1', selectedRoute: null };
 
 var WIZARD_NEXT = {
-    '1': { 'none': '2a', 'have': '2b' },
-    '2b': { 'skillup': '3a', 'pro': '3b' }
+    '1': { 'none': '2a', 'beginner': '2b', 'intermediate': '2c' }
 };
 
-var WIZARD_DOT_MAP = { '1': 0, '2a': 1, '2b': 1, '3a': 2, '3b': 2 };
+var WIZARD_DOT_MAP = { '1': 0, '2a': 1, '2b': 1, '2c': 1 };
 
 function isMobileFlowchart() {
     var fc = document.querySelector('.flowchart');

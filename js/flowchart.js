@@ -228,16 +228,29 @@ function revealHeroChart() {
                                     duration: 0.8, ease: 'power3.out'
                                 }, 0.5);
 
-                                // Count-up
+                                // Count-up（目標値は intro-stats.json（Discordから毎日自動生成）を優先。
+                                // 取得前/失敗時はここのフォールバック値。値は関数にしてトゥイーン開始時に評価する）
+                                var STATS_FALLBACK = { pros: 478, amount: 1.6 };
+                                function statsPros() { var s = window.__introStats; return (s && s.pro_traders > 0) ? s.pro_traders : STATS_FALLBACK.pros; }
+                                function statsAmount() { var s = window.__introStats; return (s && s.withdrawal_yen > 0) ? Math.floor(s.withdrawal_yen / 1e7) / 10 : STATS_FALLBACK.amount; } // 1億6475万→1.6（切り捨て）
                                 var obj = { pros: 0, amount: 0 };
                                 t3.to(obj, {
-                                    pros: 460, duration: 1.4, ease: 'power2.out',
-                                    onUpdate: function() { prosEl.textContent = Math.round(obj.pros); }
+                                    pros: statsPros, duration: 1.4, ease: 'power2.out',
+                                    onUpdate: function() { prosEl.textContent = Math.round(obj.pros); },
+                                    onComplete: function() { window.__heroCountDone = true; }
                                 }, 0.9);
                                 t3.to(obj, {
-                                    amount: 1.4, duration: 1.4, ease: 'power2.out',
+                                    amount: statsAmount, duration: 1.4, ease: 'power2.out',
                                     onUpdate: function() { amountEl.textContent = obj.amount.toFixed(1); }
                                 }, 0.9);
+                                // 数字ファイルの到着がカウント完了より遅れた場合は、完了後に最終値だけ差し替える
+                                if (window.__introStatsReady) {
+                                    window.__introStatsReady.then(function(st) {
+                                        if (!st) return;
+                                        var apply = function() { prosEl.textContent = statsPros(); amountEl.textContent = statsAmount().toFixed(1); };
+                                        if (window.__heroCountDone) apply(); else t3.eventCallback('onComplete', apply);
+                                    });
+                                }
                             }
 
                             // CTA container (カウンター完了直後 0.9+1.4=2.3)

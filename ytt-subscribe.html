@@ -549,7 +549,7 @@
   ytt-subscribe.html
 
   【本番反映前TODO】
-  [1] #href-tbd-trial-24h
+  [1] #href-tbd-trial-24h（未設定のまま。2026-09-06 暫定で「近日公開」メッセージ表示に変更。戻し方は本文のコメント参照）
       → 「YTT 24時間お試しを見る」ボタンの遷移先URL（計1箇所）
         ※ サブスク加入リンク・YouTubeメンバーシップ案内は
           特設ページ(ytt-tokusetu.html) と同じURLを使用済み
@@ -807,10 +807,12 @@
         <p class="trial-cta-desc">
             <strong>YTTを完全無料</strong>で<wbr>1日たっぷり試してから、<wbr>加入を検討できます。
         </p>
-        <!-- TODO: 24時間お試しページの遷移先が決まったら href を差し替え -->
-        <a href="#href-tbd-trial-24h" class="btn-trial">
+        <!-- 【近日公開の暫定対応 2026-09-06】お試しページが未完成のため data-coming-soon を付け、押すと「近日公開」メッセージを出す（末尾の trial-soon 用 style/script 参照）。
+             ページ完成時の戻し方: (1) href を実URLに差し替え (2) data-coming-soon と aria-disabled を削除 (3) 下の「※ 近日公開予定」の p を削除 (4) 末尾の trial-soon 用 style/script を削除 -->
+        <a href="#href-tbd-trial-24h" class="btn-trial" data-coming-soon="1" aria-disabled="true">
             YTT 24時間お試しを見る →
         </a>
+        <p class="trial-soon-note">※ 近日公開予定</p>
     </div>
 </section>
 
@@ -929,6 +931,28 @@ import { loadDefaultJapaneseParser } from 'https://cdn.jsdelivr.net/npm/budoux/+
     }
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run);
     else run();
+})();
+</script>
+<!-- 近日公開の暫定対応（お試しページ完成時に丸ごと削除してOK） -->
+<style>
+.btn-trial[data-coming-soon]{cursor:default;}
+.trial-soon-note{margin:0.6rem 0 0;font-size:0.8125rem;color:#6b7280;text-align:center;}
+.trial-soon-msg{display:none;margin:0.9rem auto 0;max-width:420px;padding:0.85rem 1rem;border:1.5px solid #e0c897;border-radius:12px;background:#fff;color:#1e1b4b;font-size:0.9375rem;line-height:1.7;text-align:center;}
+.trial-soon-msg.is-on{display:block;}
+</style>
+<script>
+(function(){
+  var btn=document.querySelector('.btn-trial[data-coming-soon]'); if(!btn) return;
+  var msg=document.createElement('div'); msg.className='trial-soon-msg'; msg.setAttribute('role','status');
+  msg.textContent='24時間お試しのページは近日公開予定です。もう少しだけお待ちください。';
+  var note=btn.parentElement.querySelector('.trial-soon-note');
+  (note||btn).insertAdjacentElement('afterend', msg);
+  var t;
+  btn.addEventListener('click', function(e){
+    e.preventDefault();
+    msg.classList.add('is-on'); clearTimeout(t);
+    t=setTimeout(function(){ msg.classList.remove('is-on'); }, 5000);
+  });
 })();
 </script>
 </body>

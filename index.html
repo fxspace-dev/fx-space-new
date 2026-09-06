@@ -7,11 +7,29 @@
     <link rel="icon" type="image/png" href="img/favicon.png">
     <link rel="apple-touch-icon" href="img/favicon.png">
     <meta property="og:title" content="FX SPACE - 経験ゼロから最短プロへ">
-    <meta property="og:description" content="学ぶだけで終わらせない、稼げるトレーダーになる。プロトレーダー460名以上輩出。">
+    <meta property="og:description" content="学ぶだけで終わらせない、稼げるトレーダーになる。プロトレーダー470名以上輩出。">
     <meta property="og:image" content="https://fx-space.com/intro/img/og-preview-v2.png">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="stylesheet" href="css/style.css?v=20260414m">
+    <!-- 実績数字の自動更新：Discordチャンネル名から毎日生成される数字ファイルを読む（失敗時はJS/HTMLに書かれた値のまま） -->
+    <script>
+    window.__introStats = null;
+    (function(){
+      function applyFounder(){
+        var el = document.getElementById('founder-pro-count');
+        if (el && window.__introStats) el.textContent = 'プロトレーダー ' + window.__introStats.pro_traders + '人以上輩出';
+      }
+      window.__introStatsReady = fetch('https://fxspace-dev.github.io/fx-space-lp-light/data/intro-stats.json?t=' + Date.now(), { cache: 'no-store' })
+        .then(function(r){ return r.ok ? r.json() : null; })
+        .then(function(d){
+          if (d && typeof d.pro_traders === 'number' && typeof d.withdrawal_yen === 'number') window.__introStats = d;
+          if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', applyFounder); else applyFounder();
+          return window.__introStats;
+        })
+        .catch(function(){ return null; });
+    })();
+    </script>
     <style>
     /* 固定トップバー(約52px)分、アンカー/スクロール位置を下げて隠れないようにする */
     html{ scroll-padding-top: 60px; }
@@ -2735,7 +2753,7 @@
                 <div style="display:flex;align-items:center;gap:0.75rem;"><span style="color:var(--primary);font-weight:700;font-size:1rem;flex-shrink:0;">&#10003;</span><span style="font-size:0.9375rem;font-weight:600;color:var(--text);">認定テクニカルアナリスト（CMTA®）</span></div>
                 <div style="display:flex;align-items:center;gap:0.75rem;"><span style="color:var(--primary);font-weight:700;font-size:1rem;flex-shrink:0;">&#10003;</span><span style="font-size:0.9375rem;font-weight:600;color:var(--text);">トレーダー歴 約8年</span></div>
                 <div style="display:flex;align-items:center;gap:0.75rem;"><span style="color:var(--primary);font-weight:700;font-size:1rem;flex-shrink:0;">&#10003;</span><span style="font-size:0.9375rem;font-weight:600;color:var(--text);">書籍「結果を勝ち取る！本気のFX」著者</span></div>
-                <div style="display:flex;align-items:center;gap:0.75rem;"><span style="color:var(--primary);font-weight:700;font-size:1rem;flex-shrink:0;">&#10003;</span><span style="font-size:0.9375rem;font-weight:600;color:var(--text);">プロトレーダー 460人以上輩出</span></div>
+                <div style="display:flex;align-items:center;gap:0.75rem;"><span style="color:var(--primary);font-weight:700;font-size:1rem;flex-shrink:0;">&#10003;</span><span id="founder-pro-count" style="font-size:0.9375rem;font-weight:600;color:var(--text);">プロトレーダー 478人以上輩出</span></div>
                 <div style="display:flex;align-items:center;gap:0.75rem;"><span style="color:var(--primary);font-weight:700;font-size:1rem;flex-shrink:0;">&#10003;</span><span style="font-size:0.9375rem;font-weight:600;color:var(--text);">YouTubeで10万→1,000万、Xで10万→200万など公開チャレンジ企画を実施</span></div>
                 <div style="display:flex;align-items:center;gap:0.75rem;"><span style="color:var(--primary);font-weight:700;font-size:1rem;flex-shrink:0;">&#10003;</span><span style="font-size:0.9375rem;font-weight:600;color:var(--text);">「実際に稼ぐ」を目的とした日本最大規模のFXコミュニティを主宰</span></div>
             </div>
@@ -3061,7 +3079,7 @@
 
 <script src="js/gsap.min.js?v=20260301a"></script>
 <script src="js/ScrollTrigger.min.js?v=20260301a"></script>
-<script src="js/flowchart.js?v=20260820a"></script>
+<script src="js/flowchart.js?v=20260906a"></script>
 <script src="js/animations.js?v=20260301a"></script>
 <script>
 /* ===== YTT結果カード内 4機能アニメ（-r版 / 上部#ytt-sectionとid衝突しないよう別id） ===== */

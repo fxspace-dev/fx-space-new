@@ -571,8 +571,8 @@
   ytt-download.html
 
   【本番反映前TODO】
-  [1] ダウンロードURL（設定済み 2026-09-06・安田さん本番設定を反映）
-      → 「YTT最新版をダウンロード」ボタン。新しいZIPを出すたびに href を差し替えること
+  [1] ダウンロードURL（設定済み・本番と同じ。新しいZIPを出すたびに href を差し替えること）
+      → 「YTT最新版をダウンロード」ボタンの遷移先URL（計1箇所）
   [2] アップデート履歴
       → 【安田さん編集】新しいリリースが出るたびに本ページの
         「アップデート履歴」セクションに新カードを追加
@@ -617,7 +617,10 @@
 <!-- メインDLボタン -->
 <section class="dl-main-section">
     <div class="dl-mega-wrap" data-anim>
-        <a href="https://fx-space.com/download/YTT%20for%20MT4_MT5_cTrader_20260731.zip" class="dl-mega-btn">
+        <!-- ▼ href = 配布ファイルのパス（htmlから見た相対 or 絶対URL）に差し替え。
+             download 属性を付けると「遷移」ではなく「ダウンロード」になり、
+             download="ファイル名.zip" で保存時のファイル名を指定できます。      -->
+        <a href="https://fx-space.com/download/YTT%20for%20MT4_MT5_cTrader_20260731.zip" download="YTT for MT4_MT5_cTrader_20260731.zip" class="dl-mega-btn">
             <span class="dl-mega-icon" aria-hidden="true">
                 <!-- 段ボール箱（trial-startと同じデザイン） -->
                 <svg class="dl-mega-box-svg" viewBox="0 0 76 74" xmlns="http://www.w3.org/2000/svg">
@@ -636,7 +639,7 @@
             </span>
             <span class="dl-mega-text">
                 <span class="dl-mega-title">YTT最新版をダウンロード</span>
-                <span class="dl-mega-sub">約 1.2 MB / .zip 形式</span>
+                <span class="dl-mega-sub">約 3.2 MB / .zip 形式</span>
             </span>
             <span class="dl-mega-dl-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
@@ -716,13 +719,158 @@
         <div class="updates-list" data-anim>
 
             <!-- 実データ：最新版を一番上に -->
+
+            <!-- ▼▼▼ 新バージョン用カード（安田さん記入欄）▼▼▼
+                 ・【】内を書き換えてください（日付 / バージョン / 見出し / 各項目）
+                 ・タグは  追加=add  /  修正=fix  /  改善=imp
+                 ・補足(※)が不要な項目は  <ul class="update-notes">…</ul>  ごと削除
+                 ・項目を増減する場合は  <li>…</li>  を複製 / 削除
+                 ・MT4版のみ等の場合は不要な <span class="update-version"> を削除     -->
             <div class="update-item is-latest" data-update>
+                <div class="update-meta">
+                    <div class="update-date">2026/7/31</div>
+                    <span class="update-dot" aria-hidden="true"></span>
+                </div>
+                <div class="update-card">
+                    <span class="update-latest-badge">最新</span>
+                    <div class="update-versions">
+                        <span class="update-version">MT4版 ver1.7.05</span>
+                        <span class="update-version">MT5版 ver1.7.05</span>
+                        <span class="update-version">cTrader版 ver1.7.05</span>
+                    </div>
+                    <div class="update-body">
+                        <h4>MT4版・MT5版・cTrader版アップデート</h4>
+                        <ol class="update-numbered">
+                            <li>
+                                <span class="update-tag fix">修正</span>コピートレードを複数のチャートに設置した際に、まれに同じエントリーが重複してコピーされる不具合を修正しました。
+                                                            <ul class="update-notes">
+                                    <li>コピーモードをご利用の方は必ずアップデートをお願いします。</li>
+<li>コピーを利用の際は、コピー元・コピー先両方で最新版をご利用ください。</li>
+<li>本口座でご利用の前にデモ口座での動作確認をお願いします。</li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <!-- ▲▲▲ 新バージョン用カード ここまで ▲▲▲ -->
+
+            <!-- 旧・最新版（is-latest を外して通常カードへ降格） -->
+            <div class="update-item" data-update>
+                <div class="update-meta">
+                    <div class="update-date">2026/7/29</div>
+                    <span class="update-dot" aria-hidden="true"></span>
+                </div>
+                <div class="update-card">
+                    <div class="update-versions">
+                        <span class="update-version">MT4版 ver1.7.04</span>
+                        <span class="update-version">MT5版 ver1.7.04</span>
+                        <span class="update-version">cTrader版 ver1.7.04</span>
+                    </div>
+                    <div class="update-body">
+                        <h4>MT4版・MT5版・cTrader版アップデート</h4>
+                        <ol class="update-numbered">
+                            <li>
+                                <span class="update-tag fix">修正</span>MT4版でtradingviewモードをオフにした時にホイールが動作しない不具合を修正しました
+                            </li>
+                            <li>
+                                <span class="update-tag imp">改善</span>コピートレードの安定性を向上させました
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 旧・最新版（is-latest を外して通常カードへ降格） -->
+            <div class="update-item" data-update>
+                <div class="update-meta">
+                    <div class="update-date">2026/7/27</div>
+                    <span class="update-dot" aria-hidden="true"></span>
+                </div>
+                <div class="update-card">
+                    <div class="update-versions">
+                        <span class="update-version">MT4版 ver1.7.03</span>
+                        <span class="update-version">MT5版 ver1.7.03</span>
+                    </div>
+                    <div class="update-body">
+                        <h4>MT4版・MT5版アップデート</h4>
+                        <ol class="update-numbered">
+                            <li>
+                                <span class="update-tag fix">修正</span>一部環境で、再起動時にMT4の表示設定（ツールバーのカスタマイズ・チャート配列）がリセットされる不具合を修正しました。
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div class="update-item" data-update>
+                <div class="update-meta">
+                    <div class="update-date">2026/7/26</div>
+                    <span class="update-dot" aria-hidden="true"></span>
+                </div>
+                <div class="update-card">
+                    <div class="update-versions">
+                        <span class="update-version">MT4版 ver1.7.02</span>
+                        <span class="update-version">MT5版 ver1.7.02</span>
+                    </div>
+                    <div class="update-body">
+                        <h4>MT4版・MT5版アップデート</h4>
+                        <ol class="update-numbered">
+                            <li>
+                                <span class="update-tag fix">修正</span>YTTを表示した状態でMT4を閉じた場合に、MT4の表示設定の変更が保存されない不具合を修正しました。
+                            </li>
+                            <li>
+                                <span class="update-tag fix">修正</span>一部証券会社でゴールドのロット計算が不正になる不具合を修正しました。
+                            </li>
+                            <li>
+                                <span class="update-tag fix">修正</span>Appleシリコン搭載MacでMT5版YTTが起動できない不具合を修正しました。
+                                <ul class="update-notes">
+                                    <li>Windows、およびIntelチップのMacをお使いの方もこれまでどおりご利用いただけます。</li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 旧・最新版（is-latest を外して通常カードへ降格） -->
+            <div class="update-item" data-update>
+                <div class="update-meta">
+                    <div class="update-date">2026/7/18</div>
+                    <span class="update-dot" aria-hidden="true"></span>
+                </div>
+                <div class="update-card">
+                    <div class="update-versions">
+                        <span class="update-version">MT4版 ver1.7.01</span>
+                        <span class="update-version">MT5版 ver1.7.01</span>
+                        <span class="update-version">cTrader版 ver1.7.01</span>
+                    </div>
+                    <div class="update-body">
+                        <h4>MT4版・MT5版・cTrader版アップデート</h4>
+                        <ol class="update-numbered">
+                            <li>
+                                <span class="update-tag add">追加</span>利確速報機能を追加しました（MT4・MT5・cTrader）
+                                <ul class="update-notes">
+                                    <li>利確速報機能の追加に伴い、利用規約への同意とYTT使用口座の再登録が必要となります。</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <span class="update-tag fix">修正</span>一部不具合を修正しました（MT4・MT5）
+                            </li>
+                            <li>
+                                <span class="update-tag imp">改善</span>コピトレの安定性を大幅に改善しました（MT4・MT5・cTrader）
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div class="update-item" data-update>
                 <div class="update-meta">
                     <div class="update-date">2026/5/3</div>
                     <span class="update-dot" aria-hidden="true"></span>
                 </div>
                 <div class="update-card">
-                    <span class="update-latest-badge">最新</span>
                     <div class="update-versions">
                         <span class="update-version">MT4版 ver1.6.39</span>
                         <span class="update-version">MT5版 ver1.0.27</span>
@@ -864,39 +1012,17 @@
     });
 })();
 </script>
-<!-- BudouX — 日本語の自動文節改行（画面サイズに応じて最適な位置で自然に折る） -->
-<script type="module">
-import { loadDefaultJapaneseParser } from 'https://cdn.jsdelivr.net/npm/budoux/+esm';
-(function () {
-    var SKIP = { SCRIPT: 1, STYLE: 1, TEXTAREA: 1, NOSCRIPT: 1, CODE: 1, PRE: 1 };
-    function applyBudouX(parser, root) {
-        var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
-            acceptNode: function (n) {
-                if (!n.nodeValue || !/[぀-ヿ㐀-鿿]/.test(n.nodeValue)) return NodeFilter.FILTER_REJECT;
-                var p = n.parentNode;
-                if (!p || SKIP[p.nodeName] || (p.closest && p.closest('svg'))) return NodeFilter.FILTER_REJECT;
-                return NodeFilter.FILTER_ACCEPT;
-            }
-        });
-        var nodes = [];
-        while (walker.nextNode()) nodes.push(walker.currentNode);
-        nodes.forEach(function (n) {
-            var segs = parser.parse(n.nodeValue);
-            if (segs.length < 2) return;
-            var frag = document.createDocumentFragment();
-            segs.forEach(function (s, i) {
-                frag.appendChild(document.createTextNode(s));
-                if (i < segs.length - 1) frag.appendChild(document.createElement('wbr'));
-            });
-            n.parentNode.replaceChild(frag, n);
-        });
+<!-- BudouX — 日本語の自動文節改行（画面サイズに応じて最適な位置で折る） -->
+<script src="https://cdn.jsdelivr.net/npm/budoux/bundle/budoux-ja.min.js" defer></script>
+<script>
+window.addEventListener('DOMContentLoaded', function() {
+    if (window.budoux) {
+        try {
+            var parser = window.budoux.loadDefaultJapaneseParser();
+            parser.applyElement(document.body);
+        } catch (e) {}
     }
-    function run() {
-        try { applyBudouX(loadDefaultJapaneseParser(), document.body); } catch (e) {}
-    }
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run);
-    else run();
-})();
+});
 </script>
 </body>
 </html>

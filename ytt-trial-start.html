@@ -543,8 +543,8 @@
   ytt-trial-start.html
 
   【本番反映前TODO】
-  [1] ダウンロードURL（設定済み 2026-09-06・安田さん本番設定を反映）
-      → STEP3「YTTをダウンロード」ボタン。新しいZIPを出すたびに href を差し替えること
+  [1] ダウンロードURL（設定済み・本番と同じ。新しいZIPを出すたびに href を差し替えること）
+      → STEP3「YTTをダウンロード」ボタンの遷移先URL（計1箇所）
   [2] ytt-trial-terms.html
       → 仮の規約ページ。よすが用意の正式版が出来たら差し替え
 
@@ -729,7 +729,7 @@
                         </span>
                     </div>
                     <div class="preview-box-label">YTT.zip</div>
-                    <div class="preview-box-size">約 1.2 MB</div>
+                    <div class="preview-box-size">約 3.2 MB</div>
                 </div>
             </div>
             <div class="step-info">
@@ -741,7 +741,7 @@
                 </h2>
                 <p>下のボタンからzipファイルを保存してください。<wbr>ダウンロードが終わったら次のステップに進みます。</p>
                 <div class="step-actions">
-                    <a href="https://fx-space.com/download/YTT_24Trial%20for%20MT4_MT5_20260718.zip" class="btn-solid-step" id="dlBtn">
+                    <a href="https://fx-space.com/download/YTT_24Trial%20for%20MT4_MT5_20260718.zip" download="YTT_24Trial for MT4_MT5_20260718.zip" class="btn-solid-step" id="dlBtn">
                         <span class="dl-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="3" x2="12" y2="15"/></svg></span>
                         YTTをダウンロード
                     </a>
@@ -1107,39 +1107,17 @@
     });
 })();
 </script>
-<!-- BudouX — 日本語の自動文節改行（画面サイズに応じて最適な位置で自然に折る） -->
-<script type="module">
-import { loadDefaultJapaneseParser } from 'https://cdn.jsdelivr.net/npm/budoux/+esm';
-(function () {
-    var SKIP = { SCRIPT: 1, STYLE: 1, TEXTAREA: 1, NOSCRIPT: 1, CODE: 1, PRE: 1 };
-    function applyBudouX(parser, root) {
-        var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
-            acceptNode: function (n) {
-                if (!n.nodeValue || !/[぀-ヿ㐀-鿿]/.test(n.nodeValue)) return NodeFilter.FILTER_REJECT;
-                var p = n.parentNode;
-                if (!p || SKIP[p.nodeName] || (p.closest && p.closest('svg'))) return NodeFilter.FILTER_REJECT;
-                return NodeFilter.FILTER_ACCEPT;
-            }
-        });
-        var nodes = [];
-        while (walker.nextNode()) nodes.push(walker.currentNode);
-        nodes.forEach(function (n) {
-            var segs = parser.parse(n.nodeValue);
-            if (segs.length < 2) return;
-            var frag = document.createDocumentFragment();
-            segs.forEach(function (s, i) {
-                frag.appendChild(document.createTextNode(s));
-                if (i < segs.length - 1) frag.appendChild(document.createElement('wbr'));
-            });
-            n.parentNode.replaceChild(frag, n);
-        });
+<!-- BudouX — 日本語の自動文節改行（画面サイズに応じて最適な位置で折る） -->
+<script src="https://cdn.jsdelivr.net/npm/budoux/bundle/budoux-ja.min.js" defer></script>
+<script>
+window.addEventListener('DOMContentLoaded', function() {
+    if (window.budoux) {
+        try {
+            var parser = window.budoux.loadDefaultJapaneseParser();
+            parser.applyElement(document.body);
+        } catch (e) {}
     }
-    function run() {
-        try { applyBudouX(loadDefaultJapaneseParser(), document.body); } catch (e) {}
-    }
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run);
-    else run();
-})();
+});
 </script>
 </body>
 </html>

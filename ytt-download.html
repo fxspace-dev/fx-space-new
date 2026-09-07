@@ -365,6 +365,23 @@
                 z-index: 0;
             }
         }
+        /* 履歴は最新2件だけ表示し、それより前は「過去の履歴を見る」で開く（JSで自動判定。カード追加時の編集は不要） */
+        .update-item.is-folded { display: none; }
+        .updates-more {
+            display: flex; justify-content: center;
+            margin: 0.25rem 0 1.5rem;
+        }
+        .updates-more-btn {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            min-height: 44px; padding: 0.6rem 1.4rem;
+            border: 1.5px solid rgba(255,255,255,0.4); border-radius: 999px;
+            background: transparent; color: #fff;
+            font-size: 0.9rem; font-weight: 700; cursor: pointer;
+            transition: background 0.15s, border-color 0.15s;
+        }
+        .updates-more-btn:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.7); }
+        .updates-more-btn .chev { display: inline-block; transition: transform 0.2s; }
+        .updates-more.is-open .updates-more-btn .chev { transform: rotate(180deg); }
         /* 各アップデートカード */
         .update-item {
             position: relative;
@@ -579,7 +596,9 @@
   [2] アップデート履歴
       → 【安田さん編集】新しいリリースが出るたびに本ページの
         「アップデート履歴」セクションに新カードを追加
-        既存3件（2026/5/3, 2026/3/9, 2026/2/22）を参考にコピペ可
+        既存カードを参考にコピペ可（一番上に追加し、旧最新の is-latest と「最新」バッジを外す）
+        ※ 表示は自動で「最新2件」だけになり、3件目以降は「過去の履歴を見る」ボタンで開く（編集不要）
+        ※ 2026/2/22 のカードは例として書いたもので実際の更新ではないため 2026-09-07 に削除済み
   [3] バージョン番号（ヒーローの v1.6.39 等）
       → 最新版に合わせて差し替え
 
@@ -938,27 +957,6 @@
                 </div>
             </div>
 
-            <div class="update-item" data-update>
-                <div class="update-meta">
-                    <div class="update-date">2026/2/22</div>
-                    <span class="update-dot" aria-hidden="true"></span>
-                </div>
-                <div class="update-card">
-                    <div class="update-versions">
-                        <span class="update-version">MT5版 ver1.0.25</span>
-                    </div>
-                    <div class="update-body">
-                        <h4>MT5版アップデート</h4>
-                        <ol class="update-numbered">
-                            <li>
-                                <span class="update-tag fix">修正</span>Fintokeiの一部通貨ペアでロット計算が正しく反映されない不具合を修正しました。
-                            </li>
-                        </ol>
-                        <p class="update-footnote">お手数ですが更新をお願い致します。</p>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </div>
 </section>
@@ -967,6 +965,41 @@
     <p>© FX SPACE — <a href="ytt-tokusetu.html">YTT特設ページ</a> / <a href="index.html">トップページ</a></p>
 </footer>
 
+<script>
+// アップデート履歴：最新2件だけ見せて、3件目以降は「過去の履歴を見る」で展開（件数はカードの数から自動で決まる）
+(function () {
+    var list = document.querySelector('.updates-list');
+    if (!list) return;
+    var items = Array.prototype.slice.call(list.querySelectorAll('.update-item'));
+    var older = items.slice(2);
+    if (!older.length) return;
+    older.forEach(function (el) { el.classList.add('is-folded'); });
+    var wrap = document.createElement('div');
+    wrap.className = 'updates-more';
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'updates-more-btn';
+    btn.setAttribute('aria-expanded', 'false');
+    var label = function (open) {
+        btn.innerHTML = (open ? '過去の履歴を閉じる' : '過去の履歴を見る（' + older.length + '件）') + ' <span class="chev" aria-hidden="true">▼</span>';
+    };
+    label(false);
+    btn.addEventListener('click', function () {
+        var open = !wrap.classList.contains('is-open');
+        wrap.classList.toggle('is-open', open);
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        older.forEach(function (el) {
+            el.classList.toggle('is-folded', !open);
+            el.style.opacity = 1; el.style.transform = 'none'; /* 出現アニメの対象外なので即表示 */
+        });
+        label(open);
+        if (!open) { wrap.scrollIntoView({ block: 'nearest' }); }
+        if (window.ScrollTrigger && ScrollTrigger.refresh) { ScrollTrigger.refresh(); }
+    });
+    wrap.appendChild(btn);
+    items[1].insertAdjacentElement('afterend', wrap);
+})();
+</script>
 <script src="js/gsap.min.js?v=20260301a"></script>
 <script src="js/ScrollTrigger.min.js?v=20260301a"></script>
 <script>
@@ -1007,7 +1040,7 @@
             scrollTrigger: { trigger: updatesList, start: 'top 85%', once: true }
         });
     }
-    gsap.utils.toArray('[data-update]').forEach(function(item, i) {
+    gsap.utils.toArray('[data-update]:not(.is-folded)').forEach(function(item, i) {
         gsap.fromTo(item, { opacity: 0, x: -16 }, {
             opacity: 1, x: 0, duration: 0.5, delay: i * 0.08, ease: 'power2.out',
             scrollTrigger: { trigger: item, start: 'top 88%', once: true }

@@ -1239,6 +1239,11 @@ body.budoux-ready {
 .section-bg-dark { background: #252259 !important; color: #f2f3f5; }
 
 .content-card { position: relative; overflow: visible; }
+/* スマホで「i」を開いたとき、補足文の折り返せない語句（例「ライン→シナリオ→タイミング→過去検証。」）が
+   グリッド列の最小幅になって画面外へ広がるのを防ぐ（iPhone Safari で再現）。
+   列は中身より小さくなれるようにし、補足文は文字単位で折り返す */
+.content-grid > .content-card { min-width: 0; }
+.content-card .card-tip { word-break: normal; overflow-wrap: anywhere; }
 .content-card::after { display: none; }
 #cs-ring-inv {
     position: fixed; width: 80px; height: 80px;

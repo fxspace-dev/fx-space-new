@@ -11,7 +11,7 @@
     <meta property="og:image" content="https://fx-space.com/intro/img/og-preview-v2.png">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
-    <link rel="stylesheet" href="css/style.css?v=20260906c">
+    <link rel="stylesheet" href="css/style.css?v=20260907a">
     <!-- 実績数字の自動更新：Discordチャンネル名から毎日生成される数字ファイルを読む（失敗時はJS/HTMLに書かれた値のまま） -->
     <script>
     window.__introStats = null;
@@ -283,6 +283,18 @@
     @media (max-width:480px){
       .flowchart-section .ob-link, .flowchart-section .ob-vstep-title a, .fintokei-link, .yc-credit a, .ytt-fto-scene-credit a{ display:inline-block; padding:0.55em 0; }
       .fx-topbar-logo{ padding:0.55rem 0.25rem; margin:-0.55rem 0; }
+    }
+    /* 23. YouTubeメンバーシップ対応表：PCは1行、スマホは「プラン名（料金）」＋字下げした「→ ◯◯相当」の2行に。
+          （375px幅では1行に収まらないため、途中で切れる改行ではなく意図した2行にする） */
+    .ytm-row{ display:flex; flex-wrap:wrap; column-gap:0.35rem; }
+    .ytm-row > span{ white-space:nowrap; }
+    .ytm-to{ font-weight:700; color:#1f2937; }
+    @media (max-width:480px){
+      .ytm-map{ padding-left:0.9rem !important; padding-right:0.9rem !important; }
+      .ytm-row{ display:block; margin-bottom:0.2rem; }
+      .ytm-row:last-child{ margin-bottom:0; }
+      .ytm-from, .ytm-to{ display:block; }
+      .ytm-to{ padding-left:1em; }
     }
     /* 固定トップバー：他ページ（ytt-sp-nav）と同じ白バー＋下線。左＝ロゴ（先頭へ）／右＝手書き黄色ボタン */
     .fx-topbar{
@@ -2858,9 +2870,9 @@
             <p style="color:#1f2937; font-size:0.9rem; font-weight:600; margin:0 0 0.75rem;">YouTubeメンバーシップにご登録されている方へ</p>
 
             <p style="color:#4b5563; font-size:0.8125rem; line-height:1.6; margin:0 0 0.625rem;">YouTubeメンバーシップでも同じ特典が受けられます。</p>
-            <div style="display:inline-block; text-align:left; margin:0 auto 1rem; background:#f9fafb; border-radius:0.5rem; padding:0.625rem 1.25rem; font-size:0.8125rem; color:#374151; line-height:1.8;">
-                よすが式FXメンバー（¥2,990/月）→ スタンダード相当<br>
-                ライブチャート分析（¥6,000/月）→ プレミアム相当
+            <div class="ytm-map" style="display:inline-block; max-width:100%; text-align:left; margin:0 auto 1rem; background:#f9fafb; border-radius:0.5rem; padding:0.625rem 1.25rem; font-size:0.8125rem; color:#374151; line-height:1.8;">
+                <div class="ytm-row"><span class="ytm-from">よすが式FXメンバー（¥2,990/月）</span><span class="ytm-to">→ スタンダード相当</span></div>
+                <div class="ytm-row"><span class="ytm-from">ライブチャート分析（¥6,000/月）</span><span class="ytm-to">→ プレミアム相当</span></div>
             </div>
 
             <div style="border-top:1px solid #d1d5db; padding-top:0.875rem; margin-top:0.25rem;">

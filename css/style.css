@@ -1554,8 +1554,15 @@ body.budoux-ready {
     .quiz-option .opt-icon { font-size: 1.125rem; }
     .btn { padding: 0.75rem 1.5rem; font-size: 0.9375rem; }
     .result-actions { flex-direction: column; align-items: center; }
-    .content-grid { grid-template-columns: 1fr 1fr; }
-    .content-card { padding: 0.875rem; }
+    /* すべてのコンテンツ（index / route / onboarding 共通）：
+       スマホはカードを横幅いっぱいに広げて縦長化を抑える。セクション左右余白 32px→約14px、カード間 10px→8px。
+       「i」で開いた補足文はカードを2列ぶち抜き（全幅）にして3行程度で読めるようにする（閉じると元の2列に戻る）。
+       文字サイズは変えない。見切れ防止のため min-width:0 は上の共通ルールで担保 */
+    .content-section { padding-left: 0.85rem; padding-right: 0.85rem; }
+    .content-grid { grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+    .content-card { padding: 0.8rem 0.7rem; }
+    .content-card.tip-open { grid-column: 1 / -1; }
+    .content-card.tip-open .card-tip { padding: 0.6rem 0.75rem; line-height: 1.6; }
     .content-card h4 { font-size: 0.8125rem; }
 }
 

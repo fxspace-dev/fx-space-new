@@ -123,6 +123,19 @@
             object-fit: fill;
             margin-top: 4px;
         }
+        /* スマホ：見出し下の波線が平べったくならない高さに（route のセクション見出しと同じ 18〜26px） */
+        @media (max-width: 640px) {
+            .h2-title-wave { height: clamp(18px, 6vw, 26px); margin-top: 2px; }
+        }
+        /* 2行になる見出し（サブスクで手に入る、プロへの最短経路）：
+           スマホでは1本の長い波線を2行の下に敷くと形が崩れるので、行ごとに文字幅ぴったりの波線にする。PCは従来どおり1行＋1本 */
+        .h2-lines .h2-line { display: inline; }
+        @media (max-width: 640px) {
+            .h2-lines .h2-line { display: block; width: fit-content; margin: 0 auto; }
+            .h2-lines .h2-line::after { content: ''; display: block; height: clamp(18px, 6vw, 26px); margin-top: 2px; background: url('img/wave-orange.png') center / 100% 100% no-repeat; }
+            .h2-lines .h2-line + .h2-line { margin-top: 0.15em; }
+            .h2-lines + .h2-title-wave { display: none; }
+        }
         .ytt-sp-section-header p {
             font-size: clamp(0.875rem, 1.6vw, 1rem);
             color: #6b7280; line-height: 1.9;
@@ -283,6 +296,12 @@
             max-width: 80% !important;
             max-height: 88% !important;
         }
+        /* iPhone Safari 対策：枠（16:10）の高さに対する max-height:70% が効かず、ロゴが原寸近くで上下見切れする。
+           高さは幅から決まるので、各ロゴの縦横比に合わせて幅の上限だけで 70%（大は 88%）以内に収める */
+        .sub-feature-img { height: auto; width: auto; }
+        .sub-feature-img[src*="ytt-logo"] { max-width: 40%; }
+        .sub-feature-img[src*="zeropro90-logo"] { max-width: 50%; }
+        .sub-feature-img-large { max-width: 64% !important; }
 
         /* 「詳しくはこちら」誘導 */
         .sub-more-link {
@@ -517,6 +536,19 @@
             padding: 0.625rem 1.25rem;
             font-size: 0.8125rem; color: #374151; line-height: 1.8;
         }
+        /* 対応表：PCは1行、スマホは「プラン名（料金）」＋字下げした「→ ◯◯相当」の2行（index と同じ）。
+           375px幅では1行に収まらないため、途中で切れる改行ではなく意図した2行にする */
+        .yt-notice-mapping { max-width: 100%; }
+        .ytm-row { display: flex; flex-wrap: wrap; column-gap: 0.35rem; }
+        .ytm-row > span { white-space: nowrap; }
+        .ytm-to { font-weight: 700; color: #1f2937; }
+        @media (max-width: 480px) {
+            .yt-notice-mapping { padding-left: 0.9rem; padding-right: 0.9rem; }
+            .ytm-row { display: block; margin-bottom: 0.2rem; }
+            .ytm-row:last-child { margin-bottom: 0; }
+            .ytm-from, .ytm-to { display: block; }
+            .ytm-to { padding-left: 1em; }
+        }
         .yt-notice-divider {
             border-top: 1px solid #d1d5db;
             padding-top: 0.875rem;
@@ -678,7 +710,7 @@
     </div>
     <div class="section-h-title-row">
         <span class="h2-with-wave">
-            <h2>サブスクで手に入る、プロへの最短経路</h2>
+            <h2 class="h2-lines"><span class="h2-line">サブスクで手に入る、</span><span class="h2-line">プロへの最短経路</span></h2>
             <img class="h2-title-wave" src="img/wave-orange.png" alt="">
         </span>
     </div>
@@ -825,8 +857,8 @@
         <p class="yt-notice-title">YouTubeメンバーシップにご登録されている方へ</p>
         <p class="yt-notice-text">YouTubeメンバーシップでも同じ特典が受けられます。</p>
         <div class="yt-notice-mapping">
-            よすが式FXメンバー（¥2,990/月）→ スタンダード相当<br>
-            ライブチャート分析（¥6,000/月）→ プレミアム相当
+            <div class="ytm-row"><span class="ytm-from">よすが式FXメンバー（¥2,990/月）</span><span class="ytm-to">→ スタンダード相当</span></div>
+            <div class="ytm-row"><span class="ytm-from">ライブチャート分析（¥6,000/月）</span><span class="ytm-to">→ プレミアム相当</span></div>
         </div>
         <div class="yt-notice-divider">
             <p class="yt-notice-cta-label">接続がまだの方はこちら</p>

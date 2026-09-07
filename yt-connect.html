@@ -352,11 +352,12 @@ body[data-device="sp"] .pc-only{display:none;}
 }
 .yt-step-head{
   display:flex;
-  align-items:center;
+  align-items:flex-start; /* 番号は1行目に上揃え（折り返しはテキスト列にぶら下げ） */
   gap:0.75rem;
   margin-bottom:0.5rem;
 }
 .yt-step-num{
+  margin-top:-4px; /* 30pxの丸を1行目(約21px)の中心に光学的に合わせる */
   width:30px;height:30px;
   border-radius:50%;
   background:#4f46e5;
@@ -1379,6 +1380,12 @@ body[data-device="sp"] .pc-only{display:none;}
   .yt-overview{gap:0.625rem;}
   .yt-ov-icon{width:44px;height:44px;font-size:1.25rem;}
   .yt-step-explain{margin-left:0;margin-top:0.25rem;}
+}
+
+/* スマホ：切替タブと小さなリンクのタップ領域を44px相当に */
+@media(max-width:768px){
+  .device-tab{ min-height:44px; }
+  .yt-section a:not([class*="btn"]){ display:inline-block; padding:0.4em 0; }
 }
 </style>
 </head>

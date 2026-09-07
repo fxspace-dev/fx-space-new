@@ -11,7 +11,7 @@
     <meta property="og:image" content="https://fx-space.com/intro/img/og-preview-v2.png">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
-    <link rel="stylesheet" href="css/style.css?v=20260414m">
+    <link rel="stylesheet" href="css/style.css?v=20260906a">
     <!-- 実績数字の自動更新：Discordチャンネル名から毎日生成される数字ファイルを読む（失敗時はJS/HTMLに書かれた値のまま） -->
     <script>
     window.__introStats = null;
@@ -279,6 +279,11 @@
     }
     /* マーカーが本文よりフォント大の場合、1行目と光学的に揃うよう行高を本文寄りに */
     .founder-info > div > span:first-child{ line-height:1.6; }
+    /* 22. スマホのタップ領域：本文中の小さなテキストリンク／トップバーのロゴを44px相当に（見た目は維持） */
+    @media (max-width:480px){
+      .flowchart-section .ob-link, .flowchart-section .ob-vstep-title a, .fintokei-link, .yc-credit a, .ytt-fto-scene-credit a{ display:inline-block; padding:0.55em 0; }
+      .fx-topbar-logo{ padding:0.55rem 0.25rem; margin:-0.55rem 0; }
+    }
     /* 固定トップバー：他ページ（ytt-sp-nav）と同じ白バー＋下線。左＝ロゴ（先頭へ）／右＝手書き黄色ボタン */
     .fx-topbar{
       position:fixed; top:0; left:0; right:0; z-index:1000;
@@ -3080,7 +3085,7 @@
 <script src="js/gsap.min.js?v=20260301a"></script>
 <script src="js/ScrollTrigger.min.js?v=20260301a"></script>
 <script src="js/flowchart.js?v=20260906a"></script>
-<script src="js/animations.js?v=20260301a"></script>
+<script src="js/animations.js?v=20260906a"></script>
 <script>
 /* ===== YTT結果カード内 4機能アニメ（-r版 / 上部#ytt-sectionとid衝突しないよう別id） ===== */
 (function(){

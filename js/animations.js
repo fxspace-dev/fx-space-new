@@ -1293,7 +1293,7 @@ function drawFintokeiChart(data, months, refBalance) {
 // Fintokei graph: trigger animation on scroll into view
 (function() {
     var graphCard = document.querySelector('.fintokei-graph-card');
-    if (!graphCard) { runFintokeiSim(); return; }
+    if (!graphCard) return; // シミュレーターの無いページ（route等）では何もしない（旧: 要素が無いのに実行してエラー）
     var fkChartVisible = false;
     var fkObserver = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {

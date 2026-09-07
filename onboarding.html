@@ -1892,6 +1892,13 @@ body{ padding-top:50px; }
   .ob-card,.ob-result{padding:2rem 1.25rem;}
   .ob-choice{padding:0.875rem 1rem;}
 }
+/* index.html と同じスマホ余白圧縮（結果カード内のDiscord風UIを広く見せる。index の 7./16.(c)(e) 相当） */
+@media(max-width:480px){
+  .ob-quiz{padding-left:0;padding-right:0;}
+  .ob-card-body{padding-left:1.1rem;padding-right:1.1rem;}
+  .ob-result{padding-left:0.85rem;padding-right:0.85rem;}
+  .ob-vstep{padding-left:0.3rem;padding-right:0.3rem;}
+}
 
 /* ===== 診断結果の下：プロトレーダーへの最短ルート（全体マップ） ===== */
 .ob-route-detail{width:100%;background:#fff;border-top:1px solid #ecebf6;padding:3rem 1.25rem 3.25rem;margin-top:2.5rem;}

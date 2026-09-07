@@ -12,7 +12,7 @@
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://plans-preview--fx-space-community-preview-1775890548.netlify.app/img/og-plans.png">
-    <link rel="stylesheet" href="css/style.css?v=20260414m">
+    <link rel="stylesheet" href="css/style.css?v=20260906a">
     <style>
       /* ===== Japanese line-break rules (apply globally) ===== */
       html{
@@ -290,7 +290,12 @@
           border-bottom-color:#1e1b4b;
         }
       }
-    </style>
+    
+      /* スマホ：本文中の小さなテキストリンクのタップ領域を広げる（見た目は維持） */
+      @media(max-width:768px){
+        a[href][style*="font-size:0.8125rem"], a[href][style*="font-size:0.75rem"], .plan-year-link { display:inline-block; padding:0.5em 0; }
+      }
+</style>
 </head>
 <body style="scroll-behavior: auto;">
 
@@ -302,10 +307,10 @@
 
         <!-- Header -->
         <div class="pricing-header pricing-reveal revealed">
-            <h2 class="pricing-title-wavy">
+            <h1 class="pricing-title-wavy">
               <span class="ttl-line"><span class="pricing-h2-accent">すべての機能を</span>解放して</span>
               <span class="ttl-line">最速でプロへ</span>
-            </h2>
+            </h1>
             <p class="pricing-sub">スタンダードでほぼ全機能が使えます。<br>プレミアムならリアルタイムで分析＆トレーダー交流も。</p>
         </div>
 

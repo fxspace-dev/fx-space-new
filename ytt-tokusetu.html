@@ -13,7 +13,7 @@
     <meta name="twitter:image" content="https://fx-space.com/intro/img/og-ytt-tokusetu.png">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
-    <link rel="stylesheet" href="css/style.css?v=20260414m">
+    <link rel="stylesheet" href="css/style.css?v=20260906a">
     <style>
         /* ===== YTT特設ページ固有スタイル ===== */
         .ytt-sp-nav {
@@ -840,7 +840,13 @@
             .feat-tip { width: min(260px, 80vw); bottom: auto; top: calc(100% + 10px); }
             .feat-tip::after { top: auto; bottom: 100%; border-top-color: transparent; border-bottom-color: #1e1b4b; }
         }
-    </style>
+    
+        /* スマホ：追従ナビのボタンと本文中の小さなテキストリンクのタップ領域を44px相当に（見た目は維持） */
+        @media (max-width: 768px) {
+            .ytt-sp-nav-cta .btn-sq-blue.sm, .ytt-sp-nav-cta .btn-sq-white.sm { min-height: 44px; display: inline-flex; align-items: center; }
+            a[href][style*="font-size:0.8125rem"], a[href][style*="font-size:0.75rem"] { display: inline-block; padding: 0.5em 0; }
+        }
+</style>
 </head>
 <body style="scroll-behavior: smooth;">
 

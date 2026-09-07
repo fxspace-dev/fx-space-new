@@ -33,6 +33,8 @@ body{ padding-top:50px; }
 .route-head .accent{ color:var(--primary); }
 .tw{ display:inline-block; }
 .tw img{ display:block; width:100%; height:clamp(12px,2.8vw,20px); object-fit:fill; margin-top:2px; }
+/* ヒーロー（h1）の波線：平べったい wave-orange.png → 他ページ（route / plans / yt-connect）と同じ手書き風 underline-wave.png・24px */
+.rsec-head .tw h1 + img{ height:24px; aspect-ratio:auto; max-height:none; object-fit:fill; margin-top:-2px; }
 .route-head .route-sub{ color:var(--text-muted); font-size:clamp(0.9rem,1.8vw,1.02rem); line-height:1.8; max-width:520px; margin:1.1rem auto 0; }
 
 /* section shells（セクションごとに背景を変えて切り替わりを分かるようにする） */
@@ -869,7 +871,7 @@ body{ padding-top:50px; }
       王道ルート
       <img class="hero-title-side hero-title-side--right" src="img/title-side-yellow-right.png" alt="">
     </span>
-    <div><span class="tw"><h1>Yカリキュラムで学ぶ</h1><img src="img/wave-orange.png" alt=""></span></div>
+    <div><span class="tw"><h1>Yカリキュラムで学ぶ</h1><img src="img/underline-wave.png" alt=""></span></div>
     <p class="rsec-lead">動画で学び、答え合わせで合格していく5ステップ。</p>
   </div>
 

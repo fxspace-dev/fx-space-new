@@ -13,7 +13,7 @@
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://fx-space.com/intro/img/og-route.png">
-<link rel="stylesheet" href="css/style.css?v=20260906a">
+<link rel="stylesheet" href="css/style.css?v=20260906b">
 <style>
 /* ===== Route page（index.html と同一コンポーネントで構成） ===== */
 
@@ -2686,5 +2686,23 @@ var startZeropro = (function(){
 })();
 </script>
 
+
+<!-- スマホ: コンテンツカードの補足文（.card-tip）を「i」ボタンで開閉（ホバーできない端末のみ） -->
+<script>
+(function(){
+  if (!window.matchMedia || !matchMedia("(hover: none), (pointer: coarse)").matches) return;
+  document.querySelectorAll(".content-card").forEach(function(card){
+    if (!card.querySelector(".card-tip") || card.querySelector(".card-tip-btn")) return;
+    var b=document.createElement("button"); b.type="button"; b.className="card-tip-btn"; b.setAttribute("aria-label","説明を見る"); b.textContent="i";
+    b.addEventListener("click", function(e){
+      e.preventDefault(); e.stopPropagation();
+      var open=card.classList.contains("tip-open");
+      document.querySelectorAll(".content-card.tip-open").forEach(function(c){ c.classList.remove("tip-open"); });
+      if (!open) card.classList.add("tip-open");
+    });
+    card.appendChild(b);
+  });
+})();
+</script>
 </body>
 </html>

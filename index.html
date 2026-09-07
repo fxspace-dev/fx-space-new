@@ -11,7 +11,7 @@
     <meta property="og:image" content="https://fx-space.com/intro/img/og-preview-v2.png">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
-    <link rel="stylesheet" href="css/style.css?v=20260906a">
+    <link rel="stylesheet" href="css/style.css?v=20260906b">
     <!-- 実績数字の自動更新：Discordチャンネル名から毎日生成される数字ファイルを読む（失敗時はJS/HTMLに書かれた値のまま） -->
     <script>
     window.__introStats = null;
@@ -3303,6 +3303,24 @@ import { loadDefaultJapaneseParser } from 'https://cdn.jsdelivr.net/npm/budoux/+
   home.addEventListener('click', function(e){
     e.preventDefault();
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
+</script>
+
+<!-- スマホ: コンテンツカードの補足文（.card-tip）を「i」ボタンで開閉（ホバーできない端末のみ） -->
+<script>
+(function(){
+  if (!window.matchMedia || !matchMedia("(hover: none), (pointer: coarse)").matches) return;
+  document.querySelectorAll(".content-card").forEach(function(card){
+    if (!card.querySelector(".card-tip") || card.querySelector(".card-tip-btn")) return;
+    var b=document.createElement("button"); b.type="button"; b.className="card-tip-btn"; b.setAttribute("aria-label","説明を見る"); b.textContent="i";
+    b.addEventListener("click", function(e){
+      e.preventDefault(); e.stopPropagation();
+      var open=card.classList.contains("tip-open");
+      document.querySelectorAll(".content-card.tip-open").forEach(function(c){ c.classList.remove("tip-open"); });
+      if (!open) card.classList.add("tip-open");
+    });
+    card.appendChild(b);
   });
 })();
 </script>

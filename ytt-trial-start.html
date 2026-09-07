@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>24時間お試しスタート — YTT（よすがトレードツール）</title>
     <meta name="robots" content="noindex">
-    <link rel="stylesheet" href="css/style.css?v=20260906a">
+    <link rel="stylesheet" href="css/style.css?v=20260906b">
     <style>
         body {
             background: #f8f9fc;
@@ -67,6 +67,8 @@
             height: clamp(14px, 3vw, 22px);
             object-fit: fill; margin: 0.1rem 0 0.5rem;
         }
+        /* スマホ: 見出しの文字幅に関係なく波線の幅を揃える（短い見出しで線が細く見えるのを防ぐ。全4ページ共通） */
+        @media (max-width: 640px) { .ytt-sp-title-line .ytt-title-wave { width: max(100%, 200px); max-width: calc(100vw - 2rem); margin-left: 50%; transform: translateX(-50%); } }
         .ytt-sp-hero-lead {
             font-size: clamp(0.875rem, 1.8vw, 1rem);
             color: #6b7280; line-height: 1.85;

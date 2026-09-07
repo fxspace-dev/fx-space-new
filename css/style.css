@@ -1160,6 +1160,23 @@ body {
     opacity: 1; transform: translateX(-50%) translateY(0);
 }
 }
+/* スマホ（ホバー無し）: 「i」ボタンで補足文をカード内に展開 */
+.content-card .card-tip-btn {
+    display: none; position: absolute; top: 8px; right: 8px; z-index: 21;
+    width: 26px; height: 26px; border-radius: 50%;
+    border: 1.5px solid rgba(99,102,241,0.35); background: #fff; color: #4f46e5;
+    font: 800 12px/1 Inter, sans-serif; align-items: center; justify-content: center;
+    cursor: pointer; padding: 0;
+}
+@media (hover: none), (pointer: coarse) {
+.content-card .card-tip-btn { display: flex; }
+.content-card.tip-open .card-tip-btn { background: #4f46e5; color: #fff; }
+.content-card.tip-open .card-tip {
+    position: static; transform: none; width: auto; opacity: 1; pointer-events: auto;
+    margin: 0.5rem 0 0; box-shadow: none; transition: none; /* タップ時は即表示 */
+}
+.content-card.tip-open .card-tip::after { display: none; }
+}
 .content-card .card-emoji { font-size: 1.375rem; width: 2.75rem; height: 2.75rem; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #f0f0ff, #e8e8ff); border-radius: 14px; margin-bottom: 0.75rem; transition: transform 0.3s; }
 @media (hover: hover) and (pointer: fine) {
 .content-card:hover .card-emoji { transform: scale(1.08); }

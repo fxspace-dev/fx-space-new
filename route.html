@@ -883,6 +883,27 @@ body{ padding-top:50px; }
 .tw img:not(.brand-fintokei){ width:100%; height:clamp(20px,7vw,30px); object-fit:fill; margin-top:2px; } /* 旧12〜20px→20〜30px。文字幅ちょうどに、平べったくならない高さで */
 .rsec-head .tw img{ height:clamp(18px,6vw,26px); }
 .route-head .tw img{ height:24px; aspect-ratio:auto; max-height:none; object-fit:fill; margin-top:-2px; } /* ヒーロー（h1）の各行: plans と同じ24px */
+
+/* ===== スマホ：横幅を目一杯使って「縦長・改行だらけ」を抑える（文字サイズ・デザインは変えない） =====
+   index.html のスマホ調整（#12/#14）と同じ考え方。見切れは絶対に出さない（width:100% / min-width:0 前提） */
+@media (max-width:480px){
+  /* セクションの左右余白 24px→約14px */
+  .rsec{ padding-left:0.85rem; padding-right:0.85rem; }
+  /* すべてのコンテンツ：カード2列を広げる（151px→約169px）。「i」で開く補足文の内側余白も詰める */
+  .content-section{ padding-left:0.85rem; padding-right:0.85rem; }
+  .content-grid{ gap:0.5rem; }
+  .content-card{ padding:0.8rem 0.7rem; }
+  .content-card.tip-open .card-tip{ padding:0.6rem 0.65rem; line-height:1.55; }
+  /* 自力ルート：STEPの本文とチャート画像を、route-steps の左右余白(32px)ぶん広げる */
+  .route-steps{ padding-left:0; padding-right:0; }
+  /* ゼロプロ90のDiscord風UI：外枠の余白を詰めて本文幅を広げる（index と同じ値） */
+  .zp-block{ padding-left:0.85rem !important; padding-right:0.85rem !important; }
+  .zp-dc-flow-review,
+  .zp-dc-flow-submit{ padding-left:0.5rem; padding-right:0.5rem; }
+  .zp-dc-body{ padding-left:0.65rem; padding-right:0.65rem; }
+  /* どちらのルートでも使うもの：Discord風UIの外枠余白を詰める */
+  .tools-block{ padding-left:0.6rem; padding-right:0.6rem; }
+}
 </style>
 </head>
 <body>

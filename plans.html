@@ -300,7 +300,10 @@
     
       /* スマホ：本文中の小さなテキストリンクのタップ領域を広げる（見た目は維持） */
       @media(max-width:768px){
-        a[href][style*="font-size:0.8125rem"], a[href][style*="font-size:0.75rem"], .plan-year-link { display:inline-block; padding:0.5em 0; }
+        a[href][style*="font-size:0.8125rem"], a[href][style*="font-size:0.75rem"] { display:inline-block; padding:0.5em 0; }
+        /* 「月額プランで加入」は枠付きボタンなので左右の余白を保ったまま高さだけ確保する
+           （以前は上の行にまとめて padding:0.5em 0 を当てて左右余白が消え、文字が枠にくっついていた） */
+        .plan-year-link { display:inline-block; padding:0.7rem 1.5rem; }
       }
 </style>
 </head>

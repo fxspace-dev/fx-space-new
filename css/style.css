@@ -25,12 +25,18 @@ body {
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
     background: var(--bg);
-    /* 日本語の自然な改行（BudouX + 文節単位で折り返し）
+    /* 日本語の折り返し
+       ※ 既定は normal。keep-all は BudouX で wbr を入れたページ（body.budoux-ready）だけに適用する。
+         keep-all のまま wbr が無いと、grid/flex セルが「折り返せない1文」の幅まで広がり
+         スマホ（特に Safari）で右に見切れるため。
        ※ overflow-wrap は break-word。anywhere だと flex/grid セルが内容以下に縮み、
          「1,440万/円」のように数字や単語が任意位置で割れて縦長になるため。 */
-    word-break: keep-all;
+    word-break: normal;
     overflow-wrap: break-word;
     line-break: strict;
+}
+body.budoux-ready {
+    word-break: keep-all;
 }
 
 .heading-xl { font-size: clamp(2.2rem, 5.5vw, 4rem); font-weight: 900; letter-spacing: -0.03em; line-height: 1.1; }

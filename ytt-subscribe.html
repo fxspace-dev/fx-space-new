@@ -5,15 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YTTを使うにはサブスク加入が必要です — FX SPACE</title>
     <meta name="robots" content="noindex">
-    <link rel="stylesheet" href="css/style.css?v=20260906b">
+    <link rel="stylesheet" href="css/style.css?v=20260906c">
     <style>
         body {
             background: #f8f9fc;
-            /* BudouX が挿入する wbr を活かすため文字単位の折りを抑制 */
-            word-break: keep-all;
+            /* 折り返しは既定 normal。BudouX 適用後（body.budoux-ready）だけ keep-all にする */
+            word-break: normal;
             overflow-wrap: anywhere;
             line-break: strict;
         }
+        body.budoux-ready { word-break: keep-all; }
 
         /* NAV */
         .ytt-sp-nav {
@@ -929,7 +930,7 @@ import { loadDefaultJapaneseParser } from 'https://cdn.jsdelivr.net/npm/budoux/+
         });
     }
     function run() {
-        try { applyBudouX(loadDefaultJapaneseParser(), document.body); } catch (e) {}
+        try { applyBudouX(loadDefaultJapaneseParser(), document.body); document.body.classList.add('budoux-ready'); } catch (e) {}
     }
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run);
     else run();

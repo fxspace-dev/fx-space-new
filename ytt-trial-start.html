@@ -536,7 +536,18 @@
         .ytt-sp-page-footer a { color: #9ca3af; text-decoration: underline; }
 
         [data-anim] { opacity: 0; }
-    </style>
+            /* シミュレーターが動かない画面幅（768px以下 = style.css で「PC専用」表示になる幅）では
+           STEP6「シミュレーターで予約練習」ごと非表示にし、STEP5で完了扱いにする。PC/タブレット横では従来どおり6ステップ */
+        .s5-label-sp { display: none; }
+        @media (max-width: 768px) {
+            .step-card[data-step="6"],
+            #trial-sim-wrap,
+            .prog-line[data-prog-line="5"],
+            .prog-step[data-prog="6"] { display: none !important; }
+            .s5-label-pc { display: none; }
+            .s5-label-sp { display: inline; }
+        }
+</style>
 </head>
 <body>
 
@@ -807,7 +818,7 @@
             </div>
         </div>
         <div class="step-next">
-            <button class="btn-next-step" id="step5Next">マスターしたら次へ →</button>
+            <button class="btn-next-step" id="step5Next"><span class="s5-label-pc">マスターしたら次へ →</span><span class="s5-label-sp">マスターしたら完了 →</span></button>
         </div>
     </article>
 
@@ -926,6 +937,12 @@
         }
         setStepStatus(n, 'active');
         setProgState(n, 'active');
+        // スマホ（768px以下）では STEP6 は非表示なので、表示・スクロールはせず完了扱いだけにする
+        if (n === 6 && window.innerWidth <= 768) {
+            setStepStatus(6, 'done');
+            setProgState(6, 'done');
+            return;
+        }
         // STEP6 なら独立シミュレーターラッパーも表示（is-visibleで max-height アニメ）
         if (n === 6) {
             var simWrap = document.getElementById('trial-sim-wrap');

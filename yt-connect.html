@@ -1387,6 +1387,17 @@ body[data-device="sp"] .pc-only{display:none;}
   .device-tab{ min-height:44px; }
   .yt-section a:not([class*="btn"]){ display:inline-block; padding:0.4em 0; }
 }
+
+/* 見出しの各行の下に波線（plans.html の .pricing-title-wavy と同じ作り） */
+.ob-welcome-wavy .ttl-line{
+  display:block; width:fit-content; position:relative;
+  margin:0.1rem auto 0.9rem; padding-bottom:0.85rem;
+}
+.ob-welcome-wavy .ttl-line::after{
+  content:""; position:absolute; left:0; right:0; bottom:-4px; height:24px;
+  background:url("img/underline-wave.png") center/100% 100% no-repeat; opacity:0.95;
+}
+.ob-welcome-wavy .ttl-line:last-child{ margin-bottom:0.25rem; }
 </style>
 </head>
 <body>
@@ -1395,8 +1406,7 @@ body[data-device="sp"] .pc-only{display:none;}
 <header class="ob-header">
   <img class="ob-logo" src="img/fxspace-logo-horizontal.png" alt="FX SPACE">
   <div class="ob-welcome-wrap">
-    <h1 class="ob-welcome">YouTubeメンバーシップを<br><span class="accent">Discord</span>につなごう</h1>
-    <img class="ob-welcome-wave" src="img/underline-wave.png" alt="">
+    <h1 class="ob-welcome ob-welcome-wavy"><span class="ttl-line">YouTubeメンバーシップを</span><span class="ttl-line"><span class="accent">Discord</span>につなごう</span></h1>
   </div>
   <p class="ob-welcome-sub">YouTubeの「メンバーになる」ボタンで登録したあと、<br>Discordとつなげると<strong style="color:#1e1b4b;">メンバー限定の部屋</strong>に入れるようになります。</p>
 

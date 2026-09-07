@@ -876,6 +876,13 @@ body{ padding-top:50px; }
 /* reveal */
 .rv{ opacity:0; transform:translateY(24px); transition:opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1); }
 .rv.on{ opacity:1; transform:none; }
+
+/* 波線の見直し（2026-09-06）:
+   ・ヒーロー: 太い直線的な wave-yellow-bold.png → 他ページと同じ手書き風 underline-wave.png（plans と同じ24px）
+   ・セクション見出し: 高さを画像の比率に合わせて自然な波に（横に潰して平べったくしない） */
+.tw img:not(.brand-fintokei){ width:100%; height:clamp(20px,7vw,30px); object-fit:fill; margin-top:2px; } /* 旧12〜20px→20〜30px。文字幅ちょうどに、平べったくならない高さで */
+.rsec-head .tw img{ height:clamp(18px,6vw,26px); }
+.route-head .tw img{ height:24px; aspect-ratio:auto; max-height:none; object-fit:fill; margin-top:-2px; } /* ヒーロー（h1）の各行: plans と同じ24px */
 </style>
 </head>
 <body>
@@ -886,8 +893,8 @@ body{ padding-top:50px; }
 <header class="route-head">
   <img class="route-logo" src="img/fxspace-symbol.png" alt="FX SPACE">
   <h1 class="heading-lg">
-    <span class="tw">プロトレーダーになるための<img src="img/wave-yellow-bold.png" alt=""></span><br>
-    <span class="tw accent">最短ルート<img src="img/wave-yellow-bold.png" alt=""></span>
+    <span class="tw">プロトレーダーになるための<img src="img/underline-wave.png" alt=""></span><br>
+    <span class="tw accent">最短ルート<img src="img/underline-wave.png" alt=""></span>
   </h1>
   <p class="route-sub">やることはシンプル。<br>実力をつけて、資金を大きくして、プロへ。</p>
 </header>

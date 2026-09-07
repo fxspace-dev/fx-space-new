@@ -84,6 +84,12 @@
         align-items:center;
         justify-content:space-between;
         text-align:center; /* 2行に折り返す質問も中央揃えに */
+        min-width:0;
+      }
+      /* 質問文は必ず折り返せるように（keep-all のままだと日本語が1語扱いで縮まず ▼ を押し出す） */
+      .pl-faq-q > span:first-child{
+        flex:1 1 auto; min-width:0;
+        word-break:normal; overflow-wrap:anywhere; line-break:auto;
         gap:1rem;
         cursor:pointer;
         font-size:0.9375rem;

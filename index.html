@@ -11,7 +11,7 @@
     <meta property="og:image" content="https://fx-space.com/intro/img/og-preview-v2.png">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
-    <link rel="stylesheet" href="css/style.css?v=20260907b">
+    <link rel="stylesheet" href="css/style.css?v=20260907c">
     <!-- 実績数字の自動更新：Discordチャンネル名から毎日生成される数字ファイルを読む（失敗時はJS/HTMLに書かれた値のまま） -->
     <script>
     window.__introStats = null;
@@ -295,6 +295,23 @@
       .ytm-row:last-child{ margin-bottom:0; }
       .ytm-from, .ytm-to{ display:block; }
       .ytm-to{ padding-left:1em; }
+    }
+    /* 24. ヒーローのロゴ流し（スマホ）：ロゴが端で「切れて」見えないよう、ロゴを小さくして端のフェードを広げる（消えるように見せる） */
+    @media (max-width:480px){
+      .logo-marquee{
+        -webkit-mask-image:linear-gradient(to right, transparent, #000 24%, #000 76%, transparent);
+        mask-image:linear-gradient(to right, transparent, #000 24%, #000 76%, transparent);
+      }
+      .logo-marquee-track img{ height:38px; }
+      .logo-marquee-track{ gap:2.5rem; padding-right:2.5rem; }
+    }
+    /* 25. コミュニティ見出しと補足文の間隔：Fintokei セクション（0.5rem）と同じにする（0 → 0.5rem） */
+    .community-section .subtitle.text-center{ margin-top:0.5rem; }
+    /* 26. Fintokei 見出し「Fintokeiで安定した取引を目指す」をPC/タブレットでは必ず1行に。
+          720px の本文幅より文字幅がわずかに広くなる幅（1100px以上）で BudouX の区切り位置で2行になっていたため、
+          見出しだけ文字幅ぴったりの箱にして中央揃えで置く（本文幅からはみ出す分は左右均等）。スマホ（480px以下）は従来どおり折り返し */
+    @media (min-width:481px){
+      .fintokei-header .heading-lg{ display:block; width:max-content; max-width:calc(100vw - 2rem); margin-left:50%; transform:translateX(-50%); }
     }
     /* 固定トップバー：他ページ（ytt-sp-nav）と同じ白バー＋下線。左＝ロゴ（先頭へ）／右＝手書き黄色ボタン */
     .fx-topbar{
@@ -2727,8 +2744,8 @@
             <a class="content-card" data-cat="learn" data-rec="zeropro" href="https://discord.com/channels/1039824083208126474/1171706488234979378" target="_blank"><div class="card-emoji">🎓</div><h4>ゼロプロ90</h4><span class="card-tip">3か月間よすがが動画で毎日添削する集中育成プログラム。7段階のカリキュラムで初心者からプロレベルへ。</span><p>90日集中育成プログラム</p><span class="card-link">参加 →</span></a>
             <a class="content-card coming-soon" data-cat="learn" data-rec="elearning" href="https://fx-space.learnworlds.com/course/zeroprokiso" target="_blank"><div class="card-emoji">💻</div><h4>億トレアカデミー</h4><span class="card-tip">全12章の動画カリキュラム。基礎知識からチャート分析・資金管理まで体系的に学べます。章末クイズ付き。</span><p>全12章で基礎から体系的に学習</p><span class="card-link">始める →</span></a>
             <a class="content-card" data-cat="learn" data-rec="elearning,community" href="https://discord.com/channels/1039824083208126474/1238309633139937330" target="_blank"><div class="card-emoji">📚</div><h4>トレード学習</h4><span class="card-tip">初級・中級・上級に分かれたカリキュラム。自分のレベルに合わせてステップアップできます。</span><p>初級〜上級カリキュラム</p><span class="card-link">学習 →</span></a>
-            <a class="content-card" data-cat="learn" data-rec="elearning" href="https://fx-space.com/intro/y-curriculum.html" target="_blank"><div class="card-emoji">📖</div><h4>Yカリキュラム</h4><span class="card-tip">ライン→シナリオ→タイミング→過去検証。動画で学び、答え合わせで合格していく、よすが式の学習ロードマップ。</span><p>学習ロードマップ</p><span class="card-link">見る →</span></a>
-            <a class="content-card" data-cat="learn" data-rec="community,ytt" href="https://discord.com/channels/1039824083208126474/1246768528506486836" target="_blank"><div class="card-emoji">📝</div><h4>超実践FX問題集</h4><span class="card-tip">ライン・ナウキャスト・シナリオを詳細解説付きで演習できる全56問。知識だけでなく実践的な判断力を鍛えられます。</span><p>全56問の実力テスト</p><span class="card-link">挑戦 →</span></a>
+            <a class="content-card" data-cat="learn" data-rec="elearning" href="https://fx-space.com/intro/y-curriculum.html" target="_blank"><div class="card-emoji">📖</div><h4>Yカリキュラム</h4><span class="card-tip">ライン→<wbr>シナリオ→<wbr>タイミング→<wbr>過去検証。動画で学び、答え合わせで合格していく、よすが式の学習ロードマップ。</span><p>学習ロードマップ</p><span class="card-link">見る →</span></a>
+            <a class="content-card" data-cat="learn" data-rec="community,ytt" href="https://discord.com/channels/1039824083208126474/1246768528506486836" target="_blank"><div class="card-emoji">📝</div><h4>超実践FX問題集</h4><span class="card-tip">同じ56チャートで、ライン・ナウキャスト・シナリオの3問ずつ（全168問）を詳細解説付きで演習。知識だけでなく実践的な判断力を鍛えられます。</span><p>56チャート×3問の実力テスト</p><span class="card-link">挑戦 →</span></a>
             <a class="content-card" data-cat="learn" data-rec="elearning" href="https://discord.com/channels/1039824083208126474/1462274029258936360" target="_blank"><div class="card-emoji">🔍</div><h4>トレード学習ナビ</h4><span class="card-tip">過去のすべての学習動画をキーワードで検索。</span><p>よすがのこれまでの全動画をキーワード検索</p><span class="card-link">検索 →</span></a>
             <a class="content-card" data-cat="community" data-rec="elearning" href="https://discord.com/channels/1039824083208126474/1181506867944501321" target="_blank"><div class="card-emoji">💬</div><h4>フォーラム</h4><span class="card-tip">FXに関するあらゆる質問ができる掲示板。初心者の基本的な質問も大歓迎です。</span><p>何でも質問OK</p><span class="card-link">質問 →</span></a>
             <a class="content-card" data-cat="community" data-rec="elearning" href="https://discord.com/channels/1039824083208126474/1181536360398590003" target="_blank"><div class="card-emoji">🧑‍🏫</div><h4>astroへ質問</h4><span class="card-tip">ASTROのプロトレーダーに直接質問できるチャンネル。実践的なアドバイスがもらえます。</span><p>プロトレーダーに直接質問</p><span class="card-link">質問 →</span></a>
@@ -2771,7 +2788,7 @@
                 <div style="display:flex;align-items:center;gap:0.75rem;"><span style="color:var(--primary);font-weight:700;font-size:1rem;flex-shrink:0;">&#10003;</span><span style="font-size:0.9375rem;font-weight:600;color:var(--text);">トレーダー歴 約8年</span></div>
                 <div style="display:flex;align-items:center;gap:0.75rem;"><span style="color:var(--primary);font-weight:700;font-size:1rem;flex-shrink:0;">&#10003;</span><span style="font-size:0.9375rem;font-weight:600;color:var(--text);">書籍「結果を勝ち取る！本気のFX」著者</span></div>
                 <div style="display:flex;align-items:center;gap:0.75rem;"><span style="color:var(--primary);font-weight:700;font-size:1rem;flex-shrink:0;">&#10003;</span><span id="founder-pro-count" style="font-size:0.9375rem;font-weight:600;color:var(--text);">プロトレーダー 478人以上輩出</span></div>
-                <div style="display:flex;align-items:center;gap:0.75rem;"><span style="color:var(--primary);font-weight:700;font-size:1rem;flex-shrink:0;">&#10003;</span><span style="font-size:0.9375rem;font-weight:600;color:var(--text);">YouTubeで10万→1,000万、Xで10万→200万など公開チャレンジ企画を実施</span></div>
+                <div style="display:flex;align-items:center;gap:0.75rem;"><span style="color:var(--primary);font-weight:700;font-size:1rem;flex-shrink:0;">&#10003;</span><span style="font-size:0.9375rem;font-weight:600;color:var(--text);">YouTubeで10万→1,000万、Xで<span style="white-space:nowrap;">10万→200万</span>など公開チャレンジ企画を実施</span></div>
                 <div style="display:flex;align-items:center;gap:0.75rem;"><span style="color:var(--primary);font-weight:700;font-size:1rem;flex-shrink:0;">&#10003;</span><span style="font-size:0.9375rem;font-weight:600;color:var(--text);">「実際に稼ぐ」を目的とした日本最大規模のFXコミュニティを主宰</span></div>
             </div>
             <div class="founder-quote-box" style="background:#f0f0ff;border-radius:16px;padding:1.25rem 1.25rem;text-align:center;">
@@ -3026,7 +3043,7 @@
             <div class="purchase-cards">
                 <div class="purchase-card pricing-reveal revealed">
                     <h4>超実践FX問題集</h4>
-                    <div class="purchase-note" style="margin-bottom:0;">ライン・ナウキャスト・シナリオを詳細解説付きで演習できる全56問。知識だけでなく実践的な判断力を鍛えられます。</div>
+                    <div class="purchase-note" style="margin-bottom:0;">実践力を鍛える問題集（56チャート×3問）</div>
                     <div class="purchase-type">買い切り</div>
                     <div class="purchase-price">¥30,000</div>
                     <div class="purchase-note">実践力を鍛える問題集</div>
@@ -3057,7 +3074,7 @@
         <div class="notif-grid">
             <div>
                 <div class="notif-steps">
-                    <div class="notif-step" style="translate: none; rotate: none; scale: none; transform: translate(0px, 0px); opacity: 1;"><div class="notif-num">1</div><div class="notif-step-text"><strong>サーバー全体の通知設定</strong><span>木星アイコン右クリック → 通知設定 → @メンションのみ → プッシュ通知ON</span></div></div>
+                    <div class="notif-step" style="translate: none; rotate: none; scale: none; transform: translate(0px, 0px); opacity: 1;"><div class="notif-num">1</div><div class="notif-step-text"><strong>サーバー全体の通知設定</strong><span>木星アイコン右クリック → 通知設定 → <span style="white-space:nowrap;">@メンションのみ</span> → プッシュ通知ON</span></div></div>
                     <div class="notif-step" style="translate: none; rotate: none; scale: none; transform: translate(0px, 0px); opacity: 1;"><div class="notif-num">2</div><div class="notif-step-text"><strong>重要チャンネル2つの通知</strong><span>「インフォメーション」「動画」→ 右クリック → 全てのメッセージ</span></div></div>
                 </div>
                 <a href="https://discord.gg/CcUtqSdRDZ" target="_blank" class="btn btn-crayon-rect-orange btn-crayon-md" style="margin-top:1rem;">Discordで設定する →</a>
@@ -3097,7 +3114,7 @@
 <script src="js/gsap.min.js?v=20260301a"></script>
 <script src="js/ScrollTrigger.min.js?v=20260301a"></script>
 <script src="js/flowchart.js?v=20260906a"></script>
-<script src="js/animations.js?v=20260906a"></script>
+<script src="js/animations.js?v=20260907a"></script>
 <script>
 /* ===== YTT結果カード内 4機能アニメ（-r版 / 上部#ytt-sectionとid衝突しないよう別id） ===== */
 (function(){
@@ -3269,45 +3286,9 @@
     window.addEventListener('resize', setMarqueeSpeed);
 })();
 </script>
-<!-- BudouX — 日本語の自動文節改行（画面サイズに応じて最適な位置で自然に折る） -->
-<script type="module">
-import { loadDefaultJapaneseParser } from 'https://cdn.jsdelivr.net/npm/budoux/+esm';
-(function () {
-    var SKIP = { SCRIPT: 1, STYLE: 1, TEXTAREA: 1, NOSCRIPT: 1, CODE: 1, PRE: 1 };
-    function applyBudouX(parser, root) {
-        var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
-            acceptNode: function (n) {
-                // 日本語（ひらがな・カタカナ・漢字）を含むテキストのみ対象
-                if (!n.nodeValue || !/[぀-ヿ㐀-鿿]/.test(n.nodeValue)) return NodeFilter.FILTER_REJECT;
-                var p = n.parentNode;
-                if (!p || SKIP[p.nodeName] || (p.closest && p.closest('svg'))) return NodeFilter.FILTER_REJECT;
-                return NodeFilter.FILTER_ACCEPT;
-            }
-        });
-        var nodes = [];
-        while (walker.nextNode()) nodes.push(walker.currentNode);
-        nodes.forEach(function (n) {
-            var segs = parser.parse(n.nodeValue);
-            if (segs.length < 2) return;
-            var frag = document.createDocumentFragment();
-            segs.forEach(function (s, i) {
-                frag.appendChild(document.createTextNode(s));
-                if (i < segs.length - 1) frag.appendChild(document.createElement('wbr'));
-            });
-            n.parentNode.replaceChild(frag, n);
-        });
-    }
-    function run() {
-        try {
-            var parser = loadDefaultJapaneseParser();
-            applyBudouX(parser, document.body);
-            document.body.classList.add('budoux-ready');
-        } catch (e) {}
-    }
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run);
-    else run();
-})();
-</script>
+<!-- BudouX — 日本語の文節改行（全ページ共通・同梱版。js/budoux-init.js を参照） -->
+<script src="js/budoux-ja.min.js?v=20260907a" defer></script>
+<script src="js/budoux-init.js?v=20260907a" defer></script>
 <script>
 /* 固定トップバー：ロゴをクリックしたらページ先頭へスムーズスクロール */
 (function(){

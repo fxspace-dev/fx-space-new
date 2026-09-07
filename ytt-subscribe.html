@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YTTを使うにはサブスク加入が必要です — FX SPACE</title>
     <meta name="robots" content="noindex">
-    <link rel="stylesheet" href="css/style.css?v=20260907b">
+    <link rel="stylesheet" href="css/style.css?v=20260907c">
     <style>
         body {
             background: #f8f9fc;
@@ -512,6 +512,36 @@
             padding: 3rem 1.5rem 3rem;
         }
         /* YouTubeメンバー連携カード（index.htmlのスタイルに揃える） */
+        /* ===== プラン機能のⓘ説明（plans.html と同じ仕組み・見た目）。PC: ⓘにホバー／スマホ: 行をタップで開閉 ===== */
+        .has-tip { position: relative; }
+        .feat-info {
+            margin-left: auto; flex-shrink: 0; width: 18px; height: 18px; color: #9ca3af;
+            display: inline-flex; align-items: center; justify-content: center; transition: color 0.2s; cursor: pointer;
+            align-self: center;
+        }
+        .feat-info svg { width: 100%; height: 100%; }
+        .feat-info:hover, .has-tip.tip-open .feat-info { color: #4f46e5; }
+        .feat-tip {
+            position: absolute; bottom: calc(100% + 10px); left: 50%; transform: translateX(-50%);
+            width: 240px; background: #1e1b4b; color: #fff; padding: 0.75rem 0.875rem; border-radius: 10px;
+            font-size: 0.75rem; line-height: 1.7; opacity: 0; visibility: hidden; pointer-events: none;
+            transition: opacity 0.2s ease 0.35s, visibility 0s linear 0.55s; z-index: 100; text-align: left;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.25); white-space: normal; font-weight: 400;
+        }
+        .feat-tip::after { content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border: 6px solid transparent; border-top-color: #1e1b4b; }
+        @media (hover: hover) {
+            .feat-tip { right: 0; left: auto; transform: none; }
+            .feat-tip::after { left: auto; right: 8px; transform: none; }
+            .has-tip .feat-info:hover ~ .feat-tip, .has-tip .feat-tip:hover { opacity: 1; visibility: visible; pointer-events: auto; transition: opacity 0.15s ease, visibility 0s; }
+            .feat-tip::before { content: ''; position: absolute; top: 100%; left: 0; right: 0; height: 18px; }
+        }
+        .has-tip.tip-open .feat-tip { opacity: 1; visibility: visible; pointer-events: auto; transition: opacity 0.15s ease, visibility 0s; } /* タップ時は待たずに表示 */
+        @media (max-width: 768px) {
+            .feat-info { width: 22px; height: 22px; }
+            .has-tip { cursor: pointer; }
+            .feat-tip { width: min(260px, 80vw); bottom: auto; top: calc(100% + 10px); }
+            .feat-tip::after { top: auto; bottom: 100%; border-top-color: transparent; border-bottom-color: #1e1b4b; }
+        }
         .yt-notice {
             margin: 0 auto;
             padding: 1.5rem 1.75rem;
@@ -792,13 +822,13 @@
                 </div>
                 <div class="plan-divider"></div>
                 <ul class="plan-features">
-                    <li><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text-ytt"><span class="pf-ytt-inner">YTT（よすがトレードツール）<img src="img/wave-yellow.png" class="pf-ytt-wave" alt=""></span></span></li>
-                    <li><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">速攻プロフローチャート</span></li>
-                    <li><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">AIサポート</span></li>
-                    <li><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">毎日のシナリオ動画</span></li>
-                    <li><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">深掘解説等の限定動画</span></li>
-                    <li><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">3か月プロ企画 ゼロプロ90参加権</span></li>
-                    <li><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">プロに相談</span></li>
+                    <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text-ytt"><span class="pf-ytt-inner">YTT（よすがトレードツール）<img src="img/wave-yellow.png" class="pf-ytt-wave" alt=""></span></span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">よすが式チャート分析ツール。複雑なテクニカル分析を直感的に行え、エントリー判断の精度が上がります。</span></li>
+                    <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">速攻プロフローチャート</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">プロの思考順序をフローチャートで可視化したガイドです。</span></li>
+                    <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">AIサポート</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">FX SPACEに関する疑問に24時間いつでも答えてくれるAIアシスタント。気軽に相談できます。</span></li>
+                    <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">毎日のシナリオ動画</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">毎朝、よすががその日のシナリオを動画で解説。スタンダードでは主要3通貨ペアの分析が届きます。</span></li>
+                    <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">深掘解説等の限定動画</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">会員限定の特別解説動画。テーマ別に基礎から応用まで深く学べます。</span></li>
+                    <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">3か月プロ企画 ゼロプロ90参加権</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">90日間でゼロからプロを目指す集中プログラム。3か月に1回の募集タイミングで参加できます。</span></li>
+                    <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">プロに相談</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">困ったときにプロトレーダーに直接相談できる窓口。学習や実トレードの疑問をすぐ解消できます。</span></li>
                 </ul>
                 <a href="https://discord.com/oauth2/authorize?client_id=1132937165379211284&response_type=code&redirect_uri=https%3A%2F%2Ffx-space.com%2Fpp_sub_standard.php&scope=identify" class="btn btn-solid-blue btn-solid-md">スタンダードに加入 →</a>
             </div>
@@ -813,10 +843,10 @@
                 </div>
                 <div class="plan-divider"></div>
                 <ul class="plan-features">
-                    <li><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text-ytt"><span class="pf-ytt-inner">YTT（よすがトレードツール）<img src="img/wave-yellow.png" class="pf-ytt-wave" alt=""></span></span></li>
-                    <li><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">スタンダードの全機能</span></li>
-                    <li><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text" style="font-weight:700;">ライブチャート分析</span></li>
-                    <li><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text" style="font-weight:700;">トレード交流</span></li>
+                    <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text-ytt"><span class="pf-ytt-inner">YTT（よすがトレードツール）<img src="img/wave-yellow.png" class="pf-ytt-wave" alt=""></span></span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">よすが式チャート分析ツール。複雑なテクニカル分析を直感的に行え、エントリー判断の精度が上がります。</span></li>
+                    <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">スタンダードの全機能</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">上記スタンダードプランの全機能をそのまま利用できます。基礎から実践まで全てカバー。</span></li>
+                    <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text" style="font-weight:700;">ライブチャート分析</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">よすががチャンスと感じた相場をリアルタイム通知。プレミアム会員だけが見られる専用チャンネル。</span></li>
+                    <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text" style="font-weight:700;">トレード交流</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">メンバー同士でトレードを共有・議論する場。利確・損切報告で切磋琢磨できます。</span></li>
                 </ul>
                 <a href="https://discord.com/oauth2/authorize?client_id=1132937165379211284&response_type=code&redirect_uri=https%3A%2F%2Ffx-space.com%2Fpp_sub_premium_year.php&scope=identify" class="btn btn-solid-blue btn-solid-md">プレミアムに加入（年額） →</a>
                 <a href="https://discord.com/oauth2/authorize?client_id=1132937165379211284&response_type=code&redirect_uri=https%3A%2F%2Ffx-space.com%2Fpp_sub_premium.php&scope=identify" class="plan-year-link">月額プランで加入 →</a>
@@ -934,40 +964,31 @@
     });
 })();
 </script>
-<!-- BudouX — 日本語の自動文節改行（画面サイズに応じて最適な位置で自然に折る） -->
-<script type="module">
-import { loadDefaultJapaneseParser } from 'https://cdn.jsdelivr.net/npm/budoux/+esm';
-(function () {
-    var SKIP = { SCRIPT: 1, STYLE: 1, TEXTAREA: 1, NOSCRIPT: 1, CODE: 1, PRE: 1 };
-    function applyBudouX(parser, root) {
-        var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
-            acceptNode: function (n) {
-                if (!n.nodeValue || !/[぀-ヿ㐀-鿿]/.test(n.nodeValue)) return NodeFilter.FILTER_REJECT;
-                var p = n.parentNode;
-                if (!p || SKIP[p.nodeName] || (p.closest && p.closest('svg'))) return NodeFilter.FILTER_REJECT;
-                return NodeFilter.FILTER_ACCEPT;
-            }
-        });
-        var nodes = [];
-        while (walker.nextNode()) nodes.push(walker.currentNode);
-        nodes.forEach(function (n) {
-            var segs = parser.parse(n.nodeValue);
-            if (segs.length < 2) return;
-            var frag = document.createDocumentFragment();
-            segs.forEach(function (s, i) {
-                frag.appendChild(document.createTextNode(s));
-                if (i < segs.length - 1) frag.appendChild(document.createElement('wbr'));
-            });
-            n.parentNode.replaceChild(frag, n);
-        });
-    }
-    function run() {
-        try { applyBudouX(loadDefaultJapaneseParser(), document.body); document.body.classList.add('budoux-ready'); } catch (e) {}
-    }
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run);
-    else run();
-})();
+<script>
+// プラン機能のⓘ説明：PCはホバー、スマホは行をタップで開閉（plans.html と同じ）
+document.addEventListener('DOMContentLoaded', function(){
+  var isHoverDevice = window.matchMedia('(hover: hover)').matches;
+  if(isHoverDevice){
+    document.querySelectorAll('.feat-info').forEach(function(icon){
+      icon.addEventListener('mouseenter', function(){ document.querySelectorAll('.has-tip.tip-open').forEach(function(l){ l.classList.remove('tip-open'); }); });
+    });
+  } else {
+    document.querySelectorAll('.has-tip').forEach(function(li){
+      li.addEventListener('click', function(e){
+        if(e.target.tagName === 'A') return;
+        e.stopPropagation();
+        var wasOpen = li.classList.contains('tip-open');
+        document.querySelectorAll('.has-tip.tip-open').forEach(function(l){ l.classList.remove('tip-open'); });
+        if(!wasOpen) li.classList.add('tip-open');
+      });
+    });
+    document.addEventListener('click', function(){ document.querySelectorAll('.has-tip.tip-open').forEach(function(l){ l.classList.remove('tip-open'); }); });
+  }
+});
 </script>
+<!-- BudouX — 日本語の文節改行（全ページ共通・同梱版。js/budoux-init.js を参照） -->
+<script src="js/budoux-ja.min.js?v=20260907a" defer></script>
+<script src="js/budoux-init.js?v=20260907a" defer></script>
 <!-- 近日公開の暫定対応（お試しページ完成時に丸ごと削除してOK） -->
 <style>
 .btn-trial[data-coming-soon]{cursor:default;}

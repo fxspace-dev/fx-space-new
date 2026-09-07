@@ -15,6 +15,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;800;900&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
+/* 日本語の折り返し（style.css と同じ方針）：既定は普通に折り返し、BudouX で文節区切り（wbr）を入れた後だけ keep-all にする */
+body{ overflow-wrap:break-word; line-break:strict; }
+body.budoux-ready{ word-break:keep-all; }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
@@ -1995,5 +1998,8 @@ function toggleFaq(el) {
   }
 })();
 </script>
+<!-- BudouX — 日本語の文節改行（全ページ共通・同梱版。js/budoux-init.js を参照） -->
+<script src="js/budoux-ja.min.js?v=20260907a" defer></script>
+<script src="js/budoux-init.js?v=20260907a" defer></script>
 </body>
 </html>

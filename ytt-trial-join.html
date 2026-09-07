@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YTTお試しの前に — FX SPACE Discordへご参加ください</title>
     <meta name="robots" content="noindex">
-    <link rel="stylesheet" href="css/style.css?v=20260907b">
+    <link rel="stylesheet" href="css/style.css?v=20260907c">
     <style>
         body {
             background: #f8f9fc;
@@ -544,39 +544,8 @@
 
 })();
 </script>
-<!-- BudouX — 日本語の自動文節改行（画面サイズに応じて最適な位置で自然に折る） -->
-<script type="module">
-import { loadDefaultJapaneseParser } from 'https://cdn.jsdelivr.net/npm/budoux/+esm';
-(function () {
-    var SKIP = { SCRIPT: 1, STYLE: 1, TEXTAREA: 1, NOSCRIPT: 1, CODE: 1, PRE: 1 };
-    function applyBudouX(parser, root) {
-        var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
-            acceptNode: function (n) {
-                if (!n.nodeValue || !/[぀-ヿ㐀-鿿]/.test(n.nodeValue)) return NodeFilter.FILTER_REJECT;
-                var p = n.parentNode;
-                if (!p || SKIP[p.nodeName] || (p.closest && p.closest('svg'))) return NodeFilter.FILTER_REJECT;
-                return NodeFilter.FILTER_ACCEPT;
-            }
-        });
-        var nodes = [];
-        while (walker.nextNode()) nodes.push(walker.currentNode);
-        nodes.forEach(function (n) {
-            var segs = parser.parse(n.nodeValue);
-            if (segs.length < 2) return;
-            var frag = document.createDocumentFragment();
-            segs.forEach(function (s, i) {
-                frag.appendChild(document.createTextNode(s));
-                if (i < segs.length - 1) frag.appendChild(document.createElement('wbr'));
-            });
-            n.parentNode.replaceChild(frag, n);
-        });
-    }
-    function run() {
-        try { applyBudouX(loadDefaultJapaneseParser(), document.body); document.body.classList.add('budoux-ready'); } catch (e) {}
-    }
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run);
-    else run();
-})();
-</script>
+<!-- BudouX — 日本語の文節改行（全ページ共通・同梱版。js/budoux-init.js を参照） -->
+<script src="js/budoux-ja.min.js?v=20260907a" defer></script>
+<script src="js/budoux-init.js?v=20260907a" defer></script>
 </body>
 </html>

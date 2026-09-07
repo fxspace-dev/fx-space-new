@@ -918,7 +918,9 @@ function animateValue(el, fromVal, toVal, duration, formatter) {
     _fkAnimTimers[id] = requestAnimationFrame(step);
 }
 function runFintokeiSim() {
-    var planKey = document.getElementById('fintokei-plan').value;
+    var planEl = document.getElementById('fintokei-plan');
+    if (!planEl) return; // Fintokei シミュレーターが無いページ（ytt-download 等）では何もしない
+    var planKey = planEl.value;
     var monthlyRate = parseFloat(document.getElementById('fintokei-rate').value) / 100;
     var months = parseInt(document.getElementById('fintokei-months').value);
     if (isNaN(monthlyRate) || isNaN(months) || months < 1) return;

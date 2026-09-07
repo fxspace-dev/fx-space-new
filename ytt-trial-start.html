@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>24時間お試しスタート — YTT（よすがトレードツール）</title>
     <meta name="robots" content="noindex">
-    <link rel="stylesheet" href="css/style.css?v=20260907b">
+    <link rel="stylesheet" href="css/style.css?v=20260907c">
     <style>
         body {
             background: #f8f9fc;
@@ -1127,18 +1127,8 @@
     });
 })();
 </script>
-<!-- BudouX — 日本語の自動文節改行（画面サイズに応じて最適な位置で折る） -->
-<script src="https://cdn.jsdelivr.net/npm/budoux/bundle/budoux-ja.min.js" defer></script>
-<script>
-window.addEventListener('DOMContentLoaded', function() {
-    if (window.budoux) {
-        try {
-            var parser = window.budoux.loadDefaultJapaneseParser();
-            parser.applyElement(document.body);
-            document.body.classList.add('budoux-ready');
-        } catch (e) {}
-    }
-});
-</script>
+<!-- BudouX — 日本語の文節改行（全ページ共通・同梱版。js/budoux-init.js を参照） -->
+<script src="js/budoux-ja.min.js?v=20260907a" defer></script>
+<script src="js/budoux-init.js?v=20260907a" defer></script>
 </body>
 </html>

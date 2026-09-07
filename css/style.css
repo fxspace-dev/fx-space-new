@@ -1243,7 +1243,7 @@ body.budoux-ready {
    グリッド列の最小幅になって画面外へ広がるのを防ぐ（iPhone Safari で再現）。
    列は中身より小さくなれるようにし、補足文は文字単位で折り返す */
 .content-grid > .content-card { min-width: 0; }
-.content-card .card-tip { word-break: normal; overflow-wrap: anywhere; }
+.content-card .card-tip { overflow-wrap: anywhere; } /* 文節（wbr）優先で折り返し、入り切らない語句だけ文字単位で折る（列が広がるのを防ぐ） */
 .content-card::after { display: none; }
 #cs-ring-inv {
     position: fixed; width: 80px; height: 80px;
@@ -2355,7 +2355,7 @@ body.budoux-ready {
 .cc-msg.grouped .cc-msg-header { display: none; }
 .cc-msg-name { font-size: 0.8125rem; font-weight: 700; }
 .cc-msg-time { font-size: 0.625rem; color: #5d5f63; }
-.cc-msg-content { font-size: 0.8125rem; color: #dbdee1; line-height: 1.45; word-break: break-word; }
+.cc-msg-content { font-size: 0.8125rem; color: #dbdee1; line-height: 1.45; overflow-wrap: anywhere; } /* 文節優先。狭い吹き出しで入り切らない語句だけ文字単位で折る */
 .cc-msg-content img { max-width: 180px; border-radius: 8px; margin-top: 0.25rem; display: block; }
 .cc-reactions { display: flex; gap: 0.25rem; margin-top: 0.25rem; }
 .cc-reaction {
@@ -2885,6 +2885,7 @@ body.budoux-ready {
 }
 .zp-dc-text {
     font-size: 0.875rem; color: rgba(255,255,255,0.8); line-height: 1.7;
+    overflow-wrap: anywhere; /* 文節優先。狭い列（スマホのカルーセル等）で入り切らない語句だけ文字単位で折る */
 }
 .zp-dc-text strong { color: #fff; }
 .zp-dc-reactions {

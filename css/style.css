@@ -4000,7 +4000,9 @@ body.budoux-ready h1, body.budoux-ready h2, body.budoux-ready h3, body.budoux-re
     display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     position: relative; overflow: hidden;
 }
-.cc-yt-play { color: #ff0000; font-size: 1.25rem; }
+/* サムネ画像（真っ黒だった枠にチャート画像を敷く）。再生マークは画像の上に重ねる */
+.cc-yt-thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.cc-yt-play { color: #ff0000; font-size: 1.25rem; position: relative; z-index: 1; text-shadow: 0 0 6px rgba(0,0,0,0.7); }
 .cc-yt-info { display: flex; flex-direction: column; gap: 0.125rem; min-width: 0; }
 .cc-yt-title {
     font-size: 0.75rem; font-weight: 700; color: #00a8fc;

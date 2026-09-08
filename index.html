@@ -11,7 +11,7 @@
     <meta property="og:image" content="https://fx-space.com/intro/img/og-preview-v2.png">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
-    <link rel="stylesheet" href="css/style.css?v=20260908a">
+    <link rel="stylesheet" href="css/style.css?v=20260908b">
     <!-- 実績数字の自動更新：Discordチャンネル名から毎日生成される数字ファイルを読む（失敗時はJS/HTMLに書かれた値のまま） -->
     <script>
     window.__introStats = null;
@@ -316,6 +316,151 @@
     /* 27. ヒーロー上端のロゴ流し：固定トップバー（約61px）の下に潜って上が切れないよう、ヒーローの上余白にバーの高さを足す
           （ウィンドウが低い／狭いとヒーロー内容が縦いっぱいになり、中央揃えのままだと上端がバーに隠れていた） */
     .hero{ padding-top:calc(2rem + 62px) !important; }
+    /* 28. プラン一覧の各機能に ⓘ の説明（plans.html と同じ仕組み・見た目・文言。PC: ⓘにホバー／スマホ: 行をタップで開閉） */
+      /* ===== Feature tooltips (generic .has-tip) ===== */
+      /* Desktop: hover on the ⓘ icon triggers the tooltip
+         Mobile: tap on the wrapper toggles (handled by JS) */
+      .has-tip{
+        position:relative;
+      }
+      /* Info icon */
+      .feat-info{
+        margin-left:auto;
+        flex-shrink:0;
+        width:18px;height:18px;
+        color:#9ca3af;
+        display:inline-flex;align-items:center;justify-content:center;
+        transition:color 0.2s;
+        cursor:pointer;
+      }
+      .feat-info svg{width:100%;height:100%;}
+      .feat-info:hover,
+      .has-tip.tip-open .feat-info{
+        color:#4f46e5;
+      }
+      @media(max-width:768px){
+        .feat-info{width:22px;height:22px;}
+        /* On mobile, whole wrapper is tappable */
+        .has-tip{cursor:pointer;}
+      }
+
+      /* Premium feature card title wrapper (for tooltip on h4 titles) */
+      .prem-title-wrap{
+        display:flex;
+        align-items:center;
+        gap:0.4rem;
+        margin-bottom:0.25rem;
+        flex-wrap:nowrap;
+      }
+      .prem-title-wrap h4{
+        margin:0 !important;
+        white-space:nowrap;
+      }
+      .prem-title-wrap .feat-info{
+        margin-left:0;
+        width:18px;height:18px;
+        flex-shrink:0;
+      }
+      /* Purchase card titles: centered + slightly smaller h4 */
+      .purchase-card .prem-title-wrap{
+        justify-content:center;
+      }
+      .purchase-card .prem-title-wrap h4{
+        font-size:0.95rem;
+      }
+      /* Mobile: stack purchase cards vertically so titles don't overflow */
+      @media(max-width:640px){
+        .purchase-cards{grid-template-columns:1fr !important;}
+      }
+      .feat-tip{
+        position:absolute;
+        bottom:calc(100% + 10px);
+        left:50%;
+        transform:translateX(-50%);
+        width:240px;
+        background:#1e1b4b;
+        color:#fff;
+        padding:0.75rem 0.875rem;
+        border-radius:10px;
+        font-size:0.75rem;
+        line-height:1.7;
+        opacity:0;
+        visibility:hidden;
+        pointer-events:none;
+        /* On hide, wait 0.4s before disappearing so the cursor has time to enter the tooltip */
+        transition:opacity 0.2s ease 0.35s, visibility 0s linear 0.55s;
+        z-index:100;
+        text-align:left;
+        box-shadow:0 8px 24px rgba(0,0,0,0.25);
+        white-space:normal;
+      }
+      .feat-tip::after{
+        content:'';
+        position:absolute;
+        top:100%;
+        left:50%;
+        transform:translateX(-50%);
+        border:6px solid transparent;
+        border-top-color:#1e1b4b;
+      }
+      .feat-tip a{
+        color:#a5b4fc;
+        text-decoration:underline;
+        text-underline-offset:2px;
+        font-weight:700;
+      }
+      .feat-tip a:hover{color:#c7d2fe;}
+      /* PC: hover on the ⓘ icon OR on the tooltip itself shows tooltip */
+      @media(hover:hover){
+        /* Position tooltip above the icon (right-aligned), so mouse travel is short */
+        .feat-tip{
+          right:0;
+          left:auto;
+          transform:none;
+        }
+        .feat-tip::after{
+          left:auto;
+          right:8px;
+          transform:none;
+        }
+        .has-tip .feat-info:hover ~ .feat-tip,
+        .has-tip .feat-tip:hover{
+          opacity:1;
+          visibility:visible;
+          pointer-events:auto;
+          /* Show instantly, no delay */
+          transition:opacity 0.15s ease, visibility 0s;
+        }
+        /* Wide invisible bridge between tooltip bottom and icon area – makes mouse travel safe */
+        .feat-tip::before{
+          content:'';
+          position:absolute;
+          top:100%;
+          left:0;
+          right:0;
+          height:18px;
+        }
+      }
+      /* Mobile / tap-toggled state */
+      .has-tip.tip-open .feat-tip{
+        opacity:1;
+        visibility:visible;
+        pointer-events:auto;
+      }
+      /* Mobile: position tooltip below if there's no room above */
+      @media(max-width:768px){
+        .feat-tip{
+          width:min(260px, 80vw);
+          bottom:auto;
+          top:calc(100% + 10px);
+        }
+        .feat-tip::after{
+          top:auto;
+          bottom:100%;
+          border-top-color:transparent;
+          border-bottom-color:#1e1b4b;
+        }
+      }
     /* 固定トップバー：他ページ（ytt-sp-nav）と同じ白バー＋下線。左＝ロゴ（先頭へ）／右＝手書き黄色ボタン */
     .fx-topbar{
       position:fixed; top:0; left:0; right:0; z-index:1000;
@@ -1671,7 +1816,7 @@
                                     <div class="cc-msg-content">@everyone おはようございます！📈</div>
                                     <div class="cc-yt-embed">
                                         <div class="cc-yt-thumb">
-                                            <div class="cc-yt-play">▶</div>
+                                            <img src="img/step-b-chart.png" alt=""><div class="cc-yt-play">▶</div>
                                         </div>
                                         <div class="cc-yt-info">
                                             <span class="cc-yt-title">【3/4】朝のシナリオ構築 XAUUSD・USDJPY・<br>GBPUSD</span>
@@ -1702,7 +1847,7 @@
                                     <div class="cc-msg-content">@everyone おはようございます！📈</div>
                                     <div class="cc-yt-embed">
                                         <div class="cc-yt-thumb">
-                                            <div class="cc-yt-play">▶</div>
+                                            <img src="img/step-b-chart.png" alt=""><div class="cc-yt-play">▶</div>
                                         </div>
                                         <div class="cc-yt-info">
                                             <span class="cc-yt-title">【3/5】朝のシナリオ構築 XAUUSD・USDJPY・<br>GBPUSD</span>
@@ -2831,7 +2976,7 @@
                         </div>
                         <div class="plan-divider"></div>
                         <ul class="plan-features">
-                            <li><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">速攻プロフローチャート</span></li>
+                            <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">速攻プロフローチャート</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">プロの思考順序をフローチャートで可視化したガイドです。<br><a href="https://discord.com/channels/1039824083208126474/1238825339849801749" target="_blank">Discordで見る →</a></span></li>
                         </ul>
                         <a href="https://discord.gg/CcUtqSdRDZ" target="_blank" class="btn plan-cta plan-cta-outline">無料で始める</a>
                     </div>
@@ -2847,14 +2992,14 @@
                         </div>
                         <div class="plan-divider"></div>
                         <ul class="plan-features">
-                            <li><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">速攻プロフローチャート</span></li>
-                            <li><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">AIサポート</span></li>
-                            <li><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">毎日のシナリオ動画</span></li>
-                            <li><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">深掘解説等の限定動画</span></li>
-                            <li><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">サポートツール YTT</span></li>
-                            <li><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">3か月プロ企画 ゼロプロ90参加権利</span></li>
-                            <li><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">プロトレーダー ASTRO</span></li>
-                            <li><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">プロに相談</span></li>
+                            <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">速攻プロフローチャート</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">プロの思考順序をフローチャートで可視化したガイドです。<br><a href="https://discord.com/channels/1039824083208126474/1238825339849801749" target="_blank">Discordで見る →</a></span></li>
+                            <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">AIサポート</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">FX SPACEに関する疑問に24時間いつでも答えてくれるAIアシスタント。気軽に相談できます。<br><a href="https://discord.com/channels/1039824083208126474/1416640423396511804" target="_blank">Discordで見る →</a></span></li>
+                            <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">毎日のシナリオ動画（3通貨ペア）</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">毎朝、よすががその日のシナリオを動画で解説。スタンダードでは主要3通貨ペアの分析が届きます。<br><a href="https://discord.com/channels/1039824083208126474/1048136270582382592" target="_blank">Discordで見る →</a></span></li>
+                            <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">深掘解説等の限定動画</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">会員限定の特別解説動画。テーマ別に基礎から応用まで深く学べます。</span></li>
+                            <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">サポートツール YTT</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">よすが式チャート分析ツール。複雑なテクニカル分析を直感的に行え、エントリー判断の精度が上がります。<br><a href="https://discord.com/channels/1039824083208126474/1447939661186990173" target="_blank">Discordで見る →</a></span></li>
+                            <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">3か月プロ企画 ゼロプロ90参加権利</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">90日間でゼロからプロを目指す集中プログラム。3か月に1回の募集タイミングで参加できます。<br><a href="https://discord.com/channels/1039824083208126474/1171706488234979378" target="_blank">Discordで見る →</a></span></li>
+                            <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">プロトレーダー ASTRO</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">プロトレーダーASTROの相場観・分析にアクセス可能。実践的な視点を学べます。<br><a href="https://discord.com/channels/1039824083208126474/1136925665099251753" target="_blank">Discordで見る →</a></span></li>
+                            <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">プロに相談</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">困ったときにプロトレーダーに直接相談できる窓口。学習や実トレードの疑問をすぐ解消できます。<br><a href="https://discord.com/channels/1039824083208126474/1181536360398590003" target="_blank">Discordで見る →</a></span></li>
                         </ul>
                         <a href="https://discord.com/oauth2/authorize?client_id=1132937165379211284&amp;response_type=code&amp;redirect_uri=https%3A%2F%2Ffx-space.com%2Fpp_sub_standard.php&amp;scope=identify" class="btn plan-cta plan-cta-outline" style="border-color:var(--primary); color:var(--primary);">スタンダードに加入 →</a>
                     </div>
@@ -2872,9 +3017,10 @@
                         </div>
                         <div class="plan-divider"></div>
                         <ul class="plan-features">
-                            <li><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">スタンダードの全機能</span></li>
-                            <li><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text" style="font-weight:700;">ライブチャート分析</span></li>
-                            <li><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text" style="font-weight:700;">トレード交流</span></li>
+                            <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">スタンダードの全機能</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">上記スタンダードプランの全機能をそのまま利用できます。基礎から実践まで全てカバー。</span></li>
+                            <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text" style="font-weight:700;">ライブチャート分析</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">よすががチャンスと感じた相場をリアルタイム通知。プレミアム会員だけが見られる専用チャンネル。<br><a href="https://discord.com/channels/1039824083208126474/1282259603903615047" target="_blank">Discordで見る →</a></span></li>
+                            <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text" style="font-weight:700;">トレード交流</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">メンバー同士でトレードを共有・議論する場。利確・損切報告で切磋琢磨できます。<br><a href="https://discord.com/channels/1039824083208126474/1282260695538339851" target="_blank">Discordで見る →</a></span></li>
+                            <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text" style="font-weight:700;">毎日のシナリオ動画（主要全通貨ペア）</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">主要全通貨ペアの毎朝シナリオが届きます（スタンダードは3通貨のみ）。<br><a href="https://discord.com/channels/1039824083208126474/1356783303105183916" target="_blank">Discordで見る →</a></span></li>
                         </ul>
                         <a href="https://discord.com/oauth2/authorize?client_id=1132937165379211284&amp;response_type=code&amp;redirect_uri=https%3A%2F%2Ffx-space.com%2Fpp_sub_premium_year.php&amp;scope=identify" id="premium-cta" class="btn btn-solid-blue btn-solid-md">プレミアムに加入（年額） →</a>
                         <a href="https://discord.com/oauth2/authorize?client_id=1132937165379211284&amp;response_type=code&amp;redirect_uri=https%3A%2F%2Ffx-space.com%2Fpp_sub_premium.php&amp;scope=identify" id="premium-year-link" class="plan-year-link plan-year-link-light">月額プランで加入 →</a>
@@ -2891,8 +3037,8 @@
 
             <p style="color:#4b5563; font-size:0.8125rem; line-height:1.6; margin:0 0 0.625rem;">YouTubeメンバーシップでも同じ特典が受けられます。</p>
             <div class="ytm-map" style="display:inline-block; max-width:100%; text-align:left; margin:0 auto 1rem; background:#f9fafb; border-radius:0.5rem; padding:0.625rem 1.25rem; font-size:0.8125rem; color:#374151; line-height:1.8;">
-                <div class="ytm-row"><span class="ytm-from">よすが式FXメンバー（¥2,990/月）</span><span class="ytm-to">→ スタンダード相当</span></div>
-                <div class="ytm-row"><span class="ytm-from">ライブチャート分析（¥6,000/月）</span><span class="ytm-to">→ プレミアム相当</span></div>
+                <div class="ytm-row"><span class="ytm-from">よすが式FXメンバー（¥3,490/月）</span><span class="ytm-to">→ スタンダード相当</span></div>
+                <div class="ytm-row"><span class="ytm-from">ライブチャート分析（¥6,300/月）</span><span class="ytm-to">→ プレミアム相当</span></div>
             </div>
 
             <div style="border-top:1px solid #d1d5db; padding-top:0.875rem; margin-top:0.25rem;">
@@ -3319,6 +3465,38 @@
     card.appendChild(b);
   });
 })();
+</script>
+<script>
+// プラン一覧の ⓘ 説明（plans.html と同じ）
+// Feature tooltip:
+//  - PC (hover-capable): only icon hover triggers, no click handling
+//  - Mobile (touch): tap on the row toggles the tooltip
+document.addEventListener('DOMContentLoaded', function(){
+  var isHoverDevice = window.matchMedia('(hover: hover)').matches;
+
+  if(isHoverDevice){
+    // PC: hovering one icon should close any tap-opened tooltips elsewhere
+    document.querySelectorAll('.feat-info').forEach(function(icon){
+      icon.addEventListener('mouseenter', function(){
+        document.querySelectorAll('.has-tip.tip-open').forEach(function(l){ l.classList.remove('tip-open'); });
+      });
+    });
+  } else {
+    // Mobile: tap to toggle, tap outside to close
+    document.querySelectorAll('.has-tip').forEach(function(li){
+      li.addEventListener('click', function(e){
+        if(e.target.tagName === 'A') return;
+        e.stopPropagation();
+        var wasOpen = li.classList.contains('tip-open');
+        document.querySelectorAll('.has-tip.tip-open').forEach(function(l){ l.classList.remove('tip-open'); });
+        if(!wasOpen) li.classList.add('tip-open');
+      });
+    });
+    document.addEventListener('click', function(){
+      document.querySelectorAll('.has-tip.tip-open').forEach(function(l){ l.classList.remove('tip-open'); });
+    });
+  }
+});
 </script>
 </body>
 </html>

@@ -230,10 +230,14 @@ function revealHeroChart() {
 
                                 // Count-up（目標値は intro-stats.json（Discordから毎日自動生成）を優先。
                                 // 取得前/失敗時はここのフォールバック値。値は関数にしてトゥイーン開始時に評価する）
-                                var STATS_FALLBACK = { pros: 478, amount: 1.6 };
+                                // 4つとも Discord の数字チャンネル（毎日12:30更新）→ intro-stats.json。億円表示は 0.1億単位で切り捨て（Discord側の「万・億で切り捨て」と同じ考え方）
+                                var STATS_FALLBACK = { pros: 479, amount: 1.6, passed: 357, profit: 4.3 };
+                                var passedEl = document.getElementById('stat-passed'), profitEl = document.getElementById('stat-profit');
+                                function statsPassed() { var s = window.__introStats; return (s && s.prop_passed > 0) ? s.prop_passed : STATS_FALLBACK.passed; }
+                                function statsProfit() { var s = window.__introStats; return (s && s.profit_yen > 0) ? Math.floor(s.profit_yen / 1e7) / 10 : STATS_FALLBACK.profit; }
                                 function statsPros() { var s = window.__introStats; return (s && s.pro_traders > 0) ? s.pro_traders : STATS_FALLBACK.pros; }
                                 function statsAmount() { var s = window.__introStats; return (s && s.withdrawal_yen > 0) ? Math.floor(s.withdrawal_yen / 1e7) / 10 : STATS_FALLBACK.amount; } // 1億6475万→1.6（切り捨て）
-                                var obj = { pros: 0, amount: 0 };
+                                var obj = { pros: 0, amount: 0, passed: 0, profit: 0 };
                                 t3.to(obj, {
                                     pros: statsPros, duration: 1.4, ease: 'power2.out',
                                     onUpdate: function() { prosEl.textContent = Math.round(obj.pros); },
@@ -243,11 +247,13 @@ function revealHeroChart() {
                                     amount: statsAmount, duration: 1.4, ease: 'power2.out',
                                     onUpdate: function() { amountEl.textContent = obj.amount.toFixed(1); }
                                 }, 0.9);
+                                if (passedEl) t3.to(obj, { passed: statsPassed, duration: 1.4, ease: 'power2.out', onUpdate: function() { passedEl.textContent = Math.round(obj.passed); } }, 0.9);
+                                if (profitEl) t3.to(obj, { profit: statsProfit, duration: 1.4, ease: 'power2.out', onUpdate: function() { profitEl.textContent = obj.profit.toFixed(1); } }, 0.9);
                                 // 数字ファイルの到着がカウント完了より遅れた場合は、完了後に最終値だけ差し替える
                                 if (window.__introStatsReady) {
                                     window.__introStatsReady.then(function(st) {
                                         if (!st) return;
-                                        var apply = function() { prosEl.textContent = statsPros(); amountEl.textContent = statsAmount().toFixed(1); };
+                                        var apply = function() { prosEl.textContent = statsPros(); amountEl.textContent = statsAmount().toFixed(1); if (passedEl) passedEl.textContent = statsPassed(); if (profitEl) profitEl.textContent = statsProfit().toFixed(1); };
                                         if (window.__heroCountDone) apply(); else t3.eventCallback('onComplete', apply);
                                     });
                                 }

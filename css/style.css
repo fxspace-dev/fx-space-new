@@ -148,6 +148,7 @@ body.budoux-ready h1, body.budoux-ready h2, body.budoux-ready h3, body.budoux-re
 /* Solid flat blue button */
 .btn-solid-blue {
     display: inline-block;
+    text-align: center; /* カード内で幅いっぱい（display:block）にしたときも文字を中央に */
     background: #3430b0;
     color: white; font-weight: 800; font-size: 1.125rem;
     letter-spacing: 0.5px; padding: 1.4rem 3.5rem;

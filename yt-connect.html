@@ -18,6 +18,7 @@
 /* 日本語の折り返し（style.css と同じ方針）：既定は普通に折り返し、BudouX で文節区切り（wbr）を入れた後だけ keep-all にする */
 body{ overflow-wrap:break-word; line-break:strict; }
 body.budoux-ready{ word-break:keep-all; }
+body.budoux-ready p, body.budoux-ready li, body.budoux-ready h1, body.budoux-ready h2, body.budoux-ready h3, body.budoux-ready h4{ text-wrap:pretty; } /* 末尾の行に短い語句だけが残る改行を避ける */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{

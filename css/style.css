@@ -38,6 +38,13 @@ body {
 body.budoux-ready {
     word-break: keep-all;
 }
+/* 改行位置の見栄え：最後の行に「だけ。」「す。」のような短い語句だけが残る折り返しを避ける
+   （Chrome 117+ / Safari 26+ で有効。非対応の環境は従来どおりの折り返し）。
+   BudouX の文節区切り（wbr）の中から、末尾の行が極端に短くならない位置を選ばせる */
+body.budoux-ready p, body.budoux-ready li, body.budoux-ready dd,
+body.budoux-ready h1, body.budoux-ready h2, body.budoux-ready h3, body.budoux-ready h4 { text-wrap: pretty; }
+/* 中央寄せの短い導入文（2〜3行）は各行の長さを揃える */
+.ytt-sp-section-header > p, .rsec-lead, .section-subtitle, .pricing-header p, .content-section .subtitle, body.budoux-ready .ytt-block-title { text-wrap: balance; }
 
 .heading-xl { font-size: clamp(2.2rem, 5.5vw, 4rem); font-weight: 900; letter-spacing: -0.03em; line-height: 1.1; }
 .heading-lg { font-size: clamp(1.6rem, 4vw, 2.8rem); font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; }

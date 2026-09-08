@@ -11,7 +11,7 @@
     <meta property="og:image" content="https://fx-space.com/intro/img/og-preview-v2.png">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
-    <link rel="stylesheet" href="css/style.css?v=20260907c">
+    <link rel="stylesheet" href="css/style.css?v=20260908a">
     <!-- 実績数字の自動更新：Discordチャンネル名から毎日生成される数字ファイルを読む（失敗時はJS/HTMLに書かれた値のまま） -->
     <script>
     window.__introStats = null;
@@ -313,6 +313,9 @@
     @media (min-width:481px){
       .fintokei-header .heading-lg{ display:block; width:max-content; max-width:calc(100vw - 2rem); margin-left:50%; transform:translateX(-50%); }
     }
+    /* 27. ヒーロー上端のロゴ流し：固定トップバー（約61px）の下に潜って上が切れないよう、ヒーローの上余白にバーの高さを足す
+          （ウィンドウが低い／狭いとヒーロー内容が縦いっぱいになり、中央揃えのままだと上端がバーに隠れていた） */
+    .hero{ padding-top:calc(2rem + 62px) !important; }
     /* 固定トップバー：他ページ（ytt-sp-nav）と同じ白バー＋下線。左＝ロゴ（先頭へ）／右＝手書き黄色ボタン */
     .fx-topbar{
       position:fixed; top:0; left:0; right:0; z-index:1000;
@@ -3043,10 +3046,9 @@
             <div class="purchase-cards">
                 <div class="purchase-card pricing-reveal revealed">
                     <h4>超実践FX問題集</h4>
-                    <div class="purchase-note" style="margin-bottom:0;">実践力を鍛える問題集（56チャート×3問）</div>
                     <div class="purchase-type">買い切り</div>
                     <div class="purchase-price">¥30,000</div>
-                    <div class="purchase-note">実践力を鍛える問題集</div>
+                    <div class="purchase-note">実践力を鍛える問題集（56チャート×3問）</div>
                     <a href="https://discord.com/oauth2/authorize?client_id=1132937165379211284&amp;response_type=code&amp;redirect_uri=https%3A%2F%2Ffx-space.com%2Fpp_mondai_kaikiri.php&amp;scope=identify" class="btn plan-cta plan-cta-outline btn-sm">購入する →</a>
                 </div>
                 <div class="purchase-card pricing-reveal revealed">

@@ -95,10 +95,14 @@
         .ytt-sp-title-line .ytt-title-wave {
             display: block;
             width: 100%;
-            height: clamp(15px, 3.2vw, 23px);
+            height: clamp(14px, 3vw, 22px);
             object-fit: fill;
-            margin: 0.15rem 0 0.5rem;
+            margin: 0.1rem 0 0.5rem;
         }
+        /* スマホ: 見出しの文字幅に関係なく波線の幅を揃える（ytt-subscribe 等と同じ） */
+        @media (max-width: 640px) { .ytt-sp-title-line .ytt-title-wave { width: max(100%, 200px); max-width: calc(100vw - 2rem); margin-left: 50%; transform: translateX(-50%); } }
+        /* スマホ: セクション見出し下のオレンジ波線が平べったくならない高さに（ytt-subscribe と同じ 18〜26px） */
+        @media (max-width: 640px) { img[src$="wave-orange.png"] { height: clamp(18px, 6vw, 26px) !important; } }
         .ytt-sp-hero-lead {
             font-size: clamp(0.9375rem, 2vw, 1.125rem);
             color: #6b7280; line-height: 1.8;
@@ -864,8 +868,8 @@
 <section class="ytt-sp-hero">
     <img src="images/ytt-logo.png" alt="YTT" class="ytt-sp-hero-logo">
     <h1 class="ytt-sp-hero-title">
-        <span class="ytt-sp-title-line"><span class="line-text">シナリオ構築から決済まで<img class="ytt-title-wave" src="img/wave-yellow-bold.png" alt=""></span></span>
-        <span class="ytt-sp-title-line"><span class="line-text">これひとつで完結<img class="ytt-title-wave" src="img/wave-yellow-bold.png" alt=""></span></span>
+        <span class="ytt-sp-title-line"><span class="line-text">シナリオ構築から決済まで<img class="ytt-title-wave" src="img/wave-yellow.png" alt=""></span></span>
+        <span class="ytt-sp-title-line"><span class="line-text">これひとつで完結<img class="ytt-title-wave" src="img/wave-yellow.png" alt=""></span></span>
     </h1>
     <p class="ytt-sp-hero-lead">
         よすがが独自に開発したトレード支援ツール。<br>
@@ -1400,7 +1404,7 @@
                 <div style="text-align:center;">
                     <span style="display:inline-block;">
                         <h3 class="ytt-sp-buyout-title">YTTを買い切りで手に入れる</h3>
-                        <img src="img/wave-yellow-bold.png" alt="" style="display:block;width:100%;height:clamp(8px,1.8vw,13px);object-fit:fill;margin:0.25rem 0 0;">
+                        <img src="img/wave-yellow.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,20px);object-fit:fill;margin:0.2rem 0 0;">
                     </span>
                 </div>
             </div>

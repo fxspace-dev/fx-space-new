@@ -1184,6 +1184,8 @@ body.budoux-ready h1, body.budoux-ready h2, body.budoux-ready h3, body.budoux-re
 @media (hover: none), (pointer: coarse) {
 .content-card .card-tip-btn { display: flex; }
 .content-card.tip-open .card-tip-btn { background: #4f46e5; color: #fff; }
+/* スマホでは右上に「i」ボタンがあるので、「あなたにおすすめ」バッジは右下に逃がして重ならないようにする */
+.content-card.card-osusume::before { top: -9px; bottom: auto; right: auto; left: 50%; transform: translateX(-50%); white-space: nowrap; }
 .content-card.tip-open .card-tip {
     position: static; transform: none; width: auto; opacity: 1; pointer-events: auto;
     margin: 0.5rem 0 0; box-shadow: none; transition: none; /* タップ時は即表示 */

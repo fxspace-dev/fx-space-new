@@ -597,6 +597,16 @@
         .term-list dt { font-weight: 800; color: #1e1b4b; margin-top: 0.6rem; }
         .term-list dd { margin: 0.15rem 0 0; color: #374151; font-size: 0.92rem; line-height: 1.7; }
         .hero-ytt-web { width: min(220px, 60vw); height: auto; display: block; margin: 0 auto 0.5rem; }
+        .quiet-link { color: #4f46e5; text-decoration: underline; text-underline-offset: 3px; }
+        .about-grid { display: grid; grid-template-columns: 1fr 200px; gap: 1.5rem; align-items: center; }
+        .about-shot img { width: 100%; height: auto; border-radius: 14px; box-shadow: 0 8px 24px rgba(30,27,75,0.18); display: block; }
+        @media (max-width: 640px) { .about-grid { grid-template-columns: 1fr; } .about-shot { max-width: 220px; margin: 0 auto; } }
+        .env-table th { width: 38%; white-space: normal; }
+        .feat-list { list-style: none; padding: 0; margin: 0.5rem 0 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .feat-list li { background: #eef2ff; color: #312e81; border-radius: 999px; padding: 0.3rem 0.85rem; font-size: 0.9rem; font-weight: 700; }
+        #support .feat-list { display: grid; gap: 0.35rem; }
+        #support .feat-list li { background: none; color: #374151; font-weight: 400; padding: 0; border-radius: 0; }
+        #support .feat-list li::before { content: '・'; }
     </style>
 </head>
 <body>
@@ -630,6 +640,47 @@
         所要時間の目安は約15分。<wbr>初めての方は上から順番に進めてください。
     </p>
 </section>
+
+<!-- 機能概要（既存の「YTT導入方法」Canvaと同じ並び：規約→更新日→説明→使用環境→主な機能→サポートAI） -->
+<section class="plain-section" id="about" style="padding-top:0.5rem;">
+    <p class="lead" style="text-align:center;margin-bottom:0.25rem;">
+        <a href="https://drive.google.com/file/d/1Fd6qcQIisp-V8Eh5tV1722wkCf7qZEzc/view?usp=sharing" target="_blank" rel="noopener" class="quiet-link">利用規約</a>　※必ず目を通してください<br>
+        <a href="#href-tbd-web-features" class="quiet-link">Web版YTTの機能説明はこちら ↓</a>
+    </p>
+    <p class="lead" style="text-align:right;font-size:0.8rem;">最終更新日：2026.9/10</p>
+    <div class="about-grid">
+        <div>
+            <h2>Web版YTTとは</h2>
+            <p class="lead">ブラウザで動くYTTです。スマホからでもPCからでも、取引ツール（MT4 / MT5 / cTrader）にレシーバーEAを入れておけば、Web版YTTからシナリオ構築・注文・決済ができます。<br>注文を実際に出すのはレシーバー側なので、MT4 / MT5 は利用中もPCを起動しておく必要があります（cTrader Cloud版はPCを閉じてもOK）。</p>
+        </div>
+        <div class="about-shot"><img src="img/webytt-sp.png" alt="Web版YTT スマホ画面" loading="lazy"></div>
+    </div>
+
+    <h2 style="margin-top:2rem;">使用環境</h2>
+    <table class="guide-table env-table">
+        <tr><th>対応端末</th><td>スマホ（iPhone / Android）、PC。ブラウザで開きます</td></tr>
+        <tr><th>ブラウザ</th><td>Safari / Chrome など。スマホは Androidはインストール、iPhoneはホーム画面に追加して使うのがおすすめ（下の「スマホはアプリのように使う」を参照）</td></tr>
+        <tr><th>レシーバーEAを入れる取引ツール</th><td>MT4 / MT5 / cTrader / cTrader Cloud（1口座につき1つ）</td></tr>
+        <tr><th>通信環境</th><td>安定した高速インターネット回線</td></tr>
+        <tr><th>使用可能者</th><td><a href="https://discord.com/channels/1039824083208126474/1039824083208126476" target="_blank" rel="noopener">メンバーシップ or サブスク</a>加入者</td></tr>
+        <tr><th>使用可能証券会社、プロップファーム</th><td><a href="https://www.hfm.com/int/?refid=30443481&amp;acid=fxspaceysg" target="_blank" rel="noopener">HFM</a>、<a href="https://go.axiory.com/afs/come.php?id=13&amp;cid=5894&amp;ctgid=100&amp;atype=1" target="_blank" rel="noopener">Axiory</a>、<a href="https://portal.threetrader.com/register?r_code=IB01504280A" target="_blank" rel="noopener">ThreeTrader</a>、<a href="https://partners.fundora-trading.com/click?campaign_id=1&amp;ref_id=10" target="_blank" rel="noopener">Fundora</a>、<a href="https://my.fintokei.com/affiliate/jp/55" target="_blank" rel="noopener">Fintokei</a>、<a href="https://my.funded7.com/ja/challenges?affiliateId=yosuga" target="_blank" rel="noopener">Funded7</a>、楽天証券<br><span style="font-size:0.85em;color:#6b7280;">（他証券会社、他プロップファームでの動作はテストしていません）</span></td></tr>
+    </table>
+
+    <h2 style="margin-top:2rem;">主な機能</h2>
+    <ul class="feat-list">
+        <li>注文、決済</li><li>シナリオ構築</li><li>予約注文</li><li>オートライン</li><li>コピーモード</li><li>通知</li><li>トレードノート</li><li>経済指標表示</li><li>他多数</li>
+    </ul>
+    <p class="lead">詳細な機能解説は <a href="#href-tbd-web-features">Web版YTT 使い方ページ（準備中）</a> で行っています。</p>
+
+    <div class="note-box info" style="margin-top:1.5rem;"><b>YTTサポートAI</b><br>YTTの導入、使用方法を回答してくれるサポートAIを導入しました。使い方が分からない場合や調べるのが面倒な時にご活用ください。<br><a href="https://discord.com/channels/1039824083208126474/1406849872560390227" target="_blank" rel="noopener">YTTサポートAI（Discord）→</a></div>
+</section>
+
+<div class="section-h-title-row" style="text-align:center;margin:2.5rem 0 1rem;">
+    <span class="h2-with-wave" style="display:inline-block;">
+        <h2 style="font-size:clamp(1.4rem,4vw,1.9rem);font-weight:900;color:#1e1b4b;margin:0;">導入方法</h2>
+        <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(18px,4vw,22px);object-fit:fill;margin-top:2px;">
+    </span>
+</div>
 
 <!-- 用意するもの -->
 <div class="ready-box">
@@ -869,8 +920,23 @@
     <div class="faq-item"><button type="button" class="faq-q">Web版のアイコンが黄になる</button><div class="faq-a">価格が取得できていません。MT4 / MT5 の場合は、取引する通貨ペアを気配値表示欄に表示してください。</div></div>
     <div class="faq-item"><button type="button" class="faq-q">特定の通貨ペアやCFD商品だけ注文できない</button><div class="faq-a"><ul><li>サフィックス付きの口座（USDJPYp など）では「通貨ペア末尾のサフィックス」を入力しているか</li><li>CFD系商品は、証券会社の商品名（GOLD など）をパラメータに入力しているか</li></ul></div></div>
     <div class="faq-item"><button type="button" class="faq-q">コピーモードでポジションがコピーされない</button><div class="faq-a"><ul><li>コピー元のポジションがWeb版YTTからエントリーされたものか</li><li>ロット計算モードが損失率固定・損失額固定のとき、コピー元のポジションにSLが付いているか</li><li>レシーバー側の取引ツールが起動したままになっているか</li></ul></div></div>
+    <div class="faq-item"><button type="button" class="faq-q">セキュリティソフトにひっかかってダウンロードできない／DLLが消える</button><div class="faq-a"><ul><li>DLLの使用許可をしていない</li><li>DLLの名前がオリジナルファイル（YTT_OrderReceiver.dll）と異なっている（末尾に（1）が付いているなど）</li><li>「MQL4」→「Libraries」中のDLLファイルがセキュリティソフトにより削除／中身が空白になっている。この場合は<a href="https://support.microsoft.com/ja-jp/windows/windows-%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%E3%81%AB%E9%99%A4%E5%A4%96%E3%82%92%E8%BF%BD%E5%8A%A0%E3%81%99%E3%82%8B-811816c0-4dfd-af4a-47e4-c301afe13b26" target="_blank" rel="noopener">こちら</a>等を参考に除外処理をおこなってください（Windowsセキュリティ以外の場合は各自除外処理の方法をお調べください）</li></ul></div></div>
     <div class="faq-item"><button type="button" class="faq-q">コピーモードをオンにしたら注文が消えた</button><div class="faq-a">仕様です。オンにした時点で、セット中のシナリオと指値・逆指値注文はすべてキャンセルされます。</div></div>
-    <p class="lead" style="margin-top:1rem;">解決しないときは、FX SPACEのDiscord内「YTTサポート」チャンネルで聞いてください。</p>
+</section>
+
+<!-- サポート（既存Canvaと同じ流れ） -->
+<section class="plain-section" id="support">
+    <h2>サポート</h2>
+    <p class="lead">サポートが必要な場合や不具合だと考えられる場合は、以下の項目をチェックしてください。</p>
+    <ul class="limit-list">
+        <li>■ 使用可能証券会社・プロップファーム（HFM、Axiory、ThreeTrader、Fundora、Fintokei、Funded7、楽天証券）で使っている（他社での動作はテストしていません）</li>
+        <li>■ <a href="https://discord.com/channels/1039824083208126474/1406849872560390227" target="_blank" rel="noopener">YTTサポートAI</a> に相談した</li>
+        <li>■ <a href="https://discord.com/channels/1039824083208126474/1181497563992576051" target="_blank" rel="noopener">YTT質問フォーラム</a> で質問した</li>
+    </ul>
+    <p class="lead" style="margin-top:1rem;">以上で解決しなかったものについて、以下の内容を <a href="https://discord.com/channels/1039824083208126474/1151440259553439784" target="_blank" rel="noopener">「お問い合わせ」</a> に送ってください。</p>
+    <ul class="feat-list">
+        <li>証券会社</li><li>口座タイプ</li><li>有効証拠金残高</li><li>OS（MacかWindows）と、スマホの機種</li><li>レシーバーEAのバージョン（例：YTT_OrderEA 1.00）</li><li>Web版YTTで使用している口座番号</li><li>サポートが必要な内容をできるだけ具体的に</li><li>症状発生時／参考となるスクショ</li><li>症状発生時のターミナル→エキスパートタブのスクショ</li><li>（※必須）エラーが出ていた場合、エキスパートタブに出ていたエラーのコピー</li>
+    </ul>
 </section>
 
 <footer class="ytt-sp-page-footer">

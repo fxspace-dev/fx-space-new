@@ -877,7 +877,9 @@
     .gframe { position: relative; display: inline-block; max-width: 100%; padding: 7px; vertical-align: top; }
     .gframe > img { display: block; max-width: 100%; height: auto; border: none !important; border-radius: 5px !important; box-shadow: none !important; background: #fff; }
     .gframe > svg.gframe-line { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
-    .gframe > svg.gframe-line path { fill: none; stroke: #1e1b4b; stroke-width: 2.1; stroke-linecap: round; stroke-linejoin: round; }
+    .gframe > svg.gframe-line path { fill: none; stroke: #7b8190; stroke-linecap: round; stroke-linejoin: round; }
+    .gframe > svg.gframe-line path.p1 { stroke-width: 3.2; opacity: 0.92; }
+    .gframe > svg.gframe-line path.p2 { stroke-width: 2; opacity: 0.45; }
     .gshot.narrow .gframe { max-width: min(100%, 394px); }
     .gshot.mid .gframe { max-width: min(100%, 574px); }
     .gshot-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; align-items: start; margin-top: 0.8rem; }
@@ -954,7 +956,7 @@
 
 <!-- HERO -->
 <section class="ytt-sp-hero">
-    <img src="images/ytt-logo.png" alt="YTT" class="ytt-sp-hero-logo">
+    <img src="img/ytt-mark-notext.png" alt="YTT" class="ytt-sp-hero-logo">
     <h1 class="ytt-sp-hero-title">
         <span class="ytt-sp-title-line"><span class="line-text">Web版YTT<img class="ytt-title-wave" src="img/wave-yellow.png" alt=""></span></span>
         <span class="ytt-sp-title-line"><span class="line-text">導入方法<img class="ytt-title-wave" src="img/wave-yellow.png" alt=""></span></span>
@@ -1684,8 +1686,23 @@
     var w = box.clientWidth, h = box.clientHeight; if (!w || !h) return;
     var svg = box.querySelector('svg.gframe-line');
     svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
-    svg.firstChild.setAttribute('d', pathFor(w, h, +box.getAttribute('data-seed')));
+    var seed = +box.getAttribute('data-seed');
+    svg.querySelector('.p1').setAttribute('d', pathFor(w, h, seed));
+    svg.querySelector('.p2').setAttribute('d', pathFor(w, h, (seed ^ 0x9e3779b9) >>> 0)); // 2回なぞった感じ
   }
+  var NS = 'http://www.w3.org/2000/svg';
+  // クレヨンのかすれ：線の輪郭をざらつかせ（feDisplacementMap）、粒状に抜けを作る（feTurbulence のアルファで間引く）
+  var defs = document.createElementNS(NS, 'svg');
+  defs.setAttribute('width', '0'); defs.setAttribute('height', '0'); defs.setAttribute('aria-hidden', 'true');
+  defs.style.position = 'absolute';
+  defs.innerHTML = '<defs><filter id="gframe-crayon" x="-10%" y="-10%" width="120%" height="120%">' +
+    '<feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" seed="4" result="n1"/>' +
+    '<feDisplacementMap in="SourceGraphic" in2="n1" scale="2.8" xChannelSelector="R" yChannelSelector="G" result="rough"/>' +
+    '<feTurbulence type="fractalNoise" baseFrequency="1.15" numOctaves="2" seed="11" result="n2"/>' +
+    '<feColorMatrix in="n2" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.3 1.8" result="grain"/>' +
+    '<feComposite in="rough" in2="grain" operator="in"/>' +
+    '</filter></defs>';
+  document.body.appendChild(defs);
   var ro = window.ResizeObserver ? new ResizeObserver(function (es) { es.forEach(function (e) { draw(e.target); }); }) : null;
   document.querySelectorAll('.gshot img, .ytt-fto2-visual .webytt-sp').forEach(function (img) {
     if (img.parentElement.classList.contains('gframe')) return;
@@ -1694,9 +1711,12 @@
     box.setAttribute('data-seed', hash(img.getAttribute('src') || ''));
     img.parentNode.insertBefore(box, img);
     box.appendChild(img);
-    var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    var svg = document.createElementNS(NS, 'svg');
     svg.setAttribute('class', 'gframe-line'); svg.setAttribute('aria-hidden', 'true');
-    svg.appendChild(document.createElementNS('http://www.w3.org/2000/svg', 'path'));
+    var g = document.createElementNS(NS, 'g'); g.setAttribute('filter', 'url(#gframe-crayon)');
+    var p1 = document.createElementNS(NS, 'path'); p1.setAttribute('class', 'p1');
+    var p2 = document.createElementNS(NS, 'path'); p2.setAttribute('class', 'p2');
+    g.appendChild(p1); g.appendChild(p2); svg.appendChild(g);
     box.appendChild(svg);
     if (ro) ro.observe(box);
     img.addEventListener('load', function () { draw(box); });

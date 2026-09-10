@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web版YTT 導入ガイド — FX SPACE</title>
+    <title>Web版YTT 導入方法 — FX SPACE</title>
     <meta name="description" content="Web版（スマホ版）YTTの導入手順。口座登録、レシーバーEAの設置、Web版YTTへのログインまでを3ステップで案内します。">
     <link rel="stylesheet" href="css/style.css?v=20260908e">
     <style>
@@ -608,17 +608,68 @@
         #support .feat-list li { background: none; color: #374151; font-weight: 400; padding: 0; border-radius: 0; }
         #support .feat-list li::before { content: '・'; }
     </style>
+
+    <style>
+        /* ===== 手順ブロック（1手順＝1スクショ。既存Canva「YTT導入方法」と同じ進め方） ===== */
+        .howto { max-width: 860px; margin: 0 auto; padding: 0 1.5rem; }
+        .howto-band {
+            background: #1e2a4a; color: #fff; font-weight: 900; font-size: clamp(1rem, 2.6vw, 1.25rem);
+            padding: 0.7rem 1.1rem; border-radius: 8px; margin: 2.5rem 0 1.25rem; letter-spacing: 0.02em;
+        }
+        .howto-band .band-sub { display: block; font-size: 0.78rem; font-weight: 600; color: #c7d2fe; margin-top: 0.2rem; letter-spacing: 0; }
+        .hstep { display: grid; grid-template-columns: 34px 1fr; gap: 0.75rem; margin-bottom: 1.75rem; }
+        .hstep-no {
+            width: 34px; height: 34px; border-radius: 50%; background: #4f46e5; color: #fff;
+            display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1rem; flex-shrink: 0;
+        }
+        .hstep-body { min-width: 0; }
+        .hstep-body > p { margin: 0.35rem 0 0; font-size: 0.95rem; line-height: 1.85; color: #374151; }
+        .hstep-body > p:first-child { margin-top: 0.3rem; font-weight: 700; color: #1e1b4b; font-size: 1rem; }
+        .hshot { margin: 0.75rem 0 0; }
+        .hshot img {
+            display: block; max-width: 100%; height: auto; border: 1px solid #e5e7eb; border-radius: 10px;
+            box-shadow: 0 4px 14px rgba(30,27,75,0.08); background: #fff;
+        }
+        .hshot.narrow img { max-width: min(100%, 380px); }
+        .hshot.mid img { max-width: min(100%, 560px); }
+        .hshot figcaption { font-size: 0.8rem; color: #6b7280; margin-top: 0.35rem; line-height: 1.6; }
+        .hnote {
+            margin-top: 0.6rem; padding: 0.7rem 0.85rem; border-radius: 10px; background: #f8f9fc;
+            border-left: 4px solid #a5b4fc; font-size: 0.88rem; line-height: 1.75; color: #374151;
+        }
+        .hnote.warn { background: #fff7ed; border-left-color: #fb923c; color: #7c2d12; }
+        .hnote b { color: #1e1b4b; }
+        .hnote.warn b { color: #9a3412; }
+        .todo-shot {
+            margin: 0.75rem 0 0; border: 2px dashed #c7d2fe; border-radius: 10px; background: #f8f9fc;
+            color: #4f46e5; font-size: 0.85rem; font-weight: 700; text-align: center; padding: 1.4rem 1rem;
+        }
+        .hstep-actions { margin-top: 0.75rem; }
+        .band-img { display: block; width: 100%; max-width: 560px; height: auto; margin: 2.5rem auto 1rem; }
+        .done-msg {
+            max-width: 860px; margin: 2rem auto 0; padding: 1.2rem 1.4rem; border-radius: 14px;
+            background: linear-gradient(135deg, #eef2ff, #f5f3ff); border: 1.5px solid #c7d2fe;
+            text-align: center; font-weight: 800; color: #312e81; line-height: 1.8;
+        }
+        @media (max-width: 640px) {
+            .howto { padding: 0 1rem; }
+            .hstep { grid-template-columns: 28px 1fr; gap: 0.6rem; }
+            .hstep-no { width: 28px; height: 28px; font-size: 0.9rem; }
+            .hstep-body > p { font-size: 0.92rem; }
+        }
+    </style>
 </head>
 <body>
 
 <!--
 ====================================================================
-  Web版（スマホ版）YTT 導入ガイド  ytt-web-setup.html
-  元資料: 2026-09-10 版「Web版YTT 導入ガイド」PDF（よすが作成）
+  Web版（スマホ版）YTT 導入方法  ytt-web-setup.html
+  ・既存Canva「YTT導入方法」(DAF1unsWf4o) の流れとスクショをそのまま踏襲
+  ・デザインは fx-space.com/intro/ に合わせる
   【本番反映前TODO】
-  [1] レシーバーEA一式（webytt.zip）のダウンロードURL → 安田さんにサーバー配置とURLを確認して差し替え
-  [2] 「スクショ：…」の点線枠は、実際の画面スクリーンショットに差し替える（緒方が撮影）
-  [3] 機能説明ページ（ytt-web-features.html）ができたらリンクを有効化
+  [1] レシーバーEA（webytt.zip）のダウンロードURL → 安田さんに配置場所を確認して差し替え（#href-tbd-webytt-zip）
+  [2] 「TODO スクショ」の点線枠 → 撮影して差し替え
+  [3] 機能説明ページ（ytt-web-features.html）ができたらリンクを有効化（#href-tbd-web-features）
 ====================================================================
 -->
 
@@ -633,16 +684,17 @@
 <section class="ytt-sp-hero">
     <h1 class="ytt-sp-hero-title">
         <span class="ytt-sp-title-line"><span class="line-text">Web版YTT<img class="ytt-title-wave" src="img/wave-yellow.png" alt=""></span></span>
-        <span class="ytt-sp-title-line"><span class="line-text">導入ガイド<img class="ytt-title-wave" src="img/wave-yellow.png" alt=""></span></span>
+        <span class="ytt-sp-title-line"><span class="line-text">導入方法<img class="ytt-title-wave" src="img/wave-yellow.png" alt=""></span></span>
     </h1>
     <p class="ytt-sp-hero-lead">
-        口座の登録からレシーバーの設置、Web版YTTへのログインまで、<wbr>3ステップで完了します。<br>
-        所要時間の目安は約15分。<wbr>初めての方は上から順番に進めてください。
+        口座の登録からレシーバーの設置、Web版YTTへのログインまで。<wbr>画面のとおりに上から進めれば完了します。<br>
+        所要時間の目安は約15分です。
     </p>
 </section>
 
-<!-- 機能概要（既存の「YTT導入方法」Canvaと同じ並び：規約→更新日→説明→使用環境→主な機能→サポートAI） -->
+<!-- 機能概要（既存Canvaと同じ並び） -->
 <section class="plain-section" id="about" style="padding-top:0.5rem;">
+    <img class="band-img" src="img/webytt/banner-gaiyou.png" alt="Web版 機能概要" style="margin-top:0;">
     <p class="lead" style="text-align:center;margin-bottom:0.25rem;">
         <a href="https://drive.google.com/file/d/1Fd6qcQIisp-V8Eh5tV1722wkCf7qZEzc/view?usp=sharing" target="_blank" rel="noopener" class="quiet-link">利用規約</a>　※必ず目を通してください<br>
         <a href="#href-tbd-web-features" class="quiet-link">Web版YTTの機能説明はこちら ↓</a>
@@ -675,212 +727,333 @@
     <div class="note-box info" style="margin-top:1.5rem;"><b>YTTサポートAI</b><br>YTTの導入、使用方法を回答してくれるサポートAIを導入しました。使い方が分からない場合や調べるのが面倒な時にご活用ください。<br><a href="https://discord.com/channels/1039824083208126474/1406849872560390227" target="_blank" rel="noopener">YTTサポートAI（Discord）→</a></div>
 </section>
 
-<div class="section-h-title-row" style="text-align:center;margin:2.5rem 0 1rem;">
+<!-- 導入は3ステップ -->
+<div class="section-h-title-row" style="text-align:center;margin:3rem 0 1rem;">
     <span class="h2-with-wave" style="display:inline-block;">
         <h2 style="font-size:clamp(1.4rem,4vw,1.9rem);font-weight:900;color:#1e1b4b;margin:0;">導入方法</h2>
         <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(18px,4vw,22px);object-fit:fill;margin-top:2px;">
     </span>
 </div>
 
-<!-- 用意するもの -->
 <div class="ready-box">
     <div class="ready-grid">
-        <div class="ready-item"><span class="ri">💬</span><div><b>Discordアカウント</b>口座登録とWeb版YTTへのログインに使います</div></div>
-        <div class="ready-item"><span class="ri">📈</span><div><b>取引口座と取引ツール</b>MT4 / MT5 / cTrader のいずれか（1口座につき1つ）</div></div>
-        <div class="ready-item"><span class="ri">📦</span><div><b>レシーバー用EAのファイル</b>MT4: ex4＋dll ／ MT5: ex5＋dll ／ cTrader: .algo</div></div>
-        <div class="ready-item"><span class="ri">🌐</span><div><b>ブラウザ</b>スマホでもPCでも。Web版YTTを開くために使います</div></div>
+        <div class="ready-item"><span class="ri">1️⃣</span><div><b>口座登録</b>登録ページから口座を登録し、表示される32文字の認証コードを控える</div></div>
+        <div class="ready-item"><span class="ri">2️⃣</span><div><b>レシーバー設置</b>MT4 / MT5 / cTrader にレシーバー用EAを入れ、認証コードを設定する</div></div>
+        <div class="ready-item"><span class="ri">3️⃣</span><div><b>ログイン</b>Web版YTTにDiscord認証でログインし、口座を選んで接続を確認する</div></div>
+        <div class="ready-item"><span class="ri">📦</span><div><b>用意するもの</b>Discordアカウント／取引口座と取引ツール／レシーバー用EAのファイル／ブラウザ</div></div>
     </div>
 </div>
 
-<!-- プログレスステッパー（このページは目次として表示） -->
-<div class="progress-stepper">
-    <div class="prog-step is-active" data-prog="1">
-        <div class="prog-step-icon">
-            <img src="img/crayon-1.png" alt="1">
-            <span class="prog-step-done-mark"><img src="img/check-orange.png" alt="✓"></span>
+<div class="howto">
+
+    <!-- ===== 事前：MT4にログイン ===== -->
+    <div class="howto-band">事前準備　MT4にログインする<span class="band-sub">すでにMT4を使っている方は読み飛ばしてOKです</span></div>
+    <p class="lead" style="margin-bottom:1.25rem;">お使いの証券会社・プロップファームで口座開設後、それぞれのHPよりMT4をダウンロードします。MT4を開き、口座開設後にメールで届いた口座情報でログインします。</p>
+
+    <div class="hstep">
+        <div class="hstep-no">1</div>
+        <div class="hstep-body">
+            <p>MT4左上の「ファイル」→「取引口座にログイン」</p>
+            <figure class="hshot narrow"><img src="img/webytt/s01-file-login.png" alt="ファイルメニューから取引口座にログインを選ぶ" loading="lazy"></figure>
         </div>
-        <span class="prog-step-label">口座登録</span>
     </div>
-    <div class="prog-line" data-prog-line="1"></div>
-    <div class="prog-step is-active" data-prog="2">
-        <div class="prog-step-icon">
-            <img src="img/crayon-2.png" alt="2">
-            <span class="prog-step-done-mark"><img src="img/check-orange.png" alt="✓"></span>
+
+    <div class="hstep">
+        <div class="hstep-no">2</div>
+        <div class="hstep-body">
+            <p>ログインID・パスワード・サーバーを入力して「ログイン」</p>
+            <figure class="hshot mid"><img src="img/webytt/s02-login-dialog.png" alt="取引口座のログイン情報を入力する画面" loading="lazy"></figure>
+            <p>ログインすると、MT4左上に口座番号が表示されます（ログインID＝MT4口座番号）。</p>
+            <figure class="hshot narrow"><img src="img/webytt/s03-account-no.png" alt="MT4左上に口座番号が表示される" loading="lazy"></figure>
         </div>
-        <span class="prog-step-label">レシーバー設置</span>
     </div>
-    <div class="prog-line" data-prog-line="2"></div>
-    <div class="prog-step is-active" data-prog="3">
-        <div class="prog-step-icon">
-            <img src="img/crayon-3.png" alt="3">
-            <span class="prog-step-done-mark"><img src="img/check-orange.png" alt="✓"></span>
+
+    <!-- ===== STEP1 ===== -->
+    <div class="howto-band">STEP 1　口座登録と認証コードの確認<span class="band-sub">レシーバーとあなたの口座を結び付ける「32文字の認証コード」を受け取ります</span></div>
+
+    <div class="hstep">
+        <div class="hstep-no">1</div>
+        <div class="hstep-body">
+            <p>口座登録ページを開く</p>
+            <div class="hstep-actions">
+                <a href="https://discord.com/oauth2/authorize?client_id=1132937165379211284&amp;response_type=code&amp;redirect_uri=https%3A%2F%2Ffx-space.com%2Fyauth%2FYTTauth_9fhwrgu.php&amp;scope=identify+connections" class="btn-solid-step" target="_blank" rel="noopener">口座登録ページを開く →</a>
+            </div>
+            <p>Discordの確認画面が立ち上がるので「認証」を押します。</p>
+            <figure class="hshot narrow"><img src="img/webytt/s04-discord-auth.png" alt="Discordの認証画面" loading="lazy"></figure>
         </div>
-        <span class="prog-step-label">ログイン</span>
     </div>
+
+    <div class="hstep">
+        <div class="hstep-no">2</div>
+        <div class="hstep-body">
+            <p>ブラウザが立ち上がるので、口座番号を入力して「登録」</p>
+            <figure class="hshot"><img src="img/webytt/s05-register-form.png" alt="口座番号を入力して登録するフォーム" loading="lazy"></figure>
+        </div>
+    </div>
+
+    <div class="hstep">
+        <div class="hstep-no">3</div>
+        <div class="hstep-body">
+            <p>表示された32文字の認証コードを控える</p>
+            <p>このコードは STEP 2 のレシーバー設定で入力します。メモ帳などに控えておいてください。</p>
+            <figure class="hshot"><img src="img/webytt/s06-authcode.png" alt="32文字の認証コードが表示された画面" loading="lazy"></figure>
+            <div class="hnote warn"><b>認証コードは他人に教えないでください。</b><br>他人に知られると、あなたの口座に対して操作される可能性があります。コミュニティやSNS、スクリーンショットにコードを載せないようご注意ください。</div>
+        </div>
+    </div>
+
+    <!-- ===== STEP2 ダウンロード ===== -->
+    <div class="howto-band">STEP 2　レシーバーEAの設置<span class="band-sub">Web版YTTからの指示を受け取って注文を出すEAです。配置場所は通常のYTTと同じです</span></div>
+
+    <div class="hstep">
+        <div class="hstep-no">1</div>
+        <div class="hstep-body">
+            <p>レシーバーEAをダウンロードする</p>
+            <div class="hstep-actions">
+                <a href="#href-tbd-webytt-zip" class="btn-solid-step" id="dlBtn">レシーバーEAをダウンロード</a>
+            </div>
+            <figure class="hshot mid"><img src="img/webytt/s07-zip.png" alt="webytt一式.zip のダウンロード" loading="lazy"></figure>
+            <p>ブラウザの警告が出た場合は「ダウンロードする」を選んでください。</p>
+            <figure class="hshot narrow"><img src="img/webytt/s08-dl-warning.png" alt="ブラウザのダウンロード警告" loading="lazy"></figure>
+        </div>
+    </div>
+
+    <div class="hstep">
+        <div class="hstep-no">2</div>
+        <div class="hstep-body">
+            <p>zipファイルを解凍する</p>
+            <p>解凍すると、取引ツールごとのフォルダが入っています。お使いの取引ツールのフォルダだけ使います。</p>
+            <figure class="hshot narrow"><img src="img/webytt/s09-folders.png" alt="解凍後のフォルダ cTrader / cTrader_Cloud / MT4 / MT5" loading="lazy"></figure>
+            <p>MT4フォルダの中身は次の2つです。</p>
+            <figure class="hshot narrow"><img src="img/webytt/s10-mt4-files.png" alt="YTT_OrderEA.ex4 と YTT_OrderReceiver.dll" loading="lazy"></figure>
+            <div class="hnote">MT5：<b>YTT_OrderEA.ex5</b> と <b>YTT_OrderReceiver.dll</b>／cTrader：<b>.algo ファイル</b>（Cloud版は cTrader_Cloud フォルダの .algo）。<br>解凍方法が分からない方は <a href="https://mainichi.doda.jp/article/2022/08/03/2098" target="_blank" rel="noopener">こちら</a>。</div>
+        </div>
+    </div>
+
+    <div class="hstep">
+        <div class="hstep-no">3</div>
+        <div class="hstep-body">
+            <p>MT4を開き、「ファイル」→「データフォルダを開く」</p>
+            <figure class="hshot narrow"><img src="img/webytt/s11-datafolder.png" alt="ファイルメニューからデータフォルダを開く" loading="lazy"></figure>
+        </div>
+    </div>
+
+    <div class="hstep">
+        <div class="hstep-no">4</div>
+        <div class="hstep-body">
+            <p>フォルダ中の「MQL4」→「Experts」へと進む</p>
+            <figure class="hshot narrow"><img src="img/webytt/s12-mql4.png" alt="MQL4フォルダ" loading="lazy"></figure>
+            <figure class="hshot narrow"><img src="img/webytt/s13-experts.png" alt="Expertsフォルダ" loading="lazy"></figure>
+        </div>
+    </div>
+
+    <div class="hstep">
+        <div class="hstep-no">5</div>
+        <div class="hstep-body">
+            <p>その中に「YTT_OrderEA.ex4」を移す（もしくはコピー＆ペーストする）</p>
+            <figure class="hshot narrow"><img src="img/webytt/s14-ea-placed.png" alt="ExpertsフォルダにYTT_OrderEA.ex4を置いた状態" loading="lazy"></figure>
+        </div>
+    </div>
+
+    <div class="hstep">
+        <div class="hstep-no">6</div>
+        <div class="hstep-body">
+            <p>戻って、フォルダ中の「MQL4」→「Libraries」へと進む</p>
+            <figure class="hshot narrow"><img src="img/webytt/s15-libraries.png" alt="Librariesフォルダ" loading="lazy"></figure>
+        </div>
+    </div>
+
+    <div class="hstep">
+        <div class="hstep-no">7</div>
+        <div class="hstep-body">
+            <p>その中に「YTT_OrderReceiver.dll」を移す（もしくはコピー＆ペーストする）</p>
+            <figure class="hshot narrow"><img src="img/webytt/s16-dll-placed.png" alt="LibrariesフォルダにYTT_OrderReceiver.dllを置いた状態" loading="lazy"></figure>
+            <div class="hnote">MT5は <b>Experts</b> に ex5、<b>Libraries</b> に dll を置きます。cTraderは <b>.algo ファイルをダブルクリック</b>すると自動で配置されます。</div>
+        </div>
+    </div>
+
+    <div class="hstep">
+        <div class="hstep-no">8</div>
+        <div class="hstep-body">
+            <p>MT4右上の「×」で閉じ、もう一度MT4を立ち上げる</p>
+            <figure class="hshot narrow"><img src="img/webytt/s17-close-mt4.png" alt="MT4右上の×で閉じる" loading="lazy"></figure>
+        </div>
+    </div>
+
+    <!-- ===== STEP2 続き：チャートに導入 ===== -->
+    <div class="howto-band">STEP 2（続き）　チャートを1つだけ開き、レシーバーを導入する<span class="band-sub">レシーバーは必ず1つのチャートだけに入れてください</span></div>
+
+    <div class="hstep">
+        <div class="hstep-no">1</div>
+        <div class="hstep-body">
+            <p>MT4を開き、左上にある気配値表示のアイコンをクリック</p>
+            <figure class="hshot narrow"><img src="img/webytt/s18-kehaichi-icon.png" alt="気配値表示のアイコン" loading="lazy"></figure>
+            <p>MT4左側に気配値表示（通貨ペア名が並ぶ）が表示されます。</p>
+        </div>
+    </div>
+
+    <div class="hstep">
+        <div class="hstep-no">2</div>
+        <div class="hstep-body">
+            <p>気配値表示上で右クリック →「すべて表示」</p>
+            <figure class="hshot mid"><img src="img/webytt/s19-show-all.png" alt="気配値表示で右クリックしてすべて表示を選ぶ" loading="lazy"></figure>
+            <p>灰色ではなく黒色の通貨ペア名の中から、1つだけ通貨ペアを選びます。</p>
+        </div>
+    </div>
+
+    <div class="hstep">
+        <div class="hstep-no">3</div>
+        <div class="hstep-body">
+            <p>通貨ペア名をMT4右側の空間にドラッグ＆ドロップ</p>
+            <figure class="hshot mid"><img src="img/webytt/s20-drag-pair.png" alt="通貨ペア名をドラッグする" loading="lazy"></figure>
+            <p>下の画像のようにチャートが表示されます。</p>
+            <figure class="hshot"><img src="img/webytt/s21-chart.png" alt="チャートが表示された状態" loading="lazy"></figure>
+            <div class="hnote warn"><b>レシーバーを入れるチャートは1枚だけです。</b>複数のチャートに入れると、先に設定した方が切断されます。</div>
+        </div>
+    </div>
+
+    <div class="hstep">
+        <div class="hstep-no">4</div>
+        <div class="hstep-body">
+            <p>MT4左上にあるナビゲーターのアイコンをクリック</p>
+            <figure class="hshot narrow"><img src="img/webytt/s22-navigator-icon.png" alt="ナビゲーターのアイコン" loading="lazy"></figure>
+        </div>
+    </div>
+
+    <div class="hstep">
+        <div class="hstep-no">5</div>
+        <div class="hstep-body">
+            <p>「エキスパートアドバイザ」の左にある「＋」をクリック</p>
+            <figure class="hshot narrow"><img src="img/webytt/s23-expand-ea.png" alt="エキスパートアドバイザの＋をクリック" loading="lazy"></figure>
+            <p>前の段階で Experts フォルダに入れたファイル名が表示されます（<b>YTT_OrderEA</b>）。</p>
+            <div class="hnote">表示されないときは「エキスパートアドバイザ」を右クリック →「更新」、またはMT4を再起動してください。</div>
+        </div>
+    </div>
+
+    <div class="hstep">
+        <div class="hstep-no">6</div>
+        <div class="hstep-body">
+            <p>「YTT_OrderEA」を右クリック →「チャートに表示」</p>
+            <figure class="hshot mid"><img src="img/webytt/s24-attach-chart.png" alt="EAを右クリックしてチャートに表示を選ぶ" loading="lazy"></figure>
+            <div class="hnote">画像は旧バージョンのファイル名です。実際は <b>YTT_OrderEA</b> を選んでください。</div>
+        </div>
+    </div>
+
+    <div class="hstep">
+        <div class="hstep-no">7</div>
+        <div class="hstep-body">
+            <p>「全般」タブ →「自動売買を許可する」にチェック →「DLLの使用を許可する」にチェック</p>
+            <figure class="hshot"><img src="img/webytt/s25-general-tab.png" alt="全般タブで自動売買とDLLの使用を許可する" loading="lazy"></figure>
+        </div>
+    </div>
+
+    <div class="hstep">
+        <div class="hstep-no">8</div>
+        <div class="hstep-body">
+            <p>「パラメーターの入力」タブで、認証コードなどを入力して「OK」</p>
+            <table class="guide-table">
+                <tr><th>認証コード</th><td>STEP 1 で控えた32文字の認証コードを入力します</td></tr>
+                <tr><th>通貨ペア末尾のサフィックス</th><td>通貨ペア名の末尾に文字が付いている口座では、その文字を入力します。<br>例：Fintokei の <code>USDJPYp</code> → <code>p</code> ／ HFMプロ口座の <code>USDJPYr</code> → <code>r</code><br>サフィックスが無い口座は空欄のままでOK</td></tr>
+                <tr><th>CFD系商品の商品名</th><td>金・銀・オイル・JP225などを取引する場合、その証券会社で使われている商品名（例：<code>GOLD</code>）を入力します。<br>空欄のときは <code>XAUUSD</code> や <code>USOIL</code> のような標準の名称が使われるので、同じ名前なら空欄でOK</td></tr>
+                <tr><th>その他</th><td>任意設定です。分からない項目は初期値のままで構いません</td></tr>
+            </table>
+            <div class="todo-shot">TODO スクショ：「パラメーターの入力」タブ（認証コード欄はモザイク）</div>
+        </div>
+    </div>
+
+    <div class="hstep">
+        <div class="hstep-no">9</div>
+        <div class="hstep-body">
+            <p>MT4左上にある「自動売買」をクリック</p>
+            <figure class="hshot mid"><img src="img/webytt/s26-autotrade.png" alt="MT4の自動売買ボタン" loading="lazy"></figure>
+        </div>
+    </div>
+
+    <div class="hstep">
+        <div class="hstep-no">10</div>
+        <div class="hstep-body">
+            <p>認証に成功したら、MT4を再起動する</p>
+            <p>「初期設定が完了したので再起動してください」という案内が表示されます。案内に従って、MT4右上の「×」で閉じ、もう一度立ち上げてください。</p>
+            <figure class="hshot narrow"><img src="img/webytt/s17-close-mt4.png" alt="MT4右上の×で閉じる" loading="lazy"></figure>
+            <p>再起動後、レシーバーの表示が<b>「承認待ち（webyttで端末を承認してください）」</b>になれば STEP 2 は完了です。</p>
+            <div class="todo-shot">TODO スクショ：チャート上の「承認待ち」表示</div>
+        </div>
+    </div>
+
+    <!-- ===== STEP3 ===== -->
+    <div class="howto-band">STEP 3　Web版YTTにログイン<span class="band-sub">スマホでもPCでも、ブラウザから使えます</span></div>
+
+    <div class="hstep">
+        <div class="hstep-no">1</div>
+        <div class="hstep-body">
+            <p>Web版YTTにアクセスする</p>
+            <div class="hstep-actions">
+                <a href="https://webytt.fx-space.com/" class="btn-solid-step" target="_blank" rel="noopener">Web版YTTを開く →</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="hstep">
+        <div class="hstep-no">2</div>
+        <div class="hstep-body">
+            <p>「Discord認証」ボタンを押してログインする</p>
+            <p>初回アクセス時は「Discord認証」ボタンが表示されます。</p>
+            <div class="todo-shot">TODO スクショ：Web版YTTの「Discord認証」ボタン（スマホ）</div>
+        </div>
+    </div>
+
+    <div class="hstep">
+        <div class="hstep-no">3</div>
+        <div class="hstep-body">
+            <p>認証済み口座の一覧から、レシーバーを設定した口座を選ぶ</p>
+            <div class="todo-shot">TODO スクショ：認証済み口座の一覧（スマホ）</div>
+        </div>
+    </div>
+
+    <div class="hstep">
+        <div class="hstep-no">4</div>
+        <div class="hstep-body">
+            <p>数秒待って、接続状態を確認する</p>
+            <p>レシーバー側の表示が「接続中」になれば接続完了です。Web版側のアイコンが赤のままのときは、ページをリロードしてください。</p>
+            <div class="todo-shot">TODO スクショ：接続後の画面（左上の丸が緑）（スマホ）</div>
+            <table class="guide-table">
+                <tr><th><span class="status-dot g"></span>緑</th><td>正常に接続されています。そのまま利用できます</td></tr>
+                <tr><th><span class="status-dot y"></span>黄</th><td>接続はあるが価格が取れていません。MT4 / MT5 では、取引する通貨ペアを気配値表示欄に出してください</td></tr>
+                <tr><th><span class="status-dot r"></span>赤</th><td>接続されていません。ページをリロード。改善しない場合は下の「よくある質問」へ</td></tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="done-msg">以上で導入は完了し、Web版YTTが使用できます。<br>お疲れ様でした！</div>
+
+    <!-- ===== スマホで使う ===== -->
+    <div class="howto-band">スマホはアプリのように使うのがおすすめ<span class="band-sub">Androidはインストール、iPhoneは「ホーム画面に追加」</span></div>
+    <p class="lead" style="margin-bottom:1rem;">ブラウザのまま使うより、ホーム画面に置いておくと、アドレスバーが消えて画面が広く使え、1タップで開けます。</p>
+    <div class="os-grid">
+        <div class="os-card">
+            <h3><span class="os-tag">Android</span>インストールする</h3>
+            <ol>
+                <li>Chromeで <b>webytt.fx-space.com</b> を開く</li>
+                <li>右上の「︙」メニューを開く</li>
+                <li>「アプリをインストール」（または「ホーム画面に追加」）を選ぶ</li>
+                <li>ホーム画面に追加されたアイコンから起動する</li>
+            </ol>
+        </div>
+        <div class="os-card">
+            <h3><span class="os-tag">iPhone</span>ホーム画面に追加する</h3>
+            <ol>
+                <li>Safariで <b>webytt.fx-space.com</b> を開く</li>
+                <li>画面下の「共有」ボタン（四角に上矢印）を押す</li>
+                <li>「ホーム画面に追加」を選び、「追加」を押す</li>
+                <li>ホーム画面に追加されたアイコンから起動する</li>
+            </ol>
+        </div>
+    </div>
+    <div class="todo-shot">TODO スクショ：iPhoneの「共有」→「ホーム画面に追加」／Androidの「アプリをインストール」</div>
+
 </div>
-
-<section class="steps-flow">
-
-    <!-- STEP 1 -->
-    <article class="step-card is-active" data-step="1" id="step1">
-        <div class="step-card-body">
-            <div class="step-preview">
-                <div class="preview-fxspace-logo">
-                    <img src="img/fxspace-logo-tate.png" alt="FX SPACE">
-                </div>
-            </div>
-            <div class="step-info">
-                <h2 class="step-title-h2">
-                    <span class="step-title-text">
-                        口座登録と認証コードの確認
-                        <img src="img/wave-orange.png" alt="" class="step-title-wave">
-                    </span>
-                </h2>
-                <p>登録ページで口座を登録すると、<wbr><b>32文字の認証コード</b>が表示されます。<wbr>このコードがあなたの口座とレシーバーを結び付ける鍵になります。</p>
-                <ol class="sub-steps">
-                    <li><span class="sn">1</span><span>下のボタンから登録ページを開き、画面の案内に従って口座を登録します。<wbr>Discordの認証画面が出たら「認証」を許可してください。</span></li>
-                    <li><span class="sn">2</span><span>登録が完了すると認証コードが表示されます。<wbr><b>STEP 2 で入力するので、メモ帳などに控えてください。</b></span></li>
-                </ol>
-                <div class="step-actions">
-                    <a href="https://discord.com/oauth2/authorize?client_id=1132937165379211284&amp;response_type=code&amp;redirect_uri=https%3A%2F%2Ffx-space.com%2Fyauth%2FYTTauth_9fhwrgu.php&amp;scope=identify+connections" class="btn-solid-step" target="_blank" rel="noopener">口座登録ページを開く →</a>
-                </div>
-                <div class="note-box"><b>認証コードは他人に教えないでください。</b><br>他人に知られると、あなたの口座に対して操作される可能性があります。コミュニティやSNS、スクリーンショットにコードを載せないよう注意してください。</div>
-                <div class="shot">スクショ：認証コードが表示された画面（コード部分はぼかす）</div>
-            </div>
-        </div>
-    </article>
-
-    <!-- STEP 2 -->
-    <article class="step-card is-active" data-step="2" id="step2">
-        <div class="step-card-body">
-            <div class="step-preview">
-                <div class="preview-box">
-                    <div class="preview-box-icon">
-                        <svg viewBox="0 0 76 74" xmlns="http://www.w3.org/2000/svg">
-                            <defs><clipPath id="boxTopClip2"><polygon points="6,20 38,5 70,20 38,35"/></clipPath></defs>
-                            <ellipse cx="38" cy="70" rx="26" ry="2" fill="#000" opacity="0.08"/>
-                            <polygon points="6,20 38,5 70,20 38,35" fill="#d29457" stroke="#6b3f17" stroke-width="1.4" stroke-linejoin="round"/>
-                            <polygon points="6,20 6,52 38,67 38,35" fill="#a76b30" stroke="#6b3f17" stroke-width="1.4" stroke-linejoin="round"/>
-                            <polygon points="70,20 70,52 38,67 38,35" fill="#8b541e" stroke="#6b3f17" stroke-width="1.4" stroke-linejoin="round"/>
-                            <g clip-path="url(#boxTopClip2)"><polygon points="21,15 53,30 55,25 23,10" fill="#b07d3e" opacity="0.95"/></g>
-                        </svg>
-                    </div>
-                    <div class="preview-box-label">webytt.zip</div>
-                    <div class="preview-box-size">レシーバーEA一式</div>
-                </div>
-            </div>
-            <div class="step-info">
-                <h2 class="step-title-h2">
-                    <span class="step-title-text">
-                        レシーバーEAの設置
-                        <img src="img/wave-orange.png" alt="" class="step-title-wave">
-                    </span>
-                </h2>
-                <p>レシーバーは、取引ツール（MT4 / MT5 / cTrader）側に入れるEAです。<wbr>Web版YTTからの指示を受け取って注文を出します。<wbr>配置場所は通常のYTTと同じです。</p>
-                <div class="step-actions">
-                    <a href="#href-tbd-webytt-zip" class="btn-solid-step" id="dlBtn">レシーバーEAをダウンロード</a>
-                </div>
-                <ol class="sub-steps">
-                    <li><span class="sn">1</span><span><b>取引ツールにレシーバー用EAを配置する</b>
-                        <table class="guide-table">
-                            <tr><th>MT4</th><td><code>Experts</code> フォルダに ex4 を、<code>Libraries</code> フォルダに dll を配置</td></tr>
-                            <tr><th>MT5</th><td><code>Experts</code> フォルダに ex5 を、<code>Libraries</code> フォルダに dll を配置</td></tr>
-                            <tr><th>cTrader</th><td>.algo ファイルを実行すると自動で配置されます</td></tr>
-                        </table></span></li>
-                    <li><span class="sn">2</span><span><b>チャートを1つだけ開き、そこにレシーバーを入れる。</b><wbr>複数のチャートには入れないでください。<wbr>導入時のパラメータ設定画面で次の項目を入力します。
-                        <table class="guide-table">
-                            <tr><th>認証コード</th><td>STEP 1 で控えた32文字の認証コード</td></tr>
-                            <tr><th>通貨ペア末尾のサフィックス</th><td>通貨ペア名の末尾に文字が付いている口座では、その文字を入力。<br>例: Fintokei の <code>USDJPYp</code> → <code>p</code> ／ HFMプロ口座の <code>USDJPYr</code> → <code>r</code><br>サフィックスが無い口座は空欄のままでOK</td></tr>
-                            <tr><th>CFD系商品の商品名</th><td>金・銀・オイル・JP225などを取引する場合、その証券会社で使われている商品名（例: <code>GOLD</code>）を入力。<br>空欄のときは <code>XAUUSD</code> や <code>USOIL</code> のような標準名が使われるので、同じ名前なら空欄でOK</td></tr>
-                            <tr><th>その他</th><td>任意設定。分からない項目は初期値のままで大丈夫です</td></tr>
-                        </table></span></li>
-                    <li><span class="sn">3</span><span><b>認証に成功したら、取引ツールを再起動する。</b><wbr>初回起動時に「初期設定が完了したので再起動してください」という案内が出ます。<wbr>再起動後、レシーバーの表示が<b>「承認待ち（webyttで端末を承認してください）」</b>になればSTEP 2は完了です。</span></li>
-                </ol>
-                <div class="shot">スクショ：レシーバーのパラメータ設定画面（認証コード欄）／再起動後の「承認待ち」表示</div>
-            </div>
-        </div>
-    </article>
-
-    <!-- STEP 3 -->
-    <article class="step-card is-active" data-step="3" id="step3">
-        <div class="step-card-body">
-            <div class="step-preview">
-                <div class="preview-manual install">
-                    <img src="img/ytt-mark.png" alt="Web版YTT" style="width:60%;height:auto;margin:0 auto;display:block;">
-                </div>
-            </div>
-            <div class="step-info">
-                <h2 class="step-title-h2">
-                    <span class="step-title-text">
-                        Web版YTTにログイン
-                        <img src="img/wave-orange.png" alt="" class="step-title-wave">
-                    </span>
-                </h2>
-                <ol class="sub-steps">
-                    <li><span class="sn">1</span><span><b>Web版YTTにアクセスする。</b><wbr>スマホでもPCでも、ブラウザで開けます。</span></li>
-                    <li><span class="sn">2</span><span><b>Discord認証でログインする。</b><wbr>初回は「Discord認証」ボタンが表示されるので、押して認証してください。</span></li>
-                    <li><span class="sn">3</span><span><b>認証済み口座の一覧から、レシーバーを設定した口座を選ぶ。</b></span></li>
-                    <li><span class="sn">4</span><span><b>数秒待って、接続状態を確認する。</b><wbr>レシーバー側の表示が「接続中」になれば接続完了です。<wbr>Web版側のアイコンが赤のままのときは、ページをリロードしてください。</span></li>
-                </ol>
-                <div class="step-actions">
-                    <a href="https://webytt.fx-space.com/" class="btn-solid-step" target="_blank" rel="noopener">Web版YTTを開く →</a>
-                </div>
-                <table class="guide-table">
-                    <tr><th><span class="status-dot g"></span>緑</th><td>正常に接続されています。そのまま利用できます</td></tr>
-                    <tr><th><span class="status-dot y"></span>黄</th><td>接続はあるが価格が取れていません。MT4/MT5では、取引する通貨ペアを気配値表示欄に出してください</td></tr>
-                    <tr><th><span class="status-dot r"></span>赤</th><td>接続されていません。ページをリロード。改善しない場合は下の「困ったときは」へ</td></tr>
-                </table>
-                <div class="note-box info"><b>ここまでで導入は完了です。</b><br>以降はWeb版YTTからシナリオ設定や注文操作ができます。使い方は機能説明ページ（準備中）で動画つきで案内します。</div>
-                <div class="shot">スクショ：Discord認証ボタン／口座一覧／接続中の画面（スマホ）</div>
-            </div>
-        </div>
-    </article>
-
-    <!-- スマホで使う -->
-    <article class="step-card is-active" data-step="4" id="step-app">
-        <div class="step-card-body">
-            <div class="step-preview">
-                <div class="preview-sim">
-                    <img src="img/ytt-order-panel.png" alt="スマホ画面のイメージ">
-                </div>
-            </div>
-            <div class="step-info">
-                <h2 class="step-title-h2">
-                    <span class="step-title-text">
-                        スマホはアプリのように使うのがおすすめ
-                        <img src="img/wave-orange.png" alt="" class="step-title-wave">
-                    </span>
-                </h2>
-                <p>ブラウザのまま使うより、<wbr><b>Androidはインストール、iPhoneは「ホーム画面に追加」</b>をしておくと、<wbr>アドレスバーが消えて画面が広く使え、ホーム画面から1タップで開けます。</p>
-                <div class="os-grid">
-                    <div class="os-card">
-                        <h3><span class="os-tag">Android</span>インストールする</h3>
-                        <ol>
-                            <li>Chromeで <b>webytt.fx-space.com</b> を開く</li>
-                            <li>右上の「︙」メニューを開く</li>
-                            <li>「アプリをインストール」（または「ホーム画面に追加」）を選ぶ</li>
-                            <li>ホーム画面に追加されたアイコンから起動する</li>
-                        </ol>
-                    </div>
-                    <div class="os-card">
-                        <h3><span class="os-tag">iPhone</span>ホーム画面に追加する</h3>
-                        <ol>
-                            <li>Safariで <b>webytt.fx-space.com</b> を開く</li>
-                            <li>画面下の「共有」ボタン（四角に上矢印）を押す</li>
-                            <li>「ホーム画面に追加」を選び、「追加」を押す</li>
-                            <li>ホーム画面に追加されたアイコンから起動する</li>
-                        </ol>
-                    </div>
-                </div>
-                <div class="shot">スクショ：Android「アプリをインストール」／iPhone「ホーム画面に追加」の画面</div>
-            </div>
-        </div>
-    </article>
-
-</section>
 
 <!-- 制限事項 -->
-<section class="plain-section" id="limits">
+<section class="plain-section" id="limits" style="margin-top:3rem;">
     <h2>利用上の制限事項</h2>
     <p class="lead">仕様上の制限です。導入後に「動かない」と感じたときは、まずここを確認してください。</p>
     <ul class="limit-list">
@@ -910,21 +1083,27 @@
     </table>
 </section>
 
-<!-- 困ったときは -->
+<!-- アップデート -->
+<section class="plain-section" id="update">
+    <h2>アップデート</h2>
+    <p class="lead">新しいレシーバーEAが配布されたら、ファイルをダウンロードし、「STEP 2　レシーバーEAの設置」の手順をもう一度行ってください。</p>
+</section>
+
+<!-- よくある質問 -->
 <section class="plain-section" id="trouble">
-    <h2>困ったときは</h2>
+    <h2>Web版YTTの導入でよくある質問</h2>
     <p class="lead">よくある症状と、確認する順番です。上から順に確認してください。</p>
-    <div class="faq-item"><button type="button" class="faq-q">レシーバーで認証に失敗する</button><div class="faq-a"><ul><li>認証コードが32文字すべて正しく入力されているか（前後の空白、全角・半角の混在）</li><li>レシーバーを複数のチャートに入れていないか（1つのチャートだけに入れます）</li></ul></div></div>
+    <div class="faq-item"><button type="button" class="faq-q">レシーバーで認証に失敗する／「認証エラー」となる</button><div class="faq-a"><ul><li>認証コードが32文字すべて正しく入力されているか（前後の空白、全角・半角の混在）</li><li>レシーバーを複数のチャートに入れていないか（1つのチャートだけに入れます）</li><li>自動売買の許可をしていない（許可する箇所は2つ存在します）</li><li>DLLの使用許可をしていない</li><li>MT4を再起動していない</li><li>メンバーシップ／サブスクに加入していない</li></ul></div></div>
     <div class="faq-item"><button type="button" class="faq-q">レシーバーが「承認待ち」のまま変わらない</button><div class="faq-a">Web版YTTにログインし、認証済み口座一覧からその口座を選択してください（STEP 3）。選択後、数秒待ちます。</div></div>
     <div class="faq-item"><button type="button" class="faq-q">Web版のアイコンが赤のまま</button><div class="faq-a"><ul><li>ページをリロードします</li><li>取引ツール（MT4 / MT5 / cTrader）が起動していて、EAが動いているか</li><li>PCがスリープしていないか</li><li>同じ口座に別のレシーバーを後から設定していないか（先に設定した方が切断されます）</li></ul></div></div>
     <div class="faq-item"><button type="button" class="faq-q">Web版のアイコンが黄になる</button><div class="faq-a">価格が取得できていません。MT4 / MT5 の場合は、取引する通貨ペアを気配値表示欄に表示してください。</div></div>
     <div class="faq-item"><button type="button" class="faq-q">特定の通貨ペアやCFD商品だけ注文できない</button><div class="faq-a"><ul><li>サフィックス付きの口座（USDJPYp など）では「通貨ペア末尾のサフィックス」を入力しているか</li><li>CFD系商品は、証券会社の商品名（GOLD など）をパラメータに入力しているか</li></ul></div></div>
-    <div class="faq-item"><button type="button" class="faq-q">コピーモードでポジションがコピーされない</button><div class="faq-a"><ul><li>コピー元のポジションがWeb版YTTからエントリーされたものか</li><li>ロット計算モードが損失率固定・損失額固定のとき、コピー元のポジションにSLが付いているか</li><li>レシーバー側の取引ツールが起動したままになっているか</li></ul></div></div>
     <div class="faq-item"><button type="button" class="faq-q">セキュリティソフトにひっかかってダウンロードできない／DLLが消える</button><div class="faq-a"><ul><li>DLLの使用許可をしていない</li><li>DLLの名前がオリジナルファイル（YTT_OrderReceiver.dll）と異なっている（末尾に（1）が付いているなど）</li><li>「MQL4」→「Libraries」中のDLLファイルがセキュリティソフトにより削除／中身が空白になっている。この場合は<a href="https://support.microsoft.com/ja-jp/windows/windows-%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%E3%81%AB%E9%99%A4%E5%A4%96%E3%82%92%E8%BF%BD%E5%8A%A0%E3%81%99%E3%82%8B-811816c0-4dfd-af4a-47e4-c301afe13b26" target="_blank" rel="noopener">こちら</a>等を参考に除外処理をおこなってください（Windowsセキュリティ以外の場合は各自除外処理の方法をお調べください）</li></ul></div></div>
+    <div class="faq-item"><button type="button" class="faq-q">コピーモードでポジションがコピーされない</button><div class="faq-a"><ul><li>コピー元のポジションがWeb版YTTからエントリーされたものか</li><li>ロット計算モードが損失率固定・損失額固定のとき、コピー元のポジションにSLが付いているか</li><li>レシーバー側の取引ツールが起動したままになっているか</li></ul></div></div>
     <div class="faq-item"><button type="button" class="faq-q">コピーモードをオンにしたら注文が消えた</button><div class="faq-a">仕様です。オンにした時点で、セット中のシナリオと指値・逆指値注文はすべてキャンセルされます。</div></div>
 </section>
 
-<!-- サポート（既存Canvaと同じ流れ） -->
+<!-- サポート -->
 <section class="plain-section" id="support">
     <h2>サポート</h2>
     <p class="lead">サポートが必要な場合や不具合だと考えられる場合は、以下の項目をチェックしてください。</p>
@@ -948,7 +1127,6 @@
   document.querySelectorAll('.faq-q').forEach(function(b){
     b.addEventListener('click', function(){ b.parentElement.classList.toggle('open'); });
   });
-  // レシーバーEAのダウンロードURLが未設定の間は案内だけ出す
   var dl = document.getElementById('dlBtn');
   if (dl && dl.getAttribute('href').indexOf('#href-tbd') === 0) {
     dl.addEventListener('click', function(e){ e.preventDefault(); alert('ダウンロードURLは準備中です。Discordの「😊交流」チャンネルの配布ファイル（webytt.zip）をご利用ください。'); });

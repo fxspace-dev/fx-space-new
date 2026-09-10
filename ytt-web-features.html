@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web版YTT 導入方法（cTrader）— FX SPACE</title>
+    <title>Web版YTT 使い方 — FX SPACE</title>
     <link rel="icon" type="image/png" href="icon.png">
-    <meta property="og:title" content="Web版YTT 導入方法（cTrader）— FX SPACE">
-    <meta property="og:description" content="Web版（スマホ版）YTTの導入手順。口座登録、取引ツール（MT4 / MT5 / cTrader）への連携ツールの設置、Web版YTTへのログインまでを画像つきで案内します。">
+    <meta property="og:title" content="Web版YTT 使い方 — FX SPACE">
+    <meta property="og:description" content="Web版（スマホ版）YTTの使い方。注文・決済、ロットの自動計算、シナリオ構築、予約注文、オートラインなどの機能を、実際の画面で紹介します。">
     <meta property="og:image" content="https://fx-space.com/intro/img/og-ytt-tokusetu.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -994,10 +994,6 @@
     /* 取引ツールを選ぶまで、下の手順は表示しない */
     .js-gate #gated:not(.is-open) { display: none; }
     #tool-select { padding-bottom: 3.5rem; }
-    /* Cloud版の折りたたみ（STEP 2 の下） */
-    .cloud-acc { margin-top: 1.5rem; }
-    .cloud-lead { font-size: 0.875rem; color: #4b5563; line-height: 1.85; margin: 1.1rem 0 1.4rem; }
-    @media (max-width: 600px) { .cloud-acc > summary { padding: 1rem 1.1rem; font-size: 0.92rem; } .cloud-acc .ytt-spec-acc-body { padding: 0 1rem 1.25rem; } }
     .section-alt { background: #f4f6f9; }
     /* 「3ステップで導入完了」の背景の下辺を、次のセクションへ向かう矢印の形にする（route.html の rsec--arrowdown と同じ作り）。
        矢印の下の三角部分は次のセクションに重ね、切り取った左右は次のセクションの白が見えるようにする */
@@ -1012,19 +1008,77 @@
     @media (max-width: 640px) { #flow, #flow + section { --tip: 30px; } }
 </style>
 
-<script>document.documentElement.classList.add('js-gate');</script>
+<style>
+    /* ===== 使い方ページ（機能説明） ===== */
+    .hero-setup { font-size: 0.8125rem; color: #4b5563; margin: 0.5rem 0 0; }
+    .hero-setup a { color: #4f46e5; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+    .feat-label { max-width: 1100px; margin: 1.75rem auto 0; font-size: 0.95rem; font-weight: 900; color: #1e1b4b; text-align: left; }
+    .feat-label small { margin-left: 0.6rem; font-size: 0.75rem; font-weight: 700; color: #6b7280; }
+    .feat-label + .feat, .feat-label + .ytt-add-grid { margin-top: 0.7rem; }
+    /* 機能ごとのカード：左に動画（または画面）、右に説明 */
+    .feat {
+        display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 2rem; align-items: center;
+        background: #fff; border: 1.5px solid #e5e7eb; border-radius: 20px;
+        padding: 1.75rem; margin-top: 1.5rem; text-align: left;
+    }
+    .feat.is-sp { grid-template-columns: 300px minmax(0, 1fr); }
+    @media (max-width: 860px) { .feat, .feat.is-sp { grid-template-columns: 1fr; gap: 1.25rem; } }
+    @media (max-width: 600px) { .feat { padding: 1.1rem 1rem 1.25rem; border-radius: 16px; } }
+    .feat-media { min-width: 0; text-align: center; }
+    .feat-body { min-width: 0; }
+    .feat-head { font-size: 1.08rem; font-weight: 800; color: #1e1b4b; line-height: 1.6; margin: 0 0 0.9rem; }
+    .feat-steps { list-style: none; counter-reset: fs; margin: 0; padding: 0; }
+    .feat-steps li { counter-increment: fs; position: relative; padding: 0 0 0.7rem 2.2rem; font-size: 0.9rem; color: #374151; line-height: 1.75; }
+    .feat-steps li::before {
+        content: counter(fs); position: absolute; left: 0; top: 0.05rem;
+        width: 1.55rem; height: 1.4rem; display: flex; align-items: center; justify-content: center;
+        background: url("img/fill-crayon-orange-badge.svg") 0 0 / 100% 100% no-repeat;
+        color: #1e1b4b; font-weight: 900; font-size: 0.8rem; font-family: Inter, sans-serif;
+    }
+    .feat-steps li b { color: #1e1b4b; }
+    /* 動画の置き場所（声なし・自動再生・くり返し） */
+    .fvid { margin: 0; }
+    .fvid .gframe { display: block; width: 100%; }
+    .fvid.sp { max-width: 260px; margin: 0 auto; }
+    .fvid-box {
+        position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.35rem;
+        width: 100%; aspect-ratio: 16 / 9; border-radius: 12px; background: #1e1b4b; color: #fff; overflow: hidden;
+    }
+    .fvid.sp .fvid-box { aspect-ratio: 9 / 16; }
+    video.fvid-box { display: block; object-fit: cover; }
+    .gframe > .fvid-box { border-radius: 6px; }
+    .fvid-play { width: 58px; height: 58px; border-radius: 50%; background: #fbbf24; position: relative; margin-bottom: 0.35rem; }
+    .fvid-play::after { content: ''; position: absolute; left: 23px; top: 18px; border-style: solid; border-width: 11px 0 11px 17px; border-color: transparent transparent transparent #1e1b4b; }
+    .fvid-label { font-size: 0.95rem; font-weight: 800; letter-spacing: 0.04em; }
+    .fvid-meta { font-size: 0.75rem; color: #c7d2fe; }
+    .fvid-box.is-shot { background: #334155; }
+    /* 機能一覧 */
+    .fidx-grid { margin-top: 0.7rem; }
+    a.ytt-add-card.fidx { text-decoration: none; transition: border-color 0.15s, transform 0.15s; }
+    a.ytt-add-card.fidx:hover { border-color: #a5b4fc; transform: translateY(-2px); }
+    .fidx-no {
+        width: 30px; height: 26px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
+        background: url("img/fill-crayon-orange-badge.svg") 0 0 / 100% 100% no-repeat;
+        color: #1e1b4b; font-weight: 900; font-size: 0.85rem; font-family: Inter, sans-serif;
+    }
+    .ai-one { grid-template-columns: minmax(0, 340px); justify-content: center; }
+    .help-more { font-size: 0.8125rem; color: #4b5563; line-height: 1.9; margin-top: 1.5rem; }
+    .help-more a { color: #4f46e5; text-decoration: underline; text-underline-offset: 3px; }
+</style>
 </head>
-<body data-tool="ctrader">
+<body>
 
 <!--
 ====================================================================
-  Web版（スマホ版）YTT 導入方法（cTrader版）  ytt-web-setup-ctrader.html
-  ・ytt-web-setup-mt5.html（MT5版）を元に、事前準備・STEP 2・STEP 3の画像とよくある質問をcTraderに差し替え
-  ・cTrader Cloud版は STEP 2 の下の折りたたみ（#cloud）
-  ・流れとスクショは既存Canva「YTT導入方法」(DAF1unsWf4o) を踏襲
-  ・見た目は ytt-tokusetu.html と同じ部品（head の <style> は特設ページのものをそのまま使用）
-  【本番反映前TODO】
-  [1] 連携ツール（webytt.zip）のダウンロードURL → 安田さんに配置場所を確認して差し替え（#href-tbd-webytt-zip）
+  Web版（スマホ版）YTT 使い方（機能説明）  ytt-web-features.html
+  ・構成は既存Canva「YTTの使い方」を踏襲（はじめに → サポートAI → 画面の見方 → 機能一覧 → メイン機能 → サブ機能 → 問い合わせ）
+  ・見た目は導入方法ページ（ytt-web-setup.html）と同じ部品。CSSも同じものを使用
+  ・動画は声なし・テロップ＋囲み／矢印。できたら .fvid-box を <video class="fvid-box" autoplay muted loop playsinline> に差し替え
+  【大枠の段階・TODO】
+  [1] 各機能の動画（8本）を差し込む。構成は webytt-materials/動画構成書_Web版YTT機能説明.md
+  [2] 画面の見方（PC）の全体スクショ、コピーモードの設定画面スクショ
+  [3] サブ機能の一覧をよすが・安田さんに確認して確定
+  [4] 説明文は 2026/7/31 の画面をもとにした仮の文章。最新の画面で確認して直す
 ====================================================================
 -->
 
@@ -1042,40 +1096,70 @@
     <img src="img/ytt-mark-notext.png" alt="YTT" class="ytt-sp-hero-logo">
     <h1 class="ytt-sp-hero-title">
         <span class="ytt-sp-title-line"><span class="line-text">Web版YTT<img class="ytt-title-wave" src="img/wave-yellow.png" alt=""></span></span>
-        <span class="ytt-sp-title-line"><span class="line-text">導入方法<img class="ytt-title-wave" src="img/wave-yellow.png" alt=""></span></span>
+        <span class="ytt-sp-title-line"><span class="line-text">使い方<img class="ytt-title-wave" src="img/wave-yellow.png" alt=""></span></span>
     </h1>
     <p class="ytt-sp-hero-lead">
-        口座の登録から連携ツールの設置、Web版YTTへのログインまで。<br>
-        画像のとおりに上から進めれば、約15分で使えるようになります。
+        Web版YTTでできることを、機能ごとに紹介します。<br>
+        それぞれの機能は、実際の画面の短い動画で確認できます。
     </p>
     <div class="ytt-sp-hero-btns">
-        <a href="#flow" class="btn-sq-blue">導入をはじめる</a>
-        <a href="#trouble" class="btn-sq-white">よくある質問</a>
+        <a href="#features" class="btn-sq-blue">機能一覧を見る</a>
+        <a href="#screen" class="btn-sq-white">画面の見方</a>
     </div>
     <p style="font-size:0.8125rem;color:#6b7280;margin-top:1.25rem;">
         <a href="https://drive.google.com/file/d/1Fd6qcQIisp-V8Eh5tV1722wkCf7qZEzc/view?usp=sharing" target="_blank" rel="noopener" style="color:#4f46e5;text-decoration:underline;text-underline-offset:3px;">利用規約</a>　※必ず目を通してください
     </p>
+    <p class="hero-setup">まだ導入が済んでいない方は、先に <a href="ytt-web-setup.html">導入方法</a> へ（約15分）</p>
 </section>
 
-<!-- Web版YTTとは -->
-<section class="ytt-spec-section" style="background:#f4f6f9;">
-    <div class="ytt-spec-inner ytt-fto-wide">
+<!-- YTTサポートAI -->
+<section class="ytt-spec-section" id="ai" style="background:#f4f6f9;">
+    <div class="ytt-spec-inner">
         <div class="ytt-spec-header">
             <span class="section-title-badge section-title-badge--orange">
                 <img class="hero-title-side hero-title-side--left" src="img/title-side-orange-left.png" alt="">
-                Web版 機能概要
+                サポート
                 <img class="hero-title-side hero-title-side--right" src="img/title-side-orange-right.png" alt="">
             </span>
             <div style="text-align:center; margin-bottom:0.25rem;">
                 <div style="display:inline-block; white-space:nowrap;">
-                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">Web版YTTとは</h2>
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">YTTサポートAI</h2>
                     <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
                 </div>
             </div>
-            <p>スマホでもPCでも、ブラウザからYTTが使えます。</p>
+            <p>導入や使い方の質問に、AIが24時間回答します。<br>使い方が分からないときや、調べるのが面倒なときに使ってください。</p>
         </div>
-        <div class="ytt-fto2">
-            <div class="ytt-fto2-visual">
+        <div class="ytt-add-grid ai-one">
+            <div class="ytt-add-card ytt-support-card">
+                <img class="sup-img" src="img/icon-ytt-ai-support.png" alt="">
+                <h3>YTT AIサポート</h3>
+                <p>導入・使い方の疑問に24時間いつでも回答。まずはここで解決できます。</p>
+                <a class="sup-link" href="https://discord.com/channels/1039824083208126474/1151440259553439784/1490345736083083284" target="_blank" rel="noopener">Discordで開く →</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 画面の見方 -->
+<section class="ytt-spec-section" id="screen" style="background:#fff;">
+    <div class="ytt-spec-inner ytt-fto-wide">
+        <div class="ytt-spec-header">
+            <span class="section-title-badge section-title-badge--blue">
+                <img class="hero-title-side hero-title-side--left" src="img/title-side-blue-left.png" alt="">
+                はじめに
+                <img class="hero-title-side hero-title-side--right" src="img/title-side-blue-right.png" alt="">
+            </span>
+            <div style="text-align:center; margin-bottom:0.25rem;">
+                <div style="display:inline-block; white-space:nowrap;">
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">画面の見方</h2>
+                    <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
+                </div>
+            </div>
+            <p>よく使う場所だけ覚えておけば大丈夫です。</p>
+        </div>
+        <p class="feat-label">スマホ</p>
+        <div class="feat is-sp">
+            <div class="feat-media">
                 <div class="wy-phone" role="img" aria-label="Web版YTTのスマホ画面。上に残高、右上にシナリオと成行のボタン、中央にオートライン付きのチャート、下に切り替えメニュー">
                     <div class="wy-screen" aria-hidden="true">
                         <div class="wy-bar"><svg class="wy-logo" viewBox="0 0 20 14"><path d="M2 3v9M6 6v6M10 1v11M14 6v6M18 3v9" stroke="#e9b949" stroke-width="2.4"/></svg><span>YTT</span></div>
@@ -1131,451 +1215,366 @@
                     </div>
                 </div>
             </div>
-            <div class="ytt-fto2-content">
-                <p class="ytt-fto2-head">MT4 / MT5 / cTrader に<span class="accent">連携ツール</span>を入れておけば、<br>ブラウザから注文・決済までできます</p>
-                <ul class="ytt-fto-list">
-                    <li><img src="img/check-orange.png" alt="">注文、決済</li>
-                    <li><img src="img/check-orange.png" alt="">シナリオ構築・予約注文</li>
-                    <li><img src="img/check-orange.png" alt="">オートライン</li>
-                    <li><img src="img/check-orange.png" alt="">コピーモード</li>
-                    <li><img src="img/check-orange.png" alt="">通知・トレードノート・経済指標表示 ほか</li>
-                </ul>
-                <p class="ytt-fto-attention">連携ツールは、Web版YTTで押した注文を取引ツール（MT4 / MT5 / cTrader）に伝えて、実際に注文を出す役目です。そのため MT4 / MT5 は利用中もPCを起動したままにしてください（cTrader Cloud版はPCを閉じてもOK）。</p>
-                <p class="ytt-fto2-note">詳しい機能は <a href="ytt-web-features.html">Web版YTT 使い方ページ</a> で紹介します。</p>
+            <div class="feat-body">
+                <p class="feat-head">画面は、上から4つのまとまりでできています。</p>
+                <ol class="feat-steps">
+                    <li><b>上：口座と残高</b><br>口座番号の左の丸が緑なら、取引ツールとつながっています。</li>
+                    <li><b>右上：「シナリオ」と「成行」</b><br>注文のしかたを切り替えます。</li>
+                    <li><b>まんなか：チャート</b><br>オートラインや、自分で引いた線が表示されます。</li>
+                    <li><b>下：メニュー</b><br>通貨ペア・チャート・ポジション・履歴などの画面に移動します。</li>
+                </ol>
+                <!-- TODO: 動画1「画面の見方」（スマホ・約60秒）ができたら、ここに置く -->
             </div>
         </div>
-    </div>
-</section>
-
-<!-- 動作環境 -->
-<section class="ytt-spec-section" style="background:#fff;">
-    <div class="ytt-spec-inner">
-        <div class="ytt-spec-header">
-            <span class="section-title-badge section-title-badge--blue">
-                <img class="hero-title-side hero-title-side--left" src="img/title-side-blue-left.png" alt="">
-                動作環境
-                <img class="hero-title-side hero-title-side--right" src="img/title-side-blue-right.png" alt="">
-            </span>
-            <div style="text-align:center; margin-bottom:0.25rem;">
-                <div style="display:inline-block; white-space:nowrap;">
-                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">導入前に使用環境を確認</h2>
-                    <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
-                </div>
-            </div>
-            <p>Web版YTTはスマホ・PCのブラウザで使います。<br>注文を出す取引ツール側の環境もあわせて確認してください。</p>
-        </div>
-        <details class="ytt-spec-acc">
-            <summary>
-                <span class="ytt-spec-acc-label">使用環境を見る</span>
-                <span class="ytt-spec-acc-chev" aria-hidden="true">▼</span>
-            </summary>
-            <div class="ytt-spec-acc-body">
-                <table class="ytt-spec-table">
-                    <tbody>
-                        <tr><th>開く端末</th><td class="spec-val">スマホ（iPhone / Android）・PC のブラウザ</td><td class="spec-note">スマホは、Androidなら「インストール」、iPhoneなら「ホーム画面に追加」して使うのがおすすめ</td></tr>
-                        <tr><th>取引ツール</th><td class="spec-val">MT4 / MT5 / cTrader / cTrader Cloud</td><td class="spec-note">Web版YTTとつなぐ連携ツールを入れます（1口座につき1つ）</td></tr>
-                        <tr><th>利用中のPC</th><td class="spec-val">起動したまま</td><td class="spec-note">MT4 / MT5 / cTrader は、PCのスリープや終了で止まります。cTrader Cloud版はPCを閉じてもOK</td></tr>
-                        <tr><th>通信環境</th><td class="spec-val">安定した高速インターネット回線</td><td class="spec-note"></td></tr>
-                        <tr><th>使用可能者</th><td class="spec-val"><a href="https://discord.com/channels/1039824083208126474/1039824083208126476" target="_blank" rel="noopener">メンバーシップ or サブスク</a>加入者</td><td class="spec-note"></td></tr>
-                        <tr><th>証券会社・プロップ</th><td class="spec-val"><a href="https://www.hfm.com/int/?refid=30443481&amp;acid=fxspaceysg" target="_blank" rel="noopener">HFM</a>、<a href="https://go.axiory.com/afs/come.php?id=13&amp;cid=5894&amp;ctgid=100&amp;atype=1" target="_blank" rel="noopener">Axiory</a>、<a href="https://portal.threetrader.com/register?r_code=IB01504280A" target="_blank" rel="noopener">ThreeTrader</a>、<a href="https://partners.fundora-trading.com/click?campaign_id=1&amp;ref_id=10" target="_blank" rel="noopener">Fundora</a>、<a href="https://my.fintokei.com/affiliate/jp/55" target="_blank" rel="noopener">Fintokei</a>、<a href="https://my.funded7.com/ja/challenges?affiliateId=yosuga" target="_blank" rel="noopener">Funded7</a>、楽天証券</td><td class="spec-note">他の証券会社・プロップファームでの動作はテストしていません</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </details>
-    </div>
-</section>
-
-<!-- 導入の流れ -->
-<section class="ytt-spec-section" id="flow" style="background:#f4f6f9;">
-    <div class="ytt-spec-inner ytt-fto-wide">
-        <div class="ytt-spec-header">
-            <span class="section-title-badge section-title-badge--orange">
-                <img class="hero-title-side hero-title-side--left" src="img/title-side-orange-left.png" alt="">
-                導入方法
-                <img class="hero-title-side hero-title-side--right" src="img/title-side-orange-right.png" alt="">
-            </span>
-            <div style="text-align:center; margin-bottom:0.25rem;">
-                <div style="display:inline-block; white-space:nowrap;">
-                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">3ステップで導入完了</h2>
-                    <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
-                </div>
-            </div>
-            <p>所要時間の目安は約15分。上から順番に進めてください。</p>
-        </div>
-        <div class="ytt-add-grid flow3">
-            <a class="ytt-add-card" href="#tool-select"><img class="flow-num" src="img/crayon-1.png" alt="1"><h3>口座登録</h3><p>登録ページから口座を登録し、表示される32文字の認証コードを控える</p></a>
-            <a class="ytt-add-card" href="#tool-select"><img class="flow-num" src="img/crayon-2.png" alt="2"><h3>連携ツールの設置</h3><p>MT4 / MT5 / cTrader に連携ツールを入れ、認証コードを設定する</p></a>
-            <a class="ytt-add-card" href="#tool-select"><img class="flow-num" src="img/crayon-3.png" alt="3"><h3>ログイン</h3><p>Web版YTTにDiscordでログインし、口座を選んで接続を確認する</p></a>
-        </div>
-    </div>
-</section>
-
-<!-- 取引ツールの選択（選ぶまで下の手順は表示しない） -->
-<section class="ytt-spec-section" id="tool-select" style="background:#fff;">
-    <div class="ytt-spec-inner">
-        <div class="tool-ask" role="group" aria-labelledby="tool-ask-q">
-            <p class="tool-ask-q" id="tool-ask-q">お使いの取引ツールはどれですか？</p>
-            <p class="tool-ask-sub">選ぶと、そのツールの導入方法が表示されます</p>
-            <div class="tool-ask-btns">
-                <a class="tool-tab" data-tool="mt4" href="ytt-web-setup.html?tool=mt4">MT4</a>
-                <a class="tool-tab" data-tool="mt5" href="ytt-web-setup-mt5.html?tool=mt5">MT5</a>
-                <a class="tool-tab" data-tool="ctrader" href="ytt-web-setup-ctrader.html?tool=ctrader">cTrader</a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<div id="gated">
-<!-- 事前準備 -->
-<section class="ytt-spec-section" style="background:#f4f6f9;">
-    <div class="ytt-spec-inner">
-        <div class="ytt-spec-header">
-            <span class="section-title-badge section-title-badge--blue">
-                <img class="hero-title-side hero-title-side--left" src="img/title-side-blue-left.png" alt="">
-                事前準備（cTrader）
-                <img class="hero-title-side hero-title-side--right" src="img/title-side-blue-right.png" alt="">
-            </span>
-            <div style="text-align:center; margin-bottom:0.25rem;">
-                <div style="display:inline-block; white-space:nowrap;">
-                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">cTraderにログインする</h2>
-                    <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
-                </div>
-            </div>
-            <p>すでにcTraderを使っている方は読み飛ばしてOKです。</p>
-        </div>
-        <div class="guide-card">
-            <p style="font-size:0.875rem;color:#4b5563;line-height:1.85;margin:0 0 1.25rem;">お使いの証券会社・プロップファームで口座開設後、それぞれのHPよりcTraderをダウンロードします。cTraderを開き、口座開設後にメールで届いた情報でログインします。</p>
-            <div class="gstep">
-                <div class="gstep-no">1</div>
-                <div class="gstep-body">
-                    <p class="gstep-title">cTrader右上で口座番号を確認する</p>
-                    <p>ログインすると、cTraderの右上に「Demo」または「Live」と口座番号が表示されます。この番号を STEP 1 で登録します。</p>
-                    <figure class="gshot narrow"><img src="img/webytt/ctrader/c-01-account.png" alt="cTrader右上に口座番号が表示される" loading="lazy"></figure>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- STEP 1 -->
-<section class="ytt-spec-section" id="step1" style="background:#fff;">
-    <div class="ytt-spec-inner">
-        <div class="ytt-spec-header">
-            <span class="section-title-badge section-title-badge--orange">
-                <img class="hero-title-side hero-title-side--left" src="img/title-side-orange-left.png" alt="">
-                STEP 1
-                <img class="hero-title-side hero-title-side--right" src="img/title-side-orange-right.png" alt="">
-            </span>
-            <div style="text-align:center; margin-bottom:0.25rem;">
-                <div style="display:inline-block; white-space:nowrap;">
-                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">口座登録と認証コードの確認</h2>
-                    <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
-                </div>
-            </div>
-            <p>取引ツールに入れる連携ツールと、あなたの口座を結び付ける「32文字の認証コード」を受け取ります。</p>
-        </div>
-        <div class="guide-card">
-            <div class="gstep">
-                <div class="gstep-no">1</div>
-                <div class="gstep-body">
-                    <p class="gstep-title">口座登録ページを開く</p>
-                    <div class="gstep-btn"><a href="https://discord.com/oauth2/authorize?client_id=1132937165379211284&amp;response_type=code&amp;redirect_uri=https%3A%2F%2Ffx-space.com%2Fyauth%2FYTTauth_9fhwrgu.php&amp;scope=identify+connections" class="btn-sq-blue" target="_blank" rel="noopener">口座登録ページを開く</a></div>
-                    <p>Discordの確認画面が立ち上がるので「認証」を押します。</p>
-                    <figure class="gshot narrow"><img src="img/webytt/s04-discord-auth.png" alt="Discordの認証画面" loading="lazy"></figure>
-                </div>
-            </div>
-            <div class="gstep">
-                <div class="gstep-no">2</div>
-                <div class="gstep-body">
-                    <p class="gstep-title">ブラウザが立ち上がるので、口座番号を入力して「登録」</p>
-                    <figure class="gshot"><img src="img/webytt/s05-register-form.png" alt="口座番号を入力して登録するフォーム" loading="lazy"></figure>
-                </div>
-            </div>
-            <div class="gstep">
-                <div class="gstep-no">3</div>
-                <div class="gstep-body">
-                    <p class="gstep-title">表示された32文字の認証コードを控える</p>
-                    <p>このコードは STEP 2 の連携ツールの設定で入力します。メモ帳などに控えておいてください。</p>
-                    <figure class="gshot"><img src="img/webytt/s06-authcode.png" alt="32文字の認証コードが表示された画面" loading="lazy"></figure>
-                    <p class="gnote">認証コードは他人に教えないでください。他人に知られると、あなたの口座に対して操作される可能性があります。コミュニティやSNS、スクリーンショットにコードを載せないようご注意ください。</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- STEP 2 -->
-<section class="ytt-spec-section" id="step2" style="background:#f4f6f9;">
-    <div class="ytt-spec-inner">
-        <div class="ytt-spec-header">
-            <span class="section-title-badge section-title-badge--blue">
-                <img class="hero-title-side hero-title-side--left" src="img/title-side-blue-left.png" alt="">
-                STEP 2（cTrader）
-                <img class="hero-title-side hero-title-side--right" src="img/title-side-blue-right.png" alt="">
-            </span>
-            <div style="text-align:center; margin-bottom:0.25rem;">
-                <div style="display:inline-block; white-space:nowrap;">
-                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">cTraderに連携ツールを入れる</h2>
-                    <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
-                </div>
-            </div>
-            <p>連携ツールは、Web版YTTで押した注文を取引ツールに伝えるツールです。<br>cTraderでは、ファイルをダブルクリックするだけで取り込めます。</p>
-        </div>
-        <div class="guide-card">
-            <div class="gstep">
-                <div class="gstep-no">1</div>
-                <div class="gstep-body">
-                    <p class="gstep-title">連携ツールをダウンロードする</p>
-                    <div class="gstep-btn"><a href="#href-tbd-webytt-zip" class="btn-sq-blue" id="dlBtn">連携ツールをダウンロード</a></div>
-                    <figure class="gshot mid"><img src="img/webytt/s07-zip.png" alt="webytt一式.zip のダウンロード" loading="lazy"></figure>
-                    <p>ブラウザの警告が出た場合は「ダウンロードする」を選んでください。</p>
-                    <figure class="gshot narrow"><img src="img/webytt/s08-dl-warning.png" alt="ブラウザのダウンロード警告" loading="lazy"></figure>
-                </div>
-            </div>
-            <div class="gstep">
-                <div class="gstep-no">2</div>
-                <div class="gstep-body">
-                    <p class="gstep-title">zipファイルを解凍し、「cTrader」フォルダを開く</p>
-                    <p>解凍すると、取引ツールごとのフォルダが入っています。<b>cTrader</b>のフォルダを使います。</p>
-                    <figure class="gshot narrow"><img src="img/webytt/s09-folders.png" alt="解凍後のフォルダ cTrader / cTrader_Cloud / MT4 / MT5" loading="lazy"></figure>
-                    <p>cTraderフォルダの中身は次の1つです。</p>
-                    <figure class="gshot narrow"><img src="img/webytt/ctrader/c-02-files.png" alt="YTTWeb_cTrader_1.00.algo" loading="lazy"></figure>
-                    <div class="gtip">「cTrader_Cloud」は、PCを閉じても動かせるクラウド版です。使い方は、このSTEPのいちばん下にある「PCを閉じても動かしたい方へ」を見てください。<br>解凍方法が分からない方は <a href="https://mainichi.doda.jp/article/2022/08/03/2098" target="_blank" rel="noopener">こちら</a></div>
-                </div>
-            </div>
-            <div class="gstep">
-                <div class="gstep-no">3</div>
-                <div class="gstep-body">
-                    <p class="gstep-title">「YTTWeb_cTrader_1.00.algo」をダブルクリック →「Advanced parameters」</p>
-                    <p>cTraderに「Start cBot」の画面が出ます。「Locally」が選ばれたままでOKです。</p>
-                    <figure class="gshot"><img src="img/webytt/ctrader/c-03-start-dialog.png" alt="Start cBotの画面。Advanced parametersを開く" loading="lazy"></figure>
-                </div>
-            </div>
-            <div class="gstep">
-                <div class="gstep-no">4</div>
-                <div class="gstep-body">
-                    <p class="gstep-title">通貨ペアを選び、認証コードなどを入力して「Start cBot」</p>
-                    <figure class="gshot"><img src="img/webytt/ctrader/c-04-params.png" alt="Symbolで通貨ペアを選び、認証コードとサフィックスを入力してStart cBotを押す" loading="lazy"></figure>
-                    <p>「Symbol」の通貨ペアはどれでも構いません。入力するのは<b>必須設定</b>の2つだけです。</p>
-                    <table class="gtable">
-                        <tr><th>PairingToken（口座登録画面に表示されます）</th><td>STEP 1 で控えた<b>32文字の認証コード</b>を貼り付けます</td></tr>
-                        <tr><th>通貨ペア名末尾サフィックス</th><td>通貨ペア名の末尾に文字が付いている口座では、その文字を入力します。<br>例：Fintokei の <code>USDJPYp</code> → <code>p</code> ／ HFMプロ口座の <code>USDJPYr</code> → <code>r</code><br>サフィックスが無い口座は空欄のままでOK</td></tr>
-                    </table>
-                    <div class="gtip"><b>任意設定</b>はそのままで構いません。<br>金・銀・ビットコイン・日経・オイルなどを取引する方は、下のほうの「通貨ペア名設定」に、その証券会社で使われている商品名を入力します（例：<code>XAUUSD</code> の欄に <code>GOLD</code>）。空欄のときは標準の名称が使われるので、同じ名前なら空欄でOKです。</div>
-                </div>
-            </div>
-            <div class="gstep">
-                <div class="gstep-no">5</div>
-                <div class="gstep-body">
-                    <p class="gstep-title">チャート上の緑の「▶」を押す</p>
-                    <figure class="gshot mid"><img src="img/webytt/ctrader/c-05-play.png" alt="チャート上の緑の再生ボタン" loading="lazy"></figure>
-                    <p>緑の「▶」が出ているときは、連携ツールが止まっている状態です。押すと動き始めます。</p>
-                </div>
-            </div>
-            <div class="gstep">
-                <div class="gstep-no">6</div>
-                <div class="gstep-body">
-                    <p class="gstep-title">確認が出たら「Allow」</p>
-                    <figure class="gshot narrow"><img src="img/webytt/ctrader/c-06-allow.png" alt="requires unlimited access rights の確認でAllowを押す" loading="lazy"></figure>
-                    <p>連携ツールがWeb版YTTとやり取りするための許可です。</p>
-                </div>
-            </div>
-            <div class="gstep">
-                <div class="gstep-no">7</div>
-                <div class="gstep-body">
-                    <p class="gstep-title">チャート上に「承認待ち」と出たら STEP 2 は完了</p>
-                    <figure class="gshot mid"><img src="img/webytt/ctrader/c-07-waiting.png" alt="チャート上に承認待ちと表示された状態" loading="lazy"></figure>
-                    <p>チャート上の表示が<b>「承認待ち（webyttで端末を承認してください）」</b>になれば STEP 2 は完了です。MT4・MT5と違い、cTraderは再起動しなくて大丈夫です。</p>
-                </div>
-            </div>
-        </div>
-        <details class="ytt-spec-acc cloud-acc" id="cloud">
-            <summary>
-                <span class="ytt-spec-acc-label">PCを閉じても動かしたい方へ（cTrader Cloud版）</span>
-                <span class="ytt-spec-acc-chev" aria-hidden="true">▼</span>
-            </summary>
-            <div class="ytt-spec-acc-body">
-                <p class="cloud-lead">Cloud版は、連携ツールをcTraderのクラウドで動かします。PCを閉じたりスリープしたりしても止まりません。</p>
-            <div class="gstep">
-                <div class="gstep-no">1</div>
-                <div class="gstep-body">
-                    <p class="gstep-title">「cTrader_Cloud」フォルダの「YTTWeb_cTrader_cloud_1.00.algo」をダブルクリック</p>
-                    <figure class="gshot narrow"><img src="img/webytt/ctrader/c-10-cloud-file.png" alt="YTTWeb_cTrader_cloud_1.00.algo" loading="lazy"></figure>
-                </div>
-            </div>
-            <div class="gstep">
-                <div class="gstep-no">2</div>
-                <div class="gstep-body">
-                    <p class="gstep-title">「In the cloud」を選ぶ →「Advanced parameters」</p>
-                    <figure class="gshot"><img src="img/webytt/ctrader/c-11-cloud-dialog.png" alt="Start cBotの画面でIn the cloudを選び、Advanced parametersを開く" loading="lazy"></figure>
-                    <p>認証コードなどの入力は、上の手順4と同じです。入力したら「Start cBot」を押します。</p>
-                </div>
-            </div>
-            <div class="gstep">
-                <div class="gstep-no">3</div>
-                <div class="gstep-body">
-                    <p class="gstep-title">雲のマークが出ていればクラウドで動いています</p>
-                    <figure class="gshot mid"><img src="img/webytt/ctrader/c-12-cloud-running.png" alt="連携ツールの名前の右に雲のマークが出ている" loading="lazy"></figure>
-                    <p>このあと STEP 3 に進みます。</p>
-                    <div class="gtip">1つの口座に入れられる連携ツールは1つだけです。PCで動かす「cTrader」版とCloud版を同時に動かすと、先に動かしていた方が切断されます。</div>
-                </div>
-            </div>
-            </div>
-        </details>
-    </div>
-</section>
-
-<!-- STEP 3 -->
-<section class="ytt-spec-section" id="step3" style="background:#fff;">
-    <div class="ytt-spec-inner">
-        <div class="ytt-spec-header">
-            <span class="section-title-badge section-title-badge--blue">
-                <img class="hero-title-side hero-title-side--left" src="img/title-side-blue-left.png" alt="">
-                STEP 3
-                <img class="hero-title-side hero-title-side--right" src="img/title-side-blue-right.png" alt="">
-            </span>
-            <div style="text-align:center; margin-bottom:0.25rem;">
-                <div style="display:inline-block; white-space:nowrap;">
-                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">Web版YTTにログイン</h2>
-                    <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
-                </div>
-            </div>
-            <p>スマホでもPCでも、ブラウザから使えます。</p>
-        </div>
-        <div class="guide-card">
-            <div class="gstep">
-                <div class="gstep-no">1</div>
-                <div class="gstep-body">
-                    <p class="gstep-title">Web版YTTにアクセスする</p>
-                    <div class="gstep-btn"><a href="https://webytt.fx-space.com/" class="btn-sq-blue" target="_blank" rel="noopener">Web版YTTを開く</a></div>
-                </div>
-            </div>
-            <div class="gstep">
-                <div class="gstep-no">2</div>
-                <div class="gstep-body">
-                    <p class="gstep-title">「Discordでログイン」を押す</p>
-                    <p>ログインしていない状態でアクセスすると、下の画面が表示されます。</p>
-                    <figure class="gshot mid"><img src="img/webytt/s29-web-login.jpg" alt="ログインが必要です。Discordでログインボタン" loading="lazy"></figure>
-                </div>
-            </div>
-            <div class="gstep">
-                <div class="gstep-no">3</div>
-                <div class="gstep-body">
-                    <p class="gstep-title">「口座を選択」画面で、承認した口座を選んで「確定」</p>
-                    <p>STEP 1 で登録し、連携ツールを入れた<b>口座番号</b>を選んで、下の<b>「確定」</b>を押してください。</p>
-                    <figure class="gshot narrow"><img src="img/webytt/s30-account-select.png" alt="口座を選択の画面。承認した口座番号を選んで確定を押す" loading="lazy"></figure>
-                    <div class="gtip">あとから口座を切り替えるときは、画面上部の<b>口座番号の表示</b>を押すと、同じ「口座を選択」画面が出ます。</div>
-                </div>
-            </div>
-            <div class="gstep">
-                <div class="gstep-no">4</div>
-                <div class="gstep-body">
-                    <p class="gstep-title">「新しい端末を検出しました」と出たら「この端末を承認する」</p>
-                    <p>初めてつなぐときは、取引ツールの接続を確認する画面が出ます。<wbr>口座が合っているか確かめて、<b>「この端末を承認する」</b>を押してください。</p>
-                    <figure class="gshot narrow"><img src="img/webytt/ctrader/c-08-approve.png" alt="新しい端末を検出しました。この端末を承認するボタン" loading="lazy"></figure>
-                    <div class="gtip">身に覚えのない接続のときは「拒否」を押してください。<wbr>ほかのcTraderで同じ口座に接続している場合は、そちらが切断されます。</div>
-                </div>
-            </div>
-            <div class="gstep">
-                <div class="gstep-no">5</div>
-                <div class="gstep-body">
-                    <p class="gstep-title">数秒待って、接続状態を確認する</p>
-                    <p>口座番号の左にある<b>丸の色</b>が接続状態を表します。<b>緑</b>になっていれば接続完了です。このとき、取引ツールのチャート上の表示も「承認待ち」から<b>「接続済み」</b>に変わります。</p>
-                    <div class="gshot-pair">
-                        <figure class="gshot"><img src="img/webytt/s31-connected-sp.png" alt="スマホで接続できた状態。口座番号の左の丸が緑" loading="lazy"><figcaption><b>スマホ</b>：画面左上、口座番号の左の丸が緑</figcaption></figure>
-                        <figure class="gshot"><img src="img/webytt/s32-connected-pc.png" alt="PCで接続できた状態。口座番号の左の丸が緑" loading="lazy"><figcaption><b>PC</b>：画面右上、口座番号の左の丸が緑</figcaption></figure>
+        <p class="feat-label">PC</p>
+        <div class="feat">
+            <div class="feat-media">
+                <figure class="fvid pc">
+                    <div class="fvid-box is-shot" role="img" aria-label="画面の画像（準備中）">
+                        <span class="fvid-label">画面の画像 準備中</span>
+                        <span class="fvid-meta">PCの画面全体</span>
                     </div>
-                    <figure class="gshot mid"><img src="img/webytt/ctrader/c-09-connected.png" alt="cTraderのチャート上に「YTT for Web 接続済み」と表示された状態" loading="lazy"><figcaption><b>cTrader</b>：チャート上の表示が「接続済み」に変わる</figcaption></figure>
-                    <table class="gtable">
-                        <tr><th><span class="dot g"></span>緑</th><td>正常に接続されています。そのまま利用できます</td></tr>
-                        <tr><th><span class="dot y"></span>黄</th><td>接続はあるが価格が取れていません。サフィックスの設定が口座の通貨ペア名と合っているか確認してください</td></tr>
-                        <tr><th><span class="dot r"></span>赤</th><td>接続されていません。ページをリロード。改善しない場合は下の「よくある質問」へ</td></tr>
-                    </table>
-                </div>
+                </figure>
+            </div>
+            <div class="feat-body">
+                <p class="feat-head">PCでは、画面の右側に注文とシナリオがまとまっています。</p>
+                    <ol class="feat-steps">
+                        <li><b>右のパネル</b>：口座・残高、ロットの自動計算、成行の注文、シナリオ</li>
+                        <li><b>上のメニュー</b>：通貨ペアと時間足、ポジション・予約注文・履歴・ノート・通知</li>
+                        <li><b>左のツール</b>：チャートに線や図形を引く</li>
+                    </ol>
+                <!-- TODO: PCの画面全体のスクショ（最新）を撮って差し込む -->
             </div>
         </div>
-        <p class="ytt-fto-attention" style="margin-top:1.5rem;text-align:left;">以上で導入は完了し、Web版YTTが使用できます。お疲れ様でした！</p>
     </div>
 </section>
 
-<!-- スマホで使う -->
-<section class="ytt-spec-section" style="background:#f4f6f9;">
-    <div class="ytt-spec-inner">
+<!-- 機能一覧 -->
+<section class="ytt-spec-section" id="features" style="background:#f4f6f9;">
+    <div class="ytt-spec-inner ytt-fto-wide">
         <div class="ytt-spec-header">
             <span class="section-title-badge section-title-badge--orange">
                 <img class="hero-title-side hero-title-side--left" src="img/title-side-orange-left.png" alt="">
-                おすすめ
+                機能一覧
                 <img class="hero-title-side hero-title-side--right" src="img/title-side-orange-right.png" alt="">
             </span>
             <div style="text-align:center; margin-bottom:0.25rem;">
                 <div style="display:inline-block; white-space:nowrap;">
-                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">スマホはアプリのように使う</h2>
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">Web版YTTでできること</h2>
                     <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
                 </div>
             </div>
-            <p>ホーム画面に置いておくと、アドレスバーが消えて画面が広く使え、1タップで開けます。</p>
+            <p>まずはメイン機能から使ってみて、<br>慣れてきたらサブ機能も使ってみましょう。</p>
         </div>
-        <div class="app-mock" role="img" aria-label="ホーム画面に追加されたYTT for Webのアイコン">
-            <div class="app-mock-icon"><img src="img/ytt-mark.png" alt=""></div>
-            <div class="app-mock-label">YTT for Web</div>
-            <p class="app-mock-cap">追加すると、ホーム画面にこのアイコンができます</p>
+        <p class="feat-label">メイン機能<small>トレードの戦略に大きく関わる機能</small></p>
+        <div class="ytt-add-grid fidx-grid">
+            <a class="ytt-add-card fidx" href="#order"><h3><span class="fidx-no">1</span>注文・決済</h3><p>ロットを決めて、ボタン1つでエントリー・決済</p></a>
+            <a class="ytt-add-card fidx" href="#lot"><h3><span class="fidx-no">2</span>ロットの自動計算</h3><p>損失率を決めておけば、ロットは自動で計算</p></a>
+            <a class="ytt-add-card fidx" href="#scenario"><h3><span class="fidx-no">3</span>シナリオ構築</h3><p>エントリー前に、利確と損切りの位置を決める</p></a>
+            <a class="ytt-add-card fidx" href="#reserve"><h3><span class="fidx-no">4</span>予約注文</h3><p>決めた価格に来たら、自動でエントリー</p></a>
+            <a class="ytt-add-card fidx" href="#autoline"><h3><span class="fidx-no">5</span>オートライン</h3><p>重要なラインを、自動でチャートに引く</p></a>
+            <a class="ytt-add-card fidx" href="#alert"><h3><span class="fidx-no">6</span>通知・経済指標</h3><p>指標の時間や、決めた価格に来たことを知らせる</p></a>
+            <a class="ytt-add-card fidx" href="#note"><h3><span class="fidx-no">7</span>トレードノート</h3><p>過去のトレードを振り返る</p></a>
+            <a class="ytt-add-card fidx" href="#copy"><h3><span class="fidx-no">8</span>コピーモード（受信）</h3><p>コピー元のポジションを、自分の口座に写す</p></a>
         </div>
-        <div class="ytt-add-grid cols-2" style="max-width:720px;">
-            <div class="ytt-add-card os-card">
-                <h3><span class="os-tag">Android</span>インストールする</h3>
-                <ol>
-                    <li>Chromeで <b>webytt.fx-space.com</b> を開く</li>
-                    <li>右上の「︙」メニューを開く</li>
-                    <li>「アプリをインストール」（または「ホーム画面に追加」）を選ぶ</li>
-                    <li>ホーム画面のアイコンから起動する</li>
-                </ol>
-            </div>
-            <div class="ytt-add-card os-card">
-                <h3><span class="os-tag">iPhone</span>ホーム画面に追加する</h3>
-                <ol>
-                    <li>Safariで <b>webytt.fx-space.com</b> を開く</li>
-                    <li>画面下の「共有」ボタン（四角に上矢印）を押す</li>
-                    <li>「ホーム画面に追加」を選び、「追加」を押す</li>
-                    <li>ホーム画面のアイコンから起動する</li>
-                </ol>
-            </div>
+        <p class="feat-label">サブ機能<small>あると便利な機能</small></p>
+        <div class="ytt-add-grid fidx-grid">
+            <a class="ytt-add-card fidx" href="#sub"><h3>サブ機能の一覧</h3><p>損益非表示・お気に入り・すべての機能を開く・描画ツール・ニュース・利確速報</p></a>
         </div>
     </div>
 </section>
 
-<!-- 利用上の制限 -->
-<section class="ytt-spec-section" id="limits" style="background:#fff;">
+<!-- メイン機能 1：注文・決済 -->
+<section class="ytt-spec-section" id="order" style="background:#fff;">
     <div class="ytt-spec-inner ytt-fto-wide">
         <div class="ytt-spec-header">
             <span class="section-title-badge section-title-badge--blue">
                 <img class="hero-title-side hero-title-side--left" src="img/title-side-blue-left.png" alt="">
-                はじめに確認
+                メイン機能 1
                 <img class="hero-title-side hero-title-side--right" src="img/title-side-blue-right.png" alt="">
             </span>
             <div style="text-align:center; margin-bottom:0.25rem;">
                 <div style="display:inline-block; white-space:nowrap;">
-                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">利用上の制限事項</h2>
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">注文・決済</h2>
                     <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
                 </div>
             </div>
-            <p>「動かない」と感じたときは、まずここを確認してください。</p>
+            
         </div>
-        <div class="ytt-add-grid">
-            <div class="ytt-add-card"><h3>連携ツールは1口座に1つだけ</h3><p>同じ口座に、複数の連携ツール（MT4とMT5の両方など）を同時に入れることはできません。複数設定した場合は、先に設定していた方が切断されます。</p></div>
-            <div class="ytt-add-card"><h3>連携ツールを止めない</h3><p>cTraderのチャート上に緑の「▶」が出ているときは、連携ツールが止まっています。押して動かしてください。</p></div>
-            <div class="ytt-add-card"><h3>PCと取引ツールは起動したまま</h3><p>連携ツールが止まっているとき、PCのスリープ中、取引ツールを閉じている間は動きません。cTrader Cloud版はPCを閉じても動きます。</p></div>
+        <div class="feat is-sp">
+            <div class="feat-media">
+                <figure class="fvid sp">
+                    <div class="fvid-box" role="img" aria-label="動画（準備中）：注文・決済">
+                        <span class="fvid-play" aria-hidden="true"></span>
+                        <span class="fvid-label">動画 準備中</span>
+                        <span class="fvid-meta">スマホ・約60秒</span>
+                    </div>
+                </figure>
+            </div>
+            <div class="feat-body">
+                <p class="feat-head">ロットを決めて、ボタン1つでエントリー・決済できます。</p>
+                    <ol class="feat-steps">
+                        <li>「成行」を選ぶ</li>
+                        <li>ロットを調整する（∧ ∨ で増減）</li>
+                        <li>「BUY」か「SELL」を押すと、すぐにエントリー</li>
+                        <li>ポジションは、下のメニュー「ポジション」で確認</li>
+                        <li>「全決済」でまとめて決済。「1/2決済」なら半分だけ決済</li>
+                    </ol>
+                    <div class="gtip">PCでは、ロットを <b>−1 〜 +1</b> のボタンで細かく調整できます。</div>
+            </div>
         </div>
     </div>
 </section>
 
-<!-- コピーモード -->
-<section class="ytt-spec-section" id="copy" style="background:#f4f6f9;">
-    <div class="ytt-spec-inner">
+<!-- メイン機能 2：ロットの自動計算 -->
+<section class="ytt-spec-section" id="lot" style="background:#f4f6f9;">
+    <div class="ytt-spec-inner ytt-fto-wide">
         <div class="ytt-spec-header">
-            <span class="section-title-badge section-title-badge--orange">
-                <img class="hero-title-side hero-title-side--left" src="img/title-side-orange-left.png" alt="">
-                機能の注意点
-                <img class="hero-title-side hero-title-side--right" src="img/title-side-orange-right.png" alt="">
+            <span class="section-title-badge section-title-badge--blue">
+                <img class="hero-title-side hero-title-side--left" src="img/title-side-blue-left.png" alt="">
+                メイン機能 2
+                <img class="hero-title-side hero-title-side--right" src="img/title-side-blue-right.png" alt="">
+            </span>
+            <div style="text-align:center; margin-bottom:0.25rem;">
+                <div style="display:inline-block; white-space:nowrap;">
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">ロットの自動計算</h2>
+                    <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
+                </div>
+            </div>
+            
+        </div>
+        <div class="feat">
+            <div class="feat-media">
+                <figure class="fvid pc">
+                    <div class="fvid-box" role="img" aria-label="動画（準備中）：ロットの自動計算">
+                        <span class="fvid-play" aria-hidden="true"></span>
+                        <span class="fvid-label">動画 準備中</span>
+                        <span class="fvid-meta">PC・約50秒</span>
+                    </div>
+                </figure>
+            </div>
+            <div class="feat-body">
+                <p class="feat-head">損失率を決めておけば、ロットは自動で計算されます。</p>
+                    <ol class="feat-steps">
+                        <li>「損失率固定」で、1回のトレードで許せる損失の割合を決める（例：2.0%）</li>
+                        <li>その金額が「許容損失」に表示される</li>
+                        <li>SLまでの幅に合わせて、ロットが自動で計算される</li>
+                        <li>SLの位置を動かすと、ロットも自動で変わる</li>
+                    </ol>
+                    <div class="gtip">毎回のトレードのリスクを、同じ大きさにそろえられます。</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- メイン機能 3：シナリオ構築 -->
+<section class="ytt-spec-section" id="scenario" style="background:#fff;">
+    <div class="ytt-spec-inner ytt-fto-wide">
+        <div class="ytt-spec-header">
+            <span class="section-title-badge section-title-badge--blue">
+                <img class="hero-title-side hero-title-side--left" src="img/title-side-blue-left.png" alt="">
+                メイン機能 3
+                <img class="hero-title-side hero-title-side--right" src="img/title-side-blue-right.png" alt="">
+            </span>
+            <div style="text-align:center; margin-bottom:0.25rem;">
+                <div style="display:inline-block; white-space:nowrap;">
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">シナリオ構築</h2>
+                    <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
+                </div>
+            </div>
+            
+        </div>
+        <div class="feat">
+            <div class="feat-media">
+                <figure class="fvid pc">
+                    <div class="fvid-box" role="img" aria-label="動画（準備中）：シナリオ構築">
+                        <span class="fvid-play" aria-hidden="true"></span>
+                        <span class="fvid-label">動画 準備中</span>
+                        <span class="fvid-meta">PC・約80秒</span>
+                    </div>
+                </figure>
+            </div>
+            <div class="feat-body">
+                <p class="feat-head">エントリー前に、利確（TP）と損切り（SL）の位置を決めておけます。</p>
+                    <ol class="feat-steps">
+                        <li>「ロングシナリオ」か「ショートシナリオ」を押す</li>
+                        <li>チャートにTPとSLの線が出る</li>
+                        <li>線を動かして、利確と損切りの幅を決める</li>
+                        <li>リスクリワード（RR）が自動で表示される</li>
+                    </ol>
+                    <p class="gnote">線を引いただけでは発注されません。まず「構築中」として引き、そのまま発注するか予約にするかは、あとから決めます。</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- メイン機能 4：予約注文 -->
+<section class="ytt-spec-section" id="reserve" style="background:#f4f6f9;">
+    <div class="ytt-spec-inner ytt-fto-wide">
+        <div class="ytt-spec-header">
+            <span class="section-title-badge section-title-badge--blue">
+                <img class="hero-title-side hero-title-side--left" src="img/title-side-blue-left.png" alt="">
+                メイン機能 4
+                <img class="hero-title-side hero-title-side--right" src="img/title-side-blue-right.png" alt="">
+            </span>
+            <div style="text-align:center; margin-bottom:0.25rem;">
+                <div style="display:inline-block; white-space:nowrap;">
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">予約注文</h2>
+                    <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
+                </div>
+            </div>
+            
+        </div>
+        <div class="feat">
+            <div class="feat-media">
+                <figure class="fvid pc">
+                    <div class="fvid-box" role="img" aria-label="動画（準備中）：予約注文">
+                        <span class="fvid-play" aria-hidden="true"></span>
+                        <span class="fvid-label">動画 準備中</span>
+                        <span class="fvid-meta">PC・約60秒</span>
+                    </div>
+                </figure>
+            </div>
+            <div class="feat-body">
+                <p class="feat-head">組んだシナリオを予約にすると、決めた価格に来たときに自動でエントリーします。</p>
+                    <ol class="feat-steps">
+                        <li>構築したシナリオを予約にする</li>
+                        <li>価格が来たら、自動でエントリー</li>
+                        <li>予約中の注文は、上のメニュー「予約注文」で確認・取り消しできる</li>
+                    </ol>
+                    <div class="gtip">チャート上では、<b>構築中は破線</b>、<b>予約中は実線</b>で表示されます。</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- メイン機能 5：オートライン -->
+<section class="ytt-spec-section" id="autoline" style="background:#fff;">
+    <div class="ytt-spec-inner ytt-fto-wide">
+        <div class="ytt-spec-header">
+            <span class="section-title-badge section-title-badge--blue">
+                <img class="hero-title-side hero-title-side--left" src="img/title-side-blue-left.png" alt="">
+                メイン機能 5
+                <img class="hero-title-side hero-title-side--right" src="img/title-side-blue-right.png" alt="">
+            </span>
+            <div style="text-align:center; margin-bottom:0.25rem;">
+                <div style="display:inline-block; white-space:nowrap;">
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">オートライン</h2>
+                    <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
+                </div>
+            </div>
+            
+        </div>
+        <div class="feat">
+            <div class="feat-media">
+                <figure class="fvid pc">
+                    <div class="fvid-box" role="img" aria-label="動画（準備中）：オートライン">
+                        <span class="fvid-play" aria-hidden="true"></span>
+                        <span class="fvid-label">動画 準備中</span>
+                        <span class="fvid-meta">PC・約40秒</span>
+                    </div>
+                </figure>
+            </div>
+            <div class="feat-body">
+                <p class="feat-head">重要なラインを、自動でチャートに引きます。</p>
+                    <ol class="feat-steps">
+                        <li>オートラインをオンにすると、チャートにラインが自動で引かれる</li>
+                        <li>オン・オフは「お気に入り」から切り替えられる</li>
+                    </ol>
+                    <!-- TODO: ラインの色・種類ごとの意味（強さ）を確認して追記 -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- メイン機能 6：通知・経済指標 -->
+<section class="ytt-spec-section" id="alert" style="background:#f4f6f9;">
+    <div class="ytt-spec-inner ytt-fto-wide">
+        <div class="ytt-spec-header">
+            <span class="section-title-badge section-title-badge--blue">
+                <img class="hero-title-side hero-title-side--left" src="img/title-side-blue-left.png" alt="">
+                メイン機能 6
+                <img class="hero-title-side hero-title-side--right" src="img/title-side-blue-right.png" alt="">
+            </span>
+            <div style="text-align:center; margin-bottom:0.25rem;">
+                <div style="display:inline-block; white-space:nowrap;">
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">通知・経済指標</h2>
+                    <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
+                </div>
+            </div>
+            
+        </div>
+        <div class="feat">
+            <div class="feat-media">
+                <figure class="fvid pc">
+                    <div class="fvid-box" role="img" aria-label="動画（準備中）：通知・経済指標">
+                        <span class="fvid-play" aria-hidden="true"></span>
+                        <span class="fvid-label">動画 準備中</span>
+                        <span class="fvid-meta">PC・約40秒</span>
+                    </div>
+                </figure>
+            </div>
+            <div class="feat-body">
+                <p class="feat-head">大事な経済指標の時間や、決めた価格に来たことを知らせます。</p>
+                    <ol class="feat-steps">
+                        <li>経済指標の時間が、チャート上に表示される</li>
+                        <li>次の指標までの時間も表示される（例：「21:30 米 CPI あと42分」）</li>
+                        <li>アラートを置いておくと、その価格に来たときに通知される</li>
+                    </ol>
+                    <!-- TODO: スマホへの通知の有無と設定方法を確認して追記 -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- メイン機能 7：トレードノート -->
+<section class="ytt-spec-section" id="note" style="background:#fff;">
+    <div class="ytt-spec-inner ytt-fto-wide">
+        <div class="ytt-spec-header">
+            <span class="section-title-badge section-title-badge--blue">
+                <img class="hero-title-side hero-title-side--left" src="img/title-side-blue-left.png" alt="">
+                メイン機能 7
+                <img class="hero-title-side hero-title-side--right" src="img/title-side-blue-right.png" alt="">
+            </span>
+            <div style="text-align:center; margin-bottom:0.25rem;">
+                <div style="display:inline-block; white-space:nowrap;">
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">トレードノート</h2>
+                    <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
+                </div>
+            </div>
+            
+        </div>
+        <div class="feat">
+            <div class="feat-media">
+                <figure class="fvid pc">
+                    <div class="fvid-box" role="img" aria-label="動画（準備中）：トレードノート">
+                        <span class="fvid-play" aria-hidden="true"></span>
+                        <span class="fvid-label">動画 準備中</span>
+                        <span class="fvid-meta">PC・約40秒</span>
+                    </div>
+                </figure>
+            </div>
+            <div class="feat-body">
+                <p class="feat-head">過去のトレードを、チャートと数字で振り返れます。</p>
+                    <ol class="feat-steps">
+                        <li>上のメニュー「ノート」を開く</li>
+                        <li>自分のエントリーと決済が、チャート上に表示される</li>
+                        <li>勝率や損益などの統計も、自動で集計される</li>
+                    </ol>
+                    <!-- TODO: ノートの画面を確認して、見られる項目を追記 -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- メイン機能 8：コピーモード -->
+<section class="ytt-spec-section" id="copy" style="background:#f4f6f9;">
+    <div class="ytt-spec-inner ytt-fto-wide">
+        <div class="ytt-spec-header">
+            <span class="section-title-badge section-title-badge--blue">
+                <img class="hero-title-side hero-title-side--left" src="img/title-side-blue-left.png" alt="">
+                メイン機能 8
+                <img class="hero-title-side hero-title-side--right" src="img/title-side-blue-right.png" alt="">
             </span>
             <div style="text-align:center; margin-bottom:0.25rem;">
                 <div style="display:inline-block; white-space:nowrap;">
@@ -1585,10 +1584,28 @@
             </div>
             <p>コピー元の口座でWeb版YTTからエントリーされたポジションを、自分の口座に写す機能です。</p>
         </div>
-        <p class="ytt-fto-attention" style="text-align:left;">オンにした時点で、セット中のシナリオと指値・逆指値注文はすべてキャンセルされます。残したいものがあれば、オンにする前に確認してください。</p>
+        <div class="feat">
+            <div class="feat-media">
+                <figure class="fvid pc">
+                    <div class="fvid-box is-shot" role="img" aria-label="画面の画像（準備中）">
+                        <span class="fvid-label">画面の画像 準備中</span>
+                        <span class="fvid-meta">コピーモードの設定画面</span>
+                    </div>
+                </figure>
+            </div>
+            <div class="feat-body">
+                <p class="feat-head">設定からオンにして、コピー元の口座を選ぶだけで使えます。</p>
+                    <ol class="feat-steps">
+                        <li>設定 →「コピーモード（受信）」をオンにする</li>
+                        <li>案内に従って、コピー元の口座を設定する</li>
+                        <li>「コピー時のロット計算モード」を確認する</li>
+                    </ol>
+                    <p class="gnote">オンにした時点で、セット中のシナリオと指値・逆指値注文はすべてキャンセルされます。残したいものがあれば、オンにする前に確認してください。</p>
+            </div>
+        </div>
         <details class="ytt-spec-acc">
             <summary>
-                <span class="ytt-spec-acc-label">設定方法と制限を見る</span>
+                <span class="ytt-spec-acc-label">オンの間の制限を見る</span>
                 <span class="ytt-spec-acc-chev" aria-hidden="true">▼</span>
             </summary>
             <div class="ytt-spec-acc-body">
@@ -1605,59 +1622,38 @@
                 </table>
             </div>
         </details>
-        <p style="font-size:0.8125rem;color:#6b7280;margin-top:1.25rem;text-align:left;">新しい連携ツールが配布されたときは、ファイルをダウンロードしてお使いの取引ツールの導入方法ページで「STEP 2」の手順をもう一度行ってください。</p>
     </div>
 </section>
 
-<!-- よくある質問 -->
-<section class="ytt-spec-section" id="trouble" style="background:#fff;">
+<!-- サブ機能（TODO：一覧を確定） -->
+<section class="ytt-spec-section" id="sub" style="background:#fff;">
     <div class="ytt-spec-inner">
         <div class="ytt-spec-header">
-            <span class="section-title-badge section-title-badge--blue">
-                <img class="hero-title-side hero-title-side--left" src="img/title-side-blue-left.png" alt="">
-                よくある質問
-                <img class="hero-title-side hero-title-side--right" src="img/title-side-blue-right.png" alt="">
+            <span class="section-title-badge section-title-badge--orange">
+                <img class="hero-title-side hero-title-side--left" src="img/title-side-orange-left.png" alt="">
+                サブ機能
+                <img class="hero-title-side hero-title-side--right" src="img/title-side-orange-right.png" alt="">
             </span>
             <div style="text-align:center; margin-bottom:0.25rem;">
                 <div style="display:inline-block; white-space:nowrap;">
-                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">導入でつまずいたときは</h2>
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">あると便利な機能</h2>
                     <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
                 </div>
             </div>
+            <p>戦略には大きく関わらないけれど、使うと便利な機能です。</p>
         </div>
-        <details class="ytt-faq">
-            <summary><span class="ytt-faq-q">取引ツールで認証に失敗する／「認証エラー」になる</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
-            <div class="ytt-faq-a"><p>次のいずれかが原因のことが多いです。ひとつずつ確認してください。</p><p>①認証コード（32文字）の入力ミス（前後の空白、全角・半角の混在）<br>②連携ツールを複数動かしている（1つだけにします）<br>③確認の画面で「Allow」を押していない<br>④メンバーシップ／サブスクに加入していない</p></div>
-        </details>
-        <details class="ytt-faq">
-            <summary><span class="ytt-faq-q">取引ツールのチャート上の表示が「承認待ち」のまま変わらない</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
-            <div class="ytt-faq-a"><p>Web版YTTにログインし、「口座を選択」でその口座を選んで「確定」を押してください。「新しい端末を検出しました」と出たら「この端末を承認する」を押します（STEP 3）。</p></div>
-        </details>
-        <details class="ytt-faq">
-            <summary><span class="ytt-faq-q">Web版の丸いアイコンが赤のまま</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
-            <div class="ytt-faq-a"><p>①ページをリロードする<br>②cTraderが起動していて、連携ツールが動いているか（チャート上に緑の「▶」が出ていたら止まっています）<br>③PCがスリープしていないか<br>④同じ口座に、別の連携ツールを後から入れていないか（先に設定した方が切断されます）</p></div>
-        </details>
-        <details class="ytt-faq">
-            <summary><span class="ytt-faq-q">Web版の丸いアイコンが黄になる</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
-            <div class="ytt-faq-a"><p>価格が取得できていません。サフィックスの設定が、口座の通貨ペア名と合っているか確認してください。</p></div>
-        </details>
-        <details class="ytt-faq">
-            <summary><span class="ytt-faq-q">特定の通貨ペアやCFD商品だけ注文できない</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
-            <div class="ytt-faq-a"><p>①サフィックス付きの口座（USDJPYp など）で「通貨ペア名末尾サフィックス」を入力しているか<br>②CFD系商品は、証券会社の商品名（GOLD など）を「通貨ペア名設定」に入力しているか</p></div>
-        </details>
-        <details class="ytt-faq">
-            <summary><span class="ytt-faq-q">コピーモードでポジションがコピーされない</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
-            <div class="ytt-faq-a"><p>①コピー元のポジションがWeb版YTTからエントリーされたものか<br>②ロット計算モードが損失率固定・損失額固定のとき、コピー元のポジションにSLが付いているか<br>③連携ツールを入れた取引ツールが起動したままになっているか</p></div>
-        </details>
-        <details class="ytt-faq">
-            <summary><span class="ytt-faq-q">コピーモードをオンにしたら注文が消えた</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
-            <div class="ytt-faq-a"><p>仕様です。オンにした時点で、セット中のシナリオと指値・逆指値注文はすべてキャンセルされます。</p></div>
-        </details>
+        <div class="ytt-add-grid">
+            <div class="ytt-add-card"><h3>損益非表示</h3><p>画面の損益を隠します。画面を人に見せるときや、損益を気にせずトレードしたいときに。</p></div>
+            <div class="ytt-add-card"><h3>お気に入り</h3><p>よく使う機能を右のパネルに並べて、すぐにオン・オフを切り替えられます。</p></div>
+            <div class="ytt-add-card"><h3>すべての機能を開く</h3><p>PCでは <b>Ctrl + K</b> で、機能を名前から探して開けます。</p></div>
+            <div class="ytt-add-card"><h3>描画ツール</h3><p>PCでは、チャート左のツールで線や図形を引けます。</p></div>
+            <div class="ytt-add-card"><h3>ニュース・利確速報</h3><p>PCの画面上部に、ニュースとメンバーの利確速報が流れます。</p></div>
+        </div>
     </div>
 </section>
 
-<!-- サポート窓口 -->
-<section class="ytt-spec-section" style="background:#f4f6f9;">
+<!-- 困ったときは -->
+<section class="ytt-spec-section" id="help" style="background:#f4f6f9;">
     <div class="ytt-spec-inner">
         <div class="ytt-spec-header">
             <span class="section-title-badge section-title-badge--orange">
@@ -1667,11 +1663,11 @@
             </span>
             <div style="text-align:center; margin-bottom:0.25rem;">
                 <div style="display:inline-block; white-space:nowrap;">
-                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">サポート窓口</h2>
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">分からないことがあったら</h2>
                     <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
                 </div>
             </div>
-            <p>導入や使い方で迷っても、ここから解決できます。</p>
+            <p>使い方の質問はAIが24時間回答。<br>解決しないときは、YTT開発のエンジニアが対応します。</p>
         </div>
         <div class="ytt-add-grid cols-2">
             <div class="ytt-add-card ytt-support-card">
@@ -1687,83 +1683,27 @@
                 <a class="sup-link" href="https://discord.com/channels/1039824083208126474/1151440259553439784/1490345379613642853" target="_blank" rel="noopener">Discordで開く →</a>
             </div>
         </div>
-        <details class="ytt-spec-acc" style="margin-top:1.5rem;">
-            <summary>
-                <span class="ytt-spec-acc-label">お問い合わせのときに送る内容</span>
-                <span class="ytt-spec-acc-chev" aria-hidden="true">▼</span>
-            </summary>
-            <div class="ytt-spec-acc-body">
-                <p style="font-size:0.8125rem;color:#4b5563;line-height:1.85;margin:1rem 0 0;">上で解決しなかったものは、以下の内容を <a href="https://discord.com/channels/1039824083208126474/1151440259553439784" target="_blank" rel="noopener" style="color:#2563eb;text-decoration:underline;">「お問い合わせ」</a> に送ってください。</p>
-                <table class="ytt-spec-table">
-                    <tbody>
-                        <tr><th>口座</th><td class="spec-val">証券会社・口座タイプ・有効証拠金残高</td><td class="spec-note">Web版YTTで使用している口座番号も</td></tr>
-                        <tr><th>環境</th><td class="spec-val">OS（MacかWindows）・スマホの機種</td><td class="spec-note">連携ツールのバージョン（例：YTT_OrderEA 1.00）</td></tr>
-                        <tr><th>内容</th><td class="spec-val">困っていることをできるだけ具体的に</td><td class="spec-note">症状発生時のスクショ、ターミナル→エキスパートタブのスクショ</td></tr>
-                        <tr><th>※必須</th><td class="spec-val">エラーのコピー</td><td class="spec-note">エラーが出ていた場合、エキスパートタブに出ていたエラーの文字をコピーして貼り付け</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </details>
+        <p class="help-more">導入でつまずいたときは、<a href="ytt-web-setup.html#trouble">導入方法ページの「よくある質問」</a>も見てください。<br>機能の要望も、YTTサポートで受け付けています。</p>
     </div>
 </section>
 
 <!-- フッターCTA -->
 <section class="ytt-sp-footer-cta">
-    <h2>Web版YTTを使い始めよう</h2>
-    <p>導入が終わったら、<br>スマホからでもすぐにトレードできます。</p>
+    <h2>Web版YTTを使ってみよう</h2>
+    <p>スマホからでも、PCからでも、<br>ブラウザを開けばすぐにトレードできます。</p>
     <div class="ytt-sp-footer-cta-btns">
         <a href="https://webytt.fx-space.com/" target="_blank" rel="noopener" class="btn-white-solid">Web版YTTを開く</a>
-        <a href="ytt-tokusetu.html" class="btn-white-outline">YTT特設ページへ</a>
+        <a href="ytt-web-setup.html" class="btn-white-outline">導入方法を見る</a>
     </div>
 </section>
-
-</div><!-- /#gated -->
 
 <footer class="ytt-sp-page-footer">
     <p>© FX SPACE — <a href="ytt-tokusetu.html">YTT特設ページ</a> / <a href="index.html">トップページ</a></p>
 </footer>
 
 <script>
-(function(){
-  var dl = document.getElementById('dlBtn');
-  if (dl && dl.getAttribute('href').indexOf('#href-tbd') === 0) {
-    dl.addEventListener('click', function(e){ e.preventDefault(); alert('ダウンロードURLは準備中です。Discordの「😊交流」チャンネルの配布ファイル（webytt.zip）をご利用ください。'); });
-  }
-  document.querySelectorAll('[data-soon]').forEach(function (a) {
-    a.addEventListener('click', function (e) { e.preventDefault(); alert('cTraderの導入方法ページは準備中です。'); });
-  });
-  // ---- 取引ツールの選択：選ぶまで #gated（事前準備〜）を表示しない ----
-  var gated = document.getElementById('gated');
-  var me = document.body.getAttribute('data-tool');
-  function markChosen() {
-    document.querySelectorAll('.tool-tab[data-tool]').forEach(function (t) {
-      var on = t.getAttribute('data-tool') === me;
-      t.classList.toggle('is-on', on);
-      if (on) { t.setAttribute('aria-current', 'page'); if (!t.querySelector('.tool-check')) t.insertAdjacentHTML('afterbegin', '<span class="tool-check" aria-hidden="true">✓</span>'); }
-    });
-  }
-  function openGate(target, smooth) {
-    if (!gated) return;
-    gated.classList.add('is-open');
-    markChosen();
-    var el = target || gated.querySelector('section');
-    if (el) setTimeout(function () { el.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' }); }, 40);
-  }
-  function hashTarget() { var h = location.hash && location.hash.slice(1); var el = h && document.getElementById(h); return el && gated && gated.contains(el) ? el : null; }
-  document.querySelectorAll('.tool-tab[data-tool]').forEach(function (t) {
-    t.addEventListener('click', function (e) {
-      if (t.getAttribute('data-tool') !== me) return;           // 他のツール → そのページへ移動
-      e.preventDefault();
-      if (history.replaceState) history.replaceState(null, '', location.pathname + '?tool=' + me);
-      openGate(null, true);
-    });
-  });
-  if (new URLSearchParams(location.search).get('tool') === me) openGate(hashTarget(), false);   // 他のページで選んで来た
-  else if (hashTarget()) openGate(hashTarget(), false);                                        // よくある質問などへ直接来た
-  window.addEventListener('hashchange', function () { var t = hashTarget(); if (t) openGate(t, true); });
   // 見出しのアンカーへ飛んだとき、固定ナビの下に潜らないようにする
   document.documentElement.style.scrollPaddingTop = '72px';
-})();
 </script>
 <script>
 /* 手書き風フレーム：画像の実寸に合わせて、少しゆらいだ線で囲む（形は画像ごとに固定＝リサイズしても毎回同じ） */
@@ -1814,7 +1754,7 @@
     '</filter></defs>';
   document.body.appendChild(defs);
   var ro = window.ResizeObserver ? new ResizeObserver(function (es) { es.forEach(function (e) { draw(e.target); }); }) : null;
-  document.querySelectorAll('.gshot img').forEach(function (img) {
+  document.querySelectorAll('.gshot img, .fvid-box').forEach(function (img) {
     if (img.parentElement.classList.contains('gframe')) return;
     var box = document.createElement('span');
     box.className = 'gframe';

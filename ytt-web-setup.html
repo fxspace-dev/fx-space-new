@@ -659,6 +659,8 @@
         .shot-pair .hshot { margin: 0; }
         .shot-pair .hshot img { width: auto; max-width: 100%; } /* 元の大きさより拡大しない（小さい画像を引き伸ばすとぼやけるため） */
         @media (max-width: 640px) { .shot-pair { grid-template-columns: 1fr; } .shot-pair .hshot img { max-width: min(100%, 320px); } }
+        .home-icon { text-align: center; margin-top: 1.25rem; }
+        .home-icon img { width: 150px; max-width: 45vw; margin: 0 auto; border: none; box-shadow: none; background: transparent; }
         .todo-shot {
             margin: 0.75rem 0 0; border: 2px dashed #c7d2fe; border-radius: 10px; background: #f8f9fc;
             color: #4f46e5; font-size: 0.85rem; font-weight: 700; text-align: center; padding: 1.4rem 1rem;
@@ -1078,7 +1080,7 @@
             </ol>
         </div>
     </div>
-    <div class="todo-shot">TODO スクショ：iPhoneの「共有」→「ホーム画面に追加」／Androidの「アプリをインストール」</div>
+    <figure class="hshot home-icon"><img src="img/webytt/s33-home-icon.jpg" alt="ホーム画面に追加されたYTT for Webのアイコン" loading="lazy"><figcaption>追加すると、ホーム画面に「YTT for Web」のアイコンができます。次からはここから1タップで開けます。</figcaption></figure>
 
 </div>
 

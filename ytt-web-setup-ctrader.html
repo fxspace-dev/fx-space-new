@@ -994,6 +994,10 @@
     /* 取引ツールを選ぶまで、下の手順は表示しない */
     .js-gate #gated:not(.is-open) { display: none; }
     #tool-select { padding-bottom: 3.5rem; }
+    /* Cloud版の折りたたみ（STEP 2 の下） */
+    .cloud-acc { margin-top: 1.5rem; }
+    .cloud-lead { font-size: 0.875rem; color: #4b5563; line-height: 1.85; margin: 1.1rem 0 1.4rem; }
+    @media (max-width: 600px) { .cloud-acc > summary { padding: 1rem 1.1rem; font-size: 0.92rem; } .cloud-acc .ytt-spec-acc-body { padding: 0 1rem 1.25rem; } }
     .section-alt { background: #f4f6f9; }
     /* 「3ステップで導入完了」の背景の下辺を、次のセクションへ向かう矢印の形にする（route.html の rsec--arrowdown と同じ作り）。
        矢印の下の三角部分は次のセクションに重ね、切り取った左右は次のセクションの白が見えるようにする */
@@ -1016,7 +1020,7 @@
 ====================================================================
   Web版（スマホ版）YTT 導入方法（cTrader版）  ytt-web-setup-ctrader.html
   ・ytt-web-setup-mt5.html（MT5版）を元に、事前準備・STEP 2・STEP 3の画像とよくある質問をcTraderに差し替え
-  ・cTrader Cloud版の手順は未掲載（撮影できたら追加）
+  ・cTrader Cloud版は STEP 2 の下の折りたたみ（#cloud）
   ・流れとスクショは既存Canva「YTT導入方法」(DAF1unsWf4o) を踏襲
   ・見た目は ytt-tokusetu.html と同じ部品（head の <style> は特設ページのものをそのまま使用）
   【本番反映前TODO】
@@ -1337,7 +1341,7 @@
                     <figure class="gshot narrow"><img src="img/webytt/s09-folders.png" alt="解凍後のフォルダ cTrader / cTrader_Cloud / MT4 / MT5" loading="lazy"></figure>
                     <p>cTraderフォルダの中身は次の1つです。</p>
                     <figure class="gshot narrow"><img src="img/webytt/ctrader/c-02-files.png" alt="YTTWeb_cTrader_1.00.algo" loading="lazy"></figure>
-                    <div class="gtip">「cTrader_Cloud」は、PCを閉じても動かせるクラウド版です。このページでは「cTrader」フォルダの手順を紹介します。<br>解凍方法が分からない方は <a href="https://mainichi.doda.jp/article/2022/08/03/2098" target="_blank" rel="noopener">こちら</a></div>
+                    <div class="gtip">「cTrader_Cloud」は、PCを閉じても動かせるクラウド版です。使い方は、このSTEPのいちばん下にある「PCを閉じても動かしたい方へ」を見てください。<br>解凍方法が分からない方は <a href="https://mainichi.doda.jp/article/2022/08/03/2098" target="_blank" rel="noopener">こちら</a></div>
                 </div>
             </div>
             <div class="gstep">
@@ -1358,7 +1362,7 @@
                         <tr><th>PairingToken（口座登録画面に表示されます）</th><td>STEP 1 で控えた<b>32文字の認証コード</b>を貼り付けます</td></tr>
                         <tr><th>通貨ペア名末尾サフィックス</th><td>通貨ペア名の末尾に文字が付いている口座では、その文字を入力します。<br>例：Fintokei の <code>USDJPYp</code> → <code>p</code> ／ HFMプロ口座の <code>USDJPYr</code> → <code>r</code><br>サフィックスが無い口座は空欄のままでOK</td></tr>
                     </table>
-                    <div class="gtip"><b>任意設定</b>はそのままで構いません。</div>
+                    <div class="gtip"><b>任意設定</b>はそのままで構いません。<br>金・銀・ビットコイン・日経・オイルなどを取引する方は、下のほうの「通貨ペア名設定」に、その証券会社で使われている商品名を入力します（例：<code>XAUUSD</code> の欄に <code>GOLD</code>）。空欄のときは標準の名称が使われるので、同じ名前なら空欄でOKです。</div>
                 </div>
             </div>
             <div class="gstep">
@@ -1386,6 +1390,39 @@
                 </div>
             </div>
         </div>
+        <details class="ytt-spec-acc cloud-acc" id="cloud">
+            <summary>
+                <span class="ytt-spec-acc-label">PCを閉じても動かしたい方へ（cTrader Cloud版）</span>
+                <span class="ytt-spec-acc-chev" aria-hidden="true">▼</span>
+            </summary>
+            <div class="ytt-spec-acc-body">
+                <p class="cloud-lead">Cloud版は、連携ツールをcTraderのクラウドで動かします。PCを閉じたりスリープしたりしても止まりません。</p>
+            <div class="gstep">
+                <div class="gstep-no">1</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">「cTrader_Cloud」フォルダの「YTTWeb_cTrader_cloud_1.00.algo」をダブルクリック</p>
+                    <figure class="gshot narrow"><img src="img/webytt/ctrader/c-10-cloud-file.png" alt="YTTWeb_cTrader_cloud_1.00.algo" loading="lazy"></figure>
+                </div>
+            </div>
+            <div class="gstep">
+                <div class="gstep-no">2</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">「In the cloud」を選ぶ →「Advanced parameters」</p>
+                    <figure class="gshot"><img src="img/webytt/ctrader/c-11-cloud-dialog.png" alt="Start cBotの画面でIn the cloudを選び、Advanced parametersを開く" loading="lazy"></figure>
+                    <p>認証コードなどの入力は、上の手順4と同じです。入力したら「Start cBot」を押します。</p>
+                </div>
+            </div>
+            <div class="gstep">
+                <div class="gstep-no">3</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">雲のマークが出ていればクラウドで動いています</p>
+                    <figure class="gshot mid"><img src="img/webytt/ctrader/c-12-cloud-running.png" alt="連携ツールの名前の右に雲のマークが出ている" loading="lazy"></figure>
+                    <p>このあと STEP 3 に進みます。</p>
+                    <div class="gtip">1つの口座に入れられる連携ツールは1つだけです。PCで動かす「cTrader」版とCloud版を同時に動かすと、先に動かしていた方が切断されます。</div>
+                </div>
+            </div>
+            </div>
+        </details>
     </div>
 </section>
 
@@ -1607,7 +1644,7 @@
         </details>
         <details class="ytt-faq">
             <summary><span class="ytt-faq-q">特定の通貨ペアやCFD商品だけ注文できない</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
-            <div class="ytt-faq-a"><p>サフィックス付きの口座（USDJPYp など）で「通貨ペア名末尾サフィックス」を入力しているか確認してください。</p></div>
+            <div class="ytt-faq-a"><p>①サフィックス付きの口座（USDJPYp など）で「通貨ペア名末尾サフィックス」を入力しているか<br>②CFD系商品は、証券会社の商品名（GOLD など）を「通貨ペア名設定」に入力しているか</p></div>
         </details>
         <details class="ytt-faq">
             <summary><span class="ytt-faq-q">コピーモードでポジションがコピーされない</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>

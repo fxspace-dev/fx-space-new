@@ -647,6 +647,12 @@
         .ui-mock-body { padding: 2.2rem 1.4rem 2.6rem; text-align: center; }
         .ui-mock-h { font-size: 1.15rem; font-weight: 800; color: #111827; margin-bottom: 0.9rem; }
         .ui-mock-p { font-size: 0.82rem; color: #374151; line-height: 1.7; margin-bottom: 1.3rem; }
+        .ui-mock--acct { background: #131a2e; border-color: #2b3554; max-width: 320px; padding: 0.9rem; }
+        .acct-row { display: flex; align-items: center; gap: 0.5rem; background: #1b2440; border: 1px solid #33406b; border-radius: 8px; padding: 0.55rem 0.7rem; }
+        .acct-dot { width: 9px; height: 9px; border-radius: 50%; background: #22c55e; flex-shrink: 0; box-shadow: 0 0 6px rgba(34,197,94,0.8); }
+        .acct-name { color: #e5e7eb; font-size: 0.78rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: 1; }
+        .acct-caret { color: #9ca3af; font-size: 0.7rem; }
+        .acct-hint { color: #fbbf24; font-size: 0.72rem; margin-top: 0.5rem; padding-left: 0.2rem; }
         .ui-mock-btn { display: inline-block; background: #5865F2; color: #fff; font-size: 0.9rem; font-weight: 600; padding: 0.6rem 1.4rem; border-radius: 8px; }
         .todo-shot {
             margin: 0.75rem 0 0; border: 2px dashed #c7d2fe; border-radius: 10px; background: #f8f9fc;
@@ -1022,8 +1028,18 @@
     <div class="hstep">
         <div class="hstep-no">3</div>
         <div class="hstep-body">
-            <p>認証済み口座の一覧から、レシーバーを設定した口座を選ぶ</p>
-            <div class="todo-shot">TODO スクショ：認証済み口座の一覧（スマホ）</div>
+            <p>ログインすると、そのままWeb版YTTの画面が開きます</p>
+            <p>使う口座は、画面右上（スマホは画面上部）の<b>口座番号の表示</b>で切り替えます。<wbr>ここを押すと、認証済みの口座が一覧で出るので、<wbr><b>レシーバーを設定した口座</b>を選んでください。<wbr>すでに目的の口座が表示されていれば、そのままでOKです。</p>
+            <figure class="hshot narrow">
+                <div class="ui-mock ui-mock--acct" role="img" aria-label="画面上部の口座切り替え。緑の丸、口座番号、サーバー名、下向き矢印が並ぶ">
+                    <div class="acct-row">
+                        <span class="acct-dot"></span>
+                        <span class="acct-name">30117933（PurpleTradingSC-03D…</span>
+                        <span class="acct-caret">▾</span>
+                    </div>
+                    <div class="acct-hint">← ここを押すと口座の一覧が出ます</div>
+                </div>
+            </figure>
         </div>
     </div>
 
@@ -1031,13 +1047,13 @@
         <div class="hstep-no">4</div>
         <div class="hstep-body">
             <p>数秒待って、接続状態を確認する</p>
-            <p>レシーバー側の表示が「接続中」になれば接続完了です。Web版側のアイコンが赤のままのときは、ページをリロードしてください。</p>
-            <div class="todo-shot">TODO スクショ：接続後の画面（左上の丸が緑）（スマホ）</div>
+            <p>口座番号の左にある<b>丸の色</b>が接続状態を表します。<wbr><b>緑</b>になっていれば接続完了です。<wbr>このとき、MT4側のレシーバーの表示も「承認待ち」から<b>「接続中」</b>に変わります。</p>
             <table class="guide-table">
                 <tr><th><span class="status-dot g"></span>緑</th><td>正常に接続されています。そのまま利用できます</td></tr>
                 <tr><th><span class="status-dot y"></span>黄</th><td>接続はあるが価格が取れていません。MT4 / MT5 では、取引する通貨ペアを気配値表示欄に出してください</td></tr>
                 <tr><th><span class="status-dot r"></span>赤</th><td>接続されていません。ページをリロード。改善しない場合は下の「よくある質問」へ</td></tr>
             </table>
+            <div class="todo-shot">TODO スクショ：接続できた状態のWeb版YTT画面（スマホ）</div>
         </div>
     </div>
 

@@ -657,7 +657,7 @@
         /* スマホ・PCの画面を横に並べる（スマホ幅では縦に並べる） */
         .shot-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; align-items: start; margin-top: 0.75rem; }
         .shot-pair .hshot { margin: 0; }
-        .shot-pair .hshot img { width: 100%; max-width: 100%; }
+        .shot-pair .hshot img { width: auto; max-width: 100%; } /* 元の大きさより拡大しない（小さい画像を引き伸ばすとぼやけるため） */
         @media (max-width: 640px) { .shot-pair { grid-template-columns: 1fr; } .shot-pair .hshot img { max-width: min(100%, 320px); } }
         .todo-shot {
             margin: 0.75rem 0 0; border: 2px dashed #c7d2fe; border-radius: 10px; background: #f8f9fc;

@@ -654,6 +654,11 @@
         .acct-caret { color: #9ca3af; font-size: 0.7rem; }
         .acct-hint { color: #fbbf24; font-size: 0.72rem; margin-top: 0.5rem; padding-left: 0.2rem; }
         .ui-mock-btn { display: inline-block; background: #5865F2; color: #fff; font-size: 0.9rem; font-weight: 600; padding: 0.6rem 1.4rem; border-radius: 8px; }
+        /* スマホ・PCの画面を横に並べる（スマホ幅では縦に並べる） */
+        .shot-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; align-items: start; margin-top: 0.75rem; }
+        .shot-pair .hshot { margin: 0; }
+        .shot-pair .hshot img { width: 100%; max-width: 100%; }
+        @media (max-width: 640px) { .shot-pair { grid-template-columns: 1fr; } .shot-pair .hshot img { max-width: min(100%, 320px); } }
         .todo-shot {
             margin: 0.75rem 0 0; border: 2px dashed #c7d2fe; border-radius: 10px; background: #f8f9fc;
             color: #4f46e5; font-size: 0.85rem; font-weight: 700; text-align: center; padding: 1.4rem 1rem;
@@ -1035,7 +1040,16 @@
                 <tr><th><span class="status-dot y"></span>黄</th><td>接続はあるが価格が取れていません。MT4 / MT5 では、取引する通貨ペアを気配値表示欄に出してください</td></tr>
                 <tr><th><span class="status-dot r"></span>赤</th><td>接続されていません。ページをリロード。改善しない場合は下の「よくある質問」へ</td></tr>
             </table>
-            <div class="todo-shot">TODO スクショ：接続できた状態のWeb版YTT画面（スマホ）</div>
+            <div class="shot-pair">
+                <figure class="hshot">
+                    <img src="img/webytt/s31-connected-sp.png" alt="スマホで接続できた状態。口座番号の左の丸が緑" loading="lazy">
+                    <figcaption><b>スマホ</b>：画面左上、口座番号の左の丸が緑</figcaption>
+                </figure>
+                <figure class="hshot">
+                    <img src="img/webytt/s32-connected-pc.png" alt="PCで接続できた状態。口座番号の左の丸が緑" loading="lazy">
+                    <figcaption><b>PC</b>：画面右上、口座番号の左の丸が緑</figcaption>
+                </figure>
+            </div>
         </div>
     </div>
 

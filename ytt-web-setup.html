@@ -6,7 +6,7 @@
     <title>Web版YTT 導入方法 — FX SPACE</title>
     <link rel="icon" type="image/png" href="icon.png">
     <meta property="og:title" content="Web版YTT 導入方法 — FX SPACE">
-    <meta property="og:description" content="Web版（スマホ版）YTTの導入手順。口座登録、レシーバーEAの設置、Web版YTTへのログインまでを画像つきで案内します。">
+    <meta property="og:description" content="Web版（スマホ版）YTTの導入手順。口座登録、MT4への連携ツールの設置、Web版YTTへのログインまでを画像つきで案内します。">
     <meta property="og:image" content="https://fx-space.com/intro/img/og-ytt-tokusetu.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -951,7 +951,7 @@
   ・流れとスクショは既存Canva「YTT導入方法」(DAF1unsWf4o) を踏襲
   ・見た目は ytt-tokusetu.html と同じ部品（head の <style> は特設ページのものをそのまま使用）
   【本番反映前TODO】
-  [1] レシーバーEA（webytt.zip）のダウンロードURL → 安田さんに配置場所を確認して差し替え（#href-tbd-webytt-zip）
+  [1] 連携ツール（webytt.zip）のダウンロードURL → 安田さんに配置場所を確認して差し替え（#href-tbd-webytt-zip）
   [2] 機能説明ページができたらリンクを有効化（#href-tbd-web-features）
 ====================================================================
 -->
@@ -973,7 +973,7 @@
         <span class="ytt-sp-title-line"><span class="line-text">導入方法<img class="ytt-title-wave" src="img/wave-yellow.png" alt=""></span></span>
     </h1>
     <p class="ytt-sp-hero-lead">
-        口座の登録からレシーバーの設置、Web版YTTへのログインまで。<br>
+        口座の登録からMT4への連携ツールの設置、Web版YTTへのログインまで。<br>
         画像のとおりに上から進めれば、約15分で使えるようになります。
     </p>
     <div class="ytt-sp-hero-btns">
@@ -1007,7 +1007,7 @@
                 <img class="webytt-sp" src="img/webytt-sp.png" alt="Web版YTTのスマホ画面" loading="lazy">
             </div>
             <div class="ytt-fto2-content">
-                <p class="ytt-fto2-head">取引ツールに<span class="accent">レシーバーEA</span>を入れておけば、<br>ブラウザから注文・決済までできます</p>
+                <p class="ytt-fto2-head">MT4に<span class="accent">連携ツール</span>を入れておけば、<br>ブラウザから注文・決済までできます</p>
                 <ul class="ytt-fto-list">
                     <li><img src="img/check-orange.png" alt="">注文、決済</li>
                     <li><img src="img/check-orange.png" alt="">シナリオ構築・予約注文</li>
@@ -1015,7 +1015,7 @@
                     <li><img src="img/check-orange.png" alt="">コピーモード</li>
                     <li><img src="img/check-orange.png" alt="">通知・トレードノート・経済指標表示 ほか</li>
                 </ul>
-                <p class="ytt-fto-attention">注文を実際に出すのはレシーバー側です。MT4 / MT5 は利用中もPCを起動したままにしてください（cTrader Cloud版はPCを閉じてもOK）。</p>
+                <p class="ytt-fto-attention">連携ツールは、Web版YTTで押した注文をMT4に伝えて、実際に注文を出す役目です。そのため MT4 / MT5 は利用中もPCを起動したままにしてください（cTrader Cloud版はPCを閉じてもOK）。</p>
                 <p class="ytt-fto2-note">詳しい機能は <a href="#href-tbd-web-features">Web版YTT 使い方ページ（準備中）</a> で紹介します。</p>
             </div>
         </div>
@@ -1048,7 +1048,7 @@
                 <table class="ytt-spec-table">
                     <tbody>
                         <tr><th>開く端末</th><td class="spec-val">スマホ（iPhone / Android）・PC のブラウザ</td><td class="spec-note">スマホは、Androidなら「インストール」、iPhoneなら「ホーム画面に追加」して使うのがおすすめ</td></tr>
-                        <tr><th>取引ツール</th><td class="spec-val">MT4 / MT5 / cTrader / cTrader Cloud</td><td class="spec-note">注文を出すレシーバーEAを入れます（1口座につき1つ）</td></tr>
+                        <tr><th>取引ツール</th><td class="spec-val">MT4 / MT5 / cTrader / cTrader Cloud</td><td class="spec-note">Web版YTTとつなぐ連携ツールを入れます（1口座につき1つ）</td></tr>
                         <tr><th>利用中のPC</th><td class="spec-val">起動したまま</td><td class="spec-note">MT4 / MT5 / cTrader は、PCのスリープや終了で止まります。cTrader Cloud版はPCを閉じてもOK</td></tr>
                         <tr><th>通信環境</th><td class="spec-val">安定した高速インターネット回線</td><td class="spec-note"></td></tr>
                         <tr><th>使用可能者</th><td class="spec-val"><a href="https://discord.com/channels/1039824083208126474/1039824083208126476" target="_blank" rel="noopener">メンバーシップ or サブスク</a>加入者</td><td class="spec-note"></td></tr>
@@ -1079,7 +1079,7 @@
         </div>
         <div class="ytt-add-grid flow3">
             <a class="ytt-add-card" href="#step1"><img class="flow-num" src="img/crayon-1.png" alt="1"><h3>口座登録</h3><p>登録ページから口座を登録し、表示される32文字の認証コードを控える</p></a>
-            <a class="ytt-add-card" href="#step2"><img class="flow-num" src="img/crayon-2.png" alt="2"><h3>レシーバー設置</h3><p>MT4 / MT5 / cTrader にレシーバー用EAを入れ、認証コードを設定する</p></a>
+            <a class="ytt-add-card" href="#step2"><img class="flow-num" src="img/crayon-2.png" alt="2"><h3>連携ツールの設置</h3><p>MT4 / MT5 / cTrader に連携ツールを入れ、認証コードを設定する</p></a>
             <a class="ytt-add-card" href="#step3"><img class="flow-num" src="img/crayon-3.png" alt="3"><h3>ログイン</h3><p>Web版YTTにDiscordでログインし、口座を選んで接続を確認する</p></a>
         </div>
     </div>
@@ -1139,7 +1139,7 @@
                     <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
                 </div>
             </div>
-            <p>レシーバーとあなたの口座を結び付ける「32文字の認証コード」を受け取ります。</p>
+            <p>MT4とWeb版YTTのあなたの口座を結び付ける「32文字の認証コード」を受け取ります。</p>
         </div>
         <div class="guide-card">
             <div class="gstep">
@@ -1162,7 +1162,7 @@
                 <div class="gstep-no">3</div>
                 <div class="gstep-body">
                     <p class="gstep-title">表示された32文字の認証コードを控える</p>
-                    <p>このコードは STEP 2 のレシーバー設定で入力します。メモ帳などに控えておいてください。</p>
+                    <p>このコードは STEP 2 の連携ツールの設定で入力します。メモ帳などに控えておいてください。</p>
                     <figure class="gshot"><img src="img/webytt/s06-authcode.png" alt="32文字の認証コードが表示された画面" loading="lazy"></figure>
                     <p class="gnote">認証コードは他人に教えないでください。他人に知られると、あなたの口座に対して操作される可能性があります。コミュニティやSNS、スクリーンショットにコードを載せないようご注意ください。</p>
                 </div>
@@ -1182,18 +1182,18 @@
             </span>
             <div style="text-align:center; margin-bottom:0.25rem;">
                 <div style="display:inline-block; white-space:nowrap;">
-                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">レシーバーEAの設置</h2>
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">MT4に連携ツールを入れる</h2>
                     <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
                 </div>
             </div>
-            <p>Web版YTTからの指示を受け取って注文を出すEAです。<br>配置場所は通常のYTTと同じです。</p>
+            <p>連携ツールは、Web版YTTで押した注文をMT4に伝えるツールです。<br>入れ方は、これまでのYTTと同じです。</p>
         </div>
         <div class="guide-card">
             <div class="gstep">
                 <div class="gstep-no">1</div>
                 <div class="gstep-body">
-                    <p class="gstep-title">レシーバーEAをダウンロードする</p>
-                    <div class="gstep-btn"><a href="#href-tbd-webytt-zip" class="btn-sq-blue" id="dlBtn">レシーバーEAをダウンロード</a></div>
+                    <p class="gstep-title">連携ツールをダウンロードする</p>
+                    <div class="gstep-btn"><a href="#href-tbd-webytt-zip" class="btn-sq-blue" id="dlBtn">連携ツールをダウンロード</a></div>
                     <figure class="gshot mid"><img src="img/webytt/s07-zip.png" alt="webytt一式.zip のダウンロード" loading="lazy"></figure>
                     <p>ブラウザの警告が出た場合は「ダウンロードする」を選んでください。</p>
                     <figure class="gshot narrow"><img src="img/webytt/s08-dl-warning.png" alt="ブラウザのダウンロード警告" loading="lazy"></figure>
@@ -1269,11 +1269,11 @@
             </span>
             <div style="text-align:center; margin-bottom:0.25rem;">
                 <div style="display:inline-block; white-space:nowrap;">
-                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">チャートにレシーバーを入れる</h2>
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">チャートに連携ツールを入れる</h2>
                     <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
                 </div>
             </div>
-            <p>レシーバーは必ず<b>1つのチャートだけ</b>に入れてください。</p>
+            <p>連携ツールは必ず<b>1つのチャートだけ</b>に入れてください。</p>
         </div>
         <div class="guide-card">
             <div class="gstep">
@@ -1299,7 +1299,7 @@
                     <figure class="gshot mid"><img src="img/webytt/s20-drag-pair.png" alt="通貨ペア名をドラッグする" loading="lazy"></figure>
                     <p>下の画像のようにチャートが表示されます。</p>
                     <figure class="gshot"><img src="img/webytt/s21-chart.png" alt="チャートが表示された状態" loading="lazy"></figure>
-                    <p class="gnote">レシーバーを入れるチャートは1枚だけです。複数のチャートに入れると、先に設定した方が切断されます。</p>
+                    <p class="gnote">連携ツールを入れるチャートは1枚だけです。複数のチャートに入れると、先に設定した方が切断されます。</p>
                 </div>
             </div>
             <div class="gstep">
@@ -1314,7 +1314,7 @@
                 <div class="gstep-body">
                     <p class="gstep-title">「エキスパートアドバイザ」の左にある「＋」をクリック</p>
                     <figure class="gshot narrow"><img src="img/webytt/s23-expand-ea.png" alt="エキスパートアドバイザの＋をクリック" loading="lazy"></figure>
-                    <p>前の段階で Experts フォルダに入れたファイル名が表示されます（<b>YTT_OrderEA</b>）。</p>
+                    <p>前の段階で Experts フォルダに入れた連携ツールが表示されます（名前は <b>YTT_OrderEA</b>）。</p>
                     <div class="gtip">表示されないときは「エキスパートアドバイザ」を右クリック →「更新」、またはMT4を再起動してください。</div>
                 </div>
             </div>
@@ -1402,7 +1402,7 @@
                 <div class="gstep-no">3</div>
                 <div class="gstep-body">
                     <p class="gstep-title">「口座を選択」画面で、承認した口座を選んで「確定」</p>
-                    <p>STEP 1 で登録し、レシーバーを設定した<b>口座番号</b>を選んで、下の<b>「確定」</b>を押してください。</p>
+                    <p>STEP 1 で登録し、連携ツールを入れた<b>口座番号</b>を選んで、下の<b>「確定」</b>を押してください。</p>
                     <figure class="gshot narrow"><img src="img/webytt/s30-account-select.png" alt="口座を選択の画面。承認した口座番号を選んで確定を押す" loading="lazy"></figure>
                     <div class="gtip">あとから口座を切り替えるときは、画面上部の<b>口座番号の表示</b>を押すと、同じ「口座を選択」画面が出ます。</div>
                 </div>
@@ -1411,7 +1411,7 @@
                 <div class="gstep-no">4</div>
                 <div class="gstep-body">
                     <p class="gstep-title">数秒待って、接続状態を確認する</p>
-                    <p>口座番号の左にある<b>丸の色</b>が接続状態を表します。<b>緑</b>になっていれば接続完了です。このとき、MT4側のレシーバーの表示も「承認待ち」から<b>「接続済み」</b>に変わります。</p>
+                    <p>口座番号の左にある<b>丸の色</b>が接続状態を表します。<b>緑</b>になっていれば接続完了です。このとき、MT4のチャート上の表示も「承認待ち」から<b>「接続済み」</b>に変わります。</p>
                     <div class="gshot-pair">
                         <figure class="gshot"><img src="img/webytt/s31-connected-sp.png" alt="スマホで接続できた状態。口座番号の左の丸が緑" loading="lazy"><figcaption><b>スマホ</b>：画面左上、口座番号の左の丸が緑</figcaption></figure>
                         <figure class="gshot"><img src="img/webytt/s32-connected-pc.png" alt="PCで接続できた状態。口座番号の左の丸が緑" loading="lazy"><figcaption><b>PC</b>：画面右上、口座番号の左の丸が緑</figcaption></figure>
@@ -1492,9 +1492,9 @@
             <p>「動かない」と感じたときは、まずここを確認してください。</p>
         </div>
         <div class="ytt-add-grid">
-            <div class="ytt-add-card"><h3>レシーバーは1口座に1つだけ</h3><p>同じ口座に複数のレシーバー（MT4とMT5など）を同時に設置することはできません。複数設定した場合は、先に設定していた方が切断されます。</p></div>
+            <div class="ytt-add-card"><h3>連携ツールは1口座に1つだけ</h3><p>同じ口座に、複数の連携ツール（MT4とMT5の両方など）を同時に入れることはできません。複数設定した場合は、先に設定していた方が切断されます。</p></div>
             <div class="ytt-add-card"><h3>通貨ペアを気配値表示に出す</h3><p>MT4 / MT5 では、取引する通貨ペアを気配値表示欄に出しておいてください。出していないと価格が取得できず、アイコンが黄になります。</p></div>
-            <div class="ytt-add-card"><h3>PCと取引ツールは起動したまま</h3><p>レシーバーのEA停止中、PCのスリープ中、取引ツールを閉じている間は動きません。cTrader Cloud版はPCを閉じても動きます。</p></div>
+            <div class="ytt-add-card"><h3>PCと取引ツールは起動したまま</h3><p>連携ツールが止まっているとき、PCのスリープ中、取引ツールを閉じている間は動きません。cTrader Cloud版はPCを閉じても動きます。</p></div>
         </div>
     </div>
 </section>
@@ -1531,12 +1531,12 @@
                         <tr><th>コピーされる</th><td class="spec-val">Web版YTTからのエントリーのみ</td><td class="spec-note">コピー元が他の方法で建てたポジションはコピーされません</td></tr>
                         <tr><th>ロット</th><td class="spec-val">ロット計算モードに従う</td><td class="spec-note">損失率固定・損失額固定のときは、SLが無いポジションはコピーされません</td></tr>
                         <tr><th>TP / SL</th><td class="spec-val">同じ幅でコピー</td><td class="spec-note">約定価格の差を吸収するため、コピー元と同じTP/SL幅になるように設定されます</td></tr>
-                        <tr><th>オンにした後</th><td class="spec-val">Web版の画面は閉じてOK</td><td class="spec-note">レシーバーが入っている取引ツールは起動したままにしてください</td></tr>
+                        <tr><th>オンにした後</th><td class="spec-val">Web版の画面は閉じてOK</td><td class="spec-note">連携ツールを入れた取引ツールは起動したままにしてください</td></tr>
                     </tbody>
                 </table>
             </div>
         </details>
-        <p style="font-size:0.8125rem;color:#6b7280;margin-top:1.25rem;text-align:left;">新しいレシーバーEAが配布されたときは、ファイルをダウンロードして「STEP 2　レシーバーEAの設置」の手順をもう一度行ってください。</p>
+        <p style="font-size:0.8125rem;color:#6b7280;margin-top:1.25rem;text-align:left;">新しい連携ツールが配布されたときは、ファイルをダウンロードして「STEP 2　MT4に連携ツールを入れる」の手順をもう一度行ってください。</p>
     </div>
 </section>
 
@@ -1557,16 +1557,16 @@
             </div>
         </div>
         <details class="ytt-faq">
-            <summary><span class="ytt-faq-q">レシーバーで認証に失敗する／「認証エラー」になる</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
-            <div class="ytt-faq-a"><p>次のいずれかが原因のことが多いです。ひとつずつ確認してください。</p><p>①認証コード（32文字）の入力ミス（前後の空白、全角・半角の混在）<br>②レシーバーを複数のチャートに入れている（1つのチャートだけに入れます）<br>③自動売買の許可をしていない（許可する箇所は2つあります）<br>④DLLの使用許可をしていない<br>⑤MT4を再起動していない<br>⑥メンバーシップ／サブスクに加入していない</p></div>
+            <summary><span class="ytt-faq-q">MT4で認証に失敗する／「認証エラー」になる</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
+            <div class="ytt-faq-a"><p>次のいずれかが原因のことが多いです。ひとつずつ確認してください。</p><p>①認証コード（32文字）の入力ミス（前後の空白、全角・半角の混在）<br>②連携ツールを複数のチャートに入れている（1つのチャートだけに入れます）<br>③自動売買の許可をしていない（許可する箇所は2つあります）<br>④DLLの使用許可をしていない<br>⑤MT4を再起動していない<br>⑥メンバーシップ／サブスクに加入していない</p></div>
         </details>
         <details class="ytt-faq">
-            <summary><span class="ytt-faq-q">レシーバーが「承認待ち」のまま変わらない</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
+            <summary><span class="ytt-faq-q">MT4のチャート上の表示が「承認待ち」のまま変わらない</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
             <div class="ytt-faq-a"><p>Web版YTTにログインし、「口座を選択」でその口座を選んで「確定」を押してください（STEP 3）。選択後、数秒待ちます。</p></div>
         </details>
         <details class="ytt-faq">
             <summary><span class="ytt-faq-q">Web版の丸いアイコンが赤のまま</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
-            <div class="ytt-faq-a"><p>①ページをリロードする<br>②取引ツール（MT4 / MT5 / cTrader）が起動していて、EAが動いているか<br>③PCがスリープしていないか<br>④同じ口座に別のレシーバーを後から設定していないか（先に設定した方が切断されます）</p></div>
+            <div class="ytt-faq-a"><p>①ページをリロードする<br>②取引ツール（MT4 / MT5 / cTrader）が起動していて、連携ツールが動いているか<br>③PCがスリープしていないか<br>④同じ口座に、別の連携ツールを後から入れていないか（先に設定した方が切断されます）</p></div>
         </details>
         <details class="ytt-faq">
             <summary><span class="ytt-faq-q">Web版の丸いアイコンが黄になる</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
@@ -1582,7 +1582,7 @@
         </details>
         <details class="ytt-faq">
             <summary><span class="ytt-faq-q">コピーモードでポジションがコピーされない</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
-            <div class="ytt-faq-a"><p>①コピー元のポジションがWeb版YTTからエントリーされたものか<br>②ロット計算モードが損失率固定・損失額固定のとき、コピー元のポジションにSLが付いているか<br>③レシーバー側の取引ツールが起動したままになっているか</p></div>
+            <div class="ytt-faq-a"><p>①コピー元のポジションがWeb版YTTからエントリーされたものか<br>②ロット計算モードが損失率固定・損失額固定のとき、コピー元のポジションにSLが付いているか<br>③連携ツールを入れた取引ツールが起動したままになっているか</p></div>
         </details>
         <details class="ytt-faq">
             <summary><span class="ytt-faq-q">コピーモードをオンにしたら注文が消えた</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
@@ -1632,7 +1632,7 @@
                 <table class="ytt-spec-table">
                     <tbody>
                         <tr><th>口座</th><td class="spec-val">証券会社・口座タイプ・有効証拠金残高</td><td class="spec-note">Web版YTTで使用している口座番号も</td></tr>
-                        <tr><th>環境</th><td class="spec-val">OS（MacかWindows）・スマホの機種</td><td class="spec-note">レシーバーEAのバージョン（例：YTT_OrderEA 1.00）</td></tr>
+                        <tr><th>環境</th><td class="spec-val">OS（MacかWindows）・スマホの機種</td><td class="spec-note">連携ツールのバージョン（例：YTT_OrderEA 1.00）</td></tr>
                         <tr><th>内容</th><td class="spec-val">困っていることをできるだけ具体的に</td><td class="spec-note">症状発生時のスクショ、ターミナル→エキスパートタブのスクショ</td></tr>
                         <tr><th>※必須</th><td class="spec-val">エラーのコピー</td><td class="spec-note">エラーが出ていた場合、エキスパートタブに出ていたエラーの文字をコピーして貼り付け</td></tr>
                     </tbody>

@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web版YTT 導入方法 — FX SPACE</title>
+    <title>Web版YTT 導入方法（cTrader）— FX SPACE</title>
     <link rel="icon" type="image/png" href="icon.png">
-    <meta property="og:title" content="Web版YTT 導入方法 — FX SPACE">
+    <meta property="og:title" content="Web版YTT 導入方法（cTrader）— FX SPACE">
     <meta property="og:description" content="Web版（スマホ版）YTTの導入手順。口座登録、取引ツール（MT4 / MT5 / cTrader）への連携ツールの設置、Web版YTTへのログインまでを画像つきで案内します。">
     <meta property="og:image" content="https://fx-space.com/intro/img/og-ytt-tokusetu.png">
     <meta property="og:image:width" content="1200">
@@ -1010,11 +1010,13 @@
 
 <script>document.documentElement.classList.add('js-gate');</script>
 </head>
-<body data-tool="mt4">
+<body data-tool="ctrader">
 
 <!--
 ====================================================================
-  Web版（スマホ版）YTT 導入方法  ytt-web-setup.html
+  Web版（スマホ版）YTT 導入方法（cTrader版）  ytt-web-setup-ctrader.html
+  ・ytt-web-setup-mt5.html（MT5版）を元に、事前準備・STEP 2・STEP 3の画像とよくある質問をcTraderに差し替え
+  ・cTrader Cloud版の手順は未掲載（撮影できたら追加）
   ・流れとスクショは既存Canva「YTT導入方法」(DAF1unsWf4o) を踏襲
   ・見た目は ytt-tokusetu.html と同じ部品（head の <style> は特設ページのものをそのまま使用）
   【本番反映前TODO】
@@ -1227,33 +1229,25 @@
         <div class="ytt-spec-header">
             <span class="section-title-badge section-title-badge--blue">
                 <img class="hero-title-side hero-title-side--left" src="img/title-side-blue-left.png" alt="">
-                事前準備（MT4）
+                事前準備（cTrader）
                 <img class="hero-title-side hero-title-side--right" src="img/title-side-blue-right.png" alt="">
             </span>
             <div style="text-align:center; margin-bottom:0.25rem;">
                 <div style="display:inline-block; white-space:nowrap;">
-                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">MT4にログインする</h2>
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">cTraderにログインする</h2>
                     <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
                 </div>
             </div>
-            <p>すでにMT4を使っている方は読み飛ばしてOKです。</p>
+            <p>すでにcTraderを使っている方は読み飛ばしてOKです。</p>
         </div>
         <div class="guide-card">
-            <p style="font-size:0.875rem;color:#4b5563;line-height:1.85;margin:0 0 1.25rem;">お使いの証券会社・プロップファームで口座開設後、それぞれのHPよりMT4をダウンロードします。MT4を開き、口座開設後にメールで届いた口座情報でログインします。</p>
+            <p style="font-size:0.875rem;color:#4b5563;line-height:1.85;margin:0 0 1.25rem;">お使いの証券会社・プロップファームで口座開設後、それぞれのHPよりcTraderをダウンロードします。cTraderを開き、口座開設後にメールで届いた情報でログインします。</p>
             <div class="gstep">
                 <div class="gstep-no">1</div>
                 <div class="gstep-body">
-                    <p class="gstep-title">MT4左上の「ファイル」→「取引口座にログイン」</p>
-                    <figure class="gshot narrow"><img src="img/webytt/s01-file-login.png" alt="ファイルメニューから取引口座にログインを選ぶ" loading="lazy"></figure>
-                </div>
-            </div>
-            <div class="gstep">
-                <div class="gstep-no">2</div>
-                <div class="gstep-body">
-                    <p class="gstep-title">ログインID・パスワード・サーバーを入力して「ログイン」</p>
-                    <figure class="gshot mid"><img src="img/webytt/s02-login-dialog.png" alt="取引口座のログイン情報を入力する画面" loading="lazy"></figure>
-                    <p>ログインすると、MT4左上に口座番号が表示されます（ログインID＝MT4口座番号）。</p>
-                    <figure class="gshot narrow"><img src="img/webytt/s03-account-no.png" alt="MT4左上に口座番号が表示される" loading="lazy"></figure>
+                    <p class="gstep-title">cTrader右上で口座番号を確認する</p>
+                    <p>ログインすると、cTraderの右上に「Demo」または「Live」と口座番号が表示されます。この番号を STEP 1 で登録します。</p>
+                    <figure class="gshot narrow"><img src="img/webytt/ctrader/c-01-account.png" alt="cTrader右上に口座番号が表示される" loading="lazy"></figure>
                 </div>
             </div>
         </div>
@@ -1313,16 +1307,16 @@
         <div class="ytt-spec-header">
             <span class="section-title-badge section-title-badge--blue">
                 <img class="hero-title-side hero-title-side--left" src="img/title-side-blue-left.png" alt="">
-                STEP 2（MT4）
+                STEP 2（cTrader）
                 <img class="hero-title-side hero-title-side--right" src="img/title-side-blue-right.png" alt="">
             </span>
             <div style="text-align:center; margin-bottom:0.25rem;">
                 <div style="display:inline-block; white-space:nowrap;">
-                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">MT4に連携ツールを入れる</h2>
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">cTraderに連携ツールを入れる</h2>
                     <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
                 </div>
             </div>
-            <p>連携ツールは、Web版YTTで押した注文を取引ツールに伝えるツールです。<br>入れ方は、これまでのYTTと同じです。</p>
+            <p>連携ツールは、Web版YTTで押した注文を取引ツールに伝えるツールです。<br>cTraderでは、ファイルをダブルクリックするだけで取り込めます。</p>
         </div>
         <div class="guide-card">
             <div class="gstep">
@@ -1338,163 +1332,57 @@
             <div class="gstep">
                 <div class="gstep-no">2</div>
                 <div class="gstep-body">
-                    <p class="gstep-title">zipファイルを解凍する</p>
-                    <p>解凍すると、取引ツールごとのフォルダが入っています。お使いの取引ツールのフォルダだけ使います。</p>
+                    <p class="gstep-title">zipファイルを解凍し、「cTrader」フォルダを開く</p>
+                    <p>解凍すると、取引ツールごとのフォルダが入っています。<b>cTrader</b>のフォルダを使います。</p>
                     <figure class="gshot narrow"><img src="img/webytt/s09-folders.png" alt="解凍後のフォルダ cTrader / cTrader_Cloud / MT4 / MT5" loading="lazy"></figure>
-                    <p>MT4フォルダの中身は次の2つです。</p>
-                    <figure class="gshot narrow"><img src="img/webytt/s10-mt4-files.png" alt="YTT_OrderEA.ex4 と YTT_OrderReceiver.dll" loading="lazy"></figure>
-                    <div class="gtip">MT5：<b>YTT_OrderEA.ex5</b> と <b>YTT_OrderReceiver.dll</b>／cTrader：<b>.algo ファイル</b>（Cloud版は cTrader_Cloud フォルダの .algo）<br>解凍方法が分からない方は <a href="https://mainichi.doda.jp/article/2022/08/03/2098" target="_blank" rel="noopener">こちら</a></div>
+                    <p>cTraderフォルダの中身は次の1つです。</p>
+                    <figure class="gshot narrow"><img src="img/webytt/ctrader/c-02-files.png" alt="YTTWeb_cTrader_1.00.algo" loading="lazy"></figure>
+                    <div class="gtip">「cTrader_Cloud」は、PCを閉じても動かせるクラウド版です。このページでは「cTrader」フォルダの手順を紹介します。<br>解凍方法が分からない方は <a href="https://mainichi.doda.jp/article/2022/08/03/2098" target="_blank" rel="noopener">こちら</a></div>
                 </div>
             </div>
             <div class="gstep">
                 <div class="gstep-no">3</div>
                 <div class="gstep-body">
-                    <p class="gstep-title">MT4を開き、「ファイル」→「データフォルダを開く」</p>
-                    <figure class="gshot narrow"><img src="img/webytt/s11-datafolder.png" alt="ファイルメニューからデータフォルダを開く" loading="lazy"></figure>
+                    <p class="gstep-title">「YTTWeb_cTrader_1.00.algo」をダブルクリック →「Advanced parameters」</p>
+                    <p>cTraderに「Start cBot」の画面が出ます。「Locally」が選ばれたままでOKです。</p>
+                    <figure class="gshot"><img src="img/webytt/ctrader/c-03-start-dialog.png" alt="Start cBotの画面。Advanced parametersを開く" loading="lazy"></figure>
                 </div>
             </div>
             <div class="gstep">
                 <div class="gstep-no">4</div>
                 <div class="gstep-body">
-                    <p class="gstep-title">フォルダ中の「MQL4」→「Experts」へと進む</p>
-                    <figure class="gshot narrow"><img src="img/webytt/s12-mql4.png" alt="MQL4フォルダ" loading="lazy"></figure>
-                    <figure class="gshot narrow"><img src="img/webytt/s13-experts.png" alt="Expertsフォルダ" loading="lazy"></figure>
-                </div>
-            </div>
-            <div class="gstep">
-                <div class="gstep-no">5</div>
-                <div class="gstep-body">
-                    <p class="gstep-title">その中に「YTT_OrderEA.ex4」を移す（もしくはコピー＆ペーストする）</p>
-                    <figure class="gshot narrow"><img src="img/webytt/s14-ea-placed.png" alt="ExpertsフォルダにYTT_OrderEA.ex4を置いた状態" loading="lazy"></figure>
-                </div>
-            </div>
-            <div class="gstep">
-                <div class="gstep-no">6</div>
-                <div class="gstep-body">
-                    <p class="gstep-title">戻って、フォルダ中の「MQL4」→「Libraries」へと進む</p>
-                    <figure class="gshot narrow"><img src="img/webytt/s15-libraries.png" alt="Librariesフォルダ" loading="lazy"></figure>
-                </div>
-            </div>
-            <div class="gstep">
-                <div class="gstep-no">7</div>
-                <div class="gstep-body">
-                    <p class="gstep-title">その中に「YTT_OrderReceiver.dll」を移す（もしくはコピー＆ペーストする）</p>
-                    <figure class="gshot narrow"><img src="img/webytt/s16-dll-placed.png" alt="LibrariesフォルダにYTT_OrderReceiver.dllを置いた状態" loading="lazy"></figure>
-                    <div class="gtip">MT5は <b>Experts</b> に ex5、<b>Libraries</b> に dll を置きます。cTraderは <b>.algo ファイルをダブルクリック</b>すると自動で配置されます。</div>
-                </div>
-            </div>
-            <div class="gstep">
-                <div class="gstep-no">8</div>
-                <div class="gstep-body">
-                    <p class="gstep-title">MT4右上の「×」で閉じ、もう一度MT4を立ち上げる</p>
-                    <figure class="gshot narrow"><img src="img/webytt/s17-close-mt4.png" alt="MT4右上の×で閉じる" loading="lazy"></figure>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- STEP 2（続き） -->
-<section class="ytt-spec-section" style="background:#fff;">
-    <div class="ytt-spec-inner">
-        <div class="ytt-spec-header">
-            <span class="section-title-badge section-title-badge--orange">
-                <img class="hero-title-side hero-title-side--left" src="img/title-side-orange-left.png" alt="">
-                STEP 2（MT4・続き）
-                <img class="hero-title-side hero-title-side--right" src="img/title-side-orange-right.png" alt="">
-            </span>
-            <div style="text-align:center; margin-bottom:0.25rem;">
-                <div style="display:inline-block; white-space:nowrap;">
-                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">チャートに連携ツールを入れる</h2>
-                    <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
-                </div>
-            </div>
-            <p>連携ツールは必ず<b>1つのチャートだけ</b>に入れてください。</p>
-        </div>
-        <div class="guide-card">
-            <div class="gstep">
-                <div class="gstep-no">1</div>
-                <div class="gstep-body">
-                    <p class="gstep-title">MT4を開き、左上にある気配値表示のアイコンをクリック</p>
-                    <figure class="gshot narrow"><img src="img/webytt/s18-kehaichi-icon.png" alt="気配値表示のアイコン" loading="lazy"></figure>
-                    <p>MT4左側に気配値表示（通貨ペア名が並ぶ）が表示されます。</p>
-                </div>
-            </div>
-            <div class="gstep">
-                <div class="gstep-no">2</div>
-                <div class="gstep-body">
-                    <p class="gstep-title">気配値表示上で右クリック →「すべて表示」</p>
-                    <figure class="gshot mid"><img src="img/webytt/s19-show-all.png" alt="気配値表示で右クリックしてすべて表示を選ぶ" loading="lazy"></figure>
-                    <p>灰色ではなく黒色の通貨ペア名の中から、1つだけ通貨ペアを選びます。</p>
-                </div>
-            </div>
-            <div class="gstep">
-                <div class="gstep-no">3</div>
-                <div class="gstep-body">
-                    <p class="gstep-title">通貨ペア名をMT4右側の空間にドラッグ＆ドロップ</p>
-                    <figure class="gshot mid"><img src="img/webytt/s20-drag-pair.png" alt="通貨ペア名をドラッグする" loading="lazy"></figure>
-                    <p>下の画像のようにチャートが表示されます。</p>
-                    <figure class="gshot"><img src="img/webytt/s21-chart.png" alt="チャートが表示された状態" loading="lazy"></figure>
-                    <p class="gnote">連携ツールを入れるチャートは1枚だけです。複数のチャートに入れると、先に設定した方が切断されます。</p>
-                </div>
-            </div>
-            <div class="gstep">
-                <div class="gstep-no">4</div>
-                <div class="gstep-body">
-                    <p class="gstep-title">MT4左上にあるナビゲーターのアイコンをクリック</p>
-                    <figure class="gshot narrow"><img src="img/webytt/s22-navigator-icon.png" alt="ナビゲーターのアイコン" loading="lazy"></figure>
-                </div>
-            </div>
-            <div class="gstep">
-                <div class="gstep-no">5</div>
-                <div class="gstep-body">
-                    <p class="gstep-title">「エキスパートアドバイザ」の左にある「＋」をクリック</p>
-                    <figure class="gshot narrow"><img src="img/webytt/s23-expand-ea.png" alt="エキスパートアドバイザの＋をクリック" loading="lazy"></figure>
-                    <p>前の段階で Experts フォルダに入れた連携ツールが表示されます（名前は <b>YTT_OrderEA</b>）。</p>
-                    <div class="gtip">表示されないときは「エキスパートアドバイザ」を右クリック →「更新」、またはMT4を再起動してください。</div>
-                </div>
-            </div>
-            <div class="gstep">
-                <div class="gstep-no">6</div>
-                <div class="gstep-body">
-                    <p class="gstep-title">「YTT_OrderEA」を右クリック →「チャートに表示」</p>
-                    <figure class="gshot mid"><img src="img/webytt/s24-attach-chart.png" alt="YTT_OrderEAを右クリックしてチャートに表示を選ぶ" loading="lazy"></figure>
-                </div>
-            </div>
-            <div class="gstep">
-                <div class="gstep-no">7</div>
-                <div class="gstep-body">
-                    <p class="gstep-title">「全般」タブ →「自動売買を許可する」にチェック →「DLLの使用を許可する」にチェック</p>
-                    <figure class="gshot"><img src="img/webytt/s25-general-tab.png" alt="全般タブで自動売買とDLLの使用を許可する" loading="lazy"></figure>
-                </div>
-            </div>
-            <div class="gstep">
-                <div class="gstep-no">8</div>
-                <div class="gstep-body">
-                    <p class="gstep-title">「パラメーターの入力」タブで、認証コードなどを入力して「OK」</p>
-                    <figure class="gshot"><img src="img/webytt/s27-params.png" alt="パラメーターの入力タブ。認証コードとサフィックスを入力する" loading="lazy"></figure>
-                    <p>入力するのは<b>必須設定</b>の2つだけです。</p>
+                    <p class="gstep-title">通貨ペアを選び、認証コードなどを入力して「Start cBot」</p>
+                    <figure class="gshot"><img src="img/webytt/ctrader/c-04-params.png" alt="Symbolで通貨ペアを選び、認証コードとサフィックスを入力してStart cBotを押す" loading="lazy"></figure>
+                    <p>「Symbol」の通貨ペアはどれでも構いません。入力するのは<b>必須設定</b>の2つだけです。</p>
                     <table class="gtable">
-                        <tr><th>口座登録画面に表示される連携コード（32文字）を貼り付ける</th><td>STEP 1 で控えた<b>32文字の認証コード</b>を貼り付けます</td></tr>
+                        <tr><th>PairingToken（口座登録画面に表示されます）</th><td>STEP 1 で控えた<b>32文字の認証コード</b>を貼り付けます</td></tr>
                         <tr><th>通貨ペア名末尾サフィックス</th><td>通貨ペア名の末尾に文字が付いている口座では、その文字を入力します。<br>例：Fintokei の <code>USDJPYp</code> → <code>p</code> ／ HFMプロ口座の <code>USDJPYr</code> → <code>r</code><br>サフィックスが無い口座は空欄のままでOK</td></tr>
                     </table>
-                    <div class="gtip"><b>任意設定</b>はそのままで構いません。<br>金・銀・ビットコイン・日経・オイルなどを取引する方は、下のほうの「特殊通貨ペア名設定」に、その証券会社で使われている商品名を入力します（例：<code>XAUUSD</code> の欄に <code>GOLD</code>）。空欄のときは <code>XAUUSD</code> や <code>USOIL</code> のような標準の名称が使われるので、同じ名前なら空欄でOKです。</div>
+                    <div class="gtip"><b>任意設定</b>はそのままで構いません。</div>
                 </div>
             </div>
             <div class="gstep">
-                <div class="gstep-no">9</div>
+                <div class="gstep-no">5</div>
                 <div class="gstep-body">
-                    <p class="gstep-title">MT4左上にある「自動売買」をクリック</p>
-                    <figure class="gshot mid"><img src="img/webytt/s26-autotrade.png" alt="MT4の自動売買ボタン" loading="lazy"></figure>
+                    <p class="gstep-title">チャート上の緑の「▶」を押す</p>
+                    <figure class="gshot mid"><img src="img/webytt/ctrader/c-05-play.png" alt="チャート上の緑の再生ボタン" loading="lazy"></figure>
+                    <p>緑の「▶」が出ているときは、連携ツールが止まっている状態です。押すと動き始めます。</p>
                 </div>
             </div>
             <div class="gstep">
-                <div class="gstep-no">10</div>
+                <div class="gstep-no">6</div>
                 <div class="gstep-body">
-                    <p class="gstep-title">認証に成功したら、MT4を再起動する</p>
-                    <p>「初期設定が完了したので再起動してください」という案内が表示されます。案内に従って、MT4右上の「×」で閉じ、もう一度立ち上げてください。</p>
-                    <p>再起動後、チャート上の表示が<b>「承認待ち（webyttで端末を承認してください）」</b>になれば STEP 2 は完了です。</p>
-                    <figure class="gshot"><img src="img/webytt/s28-waiting.png" alt="チャート上に「YTT for Web 承認待ち」と表示された状態" loading="lazy"></figure>
+                    <p class="gstep-title">確認が出たら「Allow」</p>
+                    <figure class="gshot narrow"><img src="img/webytt/ctrader/c-06-allow.png" alt="requires unlimited access rights の確認でAllowを押す" loading="lazy"></figure>
+                    <p>連携ツールがWeb版YTTとやり取りするための許可です。</p>
+                </div>
+            </div>
+            <div class="gstep">
+                <div class="gstep-no">7</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">チャート上に「承認待ち」と出たら STEP 2 は完了</p>
+                    <figure class="gshot mid"><img src="img/webytt/ctrader/c-07-waiting.png" alt="チャート上に承認待ちと表示された状態" loading="lazy"></figure>
+                    <p>チャート上の表示が<b>「承認待ち（webyttで端末を承認してください）」</b>になれば STEP 2 は完了です。MT4・MT5と違い、cTraderは再起動しなくて大丈夫です。</p>
                 </div>
             </div>
         </div>
@@ -1502,7 +1390,7 @@
 </section>
 
 <!-- STEP 3 -->
-<section class="ytt-spec-section" id="step3" style="background:#f4f6f9;">
+<section class="ytt-spec-section" id="step3" style="background:#fff;">
     <div class="ytt-spec-inner">
         <div class="ytt-spec-header">
             <span class="section-title-badge section-title-badge--blue">
@@ -1548,8 +1436,8 @@
                 <div class="gstep-body">
                     <p class="gstep-title">「新しい端末を検出しました」と出たら「この端末を承認する」</p>
                     <p>初めてつなぐときは、取引ツールの接続を確認する画面が出ます。<wbr>口座が合っているか確かめて、<b>「この端末を承認する」</b>を押してください。</p>
-                    <figure class="gshot narrow"><img src="img/webytt/mt5/m5-20b-approve.png" alt="新しい端末を検出しました。この端末を承認するボタン" loading="lazy"></figure>
-                    <div class="gtip">身に覚えのない接続のときは「拒否」を押してください。<wbr>ほかのMT4 / MT5で同じ口座に接続している場合は、そちらが切断されます。</div>
+                    <figure class="gshot narrow"><img src="img/webytt/ctrader/c-08-approve.png" alt="新しい端末を検出しました。この端末を承認するボタン" loading="lazy"></figure>
+                    <div class="gtip">身に覚えのない接続のときは「拒否」を押してください。<wbr>ほかのcTraderで同じ口座に接続している場合は、そちらが切断されます。</div>
                 </div>
             </div>
             <div class="gstep">
@@ -1561,10 +1449,10 @@
                         <figure class="gshot"><img src="img/webytt/s31-connected-sp.png" alt="スマホで接続できた状態。口座番号の左の丸が緑" loading="lazy"><figcaption><b>スマホ</b>：画面左上、口座番号の左の丸が緑</figcaption></figure>
                         <figure class="gshot"><img src="img/webytt/s32-connected-pc.png" alt="PCで接続できた状態。口座番号の左の丸が緑" loading="lazy"><figcaption><b>PC</b>：画面右上、口座番号の左の丸が緑</figcaption></figure>
                     </div>
-                    <figure class="gshot mid"><img src="img/webytt/s34-mt4-connected.png" alt="MT4のチャート上に「YTT for Web 接続済み」と表示された状態" loading="lazy"><figcaption><b>MT4</b>：チャート上の表示が「接続済み」に変わる</figcaption></figure>
+                    <figure class="gshot mid"><img src="img/webytt/ctrader/c-09-connected.png" alt="cTraderのチャート上に「YTT for Web 接続済み」と表示された状態" loading="lazy"><figcaption><b>cTrader</b>：チャート上の表示が「接続済み」に変わる</figcaption></figure>
                     <table class="gtable">
                         <tr><th><span class="dot g"></span>緑</th><td>正常に接続されています。そのまま利用できます</td></tr>
-                        <tr><th><span class="dot y"></span>黄</th><td>接続はあるが価格が取れていません。MT4 / MT5 では、取引する通貨ペアを気配値表示欄に出してください</td></tr>
+                        <tr><th><span class="dot y"></span>黄</th><td>接続はあるが価格が取れていません。サフィックスの設定が口座の通貨ペア名と合っているか確認してください</td></tr>
                         <tr><th><span class="dot r"></span>赤</th><td>接続されていません。ページをリロード。改善しない場合は下の「よくある質問」へ</td></tr>
                     </table>
                 </div>
@@ -1575,7 +1463,7 @@
 </section>
 
 <!-- スマホで使う -->
-<section class="ytt-spec-section" style="background:#fff;">
+<section class="ytt-spec-section" style="background:#f4f6f9;">
     <div class="ytt-spec-inner">
         <div class="ytt-spec-header">
             <span class="section-title-badge section-title-badge--orange">
@@ -1620,7 +1508,7 @@
 </section>
 
 <!-- 利用上の制限 -->
-<section class="ytt-spec-section" id="limits" style="background:#f4f6f9;">
+<section class="ytt-spec-section" id="limits" style="background:#fff;">
     <div class="ytt-spec-inner ytt-fto-wide">
         <div class="ytt-spec-header">
             <span class="section-title-badge section-title-badge--blue">
@@ -1638,14 +1526,14 @@
         </div>
         <div class="ytt-add-grid">
             <div class="ytt-add-card"><h3>連携ツールは1口座に1つだけ</h3><p>同じ口座に、複数の連携ツール（MT4とMT5の両方など）を同時に入れることはできません。複数設定した場合は、先に設定していた方が切断されます。</p></div>
-            <div class="ytt-add-card"><h3>通貨ペアを気配値表示に出す</h3><p>MT4 / MT5 では、取引する通貨ペアを気配値表示欄に出しておいてください。出していないと価格が取得できず、アイコンが黄になります。</p></div>
+            <div class="ytt-add-card"><h3>連携ツールを止めない</h3><p>cTraderのチャート上に緑の「▶」が出ているときは、連携ツールが止まっています。押して動かしてください。</p></div>
             <div class="ytt-add-card"><h3>PCと取引ツールは起動したまま</h3><p>連携ツールが止まっているとき、PCのスリープ中、取引ツールを閉じている間は動きません。cTrader Cloud版はPCを閉じても動きます。</p></div>
         </div>
     </div>
 </section>
 
 <!-- コピーモード -->
-<section class="ytt-spec-section" id="copy" style="background:#fff;">
+<section class="ytt-spec-section" id="copy" style="background:#f4f6f9;">
     <div class="ytt-spec-inner">
         <div class="ytt-spec-header">
             <span class="section-title-badge section-title-badge--orange">
@@ -1686,7 +1574,7 @@
 </section>
 
 <!-- よくある質問 -->
-<section class="ytt-spec-section" id="trouble" style="background:#f4f6f9;">
+<section class="ytt-spec-section" id="trouble" style="background:#fff;">
     <div class="ytt-spec-inner">
         <div class="ytt-spec-header">
             <span class="section-title-badge section-title-badge--blue">
@@ -1703,11 +1591,7 @@
         </div>
         <details class="ytt-faq">
             <summary><span class="ytt-faq-q">取引ツールで認証に失敗する／「認証エラー」になる</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
-            <div class="ytt-faq-a"><p>次のいずれかが原因のことが多いです。ひとつずつ確認してください。</p><p>①認証コード（32文字）の入力ミス（前後の空白、全角・半角の混在）<br>②連携ツールを複数のチャートに入れている（1つのチャートだけに入れます）<br>③自動売買の許可をしていない（許可する箇所は2つあります）<br>④DLLの使用許可をしていない<br>⑤取引ツール（MT4 / MT5 / cTrader）を再起動していない<br>⑥メンバーシップ／サブスクに加入していない</p></div>
-        </details>
-        <details class="ytt-faq">
-            <summary><span class="ytt-faq-q">「初期化失敗（DLL使用不可…）」と表示される</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
-            <div class="ytt-faq-a"><p>DLLの使用が許可されていません。次の2か所を確認してください。</p><p>①連携ツールの設定画面の「全般」タブで「DLLの使用を許可する」にチェック<br>②MT4上部のメニュー「ツール」→「オプション」→「エキスパートアドバイザ」タブで「DLLの使用を許可する」にチェック</p><p>それでも出る場合は、「MQL4」→「Libraries」に YTT_OrderReceiver.dll が入っているか確認してください。</p></div>
+            <div class="ytt-faq-a"><p>次のいずれかが原因のことが多いです。ひとつずつ確認してください。</p><p>①認証コード（32文字）の入力ミス（前後の空白、全角・半角の混在）<br>②連携ツールを複数動かしている（1つだけにします）<br>③確認の画面で「Allow」を押していない<br>④メンバーシップ／サブスクに加入していない</p></div>
         </details>
         <details class="ytt-faq">
             <summary><span class="ytt-faq-q">取引ツールのチャート上の表示が「承認待ち」のまま変わらない</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
@@ -1715,19 +1599,15 @@
         </details>
         <details class="ytt-faq">
             <summary><span class="ytt-faq-q">Web版の丸いアイコンが赤のまま</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
-            <div class="ytt-faq-a"><p>①ページをリロードする<br>②取引ツール（MT4 / MT5 / cTrader）が起動していて、連携ツールが動いているか<br>③PCがスリープしていないか<br>④同じ口座に、別の連携ツールを後から入れていないか（先に設定した方が切断されます）</p></div>
+            <div class="ytt-faq-a"><p>①ページをリロードする<br>②cTraderが起動していて、連携ツールが動いているか（チャート上に緑の「▶」が出ていたら止まっています）<br>③PCがスリープしていないか<br>④同じ口座に、別の連携ツールを後から入れていないか（先に設定した方が切断されます）</p></div>
         </details>
         <details class="ytt-faq">
             <summary><span class="ytt-faq-q">Web版の丸いアイコンが黄になる</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
-            <div class="ytt-faq-a"><p>価格が取得できていません。MT4 / MT5 の場合は、取引する通貨ペアを気配値表示欄に表示してください。</p></div>
+            <div class="ytt-faq-a"><p>価格が取得できていません。サフィックスの設定が、口座の通貨ペア名と合っているか確認してください。</p></div>
         </details>
         <details class="ytt-faq">
             <summary><span class="ytt-faq-q">特定の通貨ペアやCFD商品だけ注文できない</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
-            <div class="ytt-faq-a"><p>①サフィックス付きの口座（USDJPYp など）で「通貨ペア名末尾サフィックス」を入力しているか<br>②CFD系商品は、証券会社の商品名（GOLD など）を「特殊通貨ペア名設定」に入力しているか</p></div>
-        </details>
-        <details class="ytt-faq">
-            <summary><span class="ytt-faq-q">セキュリティソフトにひっかかってダウンロードできない／DLLが消える</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
-            <div class="ytt-faq-a"><p>①DLLの使用許可をしていない<br>②DLLの名前がオリジナルファイル（YTT_OrderReceiver.dll）と異なっている（末尾に（1）が付いているなど）<br>③「MQL4」→「Libraries」中のDLLファイルがセキュリティソフトにより削除／中身が空白になっている</p><p>③の場合は<a href="https://support.microsoft.com/ja-jp/windows/windows-%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%E3%81%AB%E9%99%A4%E5%A4%96%E3%82%92%E8%BF%BD%E5%8A%A0%E3%81%99%E3%82%8B-811816c0-4dfd-af4a-47e4-c301afe13b26" target="_blank" rel="noopener">こちら</a>等を参考に除外処理をおこなってください（Windowsセキュリティ以外の場合は各自除外処理の方法をお調べください）。</p></div>
+            <div class="ytt-faq-a"><p>サフィックス付きの口座（USDJPYp など）で「通貨ペア名末尾サフィックス」を入力しているか確認してください。</p></div>
         </details>
         <details class="ytt-faq">
             <summary><span class="ytt-faq-q">コピーモードでポジションがコピーされない</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
@@ -1741,7 +1621,7 @@
 </section>
 
 <!-- サポート窓口 -->
-<section class="ytt-spec-section" style="background:#fff;">
+<section class="ytt-spec-section" style="background:#f4f6f9;">
     <div class="ytt-spec-inner">
         <div class="ytt-spec-header">
             <span class="section-title-badge section-title-badge--orange">

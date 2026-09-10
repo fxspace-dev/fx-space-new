@@ -898,6 +898,21 @@
     /* スマホ：インストール／ホーム追加 */
     .os-card h3 .os-tag { font-size: 0.7rem; font-weight: 800; padding: 0.15em 0.6em; border-radius: 999px; background: #1e1b4b; color: #fff; }
     .os-card ol { margin: 0.35rem 0 0; padding-left: 1.2rem; font-size: 0.8125rem; color: #4b5563; line-height: 1.85; }
+    .app-mock { text-align: center; margin: 0.25rem auto 1.75rem; }
+    .app-mock-icon {
+        width: 108px; height: 108px; margin: 0 auto; border-radius: 26px;
+        display: flex; align-items: center; justify-content: center;
+        background:
+            radial-gradient(circle at 22% 24%, rgba(255,255,255,0.45) 0 1px, transparent 1.6px),
+            radial-gradient(circle at 78% 16%, rgba(255,255,255,0.35) 0 1px, transparent 1.6px),
+            radial-gradient(circle at 86% 58%, rgba(255,255,255,0.3) 0 1px, transparent 1.6px),
+            radial-gradient(circle at 14% 66%, rgba(255,255,255,0.25) 0 1px, transparent 1.6px),
+            radial-gradient(120% 85% at 50% 118%, #7b6bff 0%, #3b34a8 34%, #1c1c5a 66%, #10113a 100%);
+        box-shadow: 0 12px 26px rgba(30,27,75,0.28), inset 0 0 0 1px rgba(255,255,255,0.06);
+    }
+    .app-mock-icon img { width: 60%; height: auto; display: block; }
+    .app-mock-label { margin-top: 0.6rem; font-size: 1.05rem; font-weight: 600; color: #111827; letter-spacing: 0.01em; }
+    .app-mock-cap { margin: 0.35rem 0 0; font-size: 0.8125rem; color: #6b7280; }
     .home-icon { text-align: center; margin-top: 1.25rem; }
     .home-icon img { width: 140px; max-width: 45vw; display: block; margin: 0 auto; }
     .home-icon figcaption { font-size: 0.8125rem; color: #4b5563; margin-top: 0.4rem; line-height: 1.7; }
@@ -1375,11 +1390,12 @@
                 <div class="gstep-no">4</div>
                 <div class="gstep-body">
                     <p class="gstep-title">数秒待って、接続状態を確認する</p>
-                    <p>口座番号の左にある<b>丸の色</b>が接続状態を表します。<b>緑</b>になっていれば接続完了です。このとき、MT4側のレシーバーの表示も「承認待ち」から<b>「接続中」</b>に変わります。</p>
+                    <p>口座番号の左にある<b>丸の色</b>が接続状態を表します。<b>緑</b>になっていれば接続完了です。このとき、MT4側のレシーバーの表示も「承認待ち」から<b>「接続済み」</b>に変わります。</p>
                     <div class="gshot-pair">
                         <figure class="gshot"><img src="img/webytt/s31-connected-sp.png" alt="スマホで接続できた状態。口座番号の左の丸が緑" loading="lazy"><figcaption><b>スマホ</b>：画面左上、口座番号の左の丸が緑</figcaption></figure>
                         <figure class="gshot"><img src="img/webytt/s32-connected-pc.png" alt="PCで接続できた状態。口座番号の左の丸が緑" loading="lazy"><figcaption><b>PC</b>：画面右上、口座番号の左の丸が緑</figcaption></figure>
                     </div>
+                    <figure class="gshot mid"><img src="img/webytt/s34-mt4-connected.png" alt="MT4のチャート上に「YTT for Web 接続済み」と表示された状態" loading="lazy"><figcaption><b>MT4</b>：チャート上の表示が「接続済み」に変わる</figcaption></figure>
                     <table class="gtable">
                         <tr><th><span class="dot g"></span>緑</th><td>正常に接続されています。そのまま利用できます</td></tr>
                         <tr><th><span class="dot y"></span>黄</th><td>接続はあるが価格が取れていません。MT4 / MT5 では、取引する通貨ペアを気配値表示欄に出してください</td></tr>
@@ -1409,6 +1425,11 @@
             </div>
             <p>ホーム画面に置いておくと、アドレスバーが消えて画面が広く使え、1タップで開けます。</p>
         </div>
+        <div class="app-mock" role="img" aria-label="ホーム画面に追加されたYTT for Webのアイコン">
+            <div class="app-mock-icon"><img src="img/ytt-mark.png" alt=""></div>
+            <div class="app-mock-label">YTT for Web</div>
+            <p class="app-mock-cap">追加すると、ホーム画面にこのアイコンができます</p>
+        </div>
         <div class="ytt-add-grid cols-2" style="max-width:720px;">
             <div class="ytt-add-card os-card">
                 <h3><span class="os-tag">Android</span>インストールする</h3>
@@ -1429,7 +1450,6 @@
                 </ol>
             </div>
         </div>
-        <figure class="home-icon"><img src="img/webytt/s33-home-icon.jpg" alt="ホーム画面に追加されたYTT for Webのアイコン" loading="lazy"><figcaption>追加すると、ホーム画面に「YTT for Web」のアイコンができます。</figcaption></figure>
     </div>
 </section>
 

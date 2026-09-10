@@ -640,6 +640,14 @@
         .hnote.warn { background: #fff7ed; border-left-color: #fb923c; color: #7c2d12; }
         .hnote b { color: #1e1b4b; }
         .hnote.warn b { color: #9a3412; }
+        /* 実画面の再現（スクショが撮れない画面用。実物と同じ文言・配色） */
+        .ui-mock { border: 1px solid #e5e7eb; border-radius: 12px; overflow: hidden; background: #fff; box-shadow: 0 4px 14px rgba(30,27,75,0.08); max-width: 340px; }
+        .ui-mock-bar { background: #f1f3f5; border-bottom: 1px solid #e5e7eb; padding: 0.45rem 0.7rem; }
+        .ui-mock-url { display: block; background: #fff; border: 1px solid #dfe3e8; border-radius: 999px; font-size: 0.72rem; color: #6b7280; padding: 0.22rem 0.7rem; text-align: center; }
+        .ui-mock-body { padding: 2.2rem 1.4rem 2.6rem; text-align: center; }
+        .ui-mock-h { font-size: 1.15rem; font-weight: 800; color: #111827; margin-bottom: 0.9rem; }
+        .ui-mock-p { font-size: 0.82rem; color: #374151; line-height: 1.7; margin-bottom: 1.3rem; }
+        .ui-mock-btn { display: inline-block; background: #5865F2; color: #fff; font-size: 0.9rem; font-weight: 600; padding: 0.6rem 1.4rem; border-radius: 8px; }
         .todo-shot {
             margin: 0.75rem 0 0; border: 2px dashed #c7d2fe; border-radius: 10px; background: #f8f9fc;
             color: #4f46e5; font-size: 0.85rem; font-weight: 700; text-align: center; padding: 1.4rem 1rem;
@@ -996,8 +1004,18 @@
         <div class="hstep-no">2</div>
         <div class="hstep-body">
             <p>「Discord認証」ボタンを押してログインする</p>
-            <p>初回アクセス時は「Discord認証」ボタンが表示されます。</p>
-            <div class="todo-shot">TODO スクショ：Web版YTTの「Discord認証」ボタン（スマホ）</div>
+            <p>ログインしていない状態でアクセスすると、下の画面が表示されます。「Discordでログイン」を押してください。</p>
+            <figure class="hshot narrow">
+                <div class="ui-mock" role="img" aria-label="ログインが必要です。webyttの利用にはDiscordログイン（サブスク加入者限定）が必要です。「Discordでログイン」ボタン">
+                    <div class="ui-mock-bar"><span class="ui-mock-url">webytt.fx-space.com</span></div>
+                    <div class="ui-mock-body">
+                        <div class="ui-mock-h">ログインが必要です</div>
+                        <div class="ui-mock-p">webyttの利用にはDiscordログイン(サブスク加入者限定)が必要です。</div>
+                        <div class="ui-mock-btn">Discordでログイン</div>
+                    </div>
+                </div>
+                <figcaption>ログイン前の画面。すでにログイン済みの場合、この画面は表示されずそのままWeb版YTTが開きます。</figcaption>
+            </figure>
         </div>
     </div>
 

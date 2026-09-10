@@ -4,19 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Web版YTT 導入方法 — FX SPACE</title>
-    <meta name="description" content="Web版（スマホ版）YTTの導入手順。口座登録、レシーバーEAの設置、Web版YTTへのログインまでを3ステップで案内します。">
+    <link rel="icon" type="image/png" href="icon.png">
+    <meta property="og:title" content="Web版YTT 導入方法 — FX SPACE">
+    <meta property="og:description" content="Web版（スマホ版）YTTの導入手順。口座登録、レシーバーEAの設置、Web版YTTへのログインまでを画像つきで案内します。">
+    <meta property="og:image" content="https://fx-space.com/intro/img/og-ytt-tokusetu.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:image" content="https://fx-space.com/intro/img/og-ytt-tokusetu.png">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="stylesheet" href="css/style.css?v=20260908e">
     <style>
-        body {
-            background: #f8f9fc;
-            /* 折り返しは既定 normal。BudouX 適用後（body.budoux-ready）だけ keep-all にする */
-            word-break: normal;
-            overflow-wrap: anywhere;
-            line-break: strict;
-        }
-        body.budoux-ready { word-break: keep-all; }
-
-        /* NAV */
+        /* ===== YTT特設ページ固有スタイル ===== */
         .ytt-sp-nav {
             position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
             background: rgba(255,255,255,0.95); backdrop-filter: blur(10px);
@@ -24,510 +23,763 @@
             display: flex; align-items: center; justify-content: space-between;
             padding: 0.875rem 2rem; gap: 1rem;
         }
-        .ytt-sp-nav-logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: inherit; }
-        .ytt-sp-nav-logo img { height: 28px; width: auto; }
-        .ytt-sp-nav-back {
-            font-size: 0.8125rem; font-weight: 700; color: #6b7280;
-            text-decoration: none;
+        .ytt-sp-nav-logo {
+            display: flex; align-items: center; gap: 0.75rem;
+            text-decoration: none; color: inherit;
         }
-        .ytt-sp-nav-back:hover { color: #1e1b4b; }
+        .ytt-sp-nav-logo img { height: 28px; width: auto; }
+        .ytt-sp-nav-logo span {
+            font-size: 0.8125rem; font-weight: 700; color: #6b7280;
+            border-left: 1px solid #e5e7eb; padding-left: 0.75rem;
+        }
+        .ytt-sp-nav-cta {
+            display: flex; gap: 0.5rem; align-items: center;
+        }
+        /* ナビ内ボタンのラベル切替（PC=長文／SP=短文） */
+        .ytt-nav-btn-label-sp { display: none; }
         @media (max-width: 600px) {
             .ytt-sp-nav { padding: 0.625rem 0.875rem; gap: 0.5rem; }
+            .ytt-sp-nav-logo span { display: none; }
             .ytt-sp-nav-logo img { height: 24px; }
-            .ytt-sp-nav-back { font-size: 0.75rem; }
+            .ytt-sp-nav-cta { gap: 0.375rem; }
+            .ytt-sp-nav-cta .btn-sq-blue.sm,
+            .ytt-sp-nav-cta .btn-sq-white.sm {
+                font-size: 0.75rem; padding: 0.4rem 0.75rem;
+            }
+            .ytt-sp-nav-cta .btn-sq-blue.sm .dl-icon {
+                width: 14px; height: 14px;
+            }
+            .ytt-nav-btn-label { display: none; }
+            .ytt-nav-btn-label-sp { display: inline; }
+        }
+        @media (max-width: 380px) {
+            .ytt-sp-nav { padding: 0.5rem 0.625rem; gap: 0.375rem; }
+            .ytt-sp-nav-cta .btn-sq-blue.sm,
+            .ytt-sp-nav-cta .btn-sq-white.sm {
+                font-size: 0.6875rem; padding: 0.375rem 0.625rem;
+            }
         }
 
-        /* HERO */
+        /* Hero */
         .ytt-sp-hero {
-            padding: 5rem 2rem 1rem;
+            padding: 8rem 2rem 5rem;
             text-align: center;
             background: #fff;
         }
-        /* ヒーローの 24h アイコン */
-        .hero-24h-icon {
-            display: block;
-            margin: -1rem auto -0.75rem;
-            width: 340px;
-            max-width: 85%;
-            height: auto;
-            filter: drop-shadow(0 6px 14px rgba(249, 115, 22, 0.18));
+        .ytt-sp-hero-logo {
+            max-width: 160px; width: auto; height: auto;
+            display: block; margin: 0 auto 1.25rem;
         }
-        @media (max-width: 600px) {
-            .hero-24h-icon { width: 250px; max-width: 70%; }
+        .ytt-sp-hero-badge {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: #fff7ed; color: #c2410c;
+            border: 1px solid #fed7aa;
+            border-radius: 100px; padding: 0.375rem 1.25rem;
+            font-size: 0.8125rem; font-weight: 700; margin-bottom: 1.25rem;
         }
         .ytt-sp-hero-title {
-            font-size: clamp(1.3rem, 4.5vw, 2.125rem);
+            font-size: clamp(1.3rem, 5vw, 3rem);
             font-weight: 900; color: #1e1b4b;
-            line-height: 1.4; letter-spacing: -0.02em;
+            line-height: 1.3; letter-spacing: -0.02em;
             margin: 0 0 1rem;
         }
-        .ytt-sp-title-line { display: block; text-align: center; }
-        .ytt-sp-title-line > span.line-text { display: inline-block; white-space: nowrap; position: relative; }
-        .ytt-sp-title-line .ytt-title-wave {
-            display: block; width: 100%;
-            height: clamp(14px, 3vw, 22px);
-            object-fit: fill; margin: 0.1rem 0 0.5rem;
+        .ytt-sp-title-line {
+            display: block;
+            text-align: center;
         }
-        /* スマホ: 見出しの文字幅に関係なく波線の幅を揃える（短い見出しで線が細く見えるのを防ぐ。全4ページ共通） */
-        @media (max-width: 640px) { .ytt-sp-title-line .ytt-title-wave { width: max(100%, 200px); max-width: calc(100vw - 2rem); margin-left: 50%; transform: translateX(-50%); } }
-        .ytt-sp-hero-lead {
-            font-size: clamp(0.875rem, 1.8vw, 1rem);
-            color: #6b7280; line-height: 1.85;
-            max-width: 460px; margin: 0 auto;
-        }
-
-        /* プログレスステッパー */
-        .progress-stepper {
-            display: flex; align-items: center;
-            justify-content: center;
-            max-width: 760px;
-            margin: 0 auto;
-            padding: 2rem 1rem 0.5rem;
-        }
-        .prog-step {
-            display: flex; flex-direction: column;
-            align-items: center; gap: 0.4rem;
-            flex-shrink: 0;
-            position: relative;
-        }
-        .prog-step-icon {
-            width: 44px; height: 44px;
-            position: relative;
-            transition: filter 0.4s ease, opacity 0.4s ease;
-        }
-        .prog-step-icon img { width: 100%; height: auto; display: block; }
-        .prog-step:not(.is-active):not(.is-done) .prog-step-icon {
-            filter: grayscale(1) brightness(1.6);
-            opacity: 0.35;
-        }
-        .prog-step.is-active .prog-step-icon {
-            filter: none;
-            transform: scale(1.08);
-            transition: filter 0.4s ease, transform 0.3s ease;
-        }
-        .prog-step.is-done .prog-step-icon img { opacity: 0.85; }
-        .prog-step .prog-step-done-mark {
-            position: absolute;
-            top: -4px; right: -6px;
-            width: 22px; height: 22px;
-            background: #fff;
-            border-radius: 50%;
-            display: none;
-            align-items: center; justify-content: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .prog-step.is-done .prog-step-done-mark { display: inline-flex; }
-        .prog-step .prog-step-done-mark img { width: 16px; height: 16px; }
-        .prog-step-label {
-            font-size: 0.6875rem;
-            font-weight: 800;
-            color: #9ca3af;
+        .ytt-sp-title-line > span.line-text {
+            display: inline-block;
             white-space: nowrap;
-            transition: color 0.3s ease;
+            position: relative;
         }
-        .prog-step.is-active .prog-step-label { color: #1e1b4b; }
-        .prog-step.is-done .prog-step-label { color: #6b7280; }
-        .prog-line {
-            flex: 1; height: 2px;
-            background: #e5e7eb;
-            max-width: 80px;
-            margin: 0 0.5rem;
-            margin-bottom: 1.4rem;
-            transition: background 0.4s ease;
-            border-radius: 1px;
+        .ytt-sp-title-line .ytt-title-wave {
+            display: block;
+            width: 100%;
+            height: clamp(14px, 3vw, 22px);
+            object-fit: fill;
+            margin: 0.1rem 0 0.5rem;
         }
-        .prog-line.is-done { background: #9ca3af; }
-        @media (max-width: 600px) {
-            .progress-stepper { padding: 1.5rem 0.75rem 0.5rem; }
-            .prog-step-icon { width: 36px; height: 36px; }
-            .prog-step.is-done .prog-step-done-mark { width: 18px; height: 18px; top: -3px; right: -4px; }
-            .prog-step.is-done .prog-step-done-mark img { width: 13px; height: 13px; }
-            .prog-step-label { font-size: 0.625rem; }
-            .prog-line { max-width: 28px; margin: 0 0.25rem; margin-bottom: 1.3rem; }
+        /* スマホ: 見出しの文字幅に関係なく波線の幅を揃える（ytt-subscribe 等と同じ） */
+        @media (max-width: 640px) { .ytt-sp-title-line .ytt-title-wave { width: max(100%, 200px); max-width: calc(100vw - 2rem); margin-left: 50%; transform: translateX(-50%); } }
+        /* スマホ: セクション見出し下のオレンジ波線が平べったくならない高さに（ytt-subscribe と同じ 18〜26px） */
+        @media (max-width: 640px) { img[src$="wave-orange.png"] { height: clamp(18px, 6vw, 26px) !important; } }
+        .ytt-sp-hero-lead {
+            font-size: clamp(0.9375rem, 2vw, 1.125rem);
+            color: #6b7280; line-height: 1.8;
+            max-width: 560px; margin: 0 auto 2rem;
+        }
+        /* PCでは吹き出しが上の文字に被らないよう余白を拡大 */
+        @media (min-width: 769px) {
+            .ytt-sp-hero-lead { margin-bottom: 4.5rem; }
+        }
+        .ytt-sp-hero-btns {
+            display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+        }
+        .ytt-sp-hero-stats {
+            display: flex; gap: 2.5rem; justify-content: center; flex-wrap: wrap;
+            margin-top: 3rem; padding-top: 2rem;
+            border-top: 1px solid #f0f0f0;
+        }
+        .ytt-sp-hero-stat { text-align: center; }
+        .ytt-sp-hero-stat-num {
+            font-size: clamp(1.5rem, 4vw, 2.25rem);
+            font-weight: 900; color: #f97316; line-height: 1;
+        }
+        .ytt-sp-hero-stat-label {
+            font-size: 0.8125rem; color: #9ca3af; margin-top: 0.25rem; font-weight: 600;
         }
 
-        /* STEPS FLOW */
-        .steps-flow {
-            padding: 1.5rem 1.5rem 4rem;
-            max-width: 720px; margin: 0 auto;
+        /* Section titles */
+        .ytt-sp-section-header {
+            text-align: center;
+            padding: 4rem 2rem 2rem;
         }
-        .step-card {
+        .ytt-sp-section-header h2 {
+            font-size: clamp(1.5rem, 4vw, 2.25rem);
+            font-weight: 900; color: #1e1b4b; margin: 0.5rem 0;
+        }
+        .ytt-sp-section-header p {
+            font-size: clamp(0.875rem, 1.8vw, 1.0625rem);
+            color: #6b7280; line-height: 1.8;
+            max-width: 560px; margin: 0.75rem auto 0;
+        }
+
+        /* Features anchor */
+        #features-anchor { display: block; height: 72px; margin-top: -72px; }
+
+        /* Demo section wrapper */
+        .ytt-sp-demo-wrap {
+            background: #f3f4f6;
+        }
+
+        /* More features teaser */
+        .ytt-more-features {
+            background: #f4f6f9;
+            padding: 3.5rem 2rem 3rem;
+            text-align: center;
+        }
+        .ytt-more-features-inner { max-width: 760px; margin: 0 auto; }
+        .ytt-more-features-label {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            font-size: 0.8125rem; font-weight: 700;
+            color: #92400e; letter-spacing: 0.08em;
+            margin-bottom: 0.75rem;
+        }
+        .ytt-more-features h3 {
+            font-size: clamp(1.1rem, 3vw, 1.5rem);
+            font-weight: 900; color: #1e1b4b;
+            margin: 0 0 0.5rem;
+        }
+        .ytt-more-features-sub {
+            font-size: 0.9rem; color: #6b7280;
+            margin: 0 0 2rem; line-height: 1.7;
+        }
+        .ytt-more-features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.875rem;
+            text-align: left;
+        }
+        @media (max-width: 640px) {
+            .ytt-more-features-grid { grid-template-columns: 1fr; }
+            .ytt-feat-item { padding: 0.875rem 1rem; }
+        }
+        .ytt-feat-item {
+            background: #f9fafb;
+            border-radius: 12px;
+            padding: 1rem 1.125rem;
+            display: flex; align-items: flex-start; gap: 0.625rem;
+        }
+        .ytt-feat-item-icon {
+            flex-shrink: 0;
+            width: 36px; height: 36px;
+        }
+        .ytt-feat-item-icon img { width: 100%; height: 100%; object-fit: contain; }
+        .ytt-feat-item-text {
+            font-size: 0.8125rem; font-weight: 700;
+            color: #1e1b4b; line-height: 1.5;
+        }
+        .ytt-feat-item-sub {
+            font-size: 0.72rem; color: #9ca3af;
+            font-weight: 400; display: block;
+            margin-top: 0.15rem; line-height: 1.4;
+        }
+
+        /* Pricing section */
+        .ytt-sp-pricing {
+            padding: 5rem 2rem;
+            background: #f4f6f9;
+            overflow: hidden;
+        }
+        .ytt-sp-pricing-inner { max-width: 760px; margin: 0 auto; }
+        .ytt-sp-plans {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 2.5rem;
+        }
+        @media (max-width: 720px) {
+            .ytt-sp-plans { grid-template-columns: 1fr; width: 100%; max-width: 480px; margin-left: auto; margin-right: auto; }
+        }
+        @media (max-width: 480px) {
+            .ytt-sp-pricing { padding: 3rem 1rem; }
+            .ytt-sp-plan-card { padding: 1.25rem 1rem; }
+        }
+        p, h1, h2, h3, h4, li,
+        .ytt-sp-plan-desc, .ytt-sp-plan-features li {
+            overflow-wrap: break-word;
+        }
+        /* SPでの日本語の自然な改行（単語/フレーズ途中で切れない・孤立文字を減らす） */
+        @media (max-width: 768px) {
+            body, p, h1, h2, h3, h4, h5, li, dd, dt, td, th, a, button,
+            .ytt-sp-hero-lead, .ytt-sp-plan-desc, .ytt-sp-plan-features li,
+            .ytt-spec-header p, .ytt-sp-section-header p,
+            .ytt-sp-footer-cta p, .ytt-more-features-sub,
+            .ytt-feat-item-text, .ytt-feat-item-sub,
+            .ytt-trial-bubble, .ytt-panel-text p, .ytt-panel-text li {
+                line-break: strict;
+                overflow-wrap: break-word;
+            }
+        }
+        .ytt-panel-text { min-width: 0; }
+        .br-sp { display: none; }
+        @media (max-width: 600px) { .br-sp { display: block; } }
+        .ytt-sp-plan-card {
             background: #fff;
             border: 1.5px solid #e5e7eb;
             border-radius: 16px;
-            margin-bottom: 1.5rem;
+            padding: 1.75rem 1.5rem;
+            display: flex; flex-direction: column; gap: 0;
             position: relative;
-        }
-        /* STEP6 のみ：シミュレータがはみ出せるようoverflow解除 */
-        .step-card[data-step="6"] { overflow: visible; }
-        .step-card:not([data-step="6"]) { overflow: hidden; }
-        .step-card.is-hidden { display: none; }
-        .step-card.is-active {
-            border-color: var(--primary);
-            box-shadow: 0 8px 24px rgba(79,70,229,0.07);
-        }
-        /* 完了状態はグレー */
-        .step-card.is-done {
-            border-color: #e5e7eb;
-            background: #fafafa;
-        }
-        .step-card.is-done .step-info h2,
-        .step-card.is-done .step-info p {
-            opacity: 0.7;
-        }
-
-        .step-card-body {
-            padding: 1.5rem 1.5rem 1.25rem;
-            display: flex; gap: 1.5rem;
-            align-items: center;
-        }
-        @media (max-width: 600px) {
-            .step-card-body { flex-direction: column; padding: 1.5rem 1.25rem 1.25rem; gap: 1rem; }
-        }
-
-        /* 右上に完了マーク */
-        .step-card-done-corner {
-            position: absolute;
-            top: 0.875rem; right: 1rem;
-            display: none;
-            align-items: center; gap: 0.375rem;
-            font-size: 0.75rem; font-weight: 800;
-            color: #6b7280;
-        }
-        .step-card.is-done .step-card-done-corner { display: inline-flex; }
-        .step-card-done-corner img { width: 16px; height: 16px; }
-
-        /* プレビューエリア */
-        .step-preview {
-            flex-shrink: 0;
-            width: 280px;
-            display: flex; align-items: center; justify-content: center;
-        }
-        @media (max-width: 600px) {
-            .step-preview { width: 100%; height: auto; }
-        }
-
-        /* 規約プレビュー (書類風) */
-        .preview-doc {
-            width: 100px; height: 130px;
-            background: #fff;
-            border: 1.5px solid #e5e7eb;
-            border-radius: 6px;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.07);
-            padding: 11px 9px;
-            transform: rotate(-3deg);
-            position: relative;
-        }
-        .preview-doc-tab {
-            position: absolute;
-            top: 8px; right: 8px;
-            width: 22px; height: 5px;
-            background: #f97316;
-            border-radius: 1px;
-        }
-        .preview-doc-h {
-            font-size: 0.5rem; font-weight: 900;
-            color: #1e1b4b;
-            margin: 4px 0 8px;
-            padding-bottom: 6px;
-            border-bottom: 1px solid #f0f0f0;
-            letter-spacing: 0.02em;
-        }
-        .preview-doc-line {
-            height: 3px;
-            background: #e5e7eb;
-            border-radius: 1px;
-            margin-bottom: 4px;
-        }
-        .preview-doc-line.s { width: 60%; }
-        .preview-doc-line.m { width: 85%; }
-        .preview-doc-line.l { width: 100%; }
-
-        /* 段ボール箱プレビュー */
-        .preview-box {
-            width: 105px; height: 130px;
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
-            gap: 0.5rem;
-            position: relative;
-        }
-        .preview-box-icon {
-            width: 76px; height: 70px;
-            position: relative;
-        }
-        .preview-box-icon svg {
-            width: 100%; height: 100%;
-            display: block;
-            filter: drop-shadow(0 4px 8px rgba(120, 65, 30, 0.18));
-        }
-        .preview-box-label {
-            font-size: 0.6875rem; font-weight: 800;
-            color: #1e1b4b;
-            text-align: center;
-        }
-        .preview-box-size {
-            font-size: 0.5625rem;
-            color: #9ca3af;
-            font-weight: 600;
-            text-align: center;
-            margin-top: -0.25rem;
-        }
-        .preview-box-badge {
-            position: absolute;
-            bottom: 14px; right: -2px;
-            width: 30px; height: 30px;
-            border-radius: 50%;
-            background: var(--primary); color: #fff;
-            display: inline-flex; align-items: center; justify-content: center;
-            box-shadow: 0 4px 10px rgba(79,70,229,0.3);
-            border: 2px solid #fff;
-        }
-        .preview-box-badge svg { width: 14px; height: 14px; }
-
-        /* マニュアル プレビュー — 実スクショ（傾きなし＆大きく） */
-        .preview-manual {
-            width: 260px;
-            aspect-ratio: 1087 / 937;
-            border-radius: 10px;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.15);
-            overflow: hidden;
-            background: #fff;
-        }
-        .preview-manual img {
-            width: 100%; height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        /* シミュレータ プレビュー — YTT注文パネル（ほぼ正方形 495x522） */
-        .preview-sim {
-            width: 240px;
-            aspect-ratio: 495 / 522;
-            border-radius: 10px;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.15);
-            overflow: hidden;
-            background: #1e1b4b;
-        }
-        .preview-sim img {
-            width: 100%; height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        @media (max-width: 600px) {
-            .preview-manual { width: 280px; }
-            .preview-sim { width: 240px; }
-        }
-
-        /* STEP本文 */
-        .step-info {
-            flex: 1; min-width: 0;
-            display: flex; flex-direction: column;
-            justify-content: center;
-        }
-        .step-info p {
-            font-size: 0.875rem;
-            color: #6b7280;
-            line-height: 1.85;
-            margin: 0 0 1rem;
-        }
-
-        /* タイトル + 文字幅に合わせたオレンジ波線 */
-        .step-title-h2 {
-            font-size: clamp(1rem, 2.2vw, 1.1875rem);
-            font-weight: 900;
-            color: #1e1b4b;
-            margin: 0 0 0.625rem;
-            line-height: 1.55;
-            text-align: left;
-        }
-        @media (max-width: 600px) {
-            .step-info { text-align: center; }
-            .step-title-h2 { text-align: center; }
-        }
-        .step-title-text {
-            display: inline-block;
-            position: relative;
-        }
-        .step-title-wave {
-            display: block;
+            min-width: 0;
             width: 100%;
-            height: 13px;
-            object-fit: fill;
-            margin-top: 2px;
+            box-sizing: border-box;
         }
-
-        /* アクションボタン群 */
-        .step-actions {
-            display: flex; gap: 0.625rem; flex-wrap: wrap;
+        .ytt-sp-plan-card.is-featured {
+            padding-top: 2.5rem;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79,70,229,0.08);
         }
-        @media (max-width: 600px) {
-            .step-actions { justify-content: center; }
+        .ytt-sp-plan-card.is-premium {
+            border-color: #1f2937;
         }
-        .btn-outline-step {
-            display: inline-flex; align-items: center; gap: 0.375rem;
-            background: #fff; color: var(--primary);
-            border: 1.5px solid var(--primary); border-radius: 10px;
-            padding: 0.6rem 1.25rem;
-            font-size: 0.875rem; font-weight: 800;
-            text-decoration: none;
+        .ytt-sp-plan-badge {
+            position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+            background: var(--primary); color: white;
+            font-size: 0.75rem; font-weight: 800;
+            padding: 0.25rem 1rem; border-radius: 100px;
+            white-space: nowrap;
+        }
+        .ytt-sp-plan-name {
+            font-size: 1.3rem; font-weight: 800; color: #374151; margin-bottom: 0.25rem;
+        }
+        .ytt-sp-plan-name.accent { color: var(--primary); }
+        .ytt-sp-plan-desc {
+            font-size: 0.8125rem; color: #9ca3af; margin-bottom: 1rem;
+        }
+        .ytt-sp-plan-price {
+            font-size: 0; margin-bottom: 1rem;
+        }
+        .ytt-sp-plan-price-amount {
+            font-size: 1.75rem; font-weight: 900; color: #374151;
+        }
+        .ytt-sp-plan-price-period {
+            font-size: 0.875rem; color: #9ca3af; font-weight: 600;
+        }
+        .ytt-sp-plan-price-sub {
+            font-size: 0.75rem; color: #9ca3af; margin-top: 0.25rem; line-height: 1.5;
+        }
+        .ytt-sp-plan-divider {
+            height: 1px; background: #f0f0f0; margin: 1rem 0;
+        }
+        .ytt-plan-also-label {
+            font-size: 0.75rem; color: #9ca3af; font-weight: 600;
+            margin: 0 0 0.375rem;
+        }
+        .ytt-sp-plan-features {
+            list-style: none; padding: 0; margin: 0 0 1.5rem; flex: 1;
+        }
+        .ytt-sp-plan-features li {
+            display: flex; align-items: flex-start; gap: 0.5rem;
+            font-size: 0.875rem; color: #4b5563; padding: 0.35rem 0;
+        }
+        .ytt-sp-plan-features li img {
+            width: 16px; height: 16px; margin-top: 1px; flex-shrink: 0;
+        }
+        .ytt-sp-plan-features li.highlight { font-weight: 700; color: #1e1b4b; }
+        .ytt-sp-plan-cta {
+            display: block; text-align: center;
+            padding: 0.75rem 1.5rem; border-radius: 10px;
+            font-weight: 800; font-size: 0.9375rem; text-decoration: none;
+            border: 2px solid var(--primary); color: var(--primary);
+            transition: all 0.2s; white-space: nowrap;
+        }
+        .ytt-sp-plan-cta:hover { background: var(--primary); color: white; }
+        .ytt-sp-plan-cta.solid {
+            background: var(--primary); color: white;
+        }
+        .ytt-sp-plan-cta.solid:hover { opacity: 0.9; }
+        /* 買い切り（サブスクの下に配置。ツールだけ欲しい方向けに程よくアピール） */
+        .ytt-sp-buyout { max-width: 40rem; margin: 0 auto; }
+        .ytt-sp-buyout-lead { text-align: center; margin-bottom: 1.125rem; }
+        .ytt-sp-buyout-eyebrow {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            font-size: 0.8125rem; font-weight: 700; color: var(--primary);
+            letter-spacing: 0.08em; margin-bottom: 0.5rem;
+        }
+        .ytt-sp-buyout-title { font-size: 1.375rem; font-weight: 800; color: #374151; margin: 0; }
+        .ytt-sp-buyout-card {
+            position: relative;
+            display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
+            background: #fff; border: 1.5px solid #e5e7eb; border-radius: 16px;
+            padding: 1.5rem 1.75rem;
+        }
+        .ytt-sp-buyout-info { min-width: 0; }
+        .ytt-sp-buyout-name {
+            display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;
+            font-size: 1rem; font-weight: 800; color: #374151; margin-bottom: 0.75rem;
+        }
+        .ytt-sp-buyout-badge {
+            position: absolute; top: -12px; left: 18px;
+            font-size: 0.75rem; font-weight: 800; color: #fff; background: var(--primary);
+            border-radius: 100px; padding: 0.25rem 1rem; white-space: nowrap;
+        }
+        .ytt-sp-buyout-benefits { list-style: none; padding: 0; margin: 0; }
+        .ytt-sp-buyout-benefits li {
+            display: flex; align-items: flex-start; gap: 0.5rem;
+            font-size: 0.8125rem; color: #4b5563; padding: 0.2rem 0;
+        }
+        .ytt-sp-buyout-benefits li img { width: 15px; height: 15px; margin-top: 2px; flex-shrink: 0; }
+        .ytt-sp-buyout-fine { font-size: 0.75rem; color: #9ca3af; margin-top: 0.625rem; line-height: 1.5; }
+        .ytt-sp-buyout-action { flex-shrink: 0; text-align: center; }
+        .ytt-sp-buyout-price { line-height: 1; margin-bottom: 0.625rem; white-space: nowrap; }
+        .ytt-sp-buyout-amount { font-size: 1.625rem; font-weight: 900; color: #1e1b4b; }
+        .ytt-sp-buyout-cta {
+            display: block; text-align: center; white-space: nowrap;
+            padding: 0.7rem 1.75rem; border-radius: 10px; font-weight: 800; font-size: 0.9375rem;
+            text-decoration: none; background: var(--primary); color: #fff; border: 2px solid var(--primary);
             transition: all 0.2s;
         }
-        .btn-outline-step:hover { background: var(--primary); color: #fff; }
-        .btn-solid-step {
-            display: inline-flex; align-items: center; gap: 0.5rem;
-            background: var(--primary); color: #fff;
-            border: 1.5px solid var(--primary); border-radius: 10px;
-            padding: 0.7rem 1.5rem;
-            font-size: 0.9375rem; font-weight: 800;
-            text-decoration: none;
-            cursor: pointer;
-            transition: opacity 0.2s;
+        .ytt-sp-buyout-cta:hover { opacity: 0.9; }
+        @media (max-width: 560px) {
+            .ytt-sp-buyout-card { flex-direction: column; align-items: stretch; }
+            .ytt-sp-buyout-action { margin-top: 0.25rem; padding-top: 1rem; border-top: 1px solid #f0f0f0; }
         }
-        .btn-solid-step:hover { opacity: 0.88; }
-        .btn-solid-step .dl-icon {
-            width: 18px; height: 18px;
+
+        /* ===== 追加セクション（FTO / FAQ / サポート） ===== */
+        .ytt-add-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+        .ytt-add-grid.cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 500px; margin-left: auto; margin-right: auto; }
+        @media (max-width: 680px) {
+            .ytt-add-grid, .ytt-add-grid.cols-2 { grid-template-columns: 1fr; max-width: 460px; margin-left: auto; margin-right: auto; }
+        }
+        .ytt-add-card {
+            background: #fff; border: 1.5px solid #e5e7eb; border-radius: 14px;
+            padding: 1.25rem; text-align: left; min-width: 0;
+        }
+        .ytt-add-card h3 {
+            font-size: 0.95rem; font-weight: 800; color: #1e1b4b; margin: 0 0 0.45rem;
+            display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap;
+        }
+        .ytt-add-card p { font-size: 0.8125rem; color: #4b5563; line-height: 1.75; margin: 0; }
+        /* FTO 訴求 */
+        .ytt-fto-biglogo { display: block; height: 88px; width: auto; max-width: 100%; margin: 1.1rem auto 0; }
+        @media (max-width: 600px) { .ytt-fto-biglogo { height: 64px; } }
+        .ytt-spec-inner.ytt-fto-wide { max-width: 1100px; }
+        .ytt-fto2 {
+            display: grid; grid-template-columns: minmax(0,1.55fr) minmax(0,1fr); gap: 2.5rem; align-items: center;
+            background: #fff; border: 1.5px solid #e5e7eb; border-radius: 20px;
+            padding: 1.75rem; margin-top: 1.5rem;
+        }
+        @media (max-width: 860px) { .ytt-fto2 { grid-template-columns: 1fr; gap: 1.25rem; } }
+        @media (max-width: 600px) { .ytt-fto2 { padding: 1rem; } }
+        .ytt-fto2-visual { min-width: 0; }
+        .ytt-fto-chart { width: 100%; height: auto; display: block; border-radius: 12px; border: 1px solid #e5e7eb; }
+        .ytt-fto-credit { font-size: 0.68rem; color: #9ca3af; margin: 0.4rem 0 0; text-align: right; }
+        .ytt-fto-credit a { color: #9ca3af; text-decoration: underline; text-underline-offset: 2px; }
+        .ytt-fto2-content { min-width: 0; }
+        .ytt-fto2-head { font-size: 1.15rem; font-weight: 800; color: #1e1b4b; line-height: 1.55; margin: 0 0 1rem; }
+        .ytt-fto2-head .accent { color: var(--primary); }
+        .ytt-fto-list { list-style: none; padding: 0; margin: 0 0 1rem; }
+        .ytt-fto-list li { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.9rem; font-weight: 700; color: #374151; padding: 0.4rem 0; }
+        .ytt-fto-list li img { width: 18px; height: 18px; margin-top: 2px; flex-shrink: 0; }
+        .ytt-fto-attention { border-left: 3px solid #f59e0b; padding: 0.35rem 0 0.35rem 0.8rem; margin: 0 0 1.1rem; font-size: 0.85rem; font-weight: 700; color: #92400e; line-height: 1.6; }
+        .ytt-fto2-btns { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+        .ytt-fto2-note { font-size: 0.72rem; color: #9ca3af; line-height: 1.6; margin: 0.9rem 0 0; }
+        .ytt-fto2-note a { color: #2563eb; text-decoration: underline; text-underline-offset: 2px; }
+        .ytt-fto-detail {
+            display: inline-block; margin-top: 0.75rem;
+            padding: 0.4rem 1.1rem; border-radius: 8px;
+            border: 1px solid #1f2937; color: #1f2937; background: #fff;
+            font-size: 0.8rem; font-weight: 600; text-decoration: none;
+            transition: all 0.15s; white-space: nowrap;
+        }
+        .ytt-fto-detail:hover { background: #1f2937; color: #fff; }
+        /* FAQ */
+        details.ytt-faq { background: #f9fafb; border: 1.5px solid #e5e7eb; border-radius: 14px; margin-top: 0.875rem; overflow: hidden; }
+        details.ytt-faq[open] { background: #fff; border-color: #d1d5db; }
+        details.ytt-faq > summary {
+            list-style: none; cursor: pointer; padding: 1rem 1.25rem;
+            font-size: 0.9375rem; font-weight: 800; color: #1e1b4b;
+            display: flex; align-items: center; justify-content: space-between; gap: 0.75rem;
+        }
+        details.ytt-faq > summary::-webkit-details-marker { display: none; }
+        .ytt-faq-q { display: flex; align-items: flex-start; gap: 0.5rem; text-align: left; }
+        .ytt-faq-q::before { content: "Q"; color: var(--primary); font-weight: 900; flex-shrink: 0; }
+        .ytt-faq-chev {
+            width: 22px; height: 22px; background: #4f46e5; color: #fff; border-radius: 50%;
             display: inline-flex; align-items: center; justify-content: center;
+            font-size: 0.7rem; font-weight: 900; transition: transform 0.25s; flex-shrink: 0;
         }
-        .btn-solid-step .dl-icon svg { width: 100%; height: 100%; }
-        @keyframes dl-bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(2px); }
+        details.ytt-faq[open] .ytt-faq-chev { transform: rotate(180deg); }
+        .ytt-faq-a { padding: 0 1.25rem 1.25rem; font-size: 0.8125rem; color: #4b5563; line-height: 1.85; border-top: 1px dashed #e5e7eb; }
+        .ytt-faq-a p { margin: 0.75rem 0 0; }
+        .ytt-faq-a a { color: #2563eb; text-decoration: underline; text-underline-offset: 2px; }
+        /* サポート窓口 */
+        .ytt-support-card { text-align: center; }
+        .ytt-support-card h3 { justify-content: center; }
+        .ytt-support-card .sup-img { display: block; width: 48px; height: 48px; object-fit: contain; margin: 0 auto 0.7rem; }
+        .ytt-support-card .sup-link {
+            display: inline-block; margin-top: 0.75rem; font-size: 0.8125rem; font-weight: 700;
+            color: var(--primary); text-decoration: underline; text-underline-offset: 3px;
         }
-        .btn-solid-step .dl-icon { animation: dl-bounce 2.4s ease-in-out infinite; }
-        @media (prefers-reduced-motion: reduce) {
-            .btn-solid-step .dl-icon { animation: none; }
+        .ytt-sp-yt-note {
+            margin-top: 2rem;
+            border: 1px solid #e5e7eb; border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            background: #fff;
+            text-align: center; max-width: 560px; margin-left: auto; margin-right: auto;
         }
+        .ytt-sp-yt-note p { font-size: 0.875rem; color: #6b7280; line-height: 1.7; margin: 0; }
+        .ytt-sp-yt-note strong { color: #374151; }
 
-        /* FX SPACE ロゴプレビュー (STEP1) */
-        .preview-fxspace-logo {
-            width: 128px;
-        }
-        .preview-fxspace-logo img {
-            width: 100%; height: auto;
-            display: block;
-        }
-
-        /* 「FX SPACE」等、絶対に改行させない語 */
-        .nowrap { white-space: nowrap; }
-
-        /* シミュレータ用 */
-        .sim-intro {
-            padding: 0 1.5rem 0.5rem;
-            font-size: 0.8125rem;
-            color: #6b7280;
-            line-height: 1.8;
+        /* Detail link section */
+        .ytt-sp-detail {
+            padding: 4rem 2rem;
+            background: #fff;
             text-align: center;
         }
-        .sim-intro strong { color: #1e1b4b; }
+        .ytt-sp-detail-inner { max-width: 640px; margin: 0 auto; }
+        .ytt-sp-detail h2 {
+            font-size: clamp(1.25rem, 3vw, 1.75rem);
+            font-weight: 900; color: #1e1b4b; margin-bottom: 0.75rem;
+        }
+        .ytt-sp-detail p {
+            font-size: 0.9375rem; color: #6b7280; line-height: 1.8; margin-bottom: 1.75rem;
+        }
+        .ytt-sp-detail-btn {
+            display: inline-flex; align-items: center; gap: 0.625rem;
+            background: #1e1b4b; color: white;
+            padding: 1rem 2.5rem; border-radius: 12px;
+            font-size: 1rem; font-weight: 800; text-decoration: none;
+            transition: opacity 0.2s;
+        }
+        .ytt-sp-detail-btn:hover { opacity: 0.85; }
+        .ytt-sp-detail-btn svg { flex-shrink: 0; }
 
-        /* ============================================
-         * シミュレータ — intro/ と同じ ytt-demo 仕組み
-         * CSSは style.css 既存定義（.ytt-demo / .ytt-demo-frame.is-fullscreen 等）を使用
-         * 独立ラッパーで GSAP transform残骸の影響を回避
-         * 初期は max-height: 0 で隠す（iframe は読み込み済み）
-         * ============================================ */
-        .trial-sim-wrap {
-            margin: 0;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease;
+        /* CTA footer */
+        .ytt-sp-footer-cta {
+            padding: 5rem 2rem;
+            text-align: center;
+            background: #1e1b4b;
         }
-        .trial-sim-wrap.is-visible {
-            max-height: 200vh;
-            margin-bottom: 0;
+        .ytt-sp-footer-cta h2 {
+            font-size: clamp(1.5rem, 4vw, 2.25rem);
+            font-weight: 900; color: #fff;
+            margin-bottom: 0.75rem;
         }
+        .ytt-sp-footer-cta p {
+            font-size: clamp(0.9rem, 1.8vw, 1.0625rem);
+            color: rgba(255,255,255,0.7); line-height: 1.8; margin-bottom: 2rem;
+        }
+        .ytt-sp-footer-cta-btns {
+            display: flex; gap: 1rem; justify-content: center; align-items: center; flex-wrap: wrap;
+        }
+        /* 下部CTAのマニュアルリンク（暗背景用） */
+        .ytt-footer-cta-manuals {
+            margin-top: 2rem;
+            display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;
+            font-size: 0.875rem;
+        }
+        .ytt-footer-cta-manuals a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: underline; text-underline-offset: 3px;
+            font-weight: 600;
+            transition: color 0.15s;
+        }
+        .ytt-footer-cta-manuals a:hover {
+            color: #fff;
+        }
+        .btn-white-outline {
+            background: transparent; color: white;
+            border: 2px solid rgba(255,255,255,0.4);
+            padding: 0.875rem 2rem; border-radius: 10px;
+            font-size: 0.9375rem; font-weight: 700;
+            text-decoration: none; transition: all 0.2s; white-space: nowrap;
+        }
+        .btn-white-outline:hover { border-color: white; background: rgba(255,255,255,0.08); }
+        .btn-white-solid {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: white; color: #1e1b4b;
+            border: 2px solid white;
+            padding: 0.875rem 2rem; border-radius: 10px;
+            font-size: 0.9375rem; font-weight: 800;
+            text-decoration: none; transition: all 0.2s; white-space: nowrap;
+        }
+        .btn-white-solid:hover { background: #f0f0f0; }
 
-        /* 次へ進むボタン (各stepの下) */
-        .step-next {
-            text-align: right;
-            padding: 0 1.5rem 1.25rem;
-        }
-        @media (max-width: 600px) {
-            .step-next { text-align: center; }
-        }
-        .btn-next-step {
+        /* 通常ボタン（手書き風を上書き） */
+        .btn-sq-blue {
             display: inline-flex; align-items: center; gap: 0.375rem;
             background: var(--primary); color: #fff;
             border: none; border-radius: 10px;
-            padding: 0.65rem 1.5rem;
-            font-size: 0.875rem; font-weight: 800;
-            text-decoration: none;
-            cursor: pointer;
-            transition: opacity 0.2s;
+            padding: 0.75rem 1.75rem;
+            font-size: 1rem; font-weight: 800; text-decoration: none;
+            cursor: pointer; transition: opacity 0.2s; white-space: nowrap;
         }
-        .btn-next-step:hover { opacity: 0.88; }
+        .btn-sq-blue:hover { opacity: 0.88; }
+        .btn-sq-blue.sm { font-size: 0.875rem; padding: 0.5rem 1.25rem; }
+        .btn-sq-white.sm { font-size: 0.875rem; padding: 0.5rem 1.25rem; }
+        .btn-sq-white {
+            display: inline-flex; align-items: center;
+            background: #fff; color: var(--primary);
+            border: 2px solid var(--primary); border-radius: 10px;
+            padding: 0.75rem 1.75rem;
+            font-size: 1rem; font-weight: 800; text-decoration: none;
+            cursor: pointer; transition: all 0.2s; white-space: nowrap;
+        }
+        .btn-sq-white:hover { background: var(--primary); color: #fff; }
 
-        /* 完了バナー — 濃紺紫セクション */
-        .complete-banner {
-            text-align: center;
-            padding: 3.5rem 1.5rem 4rem;
-            background: #3730a3;
-            color: #fff;
-            margin: 0;
-            display: none;
-        }
-        .complete-banner.is-visible { display: block; }
-        .complete-banner-check {
-            width: 64px; height: 64px;
-            margin: 0 auto 1rem;
+        /* ===== 必要スペック セクション ===== */
+        .ytt-spec-section {
+            padding: 4.5rem 1.5rem 5rem;
             background: #fff;
+        }
+        .ytt-spec-inner { max-width: 720px; margin: 0 auto; }
+        .ytt-spec-header { text-align: center; margin-bottom: 1.5rem; }
+        .ytt-spec-header h2 {
+            font-size: clamp(1.4rem, 4vw, 2rem);
+            font-weight: 900; color: #1e1b4b;
+            margin: 0.5rem 0;
+        }
+        .ytt-spec-header p {
+            font-size: clamp(0.875rem, 1.8vw, 1rem);
+            color: #6b7280; line-height: 1.8;
+            margin: 0.5rem auto 0; max-width: 520px;
+        }
+        details.ytt-spec-acc {
+            background: #f9fafb;
+            border: 1.5px solid #e5e7eb;
+            border-radius: 14px;
+            margin-top: 1.25rem;
+            overflow: hidden;
+        }
+        details.ytt-spec-acc[open] { background: #fff; border-color: #d1d5db; }
+        details.ytt-spec-acc > summary {
+            list-style: none;
+            cursor: pointer;
+            padding: 1.125rem 1.5rem;
+            font-size: 1rem; font-weight: 800; color: #1e1b4b;
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 0.75rem;
+        }
+        details.ytt-spec-acc > summary::-webkit-details-marker { display: none; }
+        .ytt-spec-acc-label { display: flex; align-items: center; gap: 0.625rem; }
+        .ytt-spec-acc-label::before {
+            content: '';
+            width: 22px; height: 22px;
+            background: url('img/check-orange.png') center/contain no-repeat;
+            display: inline-block;
+            flex-shrink: 0;
+        }
+        .ytt-spec-acc-chev {
+            width: 22px; height: 22px;
+            background: #4f46e5; color: #fff;
             border-radius: 50%;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             display: inline-flex; align-items: center; justify-content: center;
+            font-size: 0.75rem; font-weight: 900;
+            transition: transform 0.25s;
+            flex-shrink: 0;
         }
-        .complete-banner-check img { width: 36px; height: 36px; }
-        .complete-banner h2 {
-            font-size: clamp(1.125rem, 3vw, 1.5rem);
-            font-weight: 900; color: #fff;
-            margin: 0 0 0.5rem;
+        details.ytt-spec-acc[open] .ytt-spec-acc-chev { transform: rotate(180deg); }
+        .ytt-spec-acc-body {
+            padding: 0 1.5rem 1.5rem;
+            border-top: 1px dashed #e5e7eb;
+            margin-top: 0;
         }
-        .complete-banner p {
-            font-size: 0.875rem; color: rgba(255,255,255,0.78);
-            line-height: 1.85; margin: 0 auto 1.5rem;
-            max-width: 460px;
+        .ytt-spec-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.25rem;
+            font-size: 0.875rem;
         }
-        /* サポートリンク 2枚カード（初期のシンプル版） */
-        .complete-links {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            max-width: 600px;
-            margin: 0.5rem auto 0;
+        .ytt-spec-table th,
+        .ytt-spec-table td {
+            padding: 0.75rem 0.75rem;
+            border-bottom: 1px solid #f0f0f0;
+            text-align: left;
+            vertical-align: top;
+            line-height: 1.7;
+        }
+        .ytt-spec-table th {
+            width: 25%;
+            color: #6b7280; font-weight: 700;
+            background: #f9fafb;
+            white-space: nowrap;
+        }
+        .ytt-spec-table td.spec-val {
+            color: #1e1b4b; font-weight: 700;
+        }
+        .ytt-spec-table td.spec-note {
+            color: #6b7280; font-size: 0.8125rem; font-weight: 400;
         }
         @media (max-width: 600px) {
-            .complete-links { grid-template-columns: 1fr; max-width: 360px; }
+            .ytt-spec-table, .ytt-spec-table thead, .ytt-spec-table tbody,
+            .ytt-spec-table tr, .ytt-spec-table th, .ytt-spec-table td {
+                display: block; width: 100%;
+            }
+            .ytt-spec-table tr {
+                border-bottom: 1px solid #e5e7eb;
+                padding: 0.625rem 0;
+            }
+            .ytt-spec-table th {
+                background: transparent; padding: 0.25rem 0;
+                font-size: 0.75rem; color: #9ca3af;
+            }
+            .ytt-spec-table td { padding: 0.25rem 0; border: none; }
         }
-        .complete-link-card {
-            background: #fff;
-            border: 1.5px solid #e5e7eb;
-            border-radius: 12px;
-            padding: 1.25rem 1.125rem;
-            display: flex;
-            flex-direction: column;
-            text-align: center;
-            text-decoration: none;
-            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
-        }
-        .complete-link-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 18px rgba(0,0,0,0.07);
-            border-color: var(--primary);
-        }
-        .complete-link-title {
-            font-size: 0.9375rem;
-            font-weight: 900;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-        .complete-link-desc {
-            font-size: 0.75rem;
-            color: #6b7280;
-            line-height: 1.75;
+        /* DLボタン（大型・統一スタイル） */
+        .ytt-dl-btn-main {
+            font-size: 1.0625rem !important;
+            padding: 0.95rem 2rem !important;
         }
 
+        /* ===== DLアイコン（ダウンロード感を直感的に） ===== */
+        .dl-icon {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 24px; height: 24px;
+            flex-shrink: 0;
+            color: currentColor;
+            transition: transform 0.3s ease;
+        }
+        .dl-icon svg { width: 100%; height: 100%; }
+        .btn-sq-blue.sm .dl-icon { width: 16px; height: 16px; }
+        /* 静止時のやわらかな上下アニメ（注目を引く） */
+        @keyframes dl-bounce {
+            0%, 100% { transform: translateY(0); }
+            45%      { transform: translateY(2px); }
+            55%      { transform: translateY(2px); }
+        }
+        .ytt-dl-btn-main .dl-icon,
+        .btn-white-solid .dl-icon {
+            animation: dl-bounce 2.4s ease-in-out infinite;
+        }
+        /* ホバー時に強めにバウンス */
+        .ytt-dl-btn-main:hover .dl-icon,
+        .btn-white-solid:hover .dl-icon,
+        .btn-sq-blue:hover .dl-icon {
+            animation: none;
+            transform: translateY(4px);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .ytt-dl-btn-main .dl-icon,
+            .btn-white-solid .dl-icon { animation: none; }
+        }
+
+        /* ===== 24時間お試し吹き出し（右斜め上のシンプルなメモ） ===== */
+        .ytt-trial-wrap {
+            position: relative;
+            display: inline-block;
+        }
+        .ytt-trial-bubble {
+            position: absolute;
+            left: calc(100% - 1.5rem);   /* ボタン右端に少し被せる位置 */
+            bottom: calc(100% + 14px);   /* ボタンの上にしっかり余白を取って配置 */
+            background: #ffffff;
+            border: 1px solid #d1d5db;
+            color: #374151;
+            padding: 0.5rem 0.875rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            line-height: 1.5;
+            white-space: nowrap;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            z-index: 5;
+            text-align: center;
+        }
+        /* 下向きの吹き出しの尻尾（ボタンを指す） */
+        .ytt-trial-bubble::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            bottom: -7px;
+            width: 12px;
+            height: 12px;
+            background: #ffffff;
+            border-right: 1px solid #d1d5db;
+            border-bottom: 1px solid #d1d5db;
+            transform: rotate(45deg);
+        }
+        /* やさしい上下浮遊（傾きなし） */
+        @keyframes trial-float {
+            0%, 100% { translate: 0 0; }
+            50%      { translate: 0 -3px; }
+        }
+        .ytt-trial-bubble { animation: trial-float 3.2s ease-in-out infinite; }
+        @media (prefers-reduced-motion: reduce) {
+            .ytt-trial-bubble { animation: none; }
+        }
+
+        /* タブレット〜スマホ: ボタンの下に「上向き尻尾付き」の吹き出しとして配置（ボタン感を排除） */
+        @media (max-width: 768px) {
+            .ytt-sp-hero-btns { flex-direction: column; align-items: center; }
+            .ytt-trial-wrap { display: block; width: 100%; text-align: center; position: relative; }
+            .ytt-trial-bubble {
+                position: relative;
+                display: inline-block;
+                margin: 1rem auto 0;
+                animation: none;
+                font-size: 0.7rem;
+                padding: 0.5rem 0.875rem;
+                white-space: normal;
+                max-width: 18rem;
+                line-height: 1.5;
+                background: #fafafa;
+                border-style: dashed;
+                border-radius: 10px;
+            }
+            /* 上向きの三角尻尾（ボタンを指す） */
+            .ytt-trial-bubble::before {
+                content: '';
+                position: absolute;
+                left: 50%;
+                top: -7px;
+                bottom: auto;
+                width: 0;
+                height: 0;
+                background: transparent;
+                border-left: 7px solid transparent;
+                border-right: 7px solid transparent;
+                border-bottom: 7px solid #d1d5db;
+                transform: translateX(-50%);
+            }
+            .ytt-trial-bubble::after {
+                content: '';
+                position: absolute;
+                left: 50%;
+                top: -6px;
+                width: 0;
+                height: 0;
+                border-left: 6px solid transparent;
+                border-right: 6px solid transparent;
+                border-bottom: 6px solid #fafafa;
+                transform: translateX(-50%);
+            }
+        }
+
+        /* page footer */
         .ytt-sp-page-footer {
-            padding: 1.5rem 2rem;
+            padding: 1.75rem 2rem;
             text-align: center;
             font-size: 0.8125rem; color: #9ca3af;
             border-top: 1px solid #f0f0f0;
@@ -535,162 +787,136 @@
         }
         .ytt-sp-page-footer a { color: #9ca3af; text-decoration: underline; }
 
-        [data-anim] { opacity: 0; }
-            /* シミュレーターが動かない画面幅（768px以下 = style.css で「PC専用」表示になる幅）では
-           STEP6「シミュレーターで予約練習」ごと非表示にし、STEP5で完了扱いにする。PC/タブレット横では従来どおり6ステップ */
-        .s5-label-sp { display: none; }
+        /* Demo section full-height on desktop */
+        @media (min-width: 769px) {
+            .ytt-sp-demo-wrap .ytt-demo {
+                min-height: 100vh;
+            }
+        }
+        /* SPでは「やってみよう」装飾画像のみ非表示（シミュレーター本体は残す） */
         @media (max-width: 768px) {
-            .step-card[data-step="6"],
-            #trial-sim-wrap,
-            .prog-line[data-prog-line="5"],
-            .prog-step[data-prog="6"] { display: none !important; }
-            .s5-label-pc { display: none; }
-            .s5-label-sp { display: inline; }
+            .try-it-deco--ytt { display: none; }
+        }
+
+        /* ===== Tooltips ===== */
+        .nowrap { display: inline-block; white-space: nowrap; }
+        .has-tip { position: relative; }
+        .feat-info {
+            margin-left: auto; flex-shrink: 0;
+            width: 18px; height: 18px; color: #9ca3af;
+            display: inline-flex; align-items: center; justify-content: center;
+            transition: color 0.2s; cursor: pointer;
+        }
+        .feat-info svg { width: 100%; height: 100%; }
+        .feat-info:hover, .has-tip.tip-open .feat-info { color: #4f46e5; }
+        @media(max-width:768px) {
+            .feat-info { width: 22px; height: 22px; }
+            .has-tip { cursor: pointer; }
+        }
+        .feat-tip {
+            position: absolute; bottom: calc(100% + 10px); left: 50%;
+            transform: translateX(-50%); width: 240px;
+            background: #1e1b4b; color: #fff;
+            padding: 0.75rem 0.875rem; border-radius: 10px;
+            font-size: 0.75rem; line-height: 1.7;
+            opacity: 0; visibility: hidden; pointer-events: none;
+            transition: opacity 0.2s ease 0.35s, visibility 0s linear 0.55s;
+            z-index: 100; text-align: left;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.25); white-space: normal;
+        }
+        .feat-tip::after {
+            content: ''; position: absolute; top: 100%; left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent; border-top-color: #1e1b4b;
+        }
+        .feat-tip a { color: #a5b4fc; text-decoration: underline; text-underline-offset: 2px; font-weight: 700; }
+        .feat-tip a:hover { color: #c7d2fe; }
+        @media(hover:hover) {
+            .feat-tip { right: 0; left: auto; transform: none; }
+            .feat-tip::after { left: auto; right: 8px; transform: none; }
+            .has-tip .feat-info:hover ~ .feat-tip,
+            .has-tip .feat-tip:hover { opacity: 1; visibility: visible; pointer-events: auto; transition: opacity 0.15s ease, visibility 0s; }
+            .feat-tip::before { content: ''; position: absolute; top: 100%; left: 0; right: 0; height: 18px; }
+        }
+        .has-tip.tip-open .feat-tip { opacity: 1; visibility: visible; pointer-events: auto; }
+        @media(max-width:768px) {
+            .feat-tip { width: min(260px, 80vw); bottom: auto; top: calc(100% + 10px); }
+            .feat-tip::after { top: auto; bottom: 100%; border-top-color: transparent; border-bottom-color: #1e1b4b; }
+        }
+    
+        /* スマホ：追従ナビのボタンと本文中の小さなテキストリンクのタップ領域を44px相当に（見た目は維持） */
+        @media (max-width: 768px) {
+            .ytt-sp-nav-cta .btn-sq-blue.sm, .ytt-sp-nav-cta .btn-sq-white.sm { min-height: 44px; display: inline-flex; align-items: center; }
+            a[href][style*="font-size:0.8125rem"], a[href][style*="font-size:0.75rem"] { display: inline-block; padding: 0.5em 0; }
         }
 </style>
+<style>
+    /* ===== 導入手順カード（特設ページの白カード＋手書きオレンジ番号） ===== */
+    .guide-card {
+        background: #fff; border: 1.5px solid #e5e7eb; border-radius: 20px;
+        padding: 1.75rem 1.75rem 0.75rem; margin-top: 1.5rem; text-align: left;
+    }
+    @media (max-width: 600px) { .guide-card { padding: 1.25rem 1rem 0.25rem; border-radius: 16px; } }
+    .gstep { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 0.85rem; padding-bottom: 1.6rem; margin-bottom: 1.6rem; border-bottom: 1px dashed #e5e7eb; }
+    .gstep:last-child { border-bottom: none; margin-bottom: 0; }
+    .gstep-no {
+        width: 40px; height: 34px; display: flex; align-items: center; justify-content: center;
+        background: url("img/fill-crayon-orange-badge.svg") 0 0 / 100% 100% no-repeat;
+        color: #1e1b4b; font-weight: 900; font-size: 1rem; font-family: Inter, sans-serif;
+    }
+    .gstep-body { min-width: 0; }
+    .gstep-title { font-size: 0.98rem; font-weight: 800; color: #1e1b4b; line-height: 1.6; margin: 0.25rem 0 0; }
+    .gstep-body p { font-size: 0.875rem; color: #4b5563; line-height: 1.85; margin: 0.45rem 0 0; }
+    .gstep-body p b { color: #1e1b4b; }
+    .gshot { margin: 0.8rem 0 0; }
+    .gshot img { display: block; max-width: 100%; height: auto; border: 1px solid #e5e7eb; border-radius: 12px; background: #fff; }
+    .gshot.narrow img { max-width: min(100%, 380px); }
+    .gshot.mid img { max-width: min(100%, 560px); }
+    .gshot figcaption { font-size: 0.75rem; color: #6b7280; margin-top: 0.35rem; line-height: 1.6; }
+    .gshot-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; align-items: start; margin-top: 0.8rem; }
+    .gshot-pair .gshot { margin: 0; }
+    .gshot-pair .gshot img { width: auto; max-width: 100%; }
+    @media (max-width: 640px) { .gshot-pair { grid-template-columns: 1fr; } }
+    .gstep-btn { margin-top: 0.85rem; }
+    .gnote { border-left: 3px solid #f59e0b; padding: 0.35rem 0 0.35rem 0.8rem; margin: 0.8rem 0 0; font-size: 0.85rem; font-weight: 700; color: #92400e; line-height: 1.7; }
+    .gtip { background: #f9fafb; border-radius: 10px; padding: 0.7rem 0.9rem; margin: 0.8rem 0 0; font-size: 0.8125rem; color: #4b5563; line-height: 1.8; }
+    .gtip b { color: #1e1b4b; }
+    .gtip code, .gstep-body code { font-family: ui-monospace, Menlo, Consolas, monospace; background: #f3f4f6; border-radius: 4px; padding: 0.05em 0.35em; font-size: 0.9em; color: #1e1b4b; }
+    .gtable { width: 100%; border-collapse: collapse; margin-top: 0.8rem; font-size: 0.8125rem; }
+    .gtable th, .gtable td { padding: 0.6rem 0.7rem; border-bottom: 1px solid #f0f0f0; text-align: left; vertical-align: top; line-height: 1.7; }
+    .gtable th { width: 34%; color: #6b7280; font-weight: 700; background: #f9fafb; }
+    .gtable td { color: #374151; }
+    @media (max-width: 600px) { .gtable th, .gtable td { display: block; width: 100%; } .gtable th { border-bottom: none; padding-bottom: 0.2rem; } }
+    .dot { display: inline-block; width: 11px; height: 11px; border-radius: 50%; vertical-align: -1px; margin-right: 0.35rem; }
+    .dot.g { background: #22c55e; } .dot.y { background: #eab308; } .dot.r { background: #ef4444; }
+    /* 3ステップの目次（手書き数字） */
+    .flow3 .ytt-add-card { text-align: center; }
+    .flow3 .ytt-add-card h3 { justify-content: center; }
+    .flow3 .flow-num { display: block; height: 46px; width: auto; margin: 0 auto 0.6rem; }
+    .flow3 a.ytt-add-card { text-decoration: none; transition: border-color 0.15s, transform 0.15s; }
+    .flow3 a.ytt-add-card:hover { border-color: #a5b4fc; transform: translateY(-2px); }
+    /* スマホ：インストール／ホーム追加 */
+    .os-card h3 .os-tag { font-size: 0.7rem; font-weight: 800; padding: 0.15em 0.6em; border-radius: 999px; background: #1e1b4b; color: #fff; }
+    .os-card ol { margin: 0.35rem 0 0; padding-left: 1.2rem; font-size: 0.8125rem; color: #4b5563; line-height: 1.85; }
+    .home-icon { text-align: center; margin-top: 1.25rem; }
+    .home-icon img { width: 140px; max-width: 45vw; display: block; margin: 0 auto; }
+    .home-icon figcaption { font-size: 0.8125rem; color: #4b5563; margin-top: 0.4rem; line-height: 1.7; }
+    /* Web版YTTとは：スマホ画面の縦長画像 */
+    .ytt-fto2-visual .webytt-sp { display: block; width: 100%; max-width: 260px; height: auto; margin: 0 auto; border-radius: 18px; box-shadow: 0 10px 28px rgba(30,27,75,0.18); }
+    .section-alt { background: #f4f6f9; }
+</style>
 
-    <style>
-        /* ===== Web版YTT 導入ガイド用（このページだけ） ===== */
-        .steps-flow .step-card.is-hidden { display: block; } /* このページは全ステップを最初から表示 */
-        .step-num { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: #4f46e5; color: #fff; font-weight: 900; font-size: 0.95rem; margin-right: 0.5rem; vertical-align: middle; flex-shrink: 0; }
-        .sub-steps { list-style: none; padding: 0; margin: 1rem 0 0; display: grid; gap: 0.7rem; }
-        .sub-steps li { display: flex; gap: 0.6rem; align-items: flex-start; font-size: 0.95rem; line-height: 1.75; color: #374151; }
-        .sub-steps li .sn { flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%; background: #eef2ff; color: #4f46e5; font-weight: 900; font-size: 0.8rem; display: inline-flex; align-items: center; justify-content: center; margin-top: 3px; }
-        .sub-steps li b { color: #1e1b4b; }
-        .guide-table { width: 100%; border-collapse: collapse; margin: 0.9rem 0 0; font-size: 0.9rem; line-height: 1.6; }
-        .guide-table th, .guide-table td { text-align: left; padding: 0.6rem 0.7rem; border-bottom: 1px solid #e5e7eb; vertical-align: top; }
-        .guide-table th { width: 32%; color: #1e1b4b; font-weight: 800; background: #f8f9fc; white-space: nowrap; }
-        .guide-table code, .guide-code { font-family: ui-monospace, Menlo, Consolas, monospace; background: #f3f4f6; border-radius: 4px; padding: 0.05em 0.35em; font-size: 0.9em; color: #1e1b4b; }
-        .note-box { margin-top: 1rem; padding: 0.9rem 1rem; border-radius: 12px; background: #fff7ed; border: 1.5px solid #fdba74; font-size: 0.9rem; line-height: 1.7; color: #7c2d12; }
-        .note-box b { color: #9a3412; }
-        .note-box.info { background: #eef2ff; border-color: #c7d2fe; color: #312e81; }
-        .note-box.info b { color: #3730a3; }
-        .shot { margin-top: 1rem; border: 2px dashed #c7d2fe; border-radius: 12px; background: #f8f9fc; color: #6b7280; font-size: 0.85rem; text-align: center; padding: 1.6rem 1rem; }
-        .shot img { display: block; width: 100%; height: auto; border-radius: 10px; }
-        .status-dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%; vertical-align: middle; margin-right: 0.35rem; }
-        .status-dot.g { background: #22c55e; } .status-dot.y { background: #eab308; } .status-dot.r { background: #ef4444; }
-        .os-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
-        @media (max-width: 640px) { .os-grid { grid-template-columns: 1fr; } }
-        .os-card { border: 1.5px solid #e5e7eb; border-radius: 14px; padding: 1.1rem 1.1rem 1.2rem; background: #fff; }
-        .os-card h3 { margin: 0 0 0.5rem; font-size: 1.05rem; color: #1e1b4b; display: flex; align-items: center; gap: 0.5rem; }
-        .os-card h3 .os-tag { font-size: 0.7rem; font-weight: 800; padding: 0.15em 0.6em; border-radius: 999px; background: #1e1b4b; color: #fff; }
-        .os-card ol { margin: 0; padding-left: 1.3rem; font-size: 0.92rem; line-height: 1.8; color: #374151; }
-        .plain-section { max-width: 760px; margin: 0 auto; padding: 0 1.5rem 3rem; }
-        .plain-section h2 { font-size: clamp(1.25rem, 3.5vw, 1.6rem); font-weight: 900; color: #1e1b4b; margin: 0 0 0.25rem; }
-        .plain-section .lead { color: #6b7280; font-size: 0.95rem; line-height: 1.75; margin: 0 0 1rem; }
-        .limit-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.8rem; }
-        .limit-list li { border: 1.5px solid #e5e7eb; border-radius: 12px; padding: 0.9rem 1rem; background: #fff; font-size: 0.92rem; line-height: 1.7; color: #374151; }
-        .limit-list li b { display: block; color: #1e1b4b; margin-bottom: 0.2rem; }
-        .faq-item { border: 1.5px solid #e5e7eb; border-radius: 12px; background: #fff; margin-bottom: 0.7rem; overflow: hidden; }
-        .faq-q { width: 100%; text-align: left; background: none; border: none; cursor: pointer; padding: 0.9rem 2.6rem 0.9rem 1rem; font-size: 0.95rem; font-weight: 800; color: #1e1b4b; position: relative; line-height: 1.5; min-height: 44px; }
-        .faq-q::after { content: '▼'; position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); font-size: 0.7rem; color: #6b7280; transition: transform 0.2s; }
-        .faq-item.open .faq-q::after { transform: translateY(-50%) rotate(180deg); }
-        .faq-a { display: none; padding: 0 1rem 1rem; font-size: 0.9rem; line-height: 1.75; color: #374151; }
-        .faq-item.open .faq-a { display: block; }
-        .faq-a ul { margin: 0.3rem 0 0; padding-left: 1.2rem; }
-        .ready-box { max-width: 760px; margin: 0 auto 1rem; padding: 0 1.5rem; }
-        .ready-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.7rem; }
-        @media (max-width: 640px) { .ready-grid { grid-template-columns: 1fr; } }
-        .ready-item { border: 1.5px solid #e5e7eb; border-radius: 12px; padding: 0.8rem 0.9rem; background: #fff; font-size: 0.9rem; line-height: 1.6; color: #374151; display: flex; gap: 0.6rem; align-items: flex-start; }
-        .ready-item .ri { font-size: 1.2rem; line-height: 1.3; }
-        .ready-item b { display: block; color: #1e1b4b; }
-        .term-list dt { font-weight: 800; color: #1e1b4b; margin-top: 0.6rem; }
-        .term-list dd { margin: 0.15rem 0 0; color: #374151; font-size: 0.92rem; line-height: 1.7; }
-        .hero-ytt-web { width: min(220px, 60vw); height: auto; display: block; margin: 0 auto 0.5rem; }
-        .quiet-link { color: #4f46e5; text-decoration: underline; text-underline-offset: 3px; }
-        .about-grid { display: grid; grid-template-columns: 1fr 200px; gap: 1.5rem; align-items: center; }
-        .about-shot img { width: 100%; height: auto; border-radius: 14px; box-shadow: 0 8px 24px rgba(30,27,75,0.18); display: block; }
-        @media (max-width: 640px) { .about-grid { grid-template-columns: 1fr; } .about-shot { max-width: 220px; margin: 0 auto; } }
-        .env-table th { width: 38%; white-space: normal; }
-        .feat-list { list-style: none; padding: 0; margin: 0.5rem 0 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
-        .feat-list li { background: #eef2ff; color: #312e81; border-radius: 999px; padding: 0.3rem 0.85rem; font-size: 0.9rem; font-weight: 700; }
-        #support .feat-list { display: grid; gap: 0.35rem; }
-        #support .feat-list li { background: none; color: #374151; font-weight: 400; padding: 0; border-radius: 0; }
-        #support .feat-list li::before { content: '・'; }
-    </style>
-
-    <style>
-        /* ===== 手順ブロック（1手順＝1スクショ。既存Canva「YTT導入方法」と同じ進め方） ===== */
-        .howto { max-width: 860px; margin: 0 auto; padding: 0 1.5rem; }
-        .howto-band {
-            background: #1e2a4a; color: #fff; font-weight: 900; font-size: clamp(1rem, 2.6vw, 1.25rem);
-            padding: 0.7rem 1.1rem; border-radius: 8px; margin: 2.5rem 0 1.25rem; letter-spacing: 0.02em;
-        }
-        .howto-band .band-sub { display: block; font-size: 0.78rem; font-weight: 600; color: #c7d2fe; margin-top: 0.2rem; letter-spacing: 0; }
-        .hstep { display: grid; grid-template-columns: 34px 1fr; gap: 0.75rem; margin-bottom: 1.75rem; }
-        .hstep-no {
-            width: 34px; height: 34px; border-radius: 50%; background: #4f46e5; color: #fff;
-            display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1rem; flex-shrink: 0;
-        }
-        .hstep-body { min-width: 0; }
-        .hstep-body > p { margin: 0.35rem 0 0; font-size: 0.95rem; line-height: 1.85; color: #374151; }
-        .hstep-body > p:first-child { margin-top: 0.3rem; font-weight: 700; color: #1e1b4b; font-size: 1rem; }
-        .hshot { margin: 0.75rem 0 0; }
-        .hshot img {
-            display: block; max-width: 100%; height: auto; border: 1px solid #e5e7eb; border-radius: 10px;
-            box-shadow: 0 4px 14px rgba(30,27,75,0.08); background: #fff;
-        }
-        .hshot.narrow img { max-width: min(100%, 380px); }
-        .hshot.mid img { max-width: min(100%, 560px); }
-        .hshot figcaption { font-size: 0.8rem; color: #6b7280; margin-top: 0.35rem; line-height: 1.6; }
-        .hnote {
-            margin-top: 0.6rem; padding: 0.7rem 0.85rem; border-radius: 10px; background: #f8f9fc;
-            border-left: 4px solid #a5b4fc; font-size: 0.88rem; line-height: 1.75; color: #374151;
-        }
-        .hnote.warn { background: #fff7ed; border-left-color: #fb923c; color: #7c2d12; }
-        .hnote b { color: #1e1b4b; }
-        .hnote.warn b { color: #9a3412; }
-        /* 実画面の再現（スクショが撮れない画面用。実物と同じ文言・配色） */
-        .ui-mock { border: 1px solid #e5e7eb; border-radius: 12px; overflow: hidden; background: #fff; box-shadow: 0 4px 14px rgba(30,27,75,0.08); max-width: 340px; }
-        .ui-mock-bar { background: #f1f3f5; border-bottom: 1px solid #e5e7eb; padding: 0.45rem 0.7rem; }
-        .ui-mock-url { display: block; background: #fff; border: 1px solid #dfe3e8; border-radius: 999px; font-size: 0.72rem; color: #6b7280; padding: 0.22rem 0.7rem; text-align: center; }
-        .ui-mock-body { padding: 2.2rem 1.4rem 2.6rem; text-align: center; }
-        .ui-mock-h { font-size: 1.15rem; font-weight: 800; color: #111827; margin-bottom: 0.9rem; }
-        .ui-mock-p { font-size: 0.82rem; color: #374151; line-height: 1.7; margin-bottom: 1.3rem; }
-        .ui-mock--acct { background: #131a2e; border-color: #2b3554; max-width: 320px; padding: 0.9rem; }
-        .acct-row { display: flex; align-items: center; gap: 0.5rem; background: #1b2440; border: 1px solid #33406b; border-radius: 8px; padding: 0.55rem 0.7rem; }
-        .acct-dot { width: 9px; height: 9px; border-radius: 50%; background: #22c55e; flex-shrink: 0; box-shadow: 0 0 6px rgba(34,197,94,0.8); }
-        .acct-name { color: #e5e7eb; font-size: 0.78rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: 1; }
-        .acct-caret { color: #9ca3af; font-size: 0.7rem; }
-        .acct-hint { color: #fbbf24; font-size: 0.72rem; margin-top: 0.5rem; padding-left: 0.2rem; }
-        .ui-mock-btn { display: inline-block; background: #5865F2; color: #fff; font-size: 0.9rem; font-weight: 600; padding: 0.6rem 1.4rem; border-radius: 8px; }
-        /* スマホ・PCの画面を横に並べる（スマホ幅では縦に並べる） */
-        .shot-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; align-items: start; margin-top: 0.75rem; }
-        .shot-pair .hshot { margin: 0; }
-        .shot-pair .hshot img { width: auto; max-width: 100%; } /* 元の大きさより拡大しない（小さい画像を引き伸ばすとぼやけるため） */
-        @media (max-width: 640px) { .shot-pair { grid-template-columns: 1fr; } .shot-pair .hshot img { max-width: min(100%, 320px); } }
-        .home-icon { text-align: center; margin-top: 1.25rem; }
-        .home-icon img { width: 150px; max-width: 45vw; margin: 0 auto; border: none; box-shadow: none; background: transparent; }
-        .todo-shot {
-            margin: 0.75rem 0 0; border: 2px dashed #c7d2fe; border-radius: 10px; background: #f8f9fc;
-            color: #4f46e5; font-size: 0.85rem; font-weight: 700; text-align: center; padding: 1.4rem 1rem;
-        }
-        .hstep-actions { margin-top: 0.75rem; }
-        .band-img { display: block; width: 100%; max-width: 560px; height: auto; margin: 2.5rem auto 1rem; }
-        .done-msg {
-            max-width: 860px; margin: 2rem auto 0; padding: 1.2rem 1.4rem; border-radius: 14px;
-            background: linear-gradient(135deg, #eef2ff, #f5f3ff); border: 1.5px solid #c7d2fe;
-            text-align: center; font-weight: 800; color: #312e81; line-height: 1.8;
-        }
-        @media (max-width: 640px) {
-            .howto { padding: 0 1rem; }
-            .hstep { grid-template-columns: 28px 1fr; gap: 0.6rem; }
-            .hstep-no { width: 28px; height: 28px; font-size: 0.9rem; }
-            .hstep-body > p { font-size: 0.92rem; }
-        }
-    </style>
 </head>
 <body>
 
 <!--
 ====================================================================
   Web版（スマホ版）YTT 導入方法  ytt-web-setup.html
-  ・既存Canva「YTT導入方法」(DAF1unsWf4o) の流れとスクショをそのまま踏襲
-  ・デザインは fx-space.com/intro/ に合わせる
+  ・流れとスクショは既存Canva「YTT導入方法」(DAF1unsWf4o) を踏襲
+  ・見た目は ytt-tokusetu.html と同じ部品（head の <style> は特設ページのものをそのまま使用）
   【本番反映前TODO】
   [1] レシーバーEA（webytt.zip）のダウンロードURL → 安田さんに配置場所を確認して差し替え（#href-tbd-webytt-zip）
-  [2] 「TODO スクショ」の点線枠 → 撮影して差し替え
-  [3] 機能説明ページ（ytt-web-features.html）ができたらリンクを有効化（#href-tbd-web-features）
+  [2] 機能説明ページができたらリンクを有効化（#href-tbd-web-features）
 ====================================================================
 -->
 
@@ -698,456 +924,691 @@
     <a href="ytt-tokusetu.html" class="ytt-sp-nav-logo">
         <img src="img/ytt-nav-logo.png" alt="YTT — FX SPACE">
     </a>
-    <a href="ytt-tokusetu.html" class="ytt-sp-nav-back">← YTT特設ページに戻る</a>
+    <div class="ytt-sp-nav-cta">
+        <a href="https://webytt.fx-space.com/" target="_blank" rel="noopener" class="btn-sq-blue sm">Web版YTTを開く</a>
+    </div>
 </nav>
 
 <!-- HERO -->
 <section class="ytt-sp-hero">
+    <img src="images/ytt-logo.png" alt="YTT" class="ytt-sp-hero-logo">
     <h1 class="ytt-sp-hero-title">
         <span class="ytt-sp-title-line"><span class="line-text">Web版YTT<img class="ytt-title-wave" src="img/wave-yellow.png" alt=""></span></span>
         <span class="ytt-sp-title-line"><span class="line-text">導入方法<img class="ytt-title-wave" src="img/wave-yellow.png" alt=""></span></span>
     </h1>
     <p class="ytt-sp-hero-lead">
-        口座の登録からレシーバーの設置、Web版YTTへのログインまで。<wbr>画面のとおりに上から進めれば完了します。<br>
-        所要時間の目安は約15分です。
+        口座の登録からレシーバーの設置、Web版YTTへのログインまで。<br>
+        画像のとおりに上から進めれば、約15分で使えるようになります。
+    </p>
+    <div class="ytt-sp-hero-btns">
+        <a href="#flow" class="btn-sq-blue">導入をはじめる</a>
+        <a href="#trouble" class="btn-sq-white">よくある質問</a>
+    </div>
+    <p style="font-size:0.8125rem;color:#6b7280;margin-top:1.25rem;">
+        <a href="https://drive.google.com/file/d/1Fd6qcQIisp-V8Eh5tV1722wkCf7qZEzc/view?usp=sharing" target="_blank" rel="noopener" style="color:#4f46e5;text-decoration:underline;text-underline-offset:3px;">利用規約</a>　※必ず目を通してください
     </p>
 </section>
 
-<!-- 機能概要（既存Canvaと同じ並び） -->
-<section class="plain-section" id="about" style="padding-top:0.5rem;">
-    <img class="band-img" src="img/webytt/banner-gaiyou.png" alt="Web版 機能概要" style="margin-top:0;">
-    <p class="lead" style="text-align:center;margin-bottom:0.25rem;">
-        <a href="https://drive.google.com/file/d/1Fd6qcQIisp-V8Eh5tV1722wkCf7qZEzc/view?usp=sharing" target="_blank" rel="noopener" class="quiet-link">利用規約</a>　※必ず目を通してください<br>
-        <a href="#href-tbd-web-features" class="quiet-link">Web版YTTの機能説明はこちら ↓</a>
-    </p>
-    <p class="lead" style="text-align:right;font-size:0.8rem;">最終更新日：2026.9/10</p>
-    <div class="about-grid">
-        <div>
-            <h2>Web版YTTとは</h2>
-            <p class="lead">ブラウザで動くYTTです。スマホからでもPCからでも、取引ツール（MT4 / MT5 / cTrader）にレシーバーEAを入れておけば、Web版YTTからシナリオ構築・注文・決済ができます。<br>注文を実際に出すのはレシーバー側なので、MT4 / MT5 は利用中もPCを起動しておく必要があります（cTrader Cloud版はPCを閉じてもOK）。</p>
+<!-- Web版YTTとは -->
+<section class="ytt-spec-section" style="background:#f4f6f9;">
+    <div class="ytt-spec-inner ytt-fto-wide">
+        <div class="ytt-spec-header">
+            <span class="section-title-badge section-title-badge--orange">
+                <img class="hero-title-side hero-title-side--left" src="img/title-side-orange-left.png" alt="">
+                Web版 機能概要
+                <img class="hero-title-side hero-title-side--right" src="img/title-side-orange-right.png" alt="">
+            </span>
+            <div style="text-align:center; margin-bottom:0.25rem;">
+                <div style="display:inline-block; white-space:nowrap;">
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">Web版YTTとは</h2>
+                    <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
+                </div>
+            </div>
+            <p>スマホでもPCでも、ブラウザからYTTが使えます。</p>
         </div>
-        <div class="about-shot"><img src="img/webytt-sp.png" alt="Web版YTT スマホ画面" loading="lazy"></div>
+        <div class="ytt-fto2">
+            <div class="ytt-fto2-visual">
+                <img class="webytt-sp" src="img/webytt-sp.png" alt="Web版YTTのスマホ画面" loading="lazy">
+            </div>
+            <div class="ytt-fto2-content">
+                <p class="ytt-fto2-head">取引ツールに<span class="accent">レシーバーEA</span>を入れておけば、<br>ブラウザから注文・決済までできます</p>
+                <ul class="ytt-fto-list">
+                    <li><img src="img/check-orange.png" alt="">注文、決済</li>
+                    <li><img src="img/check-orange.png" alt="">シナリオ構築・予約注文</li>
+                    <li><img src="img/check-orange.png" alt="">オートライン</li>
+                    <li><img src="img/check-orange.png" alt="">コピーモード</li>
+                    <li><img src="img/check-orange.png" alt="">通知・トレードノート・経済指標表示 ほか</li>
+                </ul>
+                <p class="ytt-fto-attention">注文を実際に出すのはレシーバー側です。MT4 / MT5 は利用中もPCを起動したままにしてください（cTrader Cloud版はPCを閉じてもOK）。</p>
+                <p class="ytt-fto2-note">詳しい機能は <a href="#href-tbd-web-features">Web版YTT 使い方ページ（準備中）</a> で紹介します。</p>
+            </div>
+        </div>
     </div>
-
-    <h2 style="margin-top:2rem;">使用環境</h2>
-    <table class="guide-table env-table">
-        <tr><th>対応端末</th><td>スマホ（iPhone / Android）、PC。ブラウザで開きます</td></tr>
-        <tr><th>ブラウザ</th><td>Safari / Chrome など。スマホは Androidはインストール、iPhoneはホーム画面に追加して使うのがおすすめ（下の「スマホはアプリのように使う」を参照）</td></tr>
-        <tr><th>レシーバーEAを入れる取引ツール</th><td>MT4 / MT5 / cTrader / cTrader Cloud（1口座につき1つ）</td></tr>
-        <tr><th>通信環境</th><td>安定した高速インターネット回線</td></tr>
-        <tr><th>使用可能者</th><td><a href="https://discord.com/channels/1039824083208126474/1039824083208126476" target="_blank" rel="noopener">メンバーシップ or サブスク</a>加入者</td></tr>
-        <tr><th>使用可能証券会社、プロップファーム</th><td><a href="https://www.hfm.com/int/?refid=30443481&amp;acid=fxspaceysg" target="_blank" rel="noopener">HFM</a>、<a href="https://go.axiory.com/afs/come.php?id=13&amp;cid=5894&amp;ctgid=100&amp;atype=1" target="_blank" rel="noopener">Axiory</a>、<a href="https://portal.threetrader.com/register?r_code=IB01504280A" target="_blank" rel="noopener">ThreeTrader</a>、<a href="https://partners.fundora-trading.com/click?campaign_id=1&amp;ref_id=10" target="_blank" rel="noopener">Fundora</a>、<a href="https://my.fintokei.com/affiliate/jp/55" target="_blank" rel="noopener">Fintokei</a>、<a href="https://my.funded7.com/ja/challenges?affiliateId=yosuga" target="_blank" rel="noopener">Funded7</a>、楽天証券<br><span style="font-size:0.85em;color:#6b7280;">（他証券会社、他プロップファームでの動作はテストしていません）</span></td></tr>
-    </table>
-
-    <h2 style="margin-top:2rem;">主な機能</h2>
-    <ul class="feat-list">
-        <li>注文、決済</li><li>シナリオ構築</li><li>予約注文</li><li>オートライン</li><li>コピーモード</li><li>通知</li><li>トレードノート</li><li>経済指標表示</li><li>他多数</li>
-    </ul>
-    <p class="lead">詳細な機能解説は <a href="#href-tbd-web-features">Web版YTT 使い方ページ（準備中）</a> で行っています。</p>
-
-    <div class="note-box info" style="margin-top:1.5rem;"><b>YTTサポートAI</b><br>YTTの導入、使用方法を回答してくれるサポートAIを導入しました。使い方が分からない場合や調べるのが面倒な時にご活用ください。<br><a href="https://discord.com/channels/1039824083208126474/1406849872560390227" target="_blank" rel="noopener">YTTサポートAI（Discord）→</a></div>
 </section>
 
-<!-- 導入は3ステップ -->
-<div class="section-h-title-row" style="text-align:center;margin:3rem 0 1rem;">
-    <span class="h2-with-wave" style="display:inline-block;">
-        <h2 style="font-size:clamp(1.4rem,4vw,1.9rem);font-weight:900;color:#1e1b4b;margin:0;">導入方法</h2>
-        <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(18px,4vw,22px);object-fit:fill;margin-top:2px;">
-    </span>
-</div>
-
-<div class="ready-box">
-    <div class="ready-grid">
-        <div class="ready-item"><span class="ri">1️⃣</span><div><b>口座登録</b>登録ページから口座を登録し、表示される32文字の認証コードを控える</div></div>
-        <div class="ready-item"><span class="ri">2️⃣</span><div><b>レシーバー設置</b>MT4 / MT5 / cTrader にレシーバー用EAを入れ、認証コードを設定する</div></div>
-        <div class="ready-item"><span class="ri">3️⃣</span><div><b>ログイン</b>Web版YTTにDiscord認証でログインし、口座を選んで接続を確認する</div></div>
-        <div class="ready-item"><span class="ri">📦</span><div><b>用意するもの</b>Discordアカウント／取引口座と取引ツール／レシーバー用EAのファイル／ブラウザ</div></div>
-    </div>
-</div>
-
-<div class="howto">
-
-    <!-- ===== 事前：MT4にログイン ===== -->
-    <div class="howto-band">事前準備　MT4にログインする<span class="band-sub">すでにMT4を使っている方は読み飛ばしてOKです</span></div>
-    <p class="lead" style="margin-bottom:1.25rem;">お使いの証券会社・プロップファームで口座開設後、それぞれのHPよりMT4をダウンロードします。MT4を開き、口座開設後にメールで届いた口座情報でログインします。</p>
-
-    <div class="hstep">
-        <div class="hstep-no">1</div>
-        <div class="hstep-body">
-            <p>MT4左上の「ファイル」→「取引口座にログイン」</p>
-            <figure class="hshot narrow"><img src="img/webytt/s01-file-login.png" alt="ファイルメニューから取引口座にログインを選ぶ" loading="lazy"></figure>
-        </div>
-    </div>
-
-    <div class="hstep">
-        <div class="hstep-no">2</div>
-        <div class="hstep-body">
-            <p>ログインID・パスワード・サーバーを入力して「ログイン」</p>
-            <figure class="hshot mid"><img src="img/webytt/s02-login-dialog.png" alt="取引口座のログイン情報を入力する画面" loading="lazy"></figure>
-            <p>ログインすると、MT4左上に口座番号が表示されます（ログインID＝MT4口座番号）。</p>
-            <figure class="hshot narrow"><img src="img/webytt/s03-account-no.png" alt="MT4左上に口座番号が表示される" loading="lazy"></figure>
-        </div>
-    </div>
-
-    <!-- ===== STEP1 ===== -->
-    <div class="howto-band">STEP 1　口座登録と認証コードの確認<span class="band-sub">レシーバーとあなたの口座を結び付ける「32文字の認証コード」を受け取ります</span></div>
-
-    <div class="hstep">
-        <div class="hstep-no">1</div>
-        <div class="hstep-body">
-            <p>口座登録ページを開く</p>
-            <div class="hstep-actions">
-                <a href="https://discord.com/oauth2/authorize?client_id=1132937165379211284&amp;response_type=code&amp;redirect_uri=https%3A%2F%2Ffx-space.com%2Fyauth%2FYTTauth_9fhwrgu.php&amp;scope=identify+connections" class="btn-solid-step" target="_blank" rel="noopener">口座登録ページを開く →</a>
+<!-- 動作環境 -->
+<section class="ytt-spec-section" style="background:#fff;">
+    <div class="ytt-spec-inner">
+        <div class="ytt-spec-header">
+            <span class="section-title-badge section-title-badge--blue">
+                <img class="hero-title-side hero-title-side--left" src="img/title-side-blue-left.png" alt="">
+                動作環境
+                <img class="hero-title-side hero-title-side--right" src="img/title-side-blue-right.png" alt="">
+            </span>
+            <div style="text-align:center; margin-bottom:0.25rem;">
+                <div style="display:inline-block; white-space:nowrap;">
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">導入前に使用環境を確認</h2>
+                    <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
+                </div>
             </div>
-            <p>Discordの確認画面が立ち上がるので「認証」を押します。</p>
-            <figure class="hshot narrow"><img src="img/webytt/s04-discord-auth.png" alt="Discordの認証画面" loading="lazy"></figure>
+            <p>Web版YTTはスマホ・PCのブラウザで使います。<br>注文を出す取引ツール側の環境もあわせて確認してください。</p>
         </div>
-    </div>
-
-    <div class="hstep">
-        <div class="hstep-no">2</div>
-        <div class="hstep-body">
-            <p>ブラウザが立ち上がるので、口座番号を入力して「登録」</p>
-            <figure class="hshot"><img src="img/webytt/s05-register-form.png" alt="口座番号を入力して登録するフォーム" loading="lazy"></figure>
-        </div>
-    </div>
-
-    <div class="hstep">
-        <div class="hstep-no">3</div>
-        <div class="hstep-body">
-            <p>表示された32文字の認証コードを控える</p>
-            <p>このコードは STEP 2 のレシーバー設定で入力します。メモ帳などに控えておいてください。</p>
-            <figure class="hshot"><img src="img/webytt/s06-authcode.png" alt="32文字の認証コードが表示された画面" loading="lazy"></figure>
-            <div class="hnote warn"><b>認証コードは他人に教えないでください。</b><br>他人に知られると、あなたの口座に対して操作される可能性があります。コミュニティやSNS、スクリーンショットにコードを載せないようご注意ください。</div>
-        </div>
-    </div>
-
-    <!-- ===== STEP2 ダウンロード ===== -->
-    <div class="howto-band">STEP 2　レシーバーEAの設置<span class="band-sub">Web版YTTからの指示を受け取って注文を出すEAです。配置場所は通常のYTTと同じです</span></div>
-
-    <div class="hstep">
-        <div class="hstep-no">1</div>
-        <div class="hstep-body">
-            <p>レシーバーEAをダウンロードする</p>
-            <div class="hstep-actions">
-                <a href="#href-tbd-webytt-zip" class="btn-solid-step" id="dlBtn">レシーバーEAをダウンロード</a>
+        <details class="ytt-spec-acc">
+            <summary>
+                <span class="ytt-spec-acc-label">使用環境を見る</span>
+                <span class="ytt-spec-acc-chev" aria-hidden="true">▼</span>
+            </summary>
+            <div class="ytt-spec-acc-body">
+                <table class="ytt-spec-table">
+                    <tbody>
+                        <tr><th>開く端末</th><td class="spec-val">スマホ（iPhone / Android）・PC のブラウザ</td><td class="spec-note">スマホは、Androidなら「インストール」、iPhoneなら「ホーム画面に追加」して使うのがおすすめ</td></tr>
+                        <tr><th>取引ツール</th><td class="spec-val">MT4 / MT5 / cTrader / cTrader Cloud</td><td class="spec-note">注文を出すレシーバーEAを入れます（1口座につき1つ）</td></tr>
+                        <tr><th>利用中のPC</th><td class="spec-val">起動したまま</td><td class="spec-note">MT4 / MT5 / cTrader は、PCのスリープや終了で止まります。cTrader Cloud版はPCを閉じてもOK</td></tr>
+                        <tr><th>通信環境</th><td class="spec-val">安定した高速インターネット回線</td><td class="spec-note"></td></tr>
+                        <tr><th>使用可能者</th><td class="spec-val"><a href="https://discord.com/channels/1039824083208126474/1039824083208126476" target="_blank" rel="noopener">メンバーシップ or サブスク</a>加入者</td><td class="spec-note"></td></tr>
+                        <tr><th>証券会社・プロップ</th><td class="spec-val"><a href="https://www.hfm.com/int/?refid=30443481&amp;acid=fxspaceysg" target="_blank" rel="noopener">HFM</a>、<a href="https://go.axiory.com/afs/come.php?id=13&amp;cid=5894&amp;ctgid=100&amp;atype=1" target="_blank" rel="noopener">Axiory</a>、<a href="https://portal.threetrader.com/register?r_code=IB01504280A" target="_blank" rel="noopener">ThreeTrader</a>、<a href="https://partners.fundora-trading.com/click?campaign_id=1&amp;ref_id=10" target="_blank" rel="noopener">Fundora</a>、<a href="https://my.fintokei.com/affiliate/jp/55" target="_blank" rel="noopener">Fintokei</a>、<a href="https://my.funded7.com/ja/challenges?affiliateId=yosuga" target="_blank" rel="noopener">Funded7</a>、楽天証券</td><td class="spec-note">他の証券会社・プロップファームでの動作はテストしていません</td></tr>
+                    </tbody>
+                </table>
             </div>
-            <figure class="hshot mid"><img src="img/webytt/s07-zip.png" alt="webytt一式.zip のダウンロード" loading="lazy"></figure>
-            <p>ブラウザの警告が出た場合は「ダウンロードする」を選んでください。</p>
-            <figure class="hshot narrow"><img src="img/webytt/s08-dl-warning.png" alt="ブラウザのダウンロード警告" loading="lazy"></figure>
+        </details>
+    </div>
+</section>
+
+<!-- 導入の流れ -->
+<section class="ytt-spec-section" id="flow" style="background:#f4f6f9;">
+    <div class="ytt-spec-inner ytt-fto-wide">
+        <div class="ytt-spec-header">
+            <span class="section-title-badge section-title-badge--orange">
+                <img class="hero-title-side hero-title-side--left" src="img/title-side-orange-left.png" alt="">
+                導入方法
+                <img class="hero-title-side hero-title-side--right" src="img/title-side-orange-right.png" alt="">
+            </span>
+            <div style="text-align:center; margin-bottom:0.25rem;">
+                <div style="display:inline-block; white-space:nowrap;">
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">3ステップで導入完了</h2>
+                    <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
+                </div>
+            </div>
+            <p>所要時間の目安は約15分。上から順番に進めてください。</p>
+        </div>
+        <div class="ytt-add-grid flow3">
+            <a class="ytt-add-card" href="#step1"><img class="flow-num" src="img/crayon-1.png" alt="1"><h3>口座登録</h3><p>登録ページから口座を登録し、表示される32文字の認証コードを控える</p></a>
+            <a class="ytt-add-card" href="#step2"><img class="flow-num" src="img/crayon-2.png" alt="2"><h3>レシーバー設置</h3><p>MT4 / MT5 / cTrader にレシーバー用EAを入れ、認証コードを設定する</p></a>
+            <a class="ytt-add-card" href="#step3"><img class="flow-num" src="img/crayon-3.png" alt="3"><h3>ログイン</h3><p>Web版YTTにDiscordでログインし、口座を選んで接続を確認する</p></a>
         </div>
     </div>
+</section>
 
-    <div class="hstep">
-        <div class="hstep-no">2</div>
-        <div class="hstep-body">
-            <p>zipファイルを解凍する</p>
-            <p>解凍すると、取引ツールごとのフォルダが入っています。お使いの取引ツールのフォルダだけ使います。</p>
-            <figure class="hshot narrow"><img src="img/webytt/s09-folders.png" alt="解凍後のフォルダ cTrader / cTrader_Cloud / MT4 / MT5" loading="lazy"></figure>
-            <p>MT4フォルダの中身は次の2つです。</p>
-            <figure class="hshot narrow"><img src="img/webytt/s10-mt4-files.png" alt="YTT_OrderEA.ex4 と YTT_OrderReceiver.dll" loading="lazy"></figure>
-            <div class="hnote">MT5：<b>YTT_OrderEA.ex5</b> と <b>YTT_OrderReceiver.dll</b>／cTrader：<b>.algo ファイル</b>（Cloud版は cTrader_Cloud フォルダの .algo）。<br>解凍方法が分からない方は <a href="https://mainichi.doda.jp/article/2022/08/03/2098" target="_blank" rel="noopener">こちら</a>。</div>
+<!-- 事前準備 -->
+<section class="ytt-spec-section" style="background:#fff;">
+    <div class="ytt-spec-inner">
+        <div class="ytt-spec-header">
+            <span class="section-title-badge section-title-badge--blue">
+                <img class="hero-title-side hero-title-side--left" src="img/title-side-blue-left.png" alt="">
+                事前準備
+                <img class="hero-title-side hero-title-side--right" src="img/title-side-blue-right.png" alt="">
+            </span>
+            <div style="text-align:center; margin-bottom:0.25rem;">
+                <div style="display:inline-block; white-space:nowrap;">
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">MT4にログインする</h2>
+                    <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
+                </div>
+            </div>
+            <p>すでにMT4を使っている方は読み飛ばしてOKです。</p>
         </div>
-    </div>
-
-    <div class="hstep">
-        <div class="hstep-no">3</div>
-        <div class="hstep-body">
-            <p>MT4を開き、「ファイル」→「データフォルダを開く」</p>
-            <figure class="hshot narrow"><img src="img/webytt/s11-datafolder.png" alt="ファイルメニューからデータフォルダを開く" loading="lazy"></figure>
-        </div>
-    </div>
-
-    <div class="hstep">
-        <div class="hstep-no">4</div>
-        <div class="hstep-body">
-            <p>フォルダ中の「MQL4」→「Experts」へと進む</p>
-            <figure class="hshot narrow"><img src="img/webytt/s12-mql4.png" alt="MQL4フォルダ" loading="lazy"></figure>
-            <figure class="hshot narrow"><img src="img/webytt/s13-experts.png" alt="Expertsフォルダ" loading="lazy"></figure>
-        </div>
-    </div>
-
-    <div class="hstep">
-        <div class="hstep-no">5</div>
-        <div class="hstep-body">
-            <p>その中に「YTT_OrderEA.ex4」を移す（もしくはコピー＆ペーストする）</p>
-            <figure class="hshot narrow"><img src="img/webytt/s14-ea-placed.png" alt="ExpertsフォルダにYTT_OrderEA.ex4を置いた状態" loading="lazy"></figure>
-        </div>
-    </div>
-
-    <div class="hstep">
-        <div class="hstep-no">6</div>
-        <div class="hstep-body">
-            <p>戻って、フォルダ中の「MQL4」→「Libraries」へと進む</p>
-            <figure class="hshot narrow"><img src="img/webytt/s15-libraries.png" alt="Librariesフォルダ" loading="lazy"></figure>
-        </div>
-    </div>
-
-    <div class="hstep">
-        <div class="hstep-no">7</div>
-        <div class="hstep-body">
-            <p>その中に「YTT_OrderReceiver.dll」を移す（もしくはコピー＆ペーストする）</p>
-            <figure class="hshot narrow"><img src="img/webytt/s16-dll-placed.png" alt="LibrariesフォルダにYTT_OrderReceiver.dllを置いた状態" loading="lazy"></figure>
-            <div class="hnote">MT5は <b>Experts</b> に ex5、<b>Libraries</b> に dll を置きます。cTraderは <b>.algo ファイルをダブルクリック</b>すると自動で配置されます。</div>
-        </div>
-    </div>
-
-    <div class="hstep">
-        <div class="hstep-no">8</div>
-        <div class="hstep-body">
-            <p>MT4右上の「×」で閉じ、もう一度MT4を立ち上げる</p>
-            <figure class="hshot narrow"><img src="img/webytt/s17-close-mt4.png" alt="MT4右上の×で閉じる" loading="lazy"></figure>
-        </div>
-    </div>
-
-    <!-- ===== STEP2 続き：チャートに導入 ===== -->
-    <div class="howto-band">STEP 2（続き）　チャートを1つだけ開き、レシーバーを導入する<span class="band-sub">レシーバーは必ず1つのチャートだけに入れてください</span></div>
-
-    <div class="hstep">
-        <div class="hstep-no">1</div>
-        <div class="hstep-body">
-            <p>MT4を開き、左上にある気配値表示のアイコンをクリック</p>
-            <figure class="hshot narrow"><img src="img/webytt/s18-kehaichi-icon.png" alt="気配値表示のアイコン" loading="lazy"></figure>
-            <p>MT4左側に気配値表示（通貨ペア名が並ぶ）が表示されます。</p>
-        </div>
-    </div>
-
-    <div class="hstep">
-        <div class="hstep-no">2</div>
-        <div class="hstep-body">
-            <p>気配値表示上で右クリック →「すべて表示」</p>
-            <figure class="hshot mid"><img src="img/webytt/s19-show-all.png" alt="気配値表示で右クリックしてすべて表示を選ぶ" loading="lazy"></figure>
-            <p>灰色ではなく黒色の通貨ペア名の中から、1つだけ通貨ペアを選びます。</p>
-        </div>
-    </div>
-
-    <div class="hstep">
-        <div class="hstep-no">3</div>
-        <div class="hstep-body">
-            <p>通貨ペア名をMT4右側の空間にドラッグ＆ドロップ</p>
-            <figure class="hshot mid"><img src="img/webytt/s20-drag-pair.png" alt="通貨ペア名をドラッグする" loading="lazy"></figure>
-            <p>下の画像のようにチャートが表示されます。</p>
-            <figure class="hshot"><img src="img/webytt/s21-chart.png" alt="チャートが表示された状態" loading="lazy"></figure>
-            <div class="hnote warn"><b>レシーバーを入れるチャートは1枚だけです。</b>複数のチャートに入れると、先に設定した方が切断されます。</div>
-        </div>
-    </div>
-
-    <div class="hstep">
-        <div class="hstep-no">4</div>
-        <div class="hstep-body">
-            <p>MT4左上にあるナビゲーターのアイコンをクリック</p>
-            <figure class="hshot narrow"><img src="img/webytt/s22-navigator-icon.png" alt="ナビゲーターのアイコン" loading="lazy"></figure>
-        </div>
-    </div>
-
-    <div class="hstep">
-        <div class="hstep-no">5</div>
-        <div class="hstep-body">
-            <p>「エキスパートアドバイザ」の左にある「＋」をクリック</p>
-            <figure class="hshot narrow"><img src="img/webytt/s23-expand-ea.png" alt="エキスパートアドバイザの＋をクリック" loading="lazy"></figure>
-            <p>前の段階で Experts フォルダに入れたファイル名が表示されます（<b>YTT_OrderEA</b>）。</p>
-            <div class="hnote">表示されないときは「エキスパートアドバイザ」を右クリック →「更新」、またはMT4を再起動してください。</div>
-        </div>
-    </div>
-
-    <div class="hstep">
-        <div class="hstep-no">6</div>
-        <div class="hstep-body">
-            <p>「YTT_OrderEA」を右クリック →「チャートに表示」</p>
-            <figure class="hshot mid"><img src="img/webytt/s24-attach-chart.png" alt="EAを右クリックしてチャートに表示を選ぶ" loading="lazy"></figure>
-        </div>
-    </div>
-
-    <div class="hstep">
-        <div class="hstep-no">7</div>
-        <div class="hstep-body">
-            <p>「全般」タブ →「自動売買を許可する」にチェック →「DLLの使用を許可する」にチェック</p>
-            <figure class="hshot"><img src="img/webytt/s25-general-tab.png" alt="全般タブで自動売買とDLLの使用を許可する" loading="lazy"></figure>
-        </div>
-    </div>
-
-    <div class="hstep">
-        <div class="hstep-no">8</div>
-        <div class="hstep-body">
-            <p>「パラメーターの入力」タブで、認証コードなどを入力して「OK」</p>
-            <figure class="hshot"><img src="img/webytt/s27-params.png" alt="パラメーターの入力タブ。認証コードとサフィックスを入力する" loading="lazy"></figure>
-            <p>入力するのは<b>必須設定</b>の2つだけです。</p>
-            <table class="guide-table">
-                <tr><th>口座登録画面に表示される連携コード（32文字）を貼り付ける</th><td>STEP 1 で控えた<b>32文字の認証コード</b>を貼り付けます</td></tr>
-                <tr><th>通貨ペア名末尾サフィックス</th><td>通貨ペア名の末尾に文字が付いている口座では、その文字を入力します。<br>例：Fintokei の <code>USDJPYp</code> → <code>p</code> ／ HFMプロ口座の <code>USDJPYr</code> → <code>r</code><br>サフィックスが無い口座は空欄のままでOK</td></tr>
-            </table>
-            <div class="hnote"><b>任意設定</b>はそのままで構いません。<br>金・銀・ビットコイン・日経・オイルなどを取引する方は、下のほうにある「特殊通貨ペア名設定」に、その証券会社で使われている商品名を入力します（例：<code>XAUUSD</code> の欄に <code>GOLD</code>）。空欄のときは <code>XAUUSD</code> や <code>USOIL</code> のような標準の名称が使われるので、同じ名前なら空欄でOKです。</div>
-            <p>入力できたら「OK」を押します。</p>
-        </div>
-    </div>
-
-    <div class="hstep">
-        <div class="hstep-no">9</div>
-        <div class="hstep-body">
-            <p>MT4左上にある「自動売買」をクリック</p>
-            <figure class="hshot mid"><img src="img/webytt/s26-autotrade.png" alt="MT4の自動売買ボタン" loading="lazy"></figure>
-        </div>
-    </div>
-
-    <div class="hstep">
-        <div class="hstep-no">10</div>
-        <div class="hstep-body">
-            <p>認証に成功したら、MT4を再起動する</p>
-            <p>「初期設定が完了したので再起動してください」という案内が表示されます。案内に従って、MT4右上の「×」で閉じ、もう一度立ち上げてください。</p>
-            <figure class="hshot narrow"><img src="img/webytt/s17-close-mt4.png" alt="MT4右上の×で閉じる" loading="lazy"></figure>
-            <p>再起動後、レシーバーの表示が<b>「承認待ち（webyttで端末を承認してください）」</b>になれば STEP 2 は完了です。</p>
-            <figure class="hshot"><img src="img/webytt/s28-waiting.png" alt="チャート上に「YTT for Web 承認待ち（webyttで端末を承認してください）」と表示された状態" loading="lazy"></figure>
-        </div>
-    </div>
-
-    <!-- ===== STEP3 ===== -->
-    <div class="howto-band">STEP 3　Web版YTTにログイン<span class="band-sub">スマホでもPCでも、ブラウザから使えます</span></div>
-
-    <div class="hstep">
-        <div class="hstep-no">1</div>
-        <div class="hstep-body">
-            <p>Web版YTTにアクセスする</p>
-            <div class="hstep-actions">
-                <a href="https://webytt.fx-space.com/" class="btn-solid-step" target="_blank" rel="noopener">Web版YTTを開く →</a>
+        <div class="guide-card">
+            <p style="font-size:0.875rem;color:#4b5563;line-height:1.85;margin:0 0 1.25rem;">お使いの証券会社・プロップファームで口座開設後、それぞれのHPよりMT4をダウンロードします。MT4を開き、口座開設後にメールで届いた口座情報でログインします。</p>
+            <div class="gstep">
+                <div class="gstep-no">1</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">MT4左上の「ファイル」→「取引口座にログイン」</p>
+                    <figure class="gshot narrow"><img src="img/webytt/s01-file-login.png" alt="ファイルメニューから取引口座にログインを選ぶ" loading="lazy"></figure>
+                </div>
+            </div>
+            <div class="gstep">
+                <div class="gstep-no">2</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">ログインID・パスワード・サーバーを入力して「ログイン」</p>
+                    <figure class="gshot mid"><img src="img/webytt/s02-login-dialog.png" alt="取引口座のログイン情報を入力する画面" loading="lazy"></figure>
+                    <p>ログインすると、MT4左上に口座番号が表示されます（ログインID＝MT4口座番号）。</p>
+                    <figure class="gshot narrow"><img src="img/webytt/s03-account-no.png" alt="MT4左上に口座番号が表示される" loading="lazy"></figure>
+                </div>
             </div>
         </div>
     </div>
+</section>
 
-    <div class="hstep">
-        <div class="hstep-no">2</div>
-        <div class="hstep-body">
-            <p>「Discord認証」ボタンを押してログインする</p>
-            <p>ログインしていない状態でアクセスすると、下の画面が表示されます。「Discordでログイン」を押してください。</p>
-            <figure class="hshot mid"><img src="img/webytt/s29-web-login.jpg" alt="ログインが必要です。Discordでログインボタン" loading="lazy"></figure>
+<!-- STEP 1 -->
+<section class="ytt-spec-section" id="step1" style="background:#f4f6f9;">
+    <div class="ytt-spec-inner">
+        <div class="ytt-spec-header">
+            <span class="section-title-badge section-title-badge--orange">
+                <img class="hero-title-side hero-title-side--left" src="img/title-side-orange-left.png" alt="">
+                STEP 1
+                <img class="hero-title-side hero-title-side--right" src="img/title-side-orange-right.png" alt="">
+            </span>
+            <div style="text-align:center; margin-bottom:0.25rem;">
+                <div style="display:inline-block; white-space:nowrap;">
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">口座登録と認証コードの確認</h2>
+                    <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
+                </div>
+            </div>
+            <p>レシーバーとあなたの口座を結び付ける「32文字の認証コード」を受け取ります。</p>
         </div>
-    </div>
-
-    <div class="hstep">
-        <div class="hstep-no">3</div>
-        <div class="hstep-body">
-            <p>「口座を選択」画面で、承認した口座を選んで「確定」</p>
-            <p>ログインすると「口座を選択」が表示されます。<wbr>STEP 1 で登録し、レシーバーを設定した<b>口座番号</b>を選んで、<wbr>下の<b>「確定」</b>を押してください。</p>
-            <figure class="hshot narrow"><img src="img/webytt/s30-account-select.png" alt="口座を選択の画面。承認した口座番号を選んで確定を押す" loading="lazy"></figure>
-            <div class="hnote">あとから口座を切り替えるときは、画面上部の<b>口座番号の表示</b>を押すと、同じ「口座を選択」画面が出ます。</div>
-        </div>
-    </div>
-
-    <div class="hstep">
-        <div class="hstep-no">4</div>
-        <div class="hstep-body">
-            <p>数秒待って、接続状態を確認する</p>
-            <p>口座番号の左にある<b>丸の色</b>が接続状態を表します。<wbr><b>緑</b>になっていれば接続完了です。<wbr>このとき、MT4側のレシーバーの表示も「承認待ち」から<b>「接続中」</b>に変わります。</p>
-            <table class="guide-table">
-                <tr><th><span class="status-dot g"></span>緑</th><td>正常に接続されています。そのまま利用できます</td></tr>
-                <tr><th><span class="status-dot y"></span>黄</th><td>接続はあるが価格が取れていません。MT4 / MT5 では、取引する通貨ペアを気配値表示欄に出してください</td></tr>
-                <tr><th><span class="status-dot r"></span>赤</th><td>接続されていません。ページをリロード。改善しない場合は下の「よくある質問」へ</td></tr>
-            </table>
-            <div class="shot-pair">
-                <figure class="hshot">
-                    <img src="img/webytt/s31-connected-sp.png" alt="スマホで接続できた状態。口座番号の左の丸が緑" loading="lazy">
-                    <figcaption><b>スマホ</b>：画面左上、口座番号の左の丸が緑</figcaption>
-                </figure>
-                <figure class="hshot">
-                    <img src="img/webytt/s32-connected-pc.png" alt="PCで接続できた状態。口座番号の左の丸が緑" loading="lazy">
-                    <figcaption><b>PC</b>：画面右上、口座番号の左の丸が緑</figcaption>
-                </figure>
+        <div class="guide-card">
+            <div class="gstep">
+                <div class="gstep-no">1</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">口座登録ページを開く</p>
+                    <div class="gstep-btn"><a href="https://discord.com/oauth2/authorize?client_id=1132937165379211284&amp;response_type=code&amp;redirect_uri=https%3A%2F%2Ffx-space.com%2Fyauth%2FYTTauth_9fhwrgu.php&amp;scope=identify+connections" class="btn-sq-blue" target="_blank" rel="noopener">口座登録ページを開く</a></div>
+                    <p>Discordの確認画面が立ち上がるので「認証」を押します。</p>
+                    <figure class="gshot narrow"><img src="img/webytt/s04-discord-auth.png" alt="Discordの認証画面" loading="lazy"></figure>
+                </div>
+            </div>
+            <div class="gstep">
+                <div class="gstep-no">2</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">ブラウザが立ち上がるので、口座番号を入力して「登録」</p>
+                    <figure class="gshot"><img src="img/webytt/s05-register-form.png" alt="口座番号を入力して登録するフォーム" loading="lazy"></figure>
+                </div>
+            </div>
+            <div class="gstep">
+                <div class="gstep-no">3</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">表示された32文字の認証コードを控える</p>
+                    <p>このコードは STEP 2 のレシーバー設定で入力します。メモ帳などに控えておいてください。</p>
+                    <figure class="gshot"><img src="img/webytt/s06-authcode.png" alt="32文字の認証コードが表示された画面" loading="lazy"></figure>
+                    <p class="gnote">認証コードは他人に教えないでください。他人に知られると、あなたの口座に対して操作される可能性があります。コミュニティやSNS、スクリーンショットにコードを載せないようご注意ください。</p>
+                </div>
             </div>
         </div>
     </div>
+</section>
 
-    <div class="done-msg">以上で導入は完了し、Web版YTTが使用できます。<br>お疲れ様でした！</div>
-
-    <!-- ===== スマホで使う ===== -->
-    <div class="howto-band">スマホはアプリのように使うのがおすすめ<span class="band-sub">Androidはインストール、iPhoneは「ホーム画面に追加」</span></div>
-    <p class="lead" style="margin-bottom:1rem;">ブラウザのまま使うより、ホーム画面に置いておくと、アドレスバーが消えて画面が広く使え、1タップで開けます。</p>
-    <div class="os-grid">
-        <div class="os-card">
-            <h3><span class="os-tag">Android</span>インストールする</h3>
-            <ol>
-                <li>Chromeで <b>webytt.fx-space.com</b> を開く</li>
-                <li>右上の「︙」メニューを開く</li>
-                <li>「アプリをインストール」（または「ホーム画面に追加」）を選ぶ</li>
-                <li>ホーム画面に追加されたアイコンから起動する</li>
-            </ol>
+<!-- STEP 2 -->
+<section class="ytt-spec-section" id="step2" style="background:#fff;">
+    <div class="ytt-spec-inner">
+        <div class="ytt-spec-header">
+            <span class="section-title-badge section-title-badge--blue">
+                <img class="hero-title-side hero-title-side--left" src="img/title-side-blue-left.png" alt="">
+                STEP 2
+                <img class="hero-title-side hero-title-side--right" src="img/title-side-blue-right.png" alt="">
+            </span>
+            <div style="text-align:center; margin-bottom:0.25rem;">
+                <div style="display:inline-block; white-space:nowrap;">
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">レシーバーEAの設置</h2>
+                    <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
+                </div>
+            </div>
+            <p>Web版YTTからの指示を受け取って注文を出すEAです。<br>配置場所は通常のYTTと同じです。</p>
         </div>
-        <div class="os-card">
-            <h3><span class="os-tag">iPhone</span>ホーム画面に追加する</h3>
-            <ol>
-                <li>Safariで <b>webytt.fx-space.com</b> を開く</li>
-                <li>画面下の「共有」ボタン（四角に上矢印）を押す</li>
-                <li>「ホーム画面に追加」を選び、「追加」を押す</li>
-                <li>ホーム画面に追加されたアイコンから起動する</li>
-            </ol>
+        <div class="guide-card">
+            <div class="gstep">
+                <div class="gstep-no">1</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">レシーバーEAをダウンロードする</p>
+                    <div class="gstep-btn"><a href="#href-tbd-webytt-zip" class="btn-sq-blue" id="dlBtn">レシーバーEAをダウンロード</a></div>
+                    <figure class="gshot mid"><img src="img/webytt/s07-zip.png" alt="webytt一式.zip のダウンロード" loading="lazy"></figure>
+                    <p>ブラウザの警告が出た場合は「ダウンロードする」を選んでください。</p>
+                    <figure class="gshot narrow"><img src="img/webytt/s08-dl-warning.png" alt="ブラウザのダウンロード警告" loading="lazy"></figure>
+                </div>
+            </div>
+            <div class="gstep">
+                <div class="gstep-no">2</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">zipファイルを解凍する</p>
+                    <p>解凍すると、取引ツールごとのフォルダが入っています。お使いの取引ツールのフォルダだけ使います。</p>
+                    <figure class="gshot narrow"><img src="img/webytt/s09-folders.png" alt="解凍後のフォルダ cTrader / cTrader_Cloud / MT4 / MT5" loading="lazy"></figure>
+                    <p>MT4フォルダの中身は次の2つです。</p>
+                    <figure class="gshot narrow"><img src="img/webytt/s10-mt4-files.png" alt="YTT_OrderEA.ex4 と YTT_OrderReceiver.dll" loading="lazy"></figure>
+                    <div class="gtip">MT5：<b>YTT_OrderEA.ex5</b> と <b>YTT_OrderReceiver.dll</b>／cTrader：<b>.algo ファイル</b>（Cloud版は cTrader_Cloud フォルダの .algo）<br>解凍方法が分からない方は <a href="https://mainichi.doda.jp/article/2022/08/03/2098" target="_blank" rel="noopener">こちら</a></div>
+                </div>
+            </div>
+            <div class="gstep">
+                <div class="gstep-no">3</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">MT4を開き、「ファイル」→「データフォルダを開く」</p>
+                    <figure class="gshot narrow"><img src="img/webytt/s11-datafolder.png" alt="ファイルメニューからデータフォルダを開く" loading="lazy"></figure>
+                </div>
+            </div>
+            <div class="gstep">
+                <div class="gstep-no">4</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">フォルダ中の「MQL4」→「Experts」へと進む</p>
+                    <figure class="gshot narrow"><img src="img/webytt/s12-mql4.png" alt="MQL4フォルダ" loading="lazy"></figure>
+                    <figure class="gshot narrow"><img src="img/webytt/s13-experts.png" alt="Expertsフォルダ" loading="lazy"></figure>
+                </div>
+            </div>
+            <div class="gstep">
+                <div class="gstep-no">5</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">その中に「YTT_OrderEA.ex4」を移す（もしくはコピー＆ペーストする）</p>
+                    <figure class="gshot narrow"><img src="img/webytt/s14-ea-placed.png" alt="ExpertsフォルダにYTT_OrderEA.ex4を置いた状態" loading="lazy"></figure>
+                </div>
+            </div>
+            <div class="gstep">
+                <div class="gstep-no">6</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">戻って、フォルダ中の「MQL4」→「Libraries」へと進む</p>
+                    <figure class="gshot narrow"><img src="img/webytt/s15-libraries.png" alt="Librariesフォルダ" loading="lazy"></figure>
+                </div>
+            </div>
+            <div class="gstep">
+                <div class="gstep-no">7</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">その中に「YTT_OrderReceiver.dll」を移す（もしくはコピー＆ペーストする）</p>
+                    <figure class="gshot narrow"><img src="img/webytt/s16-dll-placed.png" alt="LibrariesフォルダにYTT_OrderReceiver.dllを置いた状態" loading="lazy"></figure>
+                    <div class="gtip">MT5は <b>Experts</b> に ex5、<b>Libraries</b> に dll を置きます。cTraderは <b>.algo ファイルをダブルクリック</b>すると自動で配置されます。</div>
+                </div>
+            </div>
+            <div class="gstep">
+                <div class="gstep-no">8</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">MT4右上の「×」で閉じ、もう一度MT4を立ち上げる</p>
+                    <figure class="gshot narrow"><img src="img/webytt/s17-close-mt4.png" alt="MT4右上の×で閉じる" loading="lazy"></figure>
+                </div>
+            </div>
         </div>
     </div>
-    <figure class="hshot home-icon"><img src="img/webytt/s33-home-icon.jpg" alt="ホーム画面に追加されたYTT for Webのアイコン" loading="lazy"><figcaption>追加すると、ホーム画面に「YTT for Web」のアイコンができます。次からはここから1タップで開けます。</figcaption></figure>
+</section>
 
-</div>
+<!-- STEP 2（続き） -->
+<section class="ytt-spec-section" style="background:#f4f6f9;">
+    <div class="ytt-spec-inner">
+        <div class="ytt-spec-header">
+            <span class="section-title-badge section-title-badge--orange">
+                <img class="hero-title-side hero-title-side--left" src="img/title-side-orange-left.png" alt="">
+                STEP 2（続き）
+                <img class="hero-title-side hero-title-side--right" src="img/title-side-orange-right.png" alt="">
+            </span>
+            <div style="text-align:center; margin-bottom:0.25rem;">
+                <div style="display:inline-block; white-space:nowrap;">
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">チャートにレシーバーを入れる</h2>
+                    <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
+                </div>
+            </div>
+            <p>レシーバーは必ず<b>1つのチャートだけ</b>に入れてください。</p>
+        </div>
+        <div class="guide-card">
+            <div class="gstep">
+                <div class="gstep-no">1</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">MT4を開き、左上にある気配値表示のアイコンをクリック</p>
+                    <figure class="gshot narrow"><img src="img/webytt/s18-kehaichi-icon.png" alt="気配値表示のアイコン" loading="lazy"></figure>
+                    <p>MT4左側に気配値表示（通貨ペア名が並ぶ）が表示されます。</p>
+                </div>
+            </div>
+            <div class="gstep">
+                <div class="gstep-no">2</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">気配値表示上で右クリック →「すべて表示」</p>
+                    <figure class="gshot mid"><img src="img/webytt/s19-show-all.png" alt="気配値表示で右クリックしてすべて表示を選ぶ" loading="lazy"></figure>
+                    <p>灰色ではなく黒色の通貨ペア名の中から、1つだけ通貨ペアを選びます。</p>
+                </div>
+            </div>
+            <div class="gstep">
+                <div class="gstep-no">3</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">通貨ペア名をMT4右側の空間にドラッグ＆ドロップ</p>
+                    <figure class="gshot mid"><img src="img/webytt/s20-drag-pair.png" alt="通貨ペア名をドラッグする" loading="lazy"></figure>
+                    <p>下の画像のようにチャートが表示されます。</p>
+                    <figure class="gshot"><img src="img/webytt/s21-chart.png" alt="チャートが表示された状態" loading="lazy"></figure>
+                    <p class="gnote">レシーバーを入れるチャートは1枚だけです。複数のチャートに入れると、先に設定した方が切断されます。</p>
+                </div>
+            </div>
+            <div class="gstep">
+                <div class="gstep-no">4</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">MT4左上にあるナビゲーターのアイコンをクリック</p>
+                    <figure class="gshot narrow"><img src="img/webytt/s22-navigator-icon.png" alt="ナビゲーターのアイコン" loading="lazy"></figure>
+                </div>
+            </div>
+            <div class="gstep">
+                <div class="gstep-no">5</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">「エキスパートアドバイザ」の左にある「＋」をクリック</p>
+                    <figure class="gshot narrow"><img src="img/webytt/s23-expand-ea.png" alt="エキスパートアドバイザの＋をクリック" loading="lazy"></figure>
+                    <p>前の段階で Experts フォルダに入れたファイル名が表示されます（<b>YTT_OrderEA</b>）。</p>
+                    <div class="gtip">表示されないときは「エキスパートアドバイザ」を右クリック →「更新」、またはMT4を再起動してください。</div>
+                </div>
+            </div>
+            <div class="gstep">
+                <div class="gstep-no">6</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">「YTT_OrderEA」を右クリック →「チャートに表示」</p>
+                    <figure class="gshot mid"><img src="img/webytt/s24-attach-chart.png" alt="YTT_OrderEAを右クリックしてチャートに表示を選ぶ" loading="lazy"></figure>
+                </div>
+            </div>
+            <div class="gstep">
+                <div class="gstep-no">7</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">「全般」タブ →「自動売買を許可する」にチェック →「DLLの使用を許可する」にチェック</p>
+                    <figure class="gshot"><img src="img/webytt/s25-general-tab.png" alt="全般タブで自動売買とDLLの使用を許可する" loading="lazy"></figure>
+                </div>
+            </div>
+            <div class="gstep">
+                <div class="gstep-no">8</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">「パラメーターの入力」タブで、認証コードなどを入力して「OK」</p>
+                    <figure class="gshot"><img src="img/webytt/s27-params.png" alt="パラメーターの入力タブ。認証コードとサフィックスを入力する" loading="lazy"></figure>
+                    <p>入力するのは<b>必須設定</b>の2つだけです。</p>
+                    <table class="gtable">
+                        <tr><th>口座登録画面に表示される連携コード（32文字）を貼り付ける</th><td>STEP 1 で控えた<b>32文字の認証コード</b>を貼り付けます</td></tr>
+                        <tr><th>通貨ペア名末尾サフィックス</th><td>通貨ペア名の末尾に文字が付いている口座では、その文字を入力します。<br>例：Fintokei の <code>USDJPYp</code> → <code>p</code> ／ HFMプロ口座の <code>USDJPYr</code> → <code>r</code><br>サフィックスが無い口座は空欄のままでOK</td></tr>
+                    </table>
+                    <div class="gtip"><b>任意設定</b>はそのままで構いません。<br>金・銀・ビットコイン・日経・オイルなどを取引する方は、下のほうの「特殊通貨ペア名設定」に、その証券会社で使われている商品名を入力します（例：<code>XAUUSD</code> の欄に <code>GOLD</code>）。空欄のときは <code>XAUUSD</code> や <code>USOIL</code> のような標準の名称が使われるので、同じ名前なら空欄でOKです。</div>
+                </div>
+            </div>
+            <div class="gstep">
+                <div class="gstep-no">9</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">MT4左上にある「自動売買」をクリック</p>
+                    <figure class="gshot mid"><img src="img/webytt/s26-autotrade.png" alt="MT4の自動売買ボタン" loading="lazy"></figure>
+                </div>
+            </div>
+            <div class="gstep">
+                <div class="gstep-no">10</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">認証に成功したら、MT4を再起動する</p>
+                    <p>「初期設定が完了したので再起動してください」という案内が表示されます。案内に従って、MT4右上の「×」で閉じ、もう一度立ち上げてください。</p>
+                    <p>再起動後、チャート上の表示が<b>「承認待ち（webyttで端末を承認してください）」</b>になれば STEP 2 は完了です。</p>
+                    <figure class="gshot"><img src="img/webytt/s28-waiting.png" alt="チャート上に「YTT for Web 承認待ち」と表示された状態" loading="lazy"></figure>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-<!-- 制限事項 -->
-<section class="plain-section" id="limits" style="margin-top:3rem;">
-    <h2>利用上の制限事項</h2>
-    <p class="lead">仕様上の制限です。導入後に「動かない」と感じたときは、まずここを確認してください。</p>
-    <ul class="limit-list">
-        <li><b>1つの口座に設置できるレシーバーは1つだけ</b>MT4とMT5、MT5とcTraderなど、同じ口座に複数のレシーバーを同時に設置することはできません。複数設定した場合は、先に設定していた方が切断されます。</li>
-        <li><b>MT4 / MT5 では、取引する通貨ペアを気配値表示欄に出しておく</b>気配値表示欄に無い通貨ペアは価格が取得できないことがあります。取れていないときはWeb版側のアイコンが黄になります。</li>
-        <li><b>次の状態のときは動作しません</b>レシーバーのEAが停止している／PCがスリープになっている／MT4・MT5・cTraderが閉じている。<br>Web版YTTはブラウザから操作しますが、注文を実際に出すのはレシーバー側です。利用中はレシーバーが動いているPCと取引ツールを起動したままにしてください（cTrader Cloud版はPCを閉じても動きます）。</li>
-    </ul>
+<!-- STEP 3 -->
+<section class="ytt-spec-section" id="step3" style="background:#fff;">
+    <div class="ytt-spec-inner">
+        <div class="ytt-spec-header">
+            <span class="section-title-badge section-title-badge--blue">
+                <img class="hero-title-side hero-title-side--left" src="img/title-side-blue-left.png" alt="">
+                STEP 3
+                <img class="hero-title-side hero-title-side--right" src="img/title-side-blue-right.png" alt="">
+            </span>
+            <div style="text-align:center; margin-bottom:0.25rem;">
+                <div style="display:inline-block; white-space:nowrap;">
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">Web版YTTにログイン</h2>
+                    <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
+                </div>
+            </div>
+            <p>スマホでもPCでも、ブラウザから使えます。</p>
+        </div>
+        <div class="guide-card">
+            <div class="gstep">
+                <div class="gstep-no">1</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">Web版YTTにアクセスする</p>
+                    <div class="gstep-btn"><a href="https://webytt.fx-space.com/" class="btn-sq-blue" target="_blank" rel="noopener">Web版YTTを開く</a></div>
+                </div>
+            </div>
+            <div class="gstep">
+                <div class="gstep-no">2</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">「Discordでログイン」を押す</p>
+                    <p>ログインしていない状態でアクセスすると、下の画面が表示されます。</p>
+                    <figure class="gshot mid"><img src="img/webytt/s29-web-login.jpg" alt="ログインが必要です。Discordでログインボタン" loading="lazy"></figure>
+                </div>
+            </div>
+            <div class="gstep">
+                <div class="gstep-no">3</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">「口座を選択」画面で、承認した口座を選んで「確定」</p>
+                    <p>STEP 1 で登録し、レシーバーを設定した<b>口座番号</b>を選んで、下の<b>「確定」</b>を押してください。</p>
+                    <figure class="gshot narrow"><img src="img/webytt/s30-account-select.png" alt="口座を選択の画面。承認した口座番号を選んで確定を押す" loading="lazy"></figure>
+                    <div class="gtip">あとから口座を切り替えるときは、画面上部の<b>口座番号の表示</b>を押すと、同じ「口座を選択」画面が出ます。</div>
+                </div>
+            </div>
+            <div class="gstep">
+                <div class="gstep-no">4</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">数秒待って、接続状態を確認する</p>
+                    <p>口座番号の左にある<b>丸の色</b>が接続状態を表します。<b>緑</b>になっていれば接続完了です。このとき、MT4側のレシーバーの表示も「承認待ち」から<b>「接続中」</b>に変わります。</p>
+                    <div class="gshot-pair">
+                        <figure class="gshot"><img src="img/webytt/s31-connected-sp.png" alt="スマホで接続できた状態。口座番号の左の丸が緑" loading="lazy"><figcaption><b>スマホ</b>：画面左上、口座番号の左の丸が緑</figcaption></figure>
+                        <figure class="gshot"><img src="img/webytt/s32-connected-pc.png" alt="PCで接続できた状態。口座番号の左の丸が緑" loading="lazy"><figcaption><b>PC</b>：画面右上、口座番号の左の丸が緑</figcaption></figure>
+                    </div>
+                    <table class="gtable">
+                        <tr><th><span class="dot g"></span>緑</th><td>正常に接続されています。そのまま利用できます</td></tr>
+                        <tr><th><span class="dot y"></span>黄</th><td>接続はあるが価格が取れていません。MT4 / MT5 では、取引する通貨ペアを気配値表示欄に出してください</td></tr>
+                        <tr><th><span class="dot r"></span>赤</th><td>接続されていません。ページをリロード。改善しない場合は下の「よくある質問」へ</td></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <p class="ytt-fto-attention" style="margin-top:1.5rem;text-align:left;">以上で導入は完了し、Web版YTTが使用できます。お疲れ様でした！</p>
+    </div>
+</section>
+
+<!-- スマホで使う -->
+<section class="ytt-spec-section" style="background:#f4f6f9;">
+    <div class="ytt-spec-inner">
+        <div class="ytt-spec-header">
+            <span class="section-title-badge section-title-badge--orange">
+                <img class="hero-title-side hero-title-side--left" src="img/title-side-orange-left.png" alt="">
+                おすすめ
+                <img class="hero-title-side hero-title-side--right" src="img/title-side-orange-right.png" alt="">
+            </span>
+            <div style="text-align:center; margin-bottom:0.25rem;">
+                <div style="display:inline-block; white-space:nowrap;">
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">スマホはアプリのように使う</h2>
+                    <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
+                </div>
+            </div>
+            <p>ホーム画面に置いておくと、アドレスバーが消えて画面が広く使え、1タップで開けます。</p>
+        </div>
+        <div class="ytt-add-grid cols-2" style="max-width:720px;">
+            <div class="ytt-add-card os-card">
+                <h3><span class="os-tag">Android</span>インストールする</h3>
+                <ol>
+                    <li>Chromeで <b>webytt.fx-space.com</b> を開く</li>
+                    <li>右上の「︙」メニューを開く</li>
+                    <li>「アプリをインストール」（または「ホーム画面に追加」）を選ぶ</li>
+                    <li>ホーム画面のアイコンから起動する</li>
+                </ol>
+            </div>
+            <div class="ytt-add-card os-card">
+                <h3><span class="os-tag">iPhone</span>ホーム画面に追加する</h3>
+                <ol>
+                    <li>Safariで <b>webytt.fx-space.com</b> を開く</li>
+                    <li>画面下の「共有」ボタン（四角に上矢印）を押す</li>
+                    <li>「ホーム画面に追加」を選び、「追加」を押す</li>
+                    <li>ホーム画面のアイコンから起動する</li>
+                </ol>
+            </div>
+        </div>
+        <figure class="home-icon"><img src="img/webytt/s33-home-icon.jpg" alt="ホーム画面に追加されたYTT for Webのアイコン" loading="lazy"><figcaption>追加すると、ホーム画面に「YTT for Web」のアイコンができます。</figcaption></figure>
+    </div>
+</section>
+
+<!-- 利用上の制限 -->
+<section class="ytt-spec-section" id="limits" style="background:#fff;">
+    <div class="ytt-spec-inner ytt-fto-wide">
+        <div class="ytt-spec-header">
+            <span class="section-title-badge section-title-badge--blue">
+                <img class="hero-title-side hero-title-side--left" src="img/title-side-blue-left.png" alt="">
+                はじめに確認
+                <img class="hero-title-side hero-title-side--right" src="img/title-side-blue-right.png" alt="">
+            </span>
+            <div style="text-align:center; margin-bottom:0.25rem;">
+                <div style="display:inline-block; white-space:nowrap;">
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">利用上の制限事項</h2>
+                    <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
+                </div>
+            </div>
+            <p>「動かない」と感じたときは、まずここを確認してください。</p>
+        </div>
+        <div class="ytt-add-grid">
+            <div class="ytt-add-card"><h3>レシーバーは1口座に1つだけ</h3><p>同じ口座に複数のレシーバー（MT4とMT5など）を同時に設置することはできません。複数設定した場合は、先に設定していた方が切断されます。</p></div>
+            <div class="ytt-add-card"><h3>通貨ペアを気配値表示に出す</h3><p>MT4 / MT5 では、取引する通貨ペアを気配値表示欄に出しておいてください。出していないと価格が取得できず、アイコンが黄になります。</p></div>
+            <div class="ytt-add-card"><h3>PCと取引ツールは起動したまま</h3><p>レシーバーのEA停止中、PCのスリープ中、取引ツールを閉じている間は動きません。cTrader Cloud版はPCを閉じても動きます。</p></div>
+        </div>
+    </div>
 </section>
 
 <!-- コピーモード -->
-<section class="plain-section" id="copy">
-    <h2>コピーモード（受信）の設定と注意点</h2>
-    <p class="lead">コピー元の口座でWeb版YTTからエントリーされたポジションを、自分の口座に写す機能です。オンにすると通常の操作に制限がかかります。</p>
-    <ol class="sub-steps">
-        <li><span class="sn">1</span><span><b>設定からコピーモード（受信）をオンにする。</b><wbr>オンにするとコピー元の口座設定画面が表示されるので、案内に従ってコピー元を設定します。</span></li>
-        <li><span class="sn">2</span><span><b>「コピー時のロット計算モード」を確認する。</b><wbr>自分の口座のロットはこの設定に従って計算されます。意図したロットになるよう事前に確認してください。</span></li>
-    </ol>
-    <div class="note-box"><b>オンにした時点で、セット中のシナリオと指値・逆指値注文はすべてキャンセルされます。</b><br>残したいものがあれば、オンにする前に確認してください。</div>
-    <table class="guide-table">
-        <tr><th>新規エントリー</th><td>コピー以外の新規エントリーはできません</td></tr>
-        <tr><th>TP / SL の移動</th><td>できません</td></tr>
-        <tr><th>コピーされるポジション</th><td>コピー元でWeb版YTTからエントリーされたポジションのみ。他の方法で建てたポジションはコピーされません</td></tr>
-        <tr><th>ロット</th><td>設定内の「コピー時のロット計算モード」が参照されます</td></tr>
-        <tr><th>SLが無いポジション</th><td>ロット計算モードが損失率固定・損失額固定の場合、SLが無いポジションはコピーされません（損失を計算できないため）</td></tr>
-        <tr><th>TP / SL</th><td>コピーされます。コピー元の価格をそのまま写すのではなく、コピー元と同じTP/SL幅になるように設定されます</td></tr>
-        <tr><th>オンにした後</th><td>Web版の画面は閉じてもOK。ただしレシーバーが入っている取引ツールは起動したままにしてください（PCのスリープにも注意）</td></tr>
-    </table>
-</section>
-
-<!-- アップデート -->
-<section class="plain-section" id="update">
-    <h2>アップデート</h2>
-    <p class="lead">新しいレシーバーEAが配布されたら、ファイルをダウンロードし、「STEP 2　レシーバーEAの設置」の手順をもう一度行ってください。</p>
+<section class="ytt-spec-section" id="copy" style="background:#f4f6f9;">
+    <div class="ytt-spec-inner">
+        <div class="ytt-spec-header">
+            <span class="section-title-badge section-title-badge--orange">
+                <img class="hero-title-side hero-title-side--left" src="img/title-side-orange-left.png" alt="">
+                機能の注意点
+                <img class="hero-title-side hero-title-side--right" src="img/title-side-orange-right.png" alt="">
+            </span>
+            <div style="text-align:center; margin-bottom:0.25rem;">
+                <div style="display:inline-block; white-space:nowrap;">
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">コピーモード（受信）</h2>
+                    <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
+                </div>
+            </div>
+            <p>コピー元の口座でWeb版YTTからエントリーされたポジションを、自分の口座に写す機能です。</p>
+        </div>
+        <p class="ytt-fto-attention" style="text-align:left;">オンにした時点で、セット中のシナリオと指値・逆指値注文はすべてキャンセルされます。残したいものがあれば、オンにする前に確認してください。</p>
+        <details class="ytt-spec-acc">
+            <summary>
+                <span class="ytt-spec-acc-label">設定方法と制限を見る</span>
+                <span class="ytt-spec-acc-chev" aria-hidden="true">▼</span>
+            </summary>
+            <div class="ytt-spec-acc-body">
+                <table class="ytt-spec-table">
+                    <tbody>
+                        <tr><th>設定方法</th><td class="spec-val">設定 → コピーモード（受信）をオン</td><td class="spec-note">コピー元の口座設定画面が出るので、案内に従って設定。「コピー時のロット計算モード」も確認</td></tr>
+                        <tr><th>新規エントリー</th><td class="spec-val">コピー以外はできない</td><td class="spec-note"></td></tr>
+                        <tr><th>TP / SL の移動</th><td class="spec-val">できない</td><td class="spec-note"></td></tr>
+                        <tr><th>コピーされる</th><td class="spec-val">Web版YTTからのエントリーのみ</td><td class="spec-note">コピー元が他の方法で建てたポジションはコピーされません</td></tr>
+                        <tr><th>ロット</th><td class="spec-val">ロット計算モードに従う</td><td class="spec-note">損失率固定・損失額固定のときは、SLが無いポジションはコピーされません</td></tr>
+                        <tr><th>TP / SL</th><td class="spec-val">同じ幅でコピー</td><td class="spec-note">約定価格の差を吸収するため、コピー元と同じTP/SL幅になるように設定されます</td></tr>
+                        <tr><th>オンにした後</th><td class="spec-val">Web版の画面は閉じてOK</td><td class="spec-note">レシーバーが入っている取引ツールは起動したままにしてください</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </details>
+        <p style="font-size:0.8125rem;color:#6b7280;margin-top:1.25rem;text-align:left;">新しいレシーバーEAが配布されたときは、ファイルをダウンロードして「STEP 2　レシーバーEAの設置」の手順をもう一度行ってください。</p>
+    </div>
 </section>
 
 <!-- よくある質問 -->
-<section class="plain-section" id="trouble">
-    <h2>Web版YTTの導入でよくある質問</h2>
-    <p class="lead">よくある症状と、確認する順番です。上から順に確認してください。</p>
-    <div class="faq-item"><button type="button" class="faq-q">レシーバーで認証に失敗する／「認証エラー」となる</button><div class="faq-a"><ul><li>認証コードが32文字すべて正しく入力されているか（前後の空白、全角・半角の混在）</li><li>レシーバーを複数のチャートに入れていないか（1つのチャートだけに入れます）</li><li>自動売買の許可をしていない（許可する箇所は2つ存在します）</li><li>DLLの使用許可をしていない</li><li>MT4を再起動していない</li><li>メンバーシップ／サブスクに加入していない</li></ul></div></div>
-    <div class="faq-item"><button type="button" class="faq-q">レシーバーが「承認待ち」のまま変わらない</button><div class="faq-a">Web版YTTにログインし、認証済み口座一覧からその口座を選択してください（STEP 3）。選択後、数秒待ちます。</div></div>
-    <div class="faq-item"><button type="button" class="faq-q">Web版のアイコンが赤のまま</button><div class="faq-a"><ul><li>ページをリロードします</li><li>取引ツール（MT4 / MT5 / cTrader）が起動していて、EAが動いているか</li><li>PCがスリープしていないか</li><li>同じ口座に別のレシーバーを後から設定していないか（先に設定した方が切断されます）</li></ul></div></div>
-    <div class="faq-item"><button type="button" class="faq-q">Web版のアイコンが黄になる</button><div class="faq-a">価格が取得できていません。MT4 / MT5 の場合は、取引する通貨ペアを気配値表示欄に表示してください。</div></div>
-    <div class="faq-item"><button type="button" class="faq-q">特定の通貨ペアやCFD商品だけ注文できない</button><div class="faq-a"><ul><li>サフィックス付きの口座（USDJPYp など）では「通貨ペア末尾のサフィックス」を入力しているか</li><li>CFD系商品は、証券会社の商品名（GOLD など）をパラメータに入力しているか</li></ul></div></div>
-    <div class="faq-item"><button type="button" class="faq-q">セキュリティソフトにひっかかってダウンロードできない／DLLが消える</button><div class="faq-a"><ul><li>DLLの使用許可をしていない</li><li>DLLの名前がオリジナルファイル（YTT_OrderReceiver.dll）と異なっている（末尾に（1）が付いているなど）</li><li>「MQL4」→「Libraries」中のDLLファイルがセキュリティソフトにより削除／中身が空白になっている。この場合は<a href="https://support.microsoft.com/ja-jp/windows/windows-%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%E3%81%AB%E9%99%A4%E5%A4%96%E3%82%92%E8%BF%BD%E5%8A%A0%E3%81%99%E3%82%8B-811816c0-4dfd-af4a-47e4-c301afe13b26" target="_blank" rel="noopener">こちら</a>等を参考に除外処理をおこなってください（Windowsセキュリティ以外の場合は各自除外処理の方法をお調べください）</li></ul></div></div>
-    <div class="faq-item"><button type="button" class="faq-q">コピーモードでポジションがコピーされない</button><div class="faq-a"><ul><li>コピー元のポジションがWeb版YTTからエントリーされたものか</li><li>ロット計算モードが損失率固定・損失額固定のとき、コピー元のポジションにSLが付いているか</li><li>レシーバー側の取引ツールが起動したままになっているか</li></ul></div></div>
-    <div class="faq-item"><button type="button" class="faq-q">コピーモードをオンにしたら注文が消えた</button><div class="faq-a">仕様です。オンにした時点で、セット中のシナリオと指値・逆指値注文はすべてキャンセルされます。</div></div>
+<section class="ytt-spec-section" id="trouble" style="background:#fff;">
+    <div class="ytt-spec-inner">
+        <div class="ytt-spec-header">
+            <span class="section-title-badge section-title-badge--blue">
+                <img class="hero-title-side hero-title-side--left" src="img/title-side-blue-left.png" alt="">
+                よくある質問
+                <img class="hero-title-side hero-title-side--right" src="img/title-side-blue-right.png" alt="">
+            </span>
+            <div style="text-align:center; margin-bottom:0.25rem;">
+                <div style="display:inline-block; white-space:nowrap;">
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">導入でつまずいたときは</h2>
+                    <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
+                </div>
+            </div>
+        </div>
+        <details class="ytt-faq">
+            <summary><span class="ytt-faq-q">レシーバーで認証に失敗する／「認証エラー」になる</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
+            <div class="ytt-faq-a"><p>次のいずれかが原因のことが多いです。ひとつずつ確認してください。</p><p>①認証コード（32文字）の入力ミス（前後の空白、全角・半角の混在）<br>②レシーバーを複数のチャートに入れている（1つのチャートだけに入れます）<br>③自動売買の許可をしていない（許可する箇所は2つあります）<br>④DLLの使用許可をしていない<br>⑤MT4を再起動していない<br>⑥メンバーシップ／サブスクに加入していない</p></div>
+        </details>
+        <details class="ytt-faq">
+            <summary><span class="ytt-faq-q">レシーバーが「承認待ち」のまま変わらない</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
+            <div class="ytt-faq-a"><p>Web版YTTにログインし、「口座を選択」でその口座を選んで「確定」を押してください（STEP 3）。選択後、数秒待ちます。</p></div>
+        </details>
+        <details class="ytt-faq">
+            <summary><span class="ytt-faq-q">Web版の丸いアイコンが赤のまま</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
+            <div class="ytt-faq-a"><p>①ページをリロードする<br>②取引ツール（MT4 / MT5 / cTrader）が起動していて、EAが動いているか<br>③PCがスリープしていないか<br>④同じ口座に別のレシーバーを後から設定していないか（先に設定した方が切断されます）</p></div>
+        </details>
+        <details class="ytt-faq">
+            <summary><span class="ytt-faq-q">Web版の丸いアイコンが黄になる</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
+            <div class="ytt-faq-a"><p>価格が取得できていません。MT4 / MT5 の場合は、取引する通貨ペアを気配値表示欄に表示してください。</p></div>
+        </details>
+        <details class="ytt-faq">
+            <summary><span class="ytt-faq-q">特定の通貨ペアやCFD商品だけ注文できない</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
+            <div class="ytt-faq-a"><p>①サフィックス付きの口座（USDJPYp など）で「通貨ペア名末尾サフィックス」を入力しているか<br>②CFD系商品は、証券会社の商品名（GOLD など）を「特殊通貨ペア名設定」に入力しているか</p></div>
+        </details>
+        <details class="ytt-faq">
+            <summary><span class="ytt-faq-q">セキュリティソフトにひっかかってダウンロードできない／DLLが消える</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
+            <div class="ytt-faq-a"><p>①DLLの使用許可をしていない<br>②DLLの名前がオリジナルファイル（YTT_OrderReceiver.dll）と異なっている（末尾に（1）が付いているなど）<br>③「MQL4」→「Libraries」中のDLLファイルがセキュリティソフトにより削除／中身が空白になっている</p><p>③の場合は<a href="https://support.microsoft.com/ja-jp/windows/windows-%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%E3%81%AB%E9%99%A4%E5%A4%96%E3%82%92%E8%BF%BD%E5%8A%A0%E3%81%99%E3%82%8B-811816c0-4dfd-af4a-47e4-c301afe13b26" target="_blank" rel="noopener">こちら</a>等を参考に除外処理をおこなってください（Windowsセキュリティ以外の場合は各自除外処理の方法をお調べください）。</p></div>
+        </details>
+        <details class="ytt-faq">
+            <summary><span class="ytt-faq-q">コピーモードでポジションがコピーされない</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
+            <div class="ytt-faq-a"><p>①コピー元のポジションがWeb版YTTからエントリーされたものか<br>②ロット計算モードが損失率固定・損失額固定のとき、コピー元のポジションにSLが付いているか<br>③レシーバー側の取引ツールが起動したままになっているか</p></div>
+        </details>
+        <details class="ytt-faq">
+            <summary><span class="ytt-faq-q">コピーモードをオンにしたら注文が消えた</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
+            <div class="ytt-faq-a"><p>仕様です。オンにした時点で、セット中のシナリオと指値・逆指値注文はすべてキャンセルされます。</p></div>
+        </details>
+    </div>
 </section>
 
-<!-- サポート -->
-<section class="plain-section" id="support">
-    <h2>サポート</h2>
-    <p class="lead">サポートが必要な場合や不具合だと考えられる場合は、以下の項目をチェックしてください。</p>
-    <ul class="limit-list">
-        <li>■ 使用可能証券会社・プロップファーム（HFM、Axiory、ThreeTrader、Fundora、Fintokei、Funded7、楽天証券）で使っている（他社での動作はテストしていません）</li>
-        <li>■ <a href="https://discord.com/channels/1039824083208126474/1406849872560390227" target="_blank" rel="noopener">YTTサポートAI</a> に相談した</li>
-        <li>■ <a href="https://discord.com/channels/1039824083208126474/1181497563992576051" target="_blank" rel="noopener">YTT質問フォーラム</a> で質問した</li>
-    </ul>
-    <p class="lead" style="margin-top:1rem;">以上で解決しなかったものについて、以下の内容を <a href="https://discord.com/channels/1039824083208126474/1151440259553439784" target="_blank" rel="noopener">「お問い合わせ」</a> に送ってください。</p>
-    <ul class="feat-list">
-        <li>証券会社</li><li>口座タイプ</li><li>有効証拠金残高</li><li>OS（MacかWindows）と、スマホの機種</li><li>レシーバーEAのバージョン（例：YTT_OrderEA 1.00）</li><li>Web版YTTで使用している口座番号</li><li>サポートが必要な内容をできるだけ具体的に</li><li>症状発生時／参考となるスクショ</li><li>症状発生時のターミナル→エキスパートタブのスクショ</li><li>（※必須）エラーが出ていた場合、エキスパートタブに出ていたエラーのコピー</li>
-    </ul>
+<!-- サポート窓口 -->
+<section class="ytt-spec-section" style="background:#f4f6f9;">
+    <div class="ytt-spec-inner">
+        <div class="ytt-spec-header">
+            <span class="section-title-badge section-title-badge--orange">
+                <img class="hero-title-side hero-title-side--left" src="img/title-side-orange-left.png" alt="">
+                困ったときは
+                <img class="hero-title-side hero-title-side--right" src="img/title-side-orange-right.png" alt="">
+            </span>
+            <div style="text-align:center; margin-bottom:0.25rem;">
+                <div style="display:inline-block; white-space:nowrap;">
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">サポート窓口</h2>
+                    <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
+                </div>
+            </div>
+            <p>導入や使い方で迷っても、ここから解決できます。</p>
+        </div>
+        <div class="ytt-add-grid cols-2">
+            <div class="ytt-add-card ytt-support-card">
+                <img class="sup-img" src="img/icon-ytt-ai-support.png" alt="">
+                <h3>YTT AIサポート</h3>
+                <p>導入・使い方の疑問に24時間いつでも回答。まずはここで解決できます。</p>
+                <a class="sup-link" href="https://discord.com/channels/1039824083208126474/1406849872560390227" target="_blank" rel="noopener">Discordで開く →</a>
+            </div>
+            <div class="ytt-add-card ytt-support-card">
+                <img class="sup-img" src="img/icon-ytt-support.png" alt="">
+                <h3>YTT質問フォーラム</h3>
+                <p>ほかのメンバーやエンジニアに質問できます。技術的な質問はこちら。</p>
+                <a class="sup-link" href="https://discord.com/channels/1039824083208126474/1181497563992576051" target="_blank" rel="noopener">Discordで開く →</a>
+            </div>
+        </div>
+        <details class="ytt-spec-acc" style="margin-top:1.5rem;">
+            <summary>
+                <span class="ytt-spec-acc-label">お問い合わせのときに送る内容</span>
+                <span class="ytt-spec-acc-chev" aria-hidden="true">▼</span>
+            </summary>
+            <div class="ytt-spec-acc-body">
+                <p style="font-size:0.8125rem;color:#4b5563;line-height:1.85;margin:1rem 0 0;">上で解決しなかったものは、以下の内容を <a href="https://discord.com/channels/1039824083208126474/1151440259553439784" target="_blank" rel="noopener" style="color:#2563eb;text-decoration:underline;">「お問い合わせ」</a> に送ってください。</p>
+                <table class="ytt-spec-table">
+                    <tbody>
+                        <tr><th>口座</th><td class="spec-val">証券会社・口座タイプ・有効証拠金残高</td><td class="spec-note">Web版YTTで使用している口座番号も</td></tr>
+                        <tr><th>環境</th><td class="spec-val">OS（MacかWindows）・スマホの機種</td><td class="spec-note">レシーバーEAのバージョン（例：YTT_OrderEA 1.00）</td></tr>
+                        <tr><th>内容</th><td class="spec-val">困っていることをできるだけ具体的に</td><td class="spec-note">症状発生時のスクショ、ターミナル→エキスパートタブのスクショ</td></tr>
+                        <tr><th>※必須</th><td class="spec-val">エラーのコピー</td><td class="spec-note">エラーが出ていた場合、エキスパートタブに出ていたエラーの文字をコピーして貼り付け</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </details>
+    </div>
+</section>
+
+<!-- フッターCTA -->
+<section class="ytt-sp-footer-cta">
+    <h2>Web版YTTを使い始めよう</h2>
+    <p>導入が終わったら、<br>スマホからでもすぐにトレードできます。</p>
+    <div class="ytt-sp-footer-cta-btns">
+        <a href="https://webytt.fx-space.com/" target="_blank" rel="noopener" class="btn-white-solid">Web版YTTを開く</a>
+        <a href="ytt-tokusetu.html" class="btn-white-outline">YTT特設ページへ</a>
+    </div>
 </section>
 
 <footer class="ytt-sp-page-footer">
@@ -1156,13 +1617,12 @@
 
 <script>
 (function(){
-  document.querySelectorAll('.faq-q').forEach(function(b){
-    b.addEventListener('click', function(){ b.parentElement.classList.toggle('open'); });
-  });
   var dl = document.getElementById('dlBtn');
   if (dl && dl.getAttribute('href').indexOf('#href-tbd') === 0) {
     dl.addEventListener('click', function(e){ e.preventDefault(); alert('ダウンロードURLは準備中です。Discordの「😊交流」チャンネルの配布ファイル（webytt.zip）をご利用ください。'); });
   }
+  // 見出しのアンカーへ飛んだとき、固定ナビの下に潜らないようにする
+  document.documentElement.style.scrollPaddingTop = '72px';
 })();
 </script>
 <!-- BudouX — 日本語の文節改行（全ページ共通・同梱版。js/budoux-init.js を参照） -->

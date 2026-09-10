@@ -6,7 +6,7 @@
     <title>Web版YTT 導入方法 — FX SPACE</title>
     <link rel="icon" type="image/png" href="icon.png">
     <meta property="og:title" content="Web版YTT 導入方法 — FX SPACE">
-    <meta property="og:description" content="Web版（スマホ版）YTTの導入手順。口座登録、MT4への連携ツールの設置、Web版YTTへのログインまでを画像つきで案内します。">
+    <meta property="og:description" content="Web版（スマホ版）YTTの導入手順。口座登録、取引ツール（MT4 / MT5 / cTrader）への連携ツールの設置、Web版YTTへのログインまでを画像つきで案内します。">
     <meta property="og:image" content="https://fx-space.com/intro/img/og-ytt-tokusetu.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -967,6 +967,19 @@
     .wy-nav span svg { width: 14px; height: 14px; }
     .wy-nav span.on { color: #e9b949; }
     .wy-nav span.has-badge::after { content: ''; position: absolute; top: -1px; left: calc(50% + 4px); width: 5px; height: 5px; border-radius: 50%; background: #f97316; }
+    /* MT4 / MT5 / cTrader の切り替え（このページはMT4） */
+    .tool-badge { display: inline-block; margin: 0 0 0.6rem; padding: 0.2rem 0.9rem; border-radius: 999px; background: #1e1b4b; color: #fff; font-size: 0.8rem; font-weight: 800; letter-spacing: 0.06em; }
+    .tool-switch { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 0.4rem; margin: 1.25rem auto 0; }
+    .tool-switch-label { width: 100%; font-size: 0.75rem; color: #6b7280; font-weight: 700; margin-bottom: 0.1rem; }
+    .tool-tab { display: inline-flex; align-items: center; gap: 0.35rem; min-height: 40px; padding: 0.45rem 1.1rem; border-radius: 999px; border: 1.5px solid #d1d5db; background: #fff; color: #1e1b4b; font-size: 0.875rem; font-weight: 800; text-decoration: none; }
+    .tool-tab.is-on { background: #1e1b4b; border-color: #1e1b4b; color: #fff; }
+    .tool-tab small, .other-tool small { font-size: 0.65rem; font-weight: 700; color: #9ca3af; }
+    .tool-tab.is-soon, .other-tool.is-soon { color: #9ca3af; cursor: default; }
+    .other-tools { margin-top: 1.75rem; text-align: center; }
+    .other-tools-lead { font-size: 0.875rem; color: #4b5563; line-height: 1.85; margin: 0; }
+    .other-tools-lead b { color: #1e1b4b; }
+    .other-tools-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.6rem; margin-top: 0.9rem; }
+    .other-tool { display: inline-flex; align-items: center; gap: 0.4rem; min-height: 44px; padding: 0.55rem 1.2rem; border-radius: 12px; border: 1.5px solid #e5e7eb; background: #fff; color: #1e1b4b; font-size: 0.875rem; text-decoration: none; }
     .section-alt { background: #f4f6f9; }
     /* 「3ステップで導入完了」の背景の下辺を、次のセクションへ向かう矢印の形にする（route.html の rsec--arrowdown と同じ作り）。
        矢印の下の三角部分は次のセクションに重ね、切り取った左右は次のセクションの白が見えるようにする */
@@ -1007,14 +1020,22 @@
 <!-- HERO -->
 <section class="ytt-sp-hero">
     <img src="img/ytt-mark-notext.png" alt="YTT" class="ytt-sp-hero-logo">
+    <span class="tool-badge">MT4版</span>
     <h1 class="ytt-sp-hero-title">
         <span class="ytt-sp-title-line"><span class="line-text">Web版YTT<img class="ytt-title-wave" src="img/wave-yellow.png" alt=""></span></span>
         <span class="ytt-sp-title-line"><span class="line-text">導入方法<img class="ytt-title-wave" src="img/wave-yellow.png" alt=""></span></span>
     </h1>
     <p class="ytt-sp-hero-lead">
-        口座の登録からMT4への連携ツールの設置、Web版YTTへのログインまで。<br>
-        画像のとおりに上から進めれば、約15分で使えるようになります。
+        口座の登録から連携ツールの設置、Web版YTTへのログインまで。<br>
+        画像のとおりに上から進めれば、約15分で使えるようになります。<br>
+        このページでは<b>MT4</b>での手順を紹介します。
     </p>
+    <div class="tool-switch" aria-label="取引ツールの選択">
+        <span class="tool-switch-label">お使いの取引ツール</span>
+        <a class="tool-tab is-on" aria-current="page">MT4</a>
+        <a class="tool-tab is-soon" href="#href-tbd-setup-mt5" data-soon="1">MT5<small>準備中</small></a>
+        <a class="tool-tab is-soon" href="#href-tbd-setup-ctrader" data-soon="1">cTrader<small>準備中</small></a>
+    </div>
     <div class="ytt-sp-hero-btns">
         <a href="#flow" class="btn-sq-blue">導入をはじめる</a>
         <a href="#trouble" class="btn-sq-white">よくある質問</a>
@@ -1099,7 +1120,7 @@
                 </div>
             </div>
             <div class="ytt-fto2-content">
-                <p class="ytt-fto2-head">MT4に<span class="accent">連携ツール</span>を入れておけば、<br>ブラウザから注文・決済までできます</p>
+                <p class="ytt-fto2-head">MT4 / MT5 / cTrader に<span class="accent">連携ツール</span>を入れておけば、<br>ブラウザから注文・決済までできます</p>
                 <ul class="ytt-fto-list">
                     <li><img src="img/check-orange.png" alt="">注文、決済</li>
                     <li><img src="img/check-orange.png" alt="">シナリオ構築・予約注文</li>
@@ -1107,7 +1128,7 @@
                     <li><img src="img/check-orange.png" alt="">コピーモード</li>
                     <li><img src="img/check-orange.png" alt="">通知・トレードノート・経済指標表示 ほか</li>
                 </ul>
-                <p class="ytt-fto-attention">連携ツールは、Web版YTTで押した注文をMT4に伝えて、実際に注文を出す役目です。そのため MT4 / MT5 は利用中もPCを起動したままにしてください（cTrader Cloud版はPCを閉じてもOK）。</p>
+                <p class="ytt-fto-attention">連携ツールは、Web版YTTで押した注文を取引ツール（MT4 / MT5 / cTrader）に伝えて、実際に注文を出す役目です。そのため MT4 / MT5 は利用中もPCを起動したままにしてください（cTrader Cloud版はPCを閉じてもOK）。</p>
                 <p class="ytt-fto2-note">詳しい機能は <a href="#href-tbd-web-features">Web版YTT 使い方ページ（準備中）</a> で紹介します。</p>
             </div>
         </div>
@@ -1174,6 +1195,13 @@
             <a class="ytt-add-card" href="#step2"><img class="flow-num" src="img/crayon-2.png" alt="2"><h3>連携ツールの設置</h3><p>MT4 / MT5 / cTrader に連携ツールを入れ、認証コードを設定する</p></a>
             <a class="ytt-add-card" href="#step3"><img class="flow-num" src="img/crayon-3.png" alt="3"><h3>ログイン</h3><p>Web版YTTにDiscordでログインし、口座を選んで接続を確認する</p></a>
         </div>
+        <div class="other-tools">
+            <p class="other-tools-lead">手順が取引ツールで変わるのは <b>STEP 2（連携ツールの設置）</b> だけです。<br>このページは <b>MT4</b> の手順です。MT5・cTrader の方はこちら。</p>
+            <div class="other-tools-links">
+                <a class="other-tool is-soon" href="#href-tbd-setup-mt5" data-soon="1"><b>MT5</b> の導入方法<small>準備中</small></a>
+                <a class="other-tool is-soon" href="#href-tbd-setup-ctrader" data-soon="1"><b>cTrader</b> の導入方法<small>準備中</small></a>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -1183,7 +1211,7 @@
         <div class="ytt-spec-header">
             <span class="section-title-badge section-title-badge--blue">
                 <img class="hero-title-side hero-title-side--left" src="img/title-side-blue-left.png" alt="">
-                事前準備
+                事前準備（MT4）
                 <img class="hero-title-side hero-title-side--right" src="img/title-side-blue-right.png" alt="">
             </span>
             <div style="text-align:center; margin-bottom:0.25rem;">
@@ -1231,7 +1259,7 @@
                     <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
                 </div>
             </div>
-            <p>MT4とWeb版YTTのあなたの口座を結び付ける「32文字の認証コード」を受け取ります。</p>
+            <p>取引ツールに入れる連携ツールと、あなたの口座を結び付ける「32文字の認証コード」を受け取ります。</p>
         </div>
         <div class="guide-card">
             <div class="gstep">
@@ -1269,7 +1297,7 @@
         <div class="ytt-spec-header">
             <span class="section-title-badge section-title-badge--blue">
                 <img class="hero-title-side hero-title-side--left" src="img/title-side-blue-left.png" alt="">
-                STEP 2
+                STEP 2（MT4）
                 <img class="hero-title-side hero-title-side--right" src="img/title-side-blue-right.png" alt="">
             </span>
             <div style="text-align:center; margin-bottom:0.25rem;">
@@ -1278,7 +1306,7 @@
                     <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
                 </div>
             </div>
-            <p>連携ツールは、Web版YTTで押した注文をMT4に伝えるツールです。<br>入れ方は、これまでのYTTと同じです。</p>
+            <p>連携ツールは、Web版YTTで押した注文を取引ツールに伝えるツールです。<br>入れ方は、これまでのYTTと同じです。</p>
         </div>
         <div class="guide-card">
             <div class="gstep">
@@ -1356,7 +1384,7 @@
         <div class="ytt-spec-header">
             <span class="section-title-badge section-title-badge--orange">
                 <img class="hero-title-side hero-title-side--left" src="img/title-side-orange-left.png" alt="">
-                STEP 2（続き）
+                STEP 2（MT4・続き）
                 <img class="hero-title-side hero-title-side--right" src="img/title-side-orange-right.png" alt="">
             </span>
             <div style="text-align:center; margin-bottom:0.25rem;">
@@ -1503,7 +1531,7 @@
                 <div class="gstep-no">4</div>
                 <div class="gstep-body">
                     <p class="gstep-title">数秒待って、接続状態を確認する</p>
-                    <p>口座番号の左にある<b>丸の色</b>が接続状態を表します。<b>緑</b>になっていれば接続完了です。このとき、MT4のチャート上の表示も「承認待ち」から<b>「接続済み」</b>に変わります。</p>
+                    <p>口座番号の左にある<b>丸の色</b>が接続状態を表します。<b>緑</b>になっていれば接続完了です。このとき、取引ツールのチャート上の表示も「承認待ち」から<b>「接続済み」</b>に変わります。</p>
                     <div class="gshot-pair">
                         <figure class="gshot"><img src="img/webytt/s31-connected-sp.png" alt="スマホで接続できた状態。口座番号の左の丸が緑" loading="lazy"><figcaption><b>スマホ</b>：画面左上、口座番号の左の丸が緑</figcaption></figure>
                         <figure class="gshot"><img src="img/webytt/s32-connected-pc.png" alt="PCで接続できた状態。口座番号の左の丸が緑" loading="lazy"><figcaption><b>PC</b>：画面右上、口座番号の左の丸が緑</figcaption></figure>
@@ -1628,7 +1656,7 @@
                 </table>
             </div>
         </details>
-        <p style="font-size:0.8125rem;color:#6b7280;margin-top:1.25rem;text-align:left;">新しい連携ツールが配布されたときは、ファイルをダウンロードして「STEP 2　MT4に連携ツールを入れる」の手順をもう一度行ってください。</p>
+        <p style="font-size:0.8125rem;color:#6b7280;margin-top:1.25rem;text-align:left;">新しい連携ツールが配布されたときは、ファイルをダウンロードしてお使いの取引ツールの導入方法ページで「STEP 2」の手順をもう一度行ってください。</p>
     </div>
 </section>
 
@@ -1649,11 +1677,11 @@
             </div>
         </div>
         <details class="ytt-faq">
-            <summary><span class="ytt-faq-q">MT4で認証に失敗する／「認証エラー」になる</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
-            <div class="ytt-faq-a"><p>次のいずれかが原因のことが多いです。ひとつずつ確認してください。</p><p>①認証コード（32文字）の入力ミス（前後の空白、全角・半角の混在）<br>②連携ツールを複数のチャートに入れている（1つのチャートだけに入れます）<br>③自動売買の許可をしていない（許可する箇所は2つあります）<br>④DLLの使用許可をしていない<br>⑤MT4を再起動していない<br>⑥メンバーシップ／サブスクに加入していない</p></div>
+            <summary><span class="ytt-faq-q">取引ツールで認証に失敗する／「認証エラー」になる</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
+            <div class="ytt-faq-a"><p>次のいずれかが原因のことが多いです。ひとつずつ確認してください。</p><p>①認証コード（32文字）の入力ミス（前後の空白、全角・半角の混在）<br>②連携ツールを複数のチャートに入れている（1つのチャートだけに入れます）<br>③自動売買の許可をしていない（許可する箇所は2つあります）<br>④DLLの使用許可をしていない<br>⑤取引ツール（MT4 / MT5 / cTrader）を再起動していない<br>⑥メンバーシップ／サブスクに加入していない</p></div>
         </details>
         <details class="ytt-faq">
-            <summary><span class="ytt-faq-q">MT4のチャート上の表示が「承認待ち」のまま変わらない</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
+            <summary><span class="ytt-faq-q">取引ツールのチャート上の表示が「承認待ち」のまま変わらない</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
             <div class="ytt-faq-a"><p>Web版YTTにログインし、「口座を選択」でその口座を選んで「確定」を押してください（STEP 3）。選択後、数秒待ちます。</p></div>
         </details>
         <details class="ytt-faq">
@@ -1754,6 +1782,9 @@
   if (dl && dl.getAttribute('href').indexOf('#href-tbd') === 0) {
     dl.addEventListener('click', function(e){ e.preventDefault(); alert('ダウンロードURLは準備中です。Discordの「😊交流」チャンネルの配布ファイル（webytt.zip）をご利用ください。'); });
   }
+  document.querySelectorAll('[data-soon]').forEach(function (a) {
+    a.addEventListener('click', function (e) { e.preventDefault(); alert('MT5・cTraderの導入方法ページは準備中です。基本の流れはMT4と同じで、STEP 2（連携ツールの設置）だけが違います。'); });
+  });
   // 見出しのアンカーへ飛んだとき、固定ナビの下に潜らないようにする
   document.documentElement.style.scrollPaddingTop = '72px';
 })();

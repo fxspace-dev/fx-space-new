@@ -929,6 +929,17 @@
     .ytt-fto2-visual { text-align: center; }
     .ytt-fto2-visual .webytt-sp { display: block; width: 100%; max-width: 260px; height: auto; margin: 0 auto; }
     .section-alt { background: #f4f6f9; }
+    /* 「3ステップで導入完了」の背景の下辺を、次のセクションへ向かう矢印の形にする（route.html の rsec--arrowdown と同じ作り）。
+       矢印の下の三角部分は次のセクションに重ね、切り取った左右は次のセクションの白が見えるようにする */
+    #flow {
+        --tip: 48px;
+        position: relative; z-index: 1;
+        padding-bottom: calc(5rem + var(--tip));
+        margin-bottom: calc(-1 * var(--tip));
+        clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--tip)), 50% 100%, 0 calc(100% - var(--tip)));
+    }
+    #flow + section { --tip: 48px; padding-top: calc(4.5rem + var(--tip)); }
+    @media (max-width: 640px) { #flow, #flow + section { --tip: 30px; } }
 </style>
 
 </head>

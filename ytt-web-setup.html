@@ -1283,7 +1283,7 @@
         </div>
         <div class="hv-wrap">
             <figure class="gshot hv-shot">
-                <video class="hv-video" controls playsinline preload="none" poster="video/webytt-setup-mt4-poster.jpg" width="1920" height="1032">
+                <video class="hv-video" controls muted playsinline preload="metadata" poster="video/webytt-setup-mt4-poster.jpg" width="1920" height="1032">
                     <source src="video/webytt-setup-mt4.mp4" type="video/mp4">
                 </video>
             </figure>
@@ -1917,6 +1917,21 @@
         var pr = hv.play(); if (pr && pr.catch) pr.catch(function () {});
       });
     });
+    // スクロールして動画が画面に入ったら自動で再生、外れたら止める（自分で止めた・見終わったときは自動で再生し直さない）
+    var hvUserPaused = false, hvAutoPausing = false, hvDone = false;
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    hv.addEventListener('play', function () { hvUserPaused = false; });
+    hv.addEventListener('pause', function () { if (hvAutoPausing) hvAutoPausing = false; else if (!hv.ended) hvUserPaused = true; });
+    hv.addEventListener('ended', function () { hvDone = true; });
+    if (!reduce && 'IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) {
+        es.forEach(function (e) {
+          if (e.isIntersecting && e.intersectionRatio >= 0.5) {
+            if (hv.paused && !hvUserPaused && !hvDone) { var pr = hv.play(); if (pr && pr.catch) pr.catch(function () {}); }
+          } else if (!hv.paused) { hvAutoPausing = true; hv.pause(); }
+        });
+      }, { threshold: [0, 0.5] }).observe(hv);
+    }
     hv.addEventListener('timeupdate', function () {
       var now = hv.currentTime, cur = null;
       hvCh.forEach(function (b) { if (now + 0.3 >= parseFloat(b.getAttribute('data-t'))) cur = b; });

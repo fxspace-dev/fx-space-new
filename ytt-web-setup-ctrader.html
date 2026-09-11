@@ -999,6 +999,20 @@
     /* 取引ツールを選ぶまで、下の手順は表示しない */
     .js-gate #gated:not(.is-open) { display: none; }
     #tool-select { padding-bottom: 3.5rem; }
+    /* 利用上の制限事項：カードの上のイメージ図 */
+    .lim-card { display: flex; flex-direction: column; }
+    .lim-mock { margin: -0.25rem 0 0.9rem; padding: 0.4rem 0 0.6rem; border-bottom: 1.5px dashed #e5e7eb; }
+    .lim-mock svg { display: block; width: 100%; max-width: 320px; height: auto; margin: 0 auto; font-family: inherit; }
+    /* 動画にも手書き風の枠（.gshot video） */
+    .gframe.gframe-video { display: block; }
+    .gframe > video { display: block; width: 100%; height: auto; border-radius: 5px; background: #0b0f1e; }
+    /* コピーモード：設定のしかた */
+    .cm-how { max-width: 560px; margin: 1.5rem auto 1.25rem; text-align: center; }
+    .cm-how-title { margin: 0; font-size: 1rem; font-weight: 900; color: #1e1b4b; display: flex; align-items: baseline; justify-content: center; gap: 0.6rem; }
+    .cm-how-title small { font-size: 0.75rem; font-weight: 700; color: #6b7280; }
+    .cm-shot { margin: 0.6rem 0 0; }
+    .gframe > video.cm-video { aspect-ratio: 1200 / 966; }
+    .cm-how-steps { margin: 0.7rem 0 0; font-size: 0.8rem; color: #4b5563; line-height: 1.8; text-align: left; }
     /* ヒーロー：導入はPCで行う */
     .pc-note { display: inline-block; margin-top: 0.7rem; color: #1e1b4b; font-size: 0.9rem; font-weight: 800; letter-spacing: 0.02em; }
     /* まだ取引口座を持っていない方へ（取引ツールの質問の下） */
@@ -1604,9 +1618,43 @@
             <p>「動かない」と感じたときは、まずここを確認してください。</p>
         </div>
         <div class="ytt-add-grid">
-            <div class="ytt-add-card"><h3>連携ツールは1口座に1つだけ</h3><p>同じ口座に、複数の連携ツール（MT4とMT5の両方など）を同時に入れることはできません。複数設定した場合は、先に設定していた方が切断されます。</p></div>
-            <div class="ytt-add-card"><h3>連携ツールを止めない</h3><p>cTraderのチャート上に緑の「▶」が出ているときは、連携ツールが止まっています。押して動かしてください。</p></div>
-            <div class="ytt-add-card"><h3>PCと取引ツールは起動したまま</h3><p>連携ツールが止まっているとき、PCのスリープ中、取引ツールを閉じている間は動きません。cTrader Cloud版はPCを閉じても動きます。</p></div>
+            <div class="ytt-add-card lim-card"><div class="lim-mock"><svg viewBox="0 0 280 150" role="img" aria-label="1つの口座にMT4とMT5の両方を入れると、先に設定したMT4は切断され、あとから設定したMT5だけがつながる図">
+  <rect x="18" y="14" width="92" height="42" rx="10" fill="#fff" stroke="#1e1b4b" stroke-width="2"/>
+  <text x="64" y="34" font-size="15" font-weight="800" fill="#1e1b4b" text-anchor="middle">MT4</text><text x="64" y="49" font-size="10" font-weight="700" fill="#6b7280" text-anchor="middle">先に設定</text>
+  <rect x="170" y="14" width="92" height="42" rx="10" fill="#fff" stroke="#1e1b4b" stroke-width="2"/>
+  <text x="216" y="34" font-size="15" font-weight="800" fill="#1e1b4b" text-anchor="middle">MT5</text><text x="216" y="49" font-size="10" font-weight="700" fill="#6b7280" text-anchor="middle">あとから設定</text>
+  <rect x="86" y="100" width="108" height="38" rx="10" fill="#1e1b4b"/>
+  <text x="140" y="124" font-size="12" font-weight="800" fill="#fff" text-anchor="middle">あなたの口座</text>
+  <path d="M72 58 L118 98" stroke="#dc2626" stroke-width="3" stroke-dasharray="6 5" fill="none" stroke-linecap="round"/>
+  <circle cx="95" cy="78" r="10" fill="#dc2626"/><path d="M90.5 73.5l9 9M99.5 73.5l-9 9" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>
+  <text x="58" y="84" font-size="12" font-weight="800" fill="#dc2626" text-anchor="middle">切断</text>
+  <path d="M208 58 L162 98" stroke="#16a34a" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <circle cx="185" cy="78" r="10" fill="#16a34a"/><path d="M180 78.5l3.6 3.6 6.4-7" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="226" y="84" font-size="12" font-weight="800" fill="#16a34a" text-anchor="middle">接続中</text>
+</svg></div><h3>連携ツールは1口座に1つだけ</h3><p>同じ口座に、複数の連携ツール（MT4とMT5の両方など）を同時に入れることはできません。複数設定した場合は、先に設定していた方が切断されます。</p></div>
+            <div class="ytt-add-card lim-card"><div class="lim-mock"><svg viewBox="0 0 280 150" role="img" aria-label="cTraderのチャート上で、緑の再生ボタンが出ているときは止まっていて、オレンジの停止ボタンが出ているときは動いている図">
+  <rect x="12" y="10" width="256" height="40" rx="9" fill="#262b38"/>
+  <rect x="22" y="19" width="120" height="22" rx="5" fill="#1b1f29" stroke="#3f4555"/><text x="82" y="34" font-size="11" font-weight="700" fill="#e5e7eb" text-anchor="middle">YTT for Web</text>
+  <rect x="214" y="17" width="44" height="26" rx="6" fill="#16a34a"/><path d="M231 23v14l12-7z" fill="#fff"/>
+  <text x="150" y="68" font-size="11" font-weight="800" fill="#1e1b4b" text-anchor="middle">緑の「▶」＝ 止まっている → 押して動かす</text>
+  <rect x="12" y="80" width="256" height="40" rx="9" fill="#262b38"/>
+  <rect x="22" y="89" width="120" height="22" rx="5" fill="#1b1f29" stroke="#3f4555"/><text x="82" y="104" font-size="11" font-weight="700" fill="#e5e7eb" text-anchor="middle">YTT for Web</text>
+  <rect x="214" y="87" width="44" height="26" rx="6" fill="#f97316"/><rect x="230" y="94" width="12" height="12" rx="1.5" fill="#fff"/>
+  <text x="150" y="138" font-size="11" font-weight="800" fill="#1e1b4b" text-anchor="middle">オレンジの「■」＝ 動いている（OK）</text>
+</svg></div><h3>連携ツールを止めない</h3><p>cTraderのチャート上に緑の「▶」が出ているときは、連携ツールが止まっています。押して動かしてください。</p></div>
+            <div class="ytt-add-card lim-card"><div class="lim-mock"><svg viewBox="0 0 280 150" role="img" aria-label="PCで取引ツールを起動していればWeb版YTTはつながり、PCがスリープ中は止まる図">
+  <rect x="10" y="18" width="84" height="54" rx="5" fill="#11163a" stroke="#1e1b4b" stroke-width="2"/>
+  <path d="M20 58 l10-9 9 5 10-14 9 7 10-10 9 5 8-7" stroke="#22c55e" stroke-width="2" fill="none" stroke-linejoin="round" stroke-linecap="round"/><text x="52" y="34" font-size="9.5" font-weight="800" fill="#e9b949" text-anchor="middle">cTrader</text>
+  <path d="M4 74 h96 l-6 8 h-84 z" fill="#1e1b4b"/><rect x="100" y="30" width="34" height="60" rx="7" fill="#11163a" stroke="#1e1b4b" stroke-width="2"/>
+  <circle cx="117" cy="52" r="6" fill="#22c55e"/><text x="117" y="75" font-size="9" font-weight="800" fill="#e9b949" text-anchor="middle">YTT</text>
+  <text x="66" y="108" font-size="12" font-weight="800" fill="#1e1b4b" text-anchor="middle">PC 起動中</text><text x="66" y="126" font-size="12" font-weight="800" fill="#16a34a" text-anchor="middle">● つながる</text>
+  <path d="M140 16 v122" stroke="#e5e7eb" stroke-width="2" stroke-dasharray="4 4"/>
+  <rect x="152" y="18" width="84" height="54" rx="5" fill="#374151" stroke="#1e1b4b" stroke-width="2"/>
+  <text x="194" y="50" font-size="13" font-weight="800" fill="#cbd5e1" text-anchor="middle">z z z</text>
+  <path d="M146 74 h96 l-6 8 h-84 z" fill="#1e1b4b"/><rect x="242" y="30" width="34" height="60" rx="7" fill="#11163a" stroke="#1e1b4b" stroke-width="2"/>
+  <circle cx="259" cy="52" r="6" fill="#ef4444"/><text x="259" y="75" font-size="9" font-weight="800" fill="#e9b949" text-anchor="middle">YTT</text>
+  <text x="208" y="108" font-size="12" font-weight="800" fill="#1e1b4b" text-anchor="middle">スリープ・終了</text><text x="208" y="126" font-size="12" font-weight="800" fill="#dc2626" text-anchor="middle">● 止まる</text>
+</svg></div><h3>PCと取引ツールは起動したまま</h3><p>連携ツールが止まっているとき、PCのスリープ中、取引ツールを閉じている間は動きません。cTrader Cloud版はPCを閉じても動きます。</p></div>
         </div>
     </div>
 </section>
@@ -1629,6 +1677,15 @@
             <p>コピー元の口座でWeb版YTTからエントリーされたポジションを、自分の口座に写す機能です。</p>
         </div>
         <p class="ytt-fto-attention" style="text-align:left;">オンにした時点で、セット中のシナリオと指値・逆指値注文はすべてキャンセルされます。残したいものがあれば、オンにする前に確認してください。</p>
+        <div class="cm-how">
+            <p class="cm-how-title">設定のしかた<small>約20秒・音声なし</small></p>
+            <figure class="gshot cm-shot">
+                <video class="cm-video" controls muted loop playsinline preload="metadata" data-autoplay poster="video/webytt-copymode-poster.jpg" width="1200" height="966">
+                    <source src="video/webytt-copymode.mp4" type="video/mp4">
+                </video>
+            </figure>
+            <p class="cm-how-steps">右下の歯車（設定）→「コピーモード（受信）」→ コピー元の口座を選んで「確定」→「コピー時のロット計算モード」を確認</p>
+        </div>
         <details class="ytt-spec-acc">
             <summary>
                 <span class="ytt-spec-acc-label">設定方法と制限を見る</span>
@@ -1780,6 +1837,21 @@
   function openNoAcc() { if (noAcc) noAcc.open = true; }
   document.querySelectorAll('a[href="#no-account"]').forEach(function (a) { a.addEventListener('click', openNoAcc); });
   if (location.hash === '#no-account') openNoAcc();
+  // ---- 動画（data-autoplay）：画面に入ったら自動再生、外れたら止める ----
+  if (!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) && 'IntersectionObserver' in window) {
+    document.querySelectorAll('video[data-autoplay]').forEach(function (v) {
+      var userPaused = false, autoPausing = false;
+      v.addEventListener('play', function () { userPaused = false; });
+      v.addEventListener('pause', function () { if (autoPausing) autoPausing = false; else if (!v.ended) userPaused = true; });
+      new IntersectionObserver(function (es) {
+        es.forEach(function (e) {
+          if (e.isIntersecting && e.intersectionRatio >= 0.5) {
+            if (v.paused && !userPaused) { var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); }
+          } else if (!v.paused) { autoPausing = true; v.pause(); }
+        });
+      }, { threshold: [0, 0.5] }).observe(v);
+    });
+  }
   // ---- 取引ツールの選択：選ぶまで #gated（事前準備〜）を表示しない ----
   var gated = document.getElementById('gated');
   var me = document.body.getAttribute('data-tool');
@@ -1862,10 +1934,10 @@
     '</filter></defs>';
   document.body.appendChild(defs);
   var ro = window.ResizeObserver ? new ResizeObserver(function (es) { es.forEach(function (e) { draw(e.target); }); }) : null;
-  document.querySelectorAll('.gshot img').forEach(function (img) {
+  document.querySelectorAll('.gshot img, .gshot video').forEach(function (img) {
     if (img.parentElement.classList.contains('gframe')) return;
     var box = document.createElement('span');
-    box.className = 'gframe';
+    box.className = img.tagName === 'VIDEO' ? 'gframe gframe-video' : 'gframe';
     box.setAttribute('data-seed', hash(img.getAttribute('src') || ''));
     img.parentNode.insertBefore(box, img);
     box.appendChild(img);

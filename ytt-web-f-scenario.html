@@ -1219,8 +1219,45 @@
     .vduo .wy-pc-screen video { display: block; width: 100%; aspect-ratio: 16 / 9; border-radius: 7px; }
     .fduo img { cursor: zoom-in; }
     .fhub-img { display: block; width: 100%; height: auto; border-radius: 10px; }
-    .flight { position: fixed; inset: 0; z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 4vh 4vw; background: rgba(8, 10, 28, 0.9); cursor: zoom-out; }
-    .flight img { max-width: 100%; max-height: 92vh; border-radius: 12px; box-shadow: 0 24px 60px rgba(0,0,0,0.5); }
+    /* 拡大表示（画像・動画）：右上の × と下の「閉じる」、まわりのタップ、Esc、スマホの「戻る」で閉じる */
+    html.flight-open { overflow: hidden; }
+    .flight { position: fixed; inset: 0; z-index: 1000; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; padding: calc(64px + env(safe-area-inset-top, 0px)) 3vw calc(20px + env(safe-area-inset-bottom, 0px)); background: rgba(8, 10, 28, 0.94); }
+    .flight-stage { flex: 1 1 auto; min-height: 0; width: 100%; display: flex; align-items: center; justify-content: center; }
+    .flight-media { display: block; max-width: 100%; max-height: calc(100vh - 170px); border-radius: 12px; box-shadow: 0 24px 60px rgba(0,0,0,0.5); background: #0a0f2c; }
+    @supports (height: 100dvh) { .flight-media { max-height: calc(100dvh - 170px); } }
+    .flight-x { position: absolute; top: calc(12px + env(safe-area-inset-top, 0px)); right: 12px; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; padding: 0; border: 0; border-radius: 50%; background: #fff; color: #1e1b4b; box-shadow: 0 6px 18px rgba(0,0,0,0.35); cursor: pointer; }
+    .flight-x svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.8; stroke-linecap: round; }
+    .flight-close { flex: none; min-width: 180px; min-height: 48px; padding: 0 1.6rem; border: 2px solid rgba(255,255,255,0.85); border-radius: 999px; background: transparent; color: #fff; font: 800 1rem/1 inherit; cursor: pointer; }
+    .flight-close:hover, .flight-x:hover { opacity: 0.88; }
+    /* 困ったときはの下の一文を中央に */
+    .help-more { text-align: center; }
+    /* 画面の見方：モックに①②…のマーク、そこから薄い線で説明へ（線は横並びのときだけ） */
+    .scr { max-width: 1100px; margin: 1.6rem auto 0; background: #fff; border: 1.5px solid #e5e7eb; border-radius: 20px; padding: 1.5rem 1.6rem 1.8rem; text-align: left; }
+    @media (max-width: 600px) { .scr { padding: 1.1rem 1rem 1.3rem; border-radius: 16px; } }
+    .scr-head { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem 0.8rem; margin-bottom: 1.4rem; }
+    .scr-dev { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.35rem 0.95rem 0.35rem 0.75rem; border-radius: 999px; background: #1e1b4b; color: #fff; font-size: 0.875rem; font-weight: 900; letter-spacing: 0.04em; }
+    .scr-dev svg { width: 17px; height: 17px; }
+    .scr-head p { margin: 0; font-size: 1.05rem; font-weight: 900; color: #1e1b4b; }
+    .scr-body { position: relative; display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr); gap: 0 96px; align-items: center; }
+    .scr.is-pc .scr-body { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); }
+    @media (max-width: 860px) { .scr-body, .scr.is-pc .scr-body { grid-template-columns: 1fr; gap: 1.4rem; } }
+    .scr-media { display: flex; justify-content: center; min-width: 0; }
+    .scr-pinwrap { position: relative; display: inline-block; }
+    .scr.is-pc .scr-pinwrap { display: block; width: 100%; max-width: 560px; }
+    .scr.is-pc .scr-pinwrap .wy-pc { max-width: none; }
+    .scr-pin, .scr-no { width: 30px; height: 27px; display: flex; align-items: center; justify-content: center; background: url("img/fill-crayon-orange-badge.svg") 0 0 / 100% 100% no-repeat; color: #1e1b4b; font: 900 0.9rem Inter, sans-serif; }
+    .scr-pin { position: absolute; z-index: 3; margin: -13px 0 0 -15px; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.45)); transition: transform .15s; }
+    .scr-pin.on { transform: scale(1.18); }
+    .scr-list { list-style: none; margin: 0; padding: 0; }
+    .scr-list li { display: flex; align-items: flex-start; gap: 0.8rem; padding: 0.6rem 0.4rem; border-radius: 12px; transition: background .15s; }
+    .scr-list li.on { background: #fff7ed; }
+    .scr-no { flex: none; margin-top: 0.05rem; }
+    .scr-list b { display: block; font-size: 0.98rem; font-weight: 900; color: #1e1b4b; }
+    .scr-list p { margin: 0.1rem 0 0; font-size: 0.875rem; color: #4b5563; line-height: 1.75; }
+    .scr-lines { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+    .scr-lines path { fill: none; stroke: rgba(249, 115, 22, 0.55); stroke-width: 1.6; transition: stroke .15s, stroke-width .15s; }
+    .scr-lines circle { fill: rgba(249, 115, 22, 0.85); }
+    .scr-lines .on path { stroke: #f97316; stroke-width: 2.4; }
 
     /* ===== Web版YTTの画面モック（使い方ページ） ===== */
     .wm { --wm-bg: #141a46; --wm-card: #1d2458; --wm-line: #30397a; --wm-text: #e5e7eb; --wm-mute: #9aa3c7; --wm-y: #e9b949;
@@ -1690,6 +1727,7 @@
     }
     vids.forEach(function (v) {
         v.addEventListener('click', function () {
+            if (window.fOpenLight) { window.fOpenLight(v); return; }
             if (v.requestFullscreen) { v.requestFullscreen().catch(function () {}); }
             else if (v.webkitEnterFullscreen) { v.webkitEnterFullscreen(); }
         });
@@ -1699,9 +1737,104 @@
 <script src="js/budoux-ja.min.js?v=20260907a" defer></script>
 <script src="js/budoux-init.js?v=20260907a" defer></script>
 <script>
-/* 本物の画面の画像：タップで拡大、もう一度タップで閉じる */
-document.querySelectorAll('.fduo img').forEach(function (img) { img.addEventListener('click', function () { var o = document.createElement('div'); o.className = 'flight'; o.innerHTML = '<img src="' + img.getAttribute('src') + '" alt="' + img.alt + '">'; o.addEventListener('click', function () { o.remove(); }); document.body.appendChild(o); }); });
+/* Web版YTT 使い方（build-guide.js がページの最後に埋め込む）
+   1. 拡大表示：本物の画面の画像・機能の動画をタップすると大きく出す。
+      閉じ方をいくつも用意する（右上の ×、下の「閉じる」、まわりのタップ、Esc、スマホの「戻る」）
+   2. 画面の見方：モックの①②…のマークから、説明の番号へ薄い線を引く（横並びのときだけ） */
+(function () {
+  var box = null, pushed = false;
+  function close(fromPop) {
+    if (!box) return;
+    var v = box.querySelector('video'); if (v) v.pause();
+    box.remove(); box = null;
+    document.documentElement.classList.remove('flight-open');
+    if (pushed && !fromPop) { pushed = false; try { history.back(); } catch (e) {} }
+    pushed = false;
+  }
+  window.fOpenLight = function (el) {
+    if (box) close();
+    var media;
+    if (el.tagName === 'VIDEO') {
+      media = document.createElement('video');
+      media.src = el.currentSrc || el.getAttribute('src');
+      if (el.poster) media.poster = el.poster;
+      media.muted = true; media.loop = true; media.autoplay = true; media.playsInline = true;
+      media.setAttribute('playsinline', ''); media.setAttribute('muted', '');
+    } else {
+      media = document.createElement('img');
+      media.src = el.getAttribute('src'); media.alt = el.alt || '';
+    }
+    media.className = 'flight-media';
+    box = document.createElement('div');
+    box.className = 'flight';
+    box.setAttribute('role', 'dialog'); box.setAttribute('aria-modal', 'true'); box.setAttribute('aria-label', '拡大表示');
+    box.innerHTML = '<button type="button" class="flight-x" aria-label="閉じる"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button><div class="flight-stage"></div><button type="button" class="flight-close">閉じる</button>';
+    box.querySelector('.flight-stage').appendChild(media);
+    // 画像や動画そのものをタップしても閉じない（見ている途中で消えないように）。それ以外の場所・ボタンで閉じる
+    box.addEventListener('click', function (e) { if (e.target === media) return; close(); });
+    document.body.appendChild(box);
+    document.documentElement.classList.add('flight-open');
+    if (media.play) { var p = media.play(); if (p && p.catch) p.catch(function () {}); }
+    // スマホの「戻る」で、ページを離れずに拡大だけを閉じる
+    try { history.pushState({ flight: 1 }, ''); pushed = true; } catch (e) {}
+    try { box.querySelector('.flight-close').focus({ preventScroll: true }); } catch (e) {}
+  };
+  window.addEventListener('popstate', function () { if (box) { pushed = false; close(true); } });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+  [].forEach.call(document.querySelectorAll('.fduo img'), function (img) {
+    img.addEventListener('click', function () { window.fOpenLight(img); });
+  });
+})();
+
+(function () {
+  var all = [].slice.call(document.querySelectorAll('.scr'));
+  if (!all.length) return;
+  var NS = 'http://www.w3.org/2000/svg';
+  function draw(scr) {
+    var body = scr.querySelector('.scr-body'), svg = scr.querySelector('.scr-lines'), list = scr.querySelector('.scr-list'), wrap = scr.querySelector('.scr-pinwrap');
+    if (!body || !svg || !list || !wrap) return;
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    var B = body.getBoundingClientRect(), L = list.getBoundingClientRect(), W = wrap.getBoundingClientRect();
+    if (L.left < W.right - 4) { svg.style.display = 'none'; return; }   // 縦に並んだとき（スマホ）は線を引かない
+    svg.style.display = '';
+    svg.setAttribute('viewBox', '0 0 ' + B.width + ' ' + B.height);
+    [].forEach.call(scr.querySelectorAll('.scr-pin'), function (pin) {
+      var n = pin.getAttribute('data-n'), no = list.querySelector('li[data-n="' + n + '"] .scr-no');
+      if (!no) return;
+      var P = pin.getBoundingClientRect(), N = no.getBoundingClientRect();
+      var x1 = P.left + P.width / 2 - B.left, y1 = P.top + P.height / 2 - B.top;
+      var x2 = N.left - B.left - 8, y2 = N.top + N.height / 2 - B.top;
+      var dx = Math.max(36, (x2 - x1) * 0.42);
+      var g = document.createElementNS(NS, 'g'); g.setAttribute('data-n', n);
+      var path = document.createElementNS(NS, 'path');
+      path.setAttribute('d', 'M' + x1 + ' ' + y1 + ' C' + (x1 + dx) + ' ' + y1 + ' ' + (x2 - dx) + ' ' + y2 + ' ' + x2 + ' ' + y2);
+      var dot = document.createElementNS(NS, 'circle');
+      dot.setAttribute('cx', x2); dot.setAttribute('cy', y2); dot.setAttribute('r', 3);
+      g.appendChild(path); g.appendChild(dot); svg.appendChild(g);
+    });
+  }
+  function redraw() { all.forEach(draw); }
+  // 説明にマウスをのせる／タップすると、その番号のマークと線を目立たせる
+  all.forEach(function (scr) {
+    [].forEach.call(scr.querySelectorAll('.scr-list li'), function (li) {
+      var n = li.getAttribute('data-n');
+      function on(v) {
+        li.classList.toggle('on', v);
+        [].forEach.call(scr.querySelectorAll('.scr-pin[data-n="' + n + '"], .scr-lines g[data-n="' + n + '"]'), function (el) {
+          if (el.classList) el.classList.toggle('on', v); else el.setAttribute('class', v ? 'on' : '');
+        });
+      }
+      li.addEventListener('mouseenter', function () { on(true); });
+      li.addEventListener('mouseleave', function () { on(false); });
+    });
+  });
+  window.addEventListener('resize', redraw);
+  window.addEventListener('load', redraw);
+  if (window.ResizeObserver) { var ro = new ResizeObserver(redraw); all.forEach(function (s) { ro.observe(s); }); }
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(redraw);
+  redraw();
+})();
 </script>
-<script src="js/ytt-web-search.js?v=55391569" defer></script>
+<script src="js/ytt-web-search.js?v=53c10944" defer></script>
 </body>
 </html>

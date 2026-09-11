@@ -1022,6 +1022,8 @@
         padding: 1.75rem; margin-top: 1.5rem; text-align: left;
     }
     .feat.is-sp { grid-template-columns: 300px minmax(0, 1fr); }
+    .feat.is-wide { grid-template-columns: 1fr; gap: 1.25rem; }
+    .feat.is-wide .gshot { margin: 0; }
     @media (max-width: 860px) { .feat, .feat.is-sp { grid-template-columns: 1fr; gap: 1.25rem; } }
     @media (max-width: 600px) { .feat { padding: 1.1rem 1rem 1.25rem; border-radius: 16px; } }
     .feat-media { min-width: 0; text-align: center; }
@@ -1076,10 +1078,9 @@
   ・動画は声なし・テロップ＋囲み／矢印。できたら .fvid-box を <video class="fvid-box" autoplay muted loop playsinline> に差し替え
   【大枠の段階・TODO】
   [1] 各機能の動画（8本）を差し込む。構成は webytt-materials/動画構成書_Web版YTT機能説明.md
-  [2] 画面の見方（PC）の全体スクショ、コピーモードの設定画面スクショ
+  [2] コピーモードの設定画面スクショ（画面の見方のPCは pc-screen.jpg ＝よすがさんの画面、掲載OK）
   [3] サブ機能の一覧をよすが・安田さんに確認して確定
   [4] 説明文は 2026/7/31 の画面をもとにした仮の文章。最新の画面で確認して直す
-  [5] シナリオ構築（#build）の描き方。パネルは 設定→一般「シナリオ構築パネルを表示」で出る（設定画面はスクショ不可）
 ====================================================================
 -->
 
@@ -1228,14 +1229,9 @@
             </div>
         </div>
         <p class="feat-label">PC</p>
-        <div class="feat">
+        <div class="feat is-wide">
             <div class="feat-media">
-                <figure class="fvid pc">
-                    <div class="fvid-box is-shot" role="img" aria-label="画面の画像（準備中）">
-                        <span class="fvid-label">画面の画像 準備中</span>
-                        <span class="fvid-meta">PCの画面全体</span>
-                    </div>
-                </figure>
+                <figure class="gshot"><img src="img/webytt/features/pc-screen.jpg" alt="Web版YTTのPC画面。左にチャート、右のパネルに口座・残高、成行の注文、シナリオ、シナリオ構築、お気に入り" loading="lazy"></figure>
             </div>
             <div class="feat-body">
                 <p class="feat-head">PCでは、画面の右側に注文とシナリオがまとまっています。</p>
@@ -1245,7 +1241,6 @@
                         <li><b>左のツール</b>：チャートに線や図形を引く</li>
                         <li><b>画面のいちばん上と下</b>：ニュースと利確速報、よく見る通貨ペアの切り替え</li>
                     </ol>
-                <!-- TODO: PCの画面全体のスクショ（最新）を撮って差し込む -->
             </div>
         </div>
     </div>
@@ -1401,12 +1396,13 @@
                 <p class="feat-head">「こう動いたら、こうする」という値動きの道筋を、チャートに描いておけます。</p>
                     <ol class="feat-steps">
                         <li><b>設定 → 一般</b> で「シナリオ構築パネルを表示」をオンにする（最初はオフになっています）</li>
-                        <li>右のパネルに出た「シナリオ構築」を押す</li>
-                        <li>チャート上に、値動きの道筋を描く</li>
-                        <li>描いたシナリオは「非表示」で隠せる。いらなくなったら「全削除」でまとめて消せる</li>
+                        <li>右のパネルの「シナリオ構築」を押す</li>
+                        <li>チャート上をクリックして、値動きの道筋を描く。クリックするたびに線が折り返し、ダブルクリックで終点になる</li>
+                        <li>続けてクリックして、<b>想定エントリー位置 → 想定利確位置 → 想定損切位置</b> の順に置く</li>
+                        <li>描き終わると、そのシナリオのRR比などが表示される</li>
                     </ol>
+                    <div class="gtip">線やアイコンは、<b>ダブルクリックして選択状態</b>にすると動かせます。<br>描いたシナリオは「非表示」で隠せて、いらなくなったら「全削除」でまとめて消せます。</div>
                     <p class="gnote">右のパネルに「シナリオ構築」が見当たらないときは、設定 → 一般 の「シナリオ構築パネルを表示」がオンになっているか確認してください。</p>
-                    <!-- TODO: 描き方（クリックの仕方、エントリー・利確・損切りの印の置き方、RRの表示）を確認して追記 -->
             </div>
         </div>
     </div>

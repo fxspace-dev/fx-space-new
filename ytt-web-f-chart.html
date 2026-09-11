@@ -1078,8 +1078,33 @@
 </style>
 <style>
     /* ===== 使い方の分野別ページ（トップ＋5ページ共通） ===== */
-    .fcat-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.45rem; max-width: 900px; margin: 1.4rem auto 0; }
-    .fcat-nav a { display: inline-flex; align-items: center; gap: 0.35rem; min-height: 38px; padding: 0.4rem 0.9rem; border: 1.5px solid #e5e7eb; border-radius: 999px; background: #fff; color: #1e1b4b; font-size: 0.8125rem; font-weight: 800; text-decoration: none; }
+    /* ページの切り替え：PCは1行、タブレットは3つ×2段、スマホは2つ×3段（はみ出しや1つだけの段を作らない） */
+    .fcat-nav { display: flex; flex-wrap: nowrap; justify-content: center; gap: 0.45rem; margin: 1.4rem auto 0; }
+    .fcat-nav a { display: inline-flex; align-items: center; justify-content: center; gap: 0.35rem; min-height: 38px; padding: 0.4rem 0.9rem; border: 1.5px solid #e5e7eb; border-radius: 999px; background: #fff; color: #1e1b4b; font-size: 0.8125rem; font-weight: 800; text-decoration: none; white-space: nowrap; }
+    @media (max-width: 900px) { .fcat-nav { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: 620px; } }
+    @media (max-width: 560px) { .fcat-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.4rem; } .fcat-nav a { padding: 0.4rem 0.5rem; font-size: 0.78rem; } }
+    /* 機能の検索 */
+    .fsearch { position: relative; max-width: 560px; margin: 1.3rem auto 0; text-align: left; }
+    .fsearch-box { display: flex; align-items: center; gap: 0.6rem; padding: 0 1rem; min-height: 52px; background: #fff; border: 2px solid #1e1b4b; border-radius: 999px; box-shadow: 0 6px 18px rgba(30, 27, 75, 0.08); cursor: text; }
+    .fsearch-box:focus-within { border-color: #4f46e5; box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.15); }
+    .fsearch-box svg { flex: none; width: 20px; height: 20px; color: #4f46e5; }
+    .fsearch-box input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; font: 700 1rem/1.4 inherit; color: #1e1b4b; }
+    .fsearch-box input::placeholder { color: #9ca3af; font-weight: 500; }
+    .fsearch-box input::-webkit-search-cancel-button { cursor: pointer; }
+    .fsearch-results { position: absolute; left: 0; right: 0; top: calc(100% + 8px); z-index: 60; max-height: min(62vh, 520px); overflow-y: auto; background: #fff; border: 1.5px solid #e5e7eb; border-radius: 16px; box-shadow: 0 18px 44px rgba(30, 27, 75, 0.18); padding: 0.4rem; }
+    .fsearch-results a { display: block; padding: 0.65rem 0.8rem; border-radius: 10px; color: #1e1b4b; text-decoration: none; }
+    .fsearch-results a:hover, .fsearch-results a.on { background: #eef0ff; }
+    .fsearch-results .fs-top { display: flex; align-items: center; justify-content: space-between; gap: 0.6rem; }
+    .fsearch-results b { font-size: 0.95rem; font-weight: 900; }
+    .fsearch-results .fs-cat { flex: none; display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.72rem; font-weight: 700; color: #6b7280; }
+    .fsearch-results .fs-cat .fcat-no { width: 18px; height: 16px; font-size: 0.62rem; }
+    .fsearch-results small { display: block; margin-top: 0.15rem; font-size: 0.8rem; line-height: 1.6; color: #4b5563; }
+    .fsearch-results mark { background: #fef08a; color: inherit; border-radius: 3px; padding: 0 1px; }
+    .fsearch-results .fs-none { padding: 0.9rem 0.8rem; font-size: 0.85rem; color: #4b5563; line-height: 1.7; }
+    .fsearch-results .fs-count { padding: 0.3rem 0.8rem 0.2rem; font-size: 0.72rem; font-weight: 700; color: #9ca3af; }
+    /* 検索から飛んできた機能をしばらく目立たせる */
+    .fcard.fs-hit { animation: fsHit 2.4s ease-out; }
+    @keyframes fsHit { 0%, 30% { border-color: #4f46e5; box-shadow: 0 0 0 5px rgba(79, 70, 229, 0.22); } 100% { border-color: #e5e7eb; box-shadow: none; } }
     .fcat-nav a:hover { border-color: #a5b4fc; }
     .fcat-nav a[aria-current="page"] { background: #1e1b4b; border-color: #1e1b4b; color: #fff; }
     .fcat-no { width: 22px; height: 19px; display: inline-flex; align-items: center; justify-content: center; background: url("img/fill-crayon-orange-badge.svg") 0 0 / 100% 100% no-repeat; color: #1e1b4b; font: 900 0.72rem Inter, sans-serif; }
@@ -1155,8 +1180,18 @@
     .fnext small { display: block; font-size: 0.72rem; font-weight: 800; color: #6b7280; }
     .fnext b { display: block; margin-top: 0.2rem; font-size: 1rem; color: #1e1b4b; }
     /* トップ：分野のカード（見本のモックつき） */
-    .fhub { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 1.5rem; }
-    @media (max-width: 760px) { .fhub { grid-template-columns: 1fr; } }
+    /* トップの5ページ：①②は大きく2つ、③④⑤は3つ並び（1つだけの段を作らない） */
+    .fhub { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+    .fhub-card { grid-column: span 2; }
+    .fhub-card:nth-child(-n+2) { grid-column: span 3; }
+    @media (max-width: 900px) { .fhub { grid-template-columns: repeat(2, minmax(0, 1fr)); } .fhub-card, .fhub-card:nth-child(-n+2) { grid-column: span 1; } .fhub-card:nth-child(5) { grid-column: 1 / -1; } }
+    @media (max-width: 600px) { .fhub { grid-template-columns: 1fr; } .fhub-card:nth-child(5) { grid-column: auto; } }
+    .fhub-vis.is-img { padding: 0; min-height: 0; aspect-ratio: 16 / 9; background: #0a0f2c; }
+    .fhub-vis.is-img img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    /* ヒーローのタイトル：1行にして、波線は文字の幅ぴったり（スマホで引き伸ばさない。導入方法ページと同じ） */
+    .ytt-sp-hero .fhub-title { font-size: clamp(1.5rem, 5.2vw, 3rem); }
+    .fhub-title .ytt-sp-title-line > span.line-text { white-space: nowrap; }
+    .ytt-sp-hero .fhub-title .ytt-sp-title-line .ytt-title-wave, .fsub-hero .ytt-sp-title-line .ytt-title-wave { width: 100%; max-width: none; margin-left: 0; transform: none; }
     .fhub-card { display: flex; flex-direction: column; background: #fff; border: 1.5px solid #e5e7eb; border-radius: 20px; padding: 1.2rem; text-align: left; text-decoration: none; transition: border-color .15s, transform .15s; }
     .fhub-card:hover { border-color: #a5b4fc; transform: translateY(-2px); }
     .fhub-vis { display: flex; align-items: center; justify-content: center; min-height: 170px; margin-bottom: 1rem; padding: 12px; border-radius: 14px; background: #eef0f7; overflow: hidden; }
@@ -1336,6 +1371,10 @@
         <a href="ytt-web-features.html">使い方トップ</a>
         <a href="ytt-web-f-trade.html"><span class="fcat-no">1</span>注文・ロット・決済</a><a href="ytt-web-f-scenario.html"><span class="fcat-no">2</span>シナリオ・予約注文</a><a href="ytt-web-f-chart.html" aria-current="page"><span class="fcat-no">3</span>チャートの表示</a><a href="ytt-web-f-tools.html"><span class="fcat-no">4</span>分析ツール</a><a href="ytt-web-f-settings.html"><span class="fcat-no">5</span>モードと設定</a>
     </nav>
+    <div class="fsearch" role="search">
+        <label class="fsearch-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg><input type="search" placeholder="機能をさがす（例：損切り・通知）" autocomplete="off" enterkeyhint="search" aria-label="機能をさがす"></label>
+        <div class="fsearch-results" hidden></div>
+    </div>
     <div class="ftoc" aria-label="このページの機能"><a href="#autoline">オートライン</a><a href="#zigzag">zigzag MTF</a><a href="#alertline">通知ライン</a><a href="#breakeven">Breakeven表示</a><a href="#entry-viz">エントリーの可視化</a><a href="#history">チャートに取引履歴を表示</a><a href="#indicator">経済指標表示</a><a href="#session">セッション表示</a><a href="#scalp">スキャモード</a><a href="#watermark">通貨ペア・時間足をすかし表示</a><a href="#drawing">描画ツール</a><a href="#cursor">十字カーソル</a><a href="#screenshot">スクリーンショット</a></div>
 </section>
 
@@ -1637,5 +1676,6 @@
 /* 本物の画面の画像：タップで拡大、もう一度タップで閉じる */
 document.querySelectorAll('.fduo img').forEach(function (img) { img.addEventListener('click', function () { var o = document.createElement('div'); o.className = 'flight'; o.innerHTML = '<img src="' + img.getAttribute('src') + '" alt="' + img.alt + '">'; o.addEventListener('click', function () { o.remove(); }); document.body.appendChild(o); }); });
 </script>
+<script src="js/ytt-web-search.js?v=55391569" defer></script>
 </body>
 </html>

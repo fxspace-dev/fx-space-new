@@ -1152,6 +1152,18 @@
     .fhub-card h3 .fcat-no { width: 32px; height: 27px; font-size: 0.9rem; }
     .fhub-card p { margin: 0.4rem 0 0; font-size: 0.85rem; color: #4b5563; line-height: 1.7; }
     .fhub-card .go { margin-top: 0.8rem; font-size: 0.85rem; font-weight: 800; color: #4f46e5; }
+    /* PC＋スマホの2台並び（本物の画面） */
+    .fduo { position: relative; container-type: inline-size; margin: 0; padding-top: 13%; }
+    .fduo-pc { width: 78%; }
+    .fduo .wy-pc { max-width: none; margin: 0; }
+    .fduo .wy-pc-screen img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 7px; }
+    .fduo-sp { position: absolute; right: 0; bottom: 1.6rem; width: 29%; }
+    .fd-phone { padding: 1.3cqw; background: #05070f; border-radius: 4.8cqw; box-shadow: 0 20px 44px rgba(30, 27, 75, 0.35), 0 0 0 1px rgba(255,255,255,0.06) inset; }
+    .fd-phone img { display: block; width: 100%; height: auto; border-radius: 3.7cqw; }
+    .fduo img { cursor: zoom-in; }
+    .fhub-img { display: block; width: 100%; height: auto; border-radius: 10px; }
+    .flight { position: fixed; inset: 0; z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 4vh 4vw; background: rgba(8, 10, 28, 0.9); cursor: zoom-out; }
+    .flight img { max-width: 100%; max-height: 92vh; border-radius: 12px; box-shadow: 0 24px 60px rgba(0,0,0,0.5); }
 
     /* ===== Web版YTTの画面モック（使い方ページ） ===== */
     .wm { --wm-bg: #141a46; --wm-card: #1d2458; --wm-line: #30397a; --wm-text: #e5e7eb; --wm-mute: #9aa3c7; --wm-y: #e9b949;
@@ -1327,22 +1339,11 @@
             <div class="fwhere"><span class="fwhere-item"><b>PC</b><span>右のパネル</span><i aria-hidden="true">›</i><span>成行</span></span><span class="fwhere-item"><b>スマホ</b><span>右上「成行」</span></span></div>
             <div class="fcard-grid"><div class="fcard-media"><figure class="fvid"><div class="wy-phone"><div class="wy-screen"><video class="fvid-video" src="img/webytt/feat/feat-order.mp4" poster="img/webytt/feat/feat-order.jpg" muted loop playsinline preload="none" aria-label="動画：注文・決済（声なし）"></video></div></div><figcaption class="fvid-cap">タップで拡大</figcaption></figure></div><div class="fcard-side"><ul class="fpoints"><li>「成行」を選ぶ</li><li>ロットを ∧ ∨（PCは −1〜+1）で調整</li><li>「BUY」で買い、「SELL」で売り</li></ul></div></div>
         </article>
-        <article class="fcard has-media" id="close">
+        <article class="fcard has-media is-wide" id="close">
             <div class="fcard-top"><h3 class="fcard-name">全決済・1/2決済</h3></div>
             <p class="fcard-what">まとめて決済、または半分だけ決済。</p>
-            <div class="fwhere"><span class="fwhere-item"><b>PC</b><span>右のパネル</span><i aria-hidden="true">›</i><span>成行</span></span></div>
-            <div class="fcard-grid"><div class="fcard-media"><div class="wm wm-panel" role="img" aria-label="右のパネルの「成行」">
-    <div class="wm-card">
-      <p class="wm-card-t">● 成行 ▾</p>
-      <div class="wm-order">
-        <span class="wm-sell">SELL</span>
-        <span class="wm-lot"><small>LOT</small>0.10</span>
-        <span class="wm-buy">BUY</span>
-      </div>
-      <div class="wm-steps"><span>−1</span><span>−0.1</span><span>−.01</span><span>+.01</span><span>+0.1</span><span>+1</span></div>
-      <div class="wm-close"><span class=" hl">全決済</span><span class=" hl">1/2決済</span></div>
-    </div>
-  </div></div><div class="fcard-side"><ul class="fpoints"><li><b>全決済</b>：保有中のポジションをまとめて決済</li><li><b>1/2決済</b>：押すたびに半分ずつ決済（1lot → 0.5 → 0.25）</li></ul></div></div>
+            <div class="fwhere"><span class="fwhere-item"><b>PC</b><span>右のパネル</span><i aria-hidden="true">›</i><span>成行</span></span><span class="fwhere-item"><b>スマホ</b><span>チャートの下</span></span></div>
+            <div class="fcard-grid"><div class="fcard-media"><figure class="fduo"><div class="fduo-pc"><div class="wy-pc"><div class="wy-pc-screen"><img src="img/webytt/feat/feat-close-pc.jpg" alt="PCの画面：全決済・1/2決済" loading="lazy"></div><div class="wy-pc-base" aria-hidden="true"></div></div></div><div class="fduo-sp"><div class="fd-phone"><img src="img/webytt/feat/feat-close-sp.jpg" alt="スマホの画面：全決済・1/2決済" loading="lazy"></div></div><figcaption class="fvid-cap">PCとスマホの画面　タップで拡大</figcaption></figure></div><div class="fcard-side"><ul class="fpoints"><li><b>全決済</b>：保有中のポジションをまとめて決済</li><li><b>1/2決済</b>：押すたびに半分ずつ決済（1lot → 0.5 → 0.25）</li><li>スマホはチャートの下のボタン</li></ul></div></div>
         </article>
         <article class="fcard has-media" id="positions">
             <div class="fcard-top"><h3 class="fcard-name">ポジションと履歴</h3></div>
@@ -1617,5 +1618,9 @@
 </script>
 <script src="js/budoux-ja.min.js?v=20260907a" defer></script>
 <script src="js/budoux-init.js?v=20260907a" defer></script>
+<script>
+/* 本物の画面の画像：タップで拡大、もう一度タップで閉じる */
+document.querySelectorAll('.fduo img').forEach(function (img) { img.addEventListener('click', function () { var o = document.createElement('div'); o.className = 'flight'; o.innerHTML = '<img src="' + img.getAttribute('src') + '" alt="' + img.alt + '">'; o.addEventListener('click', function () { o.remove(); }); document.body.appendChild(o); }); });
+</script>
 </body>
 </html>

@@ -1152,6 +1152,18 @@
     .fhub-card h3 .fcat-no { width: 32px; height: 27px; font-size: 0.9rem; }
     .fhub-card p { margin: 0.4rem 0 0; font-size: 0.85rem; color: #4b5563; line-height: 1.7; }
     .fhub-card .go { margin-top: 0.8rem; font-size: 0.85rem; font-weight: 800; color: #4f46e5; }
+    /* PC＋スマホの2台並び（本物の画面） */
+    .fduo { position: relative; container-type: inline-size; margin: 0; padding-top: 13%; }
+    .fduo-pc { width: 78%; }
+    .fduo .wy-pc { max-width: none; margin: 0; }
+    .fduo .wy-pc-screen img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 7px; }
+    .fduo-sp { position: absolute; right: 0; bottom: 1.6rem; width: 29%; }
+    .fd-phone { padding: 1.3cqw; background: #05070f; border-radius: 4.8cqw; box-shadow: 0 20px 44px rgba(30, 27, 75, 0.35), 0 0 0 1px rgba(255,255,255,0.06) inset; }
+    .fd-phone img { display: block; width: 100%; height: auto; border-radius: 3.7cqw; }
+    .fduo img { cursor: zoom-in; }
+    .fhub-img { display: block; width: 100%; height: auto; border-radius: 10px; }
+    .flight { position: fixed; inset: 0; z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 4vh 4vw; background: rgba(8, 10, 28, 0.9); cursor: zoom-out; }
+    .flight img { max-width: 100%; max-height: 92vh; border-radius: 12px; box-shadow: 0 24px 60px rgba(0,0,0,0.5); }
 
     /* ===== Web版YTTの画面モック（使い方ページ） ===== */
     .wm { --wm-bg: #141a46; --wm-card: #1d2458; --wm-line: #30397a; --wm-text: #e5e7eb; --wm-mute: #9aa3c7; --wm-y: #e9b949;
@@ -1570,5 +1582,9 @@
 </script>
 <script src="js/budoux-ja.min.js?v=20260907a" defer></script>
 <script src="js/budoux-init.js?v=20260907a" defer></script>
+<script>
+/* 本物の画面の画像：タップで拡大、もう一度タップで閉じる */
+document.querySelectorAll('.fduo img').forEach(function (img) { img.addEventListener('click', function () { var o = document.createElement('div'); o.className = 'flight'; o.innerHTML = '<img src="' + img.getAttribute('src') + '" alt="' + img.alt + '">'; o.addEventListener('click', function () { o.remove(); }); document.body.appendChild(o); }); });
+</script>
 </body>
 </html>

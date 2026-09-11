@@ -1010,6 +1010,7 @@
     .ytt-add-grid.flow4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
     @media (max-width: 900px) { .ytt-add-grid.flow4 { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 560px; margin-left: auto; margin-right: auto; } }
     @media (max-width: 520px) { .ytt-add-grid.flow4 { grid-template-columns: 1fr; max-width: 460px; } }
+    .os-note { font-size: 0.85rem; color: #4b5563; background: #f4f6f9; border-radius: 10px; padding: 0.7rem 0.9rem; margin: 0 0 1.4rem; line-height: 1.75; }
     .tool-dl-btns { display: flex; flex-wrap: wrap; gap: 0.6rem; }
     .tool-dl-btns a { min-width: 190px; text-align: center; }
     .next-btns { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; margin-top: 0.5rem; }
@@ -1273,6 +1274,7 @@
             </div>
         </div>
         <div class="guide-card">
+            <p class="os-note">このSTEPの画面はWindowsのものです。Macの方は、手順2の「Macの方へ」を見てください。</p>
             <div class="gstep">
                 <div class="gstep-no">1</div>
                 <div class="gstep-body">
@@ -1284,18 +1286,46 @@
                 <div class="gstep-no">2</div>
                 <div class="gstep-body">
                     <p class="gstep-title">「Windowsにダウンロード」を押す</p>
-                    <p>取引ツールのファイル（.exe）がダウンロードされます。</p>
+                    <figure class="gshot"><img src="img/webytt/hfm/hd-01-mt4-page.png" alt="WindowsにダウンロードとMacにダウンロードのボタン" loading="lazy"></figure>
+                    <div class="gtip"><b>Macの方へ</b><br>「Macにダウンロード」を押すと、Mac用のページが開きます。そのページの「MACにMT4をダウンロード」（MT5は「MACにMT5をダウンロード」）からダウンロードしてください。インストールのしかたは、同じページの「マニュアルをダウンロード」（HFM公式・日本語）に載っています。<br><a href="https://www.hfm.com/int/jp/platforms/mt4-on-mac" target="_blank" rel="noopener">MT4のMac用ページ</a>　／　<a href="https://www.hfm.com/int/jp/platforms/mt5-on-mac" target="_blank" rel="noopener">MT5のMac用ページ</a></div>
                 </div>
             </div>
             <div class="gstep">
                 <div class="gstep-no">3</div>
                 <div class="gstep-body">
-                    <p class="gstep-title">ダウンロードしたファイルを開いて、インストールする</p>
-                    <p>画面の案内に沿って進めます。インストールが終わったら、取引ツールを開きます。</p>
+                    <p class="gstep-title">ダウンロードしたファイルを開く</p>
+                    <figure class="gshot narrow"><img src="img/webytt/hfm/hd-02-mt4-file.png" alt="ダウンロードしたファイル hfmarketssv4setup.exe" loading="lazy"></figure>
+                    <p>ブラウザの右上のダウンロード表示から開けます。ファイル名は、MT4なら「hfmarketssv4setup.exe」、MT5なら「hfmarketsglobal5setup.exe」です。</p>
+                    <p>「このアプリがデバイスに変更を加えることを許可しますか？」と出たら「はい」を押します。</p>
                 </div>
             </div>
             <div class="gstep">
                 <div class="gstep-no">4</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">「次へ」を押してインストール</p>
+                    <figure class="gshot mid"><img src="img/webytt/hfm/hd-03-mt4-open.png" alt="使用許諾契約の画面で次へを押す" loading="lazy"></figure>
+                    <p>インストールが始まるので、終わるまで待ちます。</p>
+                    <figure class="gshot mid"><img src="img/webytt/hfm/hd-04-mt4-install.png" alt="インストール中の画面" loading="lazy"></figure>
+                </div>
+            </div>
+            <div class="gstep">
+                <div class="gstep-no">5</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">「完了」を押す</p>
+                    <figure class="gshot mid"><img src="img/webytt/hfm/hd-05-mt4-done.png" alt="インストール完了の画面で完了を押す" loading="lazy"></figure>
+                    <p>取引ツールが開きます。</p>
+                </div>
+            </div>
+            <div class="gstep">
+                <div class="gstep-no">6</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">「デモ口座の申請」が出たら「キャンセル」</p>
+                    <figure class="gshot mid"><img src="img/webytt/hfm/hd-06-mt4-first.png" alt="デモ口座の申請の画面でキャンセルを押す" loading="lazy"></figure>
+                    <p>初めて開いたときに出る、デモ口座を作るための画面です。閉じて大丈夫です。STEP 3 で作った口座には、次の手順でログインします。</p>
+                </div>
+            </div>
+            <div class="gstep">
+                <div class="gstep-no">7</div>
                 <div class="gstep-body">
                     <p class="gstep-title">左上の「ファイル」→「取引口座にログイン」</p>
                     <figure class="gshot narrow"><img src="img/webytt/s01-file-login.png" alt="ファイルメニューから取引口座にログインを選ぶ" loading="lazy"></figure>
@@ -1303,7 +1333,7 @@
                 </div>
             </div>
             <div class="gstep">
-                <div class="gstep-no">5</div>
+                <div class="gstep-no">8</div>
                 <div class="gstep-body">
                     <p class="gstep-title">ログインID・パスワード・サーバーを入力して「ログイン」</p>
                     <figure class="gshot mid"><img src="img/webytt/s02-login-dialog.png" alt="取引口座のログイン情報を入力する画面" loading="lazy"></figure>
@@ -1311,7 +1341,7 @@
                 </div>
             </div>
             <div class="gstep">
-                <div class="gstep-no">6</div>
+                <div class="gstep-no">9</div>
                 <div class="gstep-body">
                     <p class="gstep-title">左上に口座番号が出たら準備完了</p>
                     <figure class="gshot narrow"><img src="img/webytt/s03-account-no.png" alt="取引ツールの左上に口座番号が表示される" loading="lazy"></figure>

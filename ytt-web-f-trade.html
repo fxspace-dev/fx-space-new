@@ -1158,6 +1158,11 @@
     .fduo .wy-pc { max-width: none; margin: 0; }
     .fduo .wy-pc-screen img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 7px; }
     .fduo-sp { position: absolute; right: 0; bottom: 1.6rem; width: 29%; }
+    .fduo.flip .fduo-pc { margin-left: auto; }
+    .fduo.flip .fduo-sp { left: 0; right: auto; }
+    .fduo.two .fduo-pc { width: 68%; }
+    .fduo.two .fduo-sp { display: flex; gap: 3%; width: 45%; }
+    .fduo.two .fd-phone { flex: 1; }
     .fd-phone { padding: 1.3cqw; background: #05070f; border-radius: 4.8cqw; box-shadow: 0 20px 44px rgba(30, 27, 75, 0.35), 0 0 0 1px rgba(255,255,255,0.06) inset; }
     .fd-phone img { display: block; width: 100%; height: auto; border-radius: 3.7cqw; }
     .fduo img { cursor: zoom-in; }
@@ -1345,18 +1350,11 @@
             <div class="fwhere"><span class="fwhere-item"><b>PC</b><span>右のパネル</span><i aria-hidden="true">›</i><span>成行</span></span><span class="fwhere-item"><b>スマホ</b><span>チャートの下</span></span></div>
             <div class="fcard-grid"><div class="fcard-media"><figure class="fduo"><div class="fduo-pc"><div class="wy-pc"><div class="wy-pc-screen"><img src="img/webytt/feat/feat-close-pc.jpg" alt="PCの画面：全決済・1/2決済" loading="lazy"></div><div class="wy-pc-base" aria-hidden="true"></div></div></div><div class="fduo-sp"><div class="fd-phone"><img src="img/webytt/feat/feat-close-sp.jpg" alt="スマホの画面：全決済・1/2決済" loading="lazy"></div></div><figcaption class="fvid-cap">PCとスマホの画面　タップで拡大</figcaption></figure></div><div class="fcard-side"><ul class="fpoints"><li><b>全決済</b>：保有中のポジションをまとめて決済</li><li><b>1/2決済</b>：押すたびに半分ずつ決済（1lot → 0.5 → 0.25）</li><li>スマホはチャートの下のボタン</li></ul></div></div>
         </article>
-        <article class="fcard has-media" id="positions">
+        <article class="fcard has-media is-wide" id="positions">
             <div class="fcard-top"><h3 class="fcard-name">ポジションと履歴</h3></div>
             <p class="fcard-what">保有中のポジションと、決済したトレードの一覧。</p>
-            <div class="fwhere"><span class="fwhere-item"><b>PC</b><span>上のメニュー</span></span><span class="fwhere-item"><b>スマホ</b><span>下のメニュー</span></span></div>
-            <div class="fcard-grid"><div class="fcard-media"><div class="wm wm-bar" role="img" aria-label="PCの上のメニュー">
-    <span class="wm-sym">USDJPY</span>
-    <span class="wm-tfs"><i>M1</i><i>M5</i><i>M15</i><i class="on">M30</i><i>H1</i><i>H4</i><i>D1</i></span>
-    <span class="wm-ico" title="スクリーンショット"><svg viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="12" rx="2"/><circle cx="12" cy="13" r="3.2"/><path d="M9 7l1.2-2.2h3.6L15 7"/></svg></span>
-    <span class="wm-ico" title="アラート"><svg viewBox="0 0 24 24"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></svg></span>
-    <span class="wm-pill wm-pos hl">ポジション <b>0</b></span>
-    <span class="wm-pill hl">履歴 <b>5</b></span>
-  </div></div><div class="fcard-side"><ul class="fpoints"><li>数字は、保有中のポジション数と履歴の件数</li></ul></div></div>
+            <div class="fwhere"><span class="fwhere-item"><b>PC</b><span>上のメニュー</span><i aria-hidden="true">›</i><span>「ポジション」「履歴」</span></span><span class="fwhere-item"><b>スマホ</b><span>下のメニュー</span><i aria-hidden="true">›</i><span>「ポジション」「履歴」</span></span></div>
+            <div class="fcard-grid"><div class="fcard-media"><figure class="fduo two flip"><div class="fduo-pc"><div class="wy-pc"><div class="wy-pc-screen"><img src="img/webytt/feat/feat-positions-pc.jpg" alt="PCの画面：ポジションと履歴" loading="lazy"></div><div class="wy-pc-base" aria-hidden="true"></div></div></div><div class="fduo-sp"><div class="fd-phone"><img src="img/webytt/feat/feat-positions-sp.jpg" alt="スマホの画面：ポジション" loading="lazy"></div><div class="fd-phone"><img src="img/webytt/feat/feat-positions-sp2.jpg" alt="スマホの画面：履歴" loading="lazy"></div></div><figcaption class="fvid-cap">PCとスマホ（ポジション・履歴）の画面　タップで拡大</figcaption></figure></div><div class="fcard-side"><ul class="fpoints"><li>ボタンの数字は、保有中のポジション数と履歴の件数</li><li>ポジションは1件ずつ「決済」もできる</li><li>履歴には、入金も並ぶ</li></ul></div></div>
         </article>
         <article class="fcard has-media" id="settle">
             <div class="fcard-top"><h3 class="fcard-name">決済まわりの設定</h3></div>

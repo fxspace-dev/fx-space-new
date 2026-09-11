@@ -1178,6 +1178,8 @@
     .fduo.two .fd-phone { flex: 1; }
     .fd-phone { padding: 1.3cqw; background: #05070f; border-radius: 4.8cqw; box-shadow: 0 20px 44px rgba(30, 27, 75, 0.35), 0 0 0 1px rgba(255,255,255,0.06) inset; }
     .fd-phone img { display: block; width: 100%; height: auto; border-radius: 3.7cqw; }
+    .fd-phone video { display: block; width: 100%; height: auto; aspect-ratio: 720 / 1400; border-radius: 3.7cqw; background: #0a0f2c; }
+    .vduo .wy-pc-screen video { display: block; width: 100%; aspect-ratio: 16 / 9; border-radius: 7px; }
     .fduo img { cursor: zoom-in; }
     .fhub-img { display: block; width: 100%; height: auto; border-radius: 10px; }
     .flight { position: fixed; inset: 0; z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 4vh 4vw; background: rgba(8, 10, 28, 0.9); cursor: zoom-out; }
@@ -1385,10 +1387,10 @@
             <p class="fcard-what">エントリーと同時に、利確（TP）と損切り（SL）を置ける機能です。先にTPとSLの線を置いてから注文するので、RR比（利益と損失の比率）を確かめてからエントリーできます。</p>
             <div class="fcard-grid"><div class="fcard-media"><figure class="fvid pc"><div class="wy-pc"><div class="wy-pc-screen"><video class="fvid-video" src="img/webytt/feat/feat-scenario.mp4" poster="img/webytt/feat/feat-scenario.jpg" muted loop playsinline preload="none" aria-label="動画：シナリオ（TP/SL）（声なし）"></video></div><div class="wy-pc-base" aria-hidden="true"></div></div><figcaption class="fvid-cap">タップで拡大</figcaption></figure></div><div class="fcard-side"><p class="fsub">使い方</p><ol class="fsteps"><li>「ロングシナリオ」（買い）か「ショートシナリオ」（売り）を押す</li><li>チャートに出たTPとSLの線を、ドラッグして好きな位置に動かす</li><li>RR比が1以上なのを確かめて、エントリーする（または予約にする）</li></ol><p class="fsub">ポイント</p><ul class="fnotes"><li>損失率固定モードなら、SLに届いたときの損失が決めた割合になるように、ロットが自動で決まります</li><li>線を置いただけでは発注されません（「構築中」の状態）</li></ul></div></div>
         </article>
-        <article class="fcard has-media" id="reserve"><!-- TODO: 予約中の注文を見る場所を確認 -->
+        <article class="fcard has-media" id="reserve">
             <div class="fcard-top"><h3 class="fcard-name">予約注文</h3></div>
             <p class="fcard-what">「この価格まで来たらエントリーしたい」というときに、注文を予約しておける機能です。チャートを見ていなくても、決めた価格に来たら自動でエントリーします。</p>
-            <div class="fcard-grid"><div class="fcard-media"><figure class="fvid pc"><div class="wy-pc"><div class="wy-pc-screen"><video class="fvid-video" src="img/webytt/feat/feat-reserve.mp4" poster="img/webytt/feat/feat-reserve.jpg" muted loop playsinline preload="none" aria-label="動画：予約注文（声なし）"></video></div><div class="wy-pc-base" aria-hidden="true"></div></div><figcaption class="fvid-cap">タップで拡大</figcaption></figure></div><div class="fcard-side"><p class="fsub">使い方</p><ol class="fsteps"><li>シナリオ（TP/SL）を組む</li><li>組んだシナリオを予約にする</li><li>価格が来たら、自動でエントリーされる</li></ol><p class="fsub">ポイント</p><ul class="fnotes"><li>チャート上では、構築中は破線、予約中は実線で表示されます</li><li>取引ツール（MT4 / MT5 / cTrader）とPCが動いている間だけ働きます（cTrader Cloud版を除く）</li></ul></div></div>
+            <div class="fcard-grid"><div class="fcard-media"><figure class="fvid pc"><div class="wy-pc"><div class="wy-pc-screen"><video class="fvid-video" src="img/webytt/feat/feat-reserve.mp4" poster="img/webytt/feat/feat-reserve.jpg" muted loop playsinline preload="none" aria-label="動画：予約注文（声なし）"></video></div><div class="wy-pc-base" aria-hidden="true"></div></div><figcaption class="fvid-cap">タップで拡大</figcaption></figure></div><div class="fcard-side"><p class="fsub">使い方</p><ol class="fsteps"><li>シナリオ（TP/SL）を組む</li><li>組んだシナリオを予約にする</li><li>価格が来たら、自動でエントリーされる</li></ol><p class="fsub">ポイント</p><ul class="fnotes"><li>予約中の注文は、右のパネルの「待機中のシナリオ」で確認・取り消しできます</li><li>チャート上では、構築中は破線、予約中は実線で表示されます</li><li>取引ツール（MT4 / MT5 / cTrader）とPCが動いている間だけ働きます（cTrader Cloud版を除く）</li></ul></div></div>
         </article>
     </div>
 </section>
@@ -1409,16 +1411,10 @@
             </div>
             
         </div>
-        <article class="fcard has-media" id="trigger">
+        <article class="fcard has-media is-wide" id="trigger">
             <div class="fcard-top"><h3 class="fcard-name">エントリートリガー</h3></div>
             <p class="fcard-what">予約注文に「条件」をつける機能です。ラインに触れたらすぐに入るのではなく、「トレンドが転換したら」「押し目が来たら」「RR比がよくなったら」といった条件がそろったときだけエントリーします。</p>
-            <div class="fcard-grid"><div class="fcard-media"><div class="wm wm-set" role="img" aria-label="設定の画面（一般）">
-    <div class="wm-set-head">設定<span aria-hidden="true">×</span></div>
-    <div class="wm-set-body">
-      <div class="wm-set-tabs"><span class="on">一般</span><span>キャンバス</span><span>配色</span></div>
-      <div class="wm-set-main"><p class="wm-sec">エントリートリガー</p><div class="wm-row hl"><i>☆</i><span class="wm-row-l">トレンド転換の時間足(デフォルト値)</span><em>M5 ▾</em></div><div class="wm-row"><i>☆</i><span class="wm-row-l">押し目の時間足(デフォルト値)</span><em>M5 ▾</em></div><div class="wm-row"><i>☆</i><span class="wm-row-l">RR比(デフォルト値)</span><em>− 1.00 ＋</em></div></div>
-    </div>
-  </div></div><div class="fcard-side"><p class="fsub">くわしく</p><ul class="fnotes"><li><b>トレンド転換で注文</b>：決めた時間足（最初はM5）で、トレンドが転換したらエントリー</li><li><b>押し目で注文</b>：押し目（いったん戻ったところ）のタイミングでエントリー。判断する時間足は最初はM5</li><li><b>RR比成立で注文</b>：RR比が決めた数値（最初は1.00）以上になったらエントリー</li><li>「トレンド転換＋RR比」「押し目＋RR比」のように、2つを組み合わせることもできます</li><li>最初の値は、右下の歯車（スマホは下のメニューの「設定」）を押し、「一般」の「エントリートリガー」 で変えられます</li></ul></div></div>
+            <div class="fcard-grid"><div class="fcard-media"><figure class="fduo vduo"><div class="fduo-pc"><div class="wy-pc"><div class="wy-pc-screen"><video class="fvid-video" src="img/webytt/feat/feat-trigger.mp4" poster="img/webytt/feat/feat-trigger.jpg" muted loop playsinline preload="none" aria-label="PCの動画：エントリートリガー（声なし）"></video></div><div class="wy-pc-base" aria-hidden="true"></div></div></div><div class="fduo-sp"><div class="fd-phone"><video class="fvid-video" src="img/webytt/feat/feat-trigger-sp.mp4" poster="img/webytt/feat/feat-trigger-sp.jpg" muted loop playsinline preload="none" aria-label="スマホの動画：エントリートリガー（声なし）"></video></div></div><figcaption class="fvid-cap">PCとスマホの動画　タップで拡大</figcaption></figure></div><div class="fcard-side"><p class="fsub">使い方</p><ol class="fsteps"><li>「ロングシナリオ」か「ショートシナリオ」を押して、TPとSLの位置を決める</li><li>シナリオの中の「エントリートリガー」を開く（スマホは「トリガー」）</li><li>使う条件をオンにする（判断に使う時間足も選べる）</li><li>「エントリートリガーで SELL 待機」（買いなら BUY）を押す</li></ol><p class="fsub">ポイント</p><ul class="fnotes"><li>待機を始めると「待機中のシナリオ」に入り、条件がそろったところで成行でエントリーします</li><li><b>トレンド転換で注文</b>：決めた時間足（最初はM5）で、トレンドが転換したらエントリー</li><li><b>押し目で注文</b>：押し目（いったん戻ったところ）のタイミングでエントリー</li><li><b>RR比成立で注文</b>：RR比が決めた数値（最初は1.00）以上になったらエントリー</li></ul><details class="fmore"><summary>もっとくわしく</summary><div class="fmore-body"><p>「トレンド転換＋RR比」「押し目＋RR比」のように、2つを組み合わせることもできます。時間足やRR比の最初の値は、右下の歯車（スマホは下のメニューの「設定」）を押し、「一般」の「エントリートリガー」 で変えられます。</p></div></details></div></div>
         </article>
         <article class="fcard has-media" id="addpos"><!-- TODO: 「追加ポジは全体の損失で計算」の意味を確認 -->
             <div class="fcard-top"><h3 class="fcard-name">追加ポジ</h3><span class="finit">最初は：ロット倍率 0.50</span></div>

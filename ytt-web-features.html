@@ -1079,6 +1079,7 @@
   [2] 画面の見方（PC）の全体スクショ、コピーモードの設定画面スクショ
   [3] サブ機能の一覧をよすが・安田さんに確認して確定
   [4] 説明文は 2026/7/31 の画面をもとにした仮の文章。最新の画面で確認して直す
+  [5] シナリオ構築（#build）の描き方。パネルは 設定→一般「シナリオ構築パネルを表示」で出る（設定画面はスクショ不可）
 ====================================================================
 -->
 
@@ -1239,9 +1240,10 @@
             <div class="feat-body">
                 <p class="feat-head">PCでは、画面の右側に注文とシナリオがまとまっています。</p>
                     <ol class="feat-steps">
-                        <li><b>右のパネル</b>：口座・残高、ロットの自動計算、成行の注文、シナリオ</li>
-                        <li><b>上のメニュー</b>：通貨ペアと時間足、ポジション・予約注文・履歴・ノート・通知</li>
+                        <li><b>右のパネル</b>：口座・残高、ロットの自動計算、成行の注文、シナリオ、シナリオ構築、お気に入り</li>
+                        <li><b>上のメニュー</b>：通貨ペアと時間足、スクリーンショット・アラート、ポジション・履歴</li>
                         <li><b>左のツール</b>：チャートに線や図形を引く</li>
+                        <li><b>画面のいちばん上と下</b>：ニュースと利確速報、よく見る通貨ペアの切り替え</li>
                     </ol>
                 <!-- TODO: PCの画面全体のスクショ（最新）を撮って差し込む -->
             </div>
@@ -1270,12 +1272,13 @@
         <div class="ytt-add-grid fidx-grid">
             <a class="ytt-add-card fidx" href="#order"><h3><span class="fidx-no">1</span>注文・決済</h3><p>ロットを決めて、ボタン1つでエントリー・決済</p></a>
             <a class="ytt-add-card fidx" href="#lot"><h3><span class="fidx-no">2</span>ロットの自動計算</h3><p>損失率を決めておけば、ロットは自動で計算</p></a>
-            <a class="ytt-add-card fidx" href="#scenario"><h3><span class="fidx-no">3</span>シナリオ構築</h3><p>エントリー前に、利確と損切りの位置を決める</p></a>
-            <a class="ytt-add-card fidx" href="#reserve"><h3><span class="fidx-no">4</span>予約注文</h3><p>決めた価格に来たら、自動でエントリー</p></a>
-            <a class="ytt-add-card fidx" href="#autoline"><h3><span class="fidx-no">5</span>オートライン</h3><p>重要なラインを、自動でチャートに引く</p></a>
-            <a class="ytt-add-card fidx" href="#alert"><h3><span class="fidx-no">6</span>通知・経済指標</h3><p>指標の時間や、決めた価格に来たことを知らせる</p></a>
-            <a class="ytt-add-card fidx" href="#note"><h3><span class="fidx-no">7</span>トレードノート</h3><p>過去のトレードを振り返る</p></a>
-            <a class="ytt-add-card fidx" href="#copy"><h3><span class="fidx-no">8</span>コピーモード（受信）</h3><p>コピー元のポジションを、自分の口座に写す</p></a>
+            <a class="ytt-add-card fidx" href="#build"><h3><span class="fidx-no">3</span>シナリオ構築</h3><p>「こう動いたら、こうする」をチャートに描く</p></a>
+            <a class="ytt-add-card fidx" href="#scenario"><h3><span class="fidx-no">4</span>シナリオ（TP/SL）</h3><p>エントリー前に、利確と損切りの位置を決める</p></a>
+            <a class="ytt-add-card fidx" href="#reserve"><h3><span class="fidx-no">5</span>予約注文</h3><p>決めた価格に来たら、自動でエントリー</p></a>
+            <a class="ytt-add-card fidx" href="#autoline"><h3><span class="fidx-no">6</span>オートライン</h3><p>重要なラインを、自動でチャートに引く</p></a>
+            <a class="ytt-add-card fidx" href="#alert"><h3><span class="fidx-no">7</span>通知・経済指標</h3><p>指標の時間や、決めた価格に来たことを知らせる</p></a>
+            <a class="ytt-add-card fidx" href="#note"><h3><span class="fidx-no">8</span>トレードノート</h3><p>過去のトレードを振り返る</p></a>
+            <a class="ytt-add-card fidx" href="#copy"><h3><span class="fidx-no">9</span>コピーモード（受信）</h3><p>コピー元のポジションを、自分の口座に写す</p></a>
         </div>
         <p class="feat-label">サブ機能<small>あると便利な機能</small></p>
         <div class="ytt-add-grid fidx-grid">
@@ -1284,7 +1287,7 @@
     </div>
 </section>
 
-<!-- メイン機能 1：注文・決済 -->
+<!-- メイン機能：注文・決済 -->
 <section class="ytt-spec-section" id="order" style="background:#fff;">
     <div class="ytt-spec-inner ytt-fto-wide">
         <div class="ytt-spec-header">
@@ -1326,7 +1329,7 @@
     </div>
 </section>
 
-<!-- メイン機能 2：ロットの自動計算 -->
+<!-- メイン機能：ロットの自動計算 -->
 <section class="ytt-spec-section" id="lot" style="background:#f4f6f9;">
     <div class="ytt-spec-inner ytt-fto-wide">
         <div class="ytt-spec-header">
@@ -1367,8 +1370,8 @@
     </div>
 </section>
 
-<!-- メイン機能 3：シナリオ構築 -->
-<section class="ytt-spec-section" id="scenario" style="background:#fff;">
+<!-- メイン機能：シナリオ構築 -->
+<section class="ytt-spec-section" id="build" style="background:#fff;">
     <div class="ytt-spec-inner ytt-fto-wide">
         <div class="ytt-spec-header">
             <span class="section-title-badge section-title-badge--blue">
@@ -1390,6 +1393,48 @@
                     <div class="fvid-box" role="img" aria-label="動画（準備中）：シナリオ構築">
                         <span class="fvid-play" aria-hidden="true"></span>
                         <span class="fvid-label">動画 準備中</span>
+                        <span class="fvid-meta">PC・約60秒</span>
+                    </div>
+                </figure>
+            </div>
+            <div class="feat-body">
+                <p class="feat-head">「こう動いたら、こうする」という値動きの道筋を、チャートに描いておけます。</p>
+                    <ol class="feat-steps">
+                        <li><b>設定 → 一般</b> で「シナリオ構築パネルを表示」をオンにする（最初はオフになっています）</li>
+                        <li>右のパネルに出た「シナリオ構築」を押す</li>
+                        <li>チャート上に、値動きの道筋を描く</li>
+                        <li>描いたシナリオは「非表示」で隠せる。いらなくなったら「全削除」でまとめて消せる</li>
+                    </ol>
+                    <p class="gnote">右のパネルに「シナリオ構築」が見当たらないときは、設定 → 一般 の「シナリオ構築パネルを表示」がオンになっているか確認してください。</p>
+                    <!-- TODO: 描き方（クリックの仕方、エントリー・利確・損切りの印の置き方、RRの表示）を確認して追記 -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- メイン機能：シナリオ（TP/SL） -->
+<section class="ytt-spec-section" id="scenario" style="background:#f4f6f9;">
+    <div class="ytt-spec-inner ytt-fto-wide">
+        <div class="ytt-spec-header">
+            <span class="section-title-badge section-title-badge--blue">
+                <img class="hero-title-side hero-title-side--left" src="img/title-side-blue-left.png" alt="">
+                メイン機能 4
+                <img class="hero-title-side hero-title-side--right" src="img/title-side-blue-right.png" alt="">
+            </span>
+            <div style="text-align:center; margin-bottom:0.25rem;">
+                <div style="display:inline-block; white-space:nowrap;">
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">シナリオ（TP/SL）</h2>
+                    <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
+                </div>
+            </div>
+            
+        </div>
+        <div class="feat">
+            <div class="feat-media">
+                <figure class="fvid pc">
+                    <div class="fvid-box" role="img" aria-label="動画（準備中）：シナリオ（TP/SL）">
+                        <span class="fvid-play" aria-hidden="true"></span>
+                        <span class="fvid-label">動画 準備中</span>
                         <span class="fvid-meta">PC・約80秒</span>
                     </div>
                 </figure>
@@ -1408,13 +1453,13 @@
     </div>
 </section>
 
-<!-- メイン機能 4：予約注文 -->
-<section class="ytt-spec-section" id="reserve" style="background:#f4f6f9;">
+<!-- メイン機能：予約注文 -->
+<section class="ytt-spec-section" id="reserve" style="background:#fff;">
     <div class="ytt-spec-inner ytt-fto-wide">
         <div class="ytt-spec-header">
             <span class="section-title-badge section-title-badge--blue">
                 <img class="hero-title-side hero-title-side--left" src="img/title-side-blue-left.png" alt="">
-                メイン機能 4
+                メイン機能 5
                 <img class="hero-title-side hero-title-side--right" src="img/title-side-blue-right.png" alt="">
             </span>
             <div style="text-align:center; margin-bottom:0.25rem;">
@@ -1440,7 +1485,8 @@
                     <ol class="feat-steps">
                         <li>構築したシナリオを予約にする</li>
                         <li>価格が来たら、自動でエントリー</li>
-                        <li>予約中の注文は、上のメニュー「予約注文」で確認・取り消しできる</li>
+                        <li>予約中の注文は、一覧で確認・取り消しできる</li>
+                        <!-- TODO: 予約中の注文を見る場所（最新の画面）を確認して追記 -->
                     </ol>
                     <div class="gtip">チャート上では、<b>構築中は破線</b>、<b>予約中は実線</b>で表示されます。</div>
             </div>
@@ -1448,13 +1494,13 @@
     </div>
 </section>
 
-<!-- メイン機能 5：オートライン -->
-<section class="ytt-spec-section" id="autoline" style="background:#fff;">
+<!-- メイン機能：オートライン -->
+<section class="ytt-spec-section" id="autoline" style="background:#f4f6f9;">
     <div class="ytt-spec-inner ytt-fto-wide">
         <div class="ytt-spec-header">
             <span class="section-title-badge section-title-badge--blue">
                 <img class="hero-title-side hero-title-side--left" src="img/title-side-blue-left.png" alt="">
-                メイン機能 5
+                メイン機能 6
                 <img class="hero-title-side hero-title-side--right" src="img/title-side-blue-right.png" alt="">
             </span>
             <div style="text-align:center; margin-bottom:0.25rem;">
@@ -1487,13 +1533,13 @@
     </div>
 </section>
 
-<!-- メイン機能 6：通知・経済指標 -->
-<section class="ytt-spec-section" id="alert" style="background:#f4f6f9;">
+<!-- メイン機能：通知・経済指標 -->
+<section class="ytt-spec-section" id="alert" style="background:#fff;">
     <div class="ytt-spec-inner ytt-fto-wide">
         <div class="ytt-spec-header">
             <span class="section-title-badge section-title-badge--blue">
                 <img class="hero-title-side hero-title-side--left" src="img/title-side-blue-left.png" alt="">
-                メイン機能 6
+                メイン機能 7
                 <img class="hero-title-side hero-title-side--right" src="img/title-side-blue-right.png" alt="">
             </span>
             <div style="text-align:center; margin-bottom:0.25rem;">
@@ -1527,13 +1573,13 @@
     </div>
 </section>
 
-<!-- メイン機能 7：トレードノート -->
-<section class="ytt-spec-section" id="note" style="background:#fff;">
+<!-- メイン機能：トレードノート -->
+<section class="ytt-spec-section" id="note" style="background:#f4f6f9;">
     <div class="ytt-spec-inner ytt-fto-wide">
         <div class="ytt-spec-header">
             <span class="section-title-badge section-title-badge--blue">
                 <img class="hero-title-side hero-title-side--left" src="img/title-side-blue-left.png" alt="">
-                メイン機能 7
+                メイン機能 8
                 <img class="hero-title-side hero-title-side--right" src="img/title-side-blue-right.png" alt="">
             </span>
             <div style="text-align:center; margin-bottom:0.25rem;">
@@ -1557,7 +1603,8 @@
             <div class="feat-body">
                 <p class="feat-head">過去のトレードを、チャートと数字で振り返れます。</p>
                     <ol class="feat-steps">
-                        <li>上のメニュー「ノート」を開く</li>
+                        <li>「ノート」を開く</li>
+                        <!-- TODO: ノートを開く場所（最新の画面）を確認して追記 -->
                         <li>自分のエントリーと決済が、チャート上に表示される</li>
                         <li>勝率や損益などの統計も、自動で集計される</li>
                     </ol>
@@ -1567,13 +1614,13 @@
     </div>
 </section>
 
-<!-- メイン機能 8：コピーモード -->
-<section class="ytt-spec-section" id="copy" style="background:#f4f6f9;">
+<!-- メイン機能：コピーモード -->
+<section class="ytt-spec-section" id="copy" style="background:#fff;">
     <div class="ytt-spec-inner ytt-fto-wide">
         <div class="ytt-spec-header">
             <span class="section-title-badge section-title-badge--blue">
                 <img class="hero-title-side hero-title-side--left" src="img/title-side-blue-left.png" alt="">
-                メイン機能 8
+                メイン機能 9
                 <img class="hero-title-side hero-title-side--right" src="img/title-side-blue-right.png" alt="">
             </span>
             <div style="text-align:center; margin-bottom:0.25rem;">
@@ -1626,7 +1673,7 @@
 </section>
 
 <!-- サブ機能（TODO：一覧を確定） -->
-<section class="ytt-spec-section" id="sub" style="background:#fff;">
+<section class="ytt-spec-section" id="sub" style="background:#f4f6f9;">
     <div class="ytt-spec-inner">
         <div class="ytt-spec-header">
             <span class="section-title-badge section-title-badge--orange">
@@ -1653,7 +1700,7 @@
 </section>
 
 <!-- 困ったときは -->
-<section class="ytt-spec-section" id="help" style="background:#f4f6f9;">
+<section class="ytt-spec-section" id="help" style="background:#fff;">
     <div class="ytt-spec-inner">
         <div class="ytt-spec-header">
             <span class="section-title-badge section-title-badge--orange">

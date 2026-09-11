@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web版YTT 使い方 — FX SPACE</title>
+    <title>Web版YTT 注文・ロット・決済 — FX SPACE</title>
     <link rel="icon" type="image/png" href="icon.png">
-    <meta property="og:title" content="Web版YTT 使い方 — FX SPACE">
-    <meta property="og:description" content="Web版（スマホ版）YTTの使い方。注文・ロット、シナリオ・予約注文、チャートの表示、分析ツール、モードと設定まで、すべての機能を画面とあわせて紹介します。">
+    <meta property="og:title" content="Web版YTT 注文・ロット・決済 — FX SPACE">
+    <meta property="og:description" content="Web版YTTの使い方（注文・ロット・決済）。エントリーから決済までの基本の操作と、ロットの決め方、ポジションを持ったあとの自動処理です。">
     <meta property="og:image" content="https://fx-space.com/intro/img/og-ytt-tokusetu.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -1146,16 +1146,7 @@
 </head>
 <body>
 
-<!--
-====================================================================
-  Web版（スマホ版）YTT 使い方（機能説明）  ytt-web-features.html
-  ・構成は既存Canva「YTTの使い方」を踏襲（はじめに → サポートAI → 画面の見方 → 機能一覧 → メイン機能 → サブ機能 → 問い合わせ）
-  ・見た目は導入方法ページ（ytt-web-setup.html）と同じ部品。CSSも同じものを使用
-  ・動画は声なし・テロップ＋囲み／矢印。できたら .fvid-box を <video class="fvid-box" autoplay muted loop playsinline> に差し替え
-  ・機能の説明は分野別の5ページ（ytt-web-f-*.html）。トップと5ページは build-guide.js でまとめて作る
-  【TODO】各機能の動画／分析ツール・配色・設定のスクショ（img/webytt/features/ に置けば表示される）／各ページの <!-- TODO --> の確認
-====================================================================
--->
+<!-- Web版YTT 使い方：注文・ロット・決済（ytt-web-f-trade.html）。build-guide.js で作成。内容の元は webytt-materials/前任Canva_YTTの使い方_全文.md と Web版の画面のスクショ -->
 
 <nav class="ytt-sp-nav">
     <a href="ytt-tokusetu.html" class="ytt-sp-nav-logo">
@@ -1166,220 +1157,159 @@
     </div>
 </nav>
 
-<!-- HERO -->
-<section class="ytt-sp-hero">
-    <img src="img/ytt-mark-notext.png" alt="YTT" class="ytt-sp-hero-logo">
+<section class="ytt-sp-hero fsub-hero">
+    <p class="ytt-sp-hero-kicker">Web版YTT 使い方</p>
     <h1 class="ytt-sp-hero-title">
-        <span class="ytt-sp-title-line"><span class="line-text">Web版YTT<img class="ytt-title-wave" src="img/wave-yellow.png" alt=""></span></span>
-        <span class="ytt-sp-title-line"><span class="line-text">使い方<img class="ytt-title-wave" src="img/wave-yellow.png" alt=""></span></span>
+        <span class="ytt-sp-title-line"><span class="line-text">注文・ロット・決済<img class="ytt-title-wave" src="img/wave-yellow.png" alt=""></span></span>
     </h1>
-    <p class="ytt-sp-hero-lead">
-        Web版YTTでできることを、すべて紹介します。<br>
-        知りたい機能を、下の一覧から選んでください。
-    </p>
-    <div class="ytt-sp-hero-btns">
-        <a href="#features" class="btn-sq-blue">機能一覧を見る</a>
-        <a href="#screen" class="btn-sq-white">画面の見方</a>
-    </div>
-    <p style="font-size:0.8125rem;color:#6b7280;margin-top:1.25rem;">
-        <a href="https://drive.google.com/file/d/1Fd6qcQIisp-V8Eh5tV1722wkCf7qZEzc/view?usp=sharing" target="_blank" rel="noopener" style="color:#4f46e5;text-decoration:underline;text-underline-offset:3px;">利用規約</a>　※必ず目を通してください
-    </p>
+    <p class="ytt-sp-hero-lead">エントリーから決済までの基本の操作と、ロットの決め方、<br>ポジションを持ったあとの自動処理です。</p>
     <nav class="fcat-nav" aria-label="使い方のページ">
-        <a href="ytt-web-features.html" aria-current="page">使い方トップ</a>
-        <a href="ytt-web-f-trade.html"><span class="fcat-no">1</span>注文・ロット・決済</a><a href="ytt-web-f-scenario.html"><span class="fcat-no">2</span>シナリオ・予約注文</a><a href="ytt-web-f-chart.html"><span class="fcat-no">3</span>チャートの表示</a><a href="ytt-web-f-tools.html"><span class="fcat-no">4</span>分析ツール</a><a href="ytt-web-f-settings.html"><span class="fcat-no">5</span>モードと設定</a>
+        <a href="ytt-web-features.html">使い方トップ</a>
+        <a href="ytt-web-f-trade.html" aria-current="page"><span class="fcat-no">1</span>注文・ロット・決済</a><a href="ytt-web-f-scenario.html"><span class="fcat-no">2</span>シナリオ・予約注文</a><a href="ytt-web-f-chart.html"><span class="fcat-no">3</span>チャートの表示</a><a href="ytt-web-f-tools.html"><span class="fcat-no">4</span>分析ツール</a><a href="ytt-web-f-settings.html"><span class="fcat-no">5</span>モードと設定</a>
     </nav>
-    <p class="hero-setup">まだ導入が済んでいない方は、先に <a href="ytt-web-setup.html">導入方法</a> へ（約15分）</p>
+    <div class="fhub-links ftoc" aria-label="このページの機能"><a href="#order">成行注文</a><a href="#close">全決済・1/2決済</a><a href="#positions">ポジションと履歴</a><a href="#settle">決済まわりの設定</a><a href="#lot">ロットの決め方（3つのモード）</a><a href="#auto-be">自動建値設置</a><a href="#trail">TPのトレイル化</a><a href="#rr-fix">RR比固定</a></div>
 </section>
 
-<!-- YTTサポートAI -->
-<section class="ytt-spec-section" id="ai" style="background:#f4f6f9;">
-    <div class="ytt-spec-inner">
-        <div class="ytt-spec-header">
-            <span class="section-title-badge section-title-badge--orange">
-                <img class="hero-title-side hero-title-side--left" src="img/title-side-orange-left.png" alt="">
-                サポート
-                <img class="hero-title-side hero-title-side--right" src="img/title-side-orange-right.png" alt="">
-            </span>
-            <div style="text-align:center; margin-bottom:0.25rem;">
-                <div style="display:inline-block; white-space:nowrap;">
-                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">YTTサポートAI</h2>
-                    <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
-                </div>
-            </div>
-            <p>導入や使い方の質問に、AIが24時間回答します。<br>使い方が分からないときや、調べるのが面倒なときに使ってください。</p>
-        </div>
-        <div class="ytt-add-grid ai-one">
-            <div class="ytt-add-card ytt-support-card">
-                <img class="sup-img" src="img/icon-ytt-ai-support.png" alt="">
-                <h3>YTT AIサポート</h3>
-                <p>導入・使い方の疑問に24時間いつでも回答。まずはここで解決できます。</p>
-                <a class="sup-link" href="https://discord.com/channels/1039824083208126474/1151440259553439784/1490345736083083284" target="_blank" rel="noopener">Discordで開く →</a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- 画面の見方 -->
-<section class="ytt-spec-section" id="screen" style="background:#fff;">
+<section class="ytt-spec-section" style="background:#f4f6f9;">
     <div class="ytt-spec-inner ytt-fto-wide">
         <div class="ytt-spec-header">
             <span class="section-title-badge section-title-badge--blue">
                 <img class="hero-title-side hero-title-side--left" src="img/title-side-blue-left.png" alt="">
-                はじめに
+                注文と決済
                 <img class="hero-title-side hero-title-side--right" src="img/title-side-blue-right.png" alt="">
             </span>
             <div style="text-align:center; margin-bottom:0.25rem;">
                 <div style="display:inline-block; white-space:nowrap;">
-                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">画面の見方</h2>
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">注文と決済</h2>
                     <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
                 </div>
             </div>
-            <p>よく使う場所だけ覚えておけば大丈夫です。</p>
+            <p>ボタン1つで、エントリーも決済もできます。</p>
         </div>
-        <p class="feat-label">スマホ</p>
-        <div class="feat is-sp">
-            <div class="feat-media">
-                <div class="wy-phone" role="img" aria-label="Web版YTTのスマホ画面。上に残高、右上にシナリオと成行のボタン、中央にオートライン付きのチャート、下に切り替えメニュー">
-                    <div class="wy-screen" aria-hidden="true">
-                        <div class="wy-bar"><svg class="wy-logo" viewBox="0 0 20 14"><path d="M2 3v9M6 6v6M10 1v11M14 6v6M18 3v9" stroke="#e9b949" stroke-width="2.4"/></svg><span>YTT</span></div>
-                        <div class="wy-acct">
-                            <span class="wy-dot"></span>
-                            <span class="wy-acct-no">口座番号</span>
-                            <span class="wy-ibtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><circle cx="12" cy="13.5" r="3.5"/><path d="M8.5 7l1.5-3h4l1.5 3"/></svg></span>
-                            <span class="wy-ibtn round"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v5h-5"/></svg></span>
-                        </div>
-                        <div class="wy-bal">
-                            <div>
-                                <div class="wy-bal-main"><small>残高</small>¥1,870,936</div>
-                                <div class="wy-bal-sub">有効証拠金　1,870,936</div>
-                            </div>
-                            <div class="wy-tiles">
-                                <span class="wy-tile"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 6l6 6-6 6" stroke="#4f8df7"/><path d="M12 6l6 6-6 6" stroke="#ef4d5a"/></svg>シナリオ</span>
-                                <span class="wy-tile"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="10" height="12" rx="2.5" fill="#ef4d5a"/><rect x="11" y="6" width="10" height="12" rx="2.5" fill="#4f8df7" opacity=".9"/></svg>成行</span>
-                            </div>
-                        </div>
-                        <div class="wy-chart">
-                            <span class="wy-chip">USDJPY · M30<b>153.948</b><i>▸</i></span>
-                            <svg class="wy-chart-svg" viewBox="0 0 266 360" preserveAspectRatio="none" aria-hidden="true">
-<path d="M0 12.2H224M0 73.2H224M0 134.2H224M0 195.3H224M0 256.3H224M0 317.3H224M6 0V360M96 0V360M172 0V360" stroke="rgba(148,163,184,.08)" stroke-width="1" fill="none"/>
-<text class="wy-watermark" x="112" y="180.4" text-anchor="middle">USDJPY M30</text>
-<path d="M0 119L224 82.4" class="wy-al"/>
-<path d="M0 332.5L224 314.2" class="wy-al"/>
-<path d="M120 274.6H224" class="wy-al wy-al-s"/>
-<path d="M60 302H224" class="wy-al wy-al-s"/>
-<path d="M0 335.6H224" class="wy-al wy-al-y"/>
-<path d="M4 245.5V256.4M6.37 234.3V252.8M8.75 235.8V241.1M11.12 223.9V240.1M13.49 214.5V232.2M15.87 211.9V226.9M18.24 211.4V216.5M20.62 179.5V214.2M22.99 166V184.5M25.36 124.5V169.1M27.74 96.1V136.5M53.85 254.7V276.5M56.22 253.3V257M58.59 244.8V254.5M60.97 230.5V245.9M65.71 213.3V238M82.33 247.4V283.1M84.7 216.8V252.6M87.08 191.1V220.9M89.45 167.4V196.5M110.81 271.5V289.8M113.19 255.1V277.2M115.56 246.6V268M117.93 219.4V252.1M120.31 227.9V232.9M134.55 249.8V272.7M136.92 239.3V259.3M139.3 227.5V249.9M141.67 222.1V229.2M144.04 207.9V224.8M146.42 209.7V215.5M158.29 241.8V257.4M163.03 250V257.4M172.53 260.6V266.2M174.9 247.8V266.8M177.27 235.6V253.1M179.65 233.6V240M184.4 241.3V253.7M189.14 245.7V250.4M191.52 229.6V253.3M193.89 225.4V232.4M196.26 192.1V230.8M198.64 172.1V198.7M201.01 159V178.3M203.38 137V161.6M205.76 64.1V145.4M215.25 155.9V163.6" stroke="#22b573" stroke-width=".6" fill="none"/>
-<path d="M30.11 108.5V131.3M32.48 127.8V151.2M34.86 141V171.3M37.23 165.5V177.9M39.6 172.4V192.1M41.98 183.5V206M44.35 205.7V227.2M46.73 222.6V250.1M49.1 246.8V264.9M51.47 252.4V273.4M63.34 230.9V235.9M68.09 218.5V235.4M70.46 224.9V248.3M72.84 242.6V249.2M75.21 246V265.4M77.58 262.4V273.2M79.96 261.4V282.3M91.82 166.6V186M94.2 176.4V190.6M96.57 189.4V204.8M98.95 199.3V203.5M101.32 197.2V238M103.69 229.7V259.5M106.07 253V274.2M108.44 272.2V328M122.68 226.6V248.8M125.05 240.2V249M127.43 245.6V253.7M129.8 249.8V254.3M132.18 251.3V274.2M148.79 208.6V219.1M151.16 210.5V226.7M153.54 223.5V243.8M155.91 236V255.4M160.66 246.4V255.5M165.41 246.8V263.9M167.78 255.7V260.8M170.15 258.9V267.4M182.02 229.4V249.4M186.77 238.6V251.6M208.13 120V143.2M210.51 135.9V144M212.88 138V160.8M217.63 148.7V172.9M220 162.9V174.7" stroke="#ef4d5a" stroke-width=".6" fill="none"/>
-<path d="M3.25 251.9h1.5v4.4h-1.5zM5.62 240.7h1.5v11.2h-1.5zM8.00 239.7h1.5v1h-1.5zM10.37 231.9h1.5v7.8h-1.5zM12.74 222.6h1.5v9.3h-1.5zM15.12 215.1h1.5v7.5h-1.5zM17.49 213.5h1.5v1.6h-1.5zM19.87 182h1.5v31.5h-1.5zM22.24 168.5h1.5v13.5h-1.5zM24.61 131.7h1.5v36.8h-1.5zM26.99 115.4h1.5v16.3h-1.5zM53.10 256h1.5v16.3h-1.5zM55.47 253.4h1.5v2.6h-1.5zM57.84 245.2h1.5v8.2h-1.5zM60.22 233.5h1.5v11.7h-1.5zM64.96 219.7h1.5v15.3h-1.5zM81.58 247.6h1.5v34.2h-1.5zM83.95 219.1h1.5v28.5h-1.5zM86.33 191.9h1.5v27.2h-1.5zM88.70 169.5h1.5v22.4h-1.5zM110.06 273.5h1.5v13.3h-1.5zM112.44 262.7h1.5v10.8h-1.5zM114.81 250.3h1.5v12.4h-1.5zM117.18 231.8h1.5v18.5h-1.5zM119.56 229.1h1.5v2.7h-1.5zM133.80 255.8h1.5v13.2h-1.5zM136.17 248.9h1.5v6.9h-1.5zM138.55 227.7h1.5v21.2h-1.5zM140.92 223.6h1.5v4.1h-1.5zM143.29 215.1h1.5v8.5h-1.5zM145.67 209.8h1.5v5.3h-1.5zM157.54 250h1.5v4h-1.5zM162.28 251.1h1.5v3.6h-1.5zM171.78 263.6h1.5v0.8h-1.5zM174.15 250h1.5v13.6h-1.5zM176.52 238.1h1.5v11.9h-1.5zM178.90 235h1.5v3.1h-1.5zM183.65 244h1.5v4.8h-1.5zM188.39 247h1.5v2.4h-1.5zM190.77 231.6h1.5v15.4h-1.5zM193.14 228.1h1.5v3.5h-1.5zM195.51 196.2h1.5v31.9h-1.5zM197.89 176.5h1.5v19.7h-1.5zM200.26 160.4h1.5v16.1h-1.5zM202.63 137.8h1.5v22.6h-1.5zM205.01 121h1.5v16.8h-1.5zM214.50 158.4h1.5v2.4h-1.5z" fill="#22b573"/>
-<path d="M29.36 115.4h1.5v14.4h-1.5zM31.73 129.8h1.5v14.7h-1.5zM34.11 144.5h1.5v24.2h-1.5zM36.48 168.7h1.5v4.8h-1.5zM38.85 173.5h1.5v17.5h-1.5zM41.23 191h1.5v14.7h-1.5zM43.60 205.7h1.5v20.5h-1.5zM45.98 226.2h1.5v23.4h-1.5zM48.35 249.6h1.5v11.2h-1.5zM50.72 260.8h1.5v11.5h-1.5zM62.59 233.5h1.5v1.5h-1.5zM67.34 219.7h1.5v10.4h-1.5zM69.71 230.1h1.5v16.4h-1.5zM72.09 246.5h1.5v1.5h-1.5zM74.46 248h1.5v16.7h-1.5zM76.83 264.7h1.5v2.9h-1.5zM79.21 267.6h1.5v14.2h-1.5zM91.07 169.5h1.5v11.6h-1.5zM93.45 181.1h1.5v8.7h-1.5zM95.82 189.8h1.5v11.4h-1.5zM98.20 201.2h1.5v0.8h-1.5zM100.57 201.9h1.5v31.4h-1.5zM102.94 233.3h1.5v24.9h-1.5zM105.32 258.2h1.5v15h-1.5zM107.69 273.2h1.5v13.6h-1.5zM121.93 229.1h1.5v15.2h-1.5zM124.30 244.3h1.5v4.5h-1.5zM126.68 248.8h1.5v2.7h-1.5zM129.05 251.5h1.5v0.8h-1.5zM131.43 251.7h1.5v17.3h-1.5zM148.04 209.8h1.5v7.1h-1.5zM150.41 216.9h1.5v8.6h-1.5zM152.79 225.5h1.5v13.7h-1.5zM155.16 239.2h1.5v14.8h-1.5zM159.91 250h1.5v4.7h-1.5zM164.66 251.1h1.5v7.2h-1.5zM167.03 258.3h1.5v1.9h-1.5zM169.40 260.2h1.5v4h-1.5zM181.27 235h1.5v13.8h-1.5zM186.02 244h1.5v5.4h-1.5zM207.38 121h1.5v15.4h-1.5zM209.76 136.4h1.5v7h-1.5zM212.13 143.4h1.5v17.4h-1.5zM216.88 158.4h1.5v11.9h-1.5zM219.25 170.3h1.5v2.4h-1.5z" fill="#ef4d5a"/>
-<path d="M0 172.7H224" stroke="#ef4d5a" stroke-width=".7" stroke-dasharray="1.5 1.5"/>
-<g class="wy-axis"><text x="263" y="14.8">155.000</text><text x="263" y="45.3">154.800</text><text x="263" y="75.8">154.600</text><text x="263" y="106.3">154.400</text><text x="263" y="136.8">154.200</text><text x="263" y="167.3">154.000</text><text x="263" y="197.9">153.800</text><text x="263" y="228.4">153.600</text><text x="263" y="258.9">153.400</text><text x="263" y="289.4">153.200</text><text x="263" y="319.9">153.000</text><text x="263" y="350.4">152.800</text></g>
-<rect x="225" y="160.7" width="41" height="10" rx="1.5" fill="#ef4d5a"/>
-<text class="wy-axis-tag" x="263" y="168.39999999999998">153.952</text>
-<rect x="225" y="171.7" width="41" height="10" rx="1.5" fill="#cbd5e1"/>
-<text class="wy-axis-tag dark" x="263" y="179.39999999999998">153.948</text>
-</svg>
-                            <span class="wy-tv">TV</span>
-                            <div class="wy-dates"><span style="left:2px">9月8日</span><span style="left:84px">9月9日</span><span style="left:160px">9月10日</span></div>
-                        </div>
-                        <div class="wy-nav">
-                            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h15l-3.5-3.5"/><path d="M20 16H5l3.5 3.5"/></svg>通貨ペア</span>
-                            <span class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3v18M17 3v18"/><rect x="5" y="7" width="4" height="8" rx=".5" fill="currentColor"/><rect x="15" y="6" width="4" height="10" rx=".5"/></svg>チャート</span>
-                            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 9h6M9 13h6M9 17h3"/></svg>ポジション</span>
-                            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>履歴</span>
-                            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg>ツール</span>
-                            <span class="has-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></svg>アラート</span>
-                            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 3v2.5M12 18.5V21M3 12h2.5M18.5 12H21M5.6 5.6l1.8 1.8M16.6 16.6l1.8 1.8M5.6 18.4l1.8-1.8M16.6 7.4l1.8-1.8"/></svg>設定</span>
-                        </div>
-                    </div>
-                </div>
+        <article class="fcard has-media" id="order">
+            <div class="fcard-top">
+                <h3 class="fcard-name">成行注文</h3>
+                
             </div>
-            <div class="feat-body">
-                <p class="feat-head">画面は、上から4つのまとまりでできています。</p>
-                <ol class="feat-steps">
-                    <li><b>上：口座と残高</b><br>口座番号の左の丸が緑なら、取引ツールとつながっています。</li>
-                    <li><b>右上：「シナリオ」と「成行」</b><br>注文のしかたを切り替えます。</li>
-                    <li><b>まんなか：チャート</b><br>オートラインや、自分で引いた線が表示されます。</li>
-                    <li><b>下：メニュー</b><br>通貨ペア・チャート・ポジション・履歴などの画面に移動します。</li>
-                </ol>
-                <!-- TODO: 動画1「画面の見方」（スマホ・約60秒）ができたら、ここに置く -->
+            <p class="fcard-what">ロットを決めて「SELL」か「BUY」を押すだけで、すぐにエントリーできます。</p>
+            <div class="fwhere"><span class="fwhere-item"><b>PC</b><span>右のパネル</span><i aria-hidden="true">›</i><span>成行</span></span><span class="fwhere-item"><b>スマホ</b><span>右上の「成行」</span></span></div>
+            <div class="fcard-grid"><div class="fcard-media"><figure class="fvid sp"><div class="fvid-box" role="img" aria-label="動画（準備中）：注文・決済"><span class="fvid-play" aria-hidden="true"></span><span class="fvid-label">動画 準備中</span><span class="fvid-meta">スマホ・約60秒</span></div></figure></div><div class="fcard-body"><ol class="feat-steps"><li>「成行」を選ぶ（スマホは右上の「成行」）</li><li>ロットを調整する。PCは <b>−1 〜 +1</b> のボタン、スマホは <b>∧ ∨</b></li><li>「BUY」で買い、「SELL」で売りのエントリー</li></ol><div class="gtip">LOTの欄に出ている数字が、そのまま注文されるロットです。</div></div></div>
+        </article>
+        <article class="fcard" id="close">
+            <div class="fcard-top">
+                <h3 class="fcard-name">全決済・1/2決済</h3>
+                
             </div>
-        </div>
-        <p class="feat-label">PC</p>
-        <div class="feat">
-            <div class="feat-media">
-                <div class="wy-pc" role="img" aria-label="Web版YTTのPC画面。上にニュースとツールバー、左に描画ツール、中央にチャート、右のパネルに口座・残高、成行の注文、シナリオ、シナリオ構築、お気に入り">
-                    <div class="wy-pc-screen"><svg class="wy-pc-svg" viewBox="0 0 1000 600" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="0" y="0" width="1000" height="600" rx="0" fill="#0a0f2c"/><rect x="0" y="0" width="770" height="17" rx="0" fill="#0d1438"/><text x="6" y="12" font-size="7.5" fill="#8c95b8" font-family="'Noto Sans JP', system-ui, sans-serif">ニュース</text><text x="52" y="12" font-size="7" fill="#56608d" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">02:34</text><rect x="76" y="4.5" width="11" height="10" rx="2" fill="none" stroke="#e9b949" stroke-width="0.8"/><text x="81.5" y="12" font-size="6.5" fill="#e9b949" text-anchor="middle" font-family="'Noto Sans JP', system-ui, sans-serif">中</text><text x="92" y="12" font-size="7.5" fill="#c7cbe0" font-family="'Noto Sans JP', system-ui, sans-serif">米政府、増税や歳出削減の可能性</text><text x="232" y="12" font-size="7" fill="#56608d" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">01:51</text><rect x="256" y="4.5" width="11" height="10" rx="2" fill="none" stroke="#e9b949" stroke-width="0.8"/><text x="261.5" y="12" font-size="6.5" fill="#e9b949" text-anchor="middle" font-family="'Noto Sans JP', system-ui, sans-serif">中</text><text x="272" y="12" font-size="7.5" fill="#c7cbe0" font-family="'Noto Sans JP', system-ui, sans-serif">独10年債利回りが上昇</text><text x="412" y="12" font-size="7" fill="#56608d" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">01:27</text><rect x="436" y="4.5" width="11" height="10" rx="2" fill="none" stroke="#e9b949" stroke-width="0.8"/><text x="441.5" y="12" font-size="6.5" fill="#e9b949" text-anchor="middle" font-family="'Noto Sans JP', system-ui, sans-serif">中</text><text x="452" y="12" font-size="7.5" fill="#c7cbe0" font-family="'Noto Sans JP', system-ui, sans-serif">ユーロドル、下落の兆し</text><text x="592" y="12" font-size="7" fill="#56608d" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">00:25</text><rect x="616" y="4.5" width="11" height="10" rx="2" fill="none" stroke="#e9b949" stroke-width="0.8"/><text x="621.5" y="12" font-size="6.5" fill="#e9b949" text-anchor="middle" font-family="'Noto Sans JP', system-ui, sans-serif">中</text><text x="632" y="12" font-size="7.5" fill="#c7cbe0" font-family="'Noto Sans JP', system-ui, sans-serif">ドル円テクニカル下向き</text><rect x="0" y="17" width="770" height="17" rx="0" fill="#0b1233"/><rect x="0" y="17" width="44" height="17" rx="0" fill="#16215a"/><text x="22" y="28.5" font-size="7" fill="#9bd0ff" font-weight="700" text-anchor="middle" font-family="'Noto Sans JP', system-ui, sans-serif">利確速報</text><text x="52" y="28.5" font-size="7" fill="#56608d" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">07:58</text><text x="78" y="28.5" font-size="7.5" fill="#c7cbe0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">XAUUSD</text><text x="180" y="28.5" font-size="7.5" fill="#34d399" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">+236,958</text><text x="196" y="28.5" font-size="7" fill="#56608d" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">07:47</text><text x="222" y="28.5" font-size="7.5" fill="#c7cbe0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">XAUUSD</text><text x="324" y="28.5" font-size="7.5" fill="#34d399" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">+20,880</text><text x="340" y="28.5" font-size="7" fill="#56608d" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">07:38</text><text x="366" y="28.5" font-size="7.5" fill="#c7cbe0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">EURUSD</text><text x="468" y="28.5" font-size="7.5" fill="#34d399" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">+18,067</text><text x="484" y="28.5" font-size="7" fill="#56608d" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">07:11</text><text x="510" y="28.5" font-size="7.5" fill="#c7cbe0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">USDJPY</text><text x="612" y="28.5" font-size="7.5" fill="#34d399" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">+95,122</text><text x="628" y="28.5" font-size="7" fill="#56608d" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">07:07</text><text x="654" y="28.5" font-size="7.5" fill="#c7cbe0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">XAUUSD</text><text x="756" y="28.5" font-size="7.5" fill="#34d399" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">+112,125</text><rect x="0" y="34" width="770" height="24" rx="0" fill="#0d1438"/><path d="M7 42h10M7 46h10M7 50h10" stroke="#8c95b8" stroke-width="1.3"/><rect x="22" y="38" width="42" height="16" rx="4" fill="#16205a"/><text x="43" y="49.5" font-size="8" fill="#e5e7eb" font-weight="800" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">XAUUSD</text><text x="79" y="49.5" font-size="7" fill="#8c95b8" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">M1</text><text x="99" y="49.5" font-size="7" fill="#8c95b8" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">M5</text><text x="119" y="49.5" font-size="7" fill="#8c95b8" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">M15</text><text x="139" y="49.5" font-size="7" fill="#8c95b8" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">M30</text><rect x="150" y="38" width="18" height="16" rx="3" fill="#3a3413"/><text x="159" y="49.5" font-size="7" fill="#e9b949" font-weight="800" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">H1</text><text x="179" y="49.5" font-size="7" fill="#8c95b8" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">H4</text><text x="199" y="49.5" font-size="7" fill="#8c95b8" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">D1</text><text x="219" y="49.5" font-size="7" fill="#8c95b8" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">W1</text><text x="239" y="49.5" font-size="7" fill="#8c95b8" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">MN</text><rect x="262" y="39" width="16" height="14" rx="3" fill="none" stroke="#3a4880" stroke-width="1"/><rect x="266" y="43.5" width="8" height="6" rx="1.2" fill="none" stroke="#cbd5e1" stroke-width="1"/><circle cx="270" cy="46.5" r="1.6" fill="none" stroke="#cbd5e1" stroke-width="0.9"/><rect x="282" y="39" width="16" height="14" rx="3" fill="none" stroke="#3a4880" stroke-width="1"/><path d="M287 49.5v-3a3 3 0 0 1 6 0v3l1 1h-8z" fill="none" stroke="#cbd5e1" stroke-width="0.9"/><rect x="302" y="39" width="16" height="14" rx="3" fill="none" stroke="#3a4880" stroke-width="1"/><rect x="306" y="43" width="8" height="6" rx="1" fill="#cbd5e1"/><rect x="322" y="39" width="16" height="14" rx="3" fill="none" stroke="#3a4880" stroke-width="1"/><path d="M333.5 46a3.5 3.5 0 1 1-1-2.5M333.5 42.5v2.3h-2.3" fill="none" stroke="#cbd5e1" stroke-width="0.9"/><rect x="346" y="38" width="64" height="16" rx="8" fill="#2a2310" stroke="#b7791f" stroke-width="1"/><text x="368" y="49.5" font-size="7.5" fill="#e9b949" font-weight="700" text-anchor="middle" font-family="'Noto Sans JP', system-ui, sans-serif">ポジション</text><text x="400" y="49.5" font-size="7" fill="#e9b949" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">0</text><rect x="414" y="38" width="42" height="16" rx="8" fill="none" stroke="#2e3a73" stroke-width="1"/><text x="428" y="49.5" font-size="7.5" fill="#8c95b8" text-anchor="middle" font-family="'Noto Sans JP', system-ui, sans-serif">履歴</text><text x="446" y="49.5" font-size="7" fill="#56608d" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">39</text><rect x="0" y="58" width="22" height="520" rx="0" fill="#0d1438"/><path d="M7 70h8M11 66v8" fill="none" stroke="#e9b949" stroke-width="1.1" stroke-linecap="round"/><path d="M6 88h10" fill="none" stroke="#8c95b8" stroke-width="1.1" stroke-linecap="round"/><path d="M6 104l10-6" fill="none" stroke="#8c95b8" stroke-width="1.1" stroke-linecap="round"/><path d="M6 118h10M6 122h10" fill="none" stroke="#8c95b8" stroke-width="1.1" stroke-linecap="round"/><path d="M11 132v10" fill="none" stroke="#8c95b8" stroke-width="1.1" stroke-linecap="round"/><path d="M6 150h10v7h-10z" fill="none" stroke="#8c95b8" stroke-width="1.1" stroke-linecap="round"/><path d="M8 168h6M11 168v8" fill="none" stroke="#8c95b8" stroke-width="1.1" stroke-linecap="round"/><path d="M7 186h8M7 190h5M7 194h3" fill="none" stroke="#8c95b8" stroke-width="1.1" stroke-linecap="round"/><path d="M22 140H722M22 240H722M22 340H722M22 440H722M22 540H722M160 58V556M300 58V556M440 58V556M580 58V556" stroke="rgba(148,163,184,.07)" stroke-width="1"/><text x="372" y="330" font-size="44" fill="rgba(148,163,184,.08)" font-weight="700" text-anchor="middle" font-family="'Noto Sans JP', system-ui, sans-serif">XAUUSD H1</text><path d="M40.5 382.5V408.5M53.4 367.5V398.4M66.3 369.8V391.2M79.3 379.2V390.2M85.7 366.9V382.0M92.2 364.3V375.4M105.1 360.9V375.4M111.6 357.6V371.8M137.5 365.3V384.3M150.4 368.7V383.1M163.3 366.1V379.8M182.7 366.7V388.4M189.2 355.3V375.4M195.7 353.7V368.3M202.1 339.5V358.0M215.0 333.8V363.7M221.5 324.2V339.5M234.4 318.1V337.0M240.9 310.0V330.8M247.4 306.5V316.9M253.8 289.5V316.6M260.3 281.0V304.5M266.8 282.0V291.2M273.2 267.4V291.8M286.2 251.2V287.0M299.1 242.0V271.6M305.6 247.1V262.3M318.5 239.7V262.6M331.4 234.1V251.7M337.9 219.9V252.6M344.4 210.7V230.4M350.8 194.1V217.2M357.3 179.4V204.4M363.8 172.2V189.7M370.2 161.3V189.6M376.7 151.4V164.1M383.2 134.4V164.3M467.2 254.1V290.1M480.2 256.0V276.5M486.6 243.4V267.4M493.1 217.1V254.1M506.0 216.8V243.5M544.8 257.0V279.5M570.7 294.1V302.9M583.6 309.5V324.0M596.5 321.4V340.8M603.0 313.1V334.8M615.9 320.3V329.2M622.4 312.1V333.8M628.9 295.5V313.2M641.8 294.9V310.2M661.2 298.7V318.2M667.7 304.7V313.4M687.1 306.7V325.1M700.0 306.3V334.8" stroke="#22b573" stroke-width="0.8"/><path d="M34.0 384.4V405.9M46.9 382.4V393.6M59.9 372.0V393.2M72.8 369.0V386.1M98.7 364.4V375.7M118.1 363.6V371.0M124.5 360.2V373.8M131.0 361.4V385.8M143.9 373.1V390.9M156.9 372.0V378.3M169.8 366.3V387.7M176.3 374.2V390.0M208.6 343.9V367.0M228.0 326.5V338.8M279.7 265.5V289.5M292.6 251.9V279.8M312.0 239.9V267.4M325.0 245.3V250.9M389.6 135.5V158.1M396.1 151.4V158.2M402.6 152.2V170.3M409.0 158.4V175.7M415.5 162.7V200.9M422.0 189.1V212.4M428.4 201.5V233.8M434.9 214.6V234.6M441.4 231.9V245.1M447.8 238.0V261.1M454.3 258.2V278.0M460.8 268.9V287.4M473.7 254.6V273.5M499.6 227.3V237.1M512.5 215.2V236.6M519.0 232.5V243.0M525.4 236.6V247.8M531.9 235.3V257.5M538.3 247.3V285.2M551.3 265.2V282.3M557.7 266.5V304.9M564.2 289.0V307.8M577.1 295.2V323.8M590.1 310.7V343.3M609.5 317.6V327.8M635.3 293.8V308.4M648.3 290.2V313.3M654.7 305.1V319.2M674.1 299.3V314.9M680.6 308.3V330.0M693.5 307.2V333.9" stroke="#ef4d5a" stroke-width="0.8"/><path d="M38.6 383.0h3.8v16.5h-3.8zM51.5 377.7h3.8v15.1h-3.8zM64.4 378.0h3.8v8.9h-3.8zM77.4 380.1h3.8v2.2h-3.8zM83.8 370.7h3.8v9.4h-3.8zM90.3 365.5h3.8v5.1h-3.8zM103.2 369.0h3.8v5.5h-3.8zM109.7 367.3h3.8v1.7h-3.8zM135.6 375.8h3.8v3.4h-3.8zM148.5 373.9h3.8v7.4h-3.8zM161.4 374.1h3.8v4.2h-3.8zM180.8 372.0h3.8v11.3h-3.8zM187.3 365.4h3.8v6.6h-3.8zM193.8 355.8h3.8v9.6h-3.8zM200.2 347.0h3.8v8.8h-3.8zM213.1 336.0h3.8v22.3h-3.8zM219.6 328.6h3.8v7.4h-3.8zM232.5 325.3h3.8v4.4h-3.8zM239.0 312.8h3.8v12.4h-3.8zM245.5 307.5h3.8v5.3h-3.8zM251.9 297.3h3.8v10.2h-3.8zM258.4 283.4h3.8v13.9h-3.8zM264.9 282.8h3.8v1.0h-3.8zM271.3 273.3h3.8v9.5h-3.8zM284.3 260.8h3.8v24.2h-3.8zM297.2 252.0h3.8v19.2h-3.8zM303.7 249.6h3.8v2.4h-3.8zM316.6 245.6h3.8v13.0h-3.8zM329.5 242.1h3.8v8.7h-3.8zM336.0 225.1h3.8v17.1h-3.8zM342.5 216.5h3.8v8.5h-3.8zM348.9 199.7h3.8v16.8h-3.8zM355.4 181.8h3.8v17.9h-3.8zM361.9 180.0h3.8v1.8h-3.8zM368.3 162.5h3.8v17.5h-3.8zM374.8 157.6h3.8v5.0h-3.8zM381.3 138.3h3.8v19.2h-3.8zM465.3 263.8h3.8v21.8h-3.8zM478.3 261.4h3.8v7.3h-3.8zM484.7 247.6h3.8v13.9h-3.8zM491.2 227.4h3.8v20.2h-3.8zM504.1 222.9h3.8v12.2h-3.8zM542.9 265.2h3.8v11.3h-3.8zM568.8 299.2h3.8v1.0h-3.8zM581.7 318.3h3.8v1.4h-3.8zM594.6 329.9h3.8v9.1h-3.8zM601.1 321.1h3.8v8.8h-3.8zM614.0 325.0h3.8v1.8h-3.8zM620.5 312.8h3.8v12.2h-3.8zM627.0 302.9h3.8v10.0h-3.8zM639.9 298.7h3.8v7.8h-3.8zM659.3 307.5h3.8v7.4h-3.8zM665.8 305.6h3.8v2.0h-3.8zM685.2 309.8h3.8v10.7h-3.8zM698.1 315.2h3.8v11.5h-3.8z" fill="#22b573"/><path d="M32.1 394.0h3.8v5.5h-3.8zM45.0 383.0h3.8v9.8h-3.8zM58.0 377.7h3.8v9.1h-3.8zM70.9 378.0h3.8v4.3h-3.8zM96.8 365.5h3.8v9.0h-3.8zM116.2 367.3h3.8v1.0h-3.8zM122.6 367.7h3.8v2.9h-3.8zM129.1 370.5h3.8v8.7h-3.8zM142.0 375.8h3.8v5.4h-3.8zM155.0 373.9h3.8v4.5h-3.8zM167.9 374.1h3.8v4.3h-3.8zM174.4 378.5h3.8v4.8h-3.8zM206.7 347.0h3.8v11.4h-3.8zM226.1 328.6h3.8v1.0h-3.8zM277.8 273.3h3.8v11.6h-3.8zM290.7 260.8h3.8v10.5h-3.8zM310.1 249.6h3.8v9.0h-3.8zM323.1 245.6h3.8v5.2h-3.8zM387.7 138.3h3.8v16.2h-3.8zM394.2 154.5h3.8v3.5h-3.8zM400.7 158.1h3.8v5.9h-3.8zM407.1 164.0h3.8v8.7h-3.8zM413.6 172.7h3.8v19.9h-3.8zM420.1 192.6h3.8v14.4h-3.8zM426.5 207.0h3.8v17.3h-3.8zM433.0 224.3h3.8v10.2h-3.8zM439.5 234.5h3.8v6.1h-3.8zM445.9 240.6h3.8v19.1h-3.8zM452.4 259.7h3.8v14.9h-3.8zM458.9 274.6h3.8v11.0h-3.8zM471.8 263.8h3.8v4.9h-3.8zM497.7 227.4h3.8v7.7h-3.8zM510.6 222.9h3.8v12.0h-3.8zM517.1 234.9h3.8v7.5h-3.8zM523.5 242.4h3.8v1.5h-3.8zM530.0 244.0h3.8v7.6h-3.8zM536.4 251.6h3.8v24.9h-3.8zM549.4 265.2h3.8v6.8h-3.8zM555.8 272.1h3.8v23.7h-3.8zM562.3 295.7h3.8v4.4h-3.8zM575.2 299.2h3.8v20.5h-3.8zM588.2 318.3h3.8v20.6h-3.8zM607.6 321.1h3.8v5.7h-3.8zM633.4 302.9h3.8v3.6h-3.8zM646.4 298.7h3.8v10.8h-3.8zM652.8 309.5h3.8v5.4h-3.8zM672.2 305.6h3.8v7.4h-3.8zM678.7 312.9h3.8v7.6h-3.8zM691.6 309.8h3.8v16.9h-3.8z" fill="#ef4d5a"/><path d="M22 128L722 196" stroke="#ef4d5a" stroke-width="1.2" opacity=".85"/><path d="M22 470L722 398" stroke="#ef4d5a" stroke-width="1.2" opacity=".85"/><path d="M22 392H722" stroke="#4f8df7" stroke-width="1" stroke-dasharray="3 3" opacity=".9"/><path d="M420 150L722 360" stroke="#4f8df7" stroke-width="1" stroke-dasharray="3 3" opacity=".9"/><path d="M22 315.2H722" stroke="#ef4d5a" stroke-width=".8" stroke-dasharray="2 2"/><text x="766" y="83" font-size="7" fill="#8c95b8" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">4760.00</text><text x="766" y="127" font-size="7" fill="#8c95b8" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">4660.00</text><text x="766" y="171" font-size="7" fill="#8c95b8" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">4560.00</text><text x="766" y="215" font-size="7" fill="#8c95b8" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">4460.00</text><text x="766" y="259" font-size="7" fill="#8c95b8" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">4360.00</text><text x="766" y="303" font-size="7" fill="#8c95b8" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">4260.00</text><text x="766" y="347" font-size="7" fill="#8c95b8" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">4160.00</text><text x="766" y="391" font-size="7" fill="#8c95b8" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">4060.00</text><text x="766" y="435" font-size="7" fill="#8c95b8" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">3960.00</text><text x="766" y="479" font-size="7" fill="#8c95b8" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">3860.00</text><text x="766" y="523" font-size="7" fill="#8c95b8" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">3760.00</text><rect x="724" y="308.2366347873118" width="46" height="13" rx="2" fill="#ef4d5a"/><text x="766" y="318.2366347873118" font-size="7.5" fill="#fff" font-weight="700" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">4320.63</text><rect x="30" y="66" width="150" height="18" rx="9" fill="rgba(13,20,52,.92)" stroke="#1f2a58" stroke-width="1"/><text x="40" y="78.5" font-size="7" fill="#8c95b8" font-family="'Noto Sans JP', system-ui, sans-serif">▾</text><text x="54" y="78.5" font-size="7.5" fill="#8c95b8" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">XAUUSD · H1</text><text x="118" y="78.5" font-size="9" fill="#fff" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">4320.63</text><text x="170" y="78.5" font-size="7" fill="#8c95b8" font-family="'Noto Sans JP', system-ui, sans-serif">▸</text><text x="60" y="568" font-size="7" fill="#8c95b8" text-anchor="middle" font-family="'Noto Sans JP', system-ui, sans-serif">7月13日</text><text x="178" y="568" font-size="7" fill="#8c95b8" text-anchor="middle" font-family="'Noto Sans JP', system-ui, sans-serif">7月23日</text><text x="296" y="568" font-size="7" fill="#8c95b8" text-anchor="middle" font-family="'Noto Sans JP', system-ui, sans-serif">8月</text><text x="414" y="568" font-size="7" fill="#8c95b8" text-anchor="middle" font-family="'Noto Sans JP', system-ui, sans-serif">8月13日</text><text x="532" y="568" font-size="7" fill="#8c95b8" text-anchor="middle" font-family="'Noto Sans JP', system-ui, sans-serif">8月27日</text><text x="650" y="568" font-size="7" fill="#8c95b8" text-anchor="middle" font-family="'Noto Sans JP', system-ui, sans-serif">9月7日</text><line x1="22" y1="556" x2="770" y2="556" stroke="#1c2552"/><text x="32" y="546" font-size="12" fill="#e5e7eb" font-weight="900" font-family="'Noto Sans JP', system-ui, sans-serif">TV</text><rect x="0" y="576" width="770" height="24" rx="0" fill="#0d1438"/><rect x="4" y="580" width="96" height="16" rx="3" fill="#16205a"/><text x="12" y="591" font-size="7.5" fill="#fff" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">XAUUSD</text><text x="92" y="591" font-size="7" fill="#f87171" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">-1.87%</text><text x="118" y="591" font-size="7.5" fill="#8c95b8" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">USDJPY</text><text x="198" y="591" font-size="7" fill="#34d399" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">+0.58%</text><text x="224" y="591" font-size="7.5" fill="#8c95b8" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">GBPUSD</text><text x="304" y="591" font-size="7" fill="#f87171" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">-0.29%</text><text x="330" y="591" font-size="7.5" fill="#8c95b8" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">EURUSD</text><text x="410" y="591" font-size="7" fill="#f87171" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">-0.21%</text><text x="436" y="591" font-size="7.5" fill="#8c95b8" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">EURJPY</text><text x="516" y="591" font-size="7" fill="#34d399" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">+0.36%</text><text x="542" y="591" font-size="7.5" fill="#8c95b8" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">USDCHF</text><text x="622" y="591" font-size="7" fill="#34d399" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">+0.40%</text><rect x="770" y="0" width="196" height="600" rx="0" fill="#0f1640"/><line x1="770" y1="0" x2="770" y2="600" stroke="#1c2552"/><circle cx="785" cy="22" r="3" fill="#22c55e"/><rect x="792" y="14" width="120" height="16" rx="5" fill="#0a1236" stroke="#26336b" stroke-width="1"/><text x="800" y="25" font-size="7" fill="#56608d" font-family="'Noto Sans JP', system-ui, sans-serif">口座番号</text><rect x="916" y="14" width="38" height="16" rx="8" fill="#2a2310" stroke="#b7791f" stroke-width="1"/><text x="935" y="25" font-size="7" fill="#e9b949" font-weight="700" text-anchor="middle" font-family="'Noto Sans JP', system-ui, sans-serif">損失率</text><text x="868" y="46" font-size="7" fill="#8c95b8" text-anchor="middle" font-family="'Noto Sans JP', system-ui, sans-serif">残高</text><text x="868" y="70" font-size="21" fill="#fff" font-weight="800" text-anchor="middle" font-family="'Noto Sans JP', system-ui, sans-serif">¥1,870,936</text><text x="868" y="86" font-size="7.5" fill="#8c95b8" text-anchor="middle" font-family="'Noto Sans JP', system-ui, sans-serif">有効証拠金　1,870,936</text><rect x="782" y="94" width="83" height="20" rx="5" fill="none" stroke="#26336b" stroke-width="1"/><text x="788" y="107" font-size="6.5" fill="#8c95b8" font-family="'Noto Sans JP', system-ui, sans-serif">損失率固定</text><text x="859" y="107.5" font-size="8" fill="#e5e7eb" font-weight="700" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">− 2.0% +</text><rect x="871" y="94" width="83" height="20" rx="5" fill="none" stroke="#26336b" stroke-width="1"/><text x="877" y="107" font-size="6.5" fill="#8c95b8" font-family="'Noto Sans JP', system-ui, sans-serif">許容損失</text><text x="948" y="107.5" font-size="8" fill="#e5e7eb" font-weight="700" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">¥37,418</text><rect x="778" y="122" width="180" height="124" rx="9" fill="#151d4d" stroke="#26336b" stroke-width="1"/><circle cx="786" cy="134" r="2.2" fill="#8c95b8"/><text x="792" y="137" font-size="7.5" fill="#8c95b8" font-weight="700" font-family="'Noto Sans JP', system-ui, sans-serif">成行 ▾</text><rect x="782" y="144" width="64" height="36" rx="7" fill="#3d5fd9"/><text x="814" y="166" font-size="11" fill="#fff" font-weight="800" text-anchor="middle" font-family="'Noto Sans JP', system-ui, sans-serif">SELL</text><rect x="852" y="144" width="32" height="36" rx="7" fill="#0f1640" stroke="#26336b" stroke-width="1"/><text x="868" y="156" font-size="5.5" fill="#8c95b8" text-anchor="middle" font-family="'Noto Sans JP', system-ui, sans-serif">LOT</text><text x="868" y="171" font-size="9.5" fill="#fff" font-weight="800" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">0.10</text><rect x="890" y="144" width="64" height="36" rx="7" fill="#c2414b"/><text x="922" y="166" font-size="11" fill="#fff" font-weight="800" text-anchor="middle" font-family="'Noto Sans JP', system-ui, sans-serif">BUY</text><text x="796" y="199" font-size="7" fill="#8c95b8" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">−1</text><text x="824.8" y="199" font-size="7" fill="#8c95b8" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">−0.1</text><text x="853.6" y="199" font-size="7" fill="#8c95b8" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">−.01</text><text x="882.4" y="199" font-size="7" fill="#8c95b8" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">+.01</text><text x="911.2" y="199" font-size="7" fill="#8c95b8" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">+0.1</text><text x="940" y="199" font-size="7" fill="#8c95b8" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">+1</text><rect x="782" y="188" width="172" height="17" rx="4" fill="none" stroke="#26336b" stroke-width="1"/><rect x="782" y="212" width="110.08" height="24" rx="5" fill="#1c2452" stroke="#26336b" stroke-width="1"/><text x="837.04" y="228" font-size="9" fill="#8c95b8" font-weight="700" text-anchor="middle" font-family="'Noto Sans JP', system-ui, sans-serif">全決済</text><rect x="895.52" y="212" width="58.480000000000004" height="24" rx="5" fill="#1c2452" stroke="#26336b" stroke-width="1"/><text x="924.76" y="228" font-size="7.5" fill="#8c95b8" text-anchor="middle" font-family="'Noto Sans JP', system-ui, sans-serif">1/2決済</text><rect x="778" y="254" width="180" height="76" rx="9" fill="#151d4d" stroke="#26336b" stroke-width="1"/><circle cx="786" cy="266" r="2.2" fill="#8c95b8"/><text x="792" y="269" font-size="7.5" fill="#8c95b8" font-weight="700" font-family="'Noto Sans JP', system-ui, sans-serif">シナリオ ▾</text><rect x="782" y="276" width="83" height="44" rx="7" fill="#22306b" stroke="#4f6fd8" stroke-width="1"/><text x="823.5" y="295" font-size="8.5" fill="#dbe6ff" font-weight="800" text-anchor="middle" font-family="'Noto Sans JP', system-ui, sans-serif">ショートシナリオ</text><text x="823.5" y="309" font-size="5.5" fill="#9fb2ea" text-anchor="middle" font-family="'Noto Sans JP', system-ui, sans-serif">TP / SL を設定して構築</text><rect x="871" y="276" width="83" height="44" rx="7" fill="#4a1f38" stroke="#ef4d5a" stroke-width="1"/><text x="912.5" y="295" font-size="8.5" fill="#ffd5da" font-weight="800" text-anchor="middle" font-family="'Noto Sans JP', system-ui, sans-serif">ロングシナリオ</text><text x="912.5" y="309" font-size="5.5" fill="#e7a3ad" text-anchor="middle" font-family="'Noto Sans JP', system-ui, sans-serif">TP / SL を設定して構築</text><rect x="778" y="338" width="180" height="62" rx="9" fill="#151d4d" stroke="#26336b" stroke-width="1"/><circle cx="786" cy="350" r="2.2" fill="#8c95b8"/><text x="792" y="353" font-size="7.5" fill="#8c95b8" font-weight="700" font-family="'Noto Sans JP', system-ui, sans-serif">シナリオ構築 ▾</text><rect x="782" y="360" width="84" height="26" rx="6" fill="#0f1640" stroke="#c7cbe0" stroke-width="1.2"/><text x="824" y="377" font-size="8.5" fill="#fff" font-weight="800" text-anchor="middle" font-family="'Noto Sans JP', system-ui, sans-serif">シナリオ構築</text><rect x="872" y="360" width="38" height="26" rx="6" fill="#1c2452" stroke="#26336b" stroke-width="1"/><text x="891" y="377" font-size="7" fill="#8c95b8" text-anchor="middle" font-family="'Noto Sans JP', system-ui, sans-serif">非表示</text><rect x="916" y="360" width="38" height="26" rx="6" fill="#1c2452" stroke="#26336b" stroke-width="1"/><text x="935" y="377" font-size="7" fill="#f87171" text-anchor="middle" font-family="'Noto Sans JP', system-ui, sans-serif">全削除</text><text x="782" y="416" font-size="6.5" fill="#56608d" font-family="'Noto Sans JP', system-ui, sans-serif">この通貨ペアには保有中のポジションがありません。</text><text x="782" y="520" font-size="6.5" fill="#56608d" font-family="'Noto Sans JP', system-ui, sans-serif">お気に入り</text><rect x="782" y="527" width="172" height="20" rx="6" fill="#231f12" stroke="#b7791f" stroke-width="1"/><text x="790" y="540.5" font-size="7.5" fill="#e9b949" font-family="'Noto Sans JP', system-ui, sans-serif">シナリオ構築パネルを表示</text><text x="946" y="540.5" font-size="7" fill="#e9b949" text-anchor="end" font-family="'Noto Sans JP', system-ui, sans-serif">オン</text><circle cx="785" cy="585" r="2.2" fill="#e9b949"/><text x="792" y="588" font-size="7" fill="#c7cbe0" font-family="'Noto Sans JP', system-ui, sans-serif">21:30 米 小売売上高</text><text x="954" y="588" font-size="6.5" fill="#8c95b8" text-anchor="end" font-family="'Noto Sans JP', system-ui, sans-serif">あと 13時間</text><rect x="966" y="0" width="34" height="600" rx="0" fill="#0c1235"/><line x1="966" y1="0" x2="966" y2="600" stroke="#1c2552"/><rect x="966" y="12" width="3" height="22" rx="1" fill="#e9b949"/><path d="M976 30v-10M980 30v-14M984 30v-8M988 30v-12" fill="none" stroke="#e9b949" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M975 58h14v11h-14zM975 62h14M979 55v5M985 55v5" fill="none" stroke="#aeb6d6" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M975 97l5-6 4 3 5-7" fill="none" stroke="#aeb6d6" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M975 122h5v5h-5zM983 122h5v5h-5zM975 130h5v5h-5zM983 130h5v5h-5z" fill="none" stroke="#aeb6d6" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M976 156h12v14h-12zM979 161h6M979 165h6" fill="none" stroke="#aeb6d6" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                    <div class="wy-pc-base" aria-hidden="true"></div>
-                </div>
+            <p class="fcard-what">持っているポジションを、まとめて、または半分だけ決済できます。</p>
+            <div class="fwhere"><span class="fwhere-item"><b>PC</b><span>右のパネル</span><i aria-hidden="true">›</i><span>成行</span></span></div>
+            <div class="fcard-body"><ul class="fbul"><li><b>全決済</b>：保有中のポジションをまとめて決済します。</li><li><b>1/2決済</b>：ロットの半分だけ決済します。もう一度押すと、残りのさらに半分を決済します（例：1lot → 0.5lot → 0.25lot）。</li></ul><div class="gtip">全決済で、いま表示している通貨ペアのポジションだけを決済したいときは、下の「決済まわりの設定」を変えます。</div></div>
+        </article>
+        <article class="fcard" id="positions">
+            <div class="fcard-top">
+                <h3 class="fcard-name">ポジションと履歴</h3>
+                
             </div>
-            <div class="feat-body">
-                <p class="feat-head">PCでは、画面の右側に注文とシナリオがまとまっています。</p>
-                    <ol class="feat-steps">
-                        <li><b>右のパネル</b>：口座・残高、ロットの自動計算、成行の注文、シナリオ、シナリオ構築、お気に入り</li>
-                        <li><b>上のメニュー</b>：通貨ペアと時間足、スクリーンショット・アラート、ポジション・履歴</li>
-                        <li><b>左のツール</b>：チャートに線や図形を引く</li>
-                        <li><b>画面のいちばん上と下</b>：ニュースと利確速報、よく見る通貨ペアの切り替え</li><li><b>右端のアイコン</b>：損益カレンダー・通貨強弱・ヒートマップ・ニュース。いちばん下の歯車が設定</li>
-                    </ol>
+            <p class="fcard-what">保有中のポジションと、決済したトレードを一覧で確認できます。</p>
+            <div class="fwhere"><span class="fwhere-item"><b>PC</b><span>上のメニュー</span><i aria-hidden="true">›</i><span>「ポジション」「履歴」</span></span><span class="fwhere-item"><b>スマホ</b><span>下のメニュー</span><i aria-hidden="true">›</i><span>「ポジション」「履歴」</span></span></div>
+            <div class="fcard-body"><p>PCのボタンの横の数字は、保有中のポジションの数と、履歴の件数です。</p></div>
+        </article>
+        <article class="fcard" id="settle">
+            <div class="fcard-top">
+                <h3 class="fcard-name">決済まわりの設定</h3>
+                
             </div>
-        </div>
+            <p class="fcard-what">ボタンを押したときに確認を出すかどうかなどを選べます。</p>
+            <div class="fwhere"><span class="fwhere-item"><span>設定</span><i aria-hidden="true">›</i><span>一般</span><i aria-hidden="true">›</i><span>決済関連</span></span></div>
+            <div class="fcard-body"><div class="ftable-wrap"><table class="ftable"><thead><tr><th>項目</th><th>初期値</th><th>できること</th></tr></thead><tbody><tr><td data-h="項目">成行エントリーで確認</td><td data-h="初期値">オン</td><td data-h="できること">SELL / BUY を押したあとに、確認が出ます。オフにすると、押した瞬間に発注します。</td></tr><tr><td data-h="項目">ワンクリック決済</td><td data-h="初期値">オフ</td><td data-h="できること">オンにすると、決済のときに確認を出さず、すぐに決済します。</td></tr><tr><td data-h="項目">全決済時に表示中の通貨ペアのみ決済</td><td data-h="初期値">オフ</td><td data-h="できること">オンにすると、全決済で「いま表示している通貨ペア」のポジションだけを決済します。</td></tr></tbody></table></div><p class="gnote">押し間違いを防ぐため、慣れるまでは「成行エントリーで確認」をオンのまま使いましょう。</p></div>
+        </article>
     </div>
 </section>
 
-<!-- 機能をさがす -->
-<section class="ytt-spec-section" id="features" style="background:#f4f6f9;">
+<section class="ytt-spec-section" style="background:#fff;">
     <div class="ytt-spec-inner ytt-fto-wide">
         <div class="ytt-spec-header">
             <span class="section-title-badge section-title-badge--orange">
                 <img class="hero-title-side hero-title-side--left" src="img/title-side-orange-left.png" alt="">
-                機能一覧
+                ロットの決め方
                 <img class="hero-title-side hero-title-side--right" src="img/title-side-orange-right.png" alt="">
             </span>
             <div style="text-align:center; margin-bottom:0.25rem;">
                 <div style="display:inline-block; white-space:nowrap;">
-                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">Web版YTTでできること</h2>
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">ロットの自動計算</h2>
                     <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
                 </div>
             </div>
-            <p>機能を5つのページに分けて紹介しています。<br>まずは「注文・ロット・決済」と「シナリオ・予約注文」から読んでみてください。</p>
+            <p>1回のトレードで負うリスクを決めておくと、<br>ロットを自動で計算します。</p>
         </div>
-        <div class="fhub">
-            <div class="fhub-card">
-                <h3><span class="fcat-no">1</span>注文・ロット・決済</h3>
-                <p>エントリーから決済までの基本の操作と、ロットの決め方、ポジションを持ったあとの自動処理です。</p>
-                <div class="fhub-links"><a href="ytt-web-f-trade.html#order">成行注文</a><a href="ytt-web-f-trade.html#close">全決済・1/2決済</a><a href="ytt-web-f-trade.html#positions">ポジションと履歴</a><a href="ytt-web-f-trade.html#settle">決済まわりの設定</a><a href="ytt-web-f-trade.html#lot">ロットの決め方（3つのモード）</a><a href="ytt-web-f-trade.html#auto-be">自動建値設置</a><a href="ytt-web-f-trade.html#trail">TPのトレイル化</a><a href="ytt-web-f-trade.html#rr-fix">RR比固定</a></div>
-                <a class="btn-sq-white sm fhub-go" href="ytt-web-f-trade.html">このページを見る →</a>
+        <article class="fcard has-media" id="lot">
+            <div class="fcard-top">
+                <h3 class="fcard-name">ロットの決め方（3つのモード）</h3>
+                <span class="finit">初期値：損失率固定モード（2.0%）</span>
             </div>
-            <div class="fhub-card">
-                <h3><span class="fcat-no">2</span>シナリオ・予約注文</h3>
-                <p>エントリーの前に「こう動いたら、こうする」を決めておく機能です。チャートを見ていない時間も、決めたとおりに注文できます。</p>
-                <div class="fhub-links"><a href="ytt-web-f-scenario.html#build">シナリオ構築</a><a href="ytt-web-f-scenario.html#scenario">シナリオ（TP/SL）</a><a href="ytt-web-f-scenario.html#reserve">予約注文</a><a href="ytt-web-f-scenario.html#trigger">エントリートリガー</a><a href="ytt-web-f-scenario.html#addpos">追加ポジ</a></div>
-                <a class="btn-sq-white sm fhub-go" href="ytt-web-f-scenario.html">このページを見る →</a>
+            <p class="fcard-what">「1回で失ってよい割合（金額）」を決めておけば、ロットを毎回計算しなくて済みます。</p>
+            <div class="fwhere"><span class="fwhere-item"><span>設定</span><i aria-hidden="true">›</i><span>一般</span><i aria-hidden="true">›</i><span>ロットの決め方</span></span><span class="fwhere-item"><b>率の変更</b><span>右のパネル</span><i aria-hidden="true">›</i><span>残高の下「損失率固定 − 2.0% ＋」</span></span></div>
+            <div class="fcard-grid"><div class="fcard-media"><figure class="fvid pc"><div class="fvid-box" role="img" aria-label="動画（準備中）：ロットの自動計算"><span class="fvid-play" aria-hidden="true"></span><span class="fvid-label">動画 準備中</span><span class="fvid-meta">PC・約50秒</span></div></figure></div><div class="fcard-body"><div class="ftable-wrap"><table class="ftable"><thead><tr><th>モード</th><th>初期値</th><th>計算のしかた</th></tr></thead><tbody><tr><td data-h="モード"><b>損失率固定モード</b><br><small>最初はこれ・おすすめ</small></td><td data-h="初期値">2.0%</td><td data-h="計算のしかた">1回の損失を、残高の○%に固定します。<br>例：残高100万円・2%なら、損切りになったときの損失は2万円。</td></tr><tr><td data-h="モード"><b>損失額固定モード</b></td><td data-h="初期値">¥5,000</td><td data-h="計算のしかた">1回の損失を、金額で固定します。<br>例：¥5,000なら、損切りで失うのは5,000円まで。</td></tr><tr><td data-h="モード"><b>残高：lot固定モード</b></td><td data-h="初期値">10万円：0.10lot</td><td data-h="計算のしかた">残高10万円あたりのロットを固定します。<br>例：残高100万円なら1.00lot。残高が増減すると、ロットも自動で増減します。</td></tr></tbody></table></div><p>損失率固定・損失額固定では、<b>SLまでの幅</b>に合わせてロットが決まります。SLを遠くに置くほどロットは小さく、近くに置くほど大きくなります。</p><div class="gtip">残高の下の「許容損失」が、いまの設定で1回に失ってよい金額です。<br>残高：lot固定モードは、狙うpips数がだいたい決まっているスキャルピングなどに向いています。</div></div></div>
+        </article>
+    </div>
+</section>
+
+<section class="ytt-spec-section" style="background:#f4f6f9;">
+    <div class="ytt-spec-inner ytt-fto-wide">
+        <div class="ytt-spec-header">
+            <span class="section-title-badge section-title-badge--blue">
+                <img class="hero-title-side hero-title-side--left" src="img/title-side-blue-left.png" alt="">
+                自動処理
+                <img class="hero-title-side hero-title-side--right" src="img/title-side-blue-right.png" alt="">
+            </span>
+            <div style="text-align:center; margin-bottom:0.25rem;">
+                <div style="display:inline-block; white-space:nowrap;">
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">ポジションを持ったあと</h2>
+                    <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
+                </div>
             </div>
-            <div class="fhub-card">
-                <h3><span class="fcat-no">3</span>チャートの表示</h3>
-                <p>チャートに線や情報を重ねて、相場の状況をひと目で分かるようにする機能です。</p>
-                <div class="fhub-links"><a href="ytt-web-f-chart.html#autoline">オートライン</a><a href="ytt-web-f-chart.html#zigzag">zigzag MTF</a><a href="ytt-web-f-chart.html#alertline">通知ライン（アラート）</a><a href="ytt-web-f-chart.html#breakeven">Breakeven表示</a><a href="ytt-web-f-chart.html#entry-viz">エントリーの可視化</a><a href="ytt-web-f-chart.html#history">チャートに取引履歴を表示</a><a href="ytt-web-f-chart.html#indicator">経済指標表示</a><a href="ytt-web-f-chart.html#session">セッション表示</a><a href="ytt-web-f-chart.html#time">時間表示</a><a href="ytt-web-f-chart.html#scalp">スキャモード</a><a href="ytt-web-f-chart.html#watermark">通貨ペア・時間足をすかし表示</a><a href="ytt-web-f-chart.html#drawing">描画ツール</a><a href="ytt-web-f-chart.html#cursor">十字カーソル</a><a href="ytt-web-f-chart.html#screenshot">スクリーンショット</a></div>
-                <a class="btn-sq-white sm fhub-go" href="ytt-web-f-chart.html">このページを見る →</a>
+            <p>オンにしておくと、ポジションを持ったあとの<br>SLやTPを自動で動かします。</p>
+        </div>
+        <article class="fcard" id="auto-be">
+            <div class="fcard-top">
+                <h3 class="fcard-name">自動建値設置</h3>
+                <span class="finit">初期値：オフ（建値設置pips：1.0）</span>
             </div>
-            <div class="fhub-card">
-                <h3><span class="fcat-no">4</span>分析ツール</h3>
-                <p>PCの画面の右端に並ぶアイコンから開く、分析と振り返りのためのツールです。</p>
-                <div class="fhub-links"><a href="ytt-web-f-tools.html#calendar">損益カレンダー</a><a href="ytt-web-f-tools.html#strength">通貨強弱</a><a href="ytt-web-f-tools.html#heatmap">ヒートマップ</a><a href="ytt-web-f-tools.html#news">ニュース</a><a href="ytt-web-f-tools.html#takeprofit">利確速報</a></div>
-                <a class="btn-sq-white sm fhub-go" href="ytt-web-f-tools.html">このページを見る →</a>
+            <p class="fcard-what">ポジションを複数持ったとき、SLを自動で建値に移します。</p>
+            <div class="fwhere"><span class="fwhere-item"><span>設定</span><i aria-hidden="true">›</i><span>一般</span><i aria-hidden="true">›</i><span>自動処理</span></span></div>
+            <div class="fcard-body"><p><b>建値</b>とは、損益がほぼ0になる価格のことです。「建値設置pips」で、建値から何pips利益側にSLを置くかを決めます。</p><div class="gtip">ピラミッディング（ポジションの買い増し・売り増し）をするときに便利です。</div></div>
+        </article>
+        <article class="fcard" id="trail">
+            <div class="fcard-top">
+                <h3 class="fcard-name">TPのトレイル化</h3>
+                <span class="finit">初期値：オフ（トレイル追随pips：10.0）</span>
             </div>
-            <div class="fhub-card">
-                <h3><span class="fcat-no">5</span>モードと設定</h3>
-                <p>口座の種類に合わせたモードと、画面の見た目の変え方、設定画面の使い方です。</p>
-                <div class="fhub-links"><a href="ytt-web-f-settings.html#prop">プロップモード</a><a href="ytt-web-f-settings.html#virtual">仮想残高モード</a><a href="ytt-web-f-settings.html#copy">コピーモード（受信）</a><a href="ytt-web-f-settings.html#pl-hide">損益非表示</a><a href="ytt-web-f-settings.html#bonus">残高にボーナスを含めて表示</a><a href="ytt-web-f-settings.html#theme">配色</a><a href="ytt-web-f-settings.html#canvas">キャンバス（チャートの色）</a><a href="ytt-web-f-settings.html#open">設定を開く</a><a href="ytt-web-f-settings.html#fav">お気に入り（☆）</a><a href="ytt-web-f-settings.html#copy-settings">他の口座に設定をコピー</a><a href="ytt-web-f-settings.html#reset">初期値にリセット</a><a href="ytt-web-f-settings.html#settings-list">設定の一覧</a></div>
-                <a class="btn-sq-white sm fhub-go" href="ytt-web-f-settings.html">このページを見る →</a>
+            <p class="fcard-what">TPに届いてもすぐには利確せず、利益が伸びる方向にSLがついていきます。</p>
+            <div class="fwhere"><span class="fwhere-item"><span>設定</span><i aria-hidden="true">›</i><span>一般</span><i aria-hidden="true">›</i><span>自動処理</span></span></div>
+            <div class="fcard-body"><ol class="feat-steps"><li>オンにすると、TPのラインが「トレイルが始まるライン」に変わる</li><li>価格がそこに届くと、SLが決めた幅（初期値10pips）で現在の価格についていく</li><li>価格が戻ってきたときはSLは動かず、そのSLで決済される</li></ol><div class="gtip">大きく伸びそうな場面で、利益を最大限とりたいときに使います。</div></div>
+        </article>
+        <article class="fcard" id="rr-fix">
+            <div class="fcard-top">
+                <h3 class="fcard-name">RR比固定</h3>
+                <span class="finit">初期値：オフ（1.00倍）</span>
             </div>
+            <p class="fcard-what">リスクリワード比（利確までの幅 ÷ 損切りまでの幅）を、決めた倍率で固定します。</p>
+            <div class="fwhere"><span class="fwhere-item"><span>設定</span><i aria-hidden="true">›</i><span>一般</span><i aria-hidden="true">›</i><span>自動処理</span></span></div>
+            <div class="fcard-body"><p>たとえば1.00倍なら、利確までの幅と損切りまでの幅が同じになります。</p><!-- TODO: RR比固定の動き（TPが自動で置かれるのか等）を確認 --></div>
+        </article>
+    </div>
+</section>
+
+<section class="ytt-spec-section" style="background:#fff;">
+    <div class="ytt-spec-inner">
+        <div class="fnext">
+            <a href="ytt-web-features.html"><small>← もどる</small><b>使い方トップ</b></a>
+            <a href="ytt-web-f-scenario.html"><small>次のページ →</small><b>シナリオ・予約注文</b></a>
         </div>
     </div>
 </section>
 
 <!-- 困ったときは -->
-<section class="ytt-spec-section" id="help" style="background:#fff;">
+<section class="ytt-spec-section" id="help" style="background:#f4f6f9;">
     <div class="ytt-spec-inner">
         <div class="ytt-spec-header">
             <span class="section-title-badge section-title-badge--orange">

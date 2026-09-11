@@ -927,6 +927,11 @@
     .home-icon figcaption { font-size: 0.8125rem; color: #4b5563; margin-top: 0.4rem; line-height: 1.7; }
     /* Web版YTTとは：スマホ画面の縦長画像 */
     .ytt-fto2-visual { text-align: center; }
+    /* Web版YTTとは：スマホの列はスマホの幅に合わせ、説明文に幅を回して全体を中央に */
+    .ytt-fto2.wy-intro { grid-template-columns: 300px minmax(0, 1fr); gap: 3.5rem; max-width: 940px; margin-left: auto; margin-right: auto; padding: 2.5rem 3rem; }
+    .wy-intro .ytt-fto2-head { font-size: 1.25rem; }
+    @media (max-width: 860px) { .ytt-fto2.wy-intro { grid-template-columns: 1fr; gap: 1.75rem; padding: 1.75rem 1.5rem; max-width: 560px; } }
+    @media (max-width: 600px) { .ytt-fto2.wy-intro { padding: 1.25rem 1rem; } }
     .ytt-fto2-visual .webytt-sp { display: block; width: 100%; max-width: 260px; height: auto; margin: 0 auto; }
     /* Web版YTTのスマホ画面モック（ytt-tokusetu.html と同じもの） */
     .wy-phone { position: relative; width: 282px; margin: 0 auto; padding: 8px; background: #05070f; border-radius: 38px; box-shadow: 0 22px 48px rgba(30, 27, 75, 0.22); }
@@ -1082,7 +1087,7 @@
             </div>
             <p>スマホでもPCでも、ブラウザからYTTが使えます。</p>
         </div>
-        <div class="ytt-fto2">
+        <div class="ytt-fto2 wy-intro">
             <div class="ytt-fto2-visual">
                 <div class="wy-phone" role="img" aria-label="Web版YTTのスマホ画面。上に残高、右上にシナリオと成行のボタン、中央にオートライン付きのチャート、下に切り替えメニュー">
                     <div class="wy-screen" aria-hidden="true">

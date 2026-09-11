@@ -1005,7 +1005,13 @@
     .no-account-btns a { width: 100%; display: inline-flex; align-items: center; justify-content: center; text-align: center; box-sizing: border-box; min-height: 52px; }
     .no-account .ytt-spec-acc-body p.no-account-next { font-size: 0.8rem; color: #6b7280; margin-top: 0.9rem; }
     /* HFMで口座を作る */
-    .hfm-hero-logo { display: block; width: 150px; height: auto; margin: 0 auto 1rem; }
+    .hfm-title-logo { display: inline-block; height: 2.1em; width: auto; vertical-align: -0.62em; margin-right: 0.12em; }
+    .ytt-sp-title-line .hfm-title-logo ~ .ytt-title-wave { margin-top: 0.45em; }
+    .ytt-add-grid.flow4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    @media (max-width: 900px) { .ytt-add-grid.flow4 { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 560px; margin-left: auto; margin-right: auto; } }
+    @media (max-width: 520px) { .ytt-add-grid.flow4 { grid-template-columns: 1fr; max-width: 460px; } }
+    .tool-dl-btns { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+    .tool-dl-btns a { min-width: 190px; text-align: center; }
     .next-btns { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; margin-top: 0.5rem; }
     .next-btns a { min-width: 220px; text-align: center; }
     .section-alt { background: #f4f6f9; }
@@ -1045,9 +1051,8 @@
 
 <!-- HERO -->
 <section class="ytt-sp-hero">
-    <img src="img/webytt/hfm-logo.png" alt="HFM（HF Markets）" class="hfm-hero-logo" width="451" height="223">
     <h1 class="ytt-sp-hero-title">
-        <span class="ytt-sp-title-line"><span class="line-text">HFMで<img class="ytt-title-wave" src="img/wave-yellow.png" alt=""></span></span>
+        <span class="ytt-sp-title-line"><span class="line-text"><img class="hfm-title-logo" src="img/webytt/hfm-logo.png" alt="HFM" width="451" height="223">で<img class="ytt-title-wave" src="img/wave-yellow.png" alt=""></span></span>
         <span class="ytt-sp-title-line"><span class="line-text">口座を作る<img class="ytt-title-wave" src="img/wave-yellow.png" alt=""></span></span>
     </h1>
     <p class="ytt-sp-hero-lead">
@@ -1071,16 +1076,17 @@
             </span>
             <div style="text-align:center; margin-bottom:0.25rem;">
                 <div style="display:inline-block; white-space:nowrap;">
-                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">3ステップで口座ができます</h2>
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">4ステップで準備できます</h2>
                     <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
                 </div>
             </div>
             <p>上から順番に進めてください。</p>
         </div>
-        <div class="ytt-add-grid flow3">
+        <div class="ytt-add-grid flow3 flow4">
             <a class="ytt-add-card" href="#h-step1"><img class="flow-num" src="img/crayon-1.png" alt="1"><h3>アカウント登録</h3><p>メールアドレスとパスワードで、HFMのアカウントを作る</p></a>
             <a class="ytt-add-card" href="#h-step2"><img class="flow-num" src="img/crayon-2.png" alt="2"><h3>本人確認</h3><p>名前や住所を入力し、本人確認書類を提出する</p></a>
             <a class="ytt-add-card" href="#h-step3"><img class="flow-num" src="img/crayon-3.png" alt="3"><h3>取引口座の開設</h3><p>MT4かMT5を選んで、取引口座を作る</p></a>
+            <a class="ytt-add-card" href="#h-step4"><img class="flow-num" src="img/crayon-4.png" alt="4"><h3>取引ツールの準備</h3><p>MT4かMT5をダウンロードして、作った口座でログインする</p></a>
         </div>
     </div>
 </section>
@@ -1243,8 +1249,73 @@
                 <div class="gstep-no">5</div>
                 <div class="gstep-body">
                     <p class="gstep-title">口座番号が表示されたら完了</p>
-                    <p>口座番号などの口座情報が画面に表示され、同じ内容がメールでも届きます。</p>
-                    <p>取引ツール（MT4 / MT5）は、HFMのサイトからダウンロードしてログインします。実際にトレードするには、口座への入金も必要です。</p>
+                    <p>口座番号などの口座情報が画面に表示され、同じ内容がメールでも届きます。次の STEP 4 で、この口座番号とパスワードを使います。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- STEP 4 -->
+<section class="ytt-spec-section" id="h-step4" style="background:#f4f6f9;">
+    <div class="ytt-spec-inner">
+        <div class="ytt-spec-header">
+            <span class="section-title-badge section-title-badge--blue">
+                <img class="hero-title-side hero-title-side--left" src="img/title-side-blue-left.png" alt="">
+                STEP 4
+                <img class="hero-title-side hero-title-side--right" src="img/title-side-blue-right.png" alt="">
+            </span>
+            <div style="text-align:center; margin-bottom:0.25rem;">
+                <div style="display:inline-block; white-space:nowrap;">
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">取引ツールを準備する</h2>
+                    <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
+                </div>
+            </div>
+        </div>
+        <div class="guide-card">
+            <div class="gstep">
+                <div class="gstep-no">1</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">STEP 3 で選んだ取引ツールのページを開く</p>
+                    <div class="gstep-btn tool-dl-btns"><a href="https://www.hfm.com/int/jp/platforms/mt4-terminal" class="btn-sq-blue" target="_blank" rel="noopener">MT4のページを開く</a><a href="https://www.hfm.com/int/jp/platforms/mt5-terminal" class="btn-sq-blue" target="_blank" rel="noopener">MT5のページを開く</a></div>
+                </div>
+            </div>
+            <div class="gstep">
+                <div class="gstep-no">2</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">「Windowsにダウンロード」を押す</p>
+                    <p>取引ツールのファイル（.exe）がダウンロードされます。</p>
+                </div>
+            </div>
+            <div class="gstep">
+                <div class="gstep-no">3</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">ダウンロードしたファイルを開いて、インストールする</p>
+                    <p>画面の案内に沿って進めます。インストールが終わったら、取引ツールを開きます。</p>
+                </div>
+            </div>
+            <div class="gstep">
+                <div class="gstep-no">4</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">左上の「ファイル」→「取引口座にログイン」</p>
+                    <figure class="gshot narrow"><img src="img/webytt/s01-file-login.png" alt="ファイルメニューから取引口座にログインを選ぶ" loading="lazy"></figure>
+                    <p>画面はMT4のものです。MT5も同じ手順です。</p>
+                </div>
+            </div>
+            <div class="gstep">
+                <div class="gstep-no">5</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">ログインID・パスワード・サーバーを入力して「ログイン」</p>
+                    <figure class="gshot mid"><img src="img/webytt/s02-login-dialog.png" alt="取引口座のログイン情報を入力する画面" loading="lazy"></figure>
+                    <p>ログインIDは口座番号です。パスワードは STEP 3 で決めたものを入力します。サーバーは、口座を開設したときの画面か、届いたメールで確認できます。</p>
+                </div>
+            </div>
+            <div class="gstep">
+                <div class="gstep-no">6</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">左上に口座番号が出たら準備完了</p>
+                    <figure class="gshot narrow"><img src="img/webytt/s03-account-no.png" alt="取引ツールの左上に口座番号が表示される" loading="lazy"></figure>
+                    <p class="gnote">実際にトレードするには、口座への入金も必要です。</p>
                 </div>
             </div>
         </div>
@@ -1252,7 +1323,7 @@
 </section>
 
 <!-- 次は導入 -->
-<section class="ytt-spec-section" id="next" style="background:#f4f6f9;">
+<section class="ytt-spec-section" id="next" style="background:#fff;">
     <div class="ytt-spec-inner">
         <div class="ytt-spec-header">
             <span class="section-title-badge section-title-badge--orange">

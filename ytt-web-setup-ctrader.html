@@ -994,6 +994,15 @@
     /* 取引ツールを選ぶまで、下の手順は表示しない */
     .js-gate #gated:not(.is-open) { display: none; }
     #tool-select { padding-bottom: 3.5rem; }
+    /* まだ取引口座を持っていない方へ（取引ツールの質問の下） */
+    .no-account { max-width: 460px; margin: 1.5rem auto 0; }
+    .no-account > summary { font-size: 0.92rem; padding: 0.95rem 1.2rem; }
+    .no-account .ytt-spec-acc-body { padding: 0 1.2rem 1.3rem; text-align: left; }
+    .no-account .ytt-spec-acc-body p { font-size: 0.875rem; color: #4b5563; line-height: 1.85; margin: 0.9rem 0 0; }
+    .no-account .ytt-spec-acc-body p b { color: #1e1b4b; }
+    .no-account-btns { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 1rem; }
+    .no-account-btns a { width: 100%; display: inline-flex; align-items: center; justify-content: center; text-align: center; box-sizing: border-box; min-height: 52px; }
+    .no-account .ytt-spec-acc-body p.no-account-next { font-size: 0.8rem; color: #6b7280; margin-top: 0.9rem; }
     /* Cloud版の折りたたみ（STEP 2 の下） */
     .cloud-acc { margin-top: 1.5rem; }
     .cloud-lead { font-size: 0.875rem; color: #4b5563; line-height: 1.85; margin: 1.1rem 0 1.4rem; }
@@ -1222,6 +1231,21 @@
                 <a class="tool-tab" data-tool="ctrader" href="ytt-web-setup-ctrader.html?tool=ctrader">cTrader</a>
             </div>
         </div>
+        <details class="ytt-spec-acc no-account" id="no-account">
+            <summary>
+                <span class="ytt-spec-acc-label">まだ取引口座を持っていない方へ</span>
+                <span class="ytt-spec-acc-chev" aria-hidden="true">▼</span>
+            </summary>
+            <div class="ytt-spec-acc-body">
+                <p>口座番号は、証券会社で取引口座を作ると発行される番号です。Web版YTTは、この口座に連携ツールをつないで注文します。</p>
+                <p>これから口座を作る方は、FX SPACEで使っている<b>HFM</b>がおすすめです。口座を作るときは、取引ツールに<b>MT4</b>を選んでください。</p>
+                <div class="no-account-btns">
+                    <a class="btn-sq-blue" href="https://www.hfm.com/int/?refid=30443481&amp;acid=fxspaceysg" target="_blank" rel="noopener">HFMで口座を開設する</a>
+                    <a class="btn-sq-white" href="https://www.canva.com/design/DAGjk2kpSrU/Kajg_Ci1U6FvnPkds31Fjw/view" target="_blank" rel="noopener">口座開設の手順を見る</a>
+                </div>
+                <p class="no-account-next">口座ができたら、上の質問で「MT4」を選んで進めてください。</p>
+            </div>
+        </details>
     </div>
 </section>
 
@@ -1244,7 +1268,7 @@
             <p>すでにcTraderを使っている方は読み飛ばしてOKです。</p>
         </div>
         <div class="guide-card">
-            <p style="font-size:0.875rem;color:#4b5563;line-height:1.85;margin:0 0 1.25rem;">お使いの証券会社・プロップファームで口座開設後、それぞれのHPよりcTraderをダウンロードします。cTraderを開き、口座開設後にメールで届いた情報でログインします。</p>
+            <p style="font-size:0.875rem;color:#4b5563;line-height:1.85;margin:0 0 1.25rem;">お使いの証券会社・プロップファームで口座開設後、それぞれのHPよりcTraderをダウンロードします。cTraderを開き、口座開設後にメールで届いた情報でログインします。まだ口座を持っていない方は、<a href="#no-account" class="to-no-account">こちら</a>を見てください。</p>
             <div class="gstep">
                 <div class="gstep-no">1</div>
                 <div class="gstep-body">
@@ -1732,6 +1756,11 @@
   document.querySelectorAll('[data-soon]').forEach(function (a) {
     a.addEventListener('click', function (e) { e.preventDefault(); alert('cTraderの導入方法ページは準備中です。'); });
   });
+  // ---- 「まだ取引口座を持っていない方へ」：リンクから来たら開く ----
+  var noAcc = document.getElementById('no-account');
+  function openNoAcc() { if (noAcc) noAcc.open = true; }
+  document.querySelectorAll('a[href="#no-account"]').forEach(function (a) { a.addEventListener('click', openNoAcc); });
+  if (location.hash === '#no-account') openNoAcc();
   // ---- 取引ツールの選択：選ぶまで #gated（事前準備〜）を表示しない ----
   var gated = document.getElementById('gated');
   var me = document.body.getAttribute('data-tool');

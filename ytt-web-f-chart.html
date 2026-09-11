@@ -6,7 +6,7 @@
     <title>Web版YTT チャートの表示 — FX SPACE</title>
     <link rel="icon" type="image/png" href="icon.png">
     <meta property="og:title" content="Web版YTT チャートの表示 — FX SPACE">
-    <meta property="og:description" content="Web版YTTの使い方（チャートの表示）。チャートに線や情報を重ねて、相場の状況をひと目で分かるようにする機能です。">
+    <meta property="og:description" content="Web版YTTの使い方（チャートの表示）。">
     <meta property="og:image" content="https://fx-space.com/intro/img/og-ytt-tokusetu.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -1057,6 +1057,12 @@
     .fvid-label { font-size: 0.95rem; font-weight: 800; letter-spacing: 0.04em; }
     .fvid-meta { font-size: 0.75rem; color: #c7d2fe; }
     .fvid-box.is-shot { background: #334155; }
+    /* 機能の動画：画面の見方と同じノートPC／スマホの枠の中で再生（見えている間だけ再生、タップで全画面） */
+    .fvid .wy-pc { max-width: 100%; }
+    .fvid-video { display: block; width: 100%; height: auto; background: #0a0f2c; cursor: zoom-in; }
+    .wy-pc-screen .fvid-video { aspect-ratio: 16 / 9; border-radius: 7px; }
+    .wy-screen .fvid-video { aspect-ratio: 720 / 1400; }
+    .fvid-cap { margin-top: 0.9rem; font-size: 0.75rem; color: #6b7280; text-align: center; }
     /* 機能一覧 */
     .fidx-grid { margin-top: 0.7rem; }
     a.ytt-add-card.fidx { text-decoration: none; transition: border-color 0.15s, transform 0.15s; }
@@ -1078,75 +1084,204 @@
     .fcat-nav a[aria-current="page"] { background: #1e1b4b; border-color: #1e1b4b; color: #fff; }
     .fcat-no { width: 22px; height: 19px; display: inline-flex; align-items: center; justify-content: center; background: url("img/fill-crayon-orange-badge.svg") 0 0 / 100% 100% no-repeat; color: #1e1b4b; font: 900 0.72rem Inter, sans-serif; }
     .fsub-hero { padding-bottom: 2.25rem; }
-    .ftoc { justify-content: center; max-width: 900px; margin: 0.9rem auto 0; }
     .fsub-hero .ytt-sp-hero-kicker { display: inline-block; margin: 0 0 0.5rem; font-size: 0.8125rem; font-weight: 800; color: #4f46e5; }
-    /* 機能のカード */
-    .fcard { background: #fff; border: 1.5px solid #e5e7eb; border-radius: 18px; padding: 1.4rem 1.5rem 1.5rem; margin-top: 1.1rem; text-align: left; scroll-margin-top: 84px; }
+    .ftoc { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.35rem; max-width: 900px; margin: 0.9rem auto 0; }
+    .ftoc a { padding: 0.25rem 0.6rem; border-radius: 8px; background: #f3f4f6; color: #1e1b4b; font-size: 0.78rem; font-weight: 700; text-decoration: none; }
+    /* 機能のカード：見て分かるもの（動画・モック・図）を大きく、文字は要点だけ */
+    .fcard { background: #fff; border: 1.5px solid #e5e7eb; border-radius: 20px; padding: 1.4rem 1.5rem 1.5rem; margin-top: 1.2rem; text-align: left; scroll-margin-top: 84px; }
     @media (max-width: 600px) { .fcard { padding: 1.1rem 1rem 1.2rem; border-radius: 16px; } }
     .fcard-top { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.7rem; }
-    .fcard-name { margin: 0; font-size: 1.12rem; font-weight: 900; color: #1e1b4b; }
+    .fcard-name { margin: 0; font-size: 1.2rem; font-weight: 900; color: #1e1b4b; }
     .finit { display: inline-block; padding: 0.15rem 0.6rem; border-radius: 999px; background: #1e1b4b; color: #fff; font-size: 0.72rem; font-weight: 700; }
-    .fcard-what { margin: 0.45rem 0 0; font-size: 0.95rem; font-weight: 700; color: #374151; line-height: 1.7; }
-    .fwhere { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.7rem; }
+    .fcard-what { margin: 0.35rem 0 0; font-size: 0.98rem; font-weight: 700; color: #374151; }
+    .fwhere { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.6rem; }
     .fwhere-item { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 0.3rem; padding: 0.3rem 0.65rem; border: 1.5px dashed #c7d2fe; border-radius: 10px; font-size: 0.78rem; color: #1e1b4b; font-weight: 700; }
     .fwhere-item::before { content: "場所"; margin-right: 0.15rem; font-size: 0.68rem; font-weight: 800; color: #4f46e5; }
     .fwhere-item b { margin-right: 0.15rem; padding: 0.05rem 0.4rem; border-radius: 6px; background: #eef2ff; color: #3730a3; font-size: 0.7rem; }
     .fwhere-item i { font-style: normal; color: #9ca3af; }
-    .fcard-body { margin-top: 0.9rem; }
-    .fcard-body > p { font-size: 0.9rem; color: #374151; line-height: 1.85; margin: 0.6rem 0 0; }
-    .fcard-body > p:first-child { margin-top: 0; }
-    .fcard-body .feat-steps { margin-top: 0.2rem; }
-    .fcard-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 1.6rem; align-items: start; margin-top: 1rem; }
-    .fcard-grid .fcard-body { margin-top: 0; }
-    .fcard.is-wide .fcard-grid { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); }
-    @media (max-width: 860px) { .fcard-grid, .fcard.is-wide .fcard-grid { grid-template-columns: 1fr; gap: 1rem; } }
-    .fcard-media { min-width: 0; text-align: center; }
-    .fcard-media .gshot { margin: 0; }
-    .fbul { margin: 0.2rem 0 0; padding-left: 1.2rem; }
-    .fbul li { font-size: 0.9rem; color: #374151; line-height: 1.8; margin-bottom: 0.35rem; }
-    .ftable-wrap { overflow-x: auto; margin-top: 0.4rem; }
-    .ftable { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
-    .ftable th { text-align: left; padding: 0.5rem 0.65rem; background: #1e1b4b; color: #fff; font-size: 0.75rem; font-weight: 800; white-space: nowrap; }
-    .ftable th:first-child { border-radius: 8px 0 0 0; } .ftable th:last-child { border-radius: 0 8px 0 0; }
-    .ftable td { padding: 0.6rem 0.65rem; border-bottom: 1px solid #eef0f4; color: #374151; line-height: 1.7; vertical-align: top; }
+    .fwhere-item .wm-rail { flex-direction: row; box-shadow: none; }
+    .fcard-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 1.8rem; align-items: center; margin-top: 1.1rem; }
+    .fcard.is-wide .fcard-grid { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); }
+    @media (max-width: 860px) { .fcard-grid, .fcard.is-wide .fcard-grid { grid-template-columns: 1fr; gap: 1.1rem; } }
+    .fcard-media { min-width: 0; }
+    .fcard-media .fvid { margin: 0; }
+    .fcard-media .fvid:not(.pc) { max-width: 290px; margin: 0 auto; }
+    .fcard-side { min-width: 0; }
+    .fcard > .fcard-side { margin-top: 0.8rem; }
+    .fpoints { list-style: none; margin: 0; padding: 0; counter-reset: fp; }
+    .fpoints li { counter-increment: fp; position: relative; padding: 0.15rem 0 0.75rem 2.1rem; font-size: 0.95rem; font-weight: 700; color: #1f2937; line-height: 1.65; }
+    .fpoints li::before { content: counter(fp); position: absolute; left: 0; top: 0.12rem; width: 1.55rem; height: 1.4rem; display: flex; align-items: center; justify-content: center; background: url("img/fill-crayon-orange-badge.svg") 0 0 / 100% 100% no-repeat; color: #1e1b4b; font: 900 0.8rem Inter, sans-serif; }
+    .fpoints li b { color: #1e1b4b; }
+    .fpoints a { color: #4f46e5; }
+    .fmore { margin-top: 0.4rem; border-top: 1px dashed #e5e7eb; }
+    .fmore summary { cursor: pointer; list-style: none; display: inline-flex; align-items: center; gap: 0.35rem; margin-top: 0.7rem; padding: 0.35rem 0.8rem; border: 1.5px solid #c7d2fe; border-radius: 999px; font-size: 0.8rem; font-weight: 800; color: #3730a3; }
+    .fmore summary::-webkit-details-marker { display: none; }
+    .fmore summary::after { content: "▼"; font-size: 0.6rem; }
+    .fmore[open] summary::after { content: "▲"; }
+    .fmore-body { margin-top: 0.9rem; }
+    .fmore-body > p { font-size: 0.875rem; color: #4b5563; line-height: 1.85; margin: 0.6rem 0 0; }
+    .fmore-body .wm { margin: 0.6rem 0 0; }
+    .fmore-media { margin-bottom: 0.8rem; }
+    .ftable-wrap { overflow-x: auto; margin-top: 0.6rem; }
+    .ftable { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+    .ftable th { text-align: left; padding: 0.45rem 0.6rem; background: #1e1b4b; color: #fff; font-size: 0.72rem; font-weight: 800; white-space: nowrap; }
+    .ftable td { padding: 0.5rem 0.6rem; border-bottom: 1px solid #eef0f4; color: #374151; line-height: 1.65; vertical-align: top; }
     .ftable td:first-child { color: #1e1b4b; font-weight: 700; }
-    .ftable td small { color: #6b7280; font-weight: 700; }
-    @media (max-width: 600px) {
-        .ftable thead { display: none; }
-        .ftable tr { display: block; padding: 0.55rem 0; border-bottom: 1px solid #eef0f4; }
-        .ftable td { display: block; padding: 0.1rem 0; border: none; }
-        .ftable td[data-h="初期値"]::before { content: "初期値："; color: #6b7280; font-weight: 700; }
-    }
+    @media (max-width: 600px) { .ftable thead { display: none; } .ftable tr { display: block; padding: 0.5rem 0; border-bottom: 1px solid #eef0f4; } .ftable td { display: block; padding: 0.05rem 0; border: none; } .ftable td[data-h="初期値"]::before { content: "初期値："; color: #6b7280; } }
+    .wm .sw { display: inline-block; width: 16px; height: 12px; margin-left: 3px; border-radius: 3px; vertical-align: -1px; } .wm .sw.g { background: #2ea043; } .wm .sw.r { background: #d73a49; } .wm .sw.k { background: #0b1030; border: 1px solid #3a4170; }
     .group-after { max-width: 1100px; margin: 1.2rem auto 0; text-align: left; }
-    /* 設定の一覧 */
     .fset { list-style: none; margin: 0.9rem 0 0; padding: 0; }
     .fset li { display: flex; justify-content: space-between; gap: 1rem; padding: 0.55rem 0; border-bottom: 1px dashed #e5e7eb; font-size: 0.875rem; }
     .fset li a { color: #1e1b4b; font-weight: 700; text-decoration: underline; text-decoration-color: #c7d2fe; text-underline-offset: 3px; }
     .fset li span { color: #6b7280; white-space: nowrap; font-size: 0.8125rem; }
     .fset-note { font-size: 0.8125rem; color: #6b7280; margin-top: 1.1rem; text-align: left; }
-    /* 次のページ */
     .fnext { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.9rem; max-width: 760px; margin: 0 auto; }
     @media (max-width: 600px) { .fnext { grid-template-columns: 1fr; } }
     .fnext a { display: block; padding: 1rem 1.2rem; border: 1.5px solid #e5e7eb; border-radius: 14px; background: #fff; text-decoration: none; text-align: left; }
     .fnext a:hover { border-color: #a5b4fc; }
     .fnext small { display: block; font-size: 0.72rem; font-weight: 800; color: #6b7280; }
     .fnext b { display: block; margin-top: 0.2rem; font-size: 1rem; color: #1e1b4b; }
-    /* トップの「機能をさがす」 */
+    /* トップ：分野のカード（見本のモックつき） */
     .fhub { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 1.5rem; }
     @media (max-width: 760px) { .fhub { grid-template-columns: 1fr; } }
-    .fhub-card { display: flex; flex-direction: column; background: #fff; border: 1.5px solid #e5e7eb; border-radius: 18px; padding: 1.3rem 1.3rem 1.2rem; text-align: left; }
+    .fhub-card { display: flex; flex-direction: column; background: #fff; border: 1.5px solid #e5e7eb; border-radius: 20px; padding: 1.2rem; text-align: left; text-decoration: none; transition: border-color .15s, transform .15s; }
+    .fhub-card:hover { border-color: #a5b4fc; transform: translateY(-2px); }
+    .fhub-vis { display: flex; align-items: center; justify-content: center; min-height: 170px; margin-bottom: 1rem; padding: 12px; border-radius: 14px; background: #eef0f7; overflow: hidden; }
+    .fhub-vis .wm { box-shadow: none; }
     .fhub-card h3 { display: flex; align-items: center; gap: 0.5rem; margin: 0; font-size: 1.1rem; font-weight: 900; color: #1e1b4b; }
     .fhub-card h3 .fcat-no { width: 32px; height: 27px; font-size: 0.9rem; }
-    .fhub-card > p { margin: 0.45rem 0 0; font-size: 0.85rem; color: #4b5563; line-height: 1.75; }
-    .fhub-links { display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 0.8rem 0 1rem; }
-    .fhub-links a { padding: 0.25rem 0.6rem; border-radius: 8px; background: #f3f4f6; color: #1e1b4b; font-size: 0.78rem; font-weight: 700; text-decoration: none; }
-    .fhub-links a:hover { background: #e0e7ff; }
-    .fhub-card .fhub-go { margin-top: auto; align-self: flex-start; }
+    .fhub-card p { margin: 0.4rem 0 0; font-size: 0.85rem; color: #4b5563; line-height: 1.7; }
+    .fhub-card .go { margin-top: 0.8rem; font-size: 0.85rem; font-weight: 800; color: #4f46e5; }
+
+    /* ===== Web版YTTの画面モック（使い方ページ） ===== */
+    .wm { --wm-bg: #141a46; --wm-card: #1d2458; --wm-line: #30397a; --wm-text: #e5e7eb; --wm-mute: #9aa3c7; --wm-y: #e9b949;
+        background: var(--wm-bg); color: var(--wm-text); border-radius: 14px; font-family: 'Noto Sans JP', system-ui, sans-serif; line-height: 1.35; text-align: left;
+        box-shadow: 0 18px 40px rgba(30, 27, 75, 0.2); max-width: 100%; margin: 0 auto; }
+    .wm .hl { outline: 2.5px solid #ef4444; outline-offset: 2px; border-radius: 6px; }
+    .wm small { font-weight: 500; }
+    /* 設定 */
+    .wm-set { width: 100%; max-width: 420px; overflow: hidden; }
+    .wm-set-head { display: flex; justify-content: space-between; padding: 10px 14px; font-size: 13px; font-weight: 800; border-bottom: 1px solid var(--wm-line); background: #19205a; }
+    .wm-set-head span { color: var(--wm-mute); font-weight: 400; }
+    .wm-set-body { display: grid; grid-template-columns: 76px 1fr; }
+    .wm-set-tabs { padding: 8px 0; border-right: 1px solid var(--wm-line); background: #121842; }
+    .wm-set-tabs span { display: block; padding: 7px 10px; font-size: 11px; color: var(--wm-mute); }
+    .wm-set-tabs span.on { background: #242b62; color: #fff; font-weight: 800; }
+    .wm-set-main { min-width: 0; padding: 8px 10px 12px; }
+    @media (max-width: 440px) { .wm-set-body { grid-template-columns: 56px 1fr; } .wm-set-tabs span { padding: 7px 7px; font-size: 10px; } .wm-row { flex-wrap: wrap; } .wm-row em { white-space: normal; margin-left: auto; } }
+    .wm-sec { margin: 8px 0 5px; font-size: 10.5px; font-weight: 800; color: var(--wm-y); }
+    .wm-row { display: flex; align-items: center; gap: 7px; margin-top: 5px; padding: 8px 9px; border: 1px solid var(--wm-line); border-radius: 8px; background: var(--wm-card); font-size: 11.5px; font-weight: 700; }
+    .wm-row.is-on { border-color: rgba(233, 185, 73, 0.75); background: #2a2745; }
+    .wm-row i { font-style: normal; color: var(--wm-mute); font-size: 11px; }
+    .wm-row-l { flex: 1; min-width: 0; }
+    .wm-row-l small { display: block; margin-top: 1px; font-size: 9px; color: var(--wm-mute); }
+    .wm-row em { font-style: normal; padding: 2px 7px; border: 1px solid var(--wm-line); border-radius: 6px; font: 700 10px ui-monospace, Menlo, Consolas, monospace; color: #fff; white-space: nowrap; }
+    .wm-chk { width: 13px; height: 13px; border: 1.5px solid var(--wm-mute); border-radius: 3px; flex-shrink: 0; }
+    .wm-chk.on { border-color: var(--wm-y); background: radial-gradient(circle, var(--wm-y) 0 45%, transparent 46%); }
+    .wm-radio { width: 13px; height: 13px; border: 1.5px solid var(--wm-mute); border-radius: 50%; flex-shrink: 0; }
+    .wm-radio.on { border-color: var(--wm-y); background: radial-gradient(circle, var(--wm-y) 0 40%, transparent 42%); }
+    .wm-opt { display: flex; align-items: center; gap: 9px; margin-top: 6px; padding: 8px 9px; border: 1px solid var(--wm-line); border-radius: 9px; background: var(--wm-card); }
+    .wm-opt.on { border-color: rgba(233, 185, 73, 0.75); }
+    .wm-opt.on b { color: var(--wm-y); }
+    .wm-opt i { width: 26px; height: 26px; border-radius: 7px; flex-shrink: 0; border: 1px solid rgba(255,255,255,.12); }
+    .wm-opt b { display: block; font-size: 11.5px; }
+    .wm-opt small { display: block; font-size: 9px; color: var(--wm-mute); }
+    /* 右のパネル */
+    .wm-panel { width: 100%; max-width: 300px; padding: 12px; }
+    .wm-card { padding: 10px; border: 1px solid var(--wm-line); border-radius: 12px; background: var(--wm-card); }
+    .wm-card + .wm-card { margin-top: 8px; }
+    .wm-card-t { margin: 0 0 8px; font-size: 10.5px; font-weight: 800; color: var(--wm-mute); }
+    .wm-order { display: grid; grid-template-columns: 1fr 58px 1fr; gap: 6px; }
+    .wm-order > span { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 46px; border-radius: 9px; font-size: 14px; font-weight: 900; }
+    .wm-sell { background: #3d5fd9; } .wm-buy { background: #c2414b; }
+    .wm-lot { border: 1px solid var(--wm-line); background: #141a46; font: 900 14px ui-monospace, Menlo, monospace !important; }
+    .wm-lot small { font-size: 8px; color: var(--wm-mute); font-family: system-ui; }
+    .wm-steps { display: grid; grid-template-columns: repeat(6, 1fr); margin-top: 7px; border: 1px solid var(--wm-line); border-radius: 7px; }
+    .wm-steps span { padding: 5px 0; text-align: center; font: 700 9.5px ui-monospace, Menlo, monospace; color: var(--wm-mute); }
+    .wm-close { display: grid; grid-template-columns: 1.8fr 1fr; gap: 6px; margin-top: 7px; }
+    .wm-close span { padding: 9px 0; border: 1px solid var(--wm-line); border-radius: 8px; background: #232a60; text-align: center; font-size: 11.5px; font-weight: 800; color: #c7cbe0; }
+    .wm-bal-l { margin: 0; text-align: center; font-size: 10px; color: var(--wm-mute); }
+    .wm-bal { margin: 2px 0 0; text-align: center; font-size: 26px; font-weight: 900; }
+    .wm-bal-s { margin: 2px 0 10px; text-align: center; font-size: 10px; color: var(--wm-mute); }
+    .wm-risk { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .wm-risk span { display: flex; justify-content: space-between; align-items: center; gap: 4px; padding: 8px; border: 1px solid var(--wm-line); border-radius: 8px; }
+    .wm-risk small { font-size: 9px; color: var(--wm-mute); } .wm-risk b { font: 800 11.5px ui-monospace, Menlo, monospace; }
+    .wm-sc { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .wm-sc span { display: flex; flex-direction: column; align-items: center; padding: 10px 4px; border-radius: 9px; font-size: 11.5px; font-weight: 900; text-align: center; }
+    .wm-sc small { font-size: 7.5px; opacity: .8; margin-top: 2px; }
+    .wm-short { background: #22306b; border: 1px solid #4f6fd8; color: #dbe6ff; } .wm-long { background: #4a1f38; border: 1px solid #ef4d5a; color: #ffd5da; }
+    .wm-build { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 6px; }
+    .wm-build span { padding: 9px 0; border: 1px solid var(--wm-line); border-radius: 8px; background: #232a60; text-align: center; font-size: 10.5px; font-weight: 700; color: var(--wm-mute); }
+    .wm-build .wm-build-main { border-color: #c7cbe0; background: #141a46; color: #fff; font-weight: 900; }
+    .wm-build .wm-del { color: #f87171; }
+    /* 上のメニュー */
+    .wm-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; padding: 9px 10px; border-radius: 12px; font-size: 11px; }
+    .wm-sym { padding: 4px 8px; border-radius: 6px; background: #232a60; font: 800 11px ui-monospace, Menlo, monospace; }
+    .wm-tfs { display: flex; gap: 2px; } .wm-tfs i { font: 600 9.5px ui-monospace, Menlo, monospace; font-style: normal; color: var(--wm-mute); padding: 3px 4px; border-radius: 4px; }
+    .wm-tfs i.on { background: #3a3413; color: var(--wm-y); }
+    .wm-ico { display: inline-flex; width: 26px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--wm-line); border-radius: 6px; }
+    .wm-ico svg { width: 15px; height: 15px; fill: none; stroke: #cbd5e1; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+    .wm-pill { padding: 4px 10px; border: 1px solid var(--wm-line); border-radius: 999px; font-size: 10.5px; color: var(--wm-mute); }
+    .wm-pill b { margin-left: 3px; font: 700 10px ui-monospace, Menlo, monospace; }
+    .wm-pos { border-color: #b7791f; background: #2a2310; color: var(--wm-y); }
+    /* 右端のアイコン列（場所の表示に使う小さなもの） */
+    .wm-rail { display: inline-flex; flex-direction: column; gap: 4px; padding: 5px; border-radius: 9px; background: #141a46; vertical-align: middle; }
+    .wm-rail i { display: flex; width: 22px; height: 22px; align-items: center; justify-content: center; border-radius: 5px; }
+    .wm-rail i.hl { background: #3a3413; outline: 2px solid #ef4444; outline-offset: 1px; }
+    .wm-rail svg { width: 14px; height: 14px; fill: none; stroke: #aeb6d6; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .wm-rail i.hl svg { stroke: #e9b949; }
+    /* 分析ツールの窓 */
+    .wm-win { width: 100%; max-width: 520px; padding: 0 12px 12px; overflow: hidden; }
+    .wm-win-head { display: flex; justify-content: space-between; margin: 0 -12px 10px; padding: 10px 14px; border-bottom: 1px solid var(--wm-line); background: #19205a; font-size: 12.5px; font-weight: 800; }
+    .wm-win-head span { color: var(--wm-mute); font-weight: 400; }
+    .wm-tabs { display: flex; gap: 6px; margin: 0 0 10px; }
+    .wm-tabs span { flex: 1; padding: 6px 0; border: 1px solid var(--wm-line); border-radius: 7px; text-align: center; font-size: 10.5px; color: var(--wm-mute); }
+    .wm-tabs span.on { background: var(--wm-y); border-color: var(--wm-y); color: #1e1b4b; font-weight: 800; }
+    .wm .g { color: #4ade80; }
+    .wm-cal-top { display: flex; justify-content: space-between; align-items: center; font-size: 12px; }
+    .wm-cal-top b { font-size: 15px; } .wm-cal-top small { font-size: 9.5px; color: var(--wm-mute); } .wm-cal-top .g { font-size: 17px; }
+    .wm-cal-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin: 9px 0; }
+    .wm-cal-stats span { padding: 6px 8px; border-radius: 8px; background: #262a5e; }
+    .wm-cal-stats small { display: block; font-size: 8.5px; color: var(--wm-mute); } .wm-cal-stats b { font-size: 13px; }
+    .wm-cal-wd, .wm-cal-wk { display: grid; grid-template-columns: repeat(7, 1fr) 42px; gap: 3px; }
+    .wm-cal-wd span { text-align: center; font-size: 9px; color: var(--wm-mute); padding: 2px 0; } .wm-cal-wd .sat { color: #93c5fd; } .wm-cal-wd .sun { color: #fca5a5; }
+    .wm-cal-wk { margin-top: 3px; }
+    .wm-cal-wk > span { height: 30px; border-radius: 5px; background: #1b2150; position: relative; }
+    .wm-cal-wk > span.e { background: transparent; }
+    .wm-cal-wk > span i { position: absolute; left: 3px; top: 2px; font: 600 7.5px ui-monospace, Menlo, monospace; font-style: normal; color: var(--wm-mute); }
+    .wm-cal-wk > span.win { background: #2f5a45; outline: 1.5px solid #4ade80; }
+    .wm-cal-wk > span.win b { position: absolute; left: 3px; bottom: 2px; font-size: 7.5px; color: #86efac; }
+    .wm-cal-wk > span.wk { background: transparent; display: flex; flex-direction: column; align-items: flex-end; justify-content: center; }
+    .wm-cal-wk .wk b { font-size: 8.5px; color: var(--wm-mute); } .wm-cal-wk .wk b.g { color: #4ade80; } .wm-cal-wk .wk small { font-size: 7px; color: var(--wm-mute); }
+    .wm-heat-t { display: grid; grid-template-columns: 34px repeat(8, 1fr); gap: 2px; }
+    .wm-heat-t span { padding: 5px 0; border-radius: 3px; text-align: center; font: 600 8px ui-monospace, Menlo, monospace; color: #fff; }
+    .wm-heat-t span.h { color: var(--wm-mute); font-weight: 700; background: transparent; }
+    .wm-str-chart { display: block; width: 100%; height: auto; margin-bottom: 8px; }
+    .wm-str-bars { display: grid; grid-template-columns: 30px 1fr 44px; gap: 5px 7px; align-items: center; }
+    .wm-str-bars .c { font: 800 9.5px ui-monospace, Menlo, monospace; } .wm-str-bars .v { font: 600 9px ui-monospace, Menlo, monospace; color: var(--wm-mute); text-align: right; }
+    .wm-str-bars .bar { height: 6px; border-radius: 3px; background: #262a5e; overflow: hidden; } .wm-str-bars .bar i { display: block; height: 100%; border-radius: 3px; }
+    .wm-news { max-width: 300px; padding-top: 12px; }
+    .wm-news-i { margin-top: 7px; padding: 9px 10px; border: 1px solid var(--wm-line); border-radius: 10px; background: var(--wm-card); }
+    .wm-news-i p { display: flex; align-items: center; gap: 6px; margin: 0 0 4px; font-size: 9px; color: var(--wm-mute); }
+    .wm-news-i time { margin-left: auto; font-family: ui-monospace, Menlo, monospace; }
+    .wm-news-i .imp { padding: 1px 5px; border: 1px solid var(--wm-y); border-radius: 3px; color: var(--wm-y); font-size: 8.5px; }
+    .wm-news-i .imp.r { border-color: #ef4444; color: #fca5a5; }
+    .wm-news-i b { display: block; font-size: 11.5px; } .wm-news-i .s { display: block; margin-top: 3px; font-size: 9.5px; color: var(--wm-mute); line-height: 1.5; }
+    /* チャートの図 */
+    .wm-chart { width: 100%; max-width: 520px; padding: 6px; }
+    .wm-chart svg { display: block; width: 100%; height: auto; border-radius: 9px; }
+    /* 流れ図 */
+    .wm-flow { display: flex; align-items: center; justify-content: center; gap: 10px; max-width: 460px; padding: 18px 14px; }
+    .wm-flow .n { flex: 1; padding: 12px; border: 1px solid var(--wm-line); border-radius: 12px; background: var(--wm-card); text-align: center; }
+    .wm-flow .n.y { border-color: rgba(233,185,73,.8); }
+    .wm-flow small { display: block; font-size: 10px; color: var(--wm-mute); } .wm-flow b { display: block; margin-top: 3px; font-size: 12.5px; }
+    .wm-flow > i { font-style: normal; font-size: 20px; color: var(--wm-y); }
+
 </style>
 </head>
 <body>
 
-<!-- Web版YTT 使い方：チャートの表示（ytt-web-f-chart.html）。build-guide.js で作成。内容の元は webytt-materials/前任Canva_YTTの使い方_全文.md と Web版の画面のスクショ -->
+<!-- Web版YTT 使い方：チャートの表示（ytt-web-f-chart.html）。webytt-materials/tools/build-guide.js と mocks.js で作成（手で直さず、スクリプトを直して作り直す） -->
 
 <nav class="ytt-sp-nav">
     <a href="ytt-tokusetu.html" class="ytt-sp-nav-logo">
@@ -1162,12 +1297,12 @@
     <h1 class="ytt-sp-hero-title">
         <span class="ytt-sp-title-line"><span class="line-text">チャートの表示<img class="ytt-title-wave" src="img/wave-yellow.png" alt=""></span></span>
     </h1>
-    <p class="ytt-sp-hero-lead">チャートに線や情報を重ねて、<br>相場の状況をひと目で分かるようにする機能です。</p>
+    <p class="ytt-sp-hero-lead">チャートに線や情報を重ねて、<br>相場の状況をひと目で分かるようにします。</p>
     <nav class="fcat-nav" aria-label="使い方のページ">
         <a href="ytt-web-features.html">使い方トップ</a>
         <a href="ytt-web-f-trade.html"><span class="fcat-no">1</span>注文・ロット・決済</a><a href="ytt-web-f-scenario.html"><span class="fcat-no">2</span>シナリオ・予約注文</a><a href="ytt-web-f-chart.html" aria-current="page"><span class="fcat-no">3</span>チャートの表示</a><a href="ytt-web-f-tools.html"><span class="fcat-no">4</span>分析ツール</a><a href="ytt-web-f-settings.html"><span class="fcat-no">5</span>モードと設定</a>
     </nav>
-    <div class="fhub-links ftoc" aria-label="このページの機能"><a href="#autoline">オートライン</a><a href="#zigzag">zigzag MTF</a><a href="#alertline">通知ライン（アラート）</a><a href="#breakeven">Breakeven表示</a><a href="#entry-viz">エントリーの可視化</a><a href="#history">チャートに取引履歴を表示</a><a href="#indicator">経済指標表示</a><a href="#session">セッション表示</a><a href="#time">時間表示</a><a href="#scalp">スキャモード</a><a href="#watermark">通貨ペア・時間足をすかし表示</a><a href="#drawing">描画ツール</a><a href="#cursor">十字カーソル</a><a href="#screenshot">スクリーンショット</a></div>
+    <div class="ftoc" aria-label="このページの機能"><a href="#autoline">オートライン</a><a href="#zigzag">zigzag MTF</a><a href="#alertline">通知ライン</a><a href="#breakeven">Breakeven表示</a><a href="#entry-viz">エントリーの可視化</a><a href="#history">チャートに取引履歴を表示</a><a href="#indicator">経済指標表示</a><a href="#session">セッション表示</a><a href="#time">時間表示</a><a href="#scalp">スキャモード</a><a href="#watermark">通貨ペア・時間足をすかし表示</a><a href="#drawing">描画ツール</a><a href="#cursor">十字カーソル</a><a href="#screenshot">スクリーンショット</a></div>
 </section>
 
 <section class="ytt-spec-section" style="background:#f4f6f9;">
@@ -1184,61 +1319,49 @@
                     <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
                 </div>
             </div>
-            <p>自動で引かれるラインと、自分で置くラインです。</p>
+            
         </div>
-        <article class="fcard has-media" id="autoline">
-            <div class="fcard-top">
-                <h3 class="fcard-name">オートライン</h3>
-                <span class="finit">初期値：オン</span>
-            </div>
-            <p class="fcard-what">重要な水平線・トレンドライン・チャネルラインを、自動で引きます。</p>
+        <article class="fcard has-media" id="autoline"><!-- TODO: Web版の色ごとの意味（強さ）を確認 -->
+            <div class="fcard-top"><h3 class="fcard-name">オートライン</h3><span class="finit">初期値：オン</span></div>
+            <p class="fcard-what">重要な水平線・トレンドライン・チャネルラインを自動で引く。</p>
             <div class="fwhere"><span class="fwhere-item"><span>設定</span><i aria-hidden="true">›</i><span>一般</span><i aria-hidden="true">›</i><span>オートライン</span></span></div>
-            <div class="fcard-grid"><div class="fcard-media"><figure class="fvid pc"><div class="fvid-box" role="img" aria-label="動画（準備中）：オートライン"><span class="fvid-play" aria-hidden="true"></span><span class="fvid-label">動画 準備中</span><span class="fvid-meta">PC・約40秒</span></div></figure></div><div class="fcard-body"><ul class="fbul"><li>ラインは、複数の時間足（マルチタイムフレーム）で引かれます。</li><li>「水平線」「斜線」のチェックで、それぞれ表示・非表示を切り替えられます。</li><li>時間足ごとのライン（M1・M5・M15…）の色と線の種類、「重要ライン1・2」の色も、設定で変えられます。</li></ul><div class="gtip">ラインは、売り買いが集まりやすい場所を見えるようにしたものです。まずはオンのまま使いましょう。</div><!-- TODO: Web版の色ごとの意味（強さ）を確認 --></div></div>
+            <div class="fcard-grid"><div class="fcard-media"><figure class="fvid pc"><div class="wy-pc"><div class="wy-pc-screen"><video class="fvid-video" src="img/webytt/feat/feat-autoline.mp4" poster="img/webytt/feat/feat-autoline.jpg" muted loop playsinline preload="none" aria-label="動画：オートライン（声なし）"></video></div><div class="wy-pc-base" aria-hidden="true"></div></div><figcaption class="fvid-cap">タップで拡大</figcaption></figure></div><div class="fcard-side"><ul class="fpoints"><li>複数の時間足のラインが引かれる</li><li>「水平線」「斜線」で表示を切り替え</li><li>時間足ごとに色と線の種類を変えられる</li></ul></div></div>
         </article>
-        <article class="fcard" id="zigzag">
-            <div class="fcard-top">
-                <h3 class="fcard-name">zigzag MTF</h3>
-                <span class="finit">初期値：オフ</span>
-            </div>
-            <p class="fcard-what">トレンドの状況を、ジグザグの線と背景の色で表示します。</p>
+        <article class="fcard has-media" id="zigzag">
+            <div class="fcard-top"><h3 class="fcard-name">zigzag MTF</h3><span class="finit">初期値：オフ</span></div>
+            <p class="fcard-what">トレンドの向きを、ジグザグと背景の色で表示。</p>
             <div class="fwhere"><span class="fwhere-item"><span>設定</span><i aria-hidden="true">›</i><span>一般</span><i aria-hidden="true">›</i><span>ZIGZAG MTF</span></span></div>
-            <div class="fcard-body"><div class="ftable-wrap"><table class="ftable"><thead><tr><th>項目</th><th>表示されるもの</th></tr></thead><tbody><tr><td data-h="項目">zigzag MTF表示</td><td data-h="表示されるもの">いまの時間足のジグザグ</td></tr><tr><td data-h="項目">zigzag MTF表示（下位足）</td><td data-h="表示されるもの">1つ下の時間足のジグザグ</td></tr><tr><td data-h="項目">トレンド背景</td><td data-h="表示されるもの">背景の色でトレンドを表示（上昇・弱い上昇・弱い下降・下降の4色）</td></tr></tbody></table></div><div class="gtip">例）下降トレンドに転換したあと、下位足のジグザグで戻りのタイミングを見てショート。<br>とくに初心者の方が、トレンドの向きをつかむのに向いています。</div></div>
+            <div class="fcard-grid"><div class="fcard-media"><div class="wm wm-chart" role="img" aria-label="zigzag MTF の表示の例：背景の色、ジグザグ、下位足のジグザグ"><svg viewBox="0 0 460 220" aria-hidden="true"><rect width="460" height="220" fill="#0a0f2c"/><rect x="0" y="0" width="230" height="220" fill="rgba(34,197,94,.13)"/><rect x="230" y="0" width="70" height="220" fill="rgba(34,197,94,.06)"/><rect x="300" y="0" width="160" height="220" fill="rgba(239,77,90,.13)"/><path d="M23.2 155.7V162.2M30.4 145.9V157.9M37.6 141.8V154.4M44.7 135.6V146.3M51.9 129.2V140.0M66.3 118.0V134.8M73.5 118.8V121.9M80.7 106.8V123.3M87.9 102.0V110.6M95.1 97.4V108.5M109.4 102.5V108.9M131.0 112.3V124.3M152.5 113.7V128.7M159.7 103.1V118.2M166.9 100.6V108.3M174.1 92.5V103.4M188.5 86.3V100.9M195.7 85.4V92.4M202.8 69.1V89.6M217.2 62.3V72.2M224.4 56.6V66.0M231.6 55.4V59.7M289.1 85.1V98.3M303.5 85.8V93.5M310.6 85.2V92.5M317.8 76.3V88.6M389.7 133.7V143.1M404.1 137.1V147.6M411.3 138.0V140.8M418.4 126.2V139.3M425.6 125.0V130.5M440.0 130.1V135.2" stroke="#22b573" stroke-width=".9"/><path d="M16.0 157.5V165.2M59.1 126.6V134.1M102.2 97.3V108.7M116.6 102.4V114.7M123.8 109.0V120.7M138.2 114.0V122.1M145.4 118.3V127.8M181.3 92.6V99.3M210.0 68.3V72.4M238.8 53.1V62.5M246.0 57.5V67.3M253.2 62.1V77.9M260.3 74.8V84.3M267.5 77.3V90.7M274.7 85.8V99.2M281.9 92.5V97.8M296.3 82.9V95.1M325.0 75.8V79.8M332.2 74.3V90.5M339.4 87.1V97.0M346.6 96.0V103.5M353.8 99.4V113.5M360.9 109.6V113.3M368.1 112.8V128.6M375.3 122.0V135.7M382.5 130.5V140.2M396.9 136.1V147.2M432.8 126.2V134.3" stroke="#ef4d5a" stroke-width=".9"/><path d="M21.0 157.5h4.4v3.0h-4.4zM28.2 150.1h4.4v7.4h-4.4zM35.4 146.0h4.4v4.1h-4.4zM42.5 137.8h4.4v8.2h-4.4zM49.7 129.6h4.4v8.2h-4.4zM64.1 120.1h4.4v10.4h-4.4zM71.3 120.0h4.4v1.0h-4.4zM78.5 110.4h4.4v9.6h-4.4zM85.7 104.0h4.4v6.4h-4.4zM92.9 100.1h4.4v3.9h-4.4zM107.2 106.4h4.4v2.0h-4.4zM128.8 115.7h4.4v4.5h-4.4zM150.3 117.5h4.4v9.8h-4.4zM157.5 107.3h4.4v10.2h-4.4zM164.7 102.5h4.4v4.8h-4.4zM171.9 96.6h4.4v5.8h-4.4zM186.3 87.7h4.4v9.2h-4.4zM193.5 86.1h4.4v1.6h-4.4zM200.6 70.9h4.4v15.2h-4.4zM215.0 62.8h4.4v9.3h-4.4zM222.2 59.6h4.4v3.1h-4.4zM229.4 56.8h4.4v2.8h-4.4zM286.9 86.2h4.4v9.3h-4.4zM301.3 87.8h4.4v3.6h-4.4zM308.4 86.4h4.4v1.4h-4.4zM315.6 77.8h4.4v8.7h-4.4zM387.5 137.1h4.4v2.2h-4.4zM401.9 140.3h4.4v3.8h-4.4zM409.1 138.6h4.4v1.7h-4.4zM416.2 130.3h4.4v8.3h-4.4zM423.4 129.1h4.4v1.2h-4.4zM437.8 130.1h4.4v1.3h-4.4z" fill="#22b573"/><path d="M13.8 158.0h4.4v2.5h-4.4zM56.9 129.6h4.4v1.0h-4.4zM100.0 100.1h4.4v8.3h-4.4zM114.4 106.4h4.4v5.8h-4.4zM121.6 112.2h4.4v8.0h-4.4zM136.0 115.7h4.4v4.1h-4.4zM143.2 119.8h4.4v7.5h-4.4zM179.1 96.6h4.4v1.0h-4.4zM207.8 70.9h4.4v1.2h-4.4zM236.6 56.8h4.4v2.8h-4.4zM243.8 59.6h4.4v6.6h-4.4zM251.0 66.2h4.4v9.7h-4.4zM258.1 75.9h4.4v5.6h-4.4zM265.3 81.5h4.4v8.4h-4.4zM272.5 89.8h4.4v5.4h-4.4zM279.7 95.2h4.4v1.0h-4.4zM294.1 86.2h4.4v5.2h-4.4zM322.8 77.8h4.4v1.0h-4.4zM330.0 78.4h4.4v9.7h-4.4zM337.2 88.1h4.4v8.6h-4.4zM344.4 96.7h4.4v3.0h-4.4zM351.6 99.7h4.4v10.1h-4.4zM358.7 109.7h4.4v3.6h-4.4zM365.9 113.3h4.4v13.5h-4.4zM373.1 126.8h4.4v4.9h-4.4zM380.3 131.6h4.4v7.6h-4.4zM394.7 137.1h4.4v7.0h-4.4zM430.6 129.1h4.4v2.3h-4.4z" fill="#ef4d5a"/><polyline points="16,158 92,102 140,126 228,62 278,108 318,94 390,150 440,138" fill="none" stroke="#d1d5db" stroke-width="2"/><polyline points="318,94 334,112 348,100 364,128 378,118 390,150 410,136 426,146 440,138" fill="none" stroke="#e9b949" stroke-width="1.4"/></svg></div></div><div class="fcard-side"><ul class="fpoints"><li><b>灰色</b>：いまの時間足のジグザグ</li><li><b>黄色</b>：1つ下の時間足のジグザグ</li><li><b>背景</b>：緑は上昇、赤は下降（濃さで強さ）</li></ul><details class="fmore"><summary>くわしく見る</summary><div class="fmore-body"><div class="wm wm-set" role="img" aria-label="設定の画面（一般）">
+    <div class="wm-set-head">設定<span aria-hidden="true">×</span></div>
+    <div class="wm-set-body">
+      <div class="wm-set-tabs"><span class="on">一般</span><span>キャンバス</span><span>配色</span></div>
+      <div class="wm-set-main"><p class="wm-sec">ZIGZAG MTF</p><div class="wm-row hl"><i>☆</i><b class="wm-chk"></b><span class="wm-row-l">zigzag MTF表示</span></div><div class="wm-row"><i>☆</i><b class="wm-chk"></b><span class="wm-row-l">zigzag MTF表示(下位足)</span></div><div class="wm-row"><i>☆</i><b class="wm-chk"></b><span class="wm-row-l">トレンド背景</span></div></div>
+    </div>
+  </div></div></details></div></div>
         </article>
-        <article class="fcard" id="alertline">
-            <div class="fcard-top">
-                <h3 class="fcard-name">通知ライン（アラート）</h3>
-                
-            </div>
-            <p class="fcard-what">決めた価格にラインを置いておき、価格が触れたら知らせます。</p>
-            <div class="fwhere"><span class="fwhere-item"><b>PC</b><span>上のメニュー</span><i aria-hidden="true">›</i><span>ベルのボタン</span></span></div>
-            <div class="fcard-body"><p>チャートに「通知ライン」が表示されます。高値や安値のブレイクに置いておけば、チャートを見ていなくても気づけます。</p><!-- TODO: 通知の受け取り方（スマホへの通知など）を確認 --></div>
+        <article class="fcard has-media" id="alertline"><!-- TODO: 通知の受け取り方（スマホへの通知など）を確認 -->
+            <div class="fcard-top"><h3 class="fcard-name">通知ライン</h3></div>
+            <p class="fcard-what">決めた価格にラインを置き、触れたら通知。</p>
+            <div class="fwhere"><span class="fwhere-item"><b>PC</b><span>上のメニュー</span><i aria-hidden="true">›</i><span>ベル</span></span></div>
+            <div class="fcard-grid"><div class="fcard-media"><div class="wm wm-chart" role="img" aria-label="通知ラインの例：価格が触れたら通知"><svg viewBox="0 0 460 220" aria-hidden="true"><rect width="460" height="220" fill="#0a0f2c"/><path d="M23.2 107.4V114.0M30.4 104.2V110.1M37.6 101.8V109.0M51.9 101.0V111.4M59.1 99.4V105.6M73.5 97.2V105.0M80.7 94.0V100.3M87.9 93.9V99.0M102.2 91.4V103.5M109.4 88.8V97.1M131.0 88.1V95.5M145.4 94.0V101.1M159.7 95.6V101.1M188.5 105.0V109.3M210.0 115.3V119.4M217.2 111.2V116.4M224.4 108.2V116.9M231.6 103.7V116.8M238.8 103.9V112.2M246.0 102.6V107.9M253.2 94.4V107.9M267.5 94.1V101.9M274.7 90.5V99.2M281.9 88.9V93.7M296.3 86.4V96.3M303.5 82.3V88.4M310.6 85.6V89.7M332.2 82.6V89.9M353.8 90.1V96.0M360.9 85.7V97.0M382.5 90.7V100.9M404.1 79.8V94.4M418.4 78.7V90.8M425.6 74.6V83.2M432.8 68.7V79.3M440.0 68.8V77.1" stroke="#22b573" stroke-width=".9"/><path d="M16.0 109.1V113.4M44.7 99.1V112.2M66.3 98.4V105.8M95.1 93.6V99.4M116.6 89.3V96.9M123.8 91.2V94.7M138.2 88.1V101.9M152.5 93.0V100.6M166.9 97.0V101.0M174.1 97.6V106.4M181.3 99.6V112.5M195.7 102.8V108.5M202.8 105.8V120.6M260.3 96.1V106.2M289.1 90.8V97.3M317.8 82.7V88.7M325.0 85.6V88.6M339.4 84.5V94.6M346.6 90.4V93.3M368.1 87.4V95.1M375.3 90.9V98.4M389.7 90.1V93.9M396.9 93.2V96.2M411.3 80.7V89.2" stroke="#ef4d5a" stroke-width=".9"/><path d="M21.0 109.2h4.4v3.2h-4.4zM28.2 108.4h4.4v1.0h-4.4zM35.4 103.3h4.4v5.1h-4.4zM49.7 105.4h4.4v3.0h-4.4zM56.9 100.7h4.4v4.7h-4.4zM71.3 99.8h4.4v2.4h-4.4zM78.5 96.2h4.4v3.6h-4.4zM85.7 95.2h4.4v1.0h-4.4zM100.0 93.4h4.4v6.0h-4.4zM107.2 91.7h4.4v1.7h-4.4zM128.8 92.7h4.4v2.0h-4.4zM143.2 95.2h4.4v2.6h-4.4zM157.5 98.4h4.4v2.1h-4.4zM186.3 106.3h4.4v2.9h-4.4zM207.8 115.6h4.4v1.0h-4.4zM215.0 113.1h4.4v2.5h-4.4zM222.2 112.5h4.4v1.0h-4.4zM229.4 107.6h4.4v4.9h-4.4zM236.6 106.0h4.4v1.6h-4.4zM243.8 104.9h4.4v1.1h-4.4zM251.0 96.2h4.4v8.7h-4.4zM265.3 97.8h4.4v3.6h-4.4zM272.5 92.7h4.4v5.0h-4.4zM279.7 91.4h4.4v1.3h-4.4zM294.1 87.6h4.4v7.4h-4.4zM301.3 86.6h4.4v1.0h-4.4zM308.4 86.3h4.4v1.0h-4.4zM330.0 85.6h4.4v2.6h-4.4zM351.6 92.4h4.4v1.0h-4.4zM358.7 89.8h4.4v2.6h-4.4zM380.3 91.4h4.4v5.6h-4.4zM401.9 81.9h4.4v11.4h-4.4zM416.2 79.5h4.4v6.8h-4.4zM423.4 77.4h4.4v2.1h-4.4zM430.6 73.3h4.4v4.0h-4.4zM437.8 70.8h4.4v2.5h-4.4z" fill="#22b573"/><path d="M13.8 110.0h4.4v2.5h-4.4zM42.5 103.3h4.4v5.0h-4.4zM64.1 100.7h4.4v1.5h-4.4zM92.9 95.2h4.4v4.2h-4.4zM114.4 91.7h4.4v1.5h-4.4zM121.6 93.2h4.4v1.4h-4.4zM136.0 92.7h4.4v5.1h-4.4zM150.3 95.2h4.4v5.2h-4.4zM164.7 98.4h4.4v2.2h-4.4zM171.9 100.6h4.4v3.6h-4.4zM179.1 104.1h4.4v5.0h-4.4zM193.5 106.3h4.4v1.0h-4.4zM200.6 107.3h4.4v9.1h-4.4zM258.1 96.2h4.4v5.2h-4.4zM286.9 91.4h4.4v3.5h-4.4zM315.6 86.3h4.4v1.0h-4.4zM322.8 87.3h4.4v1.0h-4.4zM337.2 85.6h4.4v6.7h-4.4zM344.4 92.3h4.4v1.0h-4.4zM365.9 89.8h4.4v3.7h-4.4zM373.1 93.5h4.4v3.5h-4.4zM387.5 91.4h4.4v1.8h-4.4zM394.7 93.2h4.4v1.0h-4.4zM409.1 81.9h4.4v4.3h-4.4z" fill="#ef4d5a"/><path d="M16 60H444" stroke="#e5e7eb" stroke-dasharray="2 3"/><rect x="325.1" y="52" width="118.89999999999998" height="16" rx="3" fill="#e5e7eb"/><text x="439" y="64" text-anchor="end" font-size="10.5" fill="#1e1b4b" font-family="'Noto Sans JP',system-ui,sans-serif" font-weight="700">通知ライン　153.883</text><g transform="translate(26 44)"><circle r="11" fill="#e9b949"/><path d="M-4.5 3v-3.5a4.5 4.5 0 0 1 9 0V3l1.2 1.5h-11.4z M-1.6 6.5a1.6 1.6 0 0 0 3.2 0" fill="#1e1b4b"/></g></svg></div></div><div class="fcard-side"><ul class="fpoints"><li>高値・安値のブレイクに置いておく</li><li>チャートを見ていなくても気づける</li></ul></div></div>
         </article>
-        <article class="fcard" id="breakeven">
-            <div class="fcard-top">
-                <h3 class="fcard-name">Breakeven表示</h3>
-                <span class="finit">初期値：オン</span>
-            </div>
-            <p class="fcard-what">損益がゼロになる価格（損益分岐）にラインを引きます。</p>
+        <article class="fcard has-media" id="breakeven">
+            <div class="fcard-top"><h3 class="fcard-name">Breakeven表示</h3><span class="finit">初期値：オン</span></div>
+            <p class="fcard-what">損益がゼロになる価格にラインを引く。</p>
             <div class="fwhere"><span class="fwhere-item"><span>設定</span><i aria-hidden="true">›</i><span>一般</span><i aria-hidden="true">›</i><span>表示</span></span></div>
-            <div class="fcard-body"><p>ポジションを複数持っていても、どこまで戻れば損益がゼロになるかがすぐに分かります。</p></div>
+            <div class="fcard-grid"><div class="fcard-media"><div class="wm wm-chart" role="img" aria-label="Breakeven表示の例：2つのエントリーの間に、損益がゼロになるライン"><svg viewBox="0 0 460 220" aria-hidden="true"><rect width="460" height="220" fill="#0a0f2c"/><path d="M23.2 137.4V147.5M37.6 132.0V145.7M59.1 132.2V137.8M66.3 129.3V135.7M80.7 124.7V134.2M87.9 123.5V129.1M95.1 121.4V128.1M109.4 127.0V133.3M116.6 119.6V130.1M131.0 116.0V129.3M138.2 117.5V123.2M152.5 116.2V121.5M181.3 119.8V131.3M202.8 124.1V135.3M231.6 130.9V136.0M238.8 126.5V135.4M253.2 119.9V135.0M260.3 123.1V125.8M267.5 112.5V127.9M274.7 108.9V114.4M281.9 107.2V113.0M296.3 99.1V112.9M310.6 91.7V106.7M325.0 94.9V100.7M332.2 92.5V96.6M339.4 89.2V95.1M346.6 86.0V90.7M360.9 87.0V91.3M368.1 78.7V89.0M382.5 80.0V90.0M396.9 84.0V90.0M404.1 76.1V87.2M411.3 76.9V84.0M418.4 73.3V83.1M440.0 74.8V82.9" stroke="#22b573" stroke-width=".9"/><path d="M16.0 138.9V147.2M30.4 136.1V146.0M44.7 131.6V140.8M51.9 134.8V138.2M73.5 129.5V133.2M102.2 122.0V132.9M123.8 116.5V126.8M145.4 116.8V122.5M159.7 117.1V119.4M166.9 115.0V130.9M174.1 123.1V128.3M188.5 117.5V126.9M195.7 120.5V134.3M210.0 120.8V132.1M217.2 125.7V132.2M224.4 128.2V134.3M246.0 124.1V135.7M289.1 107.4V114.7M303.5 98.0V105.6M317.8 93.4V101.4M353.8 86.3V93.8M375.3 81.5V88.8M389.7 81.5V88.4M425.6 77.3V80.5M432.8 76.3V83.1" stroke="#ef4d5a" stroke-width=".9"/><path d="M21.0 137.6h4.4v6.9h-4.4zM35.4 134.9h4.4v8.5h-4.4zM56.9 133.1h4.4v3.3h-4.4zM64.1 129.7h4.4v3.4h-4.4zM78.5 128.1h4.4v3.3h-4.4zM85.7 126.6h4.4v1.5h-4.4zM92.9 124.2h4.4v2.4h-4.4zM107.2 127.7h4.4v2.5h-4.4zM114.4 119.8h4.4v7.9h-4.4zM128.8 120.4h4.4v4.5h-4.4zM136.0 118.0h4.4v2.4h-4.4zM150.3 117.5h4.4v3.7h-4.4zM179.1 122.2h4.4v4.6h-4.4zM200.6 125.2h4.4v5.7h-4.4zM229.4 131.3h4.4v1.6h-4.4zM236.6 126.6h4.4v4.7h-4.4zM251.0 124.5h4.4v6.5h-4.4zM258.1 123.4h4.4v1.2h-4.4zM265.3 113.8h4.4v9.6h-4.4zM272.5 111.0h4.4v2.8h-4.4zM279.7 109.9h4.4v1.0h-4.4zM294.1 102.7h4.4v8.6h-4.4zM308.4 96.4h4.4v7.4h-4.4zM322.8 95.8h4.4v4.2h-4.4zM330.0 93.1h4.4v2.7h-4.4zM337.2 90.5h4.4v2.6h-4.4zM344.4 87.0h4.4v3.6h-4.4zM358.7 88.7h4.4v1.4h-4.4zM365.9 82.0h4.4v6.6h-4.4zM380.3 82.5h4.4v4.6h-4.4zM394.7 87.1h4.4v1.0h-4.4zM401.9 80.6h4.4v6.5h-4.4zM409.1 79.2h4.4v1.4h-4.4zM416.2 78.0h4.4v1.2h-4.4zM437.8 78.9h4.4v2.7h-4.4z" fill="#22b573"/><path d="M13.8 142.0h4.4v2.5h-4.4zM28.2 137.6h4.4v5.8h-4.4zM42.5 134.9h4.4v1.4h-4.4zM49.7 136.4h4.4v1.0h-4.4zM71.3 129.7h4.4v1.6h-4.4zM100.0 124.2h4.4v6.0h-4.4zM121.6 119.8h4.4v5.1h-4.4zM143.2 118.0h4.4v3.2h-4.4zM157.5 117.5h4.4v1.3h-4.4zM164.7 118.7h4.4v7.8h-4.4zM171.9 126.5h4.4v1.0h-4.4zM186.3 122.2h4.4v2.2h-4.4zM193.5 124.3h4.4v6.6h-4.4zM207.8 125.2h4.4v2.4h-4.4zM215.0 127.6h4.4v3.5h-4.4zM222.2 131.1h4.4v1.8h-4.4zM243.8 126.6h4.4v4.4h-4.4zM286.9 109.9h4.4v1.4h-4.4zM301.3 102.7h4.4v1.1h-4.4zM315.6 96.4h4.4v3.6h-4.4zM351.6 87.0h4.4v3.1h-4.4zM373.1 82.0h4.4v5.1h-4.4zM387.5 82.5h4.4v5.5h-4.4zM423.4 78.0h4.4v1.0h-4.4zM430.6 78.4h4.4v3.1h-4.4z" fill="#ef4d5a"/><path d="M16 150H444" stroke="#3b82f6" stroke-dasharray="4 3"/><path d="M16 118H444" stroke="#3b82f6" stroke-dasharray="4 3"/><path d="M16 134H444" stroke="#e9b949" stroke-width="1.6"/><rect x="373.7" y="142" width="70.3" height="16" rx="3" fill="#3b82f6"/><text x="439" y="154" text-anchor="end" font-size="10.5" fill="#fff" font-family="'Noto Sans JP',system-ui,sans-serif" font-weight="700">エントリー1</text><rect x="373.7" y="110" width="70.3" height="16" rx="3" fill="#3b82f6"/><text x="439" y="122" text-anchor="end" font-size="10.5" fill="#fff" font-family="'Noto Sans JP',system-ui,sans-serif" font-weight="700">エントリー2</text><rect x="377.3" y="126" width="66.69999999999999" height="16" rx="3" fill="#e9b949"/><text x="439" y="138" text-anchor="end" font-size="10.5" fill="#1e1b4b" font-family="'Noto Sans JP',system-ui,sans-serif" font-weight="700">Breakeven</text></svg></div></div><div class="fcard-side"><ul class="fpoints"><li>ポジションが複数でも、損益ゼロの位置がすぐ分かる</li></ul></div></div>
         </article>
-        <article class="fcard" id="entry-viz">
-            <div class="fcard-top">
-                <h3 class="fcard-name">エントリーの可視化</h3>
-                <span class="finit">初期値：オン</span>
-            </div>
-            <p class="fcard-what">エントリーした位置を、チャート上に表示します。</p>
+        <article class="fcard" id="entry-viz"><!-- TODO: 表示の中身を確認 -->
+            <div class="fcard-top"><h3 class="fcard-name">エントリーの可視化</h3><span class="finit">初期値：オン</span></div>
+            <p class="fcard-what">エントリーした位置をチャートに表示。</p>
             <div class="fwhere"><span class="fwhere-item"><span>設定</span><i aria-hidden="true">›</i><span>一般</span><i aria-hidden="true">›</i><span>表示</span></span></div>
-            <div class="fcard-body"><!-- TODO: 表示の中身を確認 --></div>
+            
         </article>
         <article class="fcard" id="history">
-            <div class="fcard-top">
-                <h3 class="fcard-name">チャートに取引履歴を表示</h3>
-                <span class="finit">初期値：オフ</span>
-            </div>
-            <p class="fcard-what">過去のトレードのエントリーと決済を、チャート上に表示します。</p>
+            <div class="fcard-top"><h3 class="fcard-name">チャートに取引履歴を表示</h3><span class="finit">初期値：オフ</span></div>
+            <p class="fcard-what">過去のエントリーと決済をチャートに表示。</p>
             <div class="fwhere"><span class="fwhere-item"><span>設定</span><i aria-hidden="true">›</i><span>一般</span><i aria-hidden="true">›</i><span>表示</span></span></div>
-            <div class="fcard-body"><div class="gtip">自分のトレードを、チャートの上で振り返れます。数字での振り返りは「<a href="ytt-web-f-tools.html#calendar">損益カレンダー</a>」で。</div></div>
+            <div class="fcard-side"><ul class="fpoints"><li>チャートの上で、自分のトレードを振り返れる</li><li>数字での振り返りは <a href="ytt-web-f-tools.html#calendar">損益カレンダー</a></li></ul></div>
         </article>
     </div>
 </section>
@@ -1257,32 +1380,29 @@
                     <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
                 </div>
             </div>
-            <p>相場が動きやすい時間を、チャートの上で知らせます。</p>
+            
         </div>
         <article class="fcard has-media" id="indicator">
-            <div class="fcard-top">
-                <h3 class="fcard-name">経済指標表示</h3>
-                <span class="finit">初期値：オン（アラートもオン）</span>
-            </div>
-            <p class="fcard-what">経済指標の発表時間に縦線を引き、指標の名前を表示します。</p>
+            <div class="fcard-top"><h3 class="fcard-name">経済指標表示</h3><span class="finit">初期値：オン</span></div>
+            <p class="fcard-what">指標の発表時間に縦線と指標名。通知も。</p>
             <div class="fwhere"><span class="fwhere-item"><span>設定</span><i aria-hidden="true">›</i><span>一般</span><i aria-hidden="true">›</i><span>表示</span></span><span class="fwhere-item"><b>細かい設定</b><span>設定</span><i aria-hidden="true">›</i><span>一般</span><i aria-hidden="true">›</i><span>経済指標・セッション表示</span></span></div>
-            <div class="fcard-grid"><div class="fcard-media"><figure class="fvid pc"><div class="fvid-box" role="img" aria-label="動画（準備中）：通知・経済指標"><span class="fvid-play" aria-hidden="true"></span><span class="fvid-label">動画 準備中</span><span class="fvid-meta">PC・約40秒</span></div></figure></div><div class="fcard-body"><p>右のパネルのいちばん下には、次の指標までの残り時間が出ます（例：「21:30 米 小売売上高　あと13時間」）。</p><div class="ftable-wrap"><table class="ftable"><thead><tr><th>項目</th><th>初期値</th><th>できること</th></tr></thead><tbody><tr><td data-h="項目">表示重要度（これ以上）</td><td data-h="初期値">3</td><td data-h="できること">この重要度以上の指標を、チャートに表示します。</td></tr><tr><td data-h="項目">アラート重要度（これ以上）</td><td data-h="初期値">4</td><td data-h="できること">この重要度以上の指標を、通知します。</td></tr><tr><td data-h="項目">通知タイミング</td><td data-h="初期値">5分前</td><td data-h="できること">指標の何分前に通知するか。</td></tr></tbody></table></div><p class="gnote">指標の発表の前後は相場が荒れやすいので、エントリーを避ける目安にしましょう。</p></div></div>
+            <div class="fcard-grid"><div class="fcard-media"><figure class="fvid pc"><div class="wy-pc"><div class="wy-pc-screen"><video class="fvid-video" src="img/webytt/feat/feat-alert.mp4" poster="img/webytt/feat/feat-alert.jpg" muted loop playsinline preload="none" aria-label="動画：通知・経済指標（声なし）"></video></div><div class="wy-pc-base" aria-hidden="true"></div></div><figcaption class="fvid-cap">タップで拡大</figcaption></figure></div><div class="fcard-side"><ul class="fpoints"><li>右のパネルの下に、次の指標までの残り時間</li><li>重要度3以上を表示、4以上を通知（初期値）</li><li>発表の5分前に通知（初期値）</li></ul><details class="fmore"><summary>くわしく見る</summary><div class="fmore-body"><p class="gnote">発表の前後は相場が荒れやすいので、エントリーを避ける目安にしましょう。</p><div class="wm wm-set" role="img" aria-label="設定の画面（一般）">
+    <div class="wm-set-head">設定<span aria-hidden="true">×</span></div>
+    <div class="wm-set-body">
+      <div class="wm-set-tabs"><span class="on">一般</span><span>キャンバス</span><span>配色</span></div>
+      <div class="wm-set-main"><p class="wm-sec">経済指標・セッション表示</p><div class="wm-row"><i>☆</i><span class="wm-row-l">経済指標: 表示重要度(これ以上)</span><em>− 3 ＋</em></div><div class="wm-row"><i>☆</i><span class="wm-row-l">経済指標: アラート重要度(これ以上)</span><em>− 4 ＋</em></div><div class="wm-row"><i>☆</i><span class="wm-row-l">経済指標: 通知タイミング</span><em>− 5 分前 ＋</em></div><div class="wm-row"><i>☆</i><span class="wm-row-l">セッション: 通知タイミング</span><em>− 5 分前 ＋</em></div></div>
+    </div>
+  </div></div></details></div></div>
         </article>
-        <article class="fcard" id="session">
-            <div class="fcard-top">
-                <h3 class="fcard-name">セッション表示</h3>
-                <span class="finit">初期値：オフ</span>
-            </div>
-            <p class="fcard-what">ロンドン市場とニューヨーク市場が始まる時間に、縦線を引きます。</p>
+        <article class="fcard has-media" id="session">
+            <div class="fcard-top"><h3 class="fcard-name">セッション表示</h3><span class="finit">初期値：オフ</span></div>
+            <p class="fcard-what">ロンドンとニューヨークの市場が始まる時間に縦線。</p>
             <div class="fwhere"><span class="fwhere-item"><span>設定</span><i aria-hidden="true">›</i><span>一般</span><i aria-hidden="true">›</i><span>表示</span></span></div>
-            <div class="fcard-body"><p>「アラート」にもチェックを入れると、市場が始まる前（初期値5分前）に通知します。</p><div class="gtip">市場が始まると値動きが大きくなりやすいので、そこからトレードを始める、逆にその時間を避ける、といった使い方ができます。</div></div>
+            <div class="fcard-grid"><div class="fcard-media"><div class="wm wm-chart" role="img" aria-label="セッション表示の例：市場が始まる時間の縦線"><svg viewBox="0 0 460 220" aria-hidden="true"><rect width="460" height="220" fill="#0a0f2c"/><path d="M30.4 113.9V124.2M44.7 116.3V122.4M59.1 109.4V123.4M73.5 112.4V117.6M80.7 110.1V117.7M95.1 107.9V117.8M102.2 108.7V115.2M116.6 111.1V115.4M131.0 103.5V116.7M181.3 130.6V142.6M188.5 124.1V137.9M195.7 115.5V128.2M202.8 105.5V118.2M210.0 104.6V114.3M217.2 96.3V110.5M224.4 95.3V104.1M231.6 95.0V98.6M253.2 94.3V104.2M260.3 92.2V100.0M267.5 90.0V101.0M289.1 95.1V101.7M310.6 103.6V107.0M317.8 99.0V105.5M325.0 92.2V108.2M332.2 76.7V96.4M339.4 67.4V81.4M346.6 54.5V76.2M353.8 54.5V62.7M404.1 68.7V72.7M418.4 68.1V77.0M432.8 68.1V81.3" stroke="#22b573" stroke-width=".9"/><path d="M16.0 116.2V120.7M23.2 118.7V124.1M37.6 115.8V123.4M51.9 115.1V121.9M66.3 108.7V117.3M87.9 106.6V119.0M109.4 108.8V117.5M123.8 109.4V116.2M138.2 104.8V114.5M145.4 107.9V112.2M152.5 108.8V125.2M159.7 121.4V127.4M166.9 124.9V142.4M174.1 138.9V144.8M238.8 94.8V100.1M246.0 97.0V103.1M274.7 91.6V98.2M281.9 93.4V104.6M296.3 93.4V105.6M303.5 101.1V109.3M360.9 55.4V58.5M368.1 52.8V61.8M375.3 59.4V65.6M382.5 58.8V64.3M389.7 59.7V69.7M396.9 65.9V72.9M411.3 64.9V78.9M425.6 67.6V79.8M440.0 70.8V82.3" stroke="#ef4d5a" stroke-width=".9"/><path d="M28.2 116.9h4.4v4.3h-4.4zM42.5 117.8h4.4v1.1h-4.4zM56.9 110.8h4.4v8.7h-4.4zM71.3 115.1h4.4v1.7h-4.4zM78.5 110.9h4.4v4.3h-4.4zM92.9 111.6h4.4v2.9h-4.4zM100.0 108.8h4.4v2.7h-4.4zM114.4 113.5h4.4v1.0h-4.4zM128.8 107.2h4.4v7.3h-4.4zM179.1 134.8h4.4v7.5h-4.4zM186.3 125.5h4.4v9.3h-4.4zM193.5 118.1h4.4v7.4h-4.4zM200.6 109.6h4.4v8.4h-4.4zM207.8 109.0h4.4v1.0h-4.4zM215.0 100.7h4.4v8.3h-4.4zM222.2 97.5h4.4v3.2h-4.4zM229.4 97.0h4.4v1.0h-4.4zM251.0 99.0h4.4v1.0h-4.4zM258.1 96.6h4.4v2.4h-4.4zM265.3 94.0h4.4v2.6h-4.4zM286.9 97.3h4.4v3.0h-4.4zM308.4 104.7h4.4v1.0h-4.4zM315.6 103.5h4.4v1.3h-4.4zM322.8 92.9h4.4v10.5h-4.4zM330.0 78.1h4.4v14.8h-4.4zM337.2 72.0h4.4v6.1h-4.4zM344.4 57.9h4.4v14.2h-4.4zM351.6 56.5h4.4v1.3h-4.4zM401.9 69.3h4.4v1.8h-4.4zM416.2 69.0h4.4v6.4h-4.4zM430.6 71.4h4.4v7.3h-4.4z" fill="#22b573"/><path d="M13.8 118.0h4.4v2.5h-4.4zM21.0 120.5h4.4v1.0h-4.4zM35.4 116.9h4.4v1.9h-4.4zM49.7 117.8h4.4v1.7h-4.4zM64.1 110.8h4.4v6.0h-4.4zM85.7 110.9h4.4v3.6h-4.4zM107.2 108.8h4.4v5.0h-4.4zM121.6 113.5h4.4v1.1h-4.4zM136.0 107.2h4.4v3.3h-4.4zM143.2 110.5h4.4v1.7h-4.4zM150.3 112.2h4.4v11.9h-4.4zM157.5 124.1h4.4v2.6h-4.4zM164.7 126.7h4.4v14.9h-4.4zM171.9 141.6h4.4v1.0h-4.4zM236.6 97.0h4.4v1.0h-4.4zM243.8 98.0h4.4v1.5h-4.4zM272.5 94.0h4.4v2.0h-4.4zM279.7 96.1h4.4v4.2h-4.4zM294.1 97.3h4.4v5.2h-4.4zM301.3 102.5h4.4v2.6h-4.4zM358.7 56.5h4.4v1.0h-4.4zM365.9 57.4h4.4v2.7h-4.4zM373.1 60.0h4.4v1.0h-4.4zM380.3 61.0h4.4v1.7h-4.4zM387.5 62.6h4.4v4.0h-4.4zM394.7 66.7h4.4v4.4h-4.4zM409.1 69.3h4.4v6.1h-4.4zM423.4 69.0h4.4v9.7h-4.4zM437.8 71.4h4.4v9.6h-4.4z" fill="#ef4d5a"/><path d="M150 14V206M330 14V206" stroke="#a5b4fc" stroke-dasharray="4 4" opacity=".8"/><text x="156" y="26" font-size="11" fill="#c7d2fe" font-family="'Noto Sans JP',system-ui">ロンドン</text><text x="336" y="26" font-size="11" fill="#c7d2fe" font-family="'Noto Sans JP',system-ui">ニューヨーク</text></svg></div></div><div class="fcard-side"><ul class="fpoints"><li>始まると値動きが大きくなりやすい</li><li>「アラート」で始まる前（5分前）に通知</li></ul></div></div>
         </article>
         <article class="fcard" id="time">
-            <div class="fcard-top">
-                <h3 class="fcard-name">時間表示</h3>
-                <span class="finit">初期値：日本時間</span>
-            </div>
-            <p class="fcard-what">チャートの時間を、日本時間などに合わせて表示します。</p>
+            <div class="fcard-top"><h3 class="fcard-name">時間表示</h3><span class="finit">初期値：日本時間</span></div>
+            <p class="fcard-what">チャートの時間を日本時間などで表示。</p>
             <div class="fwhere"><span class="fwhere-item"><span>設定</span><i aria-hidden="true">›</i><span>一般</span><i aria-hidden="true">›</i><span>表示</span></span></div>
             
         </article>
@@ -1303,52 +1423,44 @@
                     <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
                 </div>
             </div>
-            <p>表示の切り替えと、自分で線を引く道具です。</p>
+            
         </div>
-        <article class="fcard" id="scalp">
-            <div class="fcard-top">
-                <h3 class="fcard-name">スキャモード</h3>
-                <span class="finit">初期値：オフ</span>
-            </div>
-            <p class="fcard-what">スキャルピング（短い時間の売買）向けの表示に切り替えます。</p>
+        <article class="fcard" id="scalp"><!-- TODO: Web版で表示されるものを確認 -->
+            <div class="fcard-top"><h3 class="fcard-name">スキャモード</h3><span class="finit">初期値：オフ</span></div>
+            <p class="fcard-what">スキャルピング向けの表示に切り替える。</p>
             <div class="fwhere"><span class="fwhere-item"><span>設定</span><i aria-hidden="true">›</i><span>一般</span><i aria-hidden="true">›</i><span>表示</span></span></div>
-            <div class="fcard-body"><p>これまでのYTT（MT4版）では、上位足のトレンド状況、足が確定するまでの残り時間、いまのスプレッド、値動きの幅の目安のラインなどが表示される機能でした。</p><!-- TODO: Web版で表示されるものを確認 --></div>
+            <div class="fcard-side"><details class="fmore"><summary>くわしく見る</summary><div class="fmore-body"><p>これまでのYTT（MT4版）では、上位足のトレンド状況、足が確定するまでの残り時間、スプレッド、値動きの幅の目安のラインが表示される機能でした。</p></div></details></div>
         </article>
         <article class="fcard" id="watermark">
-            <div class="fcard-top">
-                <h3 class="fcard-name">通貨ペア・時間足をすかし表示</h3>
-                <span class="finit">初期値：オン</span>
-            </div>
-            <p class="fcard-what">チャートの背景に、通貨ペア名と時間足を大きく薄く表示します。</p>
+            <div class="fcard-top"><h3 class="fcard-name">通貨ペア・時間足をすかし表示</h3><span class="finit">初期値：オン</span></div>
+            <p class="fcard-what">チャートの背景に、通貨ペアと時間足を大きく薄く表示。</p>
             <div class="fwhere"><span class="fwhere-item"><span>設定</span><i aria-hidden="true">›</i><span>一般</span><i aria-hidden="true">›</i><span>表示</span></span></div>
             
         </article>
         <article class="fcard" id="drawing">
-            <div class="fcard-top">
-                <h3 class="fcard-name">描画ツール</h3>
-                
-            </div>
-            <p class="fcard-what">水平線・トレンドライン・四角・テキスト・フィボナッチなどを、自分で引けます。</p>
+            <div class="fcard-top"><h3 class="fcard-name">描画ツール</h3></div>
+            <p class="fcard-what">水平線・トレンドライン・四角・テキスト・フィボナッチを自分で引く。</p>
             <div class="fwhere"><span class="fwhere-item"><b>PC</b><span>チャートの左</span></span></div>
             
         </article>
         <article class="fcard" id="cursor">
-            <div class="fcard-top">
-                <h3 class="fcard-name">十字カーソル</h3>
-                
-            </div>
-            <p class="fcard-what">チャート上の価格と時間を、十字の線で合わせられます。</p>
-            <div class="fwhere"><span class="fwhere-item"><b>色</b><span>設定</span><i aria-hidden="true">›</i><span>キャンバス</span></span><span class="fwhere-item"><b>スマホの色</b><span>設定</span><i aria-hidden="true">›</i><span>一般</span><i aria-hidden="true">›</i><span>カーソルカラー（スマホ）</span></span></div>
+            <div class="fcard-top"><h3 class="fcard-name">十字カーソル</h3></div>
+            <p class="fcard-what">価格と時間を十字の線で合わせる。色も変えられる。</p>
+            <div class="fwhere"><span class="fwhere-item"><b>色</b><span>設定</span><i aria-hidden="true">›</i><span>キャンバス</span></span><span class="fwhere-item"><b>スマホ</b><span>設定</span><i aria-hidden="true">›</i><span>一般</span><i aria-hidden="true">›</i><span>カーソルカラー</span></span></div>
             
         </article>
-        <article class="fcard" id="screenshot">
-            <div class="fcard-top">
-                <h3 class="fcard-name">スクリーンショット</h3>
-                
-            </div>
-            <p class="fcard-what">いまのチャートを画像にします。</p>
-            <div class="fwhere"><span class="fwhere-item"><b>PC</b><span>上のメニュー</span><i aria-hidden="true">›</i><span>カメラのボタン</span></span></div>
-            <div class="fcard-body"><!-- TODO: 保存先・共有のしかたを確認 --></div>
+        <article class="fcard has-media" id="screenshot"><!-- TODO: 保存先・共有のしかたを確認 -->
+            <div class="fcard-top"><h3 class="fcard-name">スクリーンショット</h3></div>
+            <p class="fcard-what">いまのチャートを画像にする。</p>
+            <div class="fwhere"><span class="fwhere-item"><b>PC</b><span>上のメニュー</span><i aria-hidden="true">›</i><span>カメラ</span></span></div>
+            <div class="fcard-grid"><div class="fcard-media"><div class="wm wm-bar" role="img" aria-label="PCの上のメニュー">
+    <span class="wm-sym">USDJPY</span>
+    <span class="wm-tfs"><i>M1</i><i>M5</i><i>M15</i><i class="on">M30</i><i>H1</i><i>H4</i><i>D1</i></span>
+    <span class="wm-ico hl" title="スクリーンショット"><svg viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="12" rx="2"/><circle cx="12" cy="13" r="3.2"/><path d="M9 7l1.2-2.2h3.6L15 7"/></svg></span>
+    <span class="wm-ico" title="アラート"><svg viewBox="0 0 24 24"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></svg></span>
+    <span class="wm-pill wm-pos">ポジション <b>0</b></span>
+    <span class="wm-pill">履歴 <b>5</b></span>
+  </div></div><div class="fcard-side"></div></div>
         </article>
     </div>
 </section>
@@ -1485,6 +1597,31 @@
 })();
 </script>
 <!-- BudouX — 日本語の文節改行（全ページ共通・同梱版。js/budoux-init.js を参照） -->
+<script>
+/* 機能の動画：画面に入ったら読み込んで再生、外れたら止める。タップで全画面 */
+(function () {
+    var vids = document.querySelectorAll('video.fvid-video');
+    if (!vids.length) return;
+    if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+                var v = e.target;
+                if (e.isIntersecting) { if (v.preload === 'none') { v.preload = 'auto'; } var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+                else { v.pause(); }
+            });
+        }, { threshold: 0.35 });
+        vids.forEach(function (v) { io.observe(v); });
+    } else {
+        vids.forEach(function (v) { v.autoplay = true; v.preload = 'auto'; });
+    }
+    vids.forEach(function (v) {
+        v.addEventListener('click', function () {
+            if (v.requestFullscreen) { v.requestFullscreen().catch(function () {}); }
+            else if (v.webkitEnterFullscreen) { v.webkitEnterFullscreen(); }
+        });
+    });
+})();
+</script>
 <script src="js/budoux-ja.min.js?v=20260907a" defer></script>
 <script src="js/budoux-init.js?v=20260907a" defer></script>
 </body>

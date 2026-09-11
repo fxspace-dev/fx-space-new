@@ -6,7 +6,7 @@
     <title>Web版YTT シナリオ・予約注文 — FX SPACE</title>
     <link rel="icon" type="image/png" href="icon.png">
     <meta property="og:title" content="Web版YTT シナリオ・予約注文 — FX SPACE">
-    <meta property="og:description" content="Web版YTTの使い方（シナリオ・予約注文）。エントリーの前に「こう動いたら、こうする」を決めておく機能です。チャートを見ていない時間も、決めたとおりに注文できます。">
+    <meta property="og:description" content="Web版YTTの使い方（シナリオ・予約注文）。">
     <meta property="og:image" content="https://fx-space.com/intro/img/og-ytt-tokusetu.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -1057,6 +1057,12 @@
     .fvid-label { font-size: 0.95rem; font-weight: 800; letter-spacing: 0.04em; }
     .fvid-meta { font-size: 0.75rem; color: #c7d2fe; }
     .fvid-box.is-shot { background: #334155; }
+    /* 機能の動画：画面の見方と同じノートPC／スマホの枠の中で再生（見えている間だけ再生、タップで全画面） */
+    .fvid .wy-pc { max-width: 100%; }
+    .fvid-video { display: block; width: 100%; height: auto; background: #0a0f2c; cursor: zoom-in; }
+    .wy-pc-screen .fvid-video { aspect-ratio: 16 / 9; border-radius: 7px; }
+    .wy-screen .fvid-video { aspect-ratio: 720 / 1400; }
+    .fvid-cap { margin-top: 0.9rem; font-size: 0.75rem; color: #6b7280; text-align: center; }
     /* 機能一覧 */
     .fidx-grid { margin-top: 0.7rem; }
     a.ytt-add-card.fidx { text-decoration: none; transition: border-color 0.15s, transform 0.15s; }
@@ -1078,75 +1084,204 @@
     .fcat-nav a[aria-current="page"] { background: #1e1b4b; border-color: #1e1b4b; color: #fff; }
     .fcat-no { width: 22px; height: 19px; display: inline-flex; align-items: center; justify-content: center; background: url("img/fill-crayon-orange-badge.svg") 0 0 / 100% 100% no-repeat; color: #1e1b4b; font: 900 0.72rem Inter, sans-serif; }
     .fsub-hero { padding-bottom: 2.25rem; }
-    .ftoc { justify-content: center; max-width: 900px; margin: 0.9rem auto 0; }
     .fsub-hero .ytt-sp-hero-kicker { display: inline-block; margin: 0 0 0.5rem; font-size: 0.8125rem; font-weight: 800; color: #4f46e5; }
-    /* 機能のカード */
-    .fcard { background: #fff; border: 1.5px solid #e5e7eb; border-radius: 18px; padding: 1.4rem 1.5rem 1.5rem; margin-top: 1.1rem; text-align: left; scroll-margin-top: 84px; }
+    .ftoc { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.35rem; max-width: 900px; margin: 0.9rem auto 0; }
+    .ftoc a { padding: 0.25rem 0.6rem; border-radius: 8px; background: #f3f4f6; color: #1e1b4b; font-size: 0.78rem; font-weight: 700; text-decoration: none; }
+    /* 機能のカード：見て分かるもの（動画・モック・図）を大きく、文字は要点だけ */
+    .fcard { background: #fff; border: 1.5px solid #e5e7eb; border-radius: 20px; padding: 1.4rem 1.5rem 1.5rem; margin-top: 1.2rem; text-align: left; scroll-margin-top: 84px; }
     @media (max-width: 600px) { .fcard { padding: 1.1rem 1rem 1.2rem; border-radius: 16px; } }
     .fcard-top { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.7rem; }
-    .fcard-name { margin: 0; font-size: 1.12rem; font-weight: 900; color: #1e1b4b; }
+    .fcard-name { margin: 0; font-size: 1.2rem; font-weight: 900; color: #1e1b4b; }
     .finit { display: inline-block; padding: 0.15rem 0.6rem; border-radius: 999px; background: #1e1b4b; color: #fff; font-size: 0.72rem; font-weight: 700; }
-    .fcard-what { margin: 0.45rem 0 0; font-size: 0.95rem; font-weight: 700; color: #374151; line-height: 1.7; }
-    .fwhere { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.7rem; }
+    .fcard-what { margin: 0.35rem 0 0; font-size: 0.98rem; font-weight: 700; color: #374151; }
+    .fwhere { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.6rem; }
     .fwhere-item { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 0.3rem; padding: 0.3rem 0.65rem; border: 1.5px dashed #c7d2fe; border-radius: 10px; font-size: 0.78rem; color: #1e1b4b; font-weight: 700; }
     .fwhere-item::before { content: "場所"; margin-right: 0.15rem; font-size: 0.68rem; font-weight: 800; color: #4f46e5; }
     .fwhere-item b { margin-right: 0.15rem; padding: 0.05rem 0.4rem; border-radius: 6px; background: #eef2ff; color: #3730a3; font-size: 0.7rem; }
     .fwhere-item i { font-style: normal; color: #9ca3af; }
-    .fcard-body { margin-top: 0.9rem; }
-    .fcard-body > p { font-size: 0.9rem; color: #374151; line-height: 1.85; margin: 0.6rem 0 0; }
-    .fcard-body > p:first-child { margin-top: 0; }
-    .fcard-body .feat-steps { margin-top: 0.2rem; }
-    .fcard-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 1.6rem; align-items: start; margin-top: 1rem; }
-    .fcard-grid .fcard-body { margin-top: 0; }
-    .fcard.is-wide .fcard-grid { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); }
-    @media (max-width: 860px) { .fcard-grid, .fcard.is-wide .fcard-grid { grid-template-columns: 1fr; gap: 1rem; } }
-    .fcard-media { min-width: 0; text-align: center; }
-    .fcard-media .gshot { margin: 0; }
-    .fbul { margin: 0.2rem 0 0; padding-left: 1.2rem; }
-    .fbul li { font-size: 0.9rem; color: #374151; line-height: 1.8; margin-bottom: 0.35rem; }
-    .ftable-wrap { overflow-x: auto; margin-top: 0.4rem; }
-    .ftable { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
-    .ftable th { text-align: left; padding: 0.5rem 0.65rem; background: #1e1b4b; color: #fff; font-size: 0.75rem; font-weight: 800; white-space: nowrap; }
-    .ftable th:first-child { border-radius: 8px 0 0 0; } .ftable th:last-child { border-radius: 0 8px 0 0; }
-    .ftable td { padding: 0.6rem 0.65rem; border-bottom: 1px solid #eef0f4; color: #374151; line-height: 1.7; vertical-align: top; }
+    .fwhere-item .wm-rail { flex-direction: row; box-shadow: none; }
+    .fcard-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 1.8rem; align-items: center; margin-top: 1.1rem; }
+    .fcard.is-wide .fcard-grid { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); }
+    @media (max-width: 860px) { .fcard-grid, .fcard.is-wide .fcard-grid { grid-template-columns: 1fr; gap: 1.1rem; } }
+    .fcard-media { min-width: 0; }
+    .fcard-media .fvid { margin: 0; }
+    .fcard-media .fvid:not(.pc) { max-width: 290px; margin: 0 auto; }
+    .fcard-side { min-width: 0; }
+    .fcard > .fcard-side { margin-top: 0.8rem; }
+    .fpoints { list-style: none; margin: 0; padding: 0; counter-reset: fp; }
+    .fpoints li { counter-increment: fp; position: relative; padding: 0.15rem 0 0.75rem 2.1rem; font-size: 0.95rem; font-weight: 700; color: #1f2937; line-height: 1.65; }
+    .fpoints li::before { content: counter(fp); position: absolute; left: 0; top: 0.12rem; width: 1.55rem; height: 1.4rem; display: flex; align-items: center; justify-content: center; background: url("img/fill-crayon-orange-badge.svg") 0 0 / 100% 100% no-repeat; color: #1e1b4b; font: 900 0.8rem Inter, sans-serif; }
+    .fpoints li b { color: #1e1b4b; }
+    .fpoints a { color: #4f46e5; }
+    .fmore { margin-top: 0.4rem; border-top: 1px dashed #e5e7eb; }
+    .fmore summary { cursor: pointer; list-style: none; display: inline-flex; align-items: center; gap: 0.35rem; margin-top: 0.7rem; padding: 0.35rem 0.8rem; border: 1.5px solid #c7d2fe; border-radius: 999px; font-size: 0.8rem; font-weight: 800; color: #3730a3; }
+    .fmore summary::-webkit-details-marker { display: none; }
+    .fmore summary::after { content: "▼"; font-size: 0.6rem; }
+    .fmore[open] summary::after { content: "▲"; }
+    .fmore-body { margin-top: 0.9rem; }
+    .fmore-body > p { font-size: 0.875rem; color: #4b5563; line-height: 1.85; margin: 0.6rem 0 0; }
+    .fmore-body .wm { margin: 0.6rem 0 0; }
+    .fmore-media { margin-bottom: 0.8rem; }
+    .ftable-wrap { overflow-x: auto; margin-top: 0.6rem; }
+    .ftable { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+    .ftable th { text-align: left; padding: 0.45rem 0.6rem; background: #1e1b4b; color: #fff; font-size: 0.72rem; font-weight: 800; white-space: nowrap; }
+    .ftable td { padding: 0.5rem 0.6rem; border-bottom: 1px solid #eef0f4; color: #374151; line-height: 1.65; vertical-align: top; }
     .ftable td:first-child { color: #1e1b4b; font-weight: 700; }
-    .ftable td small { color: #6b7280; font-weight: 700; }
-    @media (max-width: 600px) {
-        .ftable thead { display: none; }
-        .ftable tr { display: block; padding: 0.55rem 0; border-bottom: 1px solid #eef0f4; }
-        .ftable td { display: block; padding: 0.1rem 0; border: none; }
-        .ftable td[data-h="初期値"]::before { content: "初期値："; color: #6b7280; font-weight: 700; }
-    }
+    @media (max-width: 600px) { .ftable thead { display: none; } .ftable tr { display: block; padding: 0.5rem 0; border-bottom: 1px solid #eef0f4; } .ftable td { display: block; padding: 0.05rem 0; border: none; } .ftable td[data-h="初期値"]::before { content: "初期値："; color: #6b7280; } }
+    .wm .sw { display: inline-block; width: 16px; height: 12px; margin-left: 3px; border-radius: 3px; vertical-align: -1px; } .wm .sw.g { background: #2ea043; } .wm .sw.r { background: #d73a49; } .wm .sw.k { background: #0b1030; border: 1px solid #3a4170; }
     .group-after { max-width: 1100px; margin: 1.2rem auto 0; text-align: left; }
-    /* 設定の一覧 */
     .fset { list-style: none; margin: 0.9rem 0 0; padding: 0; }
     .fset li { display: flex; justify-content: space-between; gap: 1rem; padding: 0.55rem 0; border-bottom: 1px dashed #e5e7eb; font-size: 0.875rem; }
     .fset li a { color: #1e1b4b; font-weight: 700; text-decoration: underline; text-decoration-color: #c7d2fe; text-underline-offset: 3px; }
     .fset li span { color: #6b7280; white-space: nowrap; font-size: 0.8125rem; }
     .fset-note { font-size: 0.8125rem; color: #6b7280; margin-top: 1.1rem; text-align: left; }
-    /* 次のページ */
     .fnext { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.9rem; max-width: 760px; margin: 0 auto; }
     @media (max-width: 600px) { .fnext { grid-template-columns: 1fr; } }
     .fnext a { display: block; padding: 1rem 1.2rem; border: 1.5px solid #e5e7eb; border-radius: 14px; background: #fff; text-decoration: none; text-align: left; }
     .fnext a:hover { border-color: #a5b4fc; }
     .fnext small { display: block; font-size: 0.72rem; font-weight: 800; color: #6b7280; }
     .fnext b { display: block; margin-top: 0.2rem; font-size: 1rem; color: #1e1b4b; }
-    /* トップの「機能をさがす」 */
+    /* トップ：分野のカード（見本のモックつき） */
     .fhub { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 1.5rem; }
     @media (max-width: 760px) { .fhub { grid-template-columns: 1fr; } }
-    .fhub-card { display: flex; flex-direction: column; background: #fff; border: 1.5px solid #e5e7eb; border-radius: 18px; padding: 1.3rem 1.3rem 1.2rem; text-align: left; }
+    .fhub-card { display: flex; flex-direction: column; background: #fff; border: 1.5px solid #e5e7eb; border-radius: 20px; padding: 1.2rem; text-align: left; text-decoration: none; transition: border-color .15s, transform .15s; }
+    .fhub-card:hover { border-color: #a5b4fc; transform: translateY(-2px); }
+    .fhub-vis { display: flex; align-items: center; justify-content: center; min-height: 170px; margin-bottom: 1rem; padding: 12px; border-radius: 14px; background: #eef0f7; overflow: hidden; }
+    .fhub-vis .wm { box-shadow: none; }
     .fhub-card h3 { display: flex; align-items: center; gap: 0.5rem; margin: 0; font-size: 1.1rem; font-weight: 900; color: #1e1b4b; }
     .fhub-card h3 .fcat-no { width: 32px; height: 27px; font-size: 0.9rem; }
-    .fhub-card > p { margin: 0.45rem 0 0; font-size: 0.85rem; color: #4b5563; line-height: 1.75; }
-    .fhub-links { display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 0.8rem 0 1rem; }
-    .fhub-links a { padding: 0.25rem 0.6rem; border-radius: 8px; background: #f3f4f6; color: #1e1b4b; font-size: 0.78rem; font-weight: 700; text-decoration: none; }
-    .fhub-links a:hover { background: #e0e7ff; }
-    .fhub-card .fhub-go { margin-top: auto; align-self: flex-start; }
+    .fhub-card p { margin: 0.4rem 0 0; font-size: 0.85rem; color: #4b5563; line-height: 1.7; }
+    .fhub-card .go { margin-top: 0.8rem; font-size: 0.85rem; font-weight: 800; color: #4f46e5; }
+
+    /* ===== Web版YTTの画面モック（使い方ページ） ===== */
+    .wm { --wm-bg: #141a46; --wm-card: #1d2458; --wm-line: #30397a; --wm-text: #e5e7eb; --wm-mute: #9aa3c7; --wm-y: #e9b949;
+        background: var(--wm-bg); color: var(--wm-text); border-radius: 14px; font-family: 'Noto Sans JP', system-ui, sans-serif; line-height: 1.35; text-align: left;
+        box-shadow: 0 18px 40px rgba(30, 27, 75, 0.2); max-width: 100%; margin: 0 auto; }
+    .wm .hl { outline: 2.5px solid #ef4444; outline-offset: 2px; border-radius: 6px; }
+    .wm small { font-weight: 500; }
+    /* 設定 */
+    .wm-set { width: 100%; max-width: 420px; overflow: hidden; }
+    .wm-set-head { display: flex; justify-content: space-between; padding: 10px 14px; font-size: 13px; font-weight: 800; border-bottom: 1px solid var(--wm-line); background: #19205a; }
+    .wm-set-head span { color: var(--wm-mute); font-weight: 400; }
+    .wm-set-body { display: grid; grid-template-columns: 76px 1fr; }
+    .wm-set-tabs { padding: 8px 0; border-right: 1px solid var(--wm-line); background: #121842; }
+    .wm-set-tabs span { display: block; padding: 7px 10px; font-size: 11px; color: var(--wm-mute); }
+    .wm-set-tabs span.on { background: #242b62; color: #fff; font-weight: 800; }
+    .wm-set-main { min-width: 0; padding: 8px 10px 12px; }
+    @media (max-width: 440px) { .wm-set-body { grid-template-columns: 56px 1fr; } .wm-set-tabs span { padding: 7px 7px; font-size: 10px; } .wm-row { flex-wrap: wrap; } .wm-row em { white-space: normal; margin-left: auto; } }
+    .wm-sec { margin: 8px 0 5px; font-size: 10.5px; font-weight: 800; color: var(--wm-y); }
+    .wm-row { display: flex; align-items: center; gap: 7px; margin-top: 5px; padding: 8px 9px; border: 1px solid var(--wm-line); border-radius: 8px; background: var(--wm-card); font-size: 11.5px; font-weight: 700; }
+    .wm-row.is-on { border-color: rgba(233, 185, 73, 0.75); background: #2a2745; }
+    .wm-row i { font-style: normal; color: var(--wm-mute); font-size: 11px; }
+    .wm-row-l { flex: 1; min-width: 0; }
+    .wm-row-l small { display: block; margin-top: 1px; font-size: 9px; color: var(--wm-mute); }
+    .wm-row em { font-style: normal; padding: 2px 7px; border: 1px solid var(--wm-line); border-radius: 6px; font: 700 10px ui-monospace, Menlo, Consolas, monospace; color: #fff; white-space: nowrap; }
+    .wm-chk { width: 13px; height: 13px; border: 1.5px solid var(--wm-mute); border-radius: 3px; flex-shrink: 0; }
+    .wm-chk.on { border-color: var(--wm-y); background: radial-gradient(circle, var(--wm-y) 0 45%, transparent 46%); }
+    .wm-radio { width: 13px; height: 13px; border: 1.5px solid var(--wm-mute); border-radius: 50%; flex-shrink: 0; }
+    .wm-radio.on { border-color: var(--wm-y); background: radial-gradient(circle, var(--wm-y) 0 40%, transparent 42%); }
+    .wm-opt { display: flex; align-items: center; gap: 9px; margin-top: 6px; padding: 8px 9px; border: 1px solid var(--wm-line); border-radius: 9px; background: var(--wm-card); }
+    .wm-opt.on { border-color: rgba(233, 185, 73, 0.75); }
+    .wm-opt.on b { color: var(--wm-y); }
+    .wm-opt i { width: 26px; height: 26px; border-radius: 7px; flex-shrink: 0; border: 1px solid rgba(255,255,255,.12); }
+    .wm-opt b { display: block; font-size: 11.5px; }
+    .wm-opt small { display: block; font-size: 9px; color: var(--wm-mute); }
+    /* 右のパネル */
+    .wm-panel { width: 100%; max-width: 300px; padding: 12px; }
+    .wm-card { padding: 10px; border: 1px solid var(--wm-line); border-radius: 12px; background: var(--wm-card); }
+    .wm-card + .wm-card { margin-top: 8px; }
+    .wm-card-t { margin: 0 0 8px; font-size: 10.5px; font-weight: 800; color: var(--wm-mute); }
+    .wm-order { display: grid; grid-template-columns: 1fr 58px 1fr; gap: 6px; }
+    .wm-order > span { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 46px; border-radius: 9px; font-size: 14px; font-weight: 900; }
+    .wm-sell { background: #3d5fd9; } .wm-buy { background: #c2414b; }
+    .wm-lot { border: 1px solid var(--wm-line); background: #141a46; font: 900 14px ui-monospace, Menlo, monospace !important; }
+    .wm-lot small { font-size: 8px; color: var(--wm-mute); font-family: system-ui; }
+    .wm-steps { display: grid; grid-template-columns: repeat(6, 1fr); margin-top: 7px; border: 1px solid var(--wm-line); border-radius: 7px; }
+    .wm-steps span { padding: 5px 0; text-align: center; font: 700 9.5px ui-monospace, Menlo, monospace; color: var(--wm-mute); }
+    .wm-close { display: grid; grid-template-columns: 1.8fr 1fr; gap: 6px; margin-top: 7px; }
+    .wm-close span { padding: 9px 0; border: 1px solid var(--wm-line); border-radius: 8px; background: #232a60; text-align: center; font-size: 11.5px; font-weight: 800; color: #c7cbe0; }
+    .wm-bal-l { margin: 0; text-align: center; font-size: 10px; color: var(--wm-mute); }
+    .wm-bal { margin: 2px 0 0; text-align: center; font-size: 26px; font-weight: 900; }
+    .wm-bal-s { margin: 2px 0 10px; text-align: center; font-size: 10px; color: var(--wm-mute); }
+    .wm-risk { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .wm-risk span { display: flex; justify-content: space-between; align-items: center; gap: 4px; padding: 8px; border: 1px solid var(--wm-line); border-radius: 8px; }
+    .wm-risk small { font-size: 9px; color: var(--wm-mute); } .wm-risk b { font: 800 11.5px ui-monospace, Menlo, monospace; }
+    .wm-sc { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .wm-sc span { display: flex; flex-direction: column; align-items: center; padding: 10px 4px; border-radius: 9px; font-size: 11.5px; font-weight: 900; text-align: center; }
+    .wm-sc small { font-size: 7.5px; opacity: .8; margin-top: 2px; }
+    .wm-short { background: #22306b; border: 1px solid #4f6fd8; color: #dbe6ff; } .wm-long { background: #4a1f38; border: 1px solid #ef4d5a; color: #ffd5da; }
+    .wm-build { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 6px; }
+    .wm-build span { padding: 9px 0; border: 1px solid var(--wm-line); border-radius: 8px; background: #232a60; text-align: center; font-size: 10.5px; font-weight: 700; color: var(--wm-mute); }
+    .wm-build .wm-build-main { border-color: #c7cbe0; background: #141a46; color: #fff; font-weight: 900; }
+    .wm-build .wm-del { color: #f87171; }
+    /* 上のメニュー */
+    .wm-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; padding: 9px 10px; border-radius: 12px; font-size: 11px; }
+    .wm-sym { padding: 4px 8px; border-radius: 6px; background: #232a60; font: 800 11px ui-monospace, Menlo, monospace; }
+    .wm-tfs { display: flex; gap: 2px; } .wm-tfs i { font: 600 9.5px ui-monospace, Menlo, monospace; font-style: normal; color: var(--wm-mute); padding: 3px 4px; border-radius: 4px; }
+    .wm-tfs i.on { background: #3a3413; color: var(--wm-y); }
+    .wm-ico { display: inline-flex; width: 26px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--wm-line); border-radius: 6px; }
+    .wm-ico svg { width: 15px; height: 15px; fill: none; stroke: #cbd5e1; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+    .wm-pill { padding: 4px 10px; border: 1px solid var(--wm-line); border-radius: 999px; font-size: 10.5px; color: var(--wm-mute); }
+    .wm-pill b { margin-left: 3px; font: 700 10px ui-monospace, Menlo, monospace; }
+    .wm-pos { border-color: #b7791f; background: #2a2310; color: var(--wm-y); }
+    /* 右端のアイコン列（場所の表示に使う小さなもの） */
+    .wm-rail { display: inline-flex; flex-direction: column; gap: 4px; padding: 5px; border-radius: 9px; background: #141a46; vertical-align: middle; }
+    .wm-rail i { display: flex; width: 22px; height: 22px; align-items: center; justify-content: center; border-radius: 5px; }
+    .wm-rail i.hl { background: #3a3413; outline: 2px solid #ef4444; outline-offset: 1px; }
+    .wm-rail svg { width: 14px; height: 14px; fill: none; stroke: #aeb6d6; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .wm-rail i.hl svg { stroke: #e9b949; }
+    /* 分析ツールの窓 */
+    .wm-win { width: 100%; max-width: 520px; padding: 0 12px 12px; overflow: hidden; }
+    .wm-win-head { display: flex; justify-content: space-between; margin: 0 -12px 10px; padding: 10px 14px; border-bottom: 1px solid var(--wm-line); background: #19205a; font-size: 12.5px; font-weight: 800; }
+    .wm-win-head span { color: var(--wm-mute); font-weight: 400; }
+    .wm-tabs { display: flex; gap: 6px; margin: 0 0 10px; }
+    .wm-tabs span { flex: 1; padding: 6px 0; border: 1px solid var(--wm-line); border-radius: 7px; text-align: center; font-size: 10.5px; color: var(--wm-mute); }
+    .wm-tabs span.on { background: var(--wm-y); border-color: var(--wm-y); color: #1e1b4b; font-weight: 800; }
+    .wm .g { color: #4ade80; }
+    .wm-cal-top { display: flex; justify-content: space-between; align-items: center; font-size: 12px; }
+    .wm-cal-top b { font-size: 15px; } .wm-cal-top small { font-size: 9.5px; color: var(--wm-mute); } .wm-cal-top .g { font-size: 17px; }
+    .wm-cal-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin: 9px 0; }
+    .wm-cal-stats span { padding: 6px 8px; border-radius: 8px; background: #262a5e; }
+    .wm-cal-stats small { display: block; font-size: 8.5px; color: var(--wm-mute); } .wm-cal-stats b { font-size: 13px; }
+    .wm-cal-wd, .wm-cal-wk { display: grid; grid-template-columns: repeat(7, 1fr) 42px; gap: 3px; }
+    .wm-cal-wd span { text-align: center; font-size: 9px; color: var(--wm-mute); padding: 2px 0; } .wm-cal-wd .sat { color: #93c5fd; } .wm-cal-wd .sun { color: #fca5a5; }
+    .wm-cal-wk { margin-top: 3px; }
+    .wm-cal-wk > span { height: 30px; border-radius: 5px; background: #1b2150; position: relative; }
+    .wm-cal-wk > span.e { background: transparent; }
+    .wm-cal-wk > span i { position: absolute; left: 3px; top: 2px; font: 600 7.5px ui-monospace, Menlo, monospace; font-style: normal; color: var(--wm-mute); }
+    .wm-cal-wk > span.win { background: #2f5a45; outline: 1.5px solid #4ade80; }
+    .wm-cal-wk > span.win b { position: absolute; left: 3px; bottom: 2px; font-size: 7.5px; color: #86efac; }
+    .wm-cal-wk > span.wk { background: transparent; display: flex; flex-direction: column; align-items: flex-end; justify-content: center; }
+    .wm-cal-wk .wk b { font-size: 8.5px; color: var(--wm-mute); } .wm-cal-wk .wk b.g { color: #4ade80; } .wm-cal-wk .wk small { font-size: 7px; color: var(--wm-mute); }
+    .wm-heat-t { display: grid; grid-template-columns: 34px repeat(8, 1fr); gap: 2px; }
+    .wm-heat-t span { padding: 5px 0; border-radius: 3px; text-align: center; font: 600 8px ui-monospace, Menlo, monospace; color: #fff; }
+    .wm-heat-t span.h { color: var(--wm-mute); font-weight: 700; background: transparent; }
+    .wm-str-chart { display: block; width: 100%; height: auto; margin-bottom: 8px; }
+    .wm-str-bars { display: grid; grid-template-columns: 30px 1fr 44px; gap: 5px 7px; align-items: center; }
+    .wm-str-bars .c { font: 800 9.5px ui-monospace, Menlo, monospace; } .wm-str-bars .v { font: 600 9px ui-monospace, Menlo, monospace; color: var(--wm-mute); text-align: right; }
+    .wm-str-bars .bar { height: 6px; border-radius: 3px; background: #262a5e; overflow: hidden; } .wm-str-bars .bar i { display: block; height: 100%; border-radius: 3px; }
+    .wm-news { max-width: 300px; padding-top: 12px; }
+    .wm-news-i { margin-top: 7px; padding: 9px 10px; border: 1px solid var(--wm-line); border-radius: 10px; background: var(--wm-card); }
+    .wm-news-i p { display: flex; align-items: center; gap: 6px; margin: 0 0 4px; font-size: 9px; color: var(--wm-mute); }
+    .wm-news-i time { margin-left: auto; font-family: ui-monospace, Menlo, monospace; }
+    .wm-news-i .imp { padding: 1px 5px; border: 1px solid var(--wm-y); border-radius: 3px; color: var(--wm-y); font-size: 8.5px; }
+    .wm-news-i .imp.r { border-color: #ef4444; color: #fca5a5; }
+    .wm-news-i b { display: block; font-size: 11.5px; } .wm-news-i .s { display: block; margin-top: 3px; font-size: 9.5px; color: var(--wm-mute); line-height: 1.5; }
+    /* チャートの図 */
+    .wm-chart { width: 100%; max-width: 520px; padding: 6px; }
+    .wm-chart svg { display: block; width: 100%; height: auto; border-radius: 9px; }
+    /* 流れ図 */
+    .wm-flow { display: flex; align-items: center; justify-content: center; gap: 10px; max-width: 460px; padding: 18px 14px; }
+    .wm-flow .n { flex: 1; padding: 12px; border: 1px solid var(--wm-line); border-radius: 12px; background: var(--wm-card); text-align: center; }
+    .wm-flow .n.y { border-color: rgba(233,185,73,.8); }
+    .wm-flow small { display: block; font-size: 10px; color: var(--wm-mute); } .wm-flow b { display: block; margin-top: 3px; font-size: 12.5px; }
+    .wm-flow > i { font-style: normal; font-size: 20px; color: var(--wm-y); }
+
 </style>
 </head>
 <body>
 
-<!-- Web版YTT 使い方：シナリオ・予約注文（ytt-web-f-scenario.html）。build-guide.js で作成。内容の元は webytt-materials/前任Canva_YTTの使い方_全文.md と Web版の画面のスクショ -->
+<!-- Web版YTT 使い方：シナリオ・予約注文（ytt-web-f-scenario.html）。webytt-materials/tools/build-guide.js と mocks.js で作成（手で直さず、スクリプトを直して作り直す） -->
 
 <nav class="ytt-sp-nav">
     <a href="ytt-tokusetu.html" class="ytt-sp-nav-logo">
@@ -1162,12 +1297,12 @@
     <h1 class="ytt-sp-hero-title">
         <span class="ytt-sp-title-line"><span class="line-text">シナリオ・予約注文<img class="ytt-title-wave" src="img/wave-yellow.png" alt=""></span></span>
     </h1>
-    <p class="ytt-sp-hero-lead">エントリーの前に「こう動いたら、こうする」を決めておく機能です。<br>チャートを見ていない時間も、決めたとおりに注文できます。</p>
+    <p class="ytt-sp-hero-lead">「こう動いたら、こうする」を先に決めておく機能です。<br>チャートを見ていない時間も、決めたとおりに注文できます。</p>
     <nav class="fcat-nav" aria-label="使い方のページ">
         <a href="ytt-web-features.html">使い方トップ</a>
         <a href="ytt-web-f-trade.html"><span class="fcat-no">1</span>注文・ロット・決済</a><a href="ytt-web-f-scenario.html" aria-current="page"><span class="fcat-no">2</span>シナリオ・予約注文</a><a href="ytt-web-f-chart.html"><span class="fcat-no">3</span>チャートの表示</a><a href="ytt-web-f-tools.html"><span class="fcat-no">4</span>分析ツール</a><a href="ytt-web-f-settings.html"><span class="fcat-no">5</span>モードと設定</a>
     </nav>
-    <div class="fhub-links ftoc" aria-label="このページの機能"><a href="#build">シナリオ構築</a><a href="#scenario">シナリオ（TP/SL）</a><a href="#reserve">予約注文</a><a href="#trigger">エントリートリガー</a><a href="#addpos">追加ポジ</a></div>
+    <div class="ftoc" aria-label="このページの機能"><a href="#build">シナリオ構築</a><a href="#scenario">シナリオ（TP/SL）</a><a href="#reserve">予約注文</a><a href="#trigger">エントリートリガー</a><a href="#addpos">追加ポジ</a></div>
 </section>
 
 <section class="ytt-spec-section" style="background:#f4f6f9;">
@@ -1184,16 +1319,18 @@
                     <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
                 </div>
             </div>
-            <p>エントリー前に、値動きの道筋をチャートに描きます。</p>
+            
         </div>
         <article class="fcard has-media" id="build">
-            <div class="fcard-top">
-                <h3 class="fcard-name">シナリオ構築</h3>
-                <span class="finit">初期値：パネルは非表示（設定でオン）</span>
-            </div>
-            <p class="fcard-what">「こう動いたら、こうする」という値動きの道筋と、エントリー・利確・損切りの位置をチャートに描いておけます。</p>
-            <div class="fwhere"><span class="fwhere-item"><span>右のパネル</span><i aria-hidden="true">›</i><span>シナリオ構築</span></span></div>
-            <div class="fcard-grid"><div class="fcard-media"><figure class="fvid pc"><div class="fvid-box" role="img" aria-label="動画（準備中）：シナリオ構築"><span class="fvid-play" aria-hidden="true"></span><span class="fvid-label">動画 準備中</span><span class="fvid-meta">PC・約60秒</span></div></figure></div><div class="fcard-body"><ol class="feat-steps"><li><b>設定 → 一般</b> で「シナリオ構築パネルを表示」をオンにする（最初はオフになっています）</li><li>右のパネルの「シナリオ構築」を押す</li><li>チャート上をクリックして、値動きの道筋を描く。クリックするたびに線が折り返し、ダブルクリックで終点になる</li><li>続けてクリックして、<b>想定エントリー位置 → 想定利確位置 → 想定損切位置</b> の順に置く</li><li>描き終わると、そのシナリオのRR比などが表示される</li></ol><div class="gtip">線やアイコンは、<b>ダブルクリックして選択状態</b>にすると動かせます。<br>描いたシナリオは「非表示」で隠せて、いらなくなったら「全削除」でまとめて消せます。</div><p class="gnote">右のパネルに「シナリオ構築」が見当たらないときは、設定 → 一般 の「シナリオ構築パネルを表示」がオンになっているか確認してください。</p></div></div>
+            <div class="fcard-top"><h3 class="fcard-name">シナリオ構築</h3><span class="finit">初期値：パネルは非表示</span></div>
+            <p class="fcard-what">値動きの道筋と、エントリー・利確・損切りをチャートに描く。</p>
+            <div class="fwhere"><span class="fwhere-item"><b>パネルを出す</b><span>設定</span><i aria-hidden="true">›</i><span>一般</span><i aria-hidden="true">›</i><span>シナリオ構築パネルを表示</span></span><span class="fwhere-item"><span>右のパネル</span><i aria-hidden="true">›</i><span>シナリオ構築</span></span></div>
+            <div class="fcard-grid"><div class="fcard-media"><figure class="fvid pc"><div class="wy-pc"><div class="wy-pc-screen"><video class="fvid-video" src="img/webytt/feat/feat-build.mp4" poster="img/webytt/feat/feat-build.jpg" muted loop playsinline preload="none" aria-label="動画：シナリオ構築（声なし）"></video></div><div class="wy-pc-base" aria-hidden="true"></div></div><figcaption class="fvid-cap">タップで拡大</figcaption></figure></div><div class="fcard-side"><ul class="fpoints"><li>クリックで折り返し、ダブルクリックで終点</li><li>続けてクリックで、エントリー → 利確 → 損切り</li><li>RR比などが表示される</li></ul><details class="fmore"><summary>くわしく見る</summary><div class="fmore-body"><div class="fmore-media"><div class="wm wm-panel" role="img" aria-label="右のパネルの「シナリオ」と「シナリオ構築」">
+    <div class="wm-card"><p class="wm-card-t">● シナリオ ▾ ⓘ</p>
+      <div class="wm-sc"><span class="wm-short">ショートシナリオ<small>TP / SL を設定して構築</small></span><span class="wm-long">ロングシナリオ<small>TP / SL を設定して構築</small></span></div></div>
+    <div class="wm-card"><p class="wm-card-t">● シナリオ構築 ▾</p>
+      <div class="wm-build"><span class="wm-build-main hl">シナリオ構築</span><span class="">非表示</span><span class="wm-del">全削除</span></div></div>
+  </div></div><p class="gnote">パネルが見当たらないときは、設定 → 一般 の「シナリオ構築パネルを表示」をオンにしてください（最初はオフ）。</p><p>線やアイコンは、ダブルクリックで選択すると動かせます。「非表示」で隠して、「全削除」でまとめて消せます。</p></div></details></div></div>
         </article>
     </div>
 </section>
@@ -1212,25 +1349,19 @@
                     <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
                 </div>
             </div>
-            <p>利確と損切りを決めてからエントリーしたり、<br>決めた価格に来たら自動でエントリーしたりできます。</p>
+            
         </div>
         <article class="fcard has-media" id="scenario">
-            <div class="fcard-top">
-                <h3 class="fcard-name">シナリオ（TP/SL）</h3>
-                
-            </div>
-            <p class="fcard-what">エントリーの前に、利確（TP）と損切り（SL）の位置を決めておけます。</p>
-            <div class="fwhere"><span class="fwhere-item"><b>PC</b><span>右のパネル</span><i aria-hidden="true">›</i><span>シナリオ</span></span><span class="fwhere-item"><b>スマホ</b><span>右上の「シナリオ」</span></span></div>
-            <div class="fcard-grid"><div class="fcard-media"><figure class="fvid pc"><div class="fvid-box" role="img" aria-label="動画（準備中）：シナリオ（TP/SL）"><span class="fvid-play" aria-hidden="true"></span><span class="fvid-label">動画 準備中</span><span class="fvid-meta">PC・約80秒</span></div></figure></div><div class="fcard-body"><ol class="feat-steps"><li>「ロングシナリオ」か「ショートシナリオ」を押す</li><li>チャートにTPとSLの線が出る</li><li>線を動かして、利確と損切りの幅を決める</li><li>リスクリワード（RR）が自動で表示される</li></ol><div class="gtip">例）ロングシナリオを押す → TPとSLの線を動かす → RRが1以上なのを確かめて「BUY」。<br>損失率固定モードなら、SLに届いたときの損失が決めた率になるように、ロットが自動で決まります。</div><p class="gnote">線を引いただけでは発注されません。まず「構築中」として引き、そのまま発注するか予約にするかは、あとから決めます。</p></div></div>
+            <div class="fcard-top"><h3 class="fcard-name">シナリオ（TP/SL）</h3></div>
+            <p class="fcard-what">利確（TP）と損切り（SL）を決めてからエントリー。</p>
+            <div class="fwhere"><span class="fwhere-item"><b>PC</b><span>右のパネル</span><i aria-hidden="true">›</i><span>シナリオ</span></span><span class="fwhere-item"><b>スマホ</b><span>右上「シナリオ」</span></span></div>
+            <div class="fcard-grid"><div class="fcard-media"><figure class="fvid pc"><div class="wy-pc"><div class="wy-pc-screen"><video class="fvid-video" src="img/webytt/feat/feat-scenario.mp4" poster="img/webytt/feat/feat-scenario.jpg" muted loop playsinline preload="none" aria-label="動画：シナリオ（TP/SL）（声なし）"></video></div><div class="wy-pc-base" aria-hidden="true"></div></div><figcaption class="fvid-cap">タップで拡大</figcaption></figure></div><div class="fcard-side"><ul class="fpoints"><li>「ロングシナリオ」か「ショートシナリオ」を押す</li><li>TPとSLの線を動かして幅を決める</li><li>RRが1以上なのを確かめてからエントリー</li></ul><details class="fmore"><summary>くわしく見る</summary><div class="fmore-body"><p class="gnote">線を引いただけでは発注されません。まず「構築中」として引き、発注するか予約にするかは、あとから決めます。</p><p>損失率固定モードなら、SLに届いたときの損失が決めた率になるように、ロットが自動で決まります。</p></div></details></div></div>
         </article>
-        <article class="fcard has-media" id="reserve">
-            <div class="fcard-top">
-                <h3 class="fcard-name">予約注文</h3>
-                
-            </div>
-            <p class="fcard-what">組んだシナリオを予約にすると、決めた価格に来たときに自動でエントリーします。</p>
+        <article class="fcard has-media" id="reserve"><!-- TODO: 予約中の注文を見る場所を確認 -->
+            <div class="fcard-top"><h3 class="fcard-name">予約注文</h3></div>
+            <p class="fcard-what">決めた価格に来たら、自動でエントリー。</p>
             <div class="fwhere"><span class="fwhere-item"><span>シナリオを組んだあと</span></span></div>
-            <div class="fcard-grid"><div class="fcard-media"><figure class="fvid pc"><div class="fvid-box" role="img" aria-label="動画（準備中）：予約注文"><span class="fvid-play" aria-hidden="true"></span><span class="fvid-label">動画 準備中</span><span class="fvid-meta">PC・約60秒</span></div></figure></div><div class="fcard-body"><ol class="feat-steps"><li>構築したシナリオを予約にする</li><li>価格が来たら、自動でエントリー</li><li>予約中の注文は、一覧で確認・取り消しできる</li></ol><div class="gtip">チャート上では、<b>構築中は破線</b>、<b>予約中は実線</b>で表示されます。</div><!-- TODO: 予約中の注文を見る場所（最新の画面）を確認 --></div></div>
+            <div class="fcard-grid"><div class="fcard-media"><figure class="fvid pc"><div class="wy-pc"><div class="wy-pc-screen"><video class="fvid-video" src="img/webytt/feat/feat-reserve.mp4" poster="img/webytt/feat/feat-reserve.jpg" muted loop playsinline preload="none" aria-label="動画：予約注文（声なし）"></video></div><div class="wy-pc-base" aria-hidden="true"></div></div><figcaption class="fvid-cap">タップで拡大</figcaption></figure></div><div class="fcard-side"><ul class="fpoints"><li>組んだシナリオを予約にする</li><li>価格が来たら自動でエントリー</li><li>構築中は破線、予約中は実線</li></ul></div></div>
         </article>
     </div>
 </section>
@@ -1249,25 +1380,31 @@
                     <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
                 </div>
             </div>
-            <p>ラインに触れたときだけでなく、<br>トレンドやRR比を条件にエントリーできます。</p>
+            
         </div>
-        <article class="fcard" id="trigger">
-            <div class="fcard-top">
-                <h3 class="fcard-name">エントリートリガー</h3>
-                
-            </div>
-            <p class="fcard-what">「トレンドが転換したら」「押し目が来たら」「RR比が合ったら」などの条件でエントリーできます。</p>
+        <article class="fcard has-media" id="trigger">
+            <div class="fcard-top"><h3 class="fcard-name">エントリートリガー</h3></div>
+            <p class="fcard-what">トレンド転換・押し目・RR比を条件にエントリー。</p>
             <div class="fwhere"><span class="fwhere-item"><span>シナリオを組むとき</span></span><span class="fwhere-item"><b>初期値</b><span>設定</span><i aria-hidden="true">›</i><span>一般</span><i aria-hidden="true">›</i><span>エントリートリガー</span></span></div>
-            <div class="fcard-body"><div class="ftable-wrap"><table class="ftable"><thead><tr><th>条件</th><th>初期値</th><th>エントリーするタイミング</th></tr></thead><tbody><tr><td data-h="条件"><b>トレンド転換で注文</b></td><td data-h="初期値">時間足 M5</td><td data-h="エントリーするタイミング">決めた時間足で、トレンドが転換したとき</td></tr><tr><td data-h="条件"><b>押し目で注文</b></td><td data-h="初期値">時間足 M5</td><td data-h="エントリーするタイミング">決めた時間足で、押し目（戻り）のタイミングが来たとき</td></tr><tr><td data-h="条件"><b>RR比成立で注文</b></td><td data-h="初期値">RR比 1.00</td><td data-h="エントリーするタイミング">リスクリワード比が、決めた数値以上になったとき</td></tr><tr><td data-h="条件"><b>組み合わせ</b></td><td data-h="初期値">—</td><td data-h="エントリーするタイミング">「トレンド転換＋RR比」「押し目＋RR比」のように、2つとも満たしたときだけエントリー</td></tr></tbody></table></div><div class="gtip">設定の値は、シナリオを組むときの「初期値」です。いろいろ試して、自分に合う組み合わせを見つけてください。</div></div>
+            <div class="fcard-grid"><div class="fcard-media"><div class="wm wm-set" role="img" aria-label="設定の画面（一般）">
+    <div class="wm-set-head">設定<span aria-hidden="true">×</span></div>
+    <div class="wm-set-body">
+      <div class="wm-set-tabs"><span class="on">一般</span><span>キャンバス</span><span>配色</span></div>
+      <div class="wm-set-main"><p class="wm-sec">エントリートリガー</p><div class="wm-row hl"><i>☆</i><span class="wm-row-l">トレンド転換の時間足(デフォルト値)</span><em>M5 ▾</em></div><div class="wm-row"><i>☆</i><span class="wm-row-l">押し目の時間足(デフォルト値)</span><em>M5 ▾</em></div><div class="wm-row"><i>☆</i><span class="wm-row-l">RR比(デフォルト値)</span><em>− 1.00 ＋</em></div></div>
+    </div>
+  </div></div><div class="fcard-side"><ul class="fpoints"><li><b>トレンド転換</b>：決めた時間足で転換したら</li><li><b>押し目</b>：押し目（戻り）のタイミングで</li><li><b>RR比成立</b>：RR比が決めた数値以上になったら</li></ul><details class="fmore"><summary>くわしく見る</summary><div class="fmore-body"><p>「トレンド転換＋RR比」「押し目＋RR比」のように、2つとも満たしたときだけエントリーすることもできます。設定の値は、シナリオを組むときの初期値です。</p></div></details></div></div>
         </article>
-        <article class="fcard" id="addpos">
-            <div class="fcard-top">
-                <h3 class="fcard-name">追加ポジ</h3>
-                <span class="finit">初期値：ロット倍率 0.50</span>
-            </div>
-            <p class="fcard-what">エントリーしたあと、決めた価格に来たらポジションを追加します。</p>
+        <article class="fcard has-media" id="addpos"><!-- TODO: 「追加ポジは全体の損失で計算」の意味を確認 -->
+            <div class="fcard-top"><h3 class="fcard-name">追加ポジ</h3><span class="finit">初期値：ロット倍率 0.50</span></div>
+            <p class="fcard-what">エントリー後、決めた価格でポジションを追加。</p>
             <div class="fwhere"><span class="fwhere-item"><span>シナリオを組むとき</span></span><span class="fwhere-item"><b>初期値</b><span>設定</span><i aria-hidden="true">›</i><span>一般</span><i aria-hidden="true">›</i><span>追加ポジ</span></span></div>
-            <div class="fcard-body"><div class="ftable-wrap"><table class="ftable"><thead><tr><th>項目</th><th>初期値</th><th>できること</th></tr></thead><tbody><tr><td data-h="項目">ロット倍率</td><td data-h="初期値">0.50</td><td data-h="できること">最初のポジションに対して、何倍のロットを追加するか。0.50なら半分、1.00なら同じロットを追加します。</td></tr><tr><td data-h="項目">追加ポジは全体の損失で計算</td><td data-h="初期値">オフ</td><td data-h="できること">オンにすると、追加したポジションも含めた全体で損失を計算します。</td></tr></tbody></table></div><!-- TODO: 「全体の損失で計算」の意味を確認 --></div>
+            <div class="fcard-grid"><div class="fcard-media"><div class="wm wm-set" role="img" aria-label="設定の画面（一般）">
+    <div class="wm-set-head">設定<span aria-hidden="true">×</span></div>
+    <div class="wm-set-body">
+      <div class="wm-set-tabs"><span class="on">一般</span><span>キャンバス</span><span>配色</span></div>
+      <div class="wm-set-main"><p class="wm-sec">追加ポジ</p><div class="wm-row hl"><i>☆</i><span class="wm-row-l">ロット倍率(デフォルト値)</span><em>− 0.50 ＋</em></div><div class="wm-row"><i>☆</i><b class="wm-chk"></b><span class="wm-row-l">追加ポジは全体の損失で計算</span></div></div>
+    </div>
+  </div></div><div class="fcard-side"><ul class="fpoints"><li>0.50なら最初の半分、1.00なら同じロットを追加</li><li>追加のラインは何本でも置ける</li></ul></div></div>
         </article>
         <div class="group-after"><p class="gnote">シナリオや予約注文が働くのは、連携ツールを入れた取引ツールとPCが動いている間だけです（cTrader Cloud版はPCを閉じても動きます）。</p></div>
     </div>
@@ -1405,6 +1542,31 @@
 })();
 </script>
 <!-- BudouX — 日本語の文節改行（全ページ共通・同梱版。js/budoux-init.js を参照） -->
+<script>
+/* 機能の動画：画面に入ったら読み込んで再生、外れたら止める。タップで全画面 */
+(function () {
+    var vids = document.querySelectorAll('video.fvid-video');
+    if (!vids.length) return;
+    if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+                var v = e.target;
+                if (e.isIntersecting) { if (v.preload === 'none') { v.preload = 'auto'; } var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+                else { v.pause(); }
+            });
+        }, { threshold: 0.35 });
+        vids.forEach(function (v) { io.observe(v); });
+    } else {
+        vids.forEach(function (v) { v.autoplay = true; v.preload = 'auto'; });
+    }
+    vids.forEach(function (v) {
+        v.addEventListener('click', function () {
+            if (v.requestFullscreen) { v.requestFullscreen().catch(function () {}); }
+            else if (v.webkitEnterFullscreen) { v.webkitEnterFullscreen(); }
+        });
+    });
+})();
+</script>
 <script src="js/budoux-ja.min.js?v=20260907a" defer></script>
 <script src="js/budoux-init.js?v=20260907a" defer></script>
 </body>

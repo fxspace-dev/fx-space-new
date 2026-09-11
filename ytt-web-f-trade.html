@@ -6,7 +6,7 @@
     <title>Web版YTT 注文・ロット・決済 — FX SPACE</title>
     <link rel="icon" type="image/png" href="icon.png">
     <meta property="og:title" content="Web版YTT 注文・ロット・決済 — FX SPACE">
-    <meta property="og:description" content="Web版YTTの使い方（注文・ロット・決済）。エントリーから決済までの基本の操作と、ロットの決め方、ポジションを持ったあとの自動処理です。">
+    <meta property="og:description" content="Web版YTTの使い方（注文・ロット・決済）。">
     <meta property="og:image" content="https://fx-space.com/intro/img/og-ytt-tokusetu.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -1057,6 +1057,12 @@
     .fvid-label { font-size: 0.95rem; font-weight: 800; letter-spacing: 0.04em; }
     .fvid-meta { font-size: 0.75rem; color: #c7d2fe; }
     .fvid-box.is-shot { background: #334155; }
+    /* 機能の動画：画面の見方と同じノートPC／スマホの枠の中で再生（見えている間だけ再生、タップで全画面） */
+    .fvid .wy-pc { max-width: 100%; }
+    .fvid-video { display: block; width: 100%; height: auto; background: #0a0f2c; cursor: zoom-in; }
+    .wy-pc-screen .fvid-video { aspect-ratio: 16 / 9; border-radius: 7px; }
+    .wy-screen .fvid-video { aspect-ratio: 720 / 1400; }
+    .fvid-cap { margin-top: 0.9rem; font-size: 0.75rem; color: #6b7280; text-align: center; }
     /* 機能一覧 */
     .fidx-grid { margin-top: 0.7rem; }
     a.ytt-add-card.fidx { text-decoration: none; transition: border-color 0.15s, transform 0.15s; }
@@ -1078,75 +1084,204 @@
     .fcat-nav a[aria-current="page"] { background: #1e1b4b; border-color: #1e1b4b; color: #fff; }
     .fcat-no { width: 22px; height: 19px; display: inline-flex; align-items: center; justify-content: center; background: url("img/fill-crayon-orange-badge.svg") 0 0 / 100% 100% no-repeat; color: #1e1b4b; font: 900 0.72rem Inter, sans-serif; }
     .fsub-hero { padding-bottom: 2.25rem; }
-    .ftoc { justify-content: center; max-width: 900px; margin: 0.9rem auto 0; }
     .fsub-hero .ytt-sp-hero-kicker { display: inline-block; margin: 0 0 0.5rem; font-size: 0.8125rem; font-weight: 800; color: #4f46e5; }
-    /* 機能のカード */
-    .fcard { background: #fff; border: 1.5px solid #e5e7eb; border-radius: 18px; padding: 1.4rem 1.5rem 1.5rem; margin-top: 1.1rem; text-align: left; scroll-margin-top: 84px; }
+    .ftoc { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.35rem; max-width: 900px; margin: 0.9rem auto 0; }
+    .ftoc a { padding: 0.25rem 0.6rem; border-radius: 8px; background: #f3f4f6; color: #1e1b4b; font-size: 0.78rem; font-weight: 700; text-decoration: none; }
+    /* 機能のカード：見て分かるもの（動画・モック・図）を大きく、文字は要点だけ */
+    .fcard { background: #fff; border: 1.5px solid #e5e7eb; border-radius: 20px; padding: 1.4rem 1.5rem 1.5rem; margin-top: 1.2rem; text-align: left; scroll-margin-top: 84px; }
     @media (max-width: 600px) { .fcard { padding: 1.1rem 1rem 1.2rem; border-radius: 16px; } }
     .fcard-top { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.7rem; }
-    .fcard-name { margin: 0; font-size: 1.12rem; font-weight: 900; color: #1e1b4b; }
+    .fcard-name { margin: 0; font-size: 1.2rem; font-weight: 900; color: #1e1b4b; }
     .finit { display: inline-block; padding: 0.15rem 0.6rem; border-radius: 999px; background: #1e1b4b; color: #fff; font-size: 0.72rem; font-weight: 700; }
-    .fcard-what { margin: 0.45rem 0 0; font-size: 0.95rem; font-weight: 700; color: #374151; line-height: 1.7; }
-    .fwhere { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.7rem; }
+    .fcard-what { margin: 0.35rem 0 0; font-size: 0.98rem; font-weight: 700; color: #374151; }
+    .fwhere { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.6rem; }
     .fwhere-item { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 0.3rem; padding: 0.3rem 0.65rem; border: 1.5px dashed #c7d2fe; border-radius: 10px; font-size: 0.78rem; color: #1e1b4b; font-weight: 700; }
     .fwhere-item::before { content: "場所"; margin-right: 0.15rem; font-size: 0.68rem; font-weight: 800; color: #4f46e5; }
     .fwhere-item b { margin-right: 0.15rem; padding: 0.05rem 0.4rem; border-radius: 6px; background: #eef2ff; color: #3730a3; font-size: 0.7rem; }
     .fwhere-item i { font-style: normal; color: #9ca3af; }
-    .fcard-body { margin-top: 0.9rem; }
-    .fcard-body > p { font-size: 0.9rem; color: #374151; line-height: 1.85; margin: 0.6rem 0 0; }
-    .fcard-body > p:first-child { margin-top: 0; }
-    .fcard-body .feat-steps { margin-top: 0.2rem; }
-    .fcard-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 1.6rem; align-items: start; margin-top: 1rem; }
-    .fcard-grid .fcard-body { margin-top: 0; }
-    .fcard.is-wide .fcard-grid { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); }
-    @media (max-width: 860px) { .fcard-grid, .fcard.is-wide .fcard-grid { grid-template-columns: 1fr; gap: 1rem; } }
-    .fcard-media { min-width: 0; text-align: center; }
-    .fcard-media .gshot { margin: 0; }
-    .fbul { margin: 0.2rem 0 0; padding-left: 1.2rem; }
-    .fbul li { font-size: 0.9rem; color: #374151; line-height: 1.8; margin-bottom: 0.35rem; }
-    .ftable-wrap { overflow-x: auto; margin-top: 0.4rem; }
-    .ftable { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
-    .ftable th { text-align: left; padding: 0.5rem 0.65rem; background: #1e1b4b; color: #fff; font-size: 0.75rem; font-weight: 800; white-space: nowrap; }
-    .ftable th:first-child { border-radius: 8px 0 0 0; } .ftable th:last-child { border-radius: 0 8px 0 0; }
-    .ftable td { padding: 0.6rem 0.65rem; border-bottom: 1px solid #eef0f4; color: #374151; line-height: 1.7; vertical-align: top; }
+    .fwhere-item .wm-rail { flex-direction: row; box-shadow: none; }
+    .fcard-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 1.8rem; align-items: center; margin-top: 1.1rem; }
+    .fcard.is-wide .fcard-grid { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); }
+    @media (max-width: 860px) { .fcard-grid, .fcard.is-wide .fcard-grid { grid-template-columns: 1fr; gap: 1.1rem; } }
+    .fcard-media { min-width: 0; }
+    .fcard-media .fvid { margin: 0; }
+    .fcard-media .fvid:not(.pc) { max-width: 290px; margin: 0 auto; }
+    .fcard-side { min-width: 0; }
+    .fcard > .fcard-side { margin-top: 0.8rem; }
+    .fpoints { list-style: none; margin: 0; padding: 0; counter-reset: fp; }
+    .fpoints li { counter-increment: fp; position: relative; padding: 0.15rem 0 0.75rem 2.1rem; font-size: 0.95rem; font-weight: 700; color: #1f2937; line-height: 1.65; }
+    .fpoints li::before { content: counter(fp); position: absolute; left: 0; top: 0.12rem; width: 1.55rem; height: 1.4rem; display: flex; align-items: center; justify-content: center; background: url("img/fill-crayon-orange-badge.svg") 0 0 / 100% 100% no-repeat; color: #1e1b4b; font: 900 0.8rem Inter, sans-serif; }
+    .fpoints li b { color: #1e1b4b; }
+    .fpoints a { color: #4f46e5; }
+    .fmore { margin-top: 0.4rem; border-top: 1px dashed #e5e7eb; }
+    .fmore summary { cursor: pointer; list-style: none; display: inline-flex; align-items: center; gap: 0.35rem; margin-top: 0.7rem; padding: 0.35rem 0.8rem; border: 1.5px solid #c7d2fe; border-radius: 999px; font-size: 0.8rem; font-weight: 800; color: #3730a3; }
+    .fmore summary::-webkit-details-marker { display: none; }
+    .fmore summary::after { content: "▼"; font-size: 0.6rem; }
+    .fmore[open] summary::after { content: "▲"; }
+    .fmore-body { margin-top: 0.9rem; }
+    .fmore-body > p { font-size: 0.875rem; color: #4b5563; line-height: 1.85; margin: 0.6rem 0 0; }
+    .fmore-body .wm { margin: 0.6rem 0 0; }
+    .fmore-media { margin-bottom: 0.8rem; }
+    .ftable-wrap { overflow-x: auto; margin-top: 0.6rem; }
+    .ftable { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+    .ftable th { text-align: left; padding: 0.45rem 0.6rem; background: #1e1b4b; color: #fff; font-size: 0.72rem; font-weight: 800; white-space: nowrap; }
+    .ftable td { padding: 0.5rem 0.6rem; border-bottom: 1px solid #eef0f4; color: #374151; line-height: 1.65; vertical-align: top; }
     .ftable td:first-child { color: #1e1b4b; font-weight: 700; }
-    .ftable td small { color: #6b7280; font-weight: 700; }
-    @media (max-width: 600px) {
-        .ftable thead { display: none; }
-        .ftable tr { display: block; padding: 0.55rem 0; border-bottom: 1px solid #eef0f4; }
-        .ftable td { display: block; padding: 0.1rem 0; border: none; }
-        .ftable td[data-h="初期値"]::before { content: "初期値："; color: #6b7280; font-weight: 700; }
-    }
+    @media (max-width: 600px) { .ftable thead { display: none; } .ftable tr { display: block; padding: 0.5rem 0; border-bottom: 1px solid #eef0f4; } .ftable td { display: block; padding: 0.05rem 0; border: none; } .ftable td[data-h="初期値"]::before { content: "初期値："; color: #6b7280; } }
+    .wm .sw { display: inline-block; width: 16px; height: 12px; margin-left: 3px; border-radius: 3px; vertical-align: -1px; } .wm .sw.g { background: #2ea043; } .wm .sw.r { background: #d73a49; } .wm .sw.k { background: #0b1030; border: 1px solid #3a4170; }
     .group-after { max-width: 1100px; margin: 1.2rem auto 0; text-align: left; }
-    /* 設定の一覧 */
     .fset { list-style: none; margin: 0.9rem 0 0; padding: 0; }
     .fset li { display: flex; justify-content: space-between; gap: 1rem; padding: 0.55rem 0; border-bottom: 1px dashed #e5e7eb; font-size: 0.875rem; }
     .fset li a { color: #1e1b4b; font-weight: 700; text-decoration: underline; text-decoration-color: #c7d2fe; text-underline-offset: 3px; }
     .fset li span { color: #6b7280; white-space: nowrap; font-size: 0.8125rem; }
     .fset-note { font-size: 0.8125rem; color: #6b7280; margin-top: 1.1rem; text-align: left; }
-    /* 次のページ */
     .fnext { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.9rem; max-width: 760px; margin: 0 auto; }
     @media (max-width: 600px) { .fnext { grid-template-columns: 1fr; } }
     .fnext a { display: block; padding: 1rem 1.2rem; border: 1.5px solid #e5e7eb; border-radius: 14px; background: #fff; text-decoration: none; text-align: left; }
     .fnext a:hover { border-color: #a5b4fc; }
     .fnext small { display: block; font-size: 0.72rem; font-weight: 800; color: #6b7280; }
     .fnext b { display: block; margin-top: 0.2rem; font-size: 1rem; color: #1e1b4b; }
-    /* トップの「機能をさがす」 */
+    /* トップ：分野のカード（見本のモックつき） */
     .fhub { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 1.5rem; }
     @media (max-width: 760px) { .fhub { grid-template-columns: 1fr; } }
-    .fhub-card { display: flex; flex-direction: column; background: #fff; border: 1.5px solid #e5e7eb; border-radius: 18px; padding: 1.3rem 1.3rem 1.2rem; text-align: left; }
+    .fhub-card { display: flex; flex-direction: column; background: #fff; border: 1.5px solid #e5e7eb; border-radius: 20px; padding: 1.2rem; text-align: left; text-decoration: none; transition: border-color .15s, transform .15s; }
+    .fhub-card:hover { border-color: #a5b4fc; transform: translateY(-2px); }
+    .fhub-vis { display: flex; align-items: center; justify-content: center; min-height: 170px; margin-bottom: 1rem; padding: 12px; border-radius: 14px; background: #eef0f7; overflow: hidden; }
+    .fhub-vis .wm { box-shadow: none; }
     .fhub-card h3 { display: flex; align-items: center; gap: 0.5rem; margin: 0; font-size: 1.1rem; font-weight: 900; color: #1e1b4b; }
     .fhub-card h3 .fcat-no { width: 32px; height: 27px; font-size: 0.9rem; }
-    .fhub-card > p { margin: 0.45rem 0 0; font-size: 0.85rem; color: #4b5563; line-height: 1.75; }
-    .fhub-links { display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 0.8rem 0 1rem; }
-    .fhub-links a { padding: 0.25rem 0.6rem; border-radius: 8px; background: #f3f4f6; color: #1e1b4b; font-size: 0.78rem; font-weight: 700; text-decoration: none; }
-    .fhub-links a:hover { background: #e0e7ff; }
-    .fhub-card .fhub-go { margin-top: auto; align-self: flex-start; }
+    .fhub-card p { margin: 0.4rem 0 0; font-size: 0.85rem; color: #4b5563; line-height: 1.7; }
+    .fhub-card .go { margin-top: 0.8rem; font-size: 0.85rem; font-weight: 800; color: #4f46e5; }
+
+    /* ===== Web版YTTの画面モック（使い方ページ） ===== */
+    .wm { --wm-bg: #141a46; --wm-card: #1d2458; --wm-line: #30397a; --wm-text: #e5e7eb; --wm-mute: #9aa3c7; --wm-y: #e9b949;
+        background: var(--wm-bg); color: var(--wm-text); border-radius: 14px; font-family: 'Noto Sans JP', system-ui, sans-serif; line-height: 1.35; text-align: left;
+        box-shadow: 0 18px 40px rgba(30, 27, 75, 0.2); max-width: 100%; margin: 0 auto; }
+    .wm .hl { outline: 2.5px solid #ef4444; outline-offset: 2px; border-radius: 6px; }
+    .wm small { font-weight: 500; }
+    /* 設定 */
+    .wm-set { width: 100%; max-width: 420px; overflow: hidden; }
+    .wm-set-head { display: flex; justify-content: space-between; padding: 10px 14px; font-size: 13px; font-weight: 800; border-bottom: 1px solid var(--wm-line); background: #19205a; }
+    .wm-set-head span { color: var(--wm-mute); font-weight: 400; }
+    .wm-set-body { display: grid; grid-template-columns: 76px 1fr; }
+    .wm-set-tabs { padding: 8px 0; border-right: 1px solid var(--wm-line); background: #121842; }
+    .wm-set-tabs span { display: block; padding: 7px 10px; font-size: 11px; color: var(--wm-mute); }
+    .wm-set-tabs span.on { background: #242b62; color: #fff; font-weight: 800; }
+    .wm-set-main { min-width: 0; padding: 8px 10px 12px; }
+    @media (max-width: 440px) { .wm-set-body { grid-template-columns: 56px 1fr; } .wm-set-tabs span { padding: 7px 7px; font-size: 10px; } .wm-row { flex-wrap: wrap; } .wm-row em { white-space: normal; margin-left: auto; } }
+    .wm-sec { margin: 8px 0 5px; font-size: 10.5px; font-weight: 800; color: var(--wm-y); }
+    .wm-row { display: flex; align-items: center; gap: 7px; margin-top: 5px; padding: 8px 9px; border: 1px solid var(--wm-line); border-radius: 8px; background: var(--wm-card); font-size: 11.5px; font-weight: 700; }
+    .wm-row.is-on { border-color: rgba(233, 185, 73, 0.75); background: #2a2745; }
+    .wm-row i { font-style: normal; color: var(--wm-mute); font-size: 11px; }
+    .wm-row-l { flex: 1; min-width: 0; }
+    .wm-row-l small { display: block; margin-top: 1px; font-size: 9px; color: var(--wm-mute); }
+    .wm-row em { font-style: normal; padding: 2px 7px; border: 1px solid var(--wm-line); border-radius: 6px; font: 700 10px ui-monospace, Menlo, Consolas, monospace; color: #fff; white-space: nowrap; }
+    .wm-chk { width: 13px; height: 13px; border: 1.5px solid var(--wm-mute); border-radius: 3px; flex-shrink: 0; }
+    .wm-chk.on { border-color: var(--wm-y); background: radial-gradient(circle, var(--wm-y) 0 45%, transparent 46%); }
+    .wm-radio { width: 13px; height: 13px; border: 1.5px solid var(--wm-mute); border-radius: 50%; flex-shrink: 0; }
+    .wm-radio.on { border-color: var(--wm-y); background: radial-gradient(circle, var(--wm-y) 0 40%, transparent 42%); }
+    .wm-opt { display: flex; align-items: center; gap: 9px; margin-top: 6px; padding: 8px 9px; border: 1px solid var(--wm-line); border-radius: 9px; background: var(--wm-card); }
+    .wm-opt.on { border-color: rgba(233, 185, 73, 0.75); }
+    .wm-opt.on b { color: var(--wm-y); }
+    .wm-opt i { width: 26px; height: 26px; border-radius: 7px; flex-shrink: 0; border: 1px solid rgba(255,255,255,.12); }
+    .wm-opt b { display: block; font-size: 11.5px; }
+    .wm-opt small { display: block; font-size: 9px; color: var(--wm-mute); }
+    /* 右のパネル */
+    .wm-panel { width: 100%; max-width: 300px; padding: 12px; }
+    .wm-card { padding: 10px; border: 1px solid var(--wm-line); border-radius: 12px; background: var(--wm-card); }
+    .wm-card + .wm-card { margin-top: 8px; }
+    .wm-card-t { margin: 0 0 8px; font-size: 10.5px; font-weight: 800; color: var(--wm-mute); }
+    .wm-order { display: grid; grid-template-columns: 1fr 58px 1fr; gap: 6px; }
+    .wm-order > span { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 46px; border-radius: 9px; font-size: 14px; font-weight: 900; }
+    .wm-sell { background: #3d5fd9; } .wm-buy { background: #c2414b; }
+    .wm-lot { border: 1px solid var(--wm-line); background: #141a46; font: 900 14px ui-monospace, Menlo, monospace !important; }
+    .wm-lot small { font-size: 8px; color: var(--wm-mute); font-family: system-ui; }
+    .wm-steps { display: grid; grid-template-columns: repeat(6, 1fr); margin-top: 7px; border: 1px solid var(--wm-line); border-radius: 7px; }
+    .wm-steps span { padding: 5px 0; text-align: center; font: 700 9.5px ui-monospace, Menlo, monospace; color: var(--wm-mute); }
+    .wm-close { display: grid; grid-template-columns: 1.8fr 1fr; gap: 6px; margin-top: 7px; }
+    .wm-close span { padding: 9px 0; border: 1px solid var(--wm-line); border-radius: 8px; background: #232a60; text-align: center; font-size: 11.5px; font-weight: 800; color: #c7cbe0; }
+    .wm-bal-l { margin: 0; text-align: center; font-size: 10px; color: var(--wm-mute); }
+    .wm-bal { margin: 2px 0 0; text-align: center; font-size: 26px; font-weight: 900; }
+    .wm-bal-s { margin: 2px 0 10px; text-align: center; font-size: 10px; color: var(--wm-mute); }
+    .wm-risk { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .wm-risk span { display: flex; justify-content: space-between; align-items: center; gap: 4px; padding: 8px; border: 1px solid var(--wm-line); border-radius: 8px; }
+    .wm-risk small { font-size: 9px; color: var(--wm-mute); } .wm-risk b { font: 800 11.5px ui-monospace, Menlo, monospace; }
+    .wm-sc { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .wm-sc span { display: flex; flex-direction: column; align-items: center; padding: 10px 4px; border-radius: 9px; font-size: 11.5px; font-weight: 900; text-align: center; }
+    .wm-sc small { font-size: 7.5px; opacity: .8; margin-top: 2px; }
+    .wm-short { background: #22306b; border: 1px solid #4f6fd8; color: #dbe6ff; } .wm-long { background: #4a1f38; border: 1px solid #ef4d5a; color: #ffd5da; }
+    .wm-build { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 6px; }
+    .wm-build span { padding: 9px 0; border: 1px solid var(--wm-line); border-radius: 8px; background: #232a60; text-align: center; font-size: 10.5px; font-weight: 700; color: var(--wm-mute); }
+    .wm-build .wm-build-main { border-color: #c7cbe0; background: #141a46; color: #fff; font-weight: 900; }
+    .wm-build .wm-del { color: #f87171; }
+    /* 上のメニュー */
+    .wm-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; padding: 9px 10px; border-radius: 12px; font-size: 11px; }
+    .wm-sym { padding: 4px 8px; border-radius: 6px; background: #232a60; font: 800 11px ui-monospace, Menlo, monospace; }
+    .wm-tfs { display: flex; gap: 2px; } .wm-tfs i { font: 600 9.5px ui-monospace, Menlo, monospace; font-style: normal; color: var(--wm-mute); padding: 3px 4px; border-radius: 4px; }
+    .wm-tfs i.on { background: #3a3413; color: var(--wm-y); }
+    .wm-ico { display: inline-flex; width: 26px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--wm-line); border-radius: 6px; }
+    .wm-ico svg { width: 15px; height: 15px; fill: none; stroke: #cbd5e1; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+    .wm-pill { padding: 4px 10px; border: 1px solid var(--wm-line); border-radius: 999px; font-size: 10.5px; color: var(--wm-mute); }
+    .wm-pill b { margin-left: 3px; font: 700 10px ui-monospace, Menlo, monospace; }
+    .wm-pos { border-color: #b7791f; background: #2a2310; color: var(--wm-y); }
+    /* 右端のアイコン列（場所の表示に使う小さなもの） */
+    .wm-rail { display: inline-flex; flex-direction: column; gap: 4px; padding: 5px; border-radius: 9px; background: #141a46; vertical-align: middle; }
+    .wm-rail i { display: flex; width: 22px; height: 22px; align-items: center; justify-content: center; border-radius: 5px; }
+    .wm-rail i.hl { background: #3a3413; outline: 2px solid #ef4444; outline-offset: 1px; }
+    .wm-rail svg { width: 14px; height: 14px; fill: none; stroke: #aeb6d6; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .wm-rail i.hl svg { stroke: #e9b949; }
+    /* 分析ツールの窓 */
+    .wm-win { width: 100%; max-width: 520px; padding: 0 12px 12px; overflow: hidden; }
+    .wm-win-head { display: flex; justify-content: space-between; margin: 0 -12px 10px; padding: 10px 14px; border-bottom: 1px solid var(--wm-line); background: #19205a; font-size: 12.5px; font-weight: 800; }
+    .wm-win-head span { color: var(--wm-mute); font-weight: 400; }
+    .wm-tabs { display: flex; gap: 6px; margin: 0 0 10px; }
+    .wm-tabs span { flex: 1; padding: 6px 0; border: 1px solid var(--wm-line); border-radius: 7px; text-align: center; font-size: 10.5px; color: var(--wm-mute); }
+    .wm-tabs span.on { background: var(--wm-y); border-color: var(--wm-y); color: #1e1b4b; font-weight: 800; }
+    .wm .g { color: #4ade80; }
+    .wm-cal-top { display: flex; justify-content: space-between; align-items: center; font-size: 12px; }
+    .wm-cal-top b { font-size: 15px; } .wm-cal-top small { font-size: 9.5px; color: var(--wm-mute); } .wm-cal-top .g { font-size: 17px; }
+    .wm-cal-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin: 9px 0; }
+    .wm-cal-stats span { padding: 6px 8px; border-radius: 8px; background: #262a5e; }
+    .wm-cal-stats small { display: block; font-size: 8.5px; color: var(--wm-mute); } .wm-cal-stats b { font-size: 13px; }
+    .wm-cal-wd, .wm-cal-wk { display: grid; grid-template-columns: repeat(7, 1fr) 42px; gap: 3px; }
+    .wm-cal-wd span { text-align: center; font-size: 9px; color: var(--wm-mute); padding: 2px 0; } .wm-cal-wd .sat { color: #93c5fd; } .wm-cal-wd .sun { color: #fca5a5; }
+    .wm-cal-wk { margin-top: 3px; }
+    .wm-cal-wk > span { height: 30px; border-radius: 5px; background: #1b2150; position: relative; }
+    .wm-cal-wk > span.e { background: transparent; }
+    .wm-cal-wk > span i { position: absolute; left: 3px; top: 2px; font: 600 7.5px ui-monospace, Menlo, monospace; font-style: normal; color: var(--wm-mute); }
+    .wm-cal-wk > span.win { background: #2f5a45; outline: 1.5px solid #4ade80; }
+    .wm-cal-wk > span.win b { position: absolute; left: 3px; bottom: 2px; font-size: 7.5px; color: #86efac; }
+    .wm-cal-wk > span.wk { background: transparent; display: flex; flex-direction: column; align-items: flex-end; justify-content: center; }
+    .wm-cal-wk .wk b { font-size: 8.5px; color: var(--wm-mute); } .wm-cal-wk .wk b.g { color: #4ade80; } .wm-cal-wk .wk small { font-size: 7px; color: var(--wm-mute); }
+    .wm-heat-t { display: grid; grid-template-columns: 34px repeat(8, 1fr); gap: 2px; }
+    .wm-heat-t span { padding: 5px 0; border-radius: 3px; text-align: center; font: 600 8px ui-monospace, Menlo, monospace; color: #fff; }
+    .wm-heat-t span.h { color: var(--wm-mute); font-weight: 700; background: transparent; }
+    .wm-str-chart { display: block; width: 100%; height: auto; margin-bottom: 8px; }
+    .wm-str-bars { display: grid; grid-template-columns: 30px 1fr 44px; gap: 5px 7px; align-items: center; }
+    .wm-str-bars .c { font: 800 9.5px ui-monospace, Menlo, monospace; } .wm-str-bars .v { font: 600 9px ui-monospace, Menlo, monospace; color: var(--wm-mute); text-align: right; }
+    .wm-str-bars .bar { height: 6px; border-radius: 3px; background: #262a5e; overflow: hidden; } .wm-str-bars .bar i { display: block; height: 100%; border-radius: 3px; }
+    .wm-news { max-width: 300px; padding-top: 12px; }
+    .wm-news-i { margin-top: 7px; padding: 9px 10px; border: 1px solid var(--wm-line); border-radius: 10px; background: var(--wm-card); }
+    .wm-news-i p { display: flex; align-items: center; gap: 6px; margin: 0 0 4px; font-size: 9px; color: var(--wm-mute); }
+    .wm-news-i time { margin-left: auto; font-family: ui-monospace, Menlo, monospace; }
+    .wm-news-i .imp { padding: 1px 5px; border: 1px solid var(--wm-y); border-radius: 3px; color: var(--wm-y); font-size: 8.5px; }
+    .wm-news-i .imp.r { border-color: #ef4444; color: #fca5a5; }
+    .wm-news-i b { display: block; font-size: 11.5px; } .wm-news-i .s { display: block; margin-top: 3px; font-size: 9.5px; color: var(--wm-mute); line-height: 1.5; }
+    /* チャートの図 */
+    .wm-chart { width: 100%; max-width: 520px; padding: 6px; }
+    .wm-chart svg { display: block; width: 100%; height: auto; border-radius: 9px; }
+    /* 流れ図 */
+    .wm-flow { display: flex; align-items: center; justify-content: center; gap: 10px; max-width: 460px; padding: 18px 14px; }
+    .wm-flow .n { flex: 1; padding: 12px; border: 1px solid var(--wm-line); border-radius: 12px; background: var(--wm-card); text-align: center; }
+    .wm-flow .n.y { border-color: rgba(233,185,73,.8); }
+    .wm-flow small { display: block; font-size: 10px; color: var(--wm-mute); } .wm-flow b { display: block; margin-top: 3px; font-size: 12.5px; }
+    .wm-flow > i { font-style: normal; font-size: 20px; color: var(--wm-y); }
+
 </style>
 </head>
 <body>
 
-<!-- Web版YTT 使い方：注文・ロット・決済（ytt-web-f-trade.html）。build-guide.js で作成。内容の元は webytt-materials/前任Canva_YTTの使い方_全文.md と Web版の画面のスクショ -->
+<!-- Web版YTT 使い方：注文・ロット・決済（ytt-web-f-trade.html）。webytt-materials/tools/build-guide.js と mocks.js で作成（手で直さず、スクリプトを直して作り直す） -->
 
 <nav class="ytt-sp-nav">
     <a href="ytt-tokusetu.html" class="ytt-sp-nav-logo">
@@ -1162,12 +1297,12 @@
     <h1 class="ytt-sp-hero-title">
         <span class="ytt-sp-title-line"><span class="line-text">注文・ロット・決済<img class="ytt-title-wave" src="img/wave-yellow.png" alt=""></span></span>
     </h1>
-    <p class="ytt-sp-hero-lead">エントリーから決済までの基本の操作と、ロットの決め方、<br>ポジションを持ったあとの自動処理です。</p>
+    <p class="ytt-sp-hero-lead">エントリーと決済、ロットの決め方、<br>ポジションを持ったあとの自動処理です。</p>
     <nav class="fcat-nav" aria-label="使い方のページ">
         <a href="ytt-web-features.html">使い方トップ</a>
         <a href="ytt-web-f-trade.html" aria-current="page"><span class="fcat-no">1</span>注文・ロット・決済</a><a href="ytt-web-f-scenario.html"><span class="fcat-no">2</span>シナリオ・予約注文</a><a href="ytt-web-f-chart.html"><span class="fcat-no">3</span>チャートの表示</a><a href="ytt-web-f-tools.html"><span class="fcat-no">4</span>分析ツール</a><a href="ytt-web-f-settings.html"><span class="fcat-no">5</span>モードと設定</a>
     </nav>
-    <div class="fhub-links ftoc" aria-label="このページの機能"><a href="#order">成行注文</a><a href="#close">全決済・1/2決済</a><a href="#positions">ポジションと履歴</a><a href="#settle">決済まわりの設定</a><a href="#lot">ロットの決め方（3つのモード）</a><a href="#auto-be">自動建値設置</a><a href="#trail">TPのトレイル化</a><a href="#rr-fix">RR比固定</a></div>
+    <div class="ftoc" aria-label="このページの機能"><a href="#order">成行注文</a><a href="#close">全決済・1/2決済</a><a href="#positions">ポジションと履歴</a><a href="#settle">決済まわりの設定</a><a href="#lot">ロットの決め方</a><a href="#auto-be">自動建値設置</a><a href="#trail">TPのトレイル化</a><a href="#rr-fix">RR比固定</a></div>
 </section>
 
 <section class="ytt-spec-section" style="background:#f4f6f9;">
@@ -1184,43 +1319,55 @@
                     <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
                 </div>
             </div>
-            <p>ボタン1つで、エントリーも決済もできます。</p>
+            
         </div>
         <article class="fcard has-media" id="order">
-            <div class="fcard-top">
-                <h3 class="fcard-name">成行注文</h3>
-                
-            </div>
-            <p class="fcard-what">ロットを決めて「SELL」か「BUY」を押すだけで、すぐにエントリーできます。</p>
-            <div class="fwhere"><span class="fwhere-item"><b>PC</b><span>右のパネル</span><i aria-hidden="true">›</i><span>成行</span></span><span class="fwhere-item"><b>スマホ</b><span>右上の「成行」</span></span></div>
-            <div class="fcard-grid"><div class="fcard-media"><figure class="fvid sp"><div class="fvid-box" role="img" aria-label="動画（準備中）：注文・決済"><span class="fvid-play" aria-hidden="true"></span><span class="fvid-label">動画 準備中</span><span class="fvid-meta">スマホ・約60秒</span></div></figure></div><div class="fcard-body"><ol class="feat-steps"><li>「成行」を選ぶ（スマホは右上の「成行」）</li><li>ロットを調整する。PCは <b>−1 〜 +1</b> のボタン、スマホは <b>∧ ∨</b></li><li>「BUY」で買い、「SELL」で売りのエントリー</li></ol><div class="gtip">LOTの欄に出ている数字が、そのまま注文されるロットです。</div></div></div>
+            <div class="fcard-top"><h3 class="fcard-name">成行注文</h3></div>
+            <p class="fcard-what">ロットを決めて、SELL か BUY を押すだけ。</p>
+            <div class="fwhere"><span class="fwhere-item"><b>PC</b><span>右のパネル</span><i aria-hidden="true">›</i><span>成行</span></span><span class="fwhere-item"><b>スマホ</b><span>右上「成行」</span></span></div>
+            <div class="fcard-grid"><div class="fcard-media"><figure class="fvid"><div class="wy-phone"><div class="wy-screen"><video class="fvid-video" src="img/webytt/feat/feat-order.mp4" poster="img/webytt/feat/feat-order.jpg" muted loop playsinline preload="none" aria-label="動画：注文・決済（声なし）"></video></div></div><figcaption class="fvid-cap">タップで拡大</figcaption></figure></div><div class="fcard-side"><ul class="fpoints"><li>「成行」を選ぶ</li><li>ロットを ∧ ∨（PCは −1〜+1）で調整</li><li>「BUY」で買い、「SELL」で売り</li></ul></div></div>
         </article>
-        <article class="fcard" id="close">
-            <div class="fcard-top">
-                <h3 class="fcard-name">全決済・1/2決済</h3>
-                
-            </div>
-            <p class="fcard-what">持っているポジションを、まとめて、または半分だけ決済できます。</p>
+        <article class="fcard has-media" id="close">
+            <div class="fcard-top"><h3 class="fcard-name">全決済・1/2決済</h3></div>
+            <p class="fcard-what">まとめて決済、または半分だけ決済。</p>
             <div class="fwhere"><span class="fwhere-item"><b>PC</b><span>右のパネル</span><i aria-hidden="true">›</i><span>成行</span></span></div>
-            <div class="fcard-body"><ul class="fbul"><li><b>全決済</b>：保有中のポジションをまとめて決済します。</li><li><b>1/2決済</b>：ロットの半分だけ決済します。もう一度押すと、残りのさらに半分を決済します（例：1lot → 0.5lot → 0.25lot）。</li></ul><div class="gtip">全決済で、いま表示している通貨ペアのポジションだけを決済したいときは、下の「決済まわりの設定」を変えます。</div></div>
+            <div class="fcard-grid"><div class="fcard-media"><div class="wm wm-panel" role="img" aria-label="右のパネルの「成行」">
+    <div class="wm-card">
+      <p class="wm-card-t">● 成行 ▾</p>
+      <div class="wm-order">
+        <span class="wm-sell">SELL</span>
+        <span class="wm-lot"><small>LOT</small>0.10</span>
+        <span class="wm-buy">BUY</span>
+      </div>
+      <div class="wm-steps"><span>−1</span><span>−0.1</span><span>−.01</span><span>+.01</span><span>+0.1</span><span>+1</span></div>
+      <div class="wm-close"><span class=" hl">全決済</span><span class=" hl">1/2決済</span></div>
+    </div>
+  </div></div><div class="fcard-side"><ul class="fpoints"><li><b>全決済</b>：保有中のポジションをまとめて決済</li><li><b>1/2決済</b>：押すたびに半分ずつ決済（1lot → 0.5 → 0.25）</li></ul></div></div>
         </article>
-        <article class="fcard" id="positions">
-            <div class="fcard-top">
-                <h3 class="fcard-name">ポジションと履歴</h3>
-                
-            </div>
-            <p class="fcard-what">保有中のポジションと、決済したトレードを一覧で確認できます。</p>
-            <div class="fwhere"><span class="fwhere-item"><b>PC</b><span>上のメニュー</span><i aria-hidden="true">›</i><span>「ポジション」「履歴」</span></span><span class="fwhere-item"><b>スマホ</b><span>下のメニュー</span><i aria-hidden="true">›</i><span>「ポジション」「履歴」</span></span></div>
-            <div class="fcard-body"><p>PCのボタンの横の数字は、保有中のポジションの数と、履歴の件数です。</p></div>
+        <article class="fcard has-media" id="positions">
+            <div class="fcard-top"><h3 class="fcard-name">ポジションと履歴</h3></div>
+            <p class="fcard-what">保有中のポジションと、決済したトレードの一覧。</p>
+            <div class="fwhere"><span class="fwhere-item"><b>PC</b><span>上のメニュー</span></span><span class="fwhere-item"><b>スマホ</b><span>下のメニュー</span></span></div>
+            <div class="fcard-grid"><div class="fcard-media"><div class="wm wm-bar" role="img" aria-label="PCの上のメニュー">
+    <span class="wm-sym">USDJPY</span>
+    <span class="wm-tfs"><i>M1</i><i>M5</i><i>M15</i><i class="on">M30</i><i>H1</i><i>H4</i><i>D1</i></span>
+    <span class="wm-ico" title="スクリーンショット"><svg viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="12" rx="2"/><circle cx="12" cy="13" r="3.2"/><path d="M9 7l1.2-2.2h3.6L15 7"/></svg></span>
+    <span class="wm-ico" title="アラート"><svg viewBox="0 0 24 24"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></svg></span>
+    <span class="wm-pill wm-pos hl">ポジション <b>0</b></span>
+    <span class="wm-pill hl">履歴 <b>5</b></span>
+  </div></div><div class="fcard-side"><ul class="fpoints"><li>数字は、保有中のポジション数と履歴の件数</li></ul></div></div>
         </article>
-        <article class="fcard" id="settle">
-            <div class="fcard-top">
-                <h3 class="fcard-name">決済まわりの設定</h3>
-                
-            </div>
-            <p class="fcard-what">ボタンを押したときに確認を出すかどうかなどを選べます。</p>
+        <article class="fcard has-media" id="settle">
+            <div class="fcard-top"><h3 class="fcard-name">決済まわりの設定</h3></div>
+            <p class="fcard-what">押したときに確認を出すかどうか。</p>
             <div class="fwhere"><span class="fwhere-item"><span>設定</span><i aria-hidden="true">›</i><span>一般</span><i aria-hidden="true">›</i><span>決済関連</span></span></div>
-            <div class="fcard-body"><div class="ftable-wrap"><table class="ftable"><thead><tr><th>項目</th><th>初期値</th><th>できること</th></tr></thead><tbody><tr><td data-h="項目">成行エントリーで確認</td><td data-h="初期値">オン</td><td data-h="できること">SELL / BUY を押したあとに、確認が出ます。オフにすると、押した瞬間に発注します。</td></tr><tr><td data-h="項目">ワンクリック決済</td><td data-h="初期値">オフ</td><td data-h="できること">オンにすると、決済のときに確認を出さず、すぐに決済します。</td></tr><tr><td data-h="項目">全決済時に表示中の通貨ペアのみ決済</td><td data-h="初期値">オフ</td><td data-h="できること">オンにすると、全決済で「いま表示している通貨ペア」のポジションだけを決済します。</td></tr></tbody></table></div><p class="gnote">押し間違いを防ぐため、慣れるまでは「成行エントリーで確認」をオンのまま使いましょう。</p></div>
+            <div class="fcard-grid"><div class="fcard-media"><div class="wm wm-set" role="img" aria-label="設定の画面（一般）">
+    <div class="wm-set-head">設定<span aria-hidden="true">×</span></div>
+    <div class="wm-set-body">
+      <div class="wm-set-tabs"><span class="on">一般</span><span>キャンバス</span><span>配色</span></div>
+      <div class="wm-set-main"><p class="wm-sec">決済関連</p><div class="wm-row is-on hl"><i>☆</i><b class="wm-chk on"></b><span class="wm-row-l">成行エントリーで確認<small>オフ時はSELL/BUYで即発注</small></span></div><div class="wm-row"><i>☆</i><b class="wm-chk"></b><span class="wm-row-l">ワンクリック決済<small>確認なしで即決済</small></span></div><div class="wm-row"><i>☆</i><b class="wm-chk"></b><span class="wm-row-l">全決済時に表示中の通貨ペアのみ決済</span></div></div>
+    </div>
+  </div></div><div class="fcard-side"><ul class="fpoints"><li>慣れるまでは「成行エントリーで確認」をオンのまま</li><li>「ワンクリック決済」は確認なしで即決済</li><li>全決済を表示中の通貨ペアだけにもできる</li></ul></div></div>
         </article>
     </div>
 </section>
@@ -1239,16 +1386,19 @@
                     <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
                 </div>
             </div>
-            <p>1回のトレードで負うリスクを決めておくと、<br>ロットを自動で計算します。</p>
+            
         </div>
         <article class="fcard has-media" id="lot">
-            <div class="fcard-top">
-                <h3 class="fcard-name">ロットの決め方（3つのモード）</h3>
-                <span class="finit">初期値：損失率固定モード（2.0%）</span>
-            </div>
-            <p class="fcard-what">「1回で失ってよい割合（金額）」を決めておけば、ロットを毎回計算しなくて済みます。</p>
-            <div class="fwhere"><span class="fwhere-item"><span>設定</span><i aria-hidden="true">›</i><span>一般</span><i aria-hidden="true">›</i><span>ロットの決め方</span></span><span class="fwhere-item"><b>率の変更</b><span>右のパネル</span><i aria-hidden="true">›</i><span>残高の下「損失率固定 − 2.0% ＋」</span></span></div>
-            <div class="fcard-grid"><div class="fcard-media"><figure class="fvid pc"><div class="fvid-box" role="img" aria-label="動画（準備中）：ロットの自動計算"><span class="fvid-play" aria-hidden="true"></span><span class="fvid-label">動画 準備中</span><span class="fvid-meta">PC・約50秒</span></div></figure></div><div class="fcard-body"><div class="ftable-wrap"><table class="ftable"><thead><tr><th>モード</th><th>初期値</th><th>計算のしかた</th></tr></thead><tbody><tr><td data-h="モード"><b>損失率固定モード</b><br><small>最初はこれ・おすすめ</small></td><td data-h="初期値">2.0%</td><td data-h="計算のしかた">1回の損失を、残高の○%に固定します。<br>例：残高100万円・2%なら、損切りになったときの損失は2万円。</td></tr><tr><td data-h="モード"><b>損失額固定モード</b></td><td data-h="初期値">¥5,000</td><td data-h="計算のしかた">1回の損失を、金額で固定します。<br>例：¥5,000なら、損切りで失うのは5,000円まで。</td></tr><tr><td data-h="モード"><b>残高：lot固定モード</b></td><td data-h="初期値">10万円：0.10lot</td><td data-h="計算のしかた">残高10万円あたりのロットを固定します。<br>例：残高100万円なら1.00lot。残高が増減すると、ロットも自動で増減します。</td></tr></tbody></table></div><p>損失率固定・損失額固定では、<b>SLまでの幅</b>に合わせてロットが決まります。SLを遠くに置くほどロットは小さく、近くに置くほど大きくなります。</p><div class="gtip">残高の下の「許容損失」が、いまの設定で1回に失ってよい金額です。<br>残高：lot固定モードは、狙うpips数がだいたい決まっているスキャルピングなどに向いています。</div></div></div>
+            <div class="fcard-top"><h3 class="fcard-name">ロットの決め方</h3><span class="finit">初期値：損失率固定 2.0%</span></div>
+            <p class="fcard-what">1回で失ってよい割合を決めれば、ロットは自動。</p>
+            <div class="fwhere"><span class="fwhere-item"><span>右のパネル</span><i aria-hidden="true">›</i><span>損失率固定 − ＋</span></span><span class="fwhere-item"><b>モード</b><span>設定</span><i aria-hidden="true">›</i><span>一般</span><i aria-hidden="true">›</i><span>ロットの決め方</span></span></div>
+            <div class="fcard-grid"><div class="fcard-media"><figure class="fvid pc"><div class="wy-pc"><div class="wy-pc-screen"><video class="fvid-video" src="img/webytt/feat/feat-lot.mp4" poster="img/webytt/feat/feat-lot.jpg" muted loop playsinline preload="none" aria-label="動画：ロットの自動計算（声なし）"></video></div><div class="wy-pc-base" aria-hidden="true"></div></div><figcaption class="fvid-cap">タップで拡大</figcaption></figure></div><div class="fcard-side"><ul class="fpoints"><li>残高の下の − ＋ で、損失の割合を決める</li><li>「許容損失」が、1回に失ってよい金額</li><li>SLまでの幅に合わせて、ロットが自動で決まる</li></ul><details class="fmore"><summary>くわしく見る</summary><div class="fmore-body"><div class="fmore-media"><div class="wm wm-set" role="img" aria-label="設定の画面（一般）">
+    <div class="wm-set-head">設定<span aria-hidden="true">×</span></div>
+    <div class="wm-set-body">
+      <div class="wm-set-tabs"><span class="on">一般</span><span>キャンバス</span><span>配色</span></div>
+      <div class="wm-set-main"><p class="wm-sec">ロットの決め方</p><div class="wm-row"><i>☆</i><b class="wm-radio"></b><span class="wm-row-l">残高：lot固定モード</span><em>− 10万円：0.10 lot ＋</em></div><div class="wm-row is-on hl"><i>☆</i><b class="wm-radio on"></b><span class="wm-row-l">損失率固定モード</span><em>− 2.0 % ＋</em></div><div class="wm-row"><i>☆</i><b class="wm-radio"></b><span class="wm-row-l">損失額固定モード</span><em>− ¥5000 ＋</em></div></div>
+    </div>
+  </div></div><div class="ftable-wrap"><table class="ftable"><thead><tr><th>モード</th><th>計算のしかた</th></tr></thead><tbody><tr><td data-h="モード">損失率固定（おすすめ）</td><td data-h="計算のしかた">1回の損失を残高の○%に。例：残高100万円・2% → 損切りで2万円</td></tr><tr><td data-h="モード">損失額固定</td><td data-h="計算のしかた">1回の損失を金額で。例：¥5,000 → 損切りで5,000円まで</td></tr><tr><td data-h="モード">残高：lot固定</td><td data-h="計算のしかた">残高10万円あたりのロットを固定。例：100万円なら1.00lot。スキャルピング向き</td></tr></tbody></table></div></div></details></div></div>
         </article>
     </div>
 </section>
@@ -1267,34 +1417,43 @@
                     <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
                 </div>
             </div>
-            <p>オンにしておくと、ポジションを持ったあとの<br>SLやTPを自動で動かします。</p>
+            
         </div>
-        <article class="fcard" id="auto-be">
-            <div class="fcard-top">
-                <h3 class="fcard-name">自動建値設置</h3>
-                <span class="finit">初期値：オフ（建値設置pips：1.0）</span>
-            </div>
-            <p class="fcard-what">ポジションを複数持ったとき、SLを自動で建値に移します。</p>
+        <article class="fcard has-media" id="auto-be">
+            <div class="fcard-top"><h3 class="fcard-name">自動建値設置</h3><span class="finit">初期値：オフ</span></div>
+            <p class="fcard-what">2つ目のポジションを持つと、SLを建値へ。</p>
             <div class="fwhere"><span class="fwhere-item"><span>設定</span><i aria-hidden="true">›</i><span>一般</span><i aria-hidden="true">›</i><span>自動処理</span></span></div>
-            <div class="fcard-body"><p><b>建値</b>とは、損益がほぼ0になる価格のことです。「建値設置pips」で、建値から何pips利益側にSLを置くかを決めます。</p><div class="gtip">ピラミッディング（ポジションの買い増し・売り増し）をするときに便利です。</div></div>
+            <div class="fcard-grid"><div class="fcard-media"><div class="wm wm-chart" role="img" aria-label="自動建値設置の例：2つ目のポジションを持つと、SLが建値に移る"><svg viewBox="0 0 460 220" aria-hidden="true"><rect width="460" height="220" fill="#0a0f2c"/><path d="M23.2 147.4V154.1M30.4 145.0V151.5M37.6 143.5V147.9M51.9 143.3V150.8M59.1 140.0V146.1M73.5 141.7V146.4M80.7 137.0V148.4M95.1 131.9V141.5M109.4 135.9V140.2M116.6 136.2V140.8M123.8 131.9V137.7M131.0 130.2V137.9M138.2 123.9V136.3M159.7 128.3V132.6M166.9 124.7V132.2M174.1 119.5V131.2M181.3 121.3V125.9M195.7 115.5V127.3M210.0 111.5V123.8M231.6 114.2V121.2M238.8 114.2V118.1M246.0 107.7V120.0M260.3 106.2V115.8M267.5 99.3V107.3M274.7 96.4V102.1M281.9 96.3V105.4M296.3 95.6V102.3M303.5 91.0V103.5M317.8 88.1V99.2M332.2 94.3V95.1M339.4 79.7V96.1M353.8 83.3V90.2M360.9 75.8V89.6M375.3 82.9V85.4M382.5 76.2V87.5M404.1 79.1V84.2M411.3 75.0V83.7M425.6 73.6V85.8M432.8 74.2V82.2M440.0 76.4V81.9" stroke="#22b573" stroke-width=".9"/><path d="M16.0 146.1V154.7M44.7 145.6V152.3M66.3 139.6V147.8M87.9 134.9V143.6M102.2 134.7V140.4M145.4 124.7V132.9M152.5 127.8V134.1M188.5 119.5V128.0M202.8 114.9V127.2M217.2 111.1V115.1M224.4 112.2V118.7M253.2 104.2V115.9M289.1 98.1V102.7M310.6 92.0V101.2M325.0 89.2V95.5M346.6 81.0V93.2M368.1 78.4V86.4M389.7 76.6V84.8M396.9 79.5V86.9M418.4 77.3V84.9" stroke="#ef4d5a" stroke-width=".9"/><path d="M21.0 150.8h4.4v1.7h-4.4zM28.2 146.0h4.4v4.8h-4.4zM35.4 146.0h4.4v1.0h-4.4zM49.7 144.8h4.4v3.3h-4.4zM56.9 143.4h4.4v1.4h-4.4zM71.3 145.4h4.4v1.0h-4.4zM78.5 138.1h4.4v7.3h-4.4zM92.9 135.4h4.4v4.6h-4.4zM107.2 139.2h4.4v1.0h-4.4zM114.4 137.5h4.4v1.7h-4.4zM121.6 135.9h4.4v1.6h-4.4zM128.8 132.8h4.4v3.2h-4.4zM136.0 127.6h4.4v5.2h-4.4zM157.5 130.0h4.4v2.0h-4.4zM164.7 129.4h4.4v1.0h-4.4zM171.9 122.8h4.4v6.6h-4.4zM179.1 122.5h4.4v1.0h-4.4zM193.5 119.7h4.4v3.6h-4.4zM207.8 114.1h4.4v9.2h-4.4zM229.4 117.3h4.4v1.0h-4.4zM236.6 115.2h4.4v2.0h-4.4zM243.8 108.3h4.4v6.9h-4.4zM258.1 106.6h4.4v6.6h-4.4zM265.3 101.5h4.4v5.1h-4.4zM272.5 100.8h4.4v1.0h-4.4zM279.7 98.9h4.4v1.9h-4.4zM294.1 99.1h4.4v2.7h-4.4zM301.3 94.5h4.4v4.6h-4.4zM315.6 91.0h4.4v6.5h-4.4zM330.0 94.5h4.4v1.0h-4.4zM337.2 84.0h4.4v10.4h-4.4zM351.6 84.9h4.4v5.3h-4.4zM358.7 80.2h4.4v4.7h-4.4zM373.1 83.0h4.4v1.0h-4.4zM380.3 77.1h4.4v6.0h-4.4zM401.9 83.2h4.4v1.0h-4.4zM409.1 77.6h4.4v5.6h-4.4zM423.4 78.4h4.4v3.3h-4.4zM430.6 78.2h4.4v1.0h-4.4zM437.8 77.8h4.4v1.0h-4.4z" fill="#22b573"/><path d="M13.8 150.0h4.4v2.5h-4.4zM42.5 146.0h4.4v2.1h-4.4zM64.1 143.4h4.4v2.2h-4.4zM85.7 138.1h4.4v1.9h-4.4zM100.0 135.4h4.4v3.8h-4.4zM143.2 127.6h4.4v1.3h-4.4zM150.3 128.9h4.4v3.0h-4.4zM186.3 122.5h4.4v1.0h-4.4zM200.6 119.7h4.4v3.6h-4.4zM215.0 114.1h4.4v1.0h-4.4zM222.2 114.5h4.4v3.8h-4.4zM251.0 108.3h4.4v4.9h-4.4zM286.9 98.9h4.4v2.9h-4.4zM308.4 94.5h4.4v3.0h-4.4zM322.8 91.0h4.4v3.7h-4.4zM344.4 84.0h4.4v6.2h-4.4zM365.9 80.2h4.4v2.9h-4.4zM387.5 77.1h4.4v6.0h-4.4zM394.7 83.1h4.4v1.0h-4.4zM416.2 77.6h4.4v4.0h-4.4z" fill="#ef4d5a"/><path d="M16 168H200" stroke="#ef4d5a" stroke-width="1.6"/><rect x="177.4" y="160" width="22.6" height="16" rx="3" fill="#ef4d5a"/><text x="195" y="172" text-anchor="end" font-size="10.5" fill="#fff" font-family="'Noto Sans JP',system-ui,sans-serif" font-weight="700">SL</text><path d="M120 150H444M250 122H444" stroke="#3b82f6" stroke-dasharray="4 3"/><rect x="373.7" y="142" width="70.3" height="16" rx="3" fill="#3b82f6"/><text x="439" y="154" text-anchor="end" font-size="10.5" fill="#fff" font-family="'Noto Sans JP',system-ui,sans-serif" font-weight="700">エントリー1</text><rect x="373.7" y="114" width="70.3" height="16" rx="3" fill="#3b82f6"/><text x="439" y="126" text-anchor="end" font-size="10.5" fill="#fff" font-family="'Noto Sans JP',system-ui,sans-serif" font-weight="700">エントリー2</text><path d="M250 146H444" stroke="#e9b949" stroke-width="1.8"/><rect x="266.9" y="138" width="63.099999999999994" height="16" rx="3" fill="#e9b949"/><text x="325" y="150" text-anchor="end" font-size="10.5" fill="#1e1b4b" font-family="'Noto Sans JP',system-ui,sans-serif" font-weight="700">SL → 建値</text><path d="M210 166l30-16" stroke="#e9b949" stroke-width="1.5" marker-end="url(#ah)"/><defs><marker id="ah" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L8 4L0 8z" fill="#e9b949"/></marker></defs></svg></div></div><div class="fcard-side"><ul class="fpoints"><li>建値＝損益がほぼ0になる価格</li><li>「建値設置pips」（初期1.0）だけ利益側に置く</li><li>買い増し・売り増しのときに便利</li></ul><details class="fmore"><summary>くわしく見る</summary><div class="fmore-body"><div class="wm wm-set" role="img" aria-label="設定の画面（一般）">
+    <div class="wm-set-head">設定<span aria-hidden="true">×</span></div>
+    <div class="wm-set-body">
+      <div class="wm-set-tabs"><span class="on">一般</span><span>キャンバス</span><span>配色</span></div>
+      <div class="wm-set-main"><p class="wm-sec">自動処理</p><div class="wm-row"><i>☆</i><span class="wm-row-l">建値設置pips</span><em>− 1.0 pips ＋</em></div><div class="wm-row hl"><i>☆</i><b class="wm-chk"></b><span class="wm-row-l">自動建値設置</span></div></div>
+    </div>
+  </div></div></details></div></div>
         </article>
-        <article class="fcard" id="trail">
-            <div class="fcard-top">
-                <h3 class="fcard-name">TPのトレイル化</h3>
-                <span class="finit">初期値：オフ（トレイル追随pips：10.0）</span>
-            </div>
-            <p class="fcard-what">TPに届いてもすぐには利確せず、利益が伸びる方向にSLがついていきます。</p>
+        <article class="fcard has-media" id="trail">
+            <div class="fcard-top"><h3 class="fcard-name">TPのトレイル化</h3><span class="finit">初期値：オフ</span></div>
+            <p class="fcard-what">TPで利確せず、SLが価格についていく。</p>
             <div class="fwhere"><span class="fwhere-item"><span>設定</span><i aria-hidden="true">›</i><span>一般</span><i aria-hidden="true">›</i><span>自動処理</span></span></div>
-            <div class="fcard-body"><ol class="feat-steps"><li>オンにすると、TPのラインが「トレイルが始まるライン」に変わる</li><li>価格がそこに届くと、SLが決めた幅（初期値10pips）で現在の価格についていく</li><li>価格が戻ってきたときはSLは動かず、そのSLで決済される</li></ol><div class="gtip">大きく伸びそうな場面で、利益を最大限とりたいときに使います。</div></div>
+            <div class="fcard-grid"><div class="fcard-media"><div class="wm wm-chart" role="img" aria-label="TPのトレイル化の例：TPに届いたあと、SLが価格についていく"><svg viewBox="0 0 460 220" aria-hidden="true"><rect width="460" height="220" fill="#0a0f2c"/><path d="M23.2 152.2V160.7M37.6 153.8V158.8M44.7 146.4V159.9M66.3 146.8V153.3M73.5 144.3V153.8M80.7 141.0V150.0M87.9 136.7V145.9M109.4 135.0V147.3M131.0 138.2V145.5M138.2 128.6V143.2M145.4 125.8V132.4M159.7 125.7V132.8M174.1 126.0V133.0M181.3 125.4V130.8M188.5 116.2V127.6M195.7 110.9V122.0M210.0 110.6V122.1M217.2 106.8V111.5M224.4 107.3V115.1M231.6 106.8V111.8M238.8 102.9V110.1M246.0 98.6V104.9M253.2 92.4V103.6M260.3 90.2V99.9M267.5 84.1V92.3M274.7 83.9V88.0M281.9 77.8V88.3M303.5 76.4V84.4M310.6 69.7V83.0M332.2 65.8V80.9M353.8 71.3V75.5M368.1 72.1V78.9M389.7 68.5V81.9M404.1 62.6V73.9M411.3 60.7V68.7M418.4 60.1V66.3M425.6 47.2V62.3M440.0 41.3V56.2" stroke="#22b573" stroke-width=".9"/><path d="M16.0 153.2V162.2M30.4 153.4V161.1M51.9 147.1V154.9M59.1 150.1V152.6M95.1 135.5V143.9M102.2 138.4V148.0M116.6 133.5V141.1M123.8 140.1V144.5M152.5 129.3V136.2M166.9 127.6V131.1M202.8 111.6V124.2M289.1 76.4V84.9M296.3 78.6V86.4M317.8 67.3V74.7M325.0 70.0V77.1M339.4 67.8V75.6M346.6 73.8V75.5M360.9 71.6V80.7M375.3 67.8V81.2M382.5 74.4V80.1M396.9 69.1V77.3M432.8 50.2V56.2" stroke="#ef4d5a" stroke-width=".9"/><path d="M21.0 154.0h4.4v6.5h-4.4zM35.4 155.8h4.4v1.6h-4.4zM42.5 148.5h4.4v7.3h-4.4zM64.1 149.2h4.4v2.2h-4.4zM71.3 146.8h4.4v2.4h-4.4zM78.5 144.6h4.4v2.2h-4.4zM85.7 139.9h4.4v4.7h-4.4zM107.2 136.0h4.4v7.6h-4.4zM128.8 138.9h4.4v2.2h-4.4zM136.0 130.6h4.4v8.3h-4.4zM143.2 130.3h4.4v1.0h-4.4zM157.5 128.6h4.4v3.5h-4.4zM171.9 129.2h4.4v1.7h-4.4zM179.1 125.6h4.4v3.7h-4.4zM186.3 117.4h4.4v8.1h-4.4zM193.5 115.3h4.4v2.2h-4.4zM207.8 111.5h4.4v9.1h-4.4zM215.0 110.9h4.4v1.0h-4.4zM222.2 109.1h4.4v1.8h-4.4zM229.4 107.9h4.4v1.2h-4.4zM236.6 104.9h4.4v3.0h-4.4zM243.8 102.3h4.4v2.6h-4.4zM251.0 96.1h4.4v6.2h-4.4zM258.1 90.8h4.4v5.3h-4.4zM265.3 87.2h4.4v3.6h-4.4zM272.5 85.8h4.4v1.4h-4.4zM279.7 80.2h4.4v5.6h-4.4zM301.3 78.7h4.4v3.4h-4.4zM308.4 70.1h4.4v8.6h-4.4zM330.0 70.3h4.4v5.9h-4.4zM351.6 73.9h4.4v1.0h-4.4zM365.9 72.4h4.4v5.1h-4.4zM387.5 73.2h4.4v5.6h-4.4zM401.9 66.3h4.4v7.0h-4.4zM409.1 63.6h4.4v2.7h-4.4zM416.2 60.8h4.4v2.9h-4.4zM423.4 51.3h4.4v9.5h-4.4zM437.8 44.8h4.4v10.2h-4.4z" fill="#22b573"/><path d="M13.8 158.0h4.4v2.4h-4.4zM28.2 154.0h4.4v3.5h-4.4zM49.7 148.5h4.4v2.7h-4.4zM56.9 151.2h4.4v1.0h-4.4zM92.9 139.9h4.4v2.5h-4.4zM100.0 142.4h4.4v1.2h-4.4zM114.4 136.0h4.4v4.2h-4.4zM121.6 140.1h4.4v1.0h-4.4zM150.3 130.3h4.4v1.8h-4.4zM164.7 128.6h4.4v2.4h-4.4zM200.6 115.3h4.4v5.4h-4.4zM286.9 80.2h4.4v1.5h-4.4zM294.1 81.8h4.4v1.0h-4.4zM315.6 70.1h4.4v2.7h-4.4zM322.8 72.7h4.4v3.5h-4.4zM337.2 70.3h4.4v3.9h-4.4zM344.4 74.2h4.4v1.0h-4.4zM358.7 73.9h4.4v3.5h-4.4zM373.1 72.4h4.4v6.0h-4.4zM380.3 78.4h4.4v1.0h-4.4zM394.7 73.2h4.4v1.0h-4.4zM430.6 51.3h4.4v3.6h-4.4z" fill="#ef4d5a"/><path d="M16 110H240" stroke="#22c55e" stroke-dasharray="4 3"/><rect x="133.70000000000002" y="102" width="106.29999999999998" height="16" rx="3" fill="#22c55e"/><text x="235" y="114" text-anchor="end" font-size="10.5" fill="#fff" font-family="'Noto Sans JP',system-ui,sans-serif" font-weight="700">TP → トレイル開始</text><path d="M240 150H300V120H350V96H400V78H444" stroke="#ef4d5a" stroke-width="1.8" fill="none"/><rect x="356.6" y="56" width="87.39999999999999" height="16" rx="3" fill="#ef4d5a"/><text x="439" y="68" text-anchor="end" font-size="10.5" fill="#fff" font-family="'Noto Sans JP',system-ui,sans-serif" font-weight="700">SLがついていく</text></svg></div></div><div class="fcard-side"><ul class="fpoints"><li>TPが「トレイル開始」のラインに変わる</li><li>SLが決めた幅（初期10pips）で追いかける</li><li>戻ってきたらそのSLで決済</li></ul><details class="fmore"><summary>くわしく見る</summary><div class="fmore-body"><div class="wm wm-set" role="img" aria-label="設定の画面（一般）">
+    <div class="wm-set-head">設定<span aria-hidden="true">×</span></div>
+    <div class="wm-set-body">
+      <div class="wm-set-tabs"><span class="on">一般</span><span>キャンバス</span><span>配色</span></div>
+      <div class="wm-set-main"><p class="wm-sec">自動処理</p><div class="wm-row"><i>☆</i><span class="wm-row-l">トレイル追随pips</span><em>− 10.0 pips ＋</em></div><div class="wm-row hl"><i>☆</i><b class="wm-chk"></b><span class="wm-row-l">TPのトレイル化</span></div></div>
+    </div>
+  </div></div></details></div></div>
         </article>
-        <article class="fcard" id="rr-fix">
-            <div class="fcard-top">
-                <h3 class="fcard-name">RR比固定</h3>
-                <span class="finit">初期値：オフ（1.00倍）</span>
-            </div>
-            <p class="fcard-what">リスクリワード比（利確までの幅 ÷ 損切りまでの幅）を、決めた倍率で固定します。</p>
+        <article class="fcard has-media" id="rr-fix"><!-- TODO: RR比固定の動き（TPが自動で置かれるのか）を確認 -->
+            <div class="fcard-top"><h3 class="fcard-name">RR比固定</h3><span class="finit">初期値：オフ（1.00倍）</span></div>
+            <p class="fcard-what">リスクリワード比を、決めた倍率で固定。</p>
             <div class="fwhere"><span class="fwhere-item"><span>設定</span><i aria-hidden="true">›</i><span>一般</span><i aria-hidden="true">›</i><span>自動処理</span></span></div>
-            <div class="fcard-body"><p>たとえば1.00倍なら、利確までの幅と損切りまでの幅が同じになります。</p><!-- TODO: RR比固定の動き（TPが自動で置かれるのか等）を確認 --></div>
+            <div class="fcard-grid"><div class="fcard-media"><div class="wm wm-set" role="img" aria-label="設定の画面（一般）">
+    <div class="wm-set-head">設定<span aria-hidden="true">×</span></div>
+    <div class="wm-set-body">
+      <div class="wm-set-tabs"><span class="on">一般</span><span>キャンバス</span><span>配色</span></div>
+      <div class="wm-set-main"><p class="wm-sec">自動処理</p><div class="wm-row hl"><i>☆</i><b class="wm-chk"></b><span class="wm-row-l">RR比固定</span><em>− 1.00 倍 ＋</em></div></div>
+    </div>
+  </div></div><div class="fcard-side"><ul class="fpoints"><li>1.00倍なら、利確までの幅＝損切りまでの幅</li></ul></div></div>
         </article>
     </div>
 </section>
@@ -1431,6 +1590,31 @@
 })();
 </script>
 <!-- BudouX — 日本語の文節改行（全ページ共通・同梱版。js/budoux-init.js を参照） -->
+<script>
+/* 機能の動画：画面に入ったら読み込んで再生、外れたら止める。タップで全画面 */
+(function () {
+    var vids = document.querySelectorAll('video.fvid-video');
+    if (!vids.length) return;
+    if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+                var v = e.target;
+                if (e.isIntersecting) { if (v.preload === 'none') { v.preload = 'auto'; } var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+                else { v.pause(); }
+            });
+        }, { threshold: 0.35 });
+        vids.forEach(function (v) { io.observe(v); });
+    } else {
+        vids.forEach(function (v) { v.autoplay = true; v.preload = 'auto'; });
+    }
+    vids.forEach(function (v) {
+        v.addEventListener('click', function () {
+            if (v.requestFullscreen) { v.requestFullscreen().catch(function () {}); }
+            else if (v.webkitEnterFullscreen) { v.webkitEnterFullscreen(); }
+        });
+    });
+})();
+</script>
 <script src="js/budoux-ja.min.js?v=20260907a" defer></script>
 <script src="js/budoux-init.js?v=20260907a" defer></script>
 </body>

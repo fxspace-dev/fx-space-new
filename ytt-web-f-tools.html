@@ -6,7 +6,7 @@
     <title>Web版YTT 分析ツール — FX SPACE</title>
     <link rel="icon" type="image/png" href="icon.png">
     <meta property="og:title" content="Web版YTT 分析ツール — FX SPACE">
-    <meta property="og:description" content="Web版YTTの使い方（分析ツール）。PCの画面の右端に並ぶアイコンから開く、分析と振り返りのためのツールです。">
+    <meta property="og:description" content="Web版YTTの使い方（分析ツール）。">
     <meta property="og:image" content="https://fx-space.com/intro/img/og-ytt-tokusetu.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -1057,6 +1057,12 @@
     .fvid-label { font-size: 0.95rem; font-weight: 800; letter-spacing: 0.04em; }
     .fvid-meta { font-size: 0.75rem; color: #c7d2fe; }
     .fvid-box.is-shot { background: #334155; }
+    /* 機能の動画：画面の見方と同じノートPC／スマホの枠の中で再生（見えている間だけ再生、タップで全画面） */
+    .fvid .wy-pc { max-width: 100%; }
+    .fvid-video { display: block; width: 100%; height: auto; background: #0a0f2c; cursor: zoom-in; }
+    .wy-pc-screen .fvid-video { aspect-ratio: 16 / 9; border-radius: 7px; }
+    .wy-screen .fvid-video { aspect-ratio: 720 / 1400; }
+    .fvid-cap { margin-top: 0.9rem; font-size: 0.75rem; color: #6b7280; text-align: center; }
     /* 機能一覧 */
     .fidx-grid { margin-top: 0.7rem; }
     a.ytt-add-card.fidx { text-decoration: none; transition: border-color 0.15s, transform 0.15s; }
@@ -1078,75 +1084,204 @@
     .fcat-nav a[aria-current="page"] { background: #1e1b4b; border-color: #1e1b4b; color: #fff; }
     .fcat-no { width: 22px; height: 19px; display: inline-flex; align-items: center; justify-content: center; background: url("img/fill-crayon-orange-badge.svg") 0 0 / 100% 100% no-repeat; color: #1e1b4b; font: 900 0.72rem Inter, sans-serif; }
     .fsub-hero { padding-bottom: 2.25rem; }
-    .ftoc { justify-content: center; max-width: 900px; margin: 0.9rem auto 0; }
     .fsub-hero .ytt-sp-hero-kicker { display: inline-block; margin: 0 0 0.5rem; font-size: 0.8125rem; font-weight: 800; color: #4f46e5; }
-    /* 機能のカード */
-    .fcard { background: #fff; border: 1.5px solid #e5e7eb; border-radius: 18px; padding: 1.4rem 1.5rem 1.5rem; margin-top: 1.1rem; text-align: left; scroll-margin-top: 84px; }
+    .ftoc { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.35rem; max-width: 900px; margin: 0.9rem auto 0; }
+    .ftoc a { padding: 0.25rem 0.6rem; border-radius: 8px; background: #f3f4f6; color: #1e1b4b; font-size: 0.78rem; font-weight: 700; text-decoration: none; }
+    /* 機能のカード：見て分かるもの（動画・モック・図）を大きく、文字は要点だけ */
+    .fcard { background: #fff; border: 1.5px solid #e5e7eb; border-radius: 20px; padding: 1.4rem 1.5rem 1.5rem; margin-top: 1.2rem; text-align: left; scroll-margin-top: 84px; }
     @media (max-width: 600px) { .fcard { padding: 1.1rem 1rem 1.2rem; border-radius: 16px; } }
     .fcard-top { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.7rem; }
-    .fcard-name { margin: 0; font-size: 1.12rem; font-weight: 900; color: #1e1b4b; }
+    .fcard-name { margin: 0; font-size: 1.2rem; font-weight: 900; color: #1e1b4b; }
     .finit { display: inline-block; padding: 0.15rem 0.6rem; border-radius: 999px; background: #1e1b4b; color: #fff; font-size: 0.72rem; font-weight: 700; }
-    .fcard-what { margin: 0.45rem 0 0; font-size: 0.95rem; font-weight: 700; color: #374151; line-height: 1.7; }
-    .fwhere { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.7rem; }
+    .fcard-what { margin: 0.35rem 0 0; font-size: 0.98rem; font-weight: 700; color: #374151; }
+    .fwhere { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.6rem; }
     .fwhere-item { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 0.3rem; padding: 0.3rem 0.65rem; border: 1.5px dashed #c7d2fe; border-radius: 10px; font-size: 0.78rem; color: #1e1b4b; font-weight: 700; }
     .fwhere-item::before { content: "場所"; margin-right: 0.15rem; font-size: 0.68rem; font-weight: 800; color: #4f46e5; }
     .fwhere-item b { margin-right: 0.15rem; padding: 0.05rem 0.4rem; border-radius: 6px; background: #eef2ff; color: #3730a3; font-size: 0.7rem; }
     .fwhere-item i { font-style: normal; color: #9ca3af; }
-    .fcard-body { margin-top: 0.9rem; }
-    .fcard-body > p { font-size: 0.9rem; color: #374151; line-height: 1.85; margin: 0.6rem 0 0; }
-    .fcard-body > p:first-child { margin-top: 0; }
-    .fcard-body .feat-steps { margin-top: 0.2rem; }
-    .fcard-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 1.6rem; align-items: start; margin-top: 1rem; }
-    .fcard-grid .fcard-body { margin-top: 0; }
-    .fcard.is-wide .fcard-grid { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); }
-    @media (max-width: 860px) { .fcard-grid, .fcard.is-wide .fcard-grid { grid-template-columns: 1fr; gap: 1rem; } }
-    .fcard-media { min-width: 0; text-align: center; }
-    .fcard-media .gshot { margin: 0; }
-    .fbul { margin: 0.2rem 0 0; padding-left: 1.2rem; }
-    .fbul li { font-size: 0.9rem; color: #374151; line-height: 1.8; margin-bottom: 0.35rem; }
-    .ftable-wrap { overflow-x: auto; margin-top: 0.4rem; }
-    .ftable { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
-    .ftable th { text-align: left; padding: 0.5rem 0.65rem; background: #1e1b4b; color: #fff; font-size: 0.75rem; font-weight: 800; white-space: nowrap; }
-    .ftable th:first-child { border-radius: 8px 0 0 0; } .ftable th:last-child { border-radius: 0 8px 0 0; }
-    .ftable td { padding: 0.6rem 0.65rem; border-bottom: 1px solid #eef0f4; color: #374151; line-height: 1.7; vertical-align: top; }
+    .fwhere-item .wm-rail { flex-direction: row; box-shadow: none; }
+    .fcard-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 1.8rem; align-items: center; margin-top: 1.1rem; }
+    .fcard.is-wide .fcard-grid { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); }
+    @media (max-width: 860px) { .fcard-grid, .fcard.is-wide .fcard-grid { grid-template-columns: 1fr; gap: 1.1rem; } }
+    .fcard-media { min-width: 0; }
+    .fcard-media .fvid { margin: 0; }
+    .fcard-media .fvid:not(.pc) { max-width: 290px; margin: 0 auto; }
+    .fcard-side { min-width: 0; }
+    .fcard > .fcard-side { margin-top: 0.8rem; }
+    .fpoints { list-style: none; margin: 0; padding: 0; counter-reset: fp; }
+    .fpoints li { counter-increment: fp; position: relative; padding: 0.15rem 0 0.75rem 2.1rem; font-size: 0.95rem; font-weight: 700; color: #1f2937; line-height: 1.65; }
+    .fpoints li::before { content: counter(fp); position: absolute; left: 0; top: 0.12rem; width: 1.55rem; height: 1.4rem; display: flex; align-items: center; justify-content: center; background: url("img/fill-crayon-orange-badge.svg") 0 0 / 100% 100% no-repeat; color: #1e1b4b; font: 900 0.8rem Inter, sans-serif; }
+    .fpoints li b { color: #1e1b4b; }
+    .fpoints a { color: #4f46e5; }
+    .fmore { margin-top: 0.4rem; border-top: 1px dashed #e5e7eb; }
+    .fmore summary { cursor: pointer; list-style: none; display: inline-flex; align-items: center; gap: 0.35rem; margin-top: 0.7rem; padding: 0.35rem 0.8rem; border: 1.5px solid #c7d2fe; border-radius: 999px; font-size: 0.8rem; font-weight: 800; color: #3730a3; }
+    .fmore summary::-webkit-details-marker { display: none; }
+    .fmore summary::after { content: "▼"; font-size: 0.6rem; }
+    .fmore[open] summary::after { content: "▲"; }
+    .fmore-body { margin-top: 0.9rem; }
+    .fmore-body > p { font-size: 0.875rem; color: #4b5563; line-height: 1.85; margin: 0.6rem 0 0; }
+    .fmore-body .wm { margin: 0.6rem 0 0; }
+    .fmore-media { margin-bottom: 0.8rem; }
+    .ftable-wrap { overflow-x: auto; margin-top: 0.6rem; }
+    .ftable { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+    .ftable th { text-align: left; padding: 0.45rem 0.6rem; background: #1e1b4b; color: #fff; font-size: 0.72rem; font-weight: 800; white-space: nowrap; }
+    .ftable td { padding: 0.5rem 0.6rem; border-bottom: 1px solid #eef0f4; color: #374151; line-height: 1.65; vertical-align: top; }
     .ftable td:first-child { color: #1e1b4b; font-weight: 700; }
-    .ftable td small { color: #6b7280; font-weight: 700; }
-    @media (max-width: 600px) {
-        .ftable thead { display: none; }
-        .ftable tr { display: block; padding: 0.55rem 0; border-bottom: 1px solid #eef0f4; }
-        .ftable td { display: block; padding: 0.1rem 0; border: none; }
-        .ftable td[data-h="初期値"]::before { content: "初期値："; color: #6b7280; font-weight: 700; }
-    }
+    @media (max-width: 600px) { .ftable thead { display: none; } .ftable tr { display: block; padding: 0.5rem 0; border-bottom: 1px solid #eef0f4; } .ftable td { display: block; padding: 0.05rem 0; border: none; } .ftable td[data-h="初期値"]::before { content: "初期値："; color: #6b7280; } }
+    .wm .sw { display: inline-block; width: 16px; height: 12px; margin-left: 3px; border-radius: 3px; vertical-align: -1px; } .wm .sw.g { background: #2ea043; } .wm .sw.r { background: #d73a49; } .wm .sw.k { background: #0b1030; border: 1px solid #3a4170; }
     .group-after { max-width: 1100px; margin: 1.2rem auto 0; text-align: left; }
-    /* 設定の一覧 */
     .fset { list-style: none; margin: 0.9rem 0 0; padding: 0; }
     .fset li { display: flex; justify-content: space-between; gap: 1rem; padding: 0.55rem 0; border-bottom: 1px dashed #e5e7eb; font-size: 0.875rem; }
     .fset li a { color: #1e1b4b; font-weight: 700; text-decoration: underline; text-decoration-color: #c7d2fe; text-underline-offset: 3px; }
     .fset li span { color: #6b7280; white-space: nowrap; font-size: 0.8125rem; }
     .fset-note { font-size: 0.8125rem; color: #6b7280; margin-top: 1.1rem; text-align: left; }
-    /* 次のページ */
     .fnext { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.9rem; max-width: 760px; margin: 0 auto; }
     @media (max-width: 600px) { .fnext { grid-template-columns: 1fr; } }
     .fnext a { display: block; padding: 1rem 1.2rem; border: 1.5px solid #e5e7eb; border-radius: 14px; background: #fff; text-decoration: none; text-align: left; }
     .fnext a:hover { border-color: #a5b4fc; }
     .fnext small { display: block; font-size: 0.72rem; font-weight: 800; color: #6b7280; }
     .fnext b { display: block; margin-top: 0.2rem; font-size: 1rem; color: #1e1b4b; }
-    /* トップの「機能をさがす」 */
+    /* トップ：分野のカード（見本のモックつき） */
     .fhub { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 1.5rem; }
     @media (max-width: 760px) { .fhub { grid-template-columns: 1fr; } }
-    .fhub-card { display: flex; flex-direction: column; background: #fff; border: 1.5px solid #e5e7eb; border-radius: 18px; padding: 1.3rem 1.3rem 1.2rem; text-align: left; }
+    .fhub-card { display: flex; flex-direction: column; background: #fff; border: 1.5px solid #e5e7eb; border-radius: 20px; padding: 1.2rem; text-align: left; text-decoration: none; transition: border-color .15s, transform .15s; }
+    .fhub-card:hover { border-color: #a5b4fc; transform: translateY(-2px); }
+    .fhub-vis { display: flex; align-items: center; justify-content: center; min-height: 170px; margin-bottom: 1rem; padding: 12px; border-radius: 14px; background: #eef0f7; overflow: hidden; }
+    .fhub-vis .wm { box-shadow: none; }
     .fhub-card h3 { display: flex; align-items: center; gap: 0.5rem; margin: 0; font-size: 1.1rem; font-weight: 900; color: #1e1b4b; }
     .fhub-card h3 .fcat-no { width: 32px; height: 27px; font-size: 0.9rem; }
-    .fhub-card > p { margin: 0.45rem 0 0; font-size: 0.85rem; color: #4b5563; line-height: 1.75; }
-    .fhub-links { display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 0.8rem 0 1rem; }
-    .fhub-links a { padding: 0.25rem 0.6rem; border-radius: 8px; background: #f3f4f6; color: #1e1b4b; font-size: 0.78rem; font-weight: 700; text-decoration: none; }
-    .fhub-links a:hover { background: #e0e7ff; }
-    .fhub-card .fhub-go { margin-top: auto; align-self: flex-start; }
+    .fhub-card p { margin: 0.4rem 0 0; font-size: 0.85rem; color: #4b5563; line-height: 1.7; }
+    .fhub-card .go { margin-top: 0.8rem; font-size: 0.85rem; font-weight: 800; color: #4f46e5; }
+
+    /* ===== Web版YTTの画面モック（使い方ページ） ===== */
+    .wm { --wm-bg: #141a46; --wm-card: #1d2458; --wm-line: #30397a; --wm-text: #e5e7eb; --wm-mute: #9aa3c7; --wm-y: #e9b949;
+        background: var(--wm-bg); color: var(--wm-text); border-radius: 14px; font-family: 'Noto Sans JP', system-ui, sans-serif; line-height: 1.35; text-align: left;
+        box-shadow: 0 18px 40px rgba(30, 27, 75, 0.2); max-width: 100%; margin: 0 auto; }
+    .wm .hl { outline: 2.5px solid #ef4444; outline-offset: 2px; border-radius: 6px; }
+    .wm small { font-weight: 500; }
+    /* 設定 */
+    .wm-set { width: 100%; max-width: 420px; overflow: hidden; }
+    .wm-set-head { display: flex; justify-content: space-between; padding: 10px 14px; font-size: 13px; font-weight: 800; border-bottom: 1px solid var(--wm-line); background: #19205a; }
+    .wm-set-head span { color: var(--wm-mute); font-weight: 400; }
+    .wm-set-body { display: grid; grid-template-columns: 76px 1fr; }
+    .wm-set-tabs { padding: 8px 0; border-right: 1px solid var(--wm-line); background: #121842; }
+    .wm-set-tabs span { display: block; padding: 7px 10px; font-size: 11px; color: var(--wm-mute); }
+    .wm-set-tabs span.on { background: #242b62; color: #fff; font-weight: 800; }
+    .wm-set-main { min-width: 0; padding: 8px 10px 12px; }
+    @media (max-width: 440px) { .wm-set-body { grid-template-columns: 56px 1fr; } .wm-set-tabs span { padding: 7px 7px; font-size: 10px; } .wm-row { flex-wrap: wrap; } .wm-row em { white-space: normal; margin-left: auto; } }
+    .wm-sec { margin: 8px 0 5px; font-size: 10.5px; font-weight: 800; color: var(--wm-y); }
+    .wm-row { display: flex; align-items: center; gap: 7px; margin-top: 5px; padding: 8px 9px; border: 1px solid var(--wm-line); border-radius: 8px; background: var(--wm-card); font-size: 11.5px; font-weight: 700; }
+    .wm-row.is-on { border-color: rgba(233, 185, 73, 0.75); background: #2a2745; }
+    .wm-row i { font-style: normal; color: var(--wm-mute); font-size: 11px; }
+    .wm-row-l { flex: 1; min-width: 0; }
+    .wm-row-l small { display: block; margin-top: 1px; font-size: 9px; color: var(--wm-mute); }
+    .wm-row em { font-style: normal; padding: 2px 7px; border: 1px solid var(--wm-line); border-radius: 6px; font: 700 10px ui-monospace, Menlo, Consolas, monospace; color: #fff; white-space: nowrap; }
+    .wm-chk { width: 13px; height: 13px; border: 1.5px solid var(--wm-mute); border-radius: 3px; flex-shrink: 0; }
+    .wm-chk.on { border-color: var(--wm-y); background: radial-gradient(circle, var(--wm-y) 0 45%, transparent 46%); }
+    .wm-radio { width: 13px; height: 13px; border: 1.5px solid var(--wm-mute); border-radius: 50%; flex-shrink: 0; }
+    .wm-radio.on { border-color: var(--wm-y); background: radial-gradient(circle, var(--wm-y) 0 40%, transparent 42%); }
+    .wm-opt { display: flex; align-items: center; gap: 9px; margin-top: 6px; padding: 8px 9px; border: 1px solid var(--wm-line); border-radius: 9px; background: var(--wm-card); }
+    .wm-opt.on { border-color: rgba(233, 185, 73, 0.75); }
+    .wm-opt.on b { color: var(--wm-y); }
+    .wm-opt i { width: 26px; height: 26px; border-radius: 7px; flex-shrink: 0; border: 1px solid rgba(255,255,255,.12); }
+    .wm-opt b { display: block; font-size: 11.5px; }
+    .wm-opt small { display: block; font-size: 9px; color: var(--wm-mute); }
+    /* 右のパネル */
+    .wm-panel { width: 100%; max-width: 300px; padding: 12px; }
+    .wm-card { padding: 10px; border: 1px solid var(--wm-line); border-radius: 12px; background: var(--wm-card); }
+    .wm-card + .wm-card { margin-top: 8px; }
+    .wm-card-t { margin: 0 0 8px; font-size: 10.5px; font-weight: 800; color: var(--wm-mute); }
+    .wm-order { display: grid; grid-template-columns: 1fr 58px 1fr; gap: 6px; }
+    .wm-order > span { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 46px; border-radius: 9px; font-size: 14px; font-weight: 900; }
+    .wm-sell { background: #3d5fd9; } .wm-buy { background: #c2414b; }
+    .wm-lot { border: 1px solid var(--wm-line); background: #141a46; font: 900 14px ui-monospace, Menlo, monospace !important; }
+    .wm-lot small { font-size: 8px; color: var(--wm-mute); font-family: system-ui; }
+    .wm-steps { display: grid; grid-template-columns: repeat(6, 1fr); margin-top: 7px; border: 1px solid var(--wm-line); border-radius: 7px; }
+    .wm-steps span { padding: 5px 0; text-align: center; font: 700 9.5px ui-monospace, Menlo, monospace; color: var(--wm-mute); }
+    .wm-close { display: grid; grid-template-columns: 1.8fr 1fr; gap: 6px; margin-top: 7px; }
+    .wm-close span { padding: 9px 0; border: 1px solid var(--wm-line); border-radius: 8px; background: #232a60; text-align: center; font-size: 11.5px; font-weight: 800; color: #c7cbe0; }
+    .wm-bal-l { margin: 0; text-align: center; font-size: 10px; color: var(--wm-mute); }
+    .wm-bal { margin: 2px 0 0; text-align: center; font-size: 26px; font-weight: 900; }
+    .wm-bal-s { margin: 2px 0 10px; text-align: center; font-size: 10px; color: var(--wm-mute); }
+    .wm-risk { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .wm-risk span { display: flex; justify-content: space-between; align-items: center; gap: 4px; padding: 8px; border: 1px solid var(--wm-line); border-radius: 8px; }
+    .wm-risk small { font-size: 9px; color: var(--wm-mute); } .wm-risk b { font: 800 11.5px ui-monospace, Menlo, monospace; }
+    .wm-sc { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .wm-sc span { display: flex; flex-direction: column; align-items: center; padding: 10px 4px; border-radius: 9px; font-size: 11.5px; font-weight: 900; text-align: center; }
+    .wm-sc small { font-size: 7.5px; opacity: .8; margin-top: 2px; }
+    .wm-short { background: #22306b; border: 1px solid #4f6fd8; color: #dbe6ff; } .wm-long { background: #4a1f38; border: 1px solid #ef4d5a; color: #ffd5da; }
+    .wm-build { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 6px; }
+    .wm-build span { padding: 9px 0; border: 1px solid var(--wm-line); border-radius: 8px; background: #232a60; text-align: center; font-size: 10.5px; font-weight: 700; color: var(--wm-mute); }
+    .wm-build .wm-build-main { border-color: #c7cbe0; background: #141a46; color: #fff; font-weight: 900; }
+    .wm-build .wm-del { color: #f87171; }
+    /* 上のメニュー */
+    .wm-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; padding: 9px 10px; border-radius: 12px; font-size: 11px; }
+    .wm-sym { padding: 4px 8px; border-radius: 6px; background: #232a60; font: 800 11px ui-monospace, Menlo, monospace; }
+    .wm-tfs { display: flex; gap: 2px; } .wm-tfs i { font: 600 9.5px ui-monospace, Menlo, monospace; font-style: normal; color: var(--wm-mute); padding: 3px 4px; border-radius: 4px; }
+    .wm-tfs i.on { background: #3a3413; color: var(--wm-y); }
+    .wm-ico { display: inline-flex; width: 26px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--wm-line); border-radius: 6px; }
+    .wm-ico svg { width: 15px; height: 15px; fill: none; stroke: #cbd5e1; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+    .wm-pill { padding: 4px 10px; border: 1px solid var(--wm-line); border-radius: 999px; font-size: 10.5px; color: var(--wm-mute); }
+    .wm-pill b { margin-left: 3px; font: 700 10px ui-monospace, Menlo, monospace; }
+    .wm-pos { border-color: #b7791f; background: #2a2310; color: var(--wm-y); }
+    /* 右端のアイコン列（場所の表示に使う小さなもの） */
+    .wm-rail { display: inline-flex; flex-direction: column; gap: 4px; padding: 5px; border-radius: 9px; background: #141a46; vertical-align: middle; }
+    .wm-rail i { display: flex; width: 22px; height: 22px; align-items: center; justify-content: center; border-radius: 5px; }
+    .wm-rail i.hl { background: #3a3413; outline: 2px solid #ef4444; outline-offset: 1px; }
+    .wm-rail svg { width: 14px; height: 14px; fill: none; stroke: #aeb6d6; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .wm-rail i.hl svg { stroke: #e9b949; }
+    /* 分析ツールの窓 */
+    .wm-win { width: 100%; max-width: 520px; padding: 0 12px 12px; overflow: hidden; }
+    .wm-win-head { display: flex; justify-content: space-between; margin: 0 -12px 10px; padding: 10px 14px; border-bottom: 1px solid var(--wm-line); background: #19205a; font-size: 12.5px; font-weight: 800; }
+    .wm-win-head span { color: var(--wm-mute); font-weight: 400; }
+    .wm-tabs { display: flex; gap: 6px; margin: 0 0 10px; }
+    .wm-tabs span { flex: 1; padding: 6px 0; border: 1px solid var(--wm-line); border-radius: 7px; text-align: center; font-size: 10.5px; color: var(--wm-mute); }
+    .wm-tabs span.on { background: var(--wm-y); border-color: var(--wm-y); color: #1e1b4b; font-weight: 800; }
+    .wm .g { color: #4ade80; }
+    .wm-cal-top { display: flex; justify-content: space-between; align-items: center; font-size: 12px; }
+    .wm-cal-top b { font-size: 15px; } .wm-cal-top small { font-size: 9.5px; color: var(--wm-mute); } .wm-cal-top .g { font-size: 17px; }
+    .wm-cal-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin: 9px 0; }
+    .wm-cal-stats span { padding: 6px 8px; border-radius: 8px; background: #262a5e; }
+    .wm-cal-stats small { display: block; font-size: 8.5px; color: var(--wm-mute); } .wm-cal-stats b { font-size: 13px; }
+    .wm-cal-wd, .wm-cal-wk { display: grid; grid-template-columns: repeat(7, 1fr) 42px; gap: 3px; }
+    .wm-cal-wd span { text-align: center; font-size: 9px; color: var(--wm-mute); padding: 2px 0; } .wm-cal-wd .sat { color: #93c5fd; } .wm-cal-wd .sun { color: #fca5a5; }
+    .wm-cal-wk { margin-top: 3px; }
+    .wm-cal-wk > span { height: 30px; border-radius: 5px; background: #1b2150; position: relative; }
+    .wm-cal-wk > span.e { background: transparent; }
+    .wm-cal-wk > span i { position: absolute; left: 3px; top: 2px; font: 600 7.5px ui-monospace, Menlo, monospace; font-style: normal; color: var(--wm-mute); }
+    .wm-cal-wk > span.win { background: #2f5a45; outline: 1.5px solid #4ade80; }
+    .wm-cal-wk > span.win b { position: absolute; left: 3px; bottom: 2px; font-size: 7.5px; color: #86efac; }
+    .wm-cal-wk > span.wk { background: transparent; display: flex; flex-direction: column; align-items: flex-end; justify-content: center; }
+    .wm-cal-wk .wk b { font-size: 8.5px; color: var(--wm-mute); } .wm-cal-wk .wk b.g { color: #4ade80; } .wm-cal-wk .wk small { font-size: 7px; color: var(--wm-mute); }
+    .wm-heat-t { display: grid; grid-template-columns: 34px repeat(8, 1fr); gap: 2px; }
+    .wm-heat-t span { padding: 5px 0; border-radius: 3px; text-align: center; font: 600 8px ui-monospace, Menlo, monospace; color: #fff; }
+    .wm-heat-t span.h { color: var(--wm-mute); font-weight: 700; background: transparent; }
+    .wm-str-chart { display: block; width: 100%; height: auto; margin-bottom: 8px; }
+    .wm-str-bars { display: grid; grid-template-columns: 30px 1fr 44px; gap: 5px 7px; align-items: center; }
+    .wm-str-bars .c { font: 800 9.5px ui-monospace, Menlo, monospace; } .wm-str-bars .v { font: 600 9px ui-monospace, Menlo, monospace; color: var(--wm-mute); text-align: right; }
+    .wm-str-bars .bar { height: 6px; border-radius: 3px; background: #262a5e; overflow: hidden; } .wm-str-bars .bar i { display: block; height: 100%; border-radius: 3px; }
+    .wm-news { max-width: 300px; padding-top: 12px; }
+    .wm-news-i { margin-top: 7px; padding: 9px 10px; border: 1px solid var(--wm-line); border-radius: 10px; background: var(--wm-card); }
+    .wm-news-i p { display: flex; align-items: center; gap: 6px; margin: 0 0 4px; font-size: 9px; color: var(--wm-mute); }
+    .wm-news-i time { margin-left: auto; font-family: ui-monospace, Menlo, monospace; }
+    .wm-news-i .imp { padding: 1px 5px; border: 1px solid var(--wm-y); border-radius: 3px; color: var(--wm-y); font-size: 8.5px; }
+    .wm-news-i .imp.r { border-color: #ef4444; color: #fca5a5; }
+    .wm-news-i b { display: block; font-size: 11.5px; } .wm-news-i .s { display: block; margin-top: 3px; font-size: 9.5px; color: var(--wm-mute); line-height: 1.5; }
+    /* チャートの図 */
+    .wm-chart { width: 100%; max-width: 520px; padding: 6px; }
+    .wm-chart svg { display: block; width: 100%; height: auto; border-radius: 9px; }
+    /* 流れ図 */
+    .wm-flow { display: flex; align-items: center; justify-content: center; gap: 10px; max-width: 460px; padding: 18px 14px; }
+    .wm-flow .n { flex: 1; padding: 12px; border: 1px solid var(--wm-line); border-radius: 12px; background: var(--wm-card); text-align: center; }
+    .wm-flow .n.y { border-color: rgba(233,185,73,.8); }
+    .wm-flow small { display: block; font-size: 10px; color: var(--wm-mute); } .wm-flow b { display: block; margin-top: 3px; font-size: 12.5px; }
+    .wm-flow > i { font-style: normal; font-size: 20px; color: var(--wm-y); }
+
 </style>
 </head>
 <body>
 
-<!-- Web版YTT 使い方：分析ツール（ytt-web-f-tools.html）。build-guide.js で作成。内容の元は webytt-materials/前任Canva_YTTの使い方_全文.md と Web版の画面のスクショ -->
+<!-- Web版YTT 使い方：分析ツール（ytt-web-f-tools.html）。webytt-materials/tools/build-guide.js と mocks.js で作成（手で直さず、スクリプトを直して作り直す） -->
 
 <nav class="ytt-sp-nav">
     <a href="ytt-tokusetu.html" class="ytt-sp-nav-logo">
@@ -1167,7 +1302,7 @@
         <a href="ytt-web-features.html">使い方トップ</a>
         <a href="ytt-web-f-trade.html"><span class="fcat-no">1</span>注文・ロット・決済</a><a href="ytt-web-f-scenario.html"><span class="fcat-no">2</span>シナリオ・予約注文</a><a href="ytt-web-f-chart.html"><span class="fcat-no">3</span>チャートの表示</a><a href="ytt-web-f-tools.html" aria-current="page"><span class="fcat-no">4</span>分析ツール</a><a href="ytt-web-f-settings.html"><span class="fcat-no">5</span>モードと設定</a>
     </nav>
-    <div class="fhub-links ftoc" aria-label="このページの機能"><a href="#calendar">損益カレンダー</a><a href="#strength">通貨強弱</a><a href="#heatmap">ヒートマップ</a><a href="#news">ニュース</a><a href="#takeprofit">利確速報</a></div>
+    <div class="ftoc" aria-label="このページの機能"><a href="#calendar">損益カレンダー</a><a href="#strength">通貨強弱</a><a href="#heatmap">ヒートマップ</a><a href="#news">ニュース</a><a href="#takeprofit">利確速報</a></div>
 </section>
 
 <section class="ytt-spec-section" style="background:#f4f6f9;">
@@ -1180,20 +1315,23 @@
             </span>
             <div style="text-align:center; margin-bottom:0.25rem;">
                 <div style="display:inline-block; white-space:nowrap;">
-                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">自分のトレードを振り返る</h2>
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">損益カレンダー</h2>
                     <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
                 </div>
             </div>
             
         </div>
         <article class="fcard has-media is-wide" id="calendar">
-            <div class="fcard-top">
-                <h3 class="fcard-name">損益カレンダー</h3>
-                
-            </div>
-            <p class="fcard-what">日ごとの損益をカレンダーで表示します。勝った日は緑で色がつきます。</p>
-            <div class="fwhere"><span class="fwhere-item"><b>PC</b><span>右端のアイコン</span><i aria-hidden="true">›</i><span>カレンダー</span></span></div>
-            <div class="fcard-grid"><div class="fcard-media"><figure class="fvid pc"><div class="fvid-box is-shot" role="img" aria-label="画面の画像（準備中）"><span class="fvid-label">画面の画像 準備中</span><span class="fvid-meta">損益カレンダー</span></div></figure><!-- 画像：img/webytt/features/calendar.png を置けば表示される --></div><div class="fcard-body"><div class="ftable-wrap"><table class="ftable"><thead><tr><th>表示</th><th>意味</th></tr></thead><tbody><tr><td data-h="表示">月間損益</td><td data-h="意味">その月の損益の合計</td></tr><tr><td data-h="表示">トレード</td><td data-h="意味">その月のトレードの回数</td></tr><tr><td data-h="表示">勝ち / 負け（日）</td><td data-h="意味">勝った日と負けた日の数</td></tr><tr><td data-h="表示">プロフィットファクター</td><td data-h="意味">総利益 ÷ 総損失。1より大きいほど、利益が出ています</td></tr><tr><td data-h="表示">ベストデイ</td><td data-h="意味">いちばん損益がよかった日の損益</td></tr><tr><td data-h="表示">週計</td><td data-h="意味">週ごとの損益と、勝ち（W）・負け（L）の日数</td></tr></tbody></table></div><div class="gtip">‹ › で月を切り替えられます。これまでの「トレードノート」のように、自分のトレードを数字で振り返れます。</div></div></div>
+            <div class="fcard-top"><h3 class="fcard-name">損益カレンダー</h3></div>
+            <p class="fcard-what">日ごとの損益をカレンダーで。勝った日は緑。</p>
+            <div class="fwhere"><span class="fwhere-item"><b>PC</b><span>右端のアイコン</span><i aria-hidden="true">›</i><span><span class="wm-rail" aria-hidden="true"><i class=""><svg viewBox="0 0 24 24"><path d="M6 19V9M10 19V5M14 19V11M18 19V7"/></svg></i><i class="hl"><svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="14" rx="2"/><path d="M4 10h16M9 4v4M15 4v4"/></svg></i><i class=""><svg viewBox="0 0 24 24"><path d="M4 18l5-6 4 3 7-9"/></svg></i><i class=""><svg viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="1"/><rect x="13" y="4" width="7" height="7" rx="1"/><rect x="4" y="13" width="7" height="7" rx="1"/><rect x="13" y="13" width="7" height="7" rx="1"/></svg></i><i class=""><svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="16" rx="2"/><path d="M8 9h8M8 13h8M8 17h5"/></svg></i></span></span></span></div>
+            <div class="fcard-grid"><div class="fcard-media"><div class="wm wm-win wm-cal" role="img" aria-label="損益カレンダーの画面">
+    <div class="wm-win-head">損益カレンダー<span aria-hidden="true">×</span></div>
+    <div class="wm-cal-top"><span>‹　<b>9月</b> <small>2026</small>　›</span><span><small>月間損益</small> <b class="g">+10.0k</b></span></div>
+    <div class="wm-cal-stats"><span><small>トレード</small><b>5</b></span><span><small>勝ち / 負け（日）</small><b>1 / 0</b></span><span><small>プロフィットファクター</small><b class="g">623.83</b></span><span><small>ベストデイ</small><b class="g">+10.0k</b></span></div>
+    <div class="wm-cal-grid"><div class="wm-cal-wd"><span>月</span><span>火</span><span>水</span><span>木</span><span>金</span><span class="sat">土</span><span class="sun">日</span><span>週計</span></div>
+    <div class="wm-cal-wk"><span class="e"></span><span><i>1</i></span><span><i>2</i></span><span><i>3</i></span><span><i>4</i></span><span><i>5</i></span><span><i>6</i></span><span class="wk"><b>—</b><small>0W・0L</small></span></div><div class="wm-cal-wk"><span><i>7</i></span><span><i>8</i></span><span><i>9</i></span><span><i>10</i></span><span class="win"><i>11</i><b>+10.0k</b></span><span><i>12</i></span><span><i>13</i></span><span class="wk"><b class="g">+10.0k</b><small>1W・0L</small></span></div><div class="wm-cal-wk"><span><i>14</i></span><span><i>15</i></span><span><i>16</i></span><span><i>17</i></span><span><i>18</i></span><span><i>19</i></span><span><i>20</i></span><span class="wk"><b>—</b><small>0W・0L</small></span></div><div class="wm-cal-wk"><span><i>21</i></span><span><i>22</i></span><span><i>23</i></span><span><i>24</i></span><span><i>25</i></span><span><i>26</i></span><span><i>27</i></span><span class="wk"><b>—</b><small>0W・0L</small></span></div><div class="wm-cal-wk"><span><i>28</i></span><span><i>29</i></span><span><i>30</i></span><span class="e"></span><span class="e"></span><span class="e"></span><span class="e"></span><span class="wk"><b>—</b><small>0W・0L</small></span></div></div>
+  </div></div><div class="fcard-side"><ul class="fpoints"><li>上に、月間損益・トレード数・勝ち負けの日数</li><li>プロフィットファクター（総利益 ÷ 総損失）</li><li>右端に週ごとの損益と勝ち（W）・負け（L）</li></ul><details class="fmore"><summary>くわしく見る</summary><div class="fmore-body"><p>‹ › で月を切り替えられます。これまでの「トレードノート」のように、自分のトレードを数字で振り返れます。</p></div></details></div></div>
         </article>
     </div>
 </section>
@@ -1212,25 +1350,29 @@
                     <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
                 </div>
             </div>
-            <p>8つの通貨（USD・JPY・EUR・GBP・AUD・NZD・CAD・CHF）の<br>強さと動きを比べます。</p>
+            
         </div>
         <article class="fcard has-media is-wide" id="strength">
-            <div class="fcard-top">
-                <h3 class="fcard-name">通貨強弱</h3>
-                
-            </div>
-            <p class="fcard-what">どの通貨が強くて、どの通貨が弱いかを表示します。</p>
-            <div class="fwhere"><span class="fwhere-item"><b>PC</b><span>右端のアイコン</span><i aria-hidden="true">›</i><span>折れ線グラフ</span></span></div>
-            <div class="fcard-grid"><div class="fcard-media"><figure class="fvid pc"><div class="fvid-box is-shot" role="img" aria-label="画面の画像（準備中）"><span class="fvid-label">画面の画像 準備中</span><span class="fvid-meta">通貨強弱</span></div></figure><!-- 画像：img/webytt/features/strength.png を置けば表示される --></div><div class="fcard-body"><ul class="fbul"><li>期間は「1日」「週間」「月間」から選べます。</li><li>上のグラフは、期間の始まりを0として、それぞれの通貨がどう動いたかを表します。</li><li>下の横棒は、期間全体で見た、いまの強さです。</li><li>ドルストレート（EURUSDなど）の1時間足から計算しています。</li></ul><div class="gtip">強い通貨を買って、弱い通貨を売る組み合わせを探すときに使えます。</div></div></div>
+            <div class="fcard-top"><h3 class="fcard-name">通貨強弱</h3></div>
+            <p class="fcard-what">8つの通貨のうち、どれが強くてどれが弱いか。</p>
+            <div class="fwhere"><span class="fwhere-item"><b>PC</b><span>右端のアイコン</span><i aria-hidden="true">›</i><span><span class="wm-rail" aria-hidden="true"><i class=""><svg viewBox="0 0 24 24"><path d="M6 19V9M10 19V5M14 19V11M18 19V7"/></svg></i><i class=""><svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="14" rx="2"/><path d="M4 10h16M9 4v4M15 4v4"/></svg></i><i class="hl"><svg viewBox="0 0 24 24"><path d="M4 18l5-6 4 3 7-9"/></svg></i><i class=""><svg viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="1"/><rect x="13" y="4" width="7" height="7" rx="1"/><rect x="4" y="13" width="7" height="7" rx="1"/><rect x="13" y="13" width="7" height="7" rx="1"/></svg></i><i class=""><svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="16" rx="2"/><path d="M8 9h8M8 13h8M8 17h5"/></svg></i></span></span></span></div>
+            <div class="fcard-grid"><div class="fcard-media"><div class="wm wm-win wm-str" role="img" aria-label="通貨強弱の画面">
+    <div class="wm-win-head">通貨強弱<span aria-hidden="true">×</span></div>
+    <div class="wm-tabs"><span>1日</span><span>週間</span><span class="on">月間</span></div>
+    <svg viewBox="0 0 420 110" class="wm-str-chart" aria-hidden="true"><line x1="0" y1="55" x2="420" y2="55" stroke="rgba(148,163,184,.2)" stroke-dasharray="3 3"/><polyline points="0.0,56.5 7.1,55.7 14.2,53.0 21.4,51.3 28.5,52.2 35.6,49.8 42.7,49.3 49.8,50.1 56.9,52.6 64.1,50.1 71.2,51.5 78.3,48.7 85.4,47.8 92.5,45.9 99.7,44.5 106.8,42.0 113.9,44.3 121.0,44.7 128.1,45.3 135.3,45.5 142.4,43.7 149.5,44.3 156.6,43.5 163.7,42.4 170.8,42.0 178.0,40.2 185.1,37.6 192.2,34.6 199.3,32.4 206.4,30.0 213.6,33.1 220.7,33.1 227.8,34.2 234.9,35.2 242.0,35.9 249.2,34.9 256.3,35.3 263.4,32.8 270.5,30.4 277.6,32.4 284.7,31.3 291.9,28.3 299.0,28.7 306.1,27.6 313.2,24.2 320.3,25.8 327.5,26.0 334.6,23.8 341.7,24.8 348.8,23.0 355.9,20.7 363.1,18.7 370.2,21.0 377.3,18.2 384.4,18.1 391.5,15.4 398.6,16.2 405.8,17.5 412.9,13.7 420.0,13.9" fill="none" stroke="#38bdf8" stroke-width="1.4" opacity=".9"/><polyline points="0.0,57.3 7.1,56.5 14.2,58.0 21.4,54.6 28.5,54.7 35.6,55.8 42.7,55.3 49.8,54.7 56.9,53.8 64.1,55.4 71.2,52.7 78.3,52.8 85.4,53.1 92.5,53.7 99.7,54.2 106.8,52.4 113.9,52.6 121.0,49.7 128.1,47.1 135.3,48.0 142.4,50.1 149.5,48.1 156.6,46.3 163.7,47.6 170.8,49.2 178.0,48.9 185.1,48.4 192.2,46.0 199.3,43.0 206.4,42.8 213.6,45.9 220.7,48.3 227.8,46.8 234.9,48.9 242.0,47.8 249.2,44.2 256.3,41.4 263.4,39.2 270.5,42.1 277.6,42.4 284.7,41.6 291.9,42.6 299.0,40.2 306.1,38.4 313.2,39.5 320.3,40.7 327.5,37.8 334.6,36.9 341.7,36.3 348.8,36.6 355.9,36.5 363.1,39.7 370.2,38.7 377.3,37.7 384.4,38.4 391.5,36.3 398.6,38.4 405.8,35.9 412.9,36.4 420.0,38.8" fill="none" stroke="#3b82f6" stroke-width="1.4" opacity=".9"/><polyline points="0.0,55.0 7.1,53.9 14.2,53.7 21.4,51.7 28.5,53.4 35.6,55.8 42.7,56.4 49.8,58.2 56.9,59.9 64.1,60.9 71.2,56.5 78.3,53.4 85.4,51.1 92.5,48.9 99.7,52.4 106.8,50.3 113.9,49.9 121.0,48.5 128.1,46.9 135.3,51.2 142.4,50.5 149.5,52.0 156.6,52.9 163.7,53.4 170.8,55.3 178.0,53.8 185.1,53.2 192.2,54.7 199.3,54.4 206.4,54.2 213.6,53.0 220.7,51.2 227.8,50.4 234.9,51.8 242.0,49.9 249.2,47.9 256.3,49.7 263.4,47.3 270.5,50.2 277.6,52.6 284.7,52.9 291.9,54.1 299.0,50.3 306.1,48.5 313.2,48.9 320.3,47.1 327.5,47.3 334.6,45.8 341.7,48.7 348.8,50.5 355.9,48.6 363.1,48.1 370.2,45.3 377.3,45.0 384.4,46.5 391.5,47.4 398.6,46.5 405.8,45.0 412.9,43.8 420.0,43.0" fill="none" stroke="#ef4444" stroke-width="1.4" opacity=".9"/><polyline points="0.0,52.1 7.1,52.0 14.2,55.3 21.4,54.7 28.5,52.3 35.6,53.4 42.7,51.7 49.8,51.2 56.9,52.1 64.1,50.7 71.2,52.7 78.3,52.5 85.4,52.5 92.5,53.6 99.7,53.0 106.8,54.5 113.9,52.5 121.0,52.7 128.1,51.4 135.3,52.4 142.4,53.2 149.5,52.2 156.6,51.5 163.7,53.3 170.8,54.3 178.0,53.5 185.1,50.9 192.2,54.0 199.3,54.2 206.4,51.2 213.6,53.8 220.7,55.1 227.8,54.9 234.9,52.2 242.0,53.0 249.2,50.4 256.3,50.3 263.4,51.9 270.5,50.5 277.6,49.0 284.7,48.5 291.9,47.9 299.0,49.6 306.1,51.2 313.2,50.2 320.3,50.6 327.5,50.0 334.6,48.4 341.7,47.0 348.8,48.0 355.9,47.0 363.1,45.8 370.2,45.4 377.3,45.2 384.4,44.6 391.5,45.7 398.6,48.3 405.8,50.4 412.9,51.7 420.0,53.2" fill="none" stroke="#a855f7" stroke-width="1.4" opacity=".9"/><polyline points="0.0,55.1 7.1,56.5 14.2,56.7 21.4,58.1 28.5,57.7 35.6,59.3 42.7,57.9 49.8,58.3 56.9,57.9 64.1,59.3 71.2,60.2 78.3,60.1 85.4,57.5 92.5,55.7 99.7,53.5 106.8,52.4 113.9,51.6 121.0,50.9 128.1,49.1 135.3,47.7 142.4,47.4 149.5,51.8 156.6,54.1 163.7,52.4 170.8,55.0 178.0,52.0 185.1,55.3 192.2,53.7 199.3,55.6 206.4,57.1 213.6,55.5 220.7,54.3 227.8,54.2 234.9,52.4 242.0,54.2 249.2,52.1 256.3,52.5 263.4,52.3 270.5,53.0 277.6,55.4 284.7,56.9 291.9,56.2 299.0,53.9 306.1,55.5 313.2,55.5 320.3,55.3 327.5,55.1 334.6,53.1 341.7,55.0 348.8,55.2 355.9,57.1 363.1,53.8 370.2,52.2 377.3,51.9 384.4,52.6 391.5,51.9 398.6,52.9 405.8,54.2 412.9,55.4 420.0,57.6" fill="none" stroke="#22c55e" stroke-width="1.4" opacity=".9"/><polyline points="0.0,52.7 7.1,51.9 14.2,51.0 21.4,51.4 28.5,54.1 35.6,55.9 42.7,55.7 49.8,54.9 56.9,55.1 64.1,56.5 71.2,57.2 78.3,58.4 85.4,59.7 92.5,55.9 99.7,57.9 106.8,58.2 113.9,57.3 121.0,59.4 128.1,61.2 135.3,62.1 142.4,59.7 149.5,61.0 156.6,57.9 163.7,55.5 170.8,53.4 178.0,55.1 185.1,56.5 192.2,58.1 199.3,55.1 206.4,55.0 213.6,57.7 220.7,58.4 227.8,56.9 234.9,58.7 242.0,60.6 249.2,57.0 256.3,57.5 263.4,55.8 270.5,57.6 277.6,60.3 284.7,59.2 291.9,56.0 299.0,58.7 306.1,56.8 313.2,57.7 320.3,59.0 327.5,59.3 334.6,60.9 341.7,58.7 348.8,56.4 355.9,57.7 363.1,57.9 370.2,56.3 377.3,58.6 384.4,61.0 391.5,62.0 398.6,58.5 405.8,60.2 412.9,61.7 420.0,59.5" fill="none" stroke="#a3a3a3" stroke-width="1.4" opacity=".9"/><polyline points="0.0,53.0 7.1,51.5 14.2,49.9 21.4,53.2 28.5,56.6 35.6,56.7 42.7,58.3 49.8,56.5 56.9,57.7 64.1,58.4 71.2,55.5 78.3,52.9 85.4,54.2 92.5,55.1 99.7,57.9 106.8,56.8 113.9,56.9 121.0,58.4 128.1,57.2 135.3,55.2 142.4,55.1 149.5,55.3 156.6,57.3 163.7,57.2 170.8,57.2 178.0,57.1 185.1,59.2 192.2,57.6 199.3,60.5 206.4,62.0 213.6,58.6 220.7,61.8 227.8,58.7 234.9,60.2 242.0,63.1 249.2,59.5 256.3,61.3 263.4,59.9 270.5,58.4 277.6,57.0 284.7,60.2 291.9,60.9 299.0,62.0 306.1,60.9 313.2,62.1 320.3,62.8 327.5,62.8 334.6,64.6 341.7,66.8 348.8,68.7 355.9,64.7 363.1,63.9 370.2,61.6 377.3,62.0 384.4,60.3 391.5,62.8 398.6,64.8 405.8,62.1 412.9,65.5 420.0,64.4" fill="none" stroke="#f59e0b" stroke-width="1.4" opacity=".9"/><polyline points="0.0,52.2 7.1,55.0 14.2,55.9 21.4,56.2 28.5,54.5 35.6,56.0 42.7,56.2 49.8,53.5 56.9,53.1 64.1,53.3 71.2,53.1 78.3,54.5 85.4,55.4 92.5,57.0 99.7,56.5 106.8,56.9 113.9,55.0 121.0,57.1 128.1,55.7 135.3,58.4 142.4,60.9 149.5,59.6 156.6,57.0 163.7,54.6 170.8,53.0 178.0,56.8 185.1,59.7 192.2,61.6 199.3,63.9 206.4,63.0 213.6,62.6 220.7,64.7 227.8,62.3 234.9,60.2 242.0,60.6 249.2,58.9 256.3,59.0 263.4,60.6 270.5,62.5 277.6,59.5 284.7,59.2 291.9,61.9 299.0,60.7 306.1,61.5 313.2,64.5 320.3,62.6 327.5,64.7 334.6,66.6 341.7,68.2 348.8,66.8 355.9,67.8 363.1,63.9 370.2,64.1 377.3,64.6 384.4,66.2 391.5,64.3 398.6,64.8 405.8,65.3 412.9,66.9 420.0,67.8" fill="none" stroke="#ec4899" stroke-width="1.4" opacity=".9"/></svg>
+    <div class="wm-str-bars"><span class="c" style="color:#38bdf8">JPY</span><span class="bar"><i style="width:99.39393939393939%;background:#38bdf8"></i></span><span class="v">+3.28%</span><span class="c" style="color:#3b82f6">AUD</span><span class="bar"><i style="width:46.36363636363637%;background:#3b82f6"></i></span><span class="v">+1.53%</span><span class="c" style="color:#ef4444">EUR</span><span class="bar"><i style="width:17.272727272727273%;background:#ef4444"></i></span><span class="v">+0.57%</span><span class="c" style="color:#a855f7">CAD</span><span class="bar"><i style="width:15.454545454545457%;background:#a855f7"></i></span><span class="v">+0.51%</span><span class="c" style="color:#22c55e">GBP</span><span class="bar"><i style="width:3%;background:#22c55e"></i></span><span class="v">+0.07%</span><span class="c" style="color:#a3a3a3">CHF</span><span class="bar"><i style="width:7.87878787878788%;background:#a3a3a3"></i></span><span class="v">-0.26%</span><span class="c" style="color:#f59e0b">USD</span><span class="bar"><i style="width:21.515151515151516%;background:#f59e0b"></i></span><span class="v">-0.71%</span><span class="c" style="color:#ec4899">NZD</span><span class="bar"><i style="width:22.72727272727273%;background:#ec4899"></i></span><span class="v">-0.75%</span></div>
+  </div></div><div class="fcard-side"><ul class="fpoints"><li>1日・週間・月間で切り替え</li><li>上のグラフは期間中の動き、下の横棒はいまの強さ</li><li>強い通貨を買い、弱い通貨を売る組み合わせ探しに</li></ul><details class="fmore"><summary>くわしく見る</summary><div class="fmore-body"><p>ドルストレート（EURUSDなど）の1時間足から計算しています。対象はUSD・JPY・EUR・GBP・AUD・NZD・CAD・CHFの8通貨です。</p></div></details></div></div>
         </article>
         <article class="fcard has-media is-wide" id="heatmap">
-            <div class="fcard-top">
-                <h3 class="fcard-name">ヒートマップ</h3>
-                
-            </div>
-            <p class="fcard-what">8つの通貨どうしが、どれだけ動いたかを表で表示します。</p>
-            <div class="fwhere"><span class="fwhere-item"><b>PC</b><span>右端のアイコン</span><i aria-hidden="true">›</i><span>四角が4つ</span></span></div>
-            <div class="fcard-grid"><div class="fcard-media"><figure class="fvid pc"><div class="fvid-box is-shot" role="img" aria-label="画面の画像（準備中）"><span class="fvid-label">画面の画像 準備中</span><span class="fvid-meta">ヒートマップ</span></div></figure><!-- 画像：img/webytt/features/heatmap.png を置けば表示される --></div><div class="fcard-body"><ul class="fbul"><li>期間は「1日」「週間」「月間」から選べます。</li><li>左の列の通貨が、上の行の通貨に対してどれだけ動いたかを表します。</li><li>プラスは緑、マイナスは赤で、色が濃いほど大きく動いています。</li></ul></div></div>
+            <div class="fcard-top"><h3 class="fcard-name">ヒートマップ</h3></div>
+            <p class="fcard-what">8つの通貨どうしが、どれだけ動いたかを表で。</p>
+            <div class="fwhere"><span class="fwhere-item"><b>PC</b><span>右端のアイコン</span><i aria-hidden="true">›</i><span><span class="wm-rail" aria-hidden="true"><i class=""><svg viewBox="0 0 24 24"><path d="M6 19V9M10 19V5M14 19V11M18 19V7"/></svg></i><i class=""><svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="14" rx="2"/><path d="M4 10h16M9 4v4M15 4v4"/></svg></i><i class=""><svg viewBox="0 0 24 24"><path d="M4 18l5-6 4 3 7-9"/></svg></i><i class="hl"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="1"/><rect x="13" y="4" width="7" height="7" rx="1"/><rect x="4" y="13" width="7" height="7" rx="1"/><rect x="13" y="13" width="7" height="7" rx="1"/></svg></i><i class=""><svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="16" rx="2"/><path d="M8 9h8M8 13h8M8 17h5"/></svg></i></span></span></span></div>
+            <div class="fcard-grid"><div class="fcard-media"><div class="wm wm-win wm-heat" role="img" aria-label="ヒートマップの画面">
+    <div class="wm-win-head">ヒートマップ<span aria-hidden="true">×</span></div>
+    <div class="wm-tabs"><span class="on">1日</span><span>週間</span><span>月間</span></div>
+    <div class="wm-heat-t"><span></span><span class="h">USD</span><span class="h">JPY</span><span class="h">EUR</span><span class="h">GBP</span><span class="h">AUD</span><span class="h">NZD</span><span class="h">CAD</span><span class="h">CHF</span>
+    <span class="h">USD</span><span style="background:#1b2150">—</span><span style="background:rgba(34,197,94,0.39266666666666666)">+0.29%</span><span style="background:rgba(34,197,94,0.5833333333333334)">+0.55%</span><span style="background:rgba(34,197,94,0.554)">+0.51%</span><span style="background:rgba(34,197,94,0.6933333333333334)">+0.70%</span><span style="background:rgba(34,197,94,0.5686666666666667)">+0.53%</span><span style="background:rgba(34,197,94,0.554)">+0.51%</span><span style="background:rgba(34,197,94,0.7226666666666668)">+0.74%</span><span class="h">JPY</span><span style="background:rgba(239,77,90,0.39266666666666666)">-0.29%</span><span style="background:#1b2150">—</span><span style="background:rgba(34,197,94,0.3706666666666667)">+0.26%</span><span style="background:rgba(34,197,94,0.3413333333333334)">+0.22%</span><span style="background:rgba(34,197,94,0.4806666666666667)">+0.41%</span><span style="background:rgba(34,197,94,0.356)">+0.24%</span><span style="background:rgba(34,197,94,0.3413333333333334)">+0.22%</span><span style="background:rgba(34,197,94,0.51)">+0.45%</span><span class="h">EUR</span><span style="background:rgba(239,77,90,0.5833333333333334)">-0.55%</span><span style="background:rgba(239,77,90,0.3706666666666667)">-0.26%</span><span style="background:#1b2150">—</span><span style="background:rgba(239,77,90,0.21666666666666667)">-0.05%</span><span style="background:rgba(34,197,94,0.29)">+0.15%</span><span style="background:rgba(239,77,90,0.19466666666666665)">-0.02%</span><span style="background:rgba(239,77,90,0.20933333333333332)">-0.04%</span><span style="background:rgba(34,197,94,0.31933333333333336)">+0.19%</span><span class="h">GBP</span><span style="background:rgba(239,77,90,0.554)">-0.51%</span><span style="background:rgba(239,77,90,0.3413333333333334)">-0.22%</span><span style="background:rgba(34,197,94,0.21666666666666667)">+0.05%</span><span style="background:#1b2150">—</span><span style="background:rgba(34,197,94,0.32666666666666666)">+0.20%</span><span style="background:rgba(34,197,94,0.20199999999999999)">+0.03%</span><span style="background:rgba(34,197,94,0.18733333333333332)">+0.01%</span><span style="background:rgba(34,197,94,0.3486666666666667)">+0.23%</span><span class="h">AUD</span><span style="background:rgba(239,77,90,0.6933333333333334)">-0.70%</span><span style="background:rgba(239,77,90,0.4806666666666667)">-0.41%</span><span style="background:rgba(239,77,90,0.29)">-0.15%</span><span style="background:rgba(239,77,90,0.32666666666666666)">-0.20%</span><span style="background:#1b2150">—</span><span style="background:rgba(239,77,90,0.3046666666666667)">-0.17%</span><span style="background:rgba(239,77,90,0.31933333333333336)">-0.19%</span><span style="background:rgba(34,197,94,0.20933333333333332)">+0.04%</span><span class="h">NZD</span><span style="background:rgba(239,77,90,0.5686666666666667)">-0.53%</span><span style="background:rgba(239,77,90,0.356)">-0.24%</span><span style="background:rgba(34,197,94,0.19466666666666665)">+0.02%</span><span style="background:rgba(239,77,90,0.20199999999999999)">-0.03%</span><span style="background:rgba(34,197,94,0.3046666666666667)">+0.17%</span><span style="background:#1b2150">—</span><span style="background:rgba(239,77,90,0.19466666666666665)">-0.02%</span><span style="background:rgba(34,197,94,0.33399999999999996)">+0.21%</span><span class="h">CAD</span><span style="background:rgba(239,77,90,0.554)">-0.51%</span><span style="background:rgba(239,77,90,0.3413333333333334)">-0.22%</span><span style="background:rgba(34,197,94,0.20933333333333332)">+0.04%</span><span style="background:rgba(239,77,90,0.18733333333333332)">-0.01%</span><span style="background:rgba(34,197,94,0.31933333333333336)">+0.19%</span><span style="background:rgba(34,197,94,0.19466666666666665)">+0.02%</span><span style="background:#1b2150">—</span><span style="background:rgba(34,197,94,0.3486666666666667)">+0.23%</span><span class="h">CHF</span><span style="background:rgba(239,77,90,0.7226666666666668)">-0.74%</span><span style="background:rgba(239,77,90,0.51)">-0.45%</span><span style="background:rgba(239,77,90,0.31933333333333336)">-0.19%</span><span style="background:rgba(239,77,90,0.3486666666666667)">-0.23%</span><span style="background:rgba(239,77,90,0.20933333333333332)">-0.04%</span><span style="background:rgba(239,77,90,0.33399999999999996)">-0.21%</span><span style="background:rgba(239,77,90,0.3486666666666667)">-0.23%</span><span style="background:#1b2150">—</span></div>
+  </div></div><div class="fcard-side"><ul class="fpoints"><li>左の通貨が、上の通貨に対してどれだけ動いたか</li><li>緑はプラス、赤はマイナス。濃いほど大きい</li><li>1日・週間・月間で切り替え</li></ul></div></div>
         </article>
     </div>
 </section>
@@ -1252,22 +1394,19 @@
             
         </div>
         <article class="fcard has-media" id="news">
-            <div class="fcard-top">
-                <h3 class="fcard-name">ニュース</h3>
-                
-            </div>
-            <p class="fcard-what">為替のニュースを、重要度つきの一覧で表示します。</p>
-            <div class="fwhere"><span class="fwhere-item"><b>PC</b><span>右端のアイコン</span><i aria-hidden="true">›</i><span>新聞</span></span></div>
-            <div class="fcard-grid"><div class="fcard-media"><figure class="fvid sp"><div class="fvid-box is-shot" role="img" aria-label="画面の画像（準備中）"><span class="fvid-label">画面の画像 準備中</span><span class="fvid-meta">ニュースの一覧</span></div></figure><!-- 画像：img/webytt/features/news.png を置けば表示される --></div><div class="fcard-body"><ul class="fbul"><li>「〇〇関連」で表示中の通貨ペアのニュース、「すべて」ですべてのニュースを表示します。</li><li>それぞれに、重要度（中・重要）、関係する通貨、時刻、見出し、要約が出ます。</li><li>画面のいちばん上の帯にも、最新のニュースが流れます。</li></ul></div></div>
+            <div class="fcard-top"><h3 class="fcard-name">ニュース</h3></div>
+            <p class="fcard-what">為替のニュースを、重要度つきの一覧で。</p>
+            <div class="fwhere"><span class="fwhere-item"><b>PC</b><span>右端のアイコン</span><i aria-hidden="true">›</i><span><span class="wm-rail" aria-hidden="true"><i class=""><svg viewBox="0 0 24 24"><path d="M6 19V9M10 19V5M14 19V11M18 19V7"/></svg></i><i class=""><svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="14" rx="2"/><path d="M4 10h16M9 4v4M15 4v4"/></svg></i><i class=""><svg viewBox="0 0 24 24"><path d="M4 18l5-6 4 3 7-9"/></svg></i><i class=""><svg viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="1"/><rect x="13" y="4" width="7" height="7" rx="1"/><rect x="4" y="13" width="7" height="7" rx="1"/><rect x="13" y="13" width="7" height="7" rx="1"/></svg></i><i class="hl"><svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="16" rx="2"/><path d="M8 9h8M8 13h8M8 17h5"/></svg></i></span></span></span></div>
+            <div class="fcard-grid"><div class="fcard-media"><div class="wm wm-win wm-news" role="img" aria-label="ニュースの一覧">
+    <div class="wm-tabs"><span class="on">USDJPY 関連</span><span>すべて</span></div>
+    <div class="wm-news-i"><p><span class="imp">中</span><small>USD</small><time>18:51</time></p><b>ドル指数は小幅に上昇</b><span class="s">米国の経済指標や金利の動向が意識され、ドルが小幅に買われています。</span></div><div class="wm-news-i"><p><span class="imp">中</span><small>JPY</small><time>18:12</time></p><b>原油高を受けて円が軟調</b><span class="s">原油価格の上昇が円相場の重しとなっています。</span></div><div class="wm-news-i"><p><span class="imp r">重要</span><small>EUR/USD</small><time>18:04</time></p><b>ユーロ、対ドルで下げ幅を拡大</b><span class="s">米利上げ観測を背景に、ユーロ売り・ドル買いが進んでいます。</span></div>
+  </div></div><div class="fcard-side"><ul class="fpoints"><li>「〇〇関連」は表示中の通貨ペアのニュース</li><li>重要度（中・重要）・通貨・時刻・要約つき</li><li>画面のいちばん上の帯にも流れる</li></ul></div></div>
         </article>
         <article class="fcard" id="takeprofit">
-            <div class="fcard-top">
-                <h3 class="fcard-name">利確速報</h3>
-                <span class="finit">初期値：トースト表示オン</span>
-            </div>
-            <p class="fcard-what">メンバーの利確が、時刻・通貨ペア・金額で流れます。</p>
+            <div class="fcard-top"><h3 class="fcard-name">利確速報</h3><span class="finit">初期値：トースト表示オン</span></div>
+            <p class="fcard-what">メンバーの利確が、通貨ペアと金額で流れる。</p>
             <div class="fwhere"><span class="fwhere-item"><b>PC</b><span>画面のいちばん上の帯</span></span><span class="fwhere-item"><b>通知</b><span>設定</span><i aria-hidden="true">›</i><span>一般</span><i aria-hidden="true">›</i><span>表示</span></span></div>
-            <div class="fcard-body"><p>「利確速報をトースト表示」がオンだと、画面に小さな通知でも表示されます。</p></div>
+            <div class="fcard-side"><ul class="fpoints"><li>「利確速報をトースト表示」がオンだと、小さな通知でも出る</li></ul></div>
         </article>
     </div>
 </section>
@@ -1404,6 +1543,31 @@
 })();
 </script>
 <!-- BudouX — 日本語の文節改行（全ページ共通・同梱版。js/budoux-init.js を参照） -->
+<script>
+/* 機能の動画：画面に入ったら読み込んで再生、外れたら止める。タップで全画面 */
+(function () {
+    var vids = document.querySelectorAll('video.fvid-video');
+    if (!vids.length) return;
+    if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+                var v = e.target;
+                if (e.isIntersecting) { if (v.preload === 'none') { v.preload = 'auto'; } var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+                else { v.pause(); }
+            });
+        }, { threshold: 0.35 });
+        vids.forEach(function (v) { io.observe(v); });
+    } else {
+        vids.forEach(function (v) { v.autoplay = true; v.preload = 'auto'; });
+    }
+    vids.forEach(function (v) {
+        v.addEventListener('click', function () {
+            if (v.requestFullscreen) { v.requestFullscreen().catch(function () {}); }
+            else if (v.webkitEnterFullscreen) { v.webkitEnterFullscreen(); }
+        });
+    });
+})();
+</script>
 <script src="js/budoux-ja.min.js?v=20260907a" defer></script>
 <script src="js/budoux-init.js?v=20260907a" defer></script>
 </body>

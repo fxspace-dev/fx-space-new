@@ -1057,6 +1057,12 @@
     .fvid-label { font-size: 0.95rem; font-weight: 800; letter-spacing: 0.04em; }
     .fvid-meta { font-size: 0.75rem; color: #c7d2fe; }
     .fvid-box.is-shot { background: #334155; }
+    /* 機能の動画：画面の見方と同じノートPC／スマホの枠の中で再生（見えている間だけ再生、タップで全画面） */
+    .fvid .wy-pc { max-width: 100%; }
+    .fvid-video { display: block; width: 100%; height: auto; background: #0a0f2c; cursor: zoom-in; }
+    .wy-pc-screen .fvid-video { aspect-ratio: 16 / 9; border-radius: 7px; }
+    .wy-screen .fvid-video { aspect-ratio: 720 / 1400; }
+    .fvid-cap { margin-top: 0.9rem; font-size: 0.75rem; color: #6b7280; text-align: center; }
     /* 機能一覧 */
     .fidx-grid { margin-top: 0.7rem; }
     a.ytt-add-card.fidx { text-decoration: none; transition: border-color 0.15s, transform 0.15s; }
@@ -1078,7 +1084,7 @@
   Web版（スマホ版）YTT 使い方（機能説明）  ytt-web-features.html
   ・構成は既存Canva「YTTの使い方」を踏襲（はじめに → サポートAI → 画面の見方 → 機能一覧 → メイン機能 → サブ機能 → 問い合わせ）
   ・見た目は導入方法ページ（ytt-web-setup.html）と同じ部品。CSSも同じものを使用
-  ・動画は声なし・テロップ＋囲み／矢印。できたら .fvid-box を <video class="fvid-box" autoplay muted loop playsinline> に差し替え
+  ・動画は声なし・テロップ＋赤枠。7本は img/webytt/feat/feat-*.mp4（ノートPC／スマホの枠の中で再生）。トレードノート・コピーモードは準備中
   【大枠の段階・TODO】
   [1] 各機能の動画（8本）を差し込む。構成は webytt-materials/動画構成書_Web版YTT機能説明.md
   [2] コピーモードの設定画面スクショ（画面の見方のPCは、よすがさんの画面を参考にしたSVGモック。作り直すときは build-pc-mock.js）
@@ -1307,12 +1313,9 @@
         </div>
         <div class="feat is-sp">
             <div class="feat-media">
-                <figure class="fvid sp">
-                    <div class="fvid-box" role="img" aria-label="動画（準備中）：注文・決済">
-                        <span class="fvid-play" aria-hidden="true"></span>
-                        <span class="fvid-label">動画 準備中</span>
-                        <span class="fvid-meta">スマホ・約60秒</span>
-                    </div>
+                <figure class="fvid">
+                    <div class="wy-phone"><div class="wy-screen"><video class="fvid-video" src="img/webytt/feat/feat-order.mp4" poster="img/webytt/feat/feat-order.jpg" muted loop playsinline preload="none" aria-label="動画：注文・決済（声なし）"></video></div></div>
+                    <figcaption class="fvid-cap">タップで拡大</figcaption>
                 </figure>
             </div>
             <div class="feat-body">
@@ -1350,11 +1353,11 @@
         <div class="feat">
             <div class="feat-media">
                 <figure class="fvid pc">
-                    <div class="fvid-box" role="img" aria-label="動画（準備中）：ロットの自動計算">
-                        <span class="fvid-play" aria-hidden="true"></span>
-                        <span class="fvid-label">動画 準備中</span>
-                        <span class="fvid-meta">PC・約50秒</span>
+                    <div class="wy-pc">
+                        <div class="wy-pc-screen"><video class="fvid-video" src="img/webytt/feat/feat-lot.mp4" poster="img/webytt/feat/feat-lot.jpg" muted loop playsinline preload="none" aria-label="動画：ロットの自動計算（声なし）"></video></div>
+                        <div class="wy-pc-base" aria-hidden="true"></div>
                     </div>
+                    <figcaption class="fvid-cap">タップで拡大</figcaption>
                 </figure>
             </div>
             <div class="feat-body">
@@ -1391,11 +1394,11 @@
         <div class="feat">
             <div class="feat-media">
                 <figure class="fvid pc">
-                    <div class="fvid-box" role="img" aria-label="動画（準備中）：シナリオ構築">
-                        <span class="fvid-play" aria-hidden="true"></span>
-                        <span class="fvid-label">動画 準備中</span>
-                        <span class="fvid-meta">PC・約60秒</span>
+                    <div class="wy-pc">
+                        <div class="wy-pc-screen"><video class="fvid-video" src="img/webytt/feat/feat-build.mp4" poster="img/webytt/feat/feat-build.jpg" muted loop playsinline preload="none" aria-label="動画：シナリオ構築（声なし）"></video></div>
+                        <div class="wy-pc-base" aria-hidden="true"></div>
                     </div>
+                    <figcaption class="fvid-cap">タップで拡大</figcaption>
                 </figure>
             </div>
             <div class="feat-body">
@@ -1434,11 +1437,11 @@
         <div class="feat">
             <div class="feat-media">
                 <figure class="fvid pc">
-                    <div class="fvid-box" role="img" aria-label="動画（準備中）：シナリオ（TP/SL）">
-                        <span class="fvid-play" aria-hidden="true"></span>
-                        <span class="fvid-label">動画 準備中</span>
-                        <span class="fvid-meta">PC・約80秒</span>
+                    <div class="wy-pc">
+                        <div class="wy-pc-screen"><video class="fvid-video" src="img/webytt/feat/feat-scenario.mp4" poster="img/webytt/feat/feat-scenario.jpg" muted loop playsinline preload="none" aria-label="動画：シナリオ（TP/SL）（声なし）"></video></div>
+                        <div class="wy-pc-base" aria-hidden="true"></div>
                     </div>
+                    <figcaption class="fvid-cap">タップで拡大</figcaption>
                 </figure>
             </div>
             <div class="feat-body">
@@ -1475,11 +1478,11 @@
         <div class="feat">
             <div class="feat-media">
                 <figure class="fvid pc">
-                    <div class="fvid-box" role="img" aria-label="動画（準備中）：予約注文">
-                        <span class="fvid-play" aria-hidden="true"></span>
-                        <span class="fvid-label">動画 準備中</span>
-                        <span class="fvid-meta">PC・約60秒</span>
+                    <div class="wy-pc">
+                        <div class="wy-pc-screen"><video class="fvid-video" src="img/webytt/feat/feat-reserve.mp4" poster="img/webytt/feat/feat-reserve.jpg" muted loop playsinline preload="none" aria-label="動画：予約注文（声なし）"></video></div>
+                        <div class="wy-pc-base" aria-hidden="true"></div>
                     </div>
+                    <figcaption class="fvid-cap">タップで拡大</figcaption>
                 </figure>
             </div>
             <div class="feat-body">
@@ -1516,11 +1519,11 @@
         <div class="feat">
             <div class="feat-media">
                 <figure class="fvid pc">
-                    <div class="fvid-box" role="img" aria-label="動画（準備中）：オートライン">
-                        <span class="fvid-play" aria-hidden="true"></span>
-                        <span class="fvid-label">動画 準備中</span>
-                        <span class="fvid-meta">PC・約40秒</span>
+                    <div class="wy-pc">
+                        <div class="wy-pc-screen"><video class="fvid-video" src="img/webytt/feat/feat-autoline.mp4" poster="img/webytt/feat/feat-autoline.jpg" muted loop playsinline preload="none" aria-label="動画：オートライン（声なし）"></video></div>
+                        <div class="wy-pc-base" aria-hidden="true"></div>
                     </div>
+                    <figcaption class="fvid-cap">タップで拡大</figcaption>
                 </figure>
             </div>
             <div class="feat-body">
@@ -1555,11 +1558,11 @@
         <div class="feat">
             <div class="feat-media">
                 <figure class="fvid pc">
-                    <div class="fvid-box" role="img" aria-label="動画（準備中）：通知・経済指標">
-                        <span class="fvid-play" aria-hidden="true"></span>
-                        <span class="fvid-label">動画 準備中</span>
-                        <span class="fvid-meta">PC・約40秒</span>
+                    <div class="wy-pc">
+                        <div class="wy-pc-screen"><video class="fvid-video" src="img/webytt/feat/feat-alert.mp4" poster="img/webytt/feat/feat-alert.jpg" muted loop playsinline preload="none" aria-label="動画：通知・経済指標（声なし）"></video></div>
+                        <div class="wy-pc-base" aria-hidden="true"></div>
                     </div>
+                    <figcaption class="fvid-cap">タップで拡大</figcaption>
                 </figure>
             </div>
             <div class="feat-body">
@@ -1824,6 +1827,31 @@
 })();
 </script>
 <!-- BudouX — 日本語の文節改行（全ページ共通・同梱版。js/budoux-init.js を参照） -->
+<script>
+/* 機能の動画：画面に入ったら読み込んで再生、外れたら止める。タップで全画面 */
+(function () {
+    var vids = document.querySelectorAll('video.fvid-video');
+    if (!vids.length) return;
+    if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+                var v = e.target;
+                if (e.isIntersecting) { if (v.preload === 'none') { v.preload = 'auto'; } var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+                else { v.pause(); }
+            });
+        }, { threshold: 0.35 });
+        vids.forEach(function (v) { io.observe(v); });
+    } else {
+        vids.forEach(function (v) { v.autoplay = true; v.preload = 'auto'; });
+    }
+    vids.forEach(function (v) {
+        v.addEventListener('click', function () {
+            if (v.requestFullscreen) { v.requestFullscreen().catch(function () {}); }
+            else if (v.webkitEnterFullscreen) { v.webkitEnterFullscreen(); }
+        });
+    });
+})();
+</script>
 <script src="js/budoux-ja.min.js?v=20260907a" defer></script>
 <script src="js/budoux-init.js?v=20260907a" defer></script>
 </body>

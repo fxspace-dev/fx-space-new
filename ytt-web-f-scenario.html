@@ -1095,6 +1095,7 @@
     .finit { display: inline-block; padding: 0.15rem 0.6rem; border-radius: 999px; background: #1e1b4b; color: #fff; font-size: 0.72rem; font-weight: 700; }
     .fcard-what { margin: 0.6rem 0 0; padding: 0.85rem 1rem; border-radius: 12px; background: #f4f6f9; font-size: 0.95rem; line-height: 1.9; color: #1f2937; }
     .fcard-what::before { content: "これは？"; display: block; margin-bottom: 0.2rem; font-size: 0.72rem; font-weight: 800; color: #4f46e5; letter-spacing: 0.04em; }
+    .fdraft { display: inline-block; padding: 0.15rem 0.6rem; border-radius: 999px; background: #fef3c7; color: #92400e; font-size: 0.72rem; font-weight: 800; border: 1px solid #f59e0b; }
     .fsub { margin: 0 0 0.5rem; font-size: 0.8rem; font-weight: 900; color: #4f46e5; letter-spacing: 0.04em; }
     .fsteps + .fsub, .fnotes + .fsub { margin-top: 0.9rem; }
     .fsteps { list-style: none; margin: 0; padding: 0; counter-reset: fs2; }
@@ -1334,7 +1335,7 @@
         <a href="ytt-web-features.html">使い方トップ</a>
         <a href="ytt-web-f-trade.html"><span class="fcat-no">1</span>注文・ロット・決済</a><a href="ytt-web-f-scenario.html" aria-current="page"><span class="fcat-no">2</span>シナリオ・予約注文</a><a href="ytt-web-f-chart.html"><span class="fcat-no">3</span>チャートの表示</a><a href="ytt-web-f-tools.html"><span class="fcat-no">4</span>分析ツール</a><a href="ytt-web-f-settings.html"><span class="fcat-no">5</span>モードと設定</a>
     </nav>
-    <div class="ftoc" aria-label="このページの機能"><a href="#build">シナリオ構築</a><a href="#scenario">シナリオ（TP/SL）</a><a href="#reserve">予約注文</a><a href="#trigger">エントリートリガー</a><a href="#addpos">追加ポジ</a></div>
+    <div class="ftoc" aria-label="このページの機能"><a href="#build">シナリオ構築</a><a href="#scenario">シナリオ（TP/SL）</a><a href="#reserve">予約注文</a><a href="#trigger">エントリートリガー</a><a href="#conditions">条件付け</a><a href="#addpos">追加ポジ</a><a href="#pullback">押し目</a><a href="#collapse">崩壊</a><a href="#be-line">建値</a><a href="#trail-line">トレイル</a><a href="#half-line">1/2決済</a><a href="#order-ops">注文操作</a></div>
 </section>
 
 <section class="ytt-spec-section" style="background:#f4f6f9;">
@@ -1390,7 +1391,7 @@
         <article class="fcard has-media" id="reserve">
             <div class="fcard-top"><h3 class="fcard-name">予約注文</h3></div>
             <p class="fcard-what">「この価格まで来たらエントリーしたい」というときに、注文を予約しておける機能です。チャートを見ていなくても、決めた価格に来たら自動でエントリーします。</p>
-            <div class="fcard-grid"><div class="fcard-media"><figure class="fvid pc"><div class="wy-pc"><div class="wy-pc-screen"><video class="fvid-video" src="img/webytt/feat/feat-reserve.mp4" poster="img/webytt/feat/feat-reserve.jpg" muted loop playsinline preload="none" aria-label="動画：予約注文（声なし）"></video></div><div class="wy-pc-base" aria-hidden="true"></div></div><figcaption class="fvid-cap">タップで拡大</figcaption></figure></div><div class="fcard-side"><p class="fsub">使い方</p><ol class="fsteps"><li>シナリオ（TP/SL）を組む</li><li>組んだシナリオを予約にする</li><li>価格が来たら、自動でエントリーされる</li></ol><p class="fsub">ポイント</p><ul class="fnotes"><li>予約中の注文は、右のパネルの「待機中のシナリオ」で確認・取り消しできます</li><li>チャート上では、構築中は破線、予約中は実線で表示されます</li><li>取引ツール（MT4 / MT5 / cTrader）とPCが動いている間だけ働きます（cTrader Cloud版を除く）</li></ul></div></div>
+            <div class="fcard-grid"><div class="fcard-media"><figure class="fvid pc"><div class="wy-pc"><div class="wy-pc-screen"><video class="fvid-video" src="img/webytt/feat/feat-reserve.mp4" poster="img/webytt/feat/feat-reserve.jpg" muted loop playsinline preload="none" aria-label="動画：予約注文（声なし）"></video></div><div class="wy-pc-base" aria-hidden="true"></div></div><figcaption class="fvid-cap">タップで拡大</figcaption></figure></div><div class="fcard-side"><p class="fsub">使い方</p><ol class="fsteps"><li>シナリオ（TP/SL）を組む</li><li>シナリオの中の「予約（今すぐではなく、別の値で入りたいとき）」をオンにする</li><li>チャートの緑の線を、エントリーしたい価格まで動かし、予約のボタンを押す</li></ol><p class="fsub">ポイント</p><ul class="fnotes"><li>予約中の注文は、右のパネルの「待機中のシナリオ」で確認・取り消しできます</li><li>チャート上では、構築中は破線、予約中は実線で表示されます</li><li>取引ツール（MT4 / MT5 / cTrader）とPCが動いている間だけ働きます（cTrader Cloud版を除く）</li></ul></div></div>
         </article>
     </div>
 </section>
@@ -1416,16 +1417,83 @@
             <p class="fcard-what">予約注文に「条件」をつける機能です。ラインに触れたらすぐに入るのではなく、「トレンドが転換したら」「押し目が来たら」「RR比がよくなったら」といった条件がそろったときだけエントリーします。</p>
             <div class="fcard-grid"><div class="fcard-media"><figure class="fduo vduo"><div class="fduo-pc"><div class="wy-pc"><div class="wy-pc-screen"><video class="fvid-video" src="img/webytt/feat/feat-trigger.mp4" poster="img/webytt/feat/feat-trigger.jpg" muted loop playsinline preload="none" aria-label="PCの動画：エントリートリガー（声なし）"></video></div><div class="wy-pc-base" aria-hidden="true"></div></div></div><div class="fduo-sp"><div class="fd-phone"><video class="fvid-video" src="img/webytt/feat/feat-trigger-sp.mp4" poster="img/webytt/feat/feat-trigger-sp.jpg" muted loop playsinline preload="none" aria-label="スマホの動画：エントリートリガー（声なし）"></video></div></div><figcaption class="fvid-cap">PCとスマホの動画　タップで拡大</figcaption></figure></div><div class="fcard-side"><p class="fsub">使い方</p><ol class="fsteps"><li>「ロングシナリオ」か「ショートシナリオ」を押して、TPとSLの位置を決める</li><li>シナリオの中の「エントリートリガー」を開く（スマホは「トリガー」）</li><li>使う条件をオンにする（判断に使う時間足も選べる）</li><li>「エントリートリガーで SELL 待機」（買いなら BUY）を押す</li></ol><p class="fsub">ポイント</p><ul class="fnotes"><li>待機を始めると「待機中のシナリオ」に入り、条件がそろったところで成行でエントリーします</li><li><b>トレンド転換で注文</b>：決めた時間足（最初はM5）で、トレンドが転換したらエントリー</li><li><b>押し目で注文</b>：押し目（いったん戻ったところ）のタイミングでエントリー</li><li><b>RR比成立で注文</b>：RR比が決めた数値（最初は1.00）以上になったらエントリー</li></ul><details class="fmore"><summary>もっとくわしく</summary><div class="fmore-body"><p>「トレンド転換＋RR比」「押し目＋RR比」のように、2つを組み合わせることもできます。時間足やRR比の最初の値は、右下の歯車（スマホは下のメニューの「設定」）を押し、「一般」の「エントリートリガー」 で変えられます。</p></div></details></div></div>
         </article>
-        <article class="fcard has-media" id="addpos"><!-- TODO: 「追加ポジは全体の損失で計算」の意味を確認 -->
-            <div class="fcard-top"><h3 class="fcard-name">追加ポジ</h3><span class="finit">最初は：ロット倍率 0.50</span></div>
-            <p class="fcard-what">エントリーしたあと、決めた価格に来たらポジションを買い増し（売り増し）する機能です。追加するロットは、最初のポジションに対する倍率で決めます。</p>
-            <div class="fcard-grid"><div class="fcard-media"><div class="wm wm-set" role="img" aria-label="設定の画面（一般）">
-    <div class="wm-set-head">設定<span aria-hidden="true">×</span></div>
-    <div class="wm-set-body">
-      <div class="wm-set-tabs"><span class="on">一般</span><span>キャンバス</span><span>配色</span></div>
-      <div class="wm-set-main"><p class="wm-sec">追加ポジ</p><div class="wm-row hl"><i>☆</i><span class="wm-row-l">ロット倍率(デフォルト値)</span><em>− 0.50 ＋</em></div><div class="wm-row"><i>☆</i><b class="wm-chk"></b><span class="wm-row-l">追加ポジは全体の損失で計算</span></div></div>
     </div>
-  </div></div><div class="fcard-side"><p class="fsub">くわしく</p><ul class="fnotes"><li>ロット倍率 0.50 なら最初の半分、1.00 なら同じロットを追加します（最初は0.50）</li><li>追加するラインは、何本でも置けます</li><li>最初の倍率は、右下の歯車（スマホは下のメニューの「設定」）を押し、「一般」の「追加ポジ」 で変えられます</li></ul></div></div>
+</section>
+
+<section class="ytt-spec-section" style="background:#fff;">
+    <div class="ytt-spec-inner ytt-fto-wide">
+        <div class="ytt-spec-header">
+            <span class="section-title-badge section-title-badge--orange">
+                <img class="hero-title-side hero-title-side--left" src="img/title-side-orange-left.png" alt="">
+                条件付け
+                <img class="hero-title-side hero-title-side--right" src="img/title-side-orange-right.png" alt="">
+            </span>
+            <div style="text-align:center; margin-bottom:0.25rem;">
+                <div style="display:inline-block; white-space:nowrap;">
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">エントリーの前後の決まりごと</h2>
+                    <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
+                </div>
+            </div>
+            
+        </div>
+        <article class="fcard" id="conditions">
+            <div class="fcard-top"><h3 class="fcard-name">条件付け</h3></div>
+            <p class="fcard-what">シナリオに、エントリーの前やエントリーしたあとの「決まりごと」を追加する機能です。追加した決まりごとはチャートに線で表示され、価格がその線まで来ると、決めておいた動き（ポジションの追加、建値への移動など）を自動で行います。</p>
+            <div class="fcard-side"><p class="fsub">使い方</p><ol class="fsteps"><li>「ロングシナリオ」か「ショートシナリオ」を押して、TPとSLの位置を決める</li><li>シナリオの中の「条件付け」を開く</li><li>使いたい項目の ＋ を押す</li><li>チャートに出た線を動かして、位置を決める</li></ol><p class="fsub">ポイント</p><ul class="fnotes"><li><b>押し目</b>：いったん戻ってくるのを待ってからエントリーする</li><li><b>崩壊</b>：予約中に、この価格まで来たらシナリオを取りやめる</li><li><b>建値</b>：この価格まで来たら、SLを建値に動かす</li><li><b>トレイル</b>：この価格まで来たら、SLが利益の方向についていく</li><li><b>1/2決済</b>：この価格まで来たら、半分だけ決済する</li><li><b>追加ポジ</b>：この価格まで来たら、ポジションを追加する</li></ul></div>
+        </article>
+        <article class="fcard has-media is-wide" id="addpos"><!-- TODO: 「追加ポジは全体の損失で計算」の意味を確認 -->
+            <div class="fcard-top"><h3 class="fcard-name">追加ポジ</h3><span class="finit">最初は：ロット倍率 0.50</span></div>
+            <p class="fcard-what">エントリーしたあと、決めた価格まで来たら、ポジションを買い増し（売り増し）する機能です。追加するロットは、最初のポジションに対する倍率で決めます。</p>
+            <div class="fcard-grid"><div class="fcard-media"><figure class="fduo vduo"><div class="fduo-pc"><div class="wy-pc"><div class="wy-pc-screen"><video class="fvid-video" src="img/webytt/feat/feat-addpos.mp4" poster="img/webytt/feat/feat-addpos.jpg" muted loop playsinline preload="none" aria-label="PCの動画：追加ポジ（声なし）"></video></div><div class="wy-pc-base" aria-hidden="true"></div></div></div><div class="fduo-sp"><div class="fd-phone"><video class="fvid-video" src="img/webytt/feat/feat-addpos-sp.mp4" poster="img/webytt/feat/feat-addpos-sp.jpg" muted loop playsinline preload="none" aria-label="スマホの動画：追加ポジ（声なし）"></video></div></div><figcaption class="fvid-cap">PCとスマホの動画　タップで拡大</figcaption></figure></div><div class="fcard-side"><p class="fsub">使い方</p><ol class="fsteps"><li>シナリオを組み、「条件付け」を開く</li><li>「追加ポジ」の ＋ を押す</li><li>チャートに出た「追加ポジ」の線を、追加したい価格まで動かす</li><li>エントリーする（予約でも使えます）</li></ol><p class="fsub">ポイント</p><ul class="fnotes"><li>1本ごとに「×0.50」のように、最初のロットに対する倍率がつきます（0.50なら半分）</li><li>＋ を押すたびに線が増えます。いらない線は × で消せます</li><li>エントリーすると線は「追加ポジ#番号」になり、価格が来たら自動で追加されます</li></ul><details class="fmore"><summary>もっとくわしく</summary><div class="fmore-body"><p>倍率の最初の値は、右下の歯車（スマホは下のメニューの「設定」）を押し、「一般」の「追加ポジ」 で変えられます。</p></div></details></div></div>
+        </article>
+        <article class="fcard" id="pullback"><!-- TODO: 押し目の置き方（予約をオンにすると ＋ が出るか）を確認 -->
+            <div class="fcard-top"><h3 class="fcard-name">押し目</h3><span class="fdraft">確認中</span></div>
+            <p class="fcard-what">「価格がいったんこの線まで戻ってきてから」エントリーする、という条件をつける機能です。押し目（上がっている途中の一時的な下げ）や戻り（下がっている途中の一時的な上げ）を待ってから入りたいときに使います。</p>
+            <div class="fcard-side"><p class="fsub">くわしく</p><ul class="fnotes"><li>旧YTTの「成立要件」（成立の線に触れてから、注文の線で入る）にあたる機能です</li><li>条件付けの中では「未設定」と表示され、＋ がありません。予約と組み合わせて使う機能の可能性があります</li></ul></div>
+        </article>
+        <article class="fcard" id="collapse"><!-- TODO: 崩壊の置き方（予約をオンにしたときの画面）を確認 -->
+            <div class="fcard-top"><h3 class="fcard-name">崩壊</h3><span class="fdraft">確認中</span></div>
+            <p class="fcard-what">予約中のシナリオに、「この価格まで来たら、シナリオを取りやめる」という線を置く機能です。相場が思っていたのと違う方向に動いたとき、エントリーする前に自動で予約を取り消せます。</p>
+            <div class="fcard-side"><p class="fsub">くわしく</p><ul class="fnotes"><li>「成行注文では設置不可」と出るとおり、予約（今すぐではなく、別の値で入る）のときに使います</li><li>旧YTTの「シナリオ崩壊」と同じ考え方です</li></ul></div>
+        </article>
+        <article class="fcard" id="be-line"><!-- TODO: 建値の線の動きを確認 -->
+            <div class="fcard-top"><h3 class="fcard-name">建値</h3><span class="fdraft">確認中</span></div>
+            <p class="fcard-what">エントリーしたあと、価格がこの線まで来たら、損切り（SL）を自動で建値（損益がほぼ0になる価格）に動かす機能です。ある程度利益が出たところで、負けないトレードにしておけます。</p>
+            <div class="fcard-side"><p class="fsub">使い方</p><ol class="fsteps"><li>「条件付け」の「建値」の ＋ を押す</li><li>チャートに出た線を、建値にしたい価格まで動かす</li></ol><p class="fsub">ポイント</p><ul class="fnotes"><li>「自動建値設置」（ポジションが2つ以上になったら建値へ）とは別に、「この価格まで来たら」を自分で決められます</li><li>建値からどれだけ利益側にSLを置くかは、設定の「建値設置pips」（最初は1.0pips）</li></ul></div>
+        </article>
+        <article class="fcard" id="trail-line"><!-- TODO: トレイルの線の動きを確認 -->
+            <div class="fcard-top"><h3 class="fcard-name">トレイル</h3><span class="fdraft">確認中</span></div>
+            <p class="fcard-what">エントリーしたあと、価格がこの線まで来たら、トレイル（利益の方向に、損切りが一定の幅でついていく動き）を始める機能です。利益をできるだけ伸ばしたいときに使います。</p>
+            <div class="fcard-side"><p class="fsub">使い方</p><ol class="fsteps"><li>「条件付け」の「トレイル」の ＋ を押す</li><li>チャートに出た線を、トレイルを始めたい価格まで動かす</li></ol><p class="fsub">ポイント</p><ul class="fnotes"><li>ついていく幅は、設定の「トレイル追随pips」（最初は10pips）</li><li>TPの位置から始めたいときは、設定の「TPのトレイル化」も使えます</li></ul></div>
+        </article>
+        <article class="fcard" id="half-line"><!-- TODO: 1/2決済の線の動きを確認 -->
+            <div class="fcard-top"><h3 class="fcard-name">1/2決済</h3><span class="fdraft">確認中</span></div>
+            <p class="fcard-what">エントリーしたあと、価格がこの線まで来たら、ポジションの半分を自動で決済する機能です。利益の一部を先に確定させて、残りで利益を伸ばせます。</p>
+            <div class="fcard-side"><p class="fsub">使い方</p><ol class="fsteps"><li>「条件付け」の「1/2決済」の ＋ を押す</li><li>チャートに出た線を、半分決済したい価格まで動かす</li></ol></div>
+        </article>
+    </div>
+</section>
+
+<section class="ytt-spec-section" style="background:#f4f6f9;">
+    <div class="ytt-spec-inner ytt-fto-wide">
+        <div class="ytt-spec-header">
+            <span class="section-title-badge section-title-badge--blue">
+                <img class="hero-title-side hero-title-side--left" src="img/title-side-blue-left.png" alt="">
+                エントリーしたあと
+                <img class="hero-title-side hero-title-side--right" src="img/title-side-blue-right.png" alt="">
+            </span>
+            <div style="text-align:center; margin-bottom:0.25rem;">
+                <div style="display:inline-block; white-space:nowrap;">
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">持っているポジションの操作</h2>
+                    <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
+                </div>
+            </div>
+            
+        </div>
+        <article class="fcard" id="order-ops"><!-- TODO: 注文操作の各項目をオンにしたときの動きを確認 -->
+            <div class="fcard-top"><h3 class="fcard-name">注文操作</h3><span class="fdraft">確認中</span></div>
+            <p class="fcard-what">エントリーしたあとのポジションに、あとから決済のしかたを追加できる機能です。条件付けを入れずにエントリーしたときも、ここから追加できます。</p>
+            <div class="fcard-side"><p class="fsub">くわしく</p><ul class="fnotes"><li>場所：PCは右のパネルの「保有中ポジション」の下、スマホはチャートの下の「注文操作」</li><li><b>トレイルライン・建値設置・1/2決済</b>：オンにすると、それぞれの線をあとから置けます（条件付けと同じ動き）</li><li><b>決済ラインを一括で動かす</b>：TPとSLをまとめて移動できます</li></ul></div>
         </article>
         <div class="group-after"><p class="gnote">シナリオや予約注文が働くのは、連携ツールを入れた取引ツールとPCが動いている間だけです（cTrader Cloud版はPCを閉じても動きます）。</p></div>
     </div>

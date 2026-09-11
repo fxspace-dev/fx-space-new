@@ -1093,7 +1093,18 @@
     .fcard-top { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.7rem; }
     .fcard-name { margin: 0; font-size: 1.2rem; font-weight: 900; color: #1e1b4b; }
     .finit { display: inline-block; padding: 0.15rem 0.6rem; border-radius: 999px; background: #1e1b4b; color: #fff; font-size: 0.72rem; font-weight: 700; }
-    .fcard-what { margin: 0.35rem 0 0; font-size: 0.98rem; font-weight: 700; color: #374151; }
+    .fcard-what { margin: 0.6rem 0 0; padding: 0.85rem 1rem; border-radius: 12px; background: #f4f6f9; font-size: 0.95rem; line-height: 1.9; color: #1f2937; }
+    .fcard-what::before { content: "これは？"; display: block; margin-bottom: 0.2rem; font-size: 0.72rem; font-weight: 800; color: #4f46e5; letter-spacing: 0.04em; }
+    .fsub { margin: 0 0 0.5rem; font-size: 0.8rem; font-weight: 900; color: #4f46e5; letter-spacing: 0.04em; }
+    .fsteps + .fsub, .fnotes + .fsub { margin-top: 0.9rem; }
+    .fsteps { list-style: none; margin: 0; padding: 0; counter-reset: fs2; }
+    .fsteps li { counter-increment: fs2; position: relative; padding: 0.1rem 0 0.65rem 2.1rem; font-size: 0.92rem; font-weight: 700; color: #1f2937; line-height: 1.7; }
+    .fsteps li::before { content: counter(fs2); position: absolute; left: 0; top: 0.1rem; width: 1.55rem; height: 1.4rem; display: flex; align-items: center; justify-content: center; background: url("img/fill-crayon-orange-badge.svg") 0 0 / 100% 100% no-repeat; color: #1e1b4b; font: 900 0.8rem Inter, sans-serif; }
+    .fnotes { margin: 0; padding: 0 0 0 1.15rem; }
+    .fnotes li { margin-bottom: 0.45rem; font-size: 0.88rem; color: #374151; line-height: 1.8; }
+    .fnotes li::marker { color: #f59e0b; }
+    .fnotes b, .fsteps b { color: #1e1b4b; }
+    .fnotes a, .fsteps a { color: #4f46e5; }
     .fwhere { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.6rem; }
     .fwhere-item { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 0.3rem; padding: 0.3rem 0.65rem; border: 1.5px dashed #c7d2fe; border-radius: 10px; font-size: 0.78rem; color: #1e1b4b; font-weight: 700; }
     .fwhere-item::before { content: "場所"; margin-right: 0.15rem; font-size: 0.68rem; font-weight: 800; color: #4f46e5; }

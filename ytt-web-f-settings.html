@@ -1093,7 +1093,18 @@
     .fcard-top { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.7rem; }
     .fcard-name { margin: 0; font-size: 1.2rem; font-weight: 900; color: #1e1b4b; }
     .finit { display: inline-block; padding: 0.15rem 0.6rem; border-radius: 999px; background: #1e1b4b; color: #fff; font-size: 0.72rem; font-weight: 700; }
-    .fcard-what { margin: 0.35rem 0 0; font-size: 0.98rem; font-weight: 700; color: #374151; }
+    .fcard-what { margin: 0.6rem 0 0; padding: 0.85rem 1rem; border-radius: 12px; background: #f4f6f9; font-size: 0.95rem; line-height: 1.9; color: #1f2937; }
+    .fcard-what::before { content: "これは？"; display: block; margin-bottom: 0.2rem; font-size: 0.72rem; font-weight: 800; color: #4f46e5; letter-spacing: 0.04em; }
+    .fsub { margin: 0 0 0.5rem; font-size: 0.8rem; font-weight: 900; color: #4f46e5; letter-spacing: 0.04em; }
+    .fsteps + .fsub, .fnotes + .fsub { margin-top: 0.9rem; }
+    .fsteps { list-style: none; margin: 0; padding: 0; counter-reset: fs2; }
+    .fsteps li { counter-increment: fs2; position: relative; padding: 0.1rem 0 0.65rem 2.1rem; font-size: 0.92rem; font-weight: 700; color: #1f2937; line-height: 1.7; }
+    .fsteps li::before { content: counter(fs2); position: absolute; left: 0; top: 0.1rem; width: 1.55rem; height: 1.4rem; display: flex; align-items: center; justify-content: center; background: url("img/fill-crayon-orange-badge.svg") 0 0 / 100% 100% no-repeat; color: #1e1b4b; font: 900 0.8rem Inter, sans-serif; }
+    .fnotes { margin: 0; padding: 0 0 0 1.15rem; }
+    .fnotes li { margin-bottom: 0.45rem; font-size: 0.88rem; color: #374151; line-height: 1.8; }
+    .fnotes li::marker { color: #f59e0b; }
+    .fnotes b, .fsteps b { color: #1e1b4b; }
+    .fnotes a, .fsteps a { color: #4f46e5; }
     .fwhere { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.6rem; }
     .fwhere-item { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 0.3rem; padding: 0.3rem 0.65rem; border: 1.5px dashed #c7d2fe; border-radius: 10px; font-size: 0.78rem; color: #1e1b4b; font-weight: 700; }
     .fwhere-item::before { content: "場所"; margin-right: 0.15rem; font-size: 0.68rem; font-weight: 800; color: #4f46e5; }
@@ -1341,22 +1352,19 @@
             
         </div>
         <article class="fcard has-media" id="prop">
-            <div class="fcard-top"><h3 class="fcard-name">プロップモード</h3><span class="finit">初期値：オフ</span></div>
-            <p class="fcard-what">プロップファームのテストで、失格しないように守る。</p>
-            <div class="fwhere"><span class="fwhere-item"><span>設定</span><i aria-hidden="true">›</i><span>一般</span><i aria-hidden="true">›</i><span>プロップモード</span></span></div>
-            <div class="fcard-grid"><div class="fcard-media"><div class="wm wm-chart" role="img" aria-label="プロップモードの例：合格ラインと失格ラインがチャートに出る"><svg viewBox="0 0 460 220" aria-hidden="true"><rect width="460" height="220" fill="#0a0f2c"/><path d="M23.2 109.2V118.7M44.7 112.3V119.7M59.1 108.5V115.0M73.5 106.4V118.0M95.1 112.1V114.3M102.2 108.3V113.2M109.4 108.3V111.4M123.8 110.8V113.8M131.0 106.7V113.9M145.4 106.5V112.2M152.5 104.6V111.6M166.9 109.6V113.2M181.3 112.3V118.0M195.7 112.6V116.5M202.8 110.6V118.1M224.4 117.8V119.4M231.6 114.3V121.0M238.8 113.2V117.3M260.3 109.5V119.6M274.7 108.7V116.2M289.1 107.7V113.0M303.5 112.5V116.9M317.8 105.4V114.4M339.4 104.0V112.9M346.6 101.0V107.4M360.9 105.8V108.0M375.3 105.3V109.1M382.5 104.6V108.9M404.1 106.0V111.2M425.6 104.4V110.9M440.0 104.2V109.5" stroke="#22b573" stroke-width=".9"/><path d="M16.0 115.0V117.7M30.4 108.4V114.2M37.6 110.9V117.6M51.9 110.9V116.3M66.3 108.4V118.1M80.7 106.0V110.2M87.9 109.1V114.5M116.6 107.7V115.6M138.2 106.9V114.0M159.7 105.1V111.9M174.1 107.8V116.0M188.5 110.8V118.0M210.0 111.0V120.1M217.2 118.1V120.2M246.0 111.2V117.4M253.2 114.6V120.1M267.5 110.9V118.3M281.9 110.0V115.2M296.3 108.3V116.4M310.6 110.9V115.3M325.0 107.4V109.1M332.2 106.5V112.6M353.8 103.3V108.4M368.1 104.0V111.0M389.7 104.9V112.3M396.9 106.5V111.9M411.3 107.0V110.0M418.4 109.0V110.1M432.8 104.8V111.6" stroke="#ef4d5a" stroke-width=".9"/><path d="M21.0 111.6h4.4v5.2h-4.4zM42.5 114.0h4.4v2.9h-4.4zM56.9 111.0h4.4v3.9h-4.4zM71.3 109.0h4.4v6.4h-4.4zM92.9 112.7h4.4v1.6h-4.4zM100.0 110.8h4.4v1.9h-4.4zM107.2 108.6h4.4v2.2h-4.4zM121.6 111.7h4.4v1.0h-4.4zM128.8 107.9h4.4v3.8h-4.4zM143.2 109.4h4.4v2.3h-4.4zM150.3 106.2h4.4v3.2h-4.4zM164.7 109.9h4.4v1.5h-4.4zM179.1 112.9h4.4v1.8h-4.4zM193.5 114.8h4.4v1.2h-4.4zM200.6 112.3h4.4v2.5h-4.4zM222.2 117.9h4.4v1.4h-4.4zM229.4 115.1h4.4v2.8h-4.4zM236.6 114.0h4.4v1.2h-4.4zM258.1 112.7h4.4v4.4h-4.4zM272.5 111.8h4.4v3.4h-4.4zM286.9 109.3h4.4v3.7h-4.4zM301.3 112.9h4.4v1.9h-4.4zM315.6 108.0h4.4v5.7h-4.4zM337.2 106.0h4.4v5.1h-4.4zM344.4 104.2h4.4v1.8h-4.4zM358.7 106.7h4.4v1.0h-4.4zM373.1 107.3h4.4v1.3h-4.4zM380.3 106.2h4.4v1.1h-4.4zM401.9 107.7h4.4v2.9h-4.4zM423.4 106.7h4.4v3.2h-4.4zM437.8 107.5h4.4v1.0h-4.4z" fill="#22b573"/><path d="M13.8 115.0h4.4v1.7h-4.4zM28.2 111.6h4.4v1.0h-4.4zM35.4 112.3h4.4v4.6h-4.4zM49.7 114.0h4.4v1.0h-4.4zM64.1 111.0h4.4v4.4h-4.4zM78.5 109.0h4.4v1.0h-4.4zM85.7 110.0h4.4v4.3h-4.4zM114.4 108.6h4.4v4.0h-4.4zM136.0 107.9h4.4v3.8h-4.4zM157.5 106.2h4.4v5.2h-4.4zM171.9 109.9h4.4v4.8h-4.4zM186.3 112.9h4.4v3.2h-4.4zM207.8 112.3h4.4v6.3h-4.4zM215.0 118.6h4.4v1.0h-4.4zM243.8 114.0h4.4v2.2h-4.4zM251.0 116.1h4.4v1.0h-4.4zM265.3 112.7h4.4v2.5h-4.4zM279.7 111.8h4.4v1.2h-4.4zM294.1 109.3h4.4v5.6h-4.4zM308.4 112.9h4.4v1.0h-4.4zM322.8 108.0h4.4v1.0h-4.4zM330.0 108.8h4.4v2.3h-4.4zM351.6 104.2h4.4v3.0h-4.4zM365.9 106.7h4.4v1.9h-4.4zM387.5 106.2h4.4v3.2h-4.4zM394.7 109.4h4.4v1.1h-4.4zM409.1 107.7h4.4v1.6h-4.4zM416.2 109.2h4.4v1.0h-4.4zM430.6 106.7h4.4v1.8h-4.4z" fill="#ef4d5a"/><path d="M16 34H444" stroke="#22c55e" stroke-width="1.4"/><rect x="350.3" y="26" width="93.69999999999999" height="16" rx="3" fill="#22c55e"/><text x="439" y="38" text-anchor="end" font-size="10.5" fill="#fff" font-family="'Noto Sans JP',system-ui,sans-serif" font-weight="700">合格ライン ＋8%</text><path d="M16 150H444" stroke="#e9b949" stroke-width="1.4" stroke-dasharray="5 3"/><rect x="367.4" y="142" width="76.6" height="16" rx="3" fill="#e9b949"/><text x="439" y="154" text-anchor="end" font-size="10.5" fill="#1e1b4b" font-family="'Noto Sans JP',system-ui,sans-serif" font-weight="700">3%警告ライン</text><path d="M16 176H444" stroke="#f97316" stroke-width="1.4"/><rect x="326.90000000000003" y="168" width="117.09999999999998" height="16" rx="3" fill="#f97316"/><text x="439" y="180" text-anchor="end" font-size="10.5" fill="#fff" font-family="'Noto Sans JP',system-ui,sans-serif" font-weight="700">1日の失格ライン −5%</text><path d="M16 204H444" stroke="#ef4d5a" stroke-width="1.4"/><rect x="316.1" y="196" width="127.89999999999998" height="16" rx="3" fill="#ef4d5a"/><text x="439" y="208" text-anchor="end" font-size="10.5" fill="#fff" font-family="'Noto Sans JP',system-ui,sans-serif" font-weight="700">全体の失格ライン −10%</text></svg></div></div><div class="fcard-side"><ul class="fpoints"><li>プランの初期資金を「初期残高」に入れる</li><li>合格ライン・失格ラインがチャートに出る</li><li>SLが1日の上限を超えないように自動で調整</li></ul><details class="fmore"><summary>くわしく見る</summary><div class="fmore-body"><div class="ftable-wrap"><table class="ftable"><thead><tr><th>項目</th><th>初期値</th><th>できること</th></tr></thead><tbody><tr><td data-h="項目">失格ライン（初期残高比）</td><td data-h="初期値">10%</td><td data-h="できること">全体の損失の上限</td></tr><tr><td data-h="項目">失格ライン（0時証拠金比）</td><td data-h="初期値">5%</td><td data-h="できること">1日の損失の上限</td></tr><tr><td data-h="項目">合格ライン（初期残高比）</td><td data-h="初期値">8%</td><td data-h="できること">合格の目標</td></tr><tr><td data-h="項目">強制SL移動（0時証拠金比）</td><td data-h="初期値">4.5%</td><td data-h="できること">SLがこれより遠くに置かれないように動かす</td></tr><tr><td data-h="項目">合格時強制利確（初期残高比）</td><td data-h="初期値">8.1%</td><td data-h="できること">合格ラインを超えたら自動で利確</td></tr><tr><td data-h="項目">3%警告ライン</td><td data-h="初期値">3%</td><td data-h="できること">注意の目安のライン</td></tr><tr><td data-h="項目">0時リセット基準</td><td data-h="初期値">Fintokei（日本時間9時）</td><td data-h="できること">1日の区切りの時刻。カスタム時刻も可</td></tr><tr><td data-h="項目">0時有効証拠金（手動上書き）</td><td data-h="初期値">—</td><td data-h="できること">1日の損失の計算に使う金額を手で入れる</td></tr></tbody></table></div><p class="gnote">ルールはプロップファームやプランによって違います。数値は必ず自分のプランに合わせてください。</p></div></details></div></div>
+            <div class="fcard-top"><h3 class="fcard-name">プロップモード</h3><span class="finit">最初は：オフ</span></div>
+            <p class="fcard-what">Fintokeiなどのプロップファーム（テストに合格すると、会社の資金でトレードできるサービス）で、ルール違反による失格を防ぐ機能です。合格ラインや失格ラインをチャートに表示し、損切りが1日の上限を超えないように自動で調整します。</p>
+            <div class="fcard-grid"><div class="fcard-media"><div class="wm wm-chart" role="img" aria-label="プロップモードの例：合格ラインと失格ラインがチャートに出る"><svg viewBox="0 0 460 220" aria-hidden="true"><rect width="460" height="220" fill="#0a0f2c"/><path d="M23.2 109.2V118.7M44.7 112.3V119.7M59.1 108.5V115.0M73.5 106.4V118.0M95.1 112.1V114.3M102.2 108.3V113.2M109.4 108.3V111.4M123.8 110.8V113.8M131.0 106.7V113.9M145.4 106.5V112.2M152.5 104.6V111.6M166.9 109.6V113.2M181.3 112.3V118.0M195.7 112.6V116.5M202.8 110.6V118.1M224.4 117.8V119.4M231.6 114.3V121.0M238.8 113.2V117.3M260.3 109.5V119.6M274.7 108.7V116.2M289.1 107.7V113.0M303.5 112.5V116.9M317.8 105.4V114.4M339.4 104.0V112.9M346.6 101.0V107.4M360.9 105.8V108.0M375.3 105.3V109.1M382.5 104.6V108.9M404.1 106.0V111.2M425.6 104.4V110.9M440.0 104.2V109.5" stroke="#22b573" stroke-width=".9"/><path d="M16.0 115.0V117.7M30.4 108.4V114.2M37.6 110.9V117.6M51.9 110.9V116.3M66.3 108.4V118.1M80.7 106.0V110.2M87.9 109.1V114.5M116.6 107.7V115.6M138.2 106.9V114.0M159.7 105.1V111.9M174.1 107.8V116.0M188.5 110.8V118.0M210.0 111.0V120.1M217.2 118.1V120.2M246.0 111.2V117.4M253.2 114.6V120.1M267.5 110.9V118.3M281.9 110.0V115.2M296.3 108.3V116.4M310.6 110.9V115.3M325.0 107.4V109.1M332.2 106.5V112.6M353.8 103.3V108.4M368.1 104.0V111.0M389.7 104.9V112.3M396.9 106.5V111.9M411.3 107.0V110.0M418.4 109.0V110.1M432.8 104.8V111.6" stroke="#ef4d5a" stroke-width=".9"/><path d="M21.0 111.6h4.4v5.2h-4.4zM42.5 114.0h4.4v2.9h-4.4zM56.9 111.0h4.4v3.9h-4.4zM71.3 109.0h4.4v6.4h-4.4zM92.9 112.7h4.4v1.6h-4.4zM100.0 110.8h4.4v1.9h-4.4zM107.2 108.6h4.4v2.2h-4.4zM121.6 111.7h4.4v1.0h-4.4zM128.8 107.9h4.4v3.8h-4.4zM143.2 109.4h4.4v2.3h-4.4zM150.3 106.2h4.4v3.2h-4.4zM164.7 109.9h4.4v1.5h-4.4zM179.1 112.9h4.4v1.8h-4.4zM193.5 114.8h4.4v1.2h-4.4zM200.6 112.3h4.4v2.5h-4.4zM222.2 117.9h4.4v1.4h-4.4zM229.4 115.1h4.4v2.8h-4.4zM236.6 114.0h4.4v1.2h-4.4zM258.1 112.7h4.4v4.4h-4.4zM272.5 111.8h4.4v3.4h-4.4zM286.9 109.3h4.4v3.7h-4.4zM301.3 112.9h4.4v1.9h-4.4zM315.6 108.0h4.4v5.7h-4.4zM337.2 106.0h4.4v5.1h-4.4zM344.4 104.2h4.4v1.8h-4.4zM358.7 106.7h4.4v1.0h-4.4zM373.1 107.3h4.4v1.3h-4.4zM380.3 106.2h4.4v1.1h-4.4zM401.9 107.7h4.4v2.9h-4.4zM423.4 106.7h4.4v3.2h-4.4zM437.8 107.5h4.4v1.0h-4.4z" fill="#22b573"/><path d="M13.8 115.0h4.4v1.7h-4.4zM28.2 111.6h4.4v1.0h-4.4zM35.4 112.3h4.4v4.6h-4.4zM49.7 114.0h4.4v1.0h-4.4zM64.1 111.0h4.4v4.4h-4.4zM78.5 109.0h4.4v1.0h-4.4zM85.7 110.0h4.4v4.3h-4.4zM114.4 108.6h4.4v4.0h-4.4zM136.0 107.9h4.4v3.8h-4.4zM157.5 106.2h4.4v5.2h-4.4zM171.9 109.9h4.4v4.8h-4.4zM186.3 112.9h4.4v3.2h-4.4zM207.8 112.3h4.4v6.3h-4.4zM215.0 118.6h4.4v1.0h-4.4zM243.8 114.0h4.4v2.2h-4.4zM251.0 116.1h4.4v1.0h-4.4zM265.3 112.7h4.4v2.5h-4.4zM279.7 111.8h4.4v1.2h-4.4zM294.1 109.3h4.4v5.6h-4.4zM308.4 112.9h4.4v1.0h-4.4zM322.8 108.0h4.4v1.0h-4.4zM330.0 108.8h4.4v2.3h-4.4zM351.6 104.2h4.4v3.0h-4.4zM365.9 106.7h4.4v1.9h-4.4zM387.5 106.2h4.4v3.2h-4.4zM394.7 109.4h4.4v1.1h-4.4zM409.1 107.7h4.4v1.6h-4.4zM416.2 109.2h4.4v1.0h-4.4zM430.6 106.7h4.4v1.8h-4.4z" fill="#ef4d5a"/><path d="M16 34H444" stroke="#22c55e" stroke-width="1.4"/><rect x="350.3" y="26" width="93.69999999999999" height="16" rx="3" fill="#22c55e"/><text x="439" y="38" text-anchor="end" font-size="10.5" fill="#fff" font-family="'Noto Sans JP',system-ui,sans-serif" font-weight="700">合格ライン ＋8%</text><path d="M16 150H444" stroke="#e9b949" stroke-width="1.4" stroke-dasharray="5 3"/><rect x="367.4" y="142" width="76.6" height="16" rx="3" fill="#e9b949"/><text x="439" y="154" text-anchor="end" font-size="10.5" fill="#1e1b4b" font-family="'Noto Sans JP',system-ui,sans-serif" font-weight="700">3%警告ライン</text><path d="M16 176H444" stroke="#f97316" stroke-width="1.4"/><rect x="326.90000000000003" y="168" width="117.09999999999998" height="16" rx="3" fill="#f97316"/><text x="439" y="180" text-anchor="end" font-size="10.5" fill="#fff" font-family="'Noto Sans JP',system-ui,sans-serif" font-weight="700">1日の失格ライン −5%</text><path d="M16 204H444" stroke="#ef4d5a" stroke-width="1.4"/><rect x="316.1" y="196" width="127.89999999999998" height="16" rx="3" fill="#ef4d5a"/><text x="439" y="208" text-anchor="end" font-size="10.5" fill="#fff" font-family="'Noto Sans JP',system-ui,sans-serif" font-weight="700">全体の失格ライン −10%</text></svg></div></div><div class="fcard-side"><p class="fsub">使い方</p><ol class="fsteps"><li>右下の歯車（スマホは下のメニューの「設定」）を押し、「一般」の「プロップモード」を開く</li><li>「プロップモード（初期残高）」にチェックを入れ、プランの初期資金を入れる</li><li>失格ラインなどの数値を、自分のプランのルールに合わせる</li></ol><p class="fsub">ポイント</p><ul class="fnotes"><li>チャートに、合格ライン・失格ラインが表示されます</li><li>SLが1日の損失の上限より遠くに置かれないよう、自動で動きます（強制SL移動）</li></ul><details class="fmore"><summary>もっとくわしく</summary><div class="fmore-body"><div class="ftable-wrap"><table class="ftable"><thead><tr><th>項目</th><th>最初の値</th><th>どうなるか</th></tr></thead><tbody><tr><td data-h="項目">失格ライン（初期残高比）</td><td data-h="最初の値">10%</td><td data-h="どうなるか">全体の損失の上限。ここまで下がると失格</td></tr><tr><td data-h="項目">失格ライン（0時証拠金比）</td><td data-h="最初の値">5%</td><td data-h="どうなるか">1日の損失の上限。その日の0時の有効証拠金から計算</td></tr><tr><td data-h="項目">合格ライン（初期残高比）</td><td data-h="最初の値">8%</td><td data-h="どうなるか">合格の目標</td></tr><tr><td data-h="項目">強制SL移動（0時証拠金比）</td><td data-h="最初の値">4.5%</td><td data-h="どうなるか">SLがこれより遠くに置かれないように動かす</td></tr><tr><td data-h="項目">合格時強制利確（初期残高比）</td><td data-h="最初の値">8.1%</td><td data-h="どうなるか">合格ラインを超えたら自動で利確</td></tr><tr><td data-h="項目">3%警告ライン</td><td data-h="最初の値">3%</td><td data-h="どうなるか">注意の目安のライン</td></tr><tr><td data-h="項目">0時リセット基準</td><td data-h="最初の値">Fintokei（日本時間9時）</td><td data-h="どうなるか">1日の区切りの時刻。カスタム時刻も選べる</td></tr><tr><td data-h="項目">0時有効証拠金（手動上書き）</td><td data-h="最初の値">—</td><td data-h="どうなるか">1日の損失の計算に使う金額を、手で入れる</td></tr></tbody></table></div><p class="gnote">ルールはプロップファームやプランによって違います。数値は必ず自分のプランに合わせてください。</p></div></details></div></div>
         </article>
         <article class="fcard has-media" id="virtual">
-            <div class="fcard-top"><h3 class="fcard-name">仮想残高モード</h3><span class="finit">初期値：オフ</span></div>
-            <p class="fcard-what">失格までに使える金額を「残高」として、ロットを計算。</p>
-            <div class="fwhere"><span class="fwhere-item"><span>設定</span><i aria-hidden="true">›</i><span>一般</span><i aria-hidden="true">›</i><span>プロップモード</span></span></div>
-            <div class="fcard-grid"><div class="fcard-media"><div class="wm wm-flow" role="img" aria-label="仮想残高の計算の例"><span class="n"><small>失格までに使える金額</small><b>500万円</b></span><i aria-hidden="true">＋</i><span class="n"><small>これまでの損益</small><b>−100万円</b></span><i aria-hidden="true">＝</i><span class="n y"><small>仮想残高</small><b>400万円</b></span></div></div><div class="fcard-side"><ul class="fpoints"><li>プロップモードと一緒に使う</li><li>負けるほどロットが小さくなり、失格しにくい</li></ul><details class="fmore"><summary>くわしく見る</summary><div class="fmore-body"><p>例：初期残高5,000万円（失格ライン10%）で、いまの残高が4,900万円のとき、500万円＋（−100万円）＝400万円を残高としてロットを計算します。</p></div></details></div></div>
+            <div class="fcard-top"><h3 class="fcard-name">仮想残高モード</h3><span class="finit">最初は：オフ</span></div>
+            <p class="fcard-what">プロップモード中に、「失格になるまでに使える金額」を残高とみなして、ロットを計算する機能です。負けが続くとロットが自動で小さくなるので、失格しにくくなります。</p>
+            <div class="fcard-grid"><div class="fcard-media"><div class="wm wm-flow" role="img" aria-label="仮想残高の計算の例"><span class="n"><small>失格までに使える金額</small><b>500万円</b></span><i aria-hidden="true">＋</i><span class="n"><small>これまでの損益</small><b>−100万円</b></span><i aria-hidden="true">＝</i><span class="n y"><small>仮想残高</small><b>400万円</b></span></div></div><div class="fcard-side"><p class="fsub">使い方</p><ol class="fsteps"><li>プロップモードをオンにする</li><li>右下の歯車（スマホは下のメニューの「設定」）を押し、「一般」の「プロップモード」の「仮想残高モード」にチェックを入れる</li></ol><p class="fsub">ポイント</p><ul class="fnotes"><li>例：初期残高5,000万円（失格ライン10%）で、いまの残高が4,900万円なら、500万円＋（−100万円）＝400万円を残高としてロットを計算します</li></ul></div></div>
         </article>
         <article class="fcard has-media" id="copy"><!-- TODO: 許容遅延時間の意味を確認 -->
-            <div class="fcard-top"><h3 class="fcard-name">コピーモード（受信）</h3><span class="finit">初期値：オフ</span></div>
-            <p class="fcard-what">コピー元の口座のポジションを、自分の口座に写す。</p>
-            <div class="fwhere"><span class="fwhere-item"><span>設定</span><i aria-hidden="true">›</i><span>一般</span><i aria-hidden="true">›</i><span>コピーモード</span></span></div>
-            <div class="fcard-grid"><div class="fcard-media"><div class="wm wm-flow" role="img" aria-label="コピーモードの流れ"><span class="n"><small>コピー元の口座</small><b>Web版YTTでエントリー</b></span><i aria-hidden="true">→</i><span class="n y"><small>自分の口座</small><b>同じポジションが入る</b></span></div></div><div class="fcard-side"><ul class="fpoints"><li>コピー元でWeb版YTTからエントリーされたものだけ</li><li>オンにすると、セット中のシナリオと指値は取り消し</li><li>ロットの計算方法を3つから選べる</li></ul><details class="fmore"><summary>くわしく見る</summary><div class="fmore-body"><div class="fmore-media"><div class="wm wm-set" role="img" aria-label="設定の画面（一般）">
+            <div class="fcard-top"><h3 class="fcard-name">コピーモード（受信）</h3><span class="finit">最初は：オフ</span></div>
+            <p class="fcard-what">ほかの口座（コピー元）でWeb版YTTからエントリーしたポジションを、自分の口座にも同じように写す機能です。</p>
+            <div class="fcard-grid"><div class="fcard-media"><div class="wm wm-flow" role="img" aria-label="コピーモードの流れ"><span class="n"><small>コピー元の口座</small><b>Web版YTTでエントリー</b></span><i aria-hidden="true">→</i><span class="n y"><small>自分の口座</small><b>同じポジションが入る</b></span></div></div><div class="fcard-side"><p class="fsub">使い方</p><ol class="fsteps"><li>右下の歯車（スマホは下のメニューの「設定」）を押し、「一般」の「コピーモード」を開く</li><li>「コピーモード（受信）」にチェックを入れ、案内に従ってコピー元の口座を選ぶ</li><li>「コピー時のロット計算モード」を選ぶ（損失率固定／損失額固定／ロット残高固定）</li></ol><p class="fsub">ポイント</p><ul class="fnotes"><li>コピーされるのは、コピー元でWeb版YTTからエントリーしたポジションだけです</li><li>オンにした時点で、セット中のシナリオと指値・逆指値はすべて取り消されます</li></ul><details class="fmore"><summary>もっとくわしく</summary><div class="fmore-body"><div class="fmore-media"><div class="wm wm-set" role="img" aria-label="設定の画面（一般）">
     <div class="wm-set-head">設定<span aria-hidden="true">×</span></div>
     <div class="wm-set-body">
       <div class="wm-set-tabs"><span class="on">一般</span><span>キャンバス</span><span>配色</span></div>
@@ -1394,27 +1402,24 @@
             
         </div>
         <article class="fcard has-media" id="pl-hide">
-            <div class="fcard-top"><h3 class="fcard-name">損益非表示</h3><span class="finit">初期値：オフ</span></div>
-            <p class="fcard-what">損益の金額を隠して、pipsと%だけで表示。</p>
-            <div class="fwhere"><span class="fwhere-item"><span>設定</span><i aria-hidden="true">›</i><span>一般</span><i aria-hidden="true">›</i><span>表示</span></span></div>
+            <div class="fcard-top"><h3 class="fcard-name">損益非表示</h3><span class="finit">最初は：オフ</span></div>
+            <p class="fcard-what">画面の損益の金額を隠して、pipsと%だけで表示する機能です。金額が大きくなると、あせっていつもと違うトレードをしてしまうことがあります。そんなときに、金額を気にせずトレードするための機能です。</p>
             <div class="fcard-grid"><div class="fcard-media"><div class="wm wm-set" role="img" aria-label="設定の画面（一般）">
     <div class="wm-set-head">設定<span aria-hidden="true">×</span></div>
     <div class="wm-set-body">
       <div class="wm-set-tabs"><span class="on">一般</span><span>キャンバス</span><span>配色</span></div>
       <div class="wm-set-main"><p class="wm-sec">表示</p><div class="wm-row is-on"><i>☆</i><b class="wm-chk on"></b><span class="wm-row-l">エントリーの可視化</span></div><div class="wm-row hl"><i>★</i><b class="wm-chk"></b><span class="wm-row-l">損益非表示</span></div><div class="wm-row is-on"><i>☆</i><b class="wm-chk on"></b><span class="wm-row-l">Breakeven表示</span></div></div>
     </div>
-  </div></div><div class="fcard-side"><ul class="fpoints"><li>金額のプレッシャーで、いつもと違うトレードをしないために</li><li>最初から「お気に入り」（★）に入っている</li></ul></div></div>
+  </div></div><div class="fcard-side"><p class="fsub">くわしく</p><ul class="fnotes"><li>右下の歯車（スマホは下のメニューの「設定」）を押し、「一般」の「表示」 でオンにします</li><li>最初から「お気に入り」（★）に入っているので、右のパネルからすぐ切り替えられます</li></ul></div></div>
         </article>
         <article class="fcard" id="bonus">
-            <div class="fcard-top"><h3 class="fcard-name">残高にボーナスを含めて表示</h3><span class="finit">初期値：オフ</span></div>
-            <p class="fcard-what">口座のボーナスを残高に含めて表示。</p>
-            <div class="fwhere"><span class="fwhere-item"><span>設定</span><i aria-hidden="true">›</i><span>一般</span><i aria-hidden="true">›</i><span>表示</span></span></div>
-            
+            <div class="fcard-top"><h3 class="fcard-name">残高にボーナスを含めて表示</h3><span class="finit">最初は：オフ</span></div>
+            <p class="fcard-what">口座のボーナスを、残高に含めて表示する設定です。</p>
+            <div class="fcard-side"><p class="fsub">くわしく</p><ul class="fnotes"><li>右下の歯車（スマホは下のメニューの「設定」）を押し、「一般」の「表示」 でオンにします</li></ul></div>
         </article>
         <article class="fcard has-media" id="theme">
             <div class="fcard-top"><h3 class="fcard-name">配色</h3></div>
-            <p class="fcard-what">画面全体の色と質感を選ぶ。</p>
-            <div class="fwhere"><span class="fwhere-item"><span>設定</span><i aria-hidden="true">›</i><span>配色</span></span></div>
+            <p class="fcard-what">画面全体の色と質感を、好みに合わせて変えられる設定です。</p>
             <div class="fcard-grid"><div class="fcard-media"><div class="wm wm-set wm-theme" role="img" aria-label="設定の「配色」の画面">
     <div class="wm-set-head">設定<span aria-hidden="true">×</span></div>
     <div class="wm-set-body">
@@ -1422,19 +1427,18 @@
       <div class="wm-set-main"><p class="wm-sec">素材</p><div class="wm-opt"><i style="background:#2b2360"></i><span><b>マット</b><small>光を通さない一枚の質感</small></span></div><div class="wm-opt on"><i style="background:#4a45b8"></i><span><b>ガラス</b><small>枠がなく、カードだけが板になる</small></span></div>
       <p class="wm-sec">配色</p><div class="wm-opt"><i style="background:#2b2360"></i><span><b>標準（紫）</b><small>地を紫に置く最初の配色</small></span></div><div class="wm-opt"><i style="background:#2f3035"></i><span><b>ダーク</b><small>紫を抜いたグレー</small></span></div><div class="wm-opt"><i style="background:#f4f5fa"></i><span><b>ライト</b><small>白が基調。明るい場所で見やすい</small></span></div></div>
     </div>
-  </div></div><div class="fcard-side"><ul class="fpoints"><li>素材：マット／ガラス</li><li>配色：標準（紫）／ダーク／ライト</li><li>チャートの背景の色も合わせて変わる</li></ul></div></div>
+  </div></div><div class="fcard-side"><p class="fsub">使い方</p><ol class="fsteps"><li>右下の歯車（スマホは「設定」）を押し、「配色」のタブを開く</li><li>「素材」と「配色」を選ぶ</li></ol><p class="fsub">ポイント</p><ul class="fnotes"><li><b>素材</b>：マット（光を通さない一枚の質感）／ガラス（枠がなく、カードだけが板になる）</li><li><b>配色</b>：標準（紫）／ダーク（グレー）／ライト（白が基調で、明るい場所で見やすい）</li><li>配色を変えると、チャートの背景の色も一緒に変わります</li></ul></div></div>
         </article>
         <article class="fcard has-media" id="canvas">
             <div class="fcard-top"><h3 class="fcard-name">キャンバス（チャートの色）</h3></div>
-            <p class="fcard-what">ローソク足・背景・グリッド・十字カーソルの色。</p>
-            <div class="fwhere"><span class="fwhere-item"><span>設定</span><i aria-hidden="true">›</i><span>キャンバス</span></span></div>
+            <p class="fcard-what">ローソク足やチャートの背景の色など、チャートの見た目を細かく変えられる設定です。</p>
             <div class="fcard-grid"><div class="fcard-media"><div class="wm wm-set" role="img" aria-label="設定の画面（キャンバス）">
     <div class="wm-set-head">設定<span aria-hidden="true">×</span></div>
     <div class="wm-set-body">
       <div class="wm-set-tabs"><span>一般</span><span class="on">キャンバス</span><span>配色</span></div>
       <div class="wm-set-main"><p class="wm-sec">ローソク足</p><div class="wm-row"><i>☆</i><span class="wm-row-l">実体</span><em><i class="sw g"></i><i class="sw r"></i></em></div><div class="wm-row"><i>☆</i><span class="wm-row-l">ヒゲ</span><em><i class="sw g"></i><i class="sw r"></i></em></div><p class="wm-sec">チャートの基本スタイル</p><div class="wm-row"><i>☆</i><span class="wm-row-l">背景</span><em><i class="sw k"></i></em></div><div class="wm-row is-on"><i>☆</i><b class="wm-chk on"></b><span class="wm-row-l">垂直グリッドライン</span></div><div class="wm-row is-on"><i>☆</i><b class="wm-chk on"></b><span class="wm-row-l">水平グリッドライン</span></div></div>
     </div>
-  </div></div><div class="fcard-side"><ul class="fpoints"><li>左が上昇、右が下降の色</li><li>グリッドの線は表示・非表示も選べる</li></ul></div></div>
+  </div></div><div class="fcard-side"><p class="fsub">くわしく</p><ul class="fnotes"><li>右下の歯車（スマホは「設定」）→「キャンバス」のタブで変えます</li><li>ローソク足（上昇・下降）、背景、グリッド、十字カーソルの色を選べます</li></ul></div></div>
         </article>
     </div>
 </section>
@@ -1457,39 +1461,35 @@
         </div>
         <article class="fcard has-media" id="open">
             <div class="fcard-top"><h3 class="fcard-name">設定を開く</h3></div>
-            <p class="fcard-what">「一般」「キャンバス」「配色」の3つのタブ。</p>
-            <div class="fwhere"><span class="fwhere-item"><b>PC</b><span>右下の歯車</span></span><span class="fwhere-item"><b>スマホ</b><span>下のメニュー</span><i aria-hidden="true">›</i><span>設定</span></span></div>
+            <p class="fcard-what">Web版YTTの細かい設定を変える画面です。「一般」「キャンバス」「配色」の3つのタブがあります。</p>
             <div class="fcard-grid"><div class="fcard-media"><div class="wm wm-set" role="img" aria-label="設定の画面（一般）">
     <div class="wm-set-head">設定<span aria-hidden="true">×</span></div>
     <div class="wm-set-body">
       <div class="wm-set-tabs"><span class="on">一般</span><span>キャンバス</span><span>配色</span></div>
       <div class="wm-set-main"><p class="wm-sec">ロットの決め方</p><div class="wm-row"><i>☆</i><b class="wm-radio"></b><span class="wm-row-l">残高：lot固定モード</span><em>− 10万円：0.10 lot ＋</em></div><div class="wm-row is-on"><i>☆</i><b class="wm-radio on"></b><span class="wm-row-l">損失率固定モード</span><em>− 2.0 % ＋</em></div><div class="wm-row"><i>☆</i><b class="wm-radio"></b><span class="wm-row-l">損失額固定モード</span><em>− ¥5000 ＋</em></div><p class="wm-sec">決済関連</p><div class="wm-row is-on"><i>☆</i><b class="wm-chk on"></b><span class="wm-row-l">成行エントリーで確認</span></div></div>
     </div>
-  </div></div><div class="fcard-side"><ul class="fpoints"><li>下の「設定の一覧」で、全部の項目を確認できる</li></ul></div></div>
+  </div></div><div class="fcard-side"><p class="fsub">使い方</p><ol class="fsteps"><li>PCは右下の歯車、スマホは下のメニューの「設定」を押す</li><li>タブを選んで、項目を変える</li></ol><p class="fsub">ポイント</p><ul class="fnotes"><li>すべての項目は、このページのいちばん下の「<a href="#settings-list">設定の一覧</a>」で確かめられます</li></ul></div></div>
         </article>
         <article class="fcard has-media" id="fav">
             <div class="fcard-top"><h3 class="fcard-name">お気に入り（☆）</h3></div>
-            <p class="fcard-what">☆を押した項目は、右のパネルからすぐ切り替えられる。</p>
-            <div class="fwhere"><span class="fwhere-item"><span>設定の各項目の ☆</span></span></div>
+            <p class="fcard-what">よく使う設定を、右のパネルからすぐにオン・オフできるようにする機能です。</p>
             <div class="fcard-grid"><div class="fcard-media"><div class="wm wm-set" role="img" aria-label="設定の画面（一般）">
     <div class="wm-set-head">設定<span aria-hidden="true">×</span></div>
     <div class="wm-set-body">
       <div class="wm-set-tabs"><span class="on">一般</span><span>キャンバス</span><span>配色</span></div>
       <div class="wm-set-main"><p class="wm-sec">表示</p><div class="wm-row hl"><i>★</i><b class="wm-chk"></b><span class="wm-row-l">損益非表示</span></div><div class="wm-row is-on"><i>☆</i><b class="wm-chk on"></b><span class="wm-row-l">シナリオ構築パネルを表示</span></div></div>
     </div>
-  </div></div><div class="fcard-side"><ul class="fpoints"><li>よく切り替える項目に☆を付けておく</li><li>右のパネルの「お気に入り」に並ぶ</li></ul></div></div>
+  </div></div><div class="fcard-side"><p class="fsub">使い方</p><ol class="fsteps"><li>設定画面で、項目の左の☆を押す</li><li>右のパネルの「お気に入り」に、その項目が並ぶ</li></ol></div></div>
         </article>
         <article class="fcard" id="copy-settings">
             <div class="fcard-top"><h3 class="fcard-name">他の口座に設定をコピー</h3></div>
-            <p class="fcard-what">いまの口座の設定を、ほかの口座にもまとめて反映。</p>
-            <div class="fwhere"><span class="fwhere-item"><span>設定</span><i aria-hidden="true">›</i><span>いちばん下</span></span></div>
-            
+            <p class="fcard-what">いまの口座の設定を、ほかの口座にもまとめてコピーする機能です。複数の口座を使っている人に便利です。</p>
+            <div class="fcard-side"><p class="fsub">くわしく</p><ul class="fnotes"><li>設定画面のいちばん下のボタンです</li></ul></div>
         </article>
         <article class="fcard" id="reset">
             <div class="fcard-top"><h3 class="fcard-name">初期値にリセット</h3></div>
-            <p class="fcard-what">設定をすべて最初の状態に戻す。</p>
-            <div class="fwhere"><span class="fwhere-item"><span>設定</span><i aria-hidden="true">›</i><span>いちばん下</span></span></div>
-            
+            <p class="fcard-what">設定をすべて、最初の状態に戻す機能です。</p>
+            <div class="fcard-side"><p class="fsub">くわしく</p><ul class="fnotes"><li>設定画面のいちばん下のボタンです</li></ul></div>
         </article>
     </div>
 </section>

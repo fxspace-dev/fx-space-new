@@ -999,6 +999,9 @@
     /* 取引ツールを選ぶまで、下の手順は表示しない */
     .js-gate #gated:not(.is-open) { display: none; }
     #tool-select { padding-bottom: 3.5rem; }
+    /* ヒーローのタイトル：1行にして、波線は文字の幅ぴったり（スマホで引き伸ばさない） */
+    .ytt-sp-hero .ytt-sp-hero-title { font-size: clamp(1.5rem, 5.2vw, 3rem); }
+    .ytt-sp-hero .ytt-sp-title-line .ytt-title-wave { width: 100%; max-width: none; margin-left: 0; transform: none; }
     /* 利用上の制限事項：カードの上のイメージ図 */
     .lim-card { display: flex; flex-direction: column; }
     .lim-mock { margin: -0.25rem 0 0.9rem; padding: 0.4rem 0 0.6rem; border-bottom: 1.5px dashed #e5e7eb; }
@@ -1067,8 +1070,7 @@
 <section class="ytt-sp-hero">
     <img src="img/ytt-mark-notext.png" alt="YTT" class="ytt-sp-hero-logo">
     <h1 class="ytt-sp-hero-title">
-        <span class="ytt-sp-title-line"><span class="line-text">Web版YTT<img class="ytt-title-wave" src="img/wave-yellow.png" alt=""></span></span>
-        <span class="ytt-sp-title-line"><span class="line-text">導入方法<img class="ytt-title-wave" src="img/wave-yellow.png" alt=""></span></span>
+        <span class="ytt-sp-title-line"><span class="line-text">Web版YTT 導入方法<img class="ytt-title-wave" src="img/wave-yellow.png" alt=""></span></span>
     </h1>
     <p class="ytt-sp-hero-lead">
         口座の登録から連携ツールの設置、Web版YTTへのログインまで。<br>

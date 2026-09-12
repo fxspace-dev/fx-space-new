@@ -1017,6 +1017,18 @@
     .lim-mock { margin: -0.25rem 0 0.9rem; padding: 0.4rem 0 0.6rem; border-bottom: 1.5px dashed #e5e7eb; }
     .lim-mock svg { display: block; width: 100%; max-width: 320px; height: auto; margin: 0 auto; font-family: inherit; }
     .lim-mock img { display: block; max-width: 100%; max-height: 210px; width: auto; height: auto; margin: 0 auto; border-radius: 4px; }
+    .lim-flow { display: grid; justify-items: center; gap: 0.35rem; }
+    .lim-flow .lim-arrow { width: 20px; height: 20px; }
+    .lim-ytt { width: 100%; max-width: 230px; background: #11163a; border-radius: 10px; padding: 0.5rem 0.6rem 0.6rem; }
+    .lim-ytt-t { margin: 0 0 0.35rem; font-size: 0.65rem; font-weight: 800; color: #e9b949; text-align: center; }
+    .lim-ytt-row { display: flex; align-items: center; gap: 0.4rem; margin: 0.25rem 0 0; padding: 0.3rem 0.45rem; background: #1c2250; border-radius: 6px; }
+    .lim-ytt-row b { font-size: 0.7rem; font-weight: 800; color: #fff; }
+    .lim-ytt-row small { margin-left: auto; font-size: 0.65rem; font-weight: 700; }
+    .lim-ytt-row .dot { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+    .lim-ytt-row .dot.on { background: #22c55e; }
+    .lim-ytt-row .dot.off { background: #eab308; }
+    .lim-ytt-row .dot.on ~ small { color: #86efac; }
+    .lim-ytt-row .dot.off ~ small { color: #fde047; }
     /* 動画にも手書き風の枠（.gshot video） */
     .gframe.gframe-video { display: block; }
     .gframe > video { display: block; width: 100%; height: auto; border-radius: 5px; background: #0b0f1e; }
@@ -1754,7 +1766,15 @@
                     <li><svg class="lim-ng-x" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#dc2626"/><path d="M8.4 8.4l7.2 7.2M15.6 8.4l-7.2 7.2" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg><span>複数のMT4で同時に同じ口座にログインして、連携ツール（レシーバーEA）を入れる</span></li>
                 </ul>
             </div>
-            <div class="ytt-add-card lim-card"><div class="lim-mock"><img src="img/webytt/lim-kehaichi.png" alt="MT4の気配値表示に、トレードしたいUSDJPYが並んでいる" loading="lazy" width="374" height="250"></div><h3>トレードしたい通貨ペアを気配値表示に出す</h3><p>取引する通貨ペアを気配値表示欄に出しておいてください。出していないと価格が取得できず、アイコンが黄になります。</p></div>
+            <div class="ytt-add-card lim-card"><div class="lim-mock lim-flow">
+                <img src="img/webytt/lim-kehaichi.png" alt="MT4の気配値表示。トレードしたいUSDJPYが一覧に出ている" loading="lazy" width="374" height="154">
+                <svg class="lim-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v14M6 12.5l6 6 6-6" fill="none" stroke="#16a34a" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <div class="lim-ytt">
+                    <p class="lim-ytt-t">Web版YTT</p>
+                    <p class="lim-ytt-row"><span class="dot on"></span><b>USDJPY</b><small>価格OK</small></p>
+                    <p class="lim-ytt-row"><span class="dot off"></span><b>XAUUSD</b><small>価格なし</small></p>
+                </div>
+            </div><h3>トレードしたい通貨ペアを気配値表示に出す</h3><p>取引する通貨ペアを気配値表示欄に出しておいてください。出していないと価格が取得できず、アイコンが黄になります。</p></div>
             <div class="ytt-add-card lim-card"><div class="lim-mock"><svg viewBox="0 0 280 150" role="img" aria-label="PCで取引ツールを起動していればWeb版YTTはつながり、PCがスリープ中は止まる図">
   <rect x="10" y="18" width="84" height="54" rx="5" fill="#11163a" stroke="#1e1b4b" stroke-width="2"/>
   <path d="M20 58 l10-9 9 5 10-14 9 7 10-10 9 5 8-7" stroke="#22c55e" stroke-width="2" fill="none" stroke-linejoin="round" stroke-linecap="round"/><text x="52" y="34" font-size="9.5" font-weight="800" fill="#e9b949" text-anchor="middle">MT4</text>

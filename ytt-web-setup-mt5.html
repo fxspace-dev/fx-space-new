@@ -1127,6 +1127,28 @@
         .lim-card > p, .lim-ng { order: 2; }
         .lim-mock { order: 3; margin: 1rem 0 0; padding: 0.9rem 0 0; border-bottom: 0; border-top: 1.5px dashed #e5e7eb; }
     }
+    /* 固定バー：取引ツールの切り替え */
+    .nav-tool { position: relative; flex: none; }
+    .nav-tool-btn {
+        display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.35rem 0.6rem;
+        border: 1.5px solid #c7d2fe; border-radius: 999px; background: #fff; color: #1e1b4b;
+        font-family: inherit; font-size: 0.8rem; font-weight: 800; white-space: nowrap; cursor: pointer;
+    }
+    .nav-tool-btn:hover { border-color: #818cf8; }
+    .nav-tool-cv { font-size: 0.6rem; color: #6b7280; }
+    .nav-tool-menu {
+        position: absolute; top: calc(100% + 8px); right: 0; min-width: 158px; padding: 0.4rem;
+        background: #fff; border: 1.5px solid #e5e7eb; border-radius: 12px;
+        box-shadow: 0 12px 28px rgba(30, 27, 75, 0.16); display: grid; gap: 0.15rem;
+    }
+    .nav-tool-menu[hidden] { display: none; }
+    .nav-tool-menu-t { padding: 0.3rem 0.5rem 0.35rem; font-size: 0.68rem; font-weight: 700; color: #6b7280; }
+    .nav-tool-menu a { display: block; padding: 0.5rem 0.6rem; border-radius: 8px; font-size: 0.85rem; font-weight: 800; color: #1e1b4b; text-decoration: none; }
+    .nav-tool-menu a:hover { background: #f4f6f9; }
+    .nav-tool-menu a.is-on { background: #eef2ff; color: #4f46e5; }
+    @media (max-width: 600px) {
+        .nav-tool-btn { padding: 0.3rem 0.5rem; font-size: 0.75rem; }
+    }
 </style>
 
 <script>document.documentElement.classList.add('js-gate');</script>
@@ -1148,6 +1170,15 @@
     <a href="ytt-tokusetu.html" class="ytt-sp-nav-logo">
         <img src="img/ytt-nav-logo.png" alt="YTT — FX SPACE">
     </a>
+    <div class="nav-tool" hidden>
+        <button type="button" class="nav-tool-btn" aria-expanded="false" aria-haspopup="true">MT5<span class="nav-tool-cv" aria-hidden="true">▼</span></button>
+        <div class="nav-tool-menu" hidden>
+            <span class="nav-tool-menu-t">取引ツールを切り替える</span>
+            <a href="ytt-web-setup.html?tool=mt4">MT4</a>
+            <a href="ytt-web-setup-mt5.html?tool=mt5" class="is-on">MT5</a>
+            <a href="ytt-web-setup-ctrader.html?tool=ctrader">cTrader</a>
+        </div>
+    </div>
     <div class="ytt-sp-nav-cta">
         <a href="https://webytt.fx-space.com/" target="_blank" rel="noopener" class="btn-sq-blue sm">Web版YTTを開く</a>
     </div>
@@ -1338,29 +1369,6 @@
 </section>
 
 <div id="gated">
-<section class="ytt-spec-section" id="flow" style="background:#f4f6f9;">
-    <div class="ytt-spec-inner ytt-fto-wide">
-        <div class="ytt-spec-header">
-            <span class="section-title-badge section-title-badge--orange">
-                <img class="hero-title-side hero-title-side--left" src="img/title-side-orange-left.png" alt="">
-                導入方法
-                <img class="hero-title-side hero-title-side--right" src="img/title-side-orange-right.png" alt="">
-            </span>
-            <div style="text-align:center; margin-bottom:0.25rem;">
-                <div style="display:inline-block; white-space:nowrap;">
-                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">3ステップで導入完了</h2>
-                    <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
-                </div>
-            </div>
-            <p>所要時間の目安は約15分。上から順番に進めてください。</p>
-        </div>
-        <div class="ytt-add-grid flow3">
-            <a class="ytt-add-card" href="#step1"><img class="flow-num" src="img/crayon-1.png" alt="1"><h3>口座登録</h3><p>登録ページから口座を登録し、表示される32文字の認証コードを控える</p></a>
-            <a class="ytt-add-card" href="#step2"><img class="flow-num" src="img/crayon-2.png" alt="2"><h3>連携ツールの設置</h3><p>MT4 / MT5 / cTrader に連携ツールを入れ、認証コードを設定する</p></a>
-            <a class="ytt-add-card" href="#step3"><img class="flow-num" src="img/crayon-3.png" alt="3"><h3>ログイン</h3><p>Web版YTTにDiscordでログインし、口座を選んで接続を確認する</p></a>
-        </div>
-    </div>
-</section>
 
 <!-- 動画で見る（MT5）：MT5を選ぶと、手順のいちばん上に出る -->
 <section class="ytt-spec-section" id="howto-video" style="background:#f4f6f9;">
@@ -2099,6 +2107,35 @@
     });
   }
 
+
+  // ---- 固定バーの取引ツール切り替え ----
+  (function () {
+    var box = document.querySelector('.nav-tool');
+    if (!box) return;
+    var btn = box.querySelector('.nav-tool-btn'), menu = box.querySelector('.nav-tool-menu');
+    function shut() { if (!menu.hidden) { menu.hidden = true; btn.setAttribute('aria-expanded', 'false'); } }
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var willOpen = menu.hidden;
+      menu.hidden = !willOpen;
+      btn.setAttribute('aria-expanded', String(willOpen));
+    });
+    document.addEventListener('click', shut);
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') shut(); });
+    // いま読んでいるところを、切り替え先でも開く
+    var ids = ['step1', 'step2', 'step3', 'limits', 'copy', 'trouble'];
+    menu.querySelectorAll('a[href]').forEach(function (a) {
+      var base = a.getAttribute('href');
+      a.addEventListener('click', function () {
+        var now = null;
+        ids.forEach(function (id) {
+          var el = document.getElementById(id);
+          if (el && el.offsetParent !== null && el.getBoundingClientRect().top <= 80) now = id;
+        });
+        a.setAttribute('href', now ? base + '#' + now : base);
+      });
+    });
+  })();
   // ---- 取引ツールの選択：選ぶまで #gated（事前準備〜）を表示しない ----
   var gated = document.getElementById('gated');
   var me = document.body.getAttribute('data-tool');
@@ -2112,6 +2149,7 @@
   function openGate(target, smooth) {
     if (!gated) return;
     gated.classList.add('is-open');
+    var navTool = document.querySelector('.nav-tool'); if (navTool) navTool.hidden = false;
     markChosen();
     var el = target || gated.querySelector('section');
     if (el) setTimeout(function () { el.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' }); }, 40);

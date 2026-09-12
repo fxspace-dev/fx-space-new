@@ -1129,7 +1129,7 @@
         .lim-mock { order: 3; margin: 1rem 0 0; padding: 0.9rem 0 0; border-bottom: 0; border-top: 1.5px dashed #e5e7eb; }
     }
     /* 固定バー：取引ツールの切り替え */
-    .nav-tool { position: relative; flex: none; }
+    .nav-tool { position: relative; flex: none; margin-right: 0.25rem; }
     .nav-tool-btn {
         display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.35rem 0.6rem;
         border: 1.5px solid #c7d2fe; border-radius: 999px; background: #fff; color: #1e1b4b;
@@ -1172,16 +1172,16 @@
     <a href="ytt-tokusetu.html" class="ytt-sp-nav-logo">
         <img src="img/ytt-nav-logo.png" alt="YTT — FX SPACE">
     </a>
-    <div class="nav-tool" hidden>
-        <button type="button" class="nav-tool-btn" aria-expanded="false" aria-haspopup="true">cTrader<span class="nav-tool-cv" aria-hidden="true">▼</span></button>
-        <div class="nav-tool-menu" hidden>
-            <span class="nav-tool-menu-t">取引ツールを切り替える</span>
-            <a href="ytt-web-setup.html?tool=mt4">MT4</a>
-            <a href="ytt-web-setup-mt5.html?tool=mt5">MT5</a>
-            <a href="ytt-web-setup-ctrader.html?tool=ctrader" class="is-on">cTrader</a>
-        </div>
-    </div>
     <div class="ytt-sp-nav-cta">
+        <div class="nav-tool" hidden>
+            <button type="button" class="nav-tool-btn" aria-expanded="false" aria-haspopup="true">cTrader<span class="nav-tool-cv" aria-hidden="true">▼</span></button>
+            <div class="nav-tool-menu" hidden>
+                <span class="nav-tool-menu-t">取引ツールを切り替える</span>
+                <a href="ytt-web-setup.html?tool=mt4">MT4</a>
+                <a href="ytt-web-setup-mt5.html?tool=mt5">MT5</a>
+                <a href="ytt-web-setup-ctrader.html?tool=ctrader" class="is-on">cTrader</a>
+            </div>
+        </div>
         <a href="https://webytt.fx-space.com/" target="_blank" rel="noopener" class="btn-sq-blue sm">Web版YTTを開く</a>
     </div>
 </nav>

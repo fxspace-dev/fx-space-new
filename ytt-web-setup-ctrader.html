@@ -1079,6 +1079,9 @@
     /* Cloud版の折りたたみ（STEP 2 の下） */
     .cloud-acc { margin-top: 1.5rem; }
     .cloud-lead { font-size: 0.875rem; color: #4b5563; line-height: 1.85; margin: 1.1rem 0 1.4rem; }
+    .cloud-video { max-width: 640px; margin: 0 auto 1.6rem; }
+    .cloud-video video { display: block; width: 100%; height: auto; }
+    .gframe > video.cloud-vid { aspect-ratio: 1920 / 1032; }
     @media (max-width: 600px) { .cloud-acc > summary { padding: 1rem 1.1rem; font-size: 0.92rem; } .cloud-acc .ytt-spec-acc-body { padding: 0 1rem 1.25rem; } }
     .section-alt { background: #f4f6f9; }
     /* 「3ステップで導入完了」の背景の下辺を、次のセクションへ向かう矢印の形にする（route.html の rsec--arrowdown と同じ作り）。
@@ -1518,9 +1521,9 @@
             <div class="gstep">
                 <div class="gstep-no">5</div>
                 <div class="gstep-body">
-                    <p class="gstep-title">チャート上の緑の「▶」を押す</p>
+                    <p class="gstep-title">チャートに緑の「▶」が出ているときは押す</p>
                     <figure class="gshot mid"><img src="img/webytt/ctrader/c-05-play.png" alt="チャート上の緑の再生ボタン" loading="lazy"></figure>
-                    <p>緑の「▶」が出ているときは、連携ツールが止まっている状態です。押すと動き始めます。</p>
+                    <p>緑の「▶」が出ているときは、連携ツールが止まっている状態です。押すと動き始めます。すでにオレンジの「■」になっていれば、そのままで大丈夫です。</p>
                 </div>
             </div>
             <div class="gstep">
@@ -1547,6 +1550,11 @@
             </summary>
             <div class="ytt-spec-acc-body">
                 <p class="cloud-lead">Cloud版は、連携ツールをcTraderのクラウドで動かします。PCを閉じたりスリープしたりしても止まりません。</p>
+            <figure class="gshot cloud-video">
+                <video class="cloud-vid" controls muted playsinline preload="metadata" data-autoplay poster="video/webytt-ctrader-cloud-poster.jpg" width="1920" height="1032">
+                    <source src="video/webytt-ctrader-cloud.mp4" type="video/mp4">
+                </video>
+            </figure>
             <div class="gstep">
                 <div class="gstep-no">1</div>
                 <div class="gstep-body">
@@ -1557,17 +1565,20 @@
             <div class="gstep">
                 <div class="gstep-no">2</div>
                 <div class="gstep-body">
-                    <p class="gstep-title">「In the cloud」を選ぶ →「Advanced parameters」</p>
-                    <figure class="gshot"><img src="img/webytt/ctrader/c-11-cloud-dialog.png" alt="Start cBotの画面でIn the cloudを選び、Advanced parametersを開く" loading="lazy"></figure>
+                    <p class="gstep-title">「In the cloud」が選ばれていることを確認 →「Advanced parameters」</p>
+                    <figure class="gshot"><img src="img/webytt/ctrader/c-11-cloud-dialog.png" alt="Start cBotの画面。In the cloudが選ばれた状態でAdvanced parametersを開く" loading="lazy"></figure>
                     <p>認証コードなどの入力は、上の手順4と同じです。入力したら「Start cBot」を押します。</p>
                 </div>
             </div>
             <div class="gstep">
                 <div class="gstep-no">3</div>
                 <div class="gstep-body">
-                    <p class="gstep-title">雲のマークが出ていればクラウドで動いています</p>
-                    <figure class="gshot mid"><img src="img/webytt/ctrader/c-12-cloud-running.png" alt="連携ツールの名前の右に雲のマークが出ている" loading="lazy"></figure>
-                    <p>このあと STEP 3 に進みます。</p>
+                    <p class="gstep-title">上の「Status」が「Running」になればクラウドで動いています</p>
+                    <p>画面が切り替わり、「Status」は最初<b>Starting</b>と出ます。少し待つと<b>Running</b>（緑）に変わります。</p>
+                    <figure class="gshot mid"><img src="img/webytt/ctrader/c-12-cloud-running.png" alt="上部の帯のStatusがRunningになっている" loading="lazy"></figure>
+                    <p>左の一覧では、この連携ツールの行に<b>雲のマーク</b>が付きます。</p>
+                    <figure class="gshot mid"><img src="img/webytt/ctrader/c-13-cloud-icon.png" alt="cBotの一覧で、クラウドで動かしている行の左端に雲のマークが付いている" loading="lazy"></figure>
+                    <p>Cloud版はチャートが開かないので、「承認待ち」の表示は出ません。このまま STEP 3 に進みます。</p>
                     <div class="gtip">1つの口座に入れられる連携ツールは1つだけです。PCで動かす「cTrader」版とCloud版を同時に動かすと、先に動かしていた方が切断されます。</div>
                 </div>
             </div>

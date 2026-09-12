@@ -1127,9 +1127,12 @@
     @media (max-width: 600px) {
         .vzoom-pc { display: none; }
         .vzoom-sp { display: inline-flex; }
-        /* 見たいところから再生：横に並べず1つずつ縦に */
-        .hv-chapters { flex-direction: column; align-items: center; gap: 0.15rem; }
+        /* 見たいところから再生：横に並べず1つずつ縦に（左端をそろえる） */
+        .hv-chapters { flex-direction: column; align-items: stretch; gap: 0.15rem; width: fit-content; max-width: 100%; margin-left: auto; margin-right: auto; }
+        .hv-chapters button { justify-content: flex-start; }
         .hv-chapters-label { margin-bottom: 0.25rem; }
+        /* できること：チェックの位置をそろえる */
+        .wy-feats li { justify-content: flex-start; text-align: left; padding-left: 1rem; }
     }
     /* スマホ：制限事項は、文字を先に読ませて図はそのあと */
     @media (max-width: 600px) {

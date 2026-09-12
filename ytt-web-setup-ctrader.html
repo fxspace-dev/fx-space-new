@@ -1150,6 +1150,37 @@
     @media (max-width: 600px) {
         .nav-tool-btn { padding: 0.3rem 0.5rem; font-size: 0.75rem; }
     }
+    /* 目次（左から出し入れ） */
+    .toc-tab {
+        position: fixed; left: 0; top: 50%; transform: translateY(-50%); z-index: 900;
+        display: flex; align-items: center; justify-content: center;
+        width: 34px; padding: 0.9rem 0; border: 0; border-radius: 0 10px 10px 0;
+        background: #1e1b4b; color: #fff; box-shadow: 2px 3px 10px rgba(30, 27, 75, 0.25);
+        font-family: inherit; font-size: 0.8rem; font-weight: 800; letter-spacing: 0.1em; cursor: pointer;
+    }
+    .toc-tab span { writing-mode: vertical-rl; }
+    .toc-back { position: fixed; inset: 0; z-index: 1090; background: rgba(17, 22, 58, 0.4); }
+    .toc-back[hidden] { display: none; }
+    .toc-panel {
+        position: fixed; top: 0; bottom: 0; left: 0; z-index: 1100;
+        width: min(300px, 84vw); padding: 0.9rem 0.9rem 2rem; overflow-y: auto;
+        background: #fff; box-shadow: 6px 0 24px rgba(30, 27, 75, 0.18);
+    }
+    .toc-panel[hidden] { display: none; }
+    .toc-head { display: flex; align-items: center; justify-content: space-between; margin: 0 0 0.6rem; padding: 0 0.2rem; font-size: 0.95rem; font-weight: 900; color: #1e1b4b; }
+    .toc-close { display: inline-flex; width: 32px; height: 32px; align-items: center; justify-content: center; border: 0; border-radius: 50%; background: #f4f6f9; color: #1e1b4b; cursor: pointer; }
+    .toc-close svg { width: 16px; height: 16px; }
+    .toc-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.15rem; }
+    .toc-list a {
+        display: block; padding: 0.6rem 0.6rem; border-radius: 10px;
+        font-size: 0.85rem; font-weight: 700; line-height: 1.5; color: #1e1b4b; text-decoration: none;
+    }
+    .toc-list a:hover { background: #f4f6f9; }
+    .toc-list a small { display: block; font-size: 0.68rem; font-weight: 800; color: #f97316; letter-spacing: 0.04em; }
+    @media (max-width: 600px) {
+        .toc-tab { width: 30px; font-size: 0.75rem; }
+        .toc-list a { padding: 0.7rem 0.6rem; font-size: 0.9rem; }
+    }
 </style>
 
 <script>document.documentElement.classList.add('js-gate');</script>
@@ -1184,6 +1215,13 @@
         </div>
         <a href="https://webytt.fx-space.com/" target="_blank" rel="noopener" class="btn-sq-blue sm">Web版YTTを開く</a>
     </div>
+</nav>
+
+<button type="button" class="toc-tab" aria-expanded="false" aria-controls="toc-panel"><span>目次</span></button>
+<div class="toc-back" hidden></div>
+<nav class="toc-panel" id="toc-panel" aria-label="目次" hidden>
+    <p class="toc-head">目次<button type="button" class="toc-close" aria-label="目次を閉じる"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button></p>
+    <ul class="toc-list"></ul>
 </nav>
 
 <!-- HERO -->
@@ -2010,6 +2048,55 @@
   }
 
 
+
+  // ---- 目次（左から出し入れ） ----
+  (function () {
+    var tab = document.querySelector('.toc-tab'), panel = document.querySelector('.toc-panel'),
+        back = document.querySelector('.toc-back'), list = panel && panel.querySelector('.toc-list');
+    if (!tab || !panel || !list) return;
+    var skip = { 'tool-select': 1 };
+    function build() {
+      list.innerHTML = '';
+      var n = 0;
+      [].slice.call(document.querySelectorAll('section.ytt-spec-section')).forEach(function (sec) {
+        if (sec.getBoundingClientRect().height < 5) return;                 // 取引ツールを選ぶ前の非表示分
+        var h2 = sec.querySelector('.ytt-spec-header h2');
+        if (!h2 || skip[sec.id]) return;
+        var badgeEl = sec.querySelector('.section-title-badge');
+        var badge = badgeEl ? badgeEl.textContent.replace(/\s+/g, ' ').trim() : '';
+        if (badge.indexOf('続き') >= 0) return;                             // 同じSTEPの続きはまとめる
+        if (!sec.id) sec.id = 'toc-sec-' + (++n);
+        var li = document.createElement('li');
+        var a = document.createElement('a');
+        a.href = '#' + sec.id;
+        if (/^(STEP|事前準備)/.test(badge)) a.innerHTML = '<small></small>';
+        if (a.firstChild) a.firstChild.textContent = badge;
+        a.appendChild(document.createTextNode(h2.textContent.trim()));
+        a.addEventListener('click', function (e) {
+          e.preventDefault();
+          shut();
+          sec.scrollIntoView({ block: 'start' });
+        });
+        li.appendChild(a);
+        list.appendChild(li);
+      });
+    }
+    function open() {
+      build();
+      panel.hidden = false; back.hidden = false;
+      tab.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+    function shut() {
+      panel.hidden = true; back.hidden = true;
+      tab.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+    tab.addEventListener('click', function () { panel.hidden ? open() : shut(); });
+    back.addEventListener('click', shut);
+    panel.querySelector('.toc-close').addEventListener('click', shut);
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !panel.hidden) shut(); });
+  })();
   // ---- 固定バーの取引ツール切り替え ----
   (function () {
     var box = document.querySelector('.nav-tool');
@@ -2024,19 +2111,6 @@
     });
     document.addEventListener('click', shut);
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') shut(); });
-    // いま読んでいるところを、切り替え先でも開く
-    var ids = ['step1', 'step2', 'step3', 'limits', 'copy', 'trouble'];
-    menu.querySelectorAll('a[href]').forEach(function (a) {
-      var base = a.getAttribute('href');
-      a.addEventListener('click', function () {
-        var now = null;
-        ids.forEach(function (id) {
-          var el = document.getElementById(id);
-          if (el && el.offsetParent !== null && el.getBoundingClientRect().top <= 80) now = id;
-        });
-        a.setAttribute('href', now ? base + '#' + now : base);
-      });
-    });
   })();
   // ---- 取引ツールの選択：選ぶまで #gated（事前準備〜）を表示しない ----
   var gated = document.getElementById('gated');

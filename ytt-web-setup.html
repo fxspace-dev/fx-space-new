@@ -1106,7 +1106,7 @@
   ・流れとスクショは既存Canva「YTT導入方法」(DAF1unsWf4o) を踏襲
   ・見た目は ytt-tokusetu.html と同じ部品（head の <style> は特設ページのものをそのまま使用）
   【本番反映前TODO】
-  [1] 連携ツール（webytt.zip）のダウンロードURL → 安田さんに配置場所を確認して差し替え（#href-tbd-webytt-zip）
+  [1] 連携ツールのダウンロードボタンは、いまはDiscordの配布投稿へのリンク（2026-09-12 暫定）。正式な配布URLが決まったら差し替え
 ====================================================================
 -->
 
@@ -1478,7 +1478,7 @@
                 <div class="gstep-no">1</div>
                 <div class="gstep-body">
                     <p class="gstep-title">連携ツールをダウンロードする</p>
-                    <div class="gstep-btn"><a href="#href-tbd-webytt-zip" class="btn-sq-blue" id="dlBtn">連携ツールをダウンロード</a></div>
+                    <div class="gstep-btn"><a href="https://discord.com/channels/1039824083208126474/1283239173418913882/1547475609515597864" class="btn-sq-blue" id="dlBtn" target="_blank" rel="noopener">連携ツールをダウンロード</a></div>
                     <figure class="gshot mid"><img src="img/webytt/s07-zip.png" alt="webytt一式.zip のダウンロード" loading="lazy"></figure>
                     <p>ブラウザの警告が出た場合は「ダウンロードする」を選んでください。</p>
                     <figure class="gshot narrow"><img src="img/webytt/s08-dl-warning.png" alt="ブラウザのダウンロード警告" loading="lazy"></figure>
@@ -1993,10 +1993,6 @@
 
 <script>
 (function(){
-  var dl = document.getElementById('dlBtn');
-  if (dl && dl.getAttribute('href').indexOf('#href-tbd') === 0) {
-    dl.addEventListener('click', function(e){ e.preventDefault(); alert('ダウンロードURLは準備中です。Discordの「😊交流」チャンネルの配布ファイル（webytt.zip）をご利用ください。'); });
-  }
   document.querySelectorAll('[data-soon]').forEach(function (a) {
     a.addEventListener('click', function (e) { e.preventDefault(); alert('cTraderの導入方法ページは準備中です。'); });
   });

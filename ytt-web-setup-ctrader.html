@@ -999,6 +999,16 @@
     /* 取引ツールを選ぶまで、下の手順は表示しない */
     .js-gate #gated:not(.is-open) { display: none; }
     #tool-select { padding-bottom: 3.5rem; }
+    /* Web版YTTとは：いちばん伝えたい一行 */
+    .wy-intro .wy-catch { margin: 0 0 0.7rem; font-size: clamp(1.15rem, 4.6vw, 1.55rem); font-weight: 900; color: #1e1b4b; line-height: 1.5; letter-spacing: 0.01em; }
+    .wy-intro .wy-catch .accent { color: var(--primary); }
+    .wy-intro .ytt-fto2-head { font-size: 0.9rem; font-weight: 700; color: #4b5563; line-height: 1.8; margin-bottom: 1.1rem; }
+    /* 利用上の制限事項：禁止事項 */
+    .lim-ng-card { justify-content: center; }
+    .lim-ng-card > p { margin-bottom: 0.7rem; }
+    .lim-ng { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.55rem; }
+    .lim-ng li { display: flex; align-items: flex-start; gap: 0.5rem; border: 1.5px solid #f0d6d6; border-radius: 10px; padding: 0.6rem 0.7rem; font-size: 0.8125rem; font-weight: 700; color: #1e1b4b; line-height: 1.7; }
+    .lim-ng-x { flex: none; width: 17px; height: 17px; margin-top: 0.18rem; }
     /* ヒーローのタイトル：1行にして、波線は文字の幅ぴったり（スマホで引き伸ばさない） */
     .ytt-sp-hero .ytt-sp-hero-title { font-size: clamp(1.5rem, 5.2vw, 3rem); }
     .ytt-sp-hero .ytt-sp-title-line .ytt-title-wave { width: 100%; max-width: none; margin-left: 0; transform: none; }
@@ -1166,7 +1176,8 @@
                 </div>
             </div>
             <div class="ytt-fto2-content">
-                <p class="ytt-fto2-head">MT4 / MT5 / cTrader に<span class="accent">連携ツール</span>を入れておけば、<br>ブラウザから注文・決済までできます</p>
+                <p class="wy-catch">スマホで<span class="accent">有利なカスタマイズトレード</span>が可能に</p>
+                <p class="ytt-fto2-head">MT4 / MT5 / cTrader に連携ツールを入れておけば、ブラウザから注文・決済までできます。</p>
                 <ul class="ytt-fto-list">
                     <li><img src="img/check-orange.png" alt="">注文、決済</li>
                     <li><img src="img/check-orange.png" alt="">シナリオ構築・予約注文</li>
@@ -1256,7 +1267,7 @@
                 <a class="tool-tab" data-tool="ctrader" href="ytt-web-setup-ctrader.html?tool=ctrader">cTrader</a>
             </div>
         </div>
-        <details class="ytt-spec-acc no-account" id="no-account">
+        <details class="ytt-spec-acc no-account" id="no-account" open>
             <summary>
                 <span class="ytt-spec-acc-label">まだ取引口座を持っていない方へ</span>
                 <span class="ytt-spec-acc-chev" aria-hidden="true">▼</span>
@@ -1618,20 +1629,12 @@
             <p>「動かない」と感じたときは、まずここを確認してください。</p>
         </div>
         <div class="ytt-add-grid">
-            <div class="ytt-add-card lim-card"><div class="lim-mock"><svg viewBox="0 0 280 150" role="img" aria-label="1つの口座にMT4とMT5の両方を入れると、先に設定したMT4は切断され、あとから設定したMT5だけがつながる図">
-  <rect x="18" y="14" width="92" height="42" rx="10" fill="#fff" stroke="#1e1b4b" stroke-width="2"/>
-  <text x="64" y="34" font-size="15" font-weight="800" fill="#1e1b4b" text-anchor="middle">MT4</text><text x="64" y="49" font-size="10" font-weight="700" fill="#6b7280" text-anchor="middle">先に設定</text>
-  <rect x="170" y="14" width="92" height="42" rx="10" fill="#fff" stroke="#1e1b4b" stroke-width="2"/>
-  <text x="216" y="34" font-size="15" font-weight="800" fill="#1e1b4b" text-anchor="middle">MT5</text><text x="216" y="49" font-size="10" font-weight="700" fill="#6b7280" text-anchor="middle">あとから設定</text>
-  <rect x="86" y="100" width="108" height="38" rx="10" fill="#1e1b4b"/>
-  <text x="140" y="124" font-size="12" font-weight="800" fill="#fff" text-anchor="middle">あなたの口座</text>
-  <path d="M72 58 L118 98" stroke="#dc2626" stroke-width="3" stroke-dasharray="6 5" fill="none" stroke-linecap="round"/>
-  <circle cx="95" cy="78" r="10" fill="#dc2626"/><path d="M90.5 73.5l9 9M99.5 73.5l-9 9" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>
-  <text x="58" y="84" font-size="12" font-weight="800" fill="#dc2626" text-anchor="middle">切断</text>
-  <path d="M208 58 L162 98" stroke="#16a34a" stroke-width="3.5" fill="none" stroke-linecap="round"/>
-  <circle cx="185" cy="78" r="10" fill="#16a34a"/><path d="M180 78.5l3.6 3.6 6.4-7" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="226" y="84" font-size="12" font-weight="800" fill="#16a34a" text-anchor="middle">接続中</text>
-</svg></div><h3>連携ツールは1口座に1つだけ</h3><p>同じ口座に、複数の連携ツール（MT4とMT5の両方など）を同時に入れることはできません。複数設定した場合は、先に設定していた方が切断されます。</p></div>
+            <div class="ytt-add-card lim-card lim-ng-card"><h3>連携ツールを重ねて入れない</h3><p>次の2つはしないでください。</p>
+                <ul class="lim-ng">
+                    <li><svg class="lim-ng-x" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#dc2626"/><path d="M8.4 8.4l7.2 7.2M15.6 8.4l-7.2 7.2" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg><span>同じ口座で、複数のチャートに連携ツール（cBot）を入れる</span></li>
+                    <li><svg class="lim-ng-x" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#dc2626"/><path d="M8.4 8.4l7.2 7.2M15.6 8.4l-7.2 7.2" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg><span>複数のcTraderで同時に同じ口座にログインして、連携ツール（cBot）を入れる</span></li>
+                </ul>
+            </div>
             <div class="ytt-add-card lim-card"><div class="lim-mock"><svg viewBox="0 0 280 150" role="img" aria-label="cTraderのチャート上で、緑の再生ボタンが出ているときは止まっていて、オレンジの停止ボタンが出ているときは動いている図">
   <rect x="12" y="10" width="256" height="40" rx="9" fill="#262b38"/>
   <rect x="22" y="19" width="120" height="22" rx="5" fill="#1b1f29" stroke="#3f4555"/><text x="82" y="34" font-size="11" font-weight="700" fill="#e5e7eb" text-anchor="middle">YTT for Web</text>

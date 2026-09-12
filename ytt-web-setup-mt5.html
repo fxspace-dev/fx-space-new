@@ -1151,40 +1151,44 @@
     }
     /* 目次 */
     .toc-tab {
-        flex: none; display: inline-flex; align-items: center; justify-content: center;
-        width: 36px; height: 36px; padding: 0; border: 0; border-radius: 11px;
-        background: #f4f6f9; color: #1e1b4b; cursor: pointer; transition: background 0.15s;
+        position: fixed; left: 14px; top: 80px; z-index: 900;
+        display: inline-flex; align-items: center; justify-content: center;
+        width: 46px; height: 46px; padding: 0; border: 0; border-radius: 14px;
+        background: #1e1b4b; color: #fff; cursor: pointer;
+        box-shadow: 0 6px 18px rgba(30, 27, 75, 0.3); transition: transform 0.15s, background 0.15s;
     }
-    .toc-tab svg { width: 20px; height: 20px; fill: currentColor; }
-    .toc-tab:hover { background: #e8ecf5; }
+    .toc-tab svg { width: 25px; height: 25px; fill: currentColor; }
+    .toc-tab:hover { background: #2e2a6b; transform: translateY(-1px); }
     .toc-back { position: fixed; inset: 0; z-index: 1090; background: rgba(17, 22, 58, 0.45); }
     .toc-back[hidden] { display: none; }
     .toc-panel {
         position: fixed; top: 0; bottom: 0; left: 0; z-index: 1100;
-        width: min(306px, 86vw); padding: 1.15rem 1rem 2rem; overflow-y: auto;
+        width: min(318px, 88vw); padding: 1.15rem 1.05rem 2.5rem; overflow-y: auto;
         background: #fff; box-shadow: 10px 0 36px rgba(30, 27, 75, 0.22);
     }
     .toc-panel[hidden] { display: none; }
-    .toc-head { display: flex; align-items: center; justify-content: space-between; margin: 0 0 1rem; padding: 0 0.2rem; }
-    .toc-head-t { font-size: 1.05rem; font-weight: 900; color: #1e1b4b; }
-    .toc-close { flex: none; display: inline-flex; width: 32px; height: 32px; align-items: center; justify-content: center; border: 0; border-radius: 50%; background: #f4f6f9; color: #1e1b4b; cursor: pointer; }
-    .toc-close svg { width: 15px; height: 15px; }
+    .toc-head { display: flex; align-items: center; justify-content: space-between; margin: 0 0 0.9rem; padding: 0 0.2rem; }
+    .toc-head-t { font-size: 1.1rem; font-weight: 900; color: #1e1b4b; }
+    .toc-close { flex: none; display: inline-flex; width: 34px; height: 34px; align-items: center; justify-content: center; border: 0; border-radius: 50%; background: #f4f6f9; color: #1e1b4b; cursor: pointer; }
+    .toc-close svg { width: 16px; height: 16px; }
     .toc-list { list-style: none; margin: 0; padding: 0; }
-    .toc-group { margin: 1.1rem 0 0.35rem; padding: 0 0.2rem; font-size: 0.75rem; font-weight: 900; color: #1e1b4b; }
-    .toc-group img { display: block; width: 100%; height: 7px; object-fit: fill; margin-top: 3px; }
+    .toc-group { margin: 1.5rem 0 0.5rem; padding: 0 0.2rem; font-size: 0.92rem; font-weight: 900; color: #1e1b4b; }
+    .toc-group img { display: block; width: 100%; height: 8px; object-fit: fill; margin: 0 0 0.7rem; }
     .toc-list li:first-child .toc-group { margin-top: 0; }
+    .toc-list li:first-child .toc-group img { display: none; }
     .toc-list a {
-        position: relative; display: block; padding: 0.5rem 0.4rem 0.5rem 2.4rem;
-        font-size: 0.86rem; font-weight: 700; line-height: 1.5; color: #1e1b4b; text-decoration: none;
+        position: relative; display: block; padding: 0.62rem 0.4rem 0.62rem 2.6rem;
+        font-size: 0.9rem; font-weight: 700; line-height: 1.5; color: #1e1b4b; text-decoration: none;
     }
-    .toc-list a::before { content: ''; position: absolute; left: 1rem; top: 1.05rem; width: 5px; height: 5px; border-radius: 50%; background: #c7d2fe; }
+    .toc-list a::before { content: ''; position: absolute; left: 1.15rem; top: 1.25rem; width: 6px; height: 6px; border-radius: 50%; background: #c7d2fe; }
     .toc-list a:hover { color: #4f46e5; }
-    .toc-num { position: absolute; left: 0.35rem; top: 50%; transform: translateY(-50%); width: 26px; height: auto; }
+    .toc-num { position: absolute; left: 0.3rem; top: 50%; transform: translateY(-50%); width: 29px; height: auto; }
+    .toc-list a.has-num { padding-top: 0.72rem; padding-bottom: 0.72rem; }
     .toc-list a.has-num::before { display: none; }
-    .toc-list a.is-now { font-weight: 900; background: url('img/dotline-yellow.png') left bottom 4px / 100% 7px no-repeat; }
+    .toc-list a.is-now { font-weight: 900; background: url('img/dotline-yellow.png') left bottom 3px / 100% 9px no-repeat; }
     @media (max-width: 600px) {
-        .toc-list a { padding: 0.6rem 0.4rem 0.6rem 2.4rem; font-size: 0.9rem; }
-        .toc-list a::before { top: 1.2rem; }
+        .toc-tab { left: 10px; top: 72px; width: 44px; height: 44px; }
+        .toc-list a { font-size: 0.92rem; }
     }
 </style>
 
@@ -1204,9 +1208,6 @@
 -->
 
 <nav class="ytt-sp-nav">
-    <button type="button" class="toc-tab" aria-expanded="false" aria-controls="toc-panel" aria-label="目次">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="4.5" cy="6.5" r="1.7"/><circle cx="4.5" cy="12" r="1.7"/><circle cx="4.5" cy="17.5" r="1.7"/><path d="M9.5 6.5h10M9.5 12h10M9.5 17.5h6.5" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/></svg>
-    </button>
     <a href="ytt-tokusetu.html" class="ytt-sp-nav-logo">
         <img src="img/ytt-nav-logo.png" alt="YTT — FX SPACE">
     </a>
@@ -1224,6 +1225,9 @@
     </div>
 </nav>
 
+<button type="button" class="toc-tab" aria-expanded="false" aria-controls="toc-panel" aria-label="目次">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="4.5" cy="6.5" r="1.8"/><circle cx="4.5" cy="12" r="1.8"/><circle cx="4.5" cy="17.5" r="1.8"/><path d="M9.5 6.5h10M9.5 12h10M9.5 17.5h6.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+</button>
 <div class="toc-back" hidden></div>
 <nav class="toc-panel" id="toc-panel" aria-label="目次" hidden>
     <p class="toc-head"><span class="toc-head-t">目次</span><button type="button" class="toc-close" aria-label="目次を閉じる"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button></p>
@@ -2187,11 +2191,11 @@
         if (grp !== lastGroup) {
           var g = document.createElement('p');
           g.className = 'toc-group';
-          g.textContent = grp;
           var gl = document.createElement('img');
           gl.src = 'img/dotline-yellow.png';
           gl.alt = '';
           g.appendChild(gl);
+          g.appendChild(document.createTextNode(grp));
           li.appendChild(g);
           lastGroup = grp;
         }

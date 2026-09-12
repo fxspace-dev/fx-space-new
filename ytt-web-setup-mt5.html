@@ -849,6 +849,7 @@
             .ytt-sp-nav-cta .btn-sq-blue.sm, .ytt-sp-nav-cta .btn-sq-white.sm { min-height: 44px; display: inline-flex; align-items: center; }
             a[href][style*="font-size:0.8125rem"], a[href][style*="font-size:0.75rem"] { display: inline-block; padding: 0.5em 0; }
         }
+
 </style>
 <style>
     /* ===== 導入手順カード（特設ページの白カード＋手書きオレンジ番号） ===== */
@@ -1094,6 +1095,38 @@
     }
     #flow + section { --tip: 48px; padding-top: calc(4.5rem + var(--tip)); }
     @media (max-width: 640px) { #flow, #flow + section { --tip: 30px; } }
+
+    /* スマホ：画面が狭いぶん、外側の余白を詰めて中身の幅を広げる */
+    @media (max-width: 600px) {
+        .ytt-spec-section { padding-left: 0.75rem; padding-right: 0.75rem; }
+        .ytt-spec-inner { max-width: none; }
+        .ytt-fto2, .ytt-fto2.wy-intro { padding: 1rem 0.7rem; }
+        .guide-card { padding: 1.25rem 0.7rem 0.25rem; }
+        .ytt-add-card { padding: 1rem 0.8rem; }
+        details.ytt-spec-acc > summary { padding: 1rem 0.9rem; }
+        .ytt-spec-acc-body { padding: 0 0.9rem 1.2rem; }
+        .no-account { max-width: none; }
+        .no-account-title { padding: 1rem 0.9rem; }
+        .no-account .ytt-spec-acc-body { padding: 0 0.9rem 1.2rem; }
+        .ytt-sp-hero { padding-left: 1rem; padding-right: 1rem; }
+        /* ノートPCの台座がカードの端に当たらないように */
+        .wy-devices { padding-right: 14px; }
+        .wy-lap-base { width: calc(100% + 20px); margin: 0 -10px; }
+    }
+    /* 動画を拡大して見るボタン（スマホでも文字が読めるように） */
+    .vzoom {
+        display: flex; align-items: center; gap: 0.4rem; width: fit-content; margin: 0.6rem auto 0;
+        padding: 0.45rem 0.9rem; border: 1.5px solid #c7d2fe; border-radius: 999px;
+        background: #fff; color: #1e1b4b; font-family: inherit; font-size: 0.8rem; font-weight: 800; cursor: pointer;
+    }
+    .vzoom svg { width: 15px; height: 15px; flex: none; }
+    .vzoom:hover { border-color: #818cf8; }
+    /* スマホ：制限事項は、文字を先に読ませて図はそのあと */
+    @media (max-width: 600px) {
+        .lim-card h3 { order: 1; }
+        .lim-card > p, .lim-ng { order: 2; }
+        .lim-mock { order: 3; margin: 1rem 0 0; padding: 0.9rem 0 0; border-bottom: 0; border-top: 1.5px dashed #e5e7eb; }
+    }
 </style>
 
 <script>document.documentElement.classList.add('js-gate');</script>
@@ -1132,7 +1165,7 @@
         <span class="pc-note">※導入作業はPCで行います</span>
     </p>
     <div class="ytt-sp-hero-btns">
-        <a href="#flow" class="btn-sq-blue">導入をはじめる</a>
+        <a href="#tool-select" class="btn-sq-blue">導入をはじめる</a>
         <a href="#trouble" class="btn-sq-white">よくある質問</a>
     </div>
     <p style="font-size:0.8125rem;color:#6b7280;margin-top:1.25rem;">
@@ -1232,7 +1265,7 @@
                     <li><img src="img/check-orange.png" alt="">経済指標表示 ほか</li>
                 </ul>
                 <p class="ytt-fto-attention">連携ツールは、Web版YTTで押した注文を取引ツール（MT4 / MT5 / cTrader）に伝えて、実際に注文を出す役目です。そのため MT4 / MT5 は利用中もPCを起動したままにしてください（cTrader Cloud版はPCを閉じてもOK）。</p>
-                <p class="ytt-fto2-note">詳しい機能は <a href="ytt-web-features.html">Web版YTT 使い方ページ</a> で紹介します。</p>
+                <p class="ytt-fto2-note">詳しい機能は、Web版YTTの使い方ページ（準備中）で紹介します。</p>
             </div>
         </div>
     </div>
@@ -1277,30 +1310,6 @@
 </section>
 
 <!-- 導入の流れ -->
-<section class="ytt-spec-section" id="flow" style="background:#f4f6f9;">
-    <div class="ytt-spec-inner ytt-fto-wide">
-        <div class="ytt-spec-header">
-            <span class="section-title-badge section-title-badge--orange">
-                <img class="hero-title-side hero-title-side--left" src="img/title-side-orange-left.png" alt="">
-                導入方法
-                <img class="hero-title-side hero-title-side--right" src="img/title-side-orange-right.png" alt="">
-            </span>
-            <div style="text-align:center; margin-bottom:0.25rem;">
-                <div style="display:inline-block; white-space:nowrap;">
-                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">3ステップで導入完了</h2>
-                    <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
-                </div>
-            </div>
-            <p>所要時間の目安は約15分。上から順番に進めてください。</p>
-        </div>
-        <div class="ytt-add-grid flow3">
-            <a class="ytt-add-card" href="#tool-select"><img class="flow-num" src="img/crayon-1.png" alt="1"><h3>口座登録</h3><p>登録ページから口座を登録し、表示される32文字の認証コードを控える</p></a>
-            <a class="ytt-add-card" href="#tool-select"><img class="flow-num" src="img/crayon-2.png" alt="2"><h3>連携ツールの設置</h3><p>MT4 / MT5 / cTrader に連携ツールを入れ、認証コードを設定する</p></a>
-            <a class="ytt-add-card" href="#tool-select"><img class="flow-num" src="img/crayon-3.png" alt="3"><h3>ログイン</h3><p>Web版YTTにDiscordでログインし、口座を選んで接続を確認する</p></a>
-        </div>
-    </div>
-</section>
-
 <!-- 取引ツールの選択（選ぶまで下の手順は表示しない） -->
 <section class="ytt-spec-section" id="tool-select" style="background:#fff;">
     <div class="ytt-spec-inner">
@@ -1329,6 +1338,30 @@
 </section>
 
 <div id="gated">
+<section class="ytt-spec-section" id="flow" style="background:#f4f6f9;">
+    <div class="ytt-spec-inner ytt-fto-wide">
+        <div class="ytt-spec-header">
+            <span class="section-title-badge section-title-badge--orange">
+                <img class="hero-title-side hero-title-side--left" src="img/title-side-orange-left.png" alt="">
+                導入方法
+                <img class="hero-title-side hero-title-side--right" src="img/title-side-orange-right.png" alt="">
+            </span>
+            <div style="text-align:center; margin-bottom:0.25rem;">
+                <div style="display:inline-block; white-space:nowrap;">
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">3ステップで導入完了</h2>
+                    <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
+                </div>
+            </div>
+            <p>所要時間の目安は約15分。上から順番に進めてください。</p>
+        </div>
+        <div class="ytt-add-grid flow3">
+            <a class="ytt-add-card" href="#step1"><img class="flow-num" src="img/crayon-1.png" alt="1"><h3>口座登録</h3><p>登録ページから口座を登録し、表示される32文字の認証コードを控える</p></a>
+            <a class="ytt-add-card" href="#step2"><img class="flow-num" src="img/crayon-2.png" alt="2"><h3>連携ツールの設置</h3><p>MT4 / MT5 / cTrader に連携ツールを入れ、認証コードを設定する</p></a>
+            <a class="ytt-add-card" href="#step3"><img class="flow-num" src="img/crayon-3.png" alt="3"><h3>ログイン</h3><p>Web版YTTにDiscordでログインし、口座を選んで接続を確認する</p></a>
+        </div>
+    </div>
+</section>
+
 <!-- 動画で見る（MT5）：MT5を選ぶと、手順のいちばん上に出る -->
 <section class="ytt-spec-section" id="howto-video" style="background:#f4f6f9;">
     <div class="ytt-spec-inner">
@@ -2061,6 +2094,22 @@
       }, { threshold: [0, 0.5] }).observe(v);
     });
   }
+
+  // ---- 動画に「拡大して見る」ボタン（スマホで文字が小さいため） ----
+  document.querySelectorAll('.gshot video').forEach(function (v) {
+    var fig = v.closest('figure');
+    if (!fig || fig.querySelector('.vzoom')) return;
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'vzoom';
+    b.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4H4v5M15 4h5v5M15 20h5v-5M9 20H4v-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>拡大して見る';
+    b.addEventListener('click', function () {
+      if (v.requestFullscreen) v.requestFullscreen();
+      else if (v.webkitEnterFullscreen) v.webkitEnterFullscreen();
+      else if (v.webkitRequestFullscreen) v.webkitRequestFullscreen();
+    });
+    fig.appendChild(b);
+  });
   // ---- 取引ツールの選択：選ぶまで #gated（事前準備〜）を表示しない ----
   var gated = document.getElementById('gated');
   var me = document.body.getAttribute('data-tool');

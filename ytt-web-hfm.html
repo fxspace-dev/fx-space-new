@@ -849,6 +849,7 @@
             .ytt-sp-nav-cta .btn-sq-blue.sm, .ytt-sp-nav-cta .btn-sq-white.sm { min-height: 44px; display: inline-flex; align-items: center; }
             a[href][style*="font-size:0.8125rem"], a[href][style*="font-size:0.75rem"] { display: inline-block; padding: 0.5em 0; }
         }
+
 </style>
 <style>
     /* ===== 導入手順カード（特設ページの白カード＋手書きオレンジ番号） ===== */
@@ -1034,6 +1035,29 @@
     }
     #flow + section { --tip: 48px; padding-top: calc(4.5rem + var(--tip)); }
     @media (max-width: 640px) { #flow, #flow + section { --tip: 30px; } }
+
+    /* スマホ：画面が狭いぶん、外側の余白を詰めて中身の幅を広げる */
+    @media (max-width: 600px) {
+        .ytt-spec-section { padding-left: 0.75rem; padding-right: 0.75rem; }
+        .ytt-spec-inner { max-width: none; }
+        .ytt-fto2, .ytt-fto2.wy-intro { padding: 1rem 0.7rem; }
+        .guide-card { padding: 1.25rem 0.7rem 0.25rem; }
+        .ytt-add-card { padding: 1rem 0.8rem; }
+        details.ytt-spec-acc > summary { padding: 1rem 0.9rem; }
+        .ytt-spec-acc-body { padding: 0 0.9rem 1.2rem; }
+        .no-account { max-width: none; }
+        .no-account-title { padding: 1rem 0.9rem; }
+        .no-account .ytt-spec-acc-body { padding: 0 0.9rem 1.2rem; }
+        .ytt-sp-hero { padding-left: 1rem; padding-right: 1rem; }
+    }
+    /* 動画を拡大して見るボタン（スマホでも文字が読めるように） */
+    .vzoom {
+        display: flex; align-items: center; gap: 0.4rem; width: fit-content; margin: 0.6rem auto 0;
+        padding: 0.45rem 0.9rem; border: 1.5px solid #c7d2fe; border-radius: 999px;
+        background: #fff; color: #1e1b4b; font-family: inherit; font-size: 0.8rem; font-weight: 800; cursor: pointer;
+    }
+    .vzoom svg { width: 15px; height: 15px; flex: none; }
+    .vzoom:hover { border-color: #818cf8; }
 </style>
 
 </head>

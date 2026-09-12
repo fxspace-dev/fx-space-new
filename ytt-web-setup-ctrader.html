@@ -1016,6 +1016,7 @@
     .lim-card { display: flex; flex-direction: column; }
     .lim-mock { margin: -0.25rem 0 0.9rem; padding: 0.4rem 0 0.6rem; border-bottom: 1.5px dashed #e5e7eb; }
     .lim-mock svg { display: block; width: 100%; max-width: 320px; height: auto; margin: 0 auto; font-family: inherit; }
+    .lim-mock img { display: block; max-width: 100%; max-height: 210px; width: auto; height: auto; margin: 0 auto; border-radius: 4px; }
     /* 動画にも手書き風の枠（.gshot video） */
     .gframe.gframe-video { display: block; }
     .gframe > video { display: block; width: 100%; height: auto; border-radius: 5px; background: #0b0f1e; }
@@ -1642,16 +1643,7 @@
                     <li><svg class="lim-ng-x" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#dc2626"/><path d="M8.4 8.4l7.2 7.2M15.6 8.4l-7.2 7.2" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg><span>複数のcTraderで同時に同じ口座にログインして、連携ツール（cBot）を入れる</span></li>
                 </ul>
             </div>
-            <div class="ytt-add-card lim-card"><div class="lim-mock"><svg viewBox="0 0 280 150" role="img" aria-label="cTraderのチャート上で、緑の再生ボタンが出ているときは止まっていて、オレンジの停止ボタンが出ているときは動いている図">
-  <rect x="12" y="10" width="256" height="40" rx="9" fill="#262b38"/>
-  <rect x="22" y="19" width="120" height="22" rx="5" fill="#1b1f29" stroke="#3f4555"/><text x="82" y="34" font-size="11" font-weight="700" fill="#e5e7eb" text-anchor="middle">YTT for Web</text>
-  <rect x="214" y="17" width="44" height="26" rx="6" fill="#16a34a"/><path d="M231 23v14l12-7z" fill="#fff"/>
-  <text x="150" y="68" font-size="11" font-weight="800" fill="#1e1b4b" text-anchor="middle">緑の「▶」＝ 止まっている → 押して動かす</text>
-  <rect x="12" y="80" width="256" height="40" rx="9" fill="#262b38"/>
-  <rect x="22" y="89" width="120" height="22" rx="5" fill="#1b1f29" stroke="#3f4555"/><text x="82" y="104" font-size="11" font-weight="700" fill="#e5e7eb" text-anchor="middle">YTT for Web</text>
-  <rect x="214" y="87" width="44" height="26" rx="6" fill="#f97316"/><rect x="230" y="94" width="12" height="12" rx="1.5" fill="#fff"/>
-  <text x="150" y="138" font-size="11" font-weight="800" fill="#1e1b4b" text-anchor="middle">オレンジの「■」＝ 動いている（OK）</text>
-</svg></div><h3>連携ツールを止めない</h3><p>cTraderのチャート上に緑の「▶」が出ているときは、連携ツールが止まっています。押して動かしてください。</p></div>
+            <div class="ytt-add-card lim-card"><div class="lim-mock"><img src="img/webytt/ctrader/c-05-play.png" alt="cTraderのチャート上に緑の再生ボタンが出ている状態" loading="lazy" width="542" height="277"></div><h3>連携ツールを止めない</h3><p>cTraderのチャート上に緑の「▶」が出ているときは、連携ツールが止まっています。押して動かしてください。</p></div>
             <div class="ytt-add-card lim-card"><div class="lim-mock"><svg viewBox="0 0 280 150" role="img" aria-label="PCで取引ツールを起動していればWeb版YTTはつながり、PCがスリープ中は止まる図">
   <rect x="10" y="18" width="84" height="54" rx="5" fill="#11163a" stroke="#1e1b4b" stroke-width="2"/>
   <path d="M20 58 l10-9 9 5 10-14 9 7 10-10 9 5 8-7" stroke="#22c55e" stroke-width="2" fill="none" stroke-linejoin="round" stroke-linecap="round"/><text x="52" y="34" font-size="9.5" font-weight="800" fill="#e9b949" text-anchor="middle">cTrader</text>

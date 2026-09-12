@@ -1115,13 +1115,22 @@
         .wy-lap-base { width: calc(100% + 20px); margin: 0 -10px; }
     }
     /* 動画を拡大して見るボタン（スマホでも文字が読めるように） */
+    .vzoom-row { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.6rem; }
     .vzoom {
-        display: flex; align-items: center; gap: 0.4rem; width: fit-content; margin: 0.6rem auto 0;
+        display: inline-flex; align-items: center; gap: 0.4rem;
         padding: 0.45rem 0.9rem; border: 1.5px solid #c7d2fe; border-radius: 999px;
         background: #fff; color: #1e1b4b; font-family: inherit; font-size: 0.8rem; font-weight: 800; cursor: pointer;
     }
     .vzoom svg { width: 15px; height: 15px; flex: none; }
     .vzoom:hover { border-color: #818cf8; }
+    .vzoom-sp { display: none; }
+    @media (max-width: 600px) {
+        .vzoom-pc { display: none; }
+        .vzoom-sp { display: inline-flex; }
+        /* 見たいところから再生：横に並べず1つずつ縦に */
+        .hv-chapters { flex-direction: column; align-items: center; gap: 0.15rem; }
+        .hv-chapters-label { margin-bottom: 0.25rem; }
+    }
     /* スマホ：制限事項は、文字を先に読ませて図はそのあと */
     @media (max-width: 600px) {
         .lim-card h3 { order: 1; }
@@ -2001,20 +2010,40 @@
     });
   }
 
-  // ---- 動画に「拡大して見る」ボタン（スマホで文字が小さいため） ----
+  // ---- 動画を拡大して見るボタン（スマホでは横向き・縦のままを選べる） ----
+  var vzIcon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4H4v5M15 4h5v5M15 20h5v-5M9 20H4v-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  function vzOpen(v, land) {
+    var p = null;
+    if (v.requestFullscreen) p = v.requestFullscreen();
+    else if (v.webkitRequestFullscreen) { v.webkitRequestFullscreen(); p = Promise.resolve(); }
+    else if (v.webkitEnterFullscreen) { v.webkitEnterFullscreen(); return; }   // iPhoneのSafari（向きは端末まかせ）
+    else return;
+    if (!land || !(screen.orientation && screen.orientation.lock)) return;
+    Promise.resolve(p).then(function () {
+      try { var q = screen.orientation.lock('landscape'); if (q && q.catch) q.catch(function () {}); } catch (e) {}
+    }).catch(function () {});
+  }
+  document.addEventListener('fullscreenchange', function () {
+    if (!document.fullscreenElement && screen.orientation && screen.orientation.unlock) {
+      try { screen.orientation.unlock(); } catch (e) {}
+    }
+  });
   document.querySelectorAll('.gshot video').forEach(function (v) {
     var fig = v.closest('figure');
-    if (!fig || fig.querySelector('.vzoom')) return;
-    var b = document.createElement('button');
-    b.type = 'button';
-    b.className = 'vzoom';
-    b.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4H4v5M15 4h5v5M15 20h5v-5M9 20H4v-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>拡大して見る';
-    b.addEventListener('click', function () {
-      if (v.requestFullscreen) v.requestFullscreen();
-      else if (v.webkitEnterFullscreen) v.webkitEnterFullscreen();
-      else if (v.webkitRequestFullscreen) v.webkitRequestFullscreen();
+    if (!fig || fig.querySelector('.vzoom-row')) return;
+    var row = document.createElement('div');
+    row.className = 'vzoom-row';
+    [['vzoom vzoom-pc', '拡大して見る', false],
+     ['vzoom vzoom-sp', '横向きで拡大', true],
+     ['vzoom vzoom-sp', '縦のまま拡大', false]].forEach(function (d) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = d[0];
+      b.innerHTML = vzIcon + d[1];
+      b.addEventListener('click', function () { vzOpen(v, d[2]); });
+      row.appendChild(b);
     });
-    fig.appendChild(b);
+    fig.appendChild(row);
   });
   // ---- 取引ツールの選択：選ぶまで #gated（事前準備〜）を表示しない ----
   var gated = document.getElementById('gated');

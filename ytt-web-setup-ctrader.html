@@ -1168,8 +1168,9 @@
         background: #fff; box-shadow: 10px 0 36px rgba(30, 27, 75, 0.22);
     }
     .toc-panel[hidden] { display: none; }
-    .toc-head { display: flex; align-items: center; justify-content: space-between; margin: 0 0 0.9rem; padding: 0 0.2rem; }
-    .toc-head-t { font-size: 1.1rem; font-weight: 900; color: #1e1b4b; }
+    .toc-head { display: flex; align-items: flex-start; justify-content: space-between; margin: 0 0 1.1rem; padding: 0 0.2rem; }
+    .toc-head-t { position: relative; display: inline-block; padding-bottom: 0.5rem; font-size: 1.15rem; font-weight: 900; letter-spacing: 0.14em; color: #1e1b4b; }
+    .toc-head-t::after { content: ''; position: absolute; left: 0; bottom: 0; width: 36px; height: 4px; border-radius: 2px; background: #f97316; }
     .toc-close { flex: none; display: inline-flex; width: 34px; height: 34px; align-items: center; justify-content: center; border: 0; border-radius: 50%; background: #f4f6f9; color: #1e1b4b; cursor: pointer; }
     .toc-close svg { width: 16px; height: 16px; }
     .toc-list { list-style: none; margin: 0; padding: 0; }
@@ -1186,7 +1187,7 @@
     .toc-num { position: absolute; left: 0.3rem; top: 50%; transform: translateY(-50%); width: 29px; height: auto; }
     .toc-list a.has-num { padding-top: 0.72rem; padding-bottom: 0.72rem; }
     .toc-list a.has-num::before { display: none; }
-    .toc-list a.is-now { font-weight: 900; background: url('img/dotline-yellow.png') left bottom 3px / 100% 9px no-repeat; }
+    .toc-list a.is-now { font-weight: 900; color: #f97316; }
     @media (max-width: 600px) {
         .toc-tab { left: 10px; top: 72px; width: 44px; height: 44px; }
         .toc-list a { font-size: 0.92rem; }
@@ -1232,7 +1233,7 @@
 </button>
 <div class="toc-back" hidden></div>
 <nav class="toc-panel" id="toc-panel" aria-label="目次" hidden>
-    <p class="toc-head"><span class="toc-head-t">目次</span><button type="button" class="toc-close" aria-label="目次を閉じる"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button></p>
+    <p class="toc-head"><span class="toc-head-t">CONTENTS</span><button type="button" class="toc-close" aria-label="目次を閉じる"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button></p>
     <ul class="toc-list"></ul>
 </nav>
 

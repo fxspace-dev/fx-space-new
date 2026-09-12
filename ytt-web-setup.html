@@ -1149,36 +1149,49 @@
     @media (max-width: 600px) {
         .nav-tool-btn { padding: 0.3rem 0.5rem; font-size: 0.75rem; }
     }
-    /* 目次（左から出し入れ） */
+    /* 目次 */
     .toc-tab {
-        position: fixed; left: 0; top: 50%; transform: translateY(-50%); z-index: 900;
-        display: flex; align-items: center; justify-content: center;
-        width: 34px; padding: 0.9rem 0; border: 0; border-radius: 0 10px 10px 0;
-        background: #1e1b4b; color: #fff; box-shadow: 2px 3px 10px rgba(30, 27, 75, 0.25);
-        font-family: inherit; font-size: 0.8rem; font-weight: 800; letter-spacing: 0.1em; cursor: pointer;
+        position: fixed; left: 16px; bottom: 16px; z-index: 900;
+        display: inline-flex; align-items: center; gap: 0.4rem;
+        padding: 0.55rem 0.95rem 0.55rem 0.75rem; border: 1.5px solid #dfe3f5; border-radius: 999px;
+        background: rgba(255, 255, 255, 0.96); backdrop-filter: blur(6px); color: #1e1b4b;
+        box-shadow: 0 8px 22px rgba(30, 27, 75, 0.16);
+        font-family: inherit; font-size: 0.82rem; font-weight: 800; cursor: pointer;
+        transition: transform 0.15s, box-shadow 0.15s;
     }
-    .toc-tab span { writing-mode: vertical-rl; }
-    .toc-back { position: fixed; inset: 0; z-index: 1090; background: rgba(17, 22, 58, 0.4); }
+    .toc-tab svg { width: 17px; height: 17px; fill: #4f46e5; color: #4f46e5; }
+    .toc-tab:hover { transform: translateY(-1px); box-shadow: 0 12px 26px rgba(30, 27, 75, 0.22); }
+    .toc-back { position: fixed; inset: 0; z-index: 1090; background: rgba(17, 22, 58, 0.45); }
     .toc-back[hidden] { display: none; }
     .toc-panel {
         position: fixed; top: 0; bottom: 0; left: 0; z-index: 1100;
-        width: min(300px, 84vw); padding: 0.9rem 0.9rem 2rem; overflow-y: auto;
-        background: #fff; box-shadow: 6px 0 24px rgba(30, 27, 75, 0.18);
+        width: min(304px, 86vw); padding: 1.15rem 0.85rem 2rem; overflow-y: auto;
+        background: #fff; border-radius: 0 22px 22px 0; box-shadow: 10px 0 36px rgba(30, 27, 75, 0.22);
     }
     .toc-panel[hidden] { display: none; }
-    .toc-head { display: flex; align-items: center; justify-content: space-between; margin: 0 0 0.6rem; padding: 0 0.2rem; font-size: 0.95rem; font-weight: 900; color: #1e1b4b; }
-    .toc-close { display: inline-flex; width: 32px; height: 32px; align-items: center; justify-content: center; border: 0; border-radius: 50%; background: #f4f6f9; color: #1e1b4b; cursor: pointer; }
-    .toc-close svg { width: 16px; height: 16px; }
-    .toc-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.15rem; }
+    .toc-head { display: flex; align-items: flex-start; justify-content: space-between; margin: 0 0 0.5rem; padding: 0 0.35rem; }
+    .toc-head-t { display: inline-block; font-size: 1.05rem; font-weight: 900; color: #1e1b4b; line-height: 1.2; }
+    .toc-head-t img { display: block; width: 100%; height: 9px; object-fit: fill; margin-top: 2px; }
+    .toc-close { flex: none; display: inline-flex; width: 32px; height: 32px; align-items: center; justify-content: center; border: 0; border-radius: 50%; background: #f4f6f9; color: #1e1b4b; cursor: pointer; }
+    .toc-close svg { width: 15px; height: 15px; }
+    .toc-list { list-style: none; margin: 0; padding: 0; }
+    .toc-group { margin: 1rem 0 0.3rem; padding: 0 0.45rem; font-size: 0.66rem; font-weight: 800; color: #9aa1b5; letter-spacing: 0.1em; }
+    .toc-list li:first-child .toc-group { margin-top: 0.2rem; }
     .toc-list a {
-        display: block; padding: 0.6rem 0.6rem; border-radius: 10px;
-        font-size: 0.85rem; font-weight: 700; line-height: 1.5; color: #1e1b4b; text-decoration: none;
+        display: flex; align-items: center; gap: 0.6rem; padding: 0.5rem 0.55rem;
+        border-radius: 12px; font-size: 0.86rem; font-weight: 700; line-height: 1.45;
+        color: #1e1b4b; text-decoration: none; transition: background 0.12s;
     }
     .toc-list a:hover { background: #f4f6f9; }
-    .toc-list a small { display: block; font-size: 0.68rem; font-weight: 800; color: #f97316; letter-spacing: 0.04em; }
+    .toc-mark { flex: none; width: 30px; height: 24px; display: inline-flex; align-items: center; justify-content: center; border-radius: 7px; background: #eef2ff; color: #4f46e5; font-size: 0.68rem; font-weight: 900; }
+    .toc-mark.dot { background: none; }
+    .toc-mark.dot::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #c7d2fe; }
+    .toc-list a.is-now { background: #f4f6f9; box-shadow: inset 3px 0 0 #f97316; }
+    .toc-list a.is-now .toc-mark { background: #f97316; color: #fff; }
+    .toc-list a.is-now .toc-mark.dot::before { background: #f97316; }
     @media (max-width: 600px) {
-        .toc-tab { width: 30px; font-size: 0.75rem; }
-        .toc-list a { padding: 0.7rem 0.6rem; font-size: 0.9rem; }
+        .toc-tab { left: 12px; bottom: 12px; font-size: 0.8rem; }
+        .toc-list a { padding: 0.6rem 0.55rem; font-size: 0.9rem; }
     }
 </style>
 
@@ -1214,10 +1227,12 @@
     </div>
 </nav>
 
-<button type="button" class="toc-tab" aria-expanded="false" aria-controls="toc-panel"><span>目次</span></button>
+<button type="button" class="toc-tab" aria-expanded="false" aria-controls="toc-panel">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="6.5" r="1.6"/><circle cx="5" cy="12" r="1.6"/><circle cx="5" cy="17.5" r="1.6"/><path d="M10 6.5h9M10 12h9M10 17.5h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>目次
+</button>
 <div class="toc-back" hidden></div>
 <nav class="toc-panel" id="toc-panel" aria-label="目次" hidden>
-    <p class="toc-head">目次<button type="button" class="toc-close" aria-label="目次を閉じる"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button></p>
+    <p class="toc-head"><span class="toc-head-t">目次<img src="img/wave-orange.png" alt=""></span><button type="button" class="toc-close" aria-label="目次を閉じる"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button></p>
     <ul class="toc-list"></ul>
 </nav>
 
@@ -2130,23 +2145,46 @@
     var tab = document.querySelector('.toc-tab'), panel = document.querySelector('.toc-panel'),
         back = document.querySelector('.toc-back'), list = panel && panel.querySelector('.toc-list');
     if (!tab || !panel || !list) return;
-    var skip = { 'tool-select': 1 };
     function build() {
       list.innerHTML = '';
-      var n = 0;
-      [].slice.call(document.querySelectorAll('section.ytt-spec-section')).forEach(function (sec) {
-        if (sec.getBoundingClientRect().height < 5) return;                 // 取引ツールを選ぶ前の非表示分
+      var gated = document.getElementById('gated');
+      var afterStep3 = false, afterTrouble = false, lastGroup = '', n = 0, now = null;
+      var secs = [].slice.call(document.querySelectorAll('section.ytt-spec-section')).filter(function (sec) {
+        if (sec.getBoundingClientRect().height < 5) return false;
+        if (sec.id === 'tool-select') return false;
         var h2 = sec.querySelector('.ytt-spec-header h2');
-        if (!h2 || skip[sec.id]) return;
+        if (!h2) return false;
+        var b = sec.querySelector('.section-title-badge');
+        return !(b && b.textContent.indexOf('続き') >= 0);
+      });
+      secs.forEach(function (sec) { if (sec.getBoundingClientRect().top <= 90) now = sec; });
+      secs.forEach(function (sec) {
+        var h2 = sec.querySelector('.ytt-spec-header h2');
         var badgeEl = sec.querySelector('.section-title-badge');
         var badge = badgeEl ? badgeEl.textContent.replace(/\s+/g, ' ').trim() : '';
-        if (badge.indexOf('続き') >= 0) return;                             // 同じSTEPの続きはまとめる
+        if (sec.id === 'trouble') afterTrouble = true;
+        var grp = (!gated || !gated.contains(sec)) ? 'はじめに'
+                : afterTrouble ? '困ったときは'
+                : afterStep3 ? '使いはじめてから'
+                : '導入の手順';
         if (!sec.id) sec.id = 'toc-sec-' + (++n);
         var li = document.createElement('li');
+        if (grp !== lastGroup) {
+          var g = document.createElement('p');
+          g.className = 'toc-group';
+          g.textContent = grp;
+          li.appendChild(g);
+          lastGroup = grp;
+        }
         var a = document.createElement('a');
         a.href = '#' + sec.id;
-        if (/^(STEP|事前準備)/.test(badge)) a.innerHTML = '<small></small>';
-        if (a.firstChild) a.firstChild.textContent = badge;
+        if (sec === now) a.className = 'is-now';
+        var m = document.createElement('span');
+        var step = badge.match(/STEP\s*(\d)/);
+        if (step) { m.className = 'toc-mark'; m.textContent = step[1]; }
+        else if (badge.indexOf('事前準備') === 0) { m.className = 'toc-mark'; m.textContent = '準備'; }
+        else { m.className = 'toc-mark dot'; }
+        a.appendChild(m);
         a.appendChild(document.createTextNode(h2.textContent.trim()));
         a.addEventListener('click', function (e) {
           e.preventDefault();
@@ -2155,6 +2193,7 @@
         });
         li.appendChild(a);
         list.appendChild(li);
+        if (sec.id === 'step3') afterStep3 = true;
       });
     }
     function open() {

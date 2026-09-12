@@ -1152,47 +1152,40 @@
     }
     /* 目次 */
     .toc-tab {
-        position: fixed; left: 16px; bottom: 16px; z-index: 900;
-        display: inline-flex; align-items: center; gap: 0.4rem;
-        padding: 0.55rem 0.95rem 0.55rem 0.75rem; border: 1.5px solid #dfe3f5; border-radius: 999px;
-        background: rgba(255, 255, 255, 0.96); backdrop-filter: blur(6px); color: #1e1b4b;
-        box-shadow: 0 8px 22px rgba(30, 27, 75, 0.16);
-        font-family: inherit; font-size: 0.82rem; font-weight: 800; cursor: pointer;
-        transition: transform 0.15s, box-shadow 0.15s;
+        flex: none; display: inline-flex; align-items: center; justify-content: center;
+        width: 36px; height: 36px; padding: 0; border: 0; border-radius: 11px;
+        background: #f4f6f9; color: #1e1b4b; cursor: pointer; transition: background 0.15s;
     }
-    .toc-tab svg { width: 17px; height: 17px; fill: #4f46e5; color: #4f46e5; }
-    .toc-tab:hover { transform: translateY(-1px); box-shadow: 0 12px 26px rgba(30, 27, 75, 0.22); }
+    .toc-tab svg { width: 20px; height: 20px; fill: currentColor; }
+    .toc-tab:hover { background: #e8ecf5; }
     .toc-back { position: fixed; inset: 0; z-index: 1090; background: rgba(17, 22, 58, 0.45); }
     .toc-back[hidden] { display: none; }
     .toc-panel {
         position: fixed; top: 0; bottom: 0; left: 0; z-index: 1100;
-        width: min(304px, 86vw); padding: 1.15rem 0.85rem 2rem; overflow-y: auto;
-        background: #fff; border-radius: 0 22px 22px 0; box-shadow: 10px 0 36px rgba(30, 27, 75, 0.22);
+        width: min(306px, 86vw); padding: 1.15rem 1rem 2rem; overflow-y: auto;
+        background: #fff; box-shadow: 10px 0 36px rgba(30, 27, 75, 0.22);
     }
     .toc-panel[hidden] { display: none; }
-    .toc-head { display: flex; align-items: flex-start; justify-content: space-between; margin: 0 0 0.5rem; padding: 0 0.35rem; }
-    .toc-head-t { display: inline-block; font-size: 1.05rem; font-weight: 900; color: #1e1b4b; line-height: 1.2; }
-    .toc-head-t img { display: block; width: 100%; height: 9px; object-fit: fill; margin-top: 2px; }
+    .toc-head { display: flex; align-items: center; justify-content: space-between; margin: 0 0 1rem; padding: 0 0.2rem; }
+    .toc-head-t { font-size: 1.05rem; font-weight: 900; color: #1e1b4b; }
     .toc-close { flex: none; display: inline-flex; width: 32px; height: 32px; align-items: center; justify-content: center; border: 0; border-radius: 50%; background: #f4f6f9; color: #1e1b4b; cursor: pointer; }
     .toc-close svg { width: 15px; height: 15px; }
     .toc-list { list-style: none; margin: 0; padding: 0; }
-    .toc-group { margin: 1rem 0 0.3rem; padding: 0 0.45rem; font-size: 0.66rem; font-weight: 800; color: #9aa1b5; letter-spacing: 0.1em; }
-    .toc-list li:first-child .toc-group { margin-top: 0.2rem; }
+    .toc-group { margin: 1.1rem 0 0.35rem; padding: 0 0.2rem; font-size: 0.75rem; font-weight: 900; color: #1e1b4b; }
+    .toc-group img { display: block; width: 100%; height: 7px; object-fit: fill; margin-top: 3px; }
+    .toc-list li:first-child .toc-group { margin-top: 0; }
     .toc-list a {
-        display: flex; align-items: center; gap: 0.6rem; padding: 0.5rem 0.55rem;
-        border-radius: 12px; font-size: 0.86rem; font-weight: 700; line-height: 1.45;
-        color: #1e1b4b; text-decoration: none; transition: background 0.12s;
+        position: relative; display: block; padding: 0.5rem 0.4rem 0.5rem 2.4rem;
+        font-size: 0.86rem; font-weight: 700; line-height: 1.5; color: #1e1b4b; text-decoration: none;
     }
-    .toc-list a:hover { background: #f4f6f9; }
-    .toc-mark { flex: none; width: 30px; height: 24px; display: inline-flex; align-items: center; justify-content: center; border-radius: 7px; background: #eef2ff; color: #4f46e5; font-size: 0.68rem; font-weight: 900; }
-    .toc-mark.dot { background: none; }
-    .toc-mark.dot::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #c7d2fe; }
-    .toc-list a.is-now { background: #f4f6f9; box-shadow: inset 3px 0 0 #f97316; }
-    .toc-list a.is-now .toc-mark { background: #f97316; color: #fff; }
-    .toc-list a.is-now .toc-mark.dot::before { background: #f97316; }
+    .toc-list a::before { content: ''; position: absolute; left: 1rem; top: 1.05rem; width: 5px; height: 5px; border-radius: 50%; background: #c7d2fe; }
+    .toc-list a:hover { color: #4f46e5; }
+    .toc-num { position: absolute; left: 0.35rem; top: 50%; transform: translateY(-50%); width: 26px; height: auto; }
+    .toc-list a.has-num::before { display: none; }
+    .toc-list a.is-now { font-weight: 900; background: url('img/dotline-yellow.png') left bottom 4px / 100% 7px no-repeat; }
     @media (max-width: 600px) {
-        .toc-tab { left: 12px; bottom: 12px; font-size: 0.8rem; }
-        .toc-list a { padding: 0.6rem 0.55rem; font-size: 0.9rem; }
+        .toc-list a { padding: 0.6rem 0.4rem 0.6rem 2.4rem; font-size: 0.9rem; }
+        .toc-list a::before { top: 1.2rem; }
     }
 </style>
 
@@ -1213,6 +1206,9 @@
 -->
 
 <nav class="ytt-sp-nav">
+    <button type="button" class="toc-tab" aria-expanded="false" aria-controls="toc-panel" aria-label="目次">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="4.5" cy="6.5" r="1.7"/><circle cx="4.5" cy="12" r="1.7"/><circle cx="4.5" cy="17.5" r="1.7"/><path d="M9.5 6.5h10M9.5 12h10M9.5 17.5h6.5" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/></svg>
+    </button>
     <a href="ytt-tokusetu.html" class="ytt-sp-nav-logo">
         <img src="img/ytt-nav-logo.png" alt="YTT — FX SPACE">
     </a>
@@ -1230,12 +1226,9 @@
     </div>
 </nav>
 
-<button type="button" class="toc-tab" aria-expanded="false" aria-controls="toc-panel">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="6.5" r="1.6"/><circle cx="5" cy="12" r="1.6"/><circle cx="5" cy="17.5" r="1.6"/><path d="M10 6.5h9M10 12h9M10 17.5h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>目次
-</button>
 <div class="toc-back" hidden></div>
 <nav class="toc-panel" id="toc-panel" aria-label="目次" hidden>
-    <p class="toc-head"><span class="toc-head-t">目次<img src="img/wave-orange.png" alt=""></span><button type="button" class="toc-close" aria-label="目次を閉じる"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button></p>
+    <p class="toc-head"><span class="toc-head-t">目次</span><button type="button" class="toc-close" aria-label="目次を閉じる"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button></p>
     <ul class="toc-list"></ul>
 </nav>
 
@@ -2097,18 +2090,25 @@
           var g = document.createElement('p');
           g.className = 'toc-group';
           g.textContent = grp;
+          var gl = document.createElement('img');
+          gl.src = 'img/dotline-yellow.png';
+          gl.alt = '';
+          g.appendChild(gl);
           li.appendChild(g);
           lastGroup = grp;
         }
         var a = document.createElement('a');
         a.href = '#' + sec.id;
-        if (sec === now) a.className = 'is-now';
-        var m = document.createElement('span');
         var step = badge.match(/STEP\s*(\d)/);
-        if (step) { m.className = 'toc-mark'; m.textContent = step[1]; }
-        else if (badge.indexOf('事前準備') === 0) { m.className = 'toc-mark'; m.textContent = '準備'; }
-        else { m.className = 'toc-mark dot'; }
-        a.appendChild(m);
+        if (step) {
+          var num = document.createElement('img');
+          num.className = 'toc-num';
+          num.src = 'img/crayon-' + step[1] + '.png';
+          num.alt = step[1];
+          a.appendChild(num);
+          a.className = 'has-num';
+        }
+        if (sec === now) a.className += ' is-now';
         a.appendChild(document.createTextNode(h2.textContent.trim()));
         a.addEventListener('click', function (e) {
           e.preventDefault();

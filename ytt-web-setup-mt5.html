@@ -1024,8 +1024,8 @@
     .lim-dot { width: 10px; height: 10px; border-radius: 50%; background: #eab308; flex: none; }
     .lim-pill { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; flex: 1; background: #1b2740; border-radius: 999px; padding: 0.3rem 0.7rem; font-size: 0.7rem; font-weight: 800; color: #e5e7eb; }
     .lim-pill i { font-style: normal; font-size: 0.6rem; color: #94a3b8; }
-    .lim-ytt-msg { margin: 0.45rem 0 0; background: #171233; border-radius: 8px; padding: 0.55rem 0.6rem; font-size: 0.7rem; font-weight: 700; line-height: 1.85; color: #98a0b6; text-align: left; }
-    .lim-ytt-msg b { color: #e0a33a; }
+    .lim-ytt .lim-ytt-msg { margin: 0.45rem 0 0; background: #171233; border-radius: 8px; padding: 0.55rem 0.6rem; font-size: 0.72rem; font-weight: 700; line-height: 1.9; color: #dde3ef; text-align: left; }
+    .lim-ytt .lim-ytt-msg b { color: #f0ad4a; }
     /* 動画にも手書き風の枠（.gshot video） */
     .gframe.gframe-video { display: block; }
     .gframe > video { display: block; width: 100%; height: auto; border-radius: 5px; background: #0b0f1e; }
@@ -1746,23 +1746,23 @@
                     <p class="lim-ytt-msg"><b>通貨ペア情報を取得できていません</b> XAUUSD: 404 / symbol_not_found 残高・ロット計算等が古い値のままの可能性があります。</p>
                 </div>
             </div><h3>トレードしたい通貨ペアを気配値表示に出す</h3><p>取引する通貨ペアを気配値表示欄に出しておいてください。出していないと価格が取得できず、アイコンが黄になります。</p></div>
-            <div class="ytt-add-card lim-card"><div class="lim-mock"><svg viewBox="0 0 280 300" role="img" aria-label="PCとMT5が起動中はWeb版YTTがつながり、PCのスリープ中やMT5を閉じている間は止まる図">
-  <rect x="16" y="10" width="134" height="82" rx="7" fill="#11163a" stroke="#1e1b4b" stroke-width="2.5"/>
-    <text x="83" y="36" font-size="13" font-weight="800" fill="#e9b949" text-anchor="middle">MT5</text>
-         <path d="M32 76 l14-13 13 7 14-20 13 10 14-14 13 7 12-10" stroke="#22c55e" stroke-width="2.6" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
-    <path d="M8 94 h150 l-10 12 h-130 z" fill="#1e1b4b"/><rect x="192" y="14" width="56" height="92" rx="10" fill="#11163a" stroke="#1e1b4b" stroke-width="2.5"/>
-    <circle cx="220" cy="50" r="10" fill="#22c55e"/>
-    <text x="220" y="82" font-size="12" font-weight="800" fill="#e9b949" text-anchor="middle">YTT</text>
+            <div class="ytt-add-card lim-card"><div class="lim-mock"><svg viewBox="0 0 280 324" role="img" aria-label="PCとMT5が起動中はWeb版YTTがつながり、PCのスリープ中やMT5を閉じている間は止まる図">
+  <rect x="16" y="8" width="134" height="82" rx="7" fill="#11163a" stroke="#1e1b4b" stroke-width="2.5"/>
+    <text x="83" y="34" font-size="13" font-weight="800" fill="#e9b949" text-anchor="middle">MT5</text>
+         <path d="M32 74 l14-13 13 7 14-20 13 10 14-14 13 7 12-10" stroke="#22c55e" stroke-width="2.6" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M8 92 h150 l-10 12 h-130 z" fill="#1e1b4b"/><rect x="192" y="12" width="56" height="92" rx="10" fill="#11163a" stroke="#1e1b4b" stroke-width="2.5"/>
+    <circle cx="220" cy="48" r="10" fill="#22c55e"/>
+    <text x="220" y="80" font-size="12" font-weight="800" fill="#e9b949" text-anchor="middle">YTT</text>
   <text x="140" y="128" font-size="13.5" font-weight="800" fill="#1e1b4b" text-anchor="middle">PCとMT5が起動中</text>
-  <text x="140" y="148" font-size="13.5" font-weight="800" fill="#16a34a" text-anchor="middle">● つながる</text>
-  <path d="M18 162 H262" stroke="#e5e7eb" stroke-width="2" stroke-dasharray="5 5"/>
-  <rect x="16" y="176" width="134" height="82" rx="7" fill="#374151" stroke="#1e1b4b" stroke-width="2.5"/>
-    <text x="83" y="226" font-size="19" font-weight="800" fill="#cbd5e1" text-anchor="middle">z z z</text>
-    <path d="M8 260 h150 l-10 12 h-130 z" fill="#1e1b4b"/><rect x="192" y="180" width="56" height="92" rx="10" fill="#11163a" stroke="#1e1b4b" stroke-width="2.5"/>
-    <circle cx="220" cy="216" r="10" fill="#ef4444"/>
-    <text x="220" y="248" font-size="12" font-weight="800" fill="#e9b949" text-anchor="middle">YTT</text>
-  <text x="140" y="280" font-size="13.5" font-weight="800" fill="#1e1b4b" text-anchor="middle">スリープ・MT5を閉じる</text>
-  <text x="140" y="300" font-size="13.5" font-weight="800" fill="#dc2626" text-anchor="middle">● 止まる</text>
+  <text x="140" y="150" font-size="13.5" font-weight="800" fill="#16a34a" text-anchor="middle">● つながる</text>
+  <path d="M18 166 H262" stroke="#e5e7eb" stroke-width="2" stroke-dasharray="5 5"/>
+  <rect x="16" y="180" width="134" height="82" rx="7" fill="#374151" stroke="#1e1b4b" stroke-width="2.5"/>
+    <text x="83" y="230" font-size="19" font-weight="800" fill="#cbd5e1" text-anchor="middle">z z z</text>
+    <path d="M8 264 h150 l-10 12 h-130 z" fill="#1e1b4b"/><rect x="192" y="184" width="56" height="92" rx="10" fill="#11163a" stroke="#1e1b4b" stroke-width="2.5"/>
+    <circle cx="220" cy="220" r="10" fill="#ef4444"/>
+    <text x="220" y="252" font-size="12" font-weight="800" fill="#e9b949" text-anchor="middle">YTT</text>
+  <text x="140" y="300" font-size="13.5" font-weight="800" fill="#1e1b4b" text-anchor="middle">スリープ・MT5を閉じる</text>
+  <text x="140" y="320" font-size="13.5" font-weight="800" fill="#dc2626" text-anchor="middle">● 止まる</text>
 </svg></div><h3>PCと取引ツールは起動したまま</h3><p>連携ツールが止まっているとき、PCのスリープ中、取引ツールを閉じている間は動きません。</p></div>
         </div>
     </div>

@@ -994,9 +994,6 @@
     .wy-feats li { justify-content: center; gap: 0.45rem; padding: 0.75rem 0.6rem; border: 1.5px solid #e5e7eb; border-radius: 12px; background: #fff; font-size: 0.875rem; color: #1e1b4b; text-align: center; }
     .wy-feats li img { margin-top: 1px; }
     /* まだ取引口座を持っていない方へ：トグルをやめて出しっぱなしに */
-    .no-account { background: #fff; border: 1.5px solid #d1d5db; border-radius: 14px; overflow: hidden; }
-    .no-account-title { display: flex; align-items: center; gap: 0.625rem; margin: 0; padding: 1.05rem 1.2rem; font-size: 0.92rem; font-weight: 800; color: #1e1b4b; }
-    .no-account-title::before { content: ''; width: 22px; height: 22px; background: url('img/check-orange.png') center/contain no-repeat; display: inline-block; flex-shrink: 0; }
     /* MT4 / MT5 / cTrader の切り替え（このページはMT4） */
     .tool-badge { display: inline-block; margin: 0 0 0.6rem; padding: 0.2rem 0.9rem; border-radius: 999px; background: #1e1b4b; color: #fff; font-size: 0.8rem; font-weight: 800; letter-spacing: 0.06em; }
     .tool-ask {
@@ -1025,7 +1022,7 @@
     .js-gate #gated:not(.is-open) { display: none; }
     #tool-select { padding-bottom: 3.5rem; }
     /* Web版YTTとは：いちばん伝えたい一行 */
-    .wy-intro .wy-catch { margin: 0 0 0.7rem; font-size: clamp(1.15rem, 4.6vw, 1.55rem); font-weight: 900; color: #1e1b4b; line-height: 1.5; letter-spacing: 0.01em; }
+    .wy-intro .wy-catch { margin: 0 auto 0.7rem; font-size: clamp(1.15rem, 4.6vw, 1.55rem); font-weight: 900; color: #1e1b4b; line-height: 1.5; letter-spacing: 0.01em; }
     .wy-intro .wy-catch .accent { color: var(--primary); }
     .wy-intro .ytt-fto2-head { font-size: 0.9rem; font-weight: 700; color: #4b5563; line-height: 1.8; margin-bottom: 1.1rem; }
     /* 利用上の制限事項：禁止事項 */
@@ -1054,13 +1051,6 @@
     /* 動画にも手書き風の枠（.gshot video） */
     .gframe.gframe-video { display: block; }
     .gframe > video { display: block; width: 100%; height: auto; border-radius: 5px; background: #0b0f1e; }
-    /* コピーモード：設定のしかた */
-    .cm-how { max-width: 560px; margin: 1.5rem auto 1.25rem; text-align: center; }
-    .cm-how-title { margin: 0; font-size: 1rem; font-weight: 900; color: #1e1b4b; display: flex; align-items: baseline; justify-content: center; gap: 0.6rem; }
-    .cm-how-title small { font-size: 0.75rem; font-weight: 700; color: #6b7280; }
-    .cm-shot { margin: 0.6rem 0 0; }
-    .gframe > video.cm-video { aspect-ratio: 1200 / 966; }
-    .cm-how-steps { margin: 0.7rem 0 0; font-size: 0.8rem; color: #4b5563; line-height: 1.8; text-align: left; }
     /* 動画で見る（MT5） */
     .hv-wrap { max-width: 780px; margin: 0 auto; }
     .hv-shot { margin: 0; text-align: center; }
@@ -1075,14 +1065,6 @@
     /* ヒーロー：導入はPCで行う */
     .pc-note { display: inline-block; margin-top: 0.7rem; color: #1e1b4b; font-size: 0.9rem; font-weight: 800; letter-spacing: 0.02em; }
     /* まだ取引口座を持っていない方へ（取引ツールの質問の下） */
-    .no-account { max-width: 460px; margin: 1.5rem auto 0; }
-    .no-account .ytt-spec-acc-body { padding: 0 1.2rem 1.3rem; text-align: left; }
-    .no-account .ytt-spec-acc-body p { font-size: 0.875rem; color: #4b5563; line-height: 1.85; margin: 0.9rem 0 0; }
-    .no-account .ytt-spec-acc-body p b { color: #1e1b4b; }
-    .no-account-logo { display: block; width: 140px; height: auto; margin: 1.2rem auto 0; }
-    .no-account-btns { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 1rem; }
-    .no-account-btns a { width: 100%; display: inline-flex; align-items: center; justify-content: center; text-align: center; box-sizing: border-box; min-height: 52px; }
-    .no-account .ytt-spec-acc-body p.no-account-next { font-size: 0.8rem; color: #6b7280; margin-top: 0.9rem; }
     .section-alt { background: #f4f6f9; }
     /* 「3ステップで導入完了」の背景の下辺を、次のセクションへ向かう矢印の形にする（route.html の rsec--arrowdown と同じ作り）。
        矢印の下の三角部分は次のセクションに重ね、切り取った左右は次のセクションの白が見えるようにする */
@@ -1105,9 +1087,6 @@
         .ytt-add-card { padding: 1rem 0.8rem; }
         details.ytt-spec-acc > summary { padding: 1rem 0.9rem; }
         .ytt-spec-acc-body { padding: 0 0.9rem 1.2rem; }
-        .no-account { max-width: none; }
-        .no-account-title { padding: 1rem 0.9rem; }
-        .no-account .ytt-spec-acc-body { padding: 0 0.9rem 1.2rem; }
         .ytt-sp-hero { padding-left: 1rem; padding-right: 1rem; }
         /* ノートPCの台座がカードの端に当たらないように */
         .wy-devices { padding-right: 14px; }
@@ -1189,6 +1168,38 @@
     @media (max-width: 600px) {
         .toc-tab { left: 10px; top: 72px; width: 44px; height: 44px; }
         .toc-list a { font-size: 0.92rem; }
+    }
+
+    /* YTT使用おすすめブローカー・プロップファーム（取引ツールの選択の下） */
+    .rec { max-width: 760px; margin: 1.75rem auto 0; padding: 1.4rem 1.4rem 1.3rem; background: #fff; border: 1.5px solid #d1d5db; border-radius: 14px; text-align: left; }
+    .rec-title { display: flex; align-items: center; justify-content: center; gap: 0.55rem; margin: 0; font-size: 1.05rem; font-weight: 900; color: #1e1b4b; line-height: 1.5; text-align: center; }
+    .rec-title::before { content: ''; flex: none; width: 22px; height: 22px; background: url('img/check-orange.png') center/contain no-repeat; }
+    .rec-lead { max-width: 580px; margin: 0.55rem auto 0; font-size: 0.85rem; color: #4b5563; line-height: 1.8; text-align: center; }
+    .rec-group { display: flex; align-items: center; gap: 0.7rem; margin: 1.35rem 0 0.65rem; font-size: 0.88rem; font-weight: 900; color: #1e1b4b; }
+    .rec-group::after { content: ''; flex: 1; height: 1px; background: #e5e7eb; }
+    .rec-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; }
+    .rec-item { display: flex; flex-direction: column; align-items: center; gap: 0.85rem; padding: 1.1rem 1rem 1rem; border: 1.5px solid #e5e7eb; border-radius: 12px; }
+    .rec-logo { display: flex; align-items: center; justify-content: center; height: 54px; }
+    .rec-logo img { display: block; height: auto; }
+    .rec-logo .lg-hfm { width: 104px; }
+    .rec-logo .lg-axiory { width: 172px; }
+    .rec-logo .lg-fintokei { width: 150px; }
+    .rec-logo .lg-fundora { width: 150px; }
+    .rec-tools { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.4rem; }
+    .rec-tool { display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.3rem 0.65rem 0.3rem 0.4rem; border: 1.5px solid #1e1b4b; border-radius: 999px; font-size: 0.8rem; font-weight: 800; color: #1e1b4b; line-height: 1.2; }
+    .rec-tool img { display: block; width: 20px; height: 20px; object-fit: contain; }
+    .rec-tool.is-off { border-color: #e5e7eb; color: #b3b9c4; text-decoration: line-through; }
+    .rec-tool.is-off img { filter: grayscale(1); opacity: 0.35; }
+    .rec-vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    .rec-btns { display: flex; flex-direction: column; align-items: stretch; gap: 0.3rem; width: 100%; }
+    .rec-btns .btn-sq-blue { display: inline-flex; align-items: center; justify-content: center; width: 100%; min-height: 50px; box-sizing: border-box; text-align: center; }
+    .rec-sub { padding: 0.25rem; font-size: 0.8rem; font-weight: 700; color: var(--primary); text-align: center; text-decoration: underline; text-underline-offset: 3px; }
+    .rec-next { margin: 1.1rem 0 0; font-size: 0.8rem; color: #6b7280; line-height: 1.8; text-align: center; }
+    @media (max-width: 600px) {
+        .rec { padding: 1.15rem 0.8rem 1.1rem; }
+        .rec-title { font-size: 0.98rem; }
+        .rec-lead { text-align: left; }
+        .rec-list { grid-template-columns: 1fr; }
     }
 </style>
 
@@ -1403,17 +1414,61 @@
                 <a class="tool-tab" data-tool="ctrader" href="ytt-web-setup-ctrader.html?tool=ctrader">cTrader</a>
             </div>
         </div>
-        <div class="no-account" id="no-account">
-            <p class="no-account-title">まだ取引口座を持っていない方へ</p>
-            <div class="ytt-spec-acc-body">
-                <img class="no-account-logo" src="img/webytt/hfm-logo.png" alt="HFM（HF Markets）" width="451" height="223">
-                <p>これから口座を作る方は、FX SPACEがおすすめしている<b>HFM</b>で作るのがかんたんです。Web版YTTは、HFMの<b>MT4・MT5</b>のどちらでも使えます。</p>
-                <div class="no-account-btns">
-                    <a class="btn-sq-blue" href="https://www.hfm.com/int/?refid=30443481&amp;acid=fxspaceysg" target="_blank" rel="noopener">HFMで口座を開設する</a>
-                    <a class="btn-sq-white" href="ytt-web-hfm.html">口座開設の手順を見る</a>
-                </div>
-                <p class="no-account-next">口座ができたら、上の質問で、口座を作った取引ツールを選んで進めてください。</p>
-            </div>
+        <div class="rec" id="no-account">
+            <p class="rec-title">YTT使用おすすめ<wbr>ブローカー・<wbr>プロップファーム</p>
+            <p class="rec-lead">まだ取引口座を持っていない方は、YTTを使えることを確認している次の会社がおすすめです。<wbr>使える取引ツールは会社ごとに違います。</p>
+            <p class="rec-group">証券会社（ブローカー）</p>
+            <ul class="rec-list">
+                <li class="rec-item">
+                    <div class="rec-logo"><img class="lg-hfm" src="img/webytt/hfm-logo.png" alt="HFM（HF Markets）" width="451" height="223" loading="lazy"></div>
+                    <ul class="rec-tools" aria-label="使える取引ツール">
+                        <li class="rec-tool is-on"><img src="img/webytt/rec/icon-mt.png" alt="" width="20" height="20">MT4</li>
+                        <li class="rec-tool is-on"><img src="img/webytt/rec/icon-mt.png" alt="" width="20" height="20">MT5</li>
+                        <li class="rec-tool is-off"><img src="img/webytt/rec/icon-ctrader.png" alt="" width="20" height="20">cTrader<span class="rec-vh">（使えません）</span></li>
+                    </ul>
+                    <div class="rec-btns">
+                        <a class="btn-sq-blue" href="https://www.hfm.com/int/?refid=30443481&amp;acid=fxspaceysg" target="_blank" rel="noopener">HFMで口座を開設する</a>
+                        <a class="rec-sub" href="ytt-web-hfm.html">口座開設の手順を見る</a>
+                    </div>
+                </li>
+                <li class="rec-item">
+                    <div class="rec-logo"><img class="lg-axiory" src="img/webytt/rec/axiory.png" alt="Axiory" width="440" height="51" loading="lazy"></div>
+                    <ul class="rec-tools" aria-label="使える取引ツール">
+                        <li class="rec-tool is-on"><img src="img/webytt/rec/icon-mt.png" alt="" width="20" height="20">MT4</li>
+                        <li class="rec-tool is-on"><img src="img/webytt/rec/icon-mt.png" alt="" width="20" height="20">MT5</li>
+                        <li class="rec-tool is-on"><img src="img/webytt/rec/icon-ctrader.png" alt="" width="20" height="20">cTrader</li>
+                    </ul>
+                    <div class="rec-btns">
+                        <a class="btn-sq-blue" href="https://go.axiory.com/afs/come.php?id=13&amp;cid=5894&amp;ctgid=100&amp;atype=1" target="_blank" rel="noopener">Axioryで口座を開設する</a>
+                    </div>
+                </li>
+            </ul>
+            <p class="rec-group">プロップファーム</p>
+            <ul class="rec-list">
+                <li class="rec-item">
+                    <div class="rec-logo"><img class="lg-fintokei" src="img/webytt/rec/fintokei.png" alt="Fintokei" width="383" height="73" loading="lazy"></div>
+                    <ul class="rec-tools" aria-label="使える取引ツール">
+                        <li class="rec-tool is-on"><img src="img/webytt/rec/icon-mt.png" alt="" width="20" height="20">MT4</li>
+                        <li class="rec-tool is-on"><img src="img/webytt/rec/icon-mt.png" alt="" width="20" height="20">MT5</li>
+                        <li class="rec-tool is-on"><img src="img/webytt/rec/icon-ctrader.png" alt="" width="20" height="20">cTrader</li>
+                    </ul>
+                    <div class="rec-btns">
+                        <a class="btn-sq-blue" href="https://my.fintokei.com/affiliate/jp/55" target="_blank" rel="noopener">Fintokeiの公式サイトへ</a>
+                    </div>
+                </li>
+                <li class="rec-item">
+                    <div class="rec-logo"><img class="lg-fundora" src="img/webytt/rec/fundora.png" alt="Fundora" width="400" height="98" loading="lazy"></div>
+                    <ul class="rec-tools" aria-label="使える取引ツール">
+                        <li class="rec-tool is-off"><img src="img/webytt/rec/icon-mt.png" alt="" width="20" height="20">MT4<span class="rec-vh">（使えません）</span></li>
+                        <li class="rec-tool is-off"><img src="img/webytt/rec/icon-mt.png" alt="" width="20" height="20">MT5<span class="rec-vh">（使えません）</span></li>
+                        <li class="rec-tool is-on"><img src="img/webytt/rec/icon-ctrader.png" alt="" width="20" height="20">cTrader</li>
+                    </ul>
+                    <div class="rec-btns">
+                        <a class="btn-sq-blue" href="https://partners.fundora-trading.com/click?campaign_id=1&amp;ref_id=10" target="_blank" rel="noopener">Fundoraの公式サイトへ</a>
+                    </div>
+                </li>
+            </ul>
+            <p class="rec-next">口座ができたら、上の質問で、口座を作った取引ツールを選んで進めてください。</p>
         </div>
     </div>
 </section>
@@ -1934,55 +1989,6 @@
     </div>
 </section>
 
-<!-- コピーモード -->
-<section class="ytt-spec-section" id="copy" style="background:#fff;">
-    <div class="ytt-spec-inner">
-        <div class="ytt-spec-header">
-            <span class="section-title-badge section-title-badge--orange">
-                <img class="hero-title-side hero-title-side--left" src="img/title-side-orange-left.png" alt="">
-                機能の注意点
-                <img class="hero-title-side hero-title-side--right" src="img/title-side-orange-right.png" alt="">
-            </span>
-            <div style="text-align:center; margin-bottom:0.25rem;">
-                <div style="display:inline-block; white-space:nowrap;">
-                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">コピーモード（受信）</h2>
-                    <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
-                </div>
-            </div>
-            <p>コピー元の口座でWeb版YTTからエントリーされたポジションを、自分の口座に写す機能です。</p>
-        </div>
-        <p class="ytt-fto-attention" style="text-align:left;">オンにした時点で、セット中のシナリオと指値・逆指値注文はすべてキャンセルされます。残したいものがあれば、オンにする前に確認してください。</p>
-        <div class="cm-how">
-            <p class="cm-how-title">設定のしかた</p>
-            <figure class="gshot cm-shot">
-                <video class="cm-video" controls muted loop playsinline preload="metadata" data-autoplay poster="video/webytt-copymode-poster.jpg" width="1200" height="966">
-                    <source src="video/webytt-copymode.mp4" type="video/mp4">
-                </video>
-            </figure>
-            <p class="cm-how-steps">右下の歯車（設定）→「コピーモード（受信）」→ コピー元の口座を選んで「確定」→「コピー時のロット計算モード」を確認</p>
-        </div>
-        <details class="ytt-spec-acc">
-            <summary>
-                <span class="ytt-spec-acc-label">制限を見る</span>
-                <span class="ytt-spec-acc-chev" aria-hidden="true">▼</span>
-            </summary>
-            <div class="ytt-spec-acc-body">
-                <table class="ytt-spec-table">
-                    <tbody>
-                        <tr><th>新規エントリー</th><td class="spec-val">コピー以外はできない</td><td class="spec-note"></td></tr>
-                        <tr><th>TP / SL の移動</th><td class="spec-val">できない</td><td class="spec-note"></td></tr>
-                        <tr><th>コピーされる</th><td class="spec-val">Web版YTTからのエントリーのみ</td><td class="spec-note">コピー元が他の方法で建てたポジションはコピーされません</td></tr>
-                        <tr><th>ロット</th><td class="spec-val">ロット計算モードに従う</td><td class="spec-note">損失率固定・損失額固定のときは、SLが無いポジションはコピーされません</td></tr>
-                        <tr><th>TP / SL</th><td class="spec-val">同じ幅でコピー</td><td class="spec-note">約定価格の差を吸収するため、コピー元と同じTP/SL幅になるように設定されます</td></tr>
-                        <tr><th>オンにした後</th><td class="spec-val">Web版の画面は閉じてOK</td><td class="spec-note">連携ツールを入れた取引ツールは起動したままにしてください</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </details>
-        <p style="font-size:0.8125rem;color:#6b7280;margin-top:1.25rem;text-align:left;">新しい連携ツールが配布されたときは、ファイルをダウンロードしてお使いの取引ツールの導入方法ページで「STEP 2」の手順をもう一度行ってください。</p>
-    </div>
-</section>
-
 <!-- よくある質問 -->
 <section class="ytt-spec-section" id="trouble" style="background:#f4f6f9;">
     <div class="ytt-spec-inner">
@@ -2027,14 +2033,7 @@
             <summary><span class="ytt-faq-q">セキュリティソフトにひっかかってダウンロードできない／DLLが消える</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
             <div class="ytt-faq-a"><p>①DLLの使用許可をしていない<br>②DLLの名前がオリジナルファイル（YTT_OrderReceiver.dll）と異なっている（末尾に（1）が付いているなど）<br>③「MQL5」→「Libraries」中のDLLファイルがセキュリティソフトにより削除／中身が空白になっている</p><p>③の場合は<a href="https://support.microsoft.com/ja-jp/windows/windows-%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%E3%81%AB%E9%99%A4%E5%A4%96%E3%82%92%E8%BF%BD%E5%8A%A0%E3%81%99%E3%82%8B-811816c0-4dfd-af4a-47e4-c301afe13b26" target="_blank" rel="noopener">こちら</a>等を参考に除外処理をおこなってください（Windowsセキュリティ以外の場合は各自除外処理の方法をお調べください）。</p></div>
         </details>
-        <details class="ytt-faq">
-            <summary><span class="ytt-faq-q">コピーモードでポジションがコピーされない</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
-            <div class="ytt-faq-a"><p>①コピー元のポジションがWeb版YTTからエントリーされたものか<br>②ロット計算モードが損失率固定・損失額固定のとき、コピー元のポジションにSLが付いているか<br>③連携ツールを入れた取引ツールが起動したままになっているか</p></div>
-        </details>
-        <details class="ytt-faq">
-            <summary><span class="ytt-faq-q">コピーモードをオンにしたら注文が消えた</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
-            <div class="ytt-faq-a"><p>仕様です。オンにした時点で、セット中のシナリオと指値・逆指値注文はすべてキャンセルされます。</p></div>
-        </details>
+        <p style="font-size:0.8125rem;color:#6b7280;margin-top:1.25rem;text-align:left;">新しい連携ツールが配布されたときは、ファイルをダウンロードしてお使いの取引ツールの導入方法ページで「STEP 2」の手順をもう一度行ってください。</p>
     </div>
 </section>
 

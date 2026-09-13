@@ -1174,11 +1174,17 @@
     .rec { max-width: 760px; margin: 1.75rem auto 0; padding: 1.4rem 1.4rem 1.3rem; background: #fff; border: 1.5px solid #d1d5db; border-radius: 14px; text-align: left; }
     .rec-title { display: flex; align-items: center; justify-content: center; gap: 0.55rem; margin: 0; font-size: 1.05rem; font-weight: 900; color: #1e1b4b; line-height: 1.5; text-align: center; }
     .rec-title::before { content: ''; flex: none; width: 22px; height: 22px; background: url('img/check-orange.png') center/contain no-repeat; }
-    .rec-lead { max-width: 580px; margin: 0.55rem auto 0; font-size: 0.85rem; color: #4b5563; line-height: 1.8; text-align: center; }
-    .rec-group { display: flex; align-items: center; gap: 0.7rem; margin: 1.35rem 0 0.65rem; font-size: 0.88rem; font-weight: 900; color: #1e1b4b; }
-    .rec-group::after { content: ''; flex: 1; height: 1px; background: #e5e7eb; }
+    .rec-lead { margin: 0.45rem auto 0; font-size: 0.85rem; color: #4b5563; line-height: 1.8; text-align: center; }
+    .rec-group { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.1rem 0.75rem; margin: 1.4rem 0 0.75rem; padding-bottom: 0.5rem; border-bottom: 1px solid #e5e7eb; }
+    .rec-group-name { margin: 0; font-size: 0.95rem; font-weight: 900; color: #1e1b4b; }
+    .rec-group-sub { margin: 0; font-size: 0.8rem; font-weight: 700; color: #6b7280; }
     .rec-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; }
-    .rec-item { display: flex; flex-direction: column; align-items: center; gap: 0.85rem; padding: 1.1rem 1rem 1rem; border: 1.5px solid #e5e7eb; border-radius: 12px; }
+    .rec-item { display: flex; flex-direction: column; align-items: center; gap: 0.85rem; padding: 0 1rem 1rem; border: 1.5px solid #d1d5db; border-radius: 12px; overflow: hidden; }
+    .rec-for { align-self: stretch; margin: 0 -1rem; padding: 0.6rem 0.8rem; background: #1e1b4b; color: #fff; font-size: 0.86rem; font-weight: 700; line-height: 1.45; text-align: center; }
+    .rec-for b { font-weight: 900; color: #fcd34d; }
+    .rec-item.is-main { border: 2px solid #f97316; }
+    .rec-item.is-main .rec-for { background: #f97316; }
+    .rec-item.is-main .rec-for b { color: #fff; }
     .rec-logo { display: flex; align-items: center; justify-content: center; height: 54px; }
     .rec-logo img { display: block; height: auto; }
     .rec-logo .lg-hfm { width: 104px; }
@@ -1198,7 +1204,6 @@
     @media (max-width: 600px) {
         .rec { padding: 1.15rem 0.8rem 1.1rem; }
         .rec-title { font-size: 0.98rem; }
-        .rec-lead { text-align: left; }
         .rec-list { grid-template-columns: 1fr; }
     }
 </style>
@@ -1416,10 +1421,11 @@
         </div>
         <div class="rec" id="no-account">
             <p class="rec-title">YTT使用おすすめ<wbr>ブローカー・<wbr>プロップファーム</p>
-            <p class="rec-lead">まだ取引口座を持っていない方は、YTTを使えることを確認している次の会社がおすすめです。<wbr>使える取引ツールは会社ごとに違います。</p>
-            <p class="rec-group">証券会社（ブローカー）</p>
+            <p class="rec-lead">まだ取引口座を持っていない方は、次の会社で作るのがおすすめです。</p>
+            <div class="rec-group"><p class="rec-group-name">証券会社（ブローカー）</p><p class="rec-group-sub">自分の資金でトレードする</p></div>
             <ul class="rec-list">
                 <li class="rec-item">
+                    <p class="rec-for"><b>MT4・MT5</b>を使うなら</p>
                     <div class="rec-logo"><img class="lg-hfm" src="img/webytt/hfm-logo.png" alt="HFM（HF Markets）" width="451" height="223" loading="lazy"></div>
                     <ul class="rec-tools" aria-label="使える取引ツール">
                         <li class="rec-tool is-on"><img src="img/webytt/rec/icon-mt.png" alt="" width="20" height="20">MT4</li>
@@ -1432,6 +1438,7 @@
                     </div>
                 </li>
                 <li class="rec-item">
+                    <p class="rec-for"><b>cTrader</b>を使うなら</p>
                     <div class="rec-logo"><img class="lg-axiory" src="img/webytt/rec/axiory.png" alt="Axiory" width="440" height="51" loading="lazy"></div>
                     <ul class="rec-tools" aria-label="使える取引ツール">
                         <li class="rec-tool is-on"><img src="img/webytt/rec/icon-mt.png" alt="" width="20" height="20">MT4</li>
@@ -1443,9 +1450,10 @@
                     </div>
                 </li>
             </ul>
-            <p class="rec-group">プロップファーム</p>
+            <div class="rec-group"><p class="rec-group-name">プロップファーム</p><p class="rec-group-sub">テストに合格すると、会社の資金でトレードできる</p></div>
             <ul class="rec-list">
-                <li class="rec-item">
+                <li class="rec-item is-main">
+                    <p class="rec-for"><b>基本</b>はこちらがおすすめ</p>
                     <div class="rec-logo"><img class="lg-fintokei" src="img/webytt/rec/fintokei.png" alt="Fintokei" width="383" height="73" loading="lazy"></div>
                     <ul class="rec-tools" aria-label="使える取引ツール">
                         <li class="rec-tool is-on"><img src="img/webytt/rec/icon-mt.png" alt="" width="20" height="20">MT4</li>
@@ -1457,6 +1465,7 @@
                     </div>
                 </li>
                 <li class="rec-item">
+                    <p class="rec-for"><b>日本の会社</b>の安心感を重視するなら</p>
                     <div class="rec-logo"><img class="lg-fundora" src="img/webytt/rec/fundora.png" alt="Fundora" width="400" height="98" loading="lazy"></div>
                     <ul class="rec-tools" aria-label="使える取引ツール">
                         <li class="rec-tool is-off"><img src="img/webytt/rec/icon-mt.png" alt="" width="20" height="20">MT4<span class="rec-vh">（使えません）</span></li>

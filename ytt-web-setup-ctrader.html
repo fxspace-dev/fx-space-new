@@ -1237,6 +1237,8 @@
         .tool-ask-btns { gap: 1rem; }
         .tool-tab { min-width: 184px; min-height: 72px; padding: 0.8rem 1.8rem; border-radius: 16px; font-size: 1.35rem; }
     }
+    /* スマホ：タイトルの黄色い波線を、セクション見出しのオレンジの波線と同じ太さ（高さ）に */
+    @media (max-width: 640px) { .ytt-sp-hero .ytt-sp-title-line .ytt-title-wave { height: clamp(18px, 6vw, 26px); } }
 </style>
 
 <script>document.documentElement.classList.add('js-gate');</script>

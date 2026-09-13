@@ -1217,13 +1217,18 @@
     /* スマホ：タイトルの黄色い波線を、セクション見出しのオレンジの波線と同じ太さ（高さ）に */
     @media (max-width: 640px) { .ytt-sp-hero .ytt-sp-title-line .ytt-title-wave { height: clamp(18px, 6vw, 26px); } }
 
-    /* 導入完了の表示（STEP 3 の手順の下）：手書き風のオレンジ枠 */
-    .setup-done { position: relative; max-width: 640px; margin: 2rem auto 0; padding: 1.3rem 1.4rem 1.3rem; background: url('img/frame-crayon-orange.svg') 0 0 / 100% 100% no-repeat; text-align: center; }
-    .setup-done-h { display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin: 0; font-size: 1.3rem; font-weight: 900; color: #1e1b4b; line-height: 1.4; }
-    .setup-done-ic { flex: none; display: inline-flex; width: 30px; height: 30px; align-items: center; justify-content: center; border-radius: 50%; background: #16a34a; color: #fff; }
-    .setup-done-ic svg { width: 18px; height: 18px; }
-    .setup-done .setup-done-t { margin: 0.45rem 0 0; font-size: 0.92rem; font-weight: 700; color: #374151; line-height: 1.7; }
-    @media (max-width: 600px) { .setup-done { padding: 1.5rem 1rem 1.15rem; } .setup-done-h { font-size: 1.12rem; } .setup-done-ic { width: 26px; height: 26px; } }
+    /* 導入完了の表示（STEP 3 の手順の下）：STEP 1〜3 と「完了」の丸が全部埋まった進み具合 */
+    .setup-done { max-width: 640px; margin: 2.4rem auto 0; text-align: center; }
+    .setup-done-bar { position: relative; display: flex; justify-content: space-between; list-style: none; margin: 0 auto 1.1rem; padding: 0; max-width: 460px; }
+    .setup-done-bar::before { content: ""; position: absolute; left: 12.5%; right: 12.5%; top: 14px; height: 4px; border-radius: 2px; background: #f97316; }
+    .setup-done-bar li { position: relative; display: flex; flex-direction: column; align-items: center; gap: 0.3rem; width: 25%; margin: 0; padding: 0; font-size: 0.75rem; font-weight: 900; line-height: 1.3; color: #f97316; }
+    .setup-done-bar li::before { content: none; }
+    .setup-done-bar li span { display: inline-flex; width: 32px; height: 32px; align-items: center; justify-content: center; border-radius: 50%; background: #f97316; color: #fff; box-shadow: 0 0 0 4px #fff; }
+    .setup-done-bar li.goal { color: #1e1b4b; }
+    .setup-done-bar li.goal span { width: 44px; height: 44px; margin-top: -6px; background: #1e1b4b; color: #fbbf24; }
+    .setup-done .setup-done-h { margin: 0; font-size: 1.35rem; font-weight: 900; color: #1e1b4b; line-height: 1.4; }
+    .setup-done .setup-done-t { margin: 0.35rem 0 0; font-size: 0.92rem; font-weight: 700; color: #374151; line-height: 1.7; }
+    @media (max-width: 600px) { .setup-done .setup-done-h { font-size: 1.15rem; } }
 </style>
 
 <script>document.documentElement.classList.add('js-gate');</script>
@@ -1915,7 +1920,7 @@
                 </div>
             </div>
         </div>
-        <div class="setup-done"><p class="setup-done-h"><span class="setup-done-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 12.5 10 17l8.5-9.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>導入はこれで完了です</p><p class="setup-done-t">Web版YTTが使えるようになりました。お疲れさまでした！</p></div>
+        <div class="setup-done"><ol class="setup-done-bar" aria-hidden="true"><li><span><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5.5 12.5 10 17l8.5-9.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>STEP 1</li><li><span><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5.5 12.5 10 17l8.5-9.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>STEP 2</li><li><span><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5.5 12.5 10 17l8.5-9.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>STEP 3</li><li class="goal"><span><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M5.5 12.5 10 17l8.5-9.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>完了</li></ol><p class="setup-done-h">導入はこれで完了です</p><p class="setup-done-t">Web版YTTが使えるようになりました。お疲れさまでした！</p></div>
     </div>
 </section>
 

@@ -1174,7 +1174,7 @@
     .rec-group-sub { margin: 0; font-size: 0.8rem; font-weight: 700; color: #6b7280; }
     .rec-list { list-style: none; margin: 1.35rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem 0.75rem; }
     .rec-item { position: relative; display: flex; flex-direction: column; align-items: center; gap: 0.85rem; padding: 1.8rem 1rem 1rem; border: 1.5px solid #d1d5db; border-radius: 12px; }
-    .rec-badge { position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%); padding: 0.3rem 0.95rem; border: 1.5px solid #f97316; border-radius: 999px; background: #f97316; color: #fff; font-size: 0.8rem; font-weight: 900; line-height: 1.3; white-space: nowrap; }
+    .rec-badge { position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%); width: max-content; box-sizing: border-box; padding: 0.3rem 0.95rem; border: 1.5px solid #f97316; border-radius: 999px; background: #f97316; color: #fff; font-size: 0.8rem; font-weight: 900; line-height: 1.3; white-space: nowrap; }
     .rec-badge.is-sub { background: #fff; color: #ea580c; }
     .rec-logo { display: flex; align-items: center; justify-content: center; height: 54px; }
     .rec-logo img { display: block; height: auto; }
@@ -1446,7 +1446,7 @@
             <div class="rec-group"><p class="rec-group-name">証券会社（ブローカー）</p><p class="rec-group-sub">自分の資金でトレードする</p></div>
             <ul class="rec-list">
                 <li class="rec-item">
-                    <span class="rec-badge">MT4・MT5ならこちら</span>
+                    <span class="rec-badge" data-no-budoux>MT4・MT5ならこちらがおすすめ</span>
                     <div class="rec-logo"><img class="lg-hfm" src="img/webytt/hfm-logo.png" alt="HFM（HF Markets）" width="451" height="223" loading="lazy"></div>
                     <ul class="rec-tools" aria-label="使える取引ツール">
                         <li class="rec-tool is-on"><img src="img/webytt/rec/icon-mt.png" alt="" width="20" height="20">MT4</li>
@@ -1459,7 +1459,7 @@
                     </div>
                 </li>
                 <li class="rec-item">
-                    <span class="rec-badge">cTraderならこちら</span>
+                    <span class="rec-badge" data-no-budoux>cTraderならこちらがおすすめ</span>
                     <div class="rec-logo"><img class="lg-axiory" src="img/webytt/rec/axiory.png" alt="Axiory" width="440" height="51" loading="lazy"></div>
                     <ul class="rec-tools" aria-label="使える取引ツール">
                         <li class="rec-tool is-on"><img src="img/webytt/rec/icon-mt.png" alt="" width="20" height="20">MT4</li>
@@ -1474,7 +1474,7 @@
             <div class="rec-group"><p class="rec-group-name">プロップファーム</p><p class="rec-group-sub">テストに合格すると、デモ口座での成績に応じて報酬を受け取れる</p></div>
             <ul class="rec-list">
                 <li class="rec-item">
-                    <span class="rec-badge">まずはこちらがおすすめ</span>
+                    <span class="rec-badge" data-no-budoux>おすすめ</span>
                     <div class="rec-logo"><img class="lg-fintokei" src="img/webytt/rec/fintokei.png" alt="Fintokei" width="383" height="73" loading="lazy"></div>
                     <ul class="rec-tools" aria-label="使える取引ツール">
                         <li class="rec-tool is-on"><img src="img/webytt/rec/icon-mt.png" alt="" width="20" height="20">MT4</li>
@@ -1486,7 +1486,7 @@
                     </div>
                 </li>
                 <li class="rec-item">
-                    <span class="rec-badge is-sub">日本の会社を選びたい方に</span>
+                    <span class="rec-badge is-sub" data-no-budoux>日本の会社を選びたい方に</span>
                     <div class="rec-logo"><img class="lg-fundora" src="img/webytt/rec/fundora.png" alt="Fundora" width="400" height="98" loading="lazy"></div>
                     <ul class="rec-tools" aria-label="使える取引ツール">
                         <li class="rec-tool is-off"><img src="img/webytt/rec/icon-mt.png" alt="" width="20" height="20">MT4<span class="rec-vh">（使えません）</span></li>

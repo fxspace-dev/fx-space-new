@@ -1106,15 +1106,18 @@
     .nav-tool-btn:hover { background: #f4f6f9; }
     .nav-tool-cv { display: block; width: 16px; height: 16px; flex: none; }
     .nav-tool-menu {
-        position: absolute; top: calc(100% + 8px); right: 0; min-width: 158px; padding: 0.4rem;
-        background: #fff; border: 1.5px solid #e5e7eb; border-radius: 12px;
-        box-shadow: 0 12px 28px rgba(30, 27, 75, 0.16); display: grid; gap: 0.15rem;
+        position: absolute; top: calc(100% + 8px); right: 0; min-width: 200px; padding: 0.55rem;
+        background: #fff; border: 1.5px solid #e5e7eb; border-radius: 14px;
+        box-shadow: 0 14px 32px rgba(30, 27, 75, 0.16); display: grid; gap: 0.15rem;
     }
     .nav-tool-menu[hidden] { display: none; }
-    .nav-tool-menu-t { padding: 0.3rem 0.5rem 0.35rem; font-size: 0.68rem; font-weight: 700; color: #6b7280; }
-    .nav-tool-menu a { display: block; padding: 0.5rem 0.6rem; border-radius: 8px; font-size: 0.85rem; font-weight: 800; color: #1e1b4b; text-decoration: none; }
+    .nav-tool-menu-t { padding: 0.35rem 0.55rem 0.5rem; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.04em; color: #6b7280; }
+    .nav-tool-menu a { display: flex; align-items: center; gap: 0.6rem; padding: 0.6rem 0.65rem; border-radius: 10px; font-size: 0.95rem; font-weight: 900; color: #1e1b4b; text-decoration: none; }
     .nav-tool-menu a:hover { background: #f4f6f9; }
-    .nav-tool-menu a.is-on { background: #eef2ff; color: #4f46e5; }
+    .nav-tool-menu a.is-on { background: #1e1b4b; color: #fff; }
+    .nav-tool-menu .ic { display: block; width: 24px; height: 24px; object-fit: contain; flex: none; }
+    .nav-tool-menu a.is-on .ic { background: #fff; border-radius: 6px; padding: 2px; box-sizing: border-box; }
+    .nav-tool-menu .ck { display: block; width: 18px; height: 18px; flex: none; margin-left: auto; color: #fbbf24; }
     @media (max-width: 600px) {
         .nav-tool-btn { height: 44px; gap: 0.2rem; padding: 0 0.4rem 0 0.6rem; font-size: 0.75rem; }
         .nav-tool-cv { width: 13px; height: 13px; }
@@ -1263,9 +1266,9 @@
             <button type="button" class="nav-tool-btn" aria-expanded="false" aria-haspopup="true">cTrader<svg class="nav-tool-cv" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 9.5 12 15l5.5-5.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
             <div class="nav-tool-menu" hidden>
                 <span class="nav-tool-menu-t">取引ツールを切り替える</span>
-                <a href="ytt-web-setup.html?tool=mt4">MT4</a>
-                <a href="ytt-web-setup-mt5.html?tool=mt5">MT5</a>
-                <a href="ytt-web-setup-ctrader.html?tool=ctrader" class="is-on">cTrader</a>
+                <a href="ytt-web-setup.html?tool=mt4"><img class="ic" src="img/webytt/rec/icon-mt.png" alt="" width="24" height="24">MT4</a>
+                <a href="ytt-web-setup-mt5.html?tool=mt5"><img class="ic" src="img/webytt/rec/icon-mt.png" alt="" width="24" height="24">MT5</a>
+                <a href="ytt-web-setup-ctrader.html?tool=ctrader" class="is-on" aria-current="page"><img class="ic" src="img/webytt/rec/icon-ctrader.png" alt="" width="24" height="24">cTrader<svg class="ck" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17.5 19 7.5" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
             </div>
         </div>
         <a href="https://webytt.fx-space.com/" target="_blank" rel="noopener" class="btn-sq-blue sm">Web版YTTを開く</a>

@@ -1072,6 +1072,47 @@
     @media (max-width: 600px) { .ytt-sp-hero { padding-top: 9.5rem; } }
     /* スマホ：タイトルの黄色い波線を、セクション見出しのオレンジの波線と同じ太さ（高さ）に */
     @media (max-width: 640px) { .ytt-sp-hero .ytt-sp-title-line .ytt-title-wave { height: clamp(18px, 6vw, 26px); } }
+    /* 目次 */
+    .toc-tab {
+        position: fixed; left: 14px; top: 80px; z-index: 900;
+        display: inline-flex; align-items: center; justify-content: center;
+        width: 46px; height: 46px; padding: 0; border: 0; border-radius: 14px;
+        background: #1e1b4b; color: #fff; cursor: pointer;
+        box-shadow: 0 6px 18px rgba(30, 27, 75, 0.3); transition: transform 0.15s, background 0.15s;
+    }
+    .toc-tab svg { width: 25px; height: 25px; fill: currentColor; }
+    .toc-tab:hover { background: #2e2a6b; transform: translateY(-1px); }
+    .toc-back { position: fixed; inset: 0; z-index: 1090; background: rgba(17, 22, 58, 0.45); }
+    .toc-back[hidden] { display: none; }
+    .toc-panel {
+        position: fixed; top: 0; bottom: 0; left: 0; z-index: 1100;
+        width: min(318px, 88vw); padding: 1.15rem 1.05rem 2.5rem; overflow-y: auto;
+        background: #fff; box-shadow: 10px 0 36px rgba(30, 27, 75, 0.22);
+    }
+    .toc-panel[hidden] { display: none; }
+    .toc-head { display: flex; align-items: center; justify-content: space-between; margin: 0 0.2rem 1.1rem; padding: 0 0 0.7rem; border-bottom: 1px solid #e5e7eb; }
+    .toc-head-t { font-size: 1.15rem; font-weight: 900; letter-spacing: 0.14em; color: #1e1b4b; }
+    .toc-close { flex: none; display: inline-flex; width: 34px; height: 34px; align-items: center; justify-content: center; border: 0; border-radius: 50%; background: #f4f6f9; color: #1e1b4b; cursor: pointer; }
+    .toc-close svg { width: 16px; height: 16px; }
+    .toc-list { list-style: none; margin: 0; padding: 0; }
+    .toc-group { margin: 1.5rem 0 0.55rem; padding: 0 0.2rem; font-size: 1.06rem; font-weight: 900; color: #1e1b4b; }
+    .toc-group img { display: block; width: 100%; height: 8px; object-fit: fill; margin: 0 0 0.7rem; }
+    .toc-list li:first-child .toc-group { margin-top: 0; }
+    .toc-list li:first-child .toc-group img { display: none; }
+    .toc-list a {
+        position: relative; display: block; padding: 0.62rem 0.4rem 0.62rem 2.6rem;
+        font-size: 0.9rem; font-weight: 500; line-height: 1.5; color: #1e1b4b; text-decoration: none;
+    }
+    .toc-list a::before { content: ''; position: absolute; left: 1.15rem; top: 1.25rem; width: 6px; height: 6px; border-radius: 50%; background: #c7d2fe; }
+    .toc-list a:hover { color: #4f46e5; }
+    .toc-num { position: absolute; left: 0.3rem; top: 50%; transform: translateY(-50%); width: 29px; height: auto; }
+    .toc-list a.has-num { padding-top: 0.72rem; padding-bottom: 0.72rem; }
+    .toc-list a.has-num::before { display: none; }
+    .toc-list a.is-now { font-weight: 900; color: #f97316; }
+    @media (max-width: 600px) {
+        .toc-tab { left: 10px; top: 72px; width: 44px; height: 44px; }
+        .toc-list a { font-size: 0.92rem; }
+    }
 </style>
 
 </head>
@@ -1100,6 +1141,15 @@
     <div class="ytt-sp-nav-cta">
         <a href="https://webytt.fx-space.com/" target="_blank" rel="noopener" class="btn-sq-blue sm">Web版YTTを開く</a>
     </div>
+</nav>
+
+<button type="button" class="toc-tab" aria-expanded="false" aria-controls="toc-panel" aria-label="目次">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="4.5" cy="6.5" r="1.8"/><circle cx="4.5" cy="12" r="1.8"/><circle cx="4.5" cy="17.5" r="1.8"/><path d="M9.5 6.5h10M9.5 12h10M9.5 17.5h6.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+</button>
+<div class="toc-back" hidden></div>
+<nav class="toc-panel" id="toc-panel" aria-label="目次" hidden>
+    <p class="toc-head"><span class="toc-head-t">CONTENTS</span><button type="button" class="toc-close" aria-label="目次を閉じる"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button></p>
+    <ul class="toc-list"></ul>
 </nav>
 
 <!-- HERO -->
@@ -1349,6 +1399,87 @@
   if (new URLSearchParams(location.search).get('tool') === me) openGate(hashTarget(), false);   // 他のページで選んで来た
   else if (hashTarget()) openGate(hashTarget(), false);                                        // よくある質問などへ直接来た
   window.addEventListener('hashchange', function () { var t = hashTarget(); if (t) openGate(t, true); });
+  // ---- 目次（左から出し入れ） ----
+  (function () {
+    var tab = document.querySelector('.toc-tab'), panel = document.querySelector('.toc-panel'),
+        back = document.querySelector('.toc-back'), list = panel && panel.querySelector('.toc-list');
+    if (!tab || !panel || !list) return;
+    function build() {
+      list.innerHTML = '';
+      var gated = document.getElementById('gated');
+      var afterStep3 = false, afterTrouble = false, lastGroup = '', n = 0, now = null;
+      var secs = [].slice.call(document.querySelectorAll('section.ytt-spec-section')).filter(function (sec) {
+        if (sec.getBoundingClientRect().height < 5) return false;
+        if (sec.id === 'tool-select') return false;
+        var h2 = sec.querySelector('.ytt-spec-header h2');
+        if (!h2) return false;
+        var b = sec.querySelector('.section-title-badge');
+        return !(b && b.textContent.indexOf('続き') >= 0);
+      });
+      // 「取引口座をお持ちでない方へ」の証券会社・プロップファームの見出しも、ページの順番どおりに入れる
+      [].slice.call(document.querySelectorAll('.rec-group[id]')).forEach(function (el) { if (el.getBoundingClientRect().height > 2) secs.push(el); });
+      secs.sort(function (a, b) { return (a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING) ? -1 : 1; });
+      secs.forEach(function (sec) { if (sec.getBoundingClientRect().top <= 90) now = sec; });
+      secs.forEach(function (sec) {
+        var h2 = sec.querySelector('.ytt-spec-header h2') || sec.querySelector('.rec-group-name');
+        var badgeEl = sec.querySelector('.section-title-badge');
+        var badge = badgeEl ? badgeEl.textContent.replace(/\s+/g, ' ').trim() : '';
+        if (sec.id === 'trouble') afterTrouble = true;
+        var grp = sec.id === 'flow' ? 'はじめに' : sec.id === 'next' ? '口座ができたら' : '手順';
+        if (!sec.id) sec.id = 'toc-sec-' + (++n);
+        var li = document.createElement('li');
+        if (grp !== lastGroup) {
+          var g = document.createElement('p');
+          g.className = 'toc-group';
+          var gl = document.createElement('img');
+          gl.src = 'img/dotline-yellow.png';
+          gl.alt = '';
+          g.appendChild(gl);
+          g.appendChild(document.createTextNode(grp));
+          li.appendChild(g);
+          lastGroup = grp;
+        }
+        var a = document.createElement('a');
+        a.href = '#' + sec.id;
+        var step = badge.match(/STEP\s*(\d)/);
+        if (step) {
+          var num = document.createElement('img');
+          num.className = 'toc-num';
+          num.src = 'img/crayon-' + step[1] + '.png';
+          num.alt = step[1];
+          a.appendChild(num);
+          a.className = 'has-num';
+        }
+        if (sec === now) a.className += ' is-now';
+        a.appendChild(document.createTextNode(h2.textContent.trim()));
+        a.addEventListener('click', function (e) {
+          e.preventDefault();
+          shut();
+          sec.scrollIntoView({ block: 'start' });
+          // 上にある画像があとから読み込まれて位置がずれたら、もう一度合わせる
+          [450, 1100].forEach(function (t) { setTimeout(function () { if (Math.abs(sec.getBoundingClientRect().top - 72) > 40) sec.scrollIntoView({ block: 'start' }); }, t); });
+        });
+        li.appendChild(a);
+        list.appendChild(li);
+        if (sec.id === 'step3') afterStep3 = true;
+      });
+    }
+    function open() {
+      build();
+      panel.hidden = false; back.hidden = false;
+      tab.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+    function shut() {
+      panel.hidden = true; back.hidden = true;
+      tab.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+    tab.addEventListener('click', function () { panel.hidden ? open() : shut(); });
+    back.addEventListener('click', shut);
+    panel.querySelector('.toc-close').addEventListener('click', shut);
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !panel.hidden) shut(); });
+  })();
   // 見出しのアンカーへ飛んだとき、固定ナビの下に潜らないようにする
   document.documentElement.style.scrollPaddingTop = '72px';
 })();

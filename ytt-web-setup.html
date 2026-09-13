@@ -1426,7 +1426,7 @@
         <div class="rec" id="no-account">
             <p class="rec-title">取引口座をお持ちでない方へ</p>
             <p class="rec-lead">YTTを使うのにおすすめの、ブローカー・プロップファームです。</p>
-            <div class="rec-group"><p class="rec-group-name">証券会社（ブローカー）</p><p class="rec-group-sub">自分の資金でトレードする</p></div>
+            <div class="rec-group" id="rec-broker"><p class="rec-group-name">証券会社（ブローカー）</p><p class="rec-group-sub">自分の資金でトレードする</p></div>
             <ul class="rec-list">
                 <li class="rec-item">
                     <span class="rec-badge" data-no-budoux>MT4・MT5ならこちらがおすすめ</span>
@@ -1455,7 +1455,7 @@
                     </div>
                 </li>
             </ul>
-            <div class="rec-group"><p class="rec-group-name">プロップファーム</p><p class="rec-group-sub">テストに合格すると、デモ口座での成績に応じて報酬を受け取れる</p></div>
+            <div class="rec-group" id="rec-prop"><p class="rec-group-name">プロップファーム</p><p class="rec-group-sub">テストに合格すると、デモ口座での成績に応じて報酬を受け取れる</p></div>
             <ul class="rec-list">
                 <li class="rec-item">
                     <span class="rec-badge" data-no-budoux>おすすめ</span>
@@ -2170,9 +2170,12 @@
         var b = sec.querySelector('.section-title-badge');
         return !(b && b.textContent.indexOf('続き') >= 0);
       });
+      // 「取引口座をお持ちでない方へ」の証券会社・プロップファームの見出しも、ページの順番どおりに入れる
+      [].slice.call(document.querySelectorAll('.rec-group[id]')).forEach(function (el) { if (el.getBoundingClientRect().height > 2) secs.push(el); });
+      secs.sort(function (a, b) { return (a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING) ? -1 : 1; });
       secs.forEach(function (sec) { if (sec.getBoundingClientRect().top <= 90) now = sec; });
       secs.forEach(function (sec) {
-        var h2 = sec.querySelector('.ytt-spec-header h2');
+        var h2 = sec.querySelector('.ytt-spec-header h2') || sec.querySelector('.rec-group-name');
         var badgeEl = sec.querySelector('.section-title-badge');
         var badge = badgeEl ? badgeEl.textContent.replace(/\s+/g, ' ').trim() : '';
         if (sec.id === 'trouble') afterTrouble = true;
@@ -2210,6 +2213,8 @@
           e.preventDefault();
           shut();
           sec.scrollIntoView({ block: 'start' });
+          // 上にある画像があとから読み込まれて位置がずれたら、もう一度合わせる
+          [450, 1100].forEach(function (t) { setTimeout(function () { if (Math.abs(sec.getBoundingClientRect().top - 72) > 40) sec.scrollIntoView({ block: 'start' }); }, t); });
         });
         li.appendChild(a);
         list.appendChild(li);

@@ -1059,8 +1059,7 @@
     .vzoom svg { width: 15px; height: 15px; flex: none; }
     .vzoom:hover { border-color: #818cf8; }
 
-    /* 口座開設ページのタイトル：1行で、画面幅に収まる範囲でできるだけ大きく（--title-em＝タイトル1行の幅を文字数換算した値） */
-    .ytt-sp-hero-title.acct-title { font-size: min(3.4rem, calc((100vw - 2.5rem) / var(--title-em))); margin-bottom: 1.4rem; }
+    /* 口座開設ページのタイトル：1行で（文字の大きさはほかのページと同じ） */
     .acct-title .ytt-sp-title-line > span.line-text { white-space: nowrap; }
     /* 手順の中の長いボタンは、スマホで画面からはみ出さないよう折り返す */
     .gstep-btn .btn-sq-blue { white-space: normal; max-width: 100%; box-sizing: border-box; justify-content: center; text-align: center; }
@@ -1089,7 +1088,7 @@
 
 <!-- HERO -->
 <section class="ytt-sp-hero">
-    <h1 class="ytt-sp-hero-title acct-title" style="--title-em: 10.6;">
+    <h1 class="ytt-sp-hero-title acct-title">
         <span class="ytt-sp-title-line"><span class="line-text"><img class="hfm-title-logo" src="img/webytt/hfm-logo.png" alt="HFM" width="451" height="223">で口座を作る<img class="ytt-title-wave" src="img/wave-yellow.png" alt=""></span></span>
     </h1>
     <p class="ytt-sp-hero-lead">

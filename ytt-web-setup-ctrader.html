@@ -1099,12 +1099,12 @@
     /* 固定バー：取引ツールの切り替え */
     .nav-tool { position: relative; flex: none; margin-right: 0.25rem; }
     .nav-tool-btn {
-        display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.35rem 0.6rem;
-        border: 1.5px solid #c7d2fe; border-radius: 999px; background: #fff; color: #1e1b4b;
-        font-family: inherit; font-size: 0.8rem; font-weight: 800; white-space: nowrap; cursor: pointer;
+        display: inline-flex; align-items: center; gap: 0.35rem; height: 38px; padding: 0 0.7rem 0 0.95rem; box-sizing: border-box;
+        border: 1.5px solid #1e1b4b; border-radius: 10px; background: #fff; color: #1e1b4b;
+        font-family: inherit; font-size: 0.9rem; font-weight: 900; white-space: nowrap; cursor: pointer;
     }
-    .nav-tool-btn:hover { border-color: #818cf8; }
-    .nav-tool-cv { font-size: 0.6rem; color: #6b7280; }
+    .nav-tool-btn:hover { background: #f4f6f9; }
+    .nav-tool-cv { display: block; width: 16px; height: 16px; flex: none; }
     .nav-tool-menu {
         position: absolute; top: calc(100% + 8px); right: 0; min-width: 158px; padding: 0.4rem;
         background: #fff; border: 1.5px solid #e5e7eb; border-radius: 12px;
@@ -1116,7 +1116,8 @@
     .nav-tool-menu a:hover { background: #f4f6f9; }
     .nav-tool-menu a.is-on { background: #eef2ff; color: #4f46e5; }
     @media (max-width: 600px) {
-        .nav-tool-btn { padding: 0.3rem 0.5rem; font-size: 0.75rem; }
+        .nav-tool-btn { height: 44px; gap: 0.2rem; padding: 0 0.4rem 0 0.6rem; font-size: 0.75rem; }
+        .nav-tool-cv { width: 13px; height: 13px; }
     }
     /* 目次 */
     .toc-tab {
@@ -1259,7 +1260,7 @@
     </a>
     <div class="ytt-sp-nav-cta">
         <div class="nav-tool" hidden>
-            <button type="button" class="nav-tool-btn" aria-expanded="false" aria-haspopup="true">cTrader<span class="nav-tool-cv" aria-hidden="true">▼</span></button>
+            <button type="button" class="nav-tool-btn" aria-expanded="false" aria-haspopup="true">cTrader<svg class="nav-tool-cv" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 9.5 12 15l5.5-5.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
             <div class="nav-tool-menu" hidden>
                 <span class="nav-tool-menu-t">取引ツールを切り替える</span>
                 <a href="ytt-web-setup.html?tool=mt4">MT4</a>

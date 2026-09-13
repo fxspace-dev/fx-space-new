@@ -1058,6 +1058,12 @@
     }
     .vzoom svg { width: 15px; height: 15px; flex: none; }
     .vzoom:hover { border-color: #818cf8; }
+
+    /* 口座開設ページのタイトル：1行で、画面幅に収まる範囲でできるだけ大きく（--title-em＝タイトル1行の幅を文字数換算した値） */
+    .ytt-sp-hero-title.acct-title { font-size: min(3.4rem, calc((100vw - 2.5rem) / var(--title-em))); margin-bottom: 1.4rem; }
+    .acct-title .ytt-sp-title-line > span.line-text { white-space: nowrap; }
+    /* 手順の中の長いボタンは、スマホで画面からはみ出さないよう折り返す */
+    .gstep-btn .btn-sq-blue { white-space: normal; max-width: 100%; box-sizing: border-box; justify-content: center; text-align: center; }
 </style>
 
 </head>
@@ -1083,18 +1089,13 @@
 
 <!-- HERO -->
 <section class="ytt-sp-hero">
-    <h1 class="ytt-sp-hero-title">
-        <span class="ytt-sp-title-line"><span class="line-text"><img class="hfm-title-logo" src="img/webytt/hfm-logo.png" alt="HFM" width="451" height="223">で<img class="ytt-title-wave" src="img/wave-yellow.png" alt=""></span></span>
-        <span class="ytt-sp-title-line"><span class="line-text">口座を作る<img class="ytt-title-wave" src="img/wave-yellow.png" alt=""></span></span>
+    <h1 class="ytt-sp-hero-title acct-title" style="--title-em: 10.6;">
+        <span class="ytt-sp-title-line"><span class="line-text"><img class="hfm-title-logo" src="img/webytt/hfm-logo.png" alt="HFM" width="451" height="223">で口座を作る<img class="ytt-title-wave" src="img/wave-yellow.png" alt=""></span></span>
     </h1>
     <p class="ytt-sp-hero-lead">
         Web版YTTを使うには、証券会社の取引口座が必要です。<br>
         HFMなら、登録から口座の開設までネットでできます。
     </p>
-    <div class="ytt-sp-hero-btns">
-        <a href="#flow" class="btn-sq-blue">手順を見る</a>
-        <a href="ytt-web-setup.html" class="btn-sq-white">Web版YTTの導入方法へ</a>
-    </div>
 </section>
 
 <!-- 流れ -->
@@ -1315,7 +1316,7 @@
                 <div class="gstep-no">1</div>
                 <div class="gstep-body">
                     <p class="gstep-title">STEP 3 で選んだ取引ツールのページを開く</p>
-                    <div class="gstep-btn tool-dl-btns"><a href="https://www.hfm.com/int/jp/platforms/mt4-terminal" class="btn-sq-blue" target="_blank" rel="noopener">MT4のページを開く</a><a href="https://www.hfm.com/int/jp/platforms/mt5-terminal" class="btn-sq-blue" target="_blank" rel="noopener">MT5のページを開く</a></div>
+                    <div class="gstep-btn tool-dl-btns"><a href="https://www.hfm.com/int/jp/platforms/mt4-terminal" class="btn-sq-blue" data-t="mt4" target="_blank" rel="noopener">MT4のページを開く</a><a href="https://www.hfm.com/int/jp/platforms/mt5-terminal" class="btn-sq-blue" data-t="mt5" target="_blank" rel="noopener">MT5のページを開く</a></div>
                 </div>
             </div>
             <div class="gstep">

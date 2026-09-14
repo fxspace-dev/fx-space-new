@@ -1782,12 +1782,21 @@
             <div class="gstep">
                 <div class="gstep-no">4</div>
                 <div class="gstep-body">
+                    <p class="gstep-title">チャートの上で右クリック →「取引レベル」をオンにする</p>
+                    <figure class="gshot narrow"><img src="img/webytt/mt5/m5-13c-trade-level.png" alt="チャートの右クリックメニューの取引レベル" loading="lazy"></figure>
+                    <p>「取引レベル」の左のアイコンが四角で囲まれていればオンです。囲まれていないときは、押してオンにしてください。</p>
+                    <p class="gnote">オフのままだと、時間がたつにつれてWeb版YTTに表示される価格や損益がMT5とずれていきます。利益が出ているつもりで決済したらマイナスだった、ということが起こるので、必ずオンにしてください。</p>
+                </div>
+            </div>
+            <div class="gstep">
+                <div class="gstep-no">5</div>
+                <div class="gstep-body">
                     <p class="gstep-title">上部のメニュー「表示」→「ナビゲータ」</p>
                     <figure class="gshot narrow"><img src="img/webytt/mt5/m5-13b-navigator-menu.png" alt="表示メニューからナビゲータを選ぶ" loading="lazy"></figure>
                 </div>
             </div>
             <div class="gstep">
-                <div class="gstep-no">5</div>
+                <div class="gstep-no">6</div>
                 <div class="gstep-body">
                     <p class="gstep-title">「エキスパートアドバイザ(EA)」を開き、「YTT_OrderEA」を探す</p>
                     <figure class="gshot narrow"><img src="img/webytt/mt5/m5-14-navigator.png" alt="ナビゲータのエキスパートアドバイザ(EA)にYTT_OrderEAが表示されている" loading="lazy"></figure>
@@ -1796,21 +1805,21 @@
                 </div>
             </div>
             <div class="gstep">
-                <div class="gstep-no">6</div>
+                <div class="gstep-no">7</div>
                 <div class="gstep-body">
                     <p class="gstep-title">「YTT_OrderEA」を右クリック →「チャートに追加」</p>
                     <figure class="gshot narrow"><img src="img/webytt/mt5/m5-15-attach.png" alt="YTT_OrderEAを右クリックしてチャートに追加を選ぶ" loading="lazy"></figure>
                 </div>
             </div>
             <div class="gstep">
-                <div class="gstep-no">7</div>
+                <div class="gstep-no">8</div>
                 <div class="gstep-body">
                     <p class="gstep-title">「共有」タブ →「アルゴリズム取引を許可」にチェック</p>
                     <figure class="gshot"><img src="img/webytt/mt5/m5-16a-shared-tab.png" alt="共有タブでアルゴリズム取引を許可にチェック" loading="lazy"></figure>
                 </div>
             </div>
             <div class="gstep">
-                <div class="gstep-no">8</div>
+                <div class="gstep-no">9</div>
                 <div class="gstep-body">
                     <p class="gstep-title">「仕様」タブ →「DLLの使用を許可する」にチェック</p>
                     <figure class="gshot"><img src="img/webytt/mt5/m5-16-dll-tab.png" alt="仕様タブでDLLの使用を許可するにチェック" loading="lazy"></figure>
@@ -1818,7 +1827,7 @@
                 </div>
             </div>
             <div class="gstep">
-                <div class="gstep-no">9</div>
+                <div class="gstep-no">10</div>
                 <div class="gstep-body">
                     <p class="gstep-title">「インプット」タブで、認証コードなどを入力して「OK」</p>
                     <figure class="gshot"><img src="img/webytt/mt5/m5-17-inputs.png" alt="インプットタブ。認証コードとサフィックスを入力してOKを押す" loading="lazy"></figure>
@@ -1833,14 +1842,14 @@
                 </div>
             </div>
             <div class="gstep">
-                <div class="gstep-no">10</div>
+                <div class="gstep-no">11</div>
                 <div class="gstep-body">
                     <p class="gstep-title">MT5上部の「アルゴリズム取引」をクリックしてオン（緑の状態）にする</p>
                     <figure class="gshot mid"><img src="img/webytt/mt5/m5-18-algo-button.png" alt="MT5のアルゴリズム取引ボタン" loading="lazy"></figure>
                 </div>
             </div>
             <div class="gstep">
-                <div class="gstep-no">11</div>
+                <div class="gstep-no">12</div>
                 <div class="gstep-body">
                     <p class="gstep-title">「初期設定完了 MT5を再起動してください」と出たら、MT5を再起動する</p>
                     <figure class="gshot mid"><img src="img/webytt/mt5/m5-19-restart.png" alt="チャート上に初期設定完了 MT5を再起動してくださいと表示された状態" loading="lazy"></figure>
@@ -2058,6 +2067,10 @@
         <details class="ytt-faq">
             <summary><span class="ytt-faq-q">Web版の丸いアイコンが黄になる</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
             <div class="ytt-faq-a"><p>価格が取得できていません。取引する通貨ペアを気配値表示欄に表示してください。</p></div>
+        </details>
+        <details class="ytt-faq">
+            <summary><span class="ytt-faq-q">Web版YTTの価格や損益がMT5とずれている</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
+            <div class="ytt-faq-a"><p>MT5のチャートで「取引レベル」がオフになっていると、時間がたつにつれて価格や損益がMT5とずれていきます。連携ツールを入れたチャートの上で右クリックし、「取引レベル」をオンにしてください（STEP 2「チャートに連携ツールを入れる」の手順4）。</p></div>
         </details>
         <details class="ytt-faq">
             <summary><span class="ytt-faq-q">特定の通貨ペアやCFD商品だけ注文できない</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>

@@ -1845,7 +1845,7 @@
                         <tr><th>認証コード（口座登録画面に表示されます）</th><td>STEP 1 で控えた<b>32文字の認証コード</b>を貼り付けます</td></tr>
                         <tr><th>通貨ペア名末尾サフィックス</th><td>通貨ペア名の末尾に文字が付いている口座では、その文字を入力します。<br>例：Fintokei の <code>USDJPYp</code> → <code>p</code> ／ HFMプロ口座の <code>USDJPYr</code> → <code>r</code><br>サフィックスが無い口座は空欄のままでOK</td></tr>
                     </table>
-                    <div class="gtip"><b>任意設定</b>はそのままで構いません。<br>金・銀・ビットコイン・日経・オイルなどを取引する方は、下のほうの「特殊通貨ペア名設定」に、その証券会社で使われている商品名を入力します（例：<code>XAUUSD</code> の欄に <code>GOLD</code>）。空欄のときは標準の名称が使われるので、同じ名前なら空欄でOKです。</div>
+                    <div class="gtip"><b>任意設定</b>はそのままで構いません。<br>金・銀・ビットコイン・日経・オイルなどを取引する方は、下のほうの「特殊通貨ペア名設定」に、その証券会社で使われている商品名を入力します（例：<code>XAUUSD</code> の欄に <code>GOLD</code>）。空欄のときは標準の名称が使われるので、同じ名前なら空欄でOKです。<br>記号が先頭につく口座（<code>#BTCUSD</code> など）は、その欄に <code>#</code> だけでなく <code>#BTCUSD</code> と名前を全部入れます。末尾の文字（サフィックス）は、上の「通貨ペア名末尾サフィックス」に入れておけば、ほかの欄に入れ直さなくてかまいません。</div>
                     <p>「OK」を押したあとに下の画面が出ることがあります。そのまま<b>「OK」</b>を押して大丈夫です（再起動は手順12で行います）。</p>
                     <figure class="gshot mid"><img src="img/webytt/mt5/m5-17b-done.png" alt="YTTWebの初期設定が完了しました。MT5を再起動してください。というお知らせ" loading="lazy"></figure>
                 </div>
@@ -2083,11 +2083,23 @@
         </details>
         <details class="ytt-faq">
             <summary><span class="ytt-faq-q">特定の通貨ペアやCFD商品だけ注文できない</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
-            <div class="ytt-faq-a"><p>①サフィックス付きの口座（USDJPYp など）で「通貨ペア名末尾サフィックス」を入力しているか<br>②CFD系商品は、証券会社の商品名（GOLD など）を「特殊通貨ペア名設定」に入力しているか</p></div>
+            <div class="ytt-faq-a"><p>①サフィックス付きの口座（USDJPYp など）で「通貨ペア名末尾サフィックス」を入力しているか<br>②CFD系商品は、証券会社の商品名（GOLD など）を「特殊通貨ペア名設定」に入力しているか<br>③記号が先頭につく口座（#BTCUSD など）は、名前を全部（#BTCUSD）入力しているか</p></div>
         </details>
         <details class="ytt-faq">
             <summary><span class="ytt-faq-q">セキュリティソフトにひっかかってダウンロードできない／DLLが消える</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
             <div class="ytt-faq-a"><p>①DLLの使用許可をしていない<br>②DLLの名前がオリジナルファイル（YTT_OrderReceiver.dll）と異なっている（末尾に（1）が付いているなど）<br>③「MQL5」→「Libraries」中のDLLファイルがセキュリティソフトにより削除／中身が空白になっている</p><p>③の場合は<a href="https://support.microsoft.com/ja-jp/windows/windows-%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%E3%81%AB%E9%99%A4%E5%A4%96%E3%82%92%E8%BF%BD%E5%8A%A0%E3%81%99%E3%82%8B-811816c0-4dfd-af4a-47e4-c301afe13b26" target="_blank" rel="noopener">こちら</a>等を参考に除外処理をおこなってください（Windowsセキュリティ以外の場合は各自除外処理の方法をお調べください）。</p></div>
+        </details>
+        <details class="ytt-faq">
+            <summary><span class="ytt-faq-q">Web版YTTの新しいバージョンが出たときは</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
+            <div class="ytt-faq-a"><p>ブラウザで開いている場合は、ページを更新（再読み込み）すれば新しいバージョンになります。</p><p>アプリとしてインストールしている場合は、いったん削除（アンインストール）してから、もう一度入れ直してください。</p></div>
+        </details>
+        <details class="ytt-faq">
+            <summary><span class="ytt-faq-q">チャートの足が一部だけ遅れて出る・抜けている</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
+            <div class="ytt-faq-a"><p>表示の途中が抜けていることがあります。ページを更新（再読み込み）すると直ります。</p></div>
+        </details>
+        <details class="ytt-faq">
+            <summary><span class="ytt-faq-q">前のYTTのファイルは消したほうがいい？</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
+            <div class="ytt-faq-a"><p>残しておいても問題ありません。消すと、取引ツールが少し軽くなります。</p><p>MT4のYTTは、消さなくて大丈夫です。</p></div>
         </details>
         <p style="font-size:0.8125rem;color:#6b7280;margin-top:1.25rem;text-align:left;">新しい連携ツールが配布されたときは、ファイルをダウンロードしてお使いの取引ツールの導入方法ページで「STEP 2」の手順をもう一度行ってください。</p>
     </div>

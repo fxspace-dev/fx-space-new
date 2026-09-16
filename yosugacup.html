@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yosuga杯 supported by Fintokei — FX SPACE</title>
+<link rel="icon" type="image/png" href="img/favicon.png">
+<link rel="apple-touch-icon" href="img/favicon.png">
+<meta name="description" content="よすが主催のトレード大会「Yosuga杯」。2026年9月21日〜10月20日、参加費無料。賞金総額 最大100万円、Fintokeiのチャレンジプラン、優勝者にはトロフィー。">
+<meta property="og:title" content="Yosuga杯 supported by Fintokei — その一手で、頂点へ。">
+<meta property="og:description" content="9/21〜10/20、参加費無料のトレード大会。賞金総額 最大100万円とFintokeiのチャレンジプラン。優勝者にはトロフィー。">
+<meta property="og:image" content="https://fx-space.com/intro/img/og-yosugacup.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://fx-space.com/intro/img/og-yosugacup.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Noto+Serif+JP:wght@600&display=swap">
+<link rel="stylesheet" href="css/style.css?v=20260908e">
+<!--
+  ▼ 公開前に確定が必要な項目（2026-09-13 時点）
+    1) 済 … 申込URL（https://my.fintokei.com/ja/contests/COP30）は末尾の ENTRY_URL に入れてあります。
+    2) 済 … 順位と賞品の対応は公式の大会ページのルールで確認しました（2026-09-16）。こちらの推測どおりでした。
+    3) 済 … ドローダウンは 最大20%・1日あたり10%（2026-09-16 Fintokei回答）。大会ページのルール文は数値が抜けていて修正依頼中とのこと。
+    4) 済 … よすがに紐づいていないアカウントは「コンテストに参加」でエラーになる設定。エラーが出た人だけ変更申請する流れ（同回答）。
+    5) 参加口座の仕組み … 大会ページの「コンテストに参加」を押すだけで、どの口座で取引するのかは未確認。
+    6) 順位の決め方（収益率か利益額か）… 未確認。ランキング表には「有効証拠金」と「利益」の列があります。
+    7) 開始・終了の正確な時刻とタイムゾーン … 大会ページには「2026/9/21 9:00:00」と出ます（表示の基準は未確認）。
+    7) 大会開始後に申し込んだ人の扱い … 受付は9/30 23:59（日本時間）まで延長で確定（2026-09-14）。
+       途中から参加した人の取引がいつから成績に入るか、成績の数え方が変わるかは未確認なので、ページには書いていません。
+  ※ 主催者特典（新規20名以上でRuby Slim×1）は内部条件なのでページには載せません。
+  ※ 明朝体は2か所だけに絞っています（概要の1行キャッチと、賞金・賞品セクションの見出し）。
+  ※ 賞金・賞品はタブで切り替わります。既定は「1,000名〜」。中身は末尾の TIERS で管理しています。
+-->
+<style>
+/* ===== Yosuga杯 特設ページ（ダーク・グラデーションなし） ===== */
+.yc-page {
+    --yc-bg: #05040e;
+    --yc-bg-alt: #141030;
+    --yc-panel: #15122c;
+    --yc-panel-alt: #211c47;
+    --yc-line: #3d3670;
+    --yc-line-soft: #39326a;
+    --yc-text: #ffffff;
+    --yc-muted: #d6d1ea;
+    --yc-dim: #b3adcf;
+    --yc-violet: #7244c5;
+    --yc-violet-hi: #8a5cdb;
+    --yc-violet-lt: #b295f0;
+    --yc-gold: #e3bf5f;
+    --yc-silver: #c3c6d4;
+    --yc-bronze: #c1815a;
+    background: var(--yc-bg);
+    color: var(--yc-text);
+    font-family: 'Noto Sans JP', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+.yc-page ::selection { background: var(--yc-violet); color: #fff; }
+
+/* 目には見えないが、読み上げや検索にはページの名前として伝わる見出し */
+.yc-sr { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* 明朝はこの2か所だけ */
+.yc-mincho { font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", YuMincho, serif; font-weight: 600; }
+
+/* ---- レイアウト。セクションごとに背景を変えて切れ目を作る ---- */
+.yc-section { padding: 8rem 1.5rem; border-top: 1px solid var(--yc-line-soft); }
+.yc-section.is-alt { background: var(--yc-bg-alt); }
+.yc-section[id] { scroll-margin-top: 80px; }
+.yc-inner { max-width: 960px; margin: 0 auto; }
+.yc-eyebrow {
+    display: block; text-align: center; margin: 0 auto 3.4rem;
+    font-size: clamp(1.5rem, 4.6vw, 2.1rem); font-weight: 900;
+    letter-spacing: 0.08em; color: var(--yc-text);
+}
+/* 見出しの下に置く短いアクセントライン */
+.yc-eyebrow > span { display: inline-block; position: relative; padding-bottom: 0.9rem; }
+.yc-eyebrow > span::after {
+    content: ''; position: absolute; left: 50%; transform: translateX(-50%); bottom: 0;
+    width: 40px; height: 2px; background: var(--yc-gold);
+}
+.yc-h2 { font-size: clamp(1.5rem, 4.4vw, 2.2rem); font-weight: 900; line-height: 1.45; margin: 0 0 1rem; text-align: center; }
+.yc-lead { color: var(--yc-muted); font-size: 0.98rem; line-height: 2; margin: 0 auto 2.4rem; max-width: 620px; text-align: center; }
+.yc-note { color: var(--yc-dim); font-size: 0.82rem; line-height: 1.9; margin: 2.4rem 0 0; text-align: center; }
+.yc-ref { color: var(--yc-dim); font-size: 0.82rem; text-decoration: underline; }
+.yc-ref:hover { color: var(--yc-muted); }
+
+.yc-card { background: var(--yc-panel); border: 1px solid var(--yc-line); border-radius: 8px; }
+.is-alt .yc-card { background: var(--yc-panel-alt); }
+
+/* ---- スクロール演出。JSが動かない環境では最初から見えたままになる ---- */
+[data-anim] { opacity: 1; }
+.js-anim [data-anim] { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.js-anim [data-anim].is-in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+    .js-anim [data-anim] { opacity: 1; transform: none; transition: none; }
+}
+
+/* ---- ヘッダー ---- */
+/* 共通CSSが html/body に overflow-x:hidden を付けていて sticky が効かないため、fixed で固定する */
+body.yc-page { padding-top: 65px; }
+.yc-nav {
+    position: fixed; top: 0; left: 0; right: 0; height: 65px; z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 1rem; padding: 0.7rem 1.2rem;
+    background: #05040e; border-bottom: 1px solid var(--yc-line);
+}
+.yc-nav-logo { display: flex; align-items: center; gap: 0.55rem; font-weight: 700; font-size: 0.95rem; color: #fff; text-decoration: none; }
+.yc-nav-logo img { display: block; height: 24px; width: auto; }
+
+/* ---- ボタン ---- */
+.yc-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    background: var(--yc-violet); color: #fff; text-decoration: none;
+    font-weight: 700; font-size: 1.05rem; line-height: 1.4;
+    padding: 1rem 2.4rem; border-radius: 8px; letter-spacing: 0.06em; transition: background 0.2s;
+}
+.yc-btn:hover { background: var(--yc-violet-hi); }
+.yc-btn.sm { font-size: 0.85rem; padding: 0.7rem 1.3rem; }
+
+/* ---- ヒーロー ---- */
+.yc-hero { padding: 1.5rem 1.5rem 4.5rem; text-align: center; }
+.yc-hero-banner { max-width: 960px; margin: 0 auto 2.8rem; }
+.yc-hero-banner img { display: block; width: 100%; height: auto; border-radius: 8px; }
+
+/* ---- CTAブロック ---- */
+.yc-cta { text-align: center; max-width: 470px; margin: 0 auto; }
+.yc-counts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.85rem; margin: 0 0 1.4rem; }
+.yc-counts.is-single { grid-template-columns: 1fr; }
+.yc-count { padding: 2.2rem 0.8rem 2.1rem; border: 1px solid var(--yc-line); border-radius: 8px; }
+.yc-count.is-key { border-color: rgba(227, 191, 95, 0.55); }
+.yc-count-label { font-size: 0.82rem; font-weight: 700; color: var(--yc-muted); letter-spacing: 0.08em; }
+.yc-count-value { font-weight: 900; color: var(--yc-text); margin-top: 0.25rem; line-height: 1.05; font-size: 0.95rem; }
+.yc-count-value b { font-size: 2.8rem; font-weight: 900; margin: 0 0.08em; color: var(--yc-violet-lt); }
+.yc-count.is-key .yc-count-value b { color: var(--yc-gold); }
+.yc-cta .yc-btn { width: 100%; }
+.yc-cta-link { display: inline-block; margin-top: 1.1rem; font-size: 0.85rem; color: var(--yc-dim); text-decoration: underline; }
+.yc-cta-link:hover { color: var(--yc-muted); }
+
+/* ---- 概要 ---- */
+.yc-intro-catch { font-size: clamp(1.25rem, 4.2vw, 1.8rem); line-height: 1.8; letter-spacing: 0.04em; text-align: center; margin: 0 0 1.4rem; }
+
+/* ---- 人数タブ ---- */
+.yc-tabs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; margin: 0 0 2.8rem; }
+.yc-tab {
+    font: inherit; font-size: 0.82rem; font-weight: 700; color: var(--yc-muted);
+    background: transparent; border: 1px solid var(--yc-line); border-radius: 6px;
+    padding: 0.65rem 0.3rem; cursor: pointer; transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.yc-tab:hover { color: #fff; border-color: var(--yc-violet); }
+.yc-tab.is-on { background: var(--yc-violet); border-color: var(--yc-violet); color: #fff; }
+@media (max-width: 560px) { .yc-tabs { grid-template-columns: repeat(2, 1fr); } }
+
+/* ---- 賞金総額 ---- */
+.yc-big { text-align: center; margin: 0 0 3.4rem; }
+.yc-big-label { font-size: 0.9rem; font-weight: 700; color: var(--yc-muted); letter-spacing: 0.08em; }
+.yc-big-amount { font-size: clamp(2.8rem, 11vw, 5rem); font-weight: 900; line-height: 1.05; margin: 0.3rem 0 0.2rem; color: var(--yc-gold); }
+.yc-big-amount span { font-size: 0.42em; }
+.yc-big-sub { font-size: 0.92rem; color: var(--yc-muted); }
+
+/* ---- 表彰台。カードの高さで順位を見せる ---- */
+.yc-podium { display: grid; grid-template-columns: 1fr 1.12fr 1fr; gap: 0.9rem; align-items: end; margin: 0 0 0.9rem; }
+.yc-pod { border: 1px solid; border-radius: 8px; padding: 1.5rem 1rem; text-align: center; background: var(--yc-panel); }
+.is-alt .yc-pod { background: var(--yc-panel-alt); }
+.yc-pod-badge {
+    width: 2.4rem; height: 2.4rem; border-radius: 50%; margin: 0 auto 0.9rem;
+    display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1rem;
+}
+.yc-pod-money { font-size: clamp(1.35rem, 5.4vw, 2.1rem); font-weight: 900; line-height: 1.1; }
+.yc-pod-pct { font-size: 0.78rem; color: var(--yc-dim); margin-top: 0.25rem; }
+.yc-pod-plan { font-size: 1rem; font-weight: 700; line-height: 1.5; margin-top: 1.1rem; padding-top: 1.1rem; border-top: 1px solid var(--yc-line); }
+.yc-pod-fund { display: block; font-size: 0.8rem; font-weight: 400; color: var(--yc-muted); margin-top: 0.2rem; }
+.yc-pod-plus { font-size: 1.4rem; font-weight: 900; color: var(--yc-gold); line-height: 1; margin-top: 0.9rem; }
+.yc-pod-trophy {
+    display: inline-flex; align-items: center; gap: 0.35rem; margin-top: 0.7rem;
+    font-size: 0.78rem; font-weight: 700; color: var(--yc-gold);
+    border: 1px solid var(--yc-gold); border-radius: 5px; padding: 0.25rem 0.8rem;
+}
+.yc-pod-trophy svg { width: 13px; height: 13px; }
+.yc-pod.is-1 { border-color: var(--yc-gold); padding-top: 2.4rem; padding-bottom: 2.4rem; }
+.yc-pod.is-1 .yc-pod-badge { background: var(--yc-gold); color: #1a1406; }
+.yc-pod.is-1 .yc-pod-money { color: var(--yc-gold); }
+.yc-pod.is-2 { border-color: rgba(195, 198, 212, 0.5); padding-top: 2.1rem; padding-bottom: 2.1rem; }
+.yc-pod.is-2 .yc-pod-badge { background: var(--yc-silver); color: #1a1a22; }
+.yc-pod.is-2 .yc-pod-money { color: var(--yc-silver); }
+.yc-pod.is-3 { border-color: rgba(193, 129, 90, 0.55); padding-top: 1.2rem; padding-bottom: 1.2rem; }
+.yc-pod.is-3 .yc-pod-badge { background: var(--yc-bronze); color: #1d1008; }
+.yc-pod.is-3 .yc-pod-money { color: var(--yc-bronze); }
+@media (max-width: 640px) {
+    .yc-podium { grid-template-columns: 1fr; gap: 0.6rem; }
+    .yc-pod.is-1 { order: 1; }
+    .yc-pod.is-2 { order: 2; }
+    .yc-pod.is-3 { order: 3; }
+    /* スマホは中身をすべてカードの中央にそろえる */
+    .yc-pod { display: block; text-align: center; padding: 1.4rem 1.2rem !important; }
+    .yc-pod-badge { margin: 0 auto 0.7rem; }
+    .yc-pod-plan { margin-top: 0.9rem; padding-top: 0.9rem; }
+}
+
+/* ---- 4位以下 ---- */
+.yc-rest { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 0.7rem; padding: 1.4rem; }
+.yc-rest[hidden] { display: none; }
+.yc-rest-badge {
+    flex: 0 0 auto; min-width: 3.6rem; height: 2.4rem; border-radius: 5px; background: #3d3670;
+    display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 0.82rem; padding: 0 0.6rem;
+}
+.yc-rest-plan { font-size: 1rem; font-weight: 700; }
+.yc-rest-fund { display: block; font-size: 0.8rem; font-weight: 400; color: var(--yc-muted); margin-top: 0.2rem; }
+
+/* ---- 優勝トロフィー（1位のカードの中に置く） ---- */
+/* 1位カードの背景に敷くトロフィー。中身は前面に出す */
+.yc-pod.is-1 { position: relative; overflow: hidden; }
+.yc-pod.is-1 > *:not(.yc-pod-trophy-bg) { position: relative; z-index: 1; }
+.yc-pod-trophy-bg { position: absolute; z-index: 0; right: 0; bottom: 0; width: 42%; height: auto; opacity: 0.45; pointer-events: none; }
+
+@media (max-width: 640px) { .yc-pod-trophy-bg { right: 0; width: 38%; opacity: 0.36; } }
+
+/* ---- ルール ---- */
+.yc-rules { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
+.yc-rule { padding: 2rem 1.5rem; text-align: center; }
+.yc-rule svg { width: 40px; height: 40px; color: var(--yc-violet-lt); margin-bottom: 1rem; }
+.yc-rule-label { font-size: 0.85rem; font-weight: 700; color: var(--yc-muted); letter-spacing: 0.1em; }
+.yc-rule-value { font-size: clamp(1.5rem, 4.6vw, 1.9rem); font-weight: 900; margin: 0.3rem 0 0.8rem; line-height: 1.35; }
+.yc-rule p { font-size: 0.9rem; line-height: 1.9; color: var(--yc-muted); margin: 0; }
+.yc-rule p + p { margin-top: 0.7rem; }
+.yc-rule.is-wide { grid-column: 1 / -1; }
+@media (max-width: 560px) { .yc-rules { grid-template-columns: 1fr; } .yc-rule { padding: 1.7rem 1.3rem; } }
+
+/* ---- タイムライン ---- */
+.yc-timeline { display: grid; grid-template-columns: repeat(4, 1fr); margin: 0; padding: 0; list-style: none; position: relative; }
+.yc-timeline::before { content: ''; position: absolute; left: 12.5%; right: 12.5%; top: 13px; height: 2px; background: rgba(214, 209, 234, 0.55); }
+.yc-tl { text-align: center; position: relative; padding: 0 0.5rem; }
+.yc-tl-dot {
+    width: 28px; height: 28px; border-radius: 50%; margin: 0 auto 1.1rem;
+    background: var(--yc-bg); border: 3px solid #d6d1ea; position: relative; z-index: 1;
+}
+.is-alt .yc-tl-dot { background: var(--yc-bg-alt); }
+.yc-tl.is-key .yc-tl-dot { background: var(--yc-gold); border-color: var(--yc-gold); }
+.yc-tl-date { font-size: clamp(1.3rem, 4.4vw, 1.7rem); font-weight: 900; margin-bottom: 0.35rem; line-height: 1.2; }
+.yc-tl.is-key .yc-tl-date { color: var(--yc-gold); }
+.yc-tl-title { font-size: 0.95rem; color: var(--yc-muted); line-height: 1.75; }
+@media (max-width: 640px) {
+    .yc-timeline { grid-template-columns: 1fr; gap: 1.8rem; }
+    .yc-timeline::before { display: none; }
+    /* 線は丸と丸のあいだだけに引く。最後の「後日」の下には引かない */
+    .yc-tl:not(:last-child)::after {
+        content: ''; position: absolute; left: 13px; width: 2px;
+        top: 14px; bottom: calc(-1.8rem - 14px); background: rgba(214, 209, 234, 0.55); z-index: 0;
+    }
+    .yc-tl { text-align: left; display: grid; grid-template-columns: 28px 1fr; gap: 0 1.2rem; padding: 0; }
+    .yc-tl-dot { margin: 0; }
+    .yc-tl-date, .yc-tl-title { grid-column: 2; }
+}
+
+/* ---- 参加ステップ ---- */
+/* 上から順に読む縦並び。日程セクションの横軸タイムラインと見分けがつくように、
+   つなぎ線は点線、丸は番号入りの金色にしている */
+.yc-steps { max-width: 560px; margin: 0 auto; padding-left: 4.2rem; }
+.yc-step { position: relative; padding: 0 0 3.2rem; text-align: left; }
+.yc-step:last-child { padding-bottom: 0; }
+.yc-step::before {
+    content: ''; position: absolute; left: -2.85rem; top: 3.1rem; bottom: 0.3rem;
+    border-left: 1px solid var(--yc-line-soft);
+}
+.yc-step:last-child::before { display: none; }
+.yc-step-num {
+    position: absolute; left: -4.2rem; top: 0;
+    width: 2.7rem; height: 2.7rem; border-radius: 50%;
+    border: 2px solid var(--yc-gold); background: var(--yc-bg-alt); color: var(--yc-gold);
+    display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1.05rem;
+}
+.yc-step h3 { font-size: clamp(1.05rem, 3.4vw, 1.25rem); font-weight: 900; margin: 0.35rem 0 0.6rem; line-height: 1.5; }
+.yc-step p { font-size: 0.9rem; line-height: 1.9; color: var(--yc-muted); margin: 0; }
+.yc-step p + p { margin-top: 0.7rem; }
+.yc-step .yc-btn { margin-top: 1.1rem; }
+@media (max-width: 720px) {
+    .yc-steps { padding-left: 3.4rem; }
+    .yc-step { padding-bottom: 2.8rem; }
+    .yc-step::before { left: -2.2rem; top: 2.8rem; }
+    .yc-step-num { left: -3.4rem; width: 2.4rem; height: 2.4rem; font-size: 0.98rem; }
+    .yc-step .yc-btn:not(.sm) { width: auto; }
+}
+.yc-callout { border: 1px solid var(--yc-violet); border-radius: 8px; padding: 1.6rem 1.5rem; font-size: 0.92rem; line-height: 1.9; color: var(--yc-muted); background: var(--yc-panel); text-align: center; margin-top: 3rem; }
+.is-alt .yc-callout { background: var(--yc-panel-alt); }
+.yc-callout strong { color: #fff; }
+.yc-callout .yc-btn { margin-top: 1.2rem; }
+.yc-callout p { margin: 0 0 1.1rem; }
+.yc-callout p:last-of-type { margin-bottom: 0; }
+.yc-callout p strong { display: block; margin-bottom: 0.2rem; }
+.yc-toggle { max-width: 560px; margin: 4.4rem auto 0; border: 1px solid var(--yc-line); border-radius: 8px; }
+.yc-toggle summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 0.8rem; padding: 1.2rem 1.4rem; font-size: 0.95rem; font-weight: 700; color: var(--yc-text); }
+.yc-toggle[open] summary { border-bottom: 1px solid var(--yc-line-soft); }
+.yc-toggle summary::-webkit-details-marker { display: none; }
+.yc-toggle summary::after {
+    content: ''; margin-left: auto; flex: 0 0 auto; width: 9px; height: 9px;
+    border-right: 2px solid var(--yc-violet-lt); border-bottom: 2px solid var(--yc-violet-lt);
+    transform: rotate(45deg); transition: transform 0.2s;
+}
+.yc-toggle[open] summary::after { transform: rotate(-135deg); }
+.yc-toggle-ic {
+    flex: 0 0 auto; width: 1.9rem; height: 1.9rem; border-radius: 50%;
+    border: 2px solid var(--yc-gold); color: var(--yc-gold);
+    display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: 900;
+}
+.yc-toggle-body { padding: 1.4rem 1.4rem 1.6rem; font-size: 0.92rem; line-height: 1.9; color: var(--yc-muted); }
+.yc-toggle-body p { margin: 0 0 1rem; }
+.yc-toggle-body .yc-btn { margin: 0.3rem 0 1.4rem; }
+
+/* ---- FAQ ---- */
+.yc-faqs { max-width: 720px; margin: 0 auto; }
+.yc-faq { border-bottom: 1px solid var(--yc-line); }
+.yc-faq summary {
+    cursor: pointer; list-style: none; position: relative;
+    padding: 1.3rem 2.5rem; text-align: center;
+    font-size: 1.02rem; font-weight: 700; line-height: 1.7;
+}
+.yc-faq summary::-webkit-details-marker { display: none; }
+.yc-faq summary::after {
+    content: ''; position: absolute; right: 0.8rem; top: 50%; width: 10px; height: 10px;
+    border-right: 2px solid var(--yc-violet-lt); border-bottom: 2px solid var(--yc-violet-lt);
+    transform: translateY(-70%) rotate(45deg); transition: transform 0.2s;
+}
+.yc-faq[open] summary::after { transform: translateY(-30%) rotate(-135deg); }
+.yc-faq-a { padding: 0 0.5rem 1.9rem; font-size: 0.93rem; line-height: 2; color: var(--yc-muted); text-align: center; }
+.yc-faq-a p { margin: 0 0 0.8rem; }
+.yc-faq-a p:last-child { margin-bottom: 0; }
+
+/* ---- 最終CTA・主催・フッター ---- */
+.yc-final { padding: 8rem 1.5rem; text-align: center; border-top: 1px solid var(--yc-line); }
+.yc-host { display: flex; align-items: center; justify-content: center; gap: 0.9rem; margin-top: 3.6rem; }
+.yc-host img { width: 56px; height: auto; }
+.yc-host div { text-align: left; }
+.yc-host-label { font-size: 0.78rem; color: var(--yc-dim); }
+.yc-host-name { font-size: 0.95rem; font-weight: 700; }
+.yc-footer { padding: 2rem 1.5rem 3rem; text-align: center; font-size: 0.82rem; color: var(--yc-dim); border-top: 1px solid var(--yc-line); background: var(--yc-bg-alt); }
+.yc-footer a { color: #cfc9ea; display: inline-block; padding: 0.6rem 0.8rem; }
+.yc-footer img { width: 60px; height: auto; vertical-align: middle; margin-left: 0.4rem; opacity: 0.8; }
+
+@media (max-width: 520px) {
+    .yc-section { padding: 5.8rem 1rem; }
+    .yc-final { padding: 5.8rem 1rem; }
+    .yc-hero { padding: 1rem 1rem 3rem; }
+    .yc-btn:not(.sm) { width: 100%; padding: 1rem 1.2rem; }
+}
+</style>
+</head>
+<body class="yc-page">
+
+<nav class="yc-nav">
+    <a class="yc-nav-logo" href="index.html">
+        <img src="images/fxspace-logo-horizontal-black.png" alt="FX SPACE" width="3000" height="565">
+    </a>
+    <a class="yc-btn sm yc-entry-link" href="#howto">参加を申し込む</a>
+</nav>
+
+<!-- ================= ヒーロー ================= -->
+<header class="yc-hero">
+    <h1 class="yc-sr">第1回 Yosuga杯 supported by Fintokei</h1>
+    <div class="yc-hero-banner">
+        <picture>
+            <source media="(max-width: 640px)" srcset="images/yosugacup-banner-square.png">
+            <img src="images/yosugacup-banner-wide.png" alt="Yosuga杯 supported by Fintokei その一手で、頂点へ。賞金総額 最大100万円＋賞品／開催期間 9月21日〜10月20日／参加費 無料" width="1280" height="720" fetchpriority="high">
+        </picture>
+    </div>
+    <div class="yc-cta" data-anim>
+        <div class="yc-counts" data-countdown></div>
+        <a class="yc-btn yc-entry-link" href="#howto">Yosuga杯に参加する</a>
+    </div>
+</header>
+
+<!-- ================= 概要 ================= -->
+<section class="yc-section is-alt">
+    <div class="yc-inner">
+        <p class="yc-intro-catch yc-mincho" data-anim>よすがが主催する、ひと月のトレード大会です。</p>
+        <p class="yc-lead" style="margin-bottom:0;" data-anim>参加した人は同じ条件で1か月トレードし、成績の良かった順に賞金とFintokeiのチャレンジプランが贈られます。</p>
+    </div>
+</section>
+
+<!-- ================= 賞金と賞品 ================= -->
+<section class="yc-section">
+    <div class="yc-inner">
+        <h2 class="yc-eyebrow" data-anim><span>賞金・賞品</span></h2>
+        <p class="yc-lead" data-anim>参加人数によって、賞金の額も、賞品がもらえる人数も変わります。下のボタンで切り替えて見てください。</p>
+
+        <div class="yc-tabs" data-anim role="tablist">
+            <button class="yc-tab" type="button" role="tab" aria-selected="false" data-tier="a">1〜199名</button>
+            <button class="yc-tab" type="button" role="tab" aria-selected="false" data-tier="b">200〜499名</button>
+            <button class="yc-tab" type="button" role="tab" aria-selected="false" data-tier="c">500〜999名</button>
+            <button class="yc-tab is-on" type="button" role="tab" aria-selected="true" data-tier="d">1,000名〜</button>
+        </div>
+
+        <div class="yc-big" data-anim>
+            <div class="yc-big-label">賞金総額</div>
+            <div class="yc-big-amount"><b id="yc-count" data-count="100">100</b><span>万円</span></div>
+            <div class="yc-big-sub">参加人数が増えるほど、賞金も増えます</div>
+        </div>
+
+        <div class="yc-podium" data-anim>
+            <div class="yc-pod is-2">
+                <div class="yc-pod-badge">2</div>
+                <div class="yc-pod-money" data-pod-money="2">30万円</div>
+                <div class="yc-pod-pct">賞金の30%</div>
+                <div class="yc-pod-plan"><span data-pod-plan="2">サファイア Slim</span><small class="yc-pod-fund" data-pod-fund="2">運用デモ資金 2,000万円</small></div>
+            </div>
+            <div class="yc-pod is-1">
+                <div class="yc-pod-badge">1</div>
+                <div class="yc-pod-money" data-pod-money="1">60万円</div>
+                <div class="yc-pod-pct">賞金の60%</div>
+                <div class="yc-pod-plan"><span data-pod-plan="1">トパーズ Slim</span><small class="yc-pod-fund" data-pod-fund="1">運用デモ資金 3,500万円</small></div>
+                <div class="yc-pod-plus">＋</div>
+                <span class="yc-pod-trophy">トロフィー</span>
+                <img class="yc-pod-trophy-bg" src="images/yosugacup-trophy.png?v=2" alt="" width="620" height="1059" loading="lazy">
+            </div>
+            <div class="yc-pod is-3">
+                <div class="yc-pod-badge">3</div>
+                <div class="yc-pod-money" data-pod-money="3">10万円</div>
+                <div class="yc-pod-pct">賞金の10%</div>
+                <div class="yc-pod-plan"><span data-pod-plan="3">ルビー Slim</span><small class="yc-pod-fund" data-pod-fund="3">運用デモ資金 1,000万円</small></div>
+            </div>
+        </div>
+
+        <div class="yc-rest yc-card" id="yc-rest" data-anim>
+            <div class="yc-rest-badge" id="yc-rest-range">4-20位</div>
+            <div>
+                <span class="yc-rest-plan" id="yc-rest-plan">パール Slim</span>
+                <small class="yc-rest-fund" id="yc-rest-fund">運用デモ資金 500万円（17名）／賞金はありません</small>
+            </div>
+        </div>
+
+        <p class="yc-note" data-anim><a class="yc-ref" href="https://www.fintokei.com/jp/protrader-slim/" target="_blank" rel="noopener">賞品のチャレンジプラン・スリムについて詳しく見る</a><br><small>※トロフィーの画像はイメージです</small></p>
+    </div>
+</section>
+
+<!-- ================= ルール ================= -->
+<section class="yc-section is-alt">
+    <div class="yc-inner">
+        <h2 class="yc-eyebrow" data-anim><span>ルール</span></h2>
+
+        <div class="yc-rules" data-anim>
+            <div class="yc-rule yc-card is-wide">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M12 3l7 3v5.5c0 4.2-2.9 7.1-7 9.5-4.1-2.4-7-5.3-7-9.5V6z"></path>
+                    <path d="M9.5 11.5l2.5 2.5 2.5-2.5"></path>
+                    <path d="M12 8v6"></path>
+                </svg>
+                <div class="yc-rule-label">ドローダウン（損失の上限）</div>
+                <div class="yc-rule-value">最大20％／1日あたり10％</div>
+                <p>大会を通した損失は最大20％まで、1日あたりの損失は10％までと決まっています。一発勝負のハイリスクな取引ではなく、資金管理を含めた実力を競うルールです。</p>
+            </div>
+            <div class="yc-rule yc-card">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M3 17l5-5 3.5 3.5L20 7"></path>
+                    <path d="M15 7h5v5"></path>
+                </svg>
+                <div class="yc-rule-label">レバレッジ</div>
+                <div class="yc-rule-value">100倍</div>
+                <p>今回の大会では100倍で固定されます。</p>
+            </div>
+            <div class="yc-rule yc-card">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="4" y="8" width="16" height="12" rx="2.5"></rect>
+                    <path d="M12 4v4"></path>
+                    <path d="M9 14h.01"></path>
+                    <path d="M15 14h.01"></path>
+                    <path d="M9.5 17h5"></path>
+                </svg>
+                <div class="yc-rule-label">ツール・自動売買</div>
+                <div class="yc-rule-value">YTTが使えます</div>
+                <p>いつも使っているYTT（よすがトレードツール）のまま参加できます。Web版YTTも使えます。</p>
+                <p><a class="yc-ref" href="ytt-web-setup.html">Web版YTTの導入方法を見る</a></p>
+            </div>
+            <div class="yc-rule yc-card">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="3" y="5" width="18" height="16" rx="2.5"></rect>
+                    <path d="M3 10h18"></path>
+                    <path d="M8 3v4"></path>
+                    <path d="M16 3v4"></path>
+                    <path d="M9 15l6 3"></path>
+                    <path d="M15 15l-6 3"></path>
+                </svg>
+                <div class="yc-rule-label">最低取引日数</div>
+                <div class="yc-rule-value">なし</div>
+                <p>「何日以上トレードすること」という条件はありません。</p>
+            </div>
+            <div class="yc-rule yc-card">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="9"></circle>
+                    <path d="M9 8l3 4 3-4"></path>
+                    <path d="M12 12v5"></path>
+                    <path d="M9.5 13.5h5"></path>
+                    <path d="M9.5 16h5"></path>
+                </svg>
+                <div class="yc-rule-label">参加費</div>
+                <div class="yc-rule-value">無料</div>
+                <p>大会そのものへの参加にお金はかかりません。</p>
+            </div>
+        </div>
+        <p class="yc-note" data-anim>大会の運営とルールの適用はFintokeiが行います。取引に関する規定はFintokeiの定めに従います。</p>
+    </div>
+</section>
+
+<!-- ================= 日程 ================= -->
+<section class="yc-section">
+    <div class="yc-inner">
+        <h2 class="yc-eyebrow" data-anim><span>日程</span></h2>
+
+        <ol class="yc-timeline" data-anim>
+            <li class="yc-tl is-key">
+                <div class="yc-tl-dot"></div>
+                <div class="yc-tl-date">9/21</div>
+                <div class="yc-tl-title">大会スタート</div>
+            </li>
+            <li class="yc-tl is-key">
+                <div class="yc-tl-dot"></div>
+                <div class="yc-tl-date">9/30</div>
+                <div class="yc-tl-title">申し込みの受付終了</div>
+            </li>
+            <li class="yc-tl">
+                <div class="yc-tl-dot"></div>
+                <div class="yc-tl-date">10/20</div>
+                <div class="yc-tl-title">大会終了</div>
+            </li>
+            <li class="yc-tl">
+                <div class="yc-tl-dot"></div>
+                <div class="yc-tl-date">後日</div>
+                <div class="yc-tl-title">入賞者へ個別にご連絡</div>
+            </li>
+        </ol>
+    </div>
+</section>
+
+<!-- ================= 参加方法 ================= -->
+<section class="yc-section is-alt" id="howto">
+    <div class="yc-inner">
+        <h2 class="yc-eyebrow" data-anim><span>参加方法</span></h2>
+
+        <div class="yc-steps" data-anim>
+            <div class="yc-step">
+                <div class="yc-step-num">1</div>
+                <h3>Fintokeiのアカウントを用意する</h3>
+                <p>すでにFintokeiを使っている方は、そのままで大丈夫です。はじめての方は、下のボタンから無料で登録できます。</p>
+                <a class="yc-btn sm" href="https://my.fintokei.com/affiliate/jp/55" target="_blank" rel="noopener">Fintokeiに無料登録する</a>
+            </div>
+            <div class="yc-step">
+                <div class="yc-step-num">2</div>
+                <h3>大会ページから申し込む</h3>
+                <p>Fintokeiの大会ページで「コンテストに参加」を押します。<span data-after-close="申し込みの受付は終了しました。">受付は9月30日までです。</span></p>
+                <p data-hide-after-close>ここでエラーが出た方は、下の案内をご覧ください。</p>
+            </div>
+            <div class="yc-step">
+                <div class="yc-step-num">3</div>
+                <h3>大会期間中に取引</h3>
+                <p>大会期間は9月21日〜10月20日。あとはいつものようにトレードするだけです。YTTもそのまま使えます。</p>
+            </div>
+        </div>
+
+        <details class="yc-toggle" data-anim data-hide-after-close>
+            <summary><span class="yc-toggle-ic" aria-hidden="true">?</span>「コンテストに参加」でエラーが出た方はこちら</summary>
+            <div class="yc-toggle-body">
+                <p>そのアカウントは、よすが以外の人の紹介で登録されています。下のボタンから、大会のあいだだけ「よすがの紹介」に変えてもらう申請をしてください。申請は9月30日までです。</p>
+                <a class="yc-btn sm" href="https://forms.gle/eH1HqWRUrXyicW5D9" target="_blank" rel="noopener">よすがへの変更を申し込む</a>
+                <p>Fintokeiのアカウントには「誰の紹介で登録したか」という情報がついています。今回の大会に参加できるのは、よすが（FX SPACE）の紹介で登録した方だけです。</p>
+                <p>申請から変更まで、最大2営業日かかります。完了のお知らせは届かないので、しばらくしてから、もう一度大会ページで申し込んでみてください。大会が終わると、紹介元は元に戻ります。</p>
+            </div>
+        </details>
+    </div>
+</section>
+
+<!-- ================= よくある質問 ================= -->
+<section class="yc-section">
+    <div class="yc-inner">
+        <h2 class="yc-eyebrow" data-anim><span>よくある質問</span></h2>
+
+        <div class="yc-faqs" data-anim>
+            <details class="yc-faq">
+                <summary>参加するのに、Fintokeiのプランを買う必要はありますか？</summary>
+                <div class="yc-faq-a">
+                    <p>いりません。参加費は無料です。必要なのは、よすが（FX SPACE）の紹介で登録したFintokeiのアカウントだけです。</p>
+                    <p>すでにFintokeiを使っている方は、そのまま大会ページから申し込めます。よすが以外の人の紹介で登録している場合は、「コンテストに参加」を押したときにエラーになります。そのときは<a class="yc-ref" href="https://forms.gle/eH1HqWRUrXyicW5D9" target="_blank" rel="noopener">コード変更申請フォーム</a>から、大会のあいだだけ「よすがの紹介」に変えてもらってください。申請は9月30日までです。</p>
+                    <p>変更には最大2営業日かかります。完了の連絡は届かないので、しばらくしてから、もう一度大会ページで申し込んでみてください。大会が終わると、紹介元は元に戻ります。</p>
+                </div>
+            </details>
+
+            <details class="yc-faq">
+                <summary>YTTを使って参加できますか？</summary>
+                <div class="yc-faq-a">
+                    <p>できます。今回の大会は自動売買（EA）の利用が認められているので、YTT（よすがトレードツール）も、Web版YTTも、そのまま使って構いません。いつもの環境のまま参加してください。</p>
+                </div>
+            </details>
+
+            <details class="yc-faq">
+                <summary>そもそもFintokeiとは何ですか？</summary>
+                <div class="yc-faq-a">
+                    <p>Fintokei（フィントケイ）は、チェコ共和国に本社を置くFintokei a.s.が運営する、個人トレーダーがプロトレーダーに挑戦する場を提供しているプロップファームです。</p>
+                    <p>Fintokeiの取引口座は、すべて仮想のデモ環境です。費用を払ってプランを購入し、評価をクリアしてプロトレーダーに認定されると、デモ口座での取引利益額を基に、データ提供料としての報酬を受け取れる仕組みです。</p>
+                    <p>Fintokeiは金融サービスを提供する会社ではありません。デモ環境での取引の利益が、そのまま現実のお金として戻ってくるわけではない点にご注意ください。</p>
+                    <p>Yosuga杯は、そのFintokeiの協力のもとで開催する大会です。</p>
+                </div>
+            </details>
+
+            <details class="yc-faq">
+                <summary>賞金や賞品はどうやって受け取りますか？</summary>
+                <div class="yc-faq-a">
+                    <p>入賞された方には、大会終了後に個別にご連絡します。優勝者には「第1回Yosuga杯 優勝」の物理トロフィーをお贈りします。</p>
+                </div>
+            </details>
+            <!-- TODO: 順位の決め方（収益率／利益額）が確定したら、ここに質問を追加する -->
+        </div>
+    </div>
+</section>
+
+<!-- ================= 最終CTA ================= -->
+<section class="yc-final">
+    <div class="yc-inner">
+        <div class="yc-cta" data-anim>
+            <div class="yc-counts" data-countdown></div>
+            <a class="yc-btn yc-entry-link" href="#howto">Yosuga杯に参加する</a>
+        </div>
+
+        <div class="yc-host" data-anim>
+            <img src="images/yosuga-avatar.png" alt="">
+            <div>
+                <div class="yc-host-label">主催</div>
+                <div class="yc-host-name">よすが（FX SPACE）</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="yc-footer">
+    <p>Yosuga杯 supported by <img src="images/fintokei-text-logo.png" alt="Fintokei"></p>
+    <p>© FX SPACE — <a href="index.html">トップページ</a></p>
+</footer>
+
+<script>
+/* 残り日数（日本時間で計算する）。ページ内のCTAブロックすべてに同じ文言を流し込む */
+(function () {
+    // 受付は大会開始後の 9/30 まで続くので、それまでは「受付終了まで」を出し、過ぎたら「大会終了まで」に切り替える
+    var CLOSE = Date.UTC(2026, 8, 30, 14, 59, 59); // 9/30 23:59:59 JST 申込締切
+    var START = Date.UTC(2026, 8, 20, 15, 0, 0);   // 9/21 00:00 JST 大会スタート
+    var END   = Date.UTC(2026, 9, 20, 14, 59, 59); // 10/20 23:59:59 JST 終了
+    var now = Date.now();
+    var boxes = [];
+
+    function box(label, value, key) {
+        return '<div class="yc-count' + (key ? ' is-key' : '') + '">' +
+               '<div class="yc-count-label">' + label + '</div>' +
+               '<div class="yc-count-value">' + value + '</div></div>';
+    }
+
+    /* 左は申込の受付、右は大会そのもの。大会が終わったら1つだけ出す */
+    if (now < CLOSE) {
+        var d = Math.ceil((CLOSE - now) / 86400000);
+        boxes.push(box('申込の受付終了まで', d > 1 ? 'あと <b>' + d + '</b> 日' : '<b>本日</b> まで', true));
+    } else if (now < END) {
+        boxes.push(box('大会終了まで', 'あと <b>' + Math.ceil((END - now) / 86400000) + '</b> 日', true));
+    }
+
+    if (now < START) {
+        var ds = Math.ceil((START - now) / 86400000);
+        boxes.push(box('大会スタートまで', ds > 1 ? 'あと <b>' + ds + '</b> 日' : '<b>明日</b> スタート'));
+    } else if (now < END) {
+        boxes.push(box('開催中', '大会 <b>' + (Math.floor((now - START) / 86400000) + 1) + '</b> 日目'));
+    } else {
+        boxes.push(box('第1回 Yosuga杯', '<b>終了</b> しました'));
+    }
+
+    document.querySelectorAll('[data-countdown]').forEach(function (el) {
+        el.innerHTML = boxes.join('');
+        el.classList.toggle('is-single', boxes.length === 1);
+    });
+
+    /* 申込が終わったらボタンはランキングを見るためのものに変える。
+       大会中（受付も続いている間）は、ボタンの下に小さくランキングへの案内を出す。
+       飛び先は同じ大会ページなので、ボタンを2つ並べない */
+    if (now >= CLOSE) {
+        document.querySelectorAll('.yc-entry-link').forEach(function (a) { a.textContent = 'ランキングを見る'; });
+        /* 申込の受付が終わったら、申し込み前提の文言を差し替える・隠す */
+        document.querySelectorAll('[data-after-close]').forEach(function (el) { el.textContent = el.getAttribute('data-after-close'); });
+        document.querySelectorAll('[data-hide-after-close]').forEach(function (el) { el.hidden = true; });
+    } else if (now >= START) {
+        document.querySelectorAll('.yc-cta').forEach(function (cta) {
+            var a = document.createElement('a');
+            a.className = 'yc-cta-link yc-entry-link';
+            a.href = '#howto';
+            a.textContent = '開催中のランキングを見る';
+            cta.appendChild(a);
+        });
+    }
+})();
+
+/* 人数タブ。賞金総額・表彰台・4位以下をまとめて切り替える */
+(function () {
+    var PLANS = {
+        topaz:    { name: 'トパーズ Slim',   fund: '運用デモ資金 3,500万円' },
+        sapphire: { name: 'サファイア Slim', fund: '運用デモ資金 2,000万円' },
+        ruby:     { name: 'ルビー Slim',     fund: '運用デモ資金 1,000万円' },
+        pearl:    { name: 'パール Slim',     fund: '運用デモ資金 500万円' }
+    };
+    var TIERS = {
+        a: { total: 10,  money: [6, 3, 1],    plans: ['sapphire', 'ruby', 'pearl'],    rest: null },
+        b: { total: 20,  money: [12, 6, 2],   plans: ['sapphire', 'ruby', 'ruby'],     rest: { range: '4-10位', plan: 'pearl', count: 7 } },
+        c: { total: 40,  money: [24, 12, 4],  plans: ['sapphire', 'ruby', 'ruby'],     rest: { range: '4-20位', plan: 'pearl', count: 17 } },
+        d: { total: 100, money: [60, 30, 10], plans: ['topaz', 'sapphire', 'ruby'],    rest: { range: '4-20位', plan: 'pearl', count: 17 } }
+    };
+    var tabs = document.querySelectorAll('.yc-tab');
+    var counter = document.getElementById('yc-count');
+    var rest = document.getElementById('yc-rest');
+    if (!tabs.length) return;
+
+    function apply(id) {
+        var t = TIERS[id];
+        if (!t) return;
+
+        if (counter) {
+            counter.textContent = t.total;
+            counter.setAttribute('data-count', t.total);
+        }
+        [1, 2, 3].forEach(function (n) {
+            var plan = PLANS[t.plans[n - 1]];
+            var m = document.querySelector('[data-pod-money="' + n + '"]');
+            var p = document.querySelector('[data-pod-plan="' + n + '"]');
+            var f = document.querySelector('[data-pod-fund="' + n + '"]');
+            if (m) m.textContent = t.money[n - 1] + '万円';
+            if (p) p.textContent = plan.name;
+            if (f) f.textContent = plan.fund;
+        });
+
+        if (rest) {
+            if (t.rest) {
+                var rp = PLANS[t.rest.plan];
+                document.getElementById('yc-rest-range').textContent = t.rest.range;
+                document.getElementById('yc-rest-plan').textContent = rp.name;
+                document.getElementById('yc-rest-fund').textContent = rp.fund + '（' + t.rest.count + '名）／賞金はありません';
+                rest.hidden = false;
+            } else {
+                rest.hidden = true;
+            }
+        }
+
+        tabs.forEach(function (tab) {
+            var on = tab.getAttribute('data-tier') === id;
+            tab.classList.toggle('is-on', on);
+            tab.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+    }
+
+    tabs.forEach(function (tab) {
+        tab.addEventListener('click', function () { apply(tab.getAttribute('data-tier')); });
+    });
+})();
+
+/* 参加申込リンク。ENTRY_URL に入れると全ボタンに反映される（空のままなら参加方法セクションへ移動する） */
+(function () {
+    var ENTRY_URL = 'https://my.fintokei.com/ja/contests/COP30';
+    if (!ENTRY_URL) return;
+    document.querySelectorAll('.yc-entry-link').forEach(function (a) {
+        a.href = ENTRY_URL;
+        a.target = '_blank';
+        a.rel = 'noopener';
+    });
+})();
+
+/* スクロール演出。IntersectionObserverが使えない環境では js-anim を付けないので、
+   すべて最初から表示された状態のままになる（本文が消えることはない） */
+(function () {
+    if (!('IntersectionObserver' in window)) return;
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    document.documentElement.classList.add('js-anim');
+
+    var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+            if (!e.isIntersecting) return;
+            e.target.classList.add('is-in');
+            io.unobserve(e.target);
+        });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    document.querySelectorAll('[data-anim]').forEach(function (el) { io.observe(el); });
+
+    /* ヒーローは読み込み直後に出す */
+    document.querySelectorAll('.yc-hero [data-anim]').forEach(function (el, i) {
+        setTimeout(function () { el.classList.add('is-in'); }, 80 + i * 100);
+    });
+
+    /* 賞金額のカウントアップ */
+    var counter = document.getElementById('yc-count');
+    if (counter && !reduce) {
+        var cio = new IntersectionObserver(function (entries) {
+            if (!entries[0].isIntersecting) return;
+            cio.disconnect();
+            var target = parseInt(counter.getAttribute('data-count'), 10) || 0;
+            var t0 = null, dur = 1100;
+            (function step(t) {
+                if (t0 === null) t0 = t;
+                var k = Math.min((t - t0) / dur, 1);
+                counter.textContent = Math.round(target * (1 - Math.pow(1 - k, 3)));
+                if (k < 1) requestAnimationFrame(step);
+            })(performance.now());
+        }, { rootMargin: '0px 0px -15% 0px' });
+        cio.observe(counter);
+    }
+
+    /* 保険。描画が止まっていた等で演出が発火しなかった場合に備え、5秒後に画面内の要素を強制表示する */
+    setTimeout(function () {
+        var vh = window.innerHeight;
+        document.querySelectorAll('[data-anim]').forEach(function (el) {
+            var r = el.getBoundingClientRect();
+            if (r.top < vh && r.bottom > 0) el.classList.add('is-in');
+        });
+    }, 5000);
+})();
+</script>
+
+<!-- BudouX — 日本語の文節改行（全ページ共通） -->
+<script src="js/budoux-ja.min.js?v=20260907a" defer></script>
+<script src="js/budoux-init.js?v=20260907a" defer></script>
+</body>
+</html>

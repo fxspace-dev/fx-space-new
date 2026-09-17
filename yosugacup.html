@@ -256,6 +256,17 @@ body.yc-page { padding-top: 65px; }
     .yc-tl-date, .yc-tl-title { grid-column: 2; }
 }
 
+/* ---- 参加方法。Fintokeiのアカウントがあるかどうかで2つに分ける ---- */
+.yc-paths { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.2rem; align-items: start; max-width: 860px; margin: 0 auto; }
+.yc-path { padding: 1.9rem 1.6rem; text-align: left; }
+.yc-path h3 { font-size: clamp(1.05rem, 3.4vw, 1.25rem); font-weight: 900; margin: 0 0 0.7rem; line-height: 1.5; }
+.yc-path p { font-size: 0.9rem; line-height: 1.9; color: var(--yc-muted); margin: 0 0 1.1rem; }
+.yc-path .yc-btn { display: block; width: 100%; text-align: center; }
+.yc-path-sub { margin-top: 1.6rem; padding-top: 1.3rem; border-top: 1px solid var(--yc-line-soft); }
+.yc-path-sub h4 { font-size: 0.95rem; font-weight: 900; margin: 0 0 0.6rem; color: var(--yc-gold); }
+.yc-path-sub p { font-size: 0.86rem; }
+@media (max-width: 720px) { .yc-paths { grid-template-columns: 1fr; } }
+
 /* ---- 参加ステップ ---- */
 /* 上から順に読む縦並び。日程セクションの横軸タイムラインと見分けがつくように、
    つなぎ線は点線、丸は番号入りの金色にしている */
@@ -538,28 +549,26 @@ body.yc-page { padding-top: 65px; }
 <section class="yc-section is-alt" id="howto">
     <div class="yc-inner">
         <h2 class="yc-eyebrow" data-anim><span>参加方法</span></h2>
-        <p class="yc-lead" data-anim>あてはまるものを選んでください。どれか分からない方は、まず&#9313;を押してみてください。エラーが出たら&#9314;です。</p>
+        <p class="yc-lead" data-anim>Fintokeiのアカウントをお持ちかどうかで、進み方が変わります。どちらか一方だけで参加できます。</p>
 
-        <div class="yc-steps is-branch" data-anim>
-            <div class="yc-step">
-                <div class="yc-step-num">1</div>
+        <div class="yc-paths" data-anim>
+            <div class="yc-path yc-card">
                 <h3>Fintokeiがはじめての方</h3>
-                <p>下のボタンから登録すると、アカウントの作成と大会への参加が一度に終わります。&#9313;の手続きは要りません。</p>
+                <p>下のボタンから登録してください。アカウントの作成と大会への参加が、一度に終わります。<span data-after-close="申し込みの受付は終了しました。">受付は9月30日までです。</span></p>
                 <a class="yc-btn sm" href="https://my.fintokei.com/ja/register?contestId=COP30&amp;contestTitle=%E7%AC%AC1%E5%9B%9E+Yosuga%E6%9D%AF+supported+by+Fintokei&amp;affiliate=55" target="_blank" rel="noopener">登録して参加する</a>
             </div>
-            <div class="yc-step">
-                <div class="yc-step-num">2</div>
-                <h3>すでにFintokeiを使っている方</h3>
-                <p>大会ページで「コンテストに参加」を押します。<span data-after-close="申し込みの受付は終了しました。">受付は9月30日までです。</span></p>
+
+            <div class="yc-path yc-card">
+                <h3>すでにFintokeiをお持ちの方</h3>
+                <p>大会ページを開いて「コンテストに参加」を押してください。<span data-after-close="申し込みの受付は終了しました。">受付は9月30日までです。</span></p>
                 <a class="yc-btn sm yc-join-link" href="#howto" target="_blank" rel="noopener">大会ページで参加する</a>
-            </div>
-            <div class="yc-step" data-hide-after-close>
-                <div class="yc-step-num">3</div>
-                <h3>&#9313;でエラーが出た方</h3>
-                <p>そのアカウントは、よすが以外の人の紹介で登録されています。今回の大会に参加できるのは、よすが（FX SPACE）の紹介で登録したアカウントだけです。</p>
-                <p>下のボタンから、大会のあいだだけ「よすがの紹介」に変える申請をしてください。変更まで最大2営業日かかり、完了のお知らせは届きません。しばらくしてから、もう一度&#9313;をお試しください。</p>
-                <p>申請は9月30日まで受け付けていますが、変更に日数がかかるため、余裕をもって9月26日ごろまでの申請をおすすめします。大会が終わると、紹介元は元に戻ります。</p>
-                <a class="yc-btn sm" href="https://forms.gle/eH1HqWRUrXyicW5D9" target="_blank" rel="noopener">紐付けの変更を申請する</a>
+
+                <div class="yc-path-sub" data-hide-after-close>
+                    <h4>「参加できません」と出たときは</h4>
+                    <p>そのアカウントが、よすが以外の人の紹介で登録されています。下のボタンから、大会のあいだだけ「よすがの紹介」に変える申請をしてください。</p>
+                    <p>変更まで最大2営業日かかり、完了のお知らせは届きません。しばらくしてから、もう一度上のボタンをお試しください。申請は9月30日まで受け付けていますが、余裕をもって9月26日ごろまでをおすすめします。大会が終わると、紹介元は元に戻ります。</p>
+                    <a class="yc-btn sm" href="https://forms.gle/eH1HqWRUrXyicW5D9" target="_blank" rel="noopener">紐付けの変更を申請する</a>
+                </div>
             </div>
         </div>
 
@@ -585,8 +594,8 @@ body.yc-page { padding-top: 65px; }
             <details class="yc-faq">
                 <summary>どのボタンを押せばいいか分かりません</summary>
                 <div class="yc-faq-a">
-                    <p>Fintokeiのアカウントをまだお持ちでない方は、参加方法の&#9312;「登録して参加する」を押してください。登録と大会への参加が一度に終わります。</p>
-                    <p>すでにお持ちの方は&#9313;「大会ページで参加する」です。そこで「参加できません」という内容のメッセージが出た場合だけ、&#9314;の変更申請に進んでください。</p>
+                    <p>Fintokeiのアカウントをまだお持ちでない方は「登録して参加する」、すでにお持ちの方は「大会ページで参加する」です。どちらか一方だけで参加できます。</p>
+                    <p>すでにお持ちの方で「参加できません」という内容のメッセージが出たときだけ、紐付けの変更を申請してください。</p>
                 </div>
             </details>
 

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" aria-hidden="true">
+  <!-- 動画のモックの右上につける印（手書き風の丸＋再生の三角、水色）。build-guide.js の .fvmark が使う -->
+  <defs>
+    <filter id="handplay" x="-12%" y="-12%" width="124%" height="124%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="1" seed="6" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="1.8" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+  <circle cx="30" cy="30" r="24" fill="#fff"/>
+  <g filter="url(#handplay)" stroke="#35b4e0" stroke-linecap="round" stroke-linejoin="round">
+    <!-- 丸（一筆書き。始点と終点を少しずらす） -->
+    <path fill="none" stroke-width="3.6"
+          d="M40 8.5 C51 13.5 56 26 51 37 C46 48 33 53 22 48.5 C11 43.5 6 31 11 20 C14.6 12 22 7.5 30.5 7.6"/>
+    <!-- 再生の三角（同じ水色で塗る） -->
+    <path fill="#35b4e0" stroke-width="3"
+          d="M24.5 19.5 L42 30.2 L24.5 40.5 Z"/>
+  </g>
+</svg>

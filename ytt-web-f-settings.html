@@ -1,0 +1,2792 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web版YTT モードと設定 — FX SPACE</title>
+    <link rel="icon" type="image/png" href="icon.png">
+    <meta property="og:title" content="Web版YTT モードと設定 — FX SPACE">
+    <meta property="og:description" content="Web版YTTの使い方（モードと設定）。">
+    <meta property="og:image" content="https://fx-space.com/intro/img/og-webytt-guide.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:image" content="https://fx-space.com/intro/img/og-webytt-guide.jpg">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="stylesheet" href="css/style.css?v=20260908e">
+    <style>
+        /* ===== YTT特設ページ固有スタイル ===== */
+        .ytt-sp-nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            background: rgba(255,255,255,0.95); backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e5e7eb;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0.875rem 2rem; gap: 1rem;
+        }
+        .ytt-sp-nav-logo {
+            display: flex; align-items: center; gap: 0.75rem;
+            text-decoration: none; color: inherit;
+        }
+        .ytt-sp-nav-logo img { height: 28px; width: auto; }
+        .ytt-sp-nav-logo span {
+            font-size: 0.8125rem; font-weight: 700; color: #6b7280;
+            border-left: 1px solid #e5e7eb; padding-left: 0.75rem;
+        }
+        .ytt-sp-nav-cta {
+            display: flex; gap: 0.5rem; align-items: center;
+        }
+        /* ナビ内ボタンのラベル切替（PC=長文／SP=短文） */
+        .ytt-nav-btn-label-sp { display: none; }
+        @media (max-width: 600px) {
+            .ytt-sp-nav { padding: 0.625rem 0.875rem; gap: 0.5rem; }
+            .ytt-sp-nav-logo span { display: none; }
+            .ytt-sp-nav-logo img { height: 24px; }
+            .ytt-sp-nav-cta { gap: 0.375rem; }
+            .ytt-sp-nav-cta .btn-sq-blue.sm,
+            .ytt-sp-nav-cta .btn-sq-white.sm {
+                font-size: 0.75rem; padding: 0.4rem 0.75rem;
+            }
+            .ytt-sp-nav-cta .btn-sq-blue.sm .dl-icon {
+                width: 14px; height: 14px;
+            }
+            .ytt-nav-btn-label { display: none; }
+            .ytt-nav-btn-label-sp { display: inline; }
+        }
+        @media (max-width: 380px) {
+            .ytt-sp-nav { padding: 0.5rem 0.625rem; gap: 0.375rem; }
+            .ytt-sp-nav-cta .btn-sq-blue.sm,
+            .ytt-sp-nav-cta .btn-sq-white.sm {
+                font-size: 0.6875rem; padding: 0.375rem 0.625rem;
+            }
+        }
+
+        /* Hero */
+        .ytt-sp-hero {
+            padding: 8rem 2rem 5rem;
+            text-align: center;
+            background: #fff;
+        }
+        .ytt-sp-hero-logo {
+            max-width: 160px; width: auto; height: auto;
+            display: block; margin: 0 auto 1.25rem;
+        }
+        .ytt-sp-hero-badge {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: #fff7ed; color: #c2410c;
+            border: 1px solid #fed7aa;
+            border-radius: 100px; padding: 0.375rem 1.25rem;
+            font-size: 0.8125rem; font-weight: 700; margin-bottom: 1.25rem;
+        }
+        .ytt-sp-hero-title {
+            font-size: clamp(1.3rem, 5vw, 3rem);
+            font-weight: 900; color: #1e1b4b;
+            line-height: 1.3; letter-spacing: -0.02em;
+            margin: 0 0 1rem;
+        }
+        .ytt-sp-title-line {
+            display: block;
+            text-align: center;
+        }
+        .ytt-sp-title-line > span.line-text {
+            display: inline-block;
+            white-space: nowrap;
+            position: relative;
+        }
+        .ytt-sp-title-line .ytt-title-wave {
+            display: block;
+            width: 100%;
+            height: clamp(14px, 3vw, 22px);
+            object-fit: fill;
+            margin: 0.1rem 0 0.5rem;
+        }
+        /* スマホ: 見出しの文字幅に関係なく波線の幅を揃える（ytt-subscribe 等と同じ） */
+        @media (max-width: 640px) { .ytt-sp-title-line .ytt-title-wave { width: max(100%, 200px); max-width: calc(100vw - 2rem); margin-left: 50%; transform: translateX(-50%); } }
+        /* スマホ: セクション見出し下のオレンジ波線が平べったくならない高さに（ytt-subscribe と同じ 18〜26px） */
+        @media (max-width: 640px) { img[src$="wave-orange.png"] { height: clamp(18px, 6vw, 26px) !important; } }
+        .ytt-sp-hero-lead {
+            font-size: clamp(0.9375rem, 2vw, 1.125rem);
+            color: #6b7280; line-height: 1.8;
+            max-width: 560px; margin: 0 auto 2rem;
+        }
+        /* PCでは吹き出しが上の文字に被らないよう余白を拡大 */
+        @media (min-width: 769px) {
+            .ytt-sp-hero-lead { margin-bottom: 4.5rem; }
+        }
+        .ytt-sp-hero-btns {
+            display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+        }
+        .ytt-sp-hero-stats {
+            display: flex; gap: 2.5rem; justify-content: center; flex-wrap: wrap;
+            margin-top: 3rem; padding-top: 2rem;
+            border-top: 1px solid #f0f0f0;
+        }
+        .ytt-sp-hero-stat { text-align: center; }
+        .ytt-sp-hero-stat-num {
+            font-size: clamp(1.5rem, 4vw, 2.25rem);
+            font-weight: 900; color: #f97316; line-height: 1;
+        }
+        .ytt-sp-hero-stat-label {
+            font-size: 0.8125rem; color: #9ca3af; margin-top: 0.25rem; font-weight: 600;
+        }
+
+        /* Section titles */
+        .ytt-sp-section-header {
+            text-align: center;
+            padding: 4rem 2rem 2rem;
+        }
+        .ytt-sp-section-header h2 {
+            font-size: clamp(1.5rem, 4vw, 2.25rem);
+            font-weight: 900; color: #1e1b4b; margin: 0.5rem 0;
+        }
+        .ytt-sp-section-header p {
+            font-size: clamp(0.875rem, 1.8vw, 1.0625rem);
+            color: #6b7280; line-height: 1.8;
+            max-width: 560px; margin: 0.75rem auto 0;
+        }
+
+        /* Features anchor */
+        #features-anchor { display: block; height: 72px; margin-top: -72px; }
+
+        /* Demo section wrapper */
+        .ytt-sp-demo-wrap {
+            background: #f3f4f6;
+        }
+
+        /* More features teaser */
+        .ytt-more-features {
+            background: #f4f6f9;
+            padding: 3.5rem 2rem 3rem;
+            text-align: center;
+        }
+        .ytt-more-features-inner { max-width: 760px; margin: 0 auto; }
+        .ytt-more-features-label {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            font-size: 0.8125rem; font-weight: 700;
+            color: #92400e; letter-spacing: 0.08em;
+            margin-bottom: 0.75rem;
+        }
+        .ytt-more-features h3 {
+            font-size: clamp(1.1rem, 3vw, 1.5rem);
+            font-weight: 900; color: #1e1b4b;
+            margin: 0 0 0.5rem;
+        }
+        .ytt-more-features-sub {
+            font-size: 0.9rem; color: #6b7280;
+            margin: 0 0 2rem; line-height: 1.7;
+        }
+        .ytt-more-features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 0.875rem;
+            text-align: left;
+        }
+        @media (max-width: 640px) {
+            .ytt-more-features-grid { grid-template-columns: minmax(0, 1fr); }
+            .ytt-feat-item { padding: 0.875rem 1rem; }
+        }
+        .ytt-feat-item {
+            background: #f9fafb;
+            border-radius: 12px;
+            padding: 1rem 1.125rem;
+            display: flex; align-items: flex-start; gap: 0.625rem;
+        }
+        .ytt-feat-item-icon {
+            flex-shrink: 0;
+            width: 36px; height: 36px;
+        }
+        .ytt-feat-item-icon img { width: 100%; height: 100%; object-fit: contain; }
+        .ytt-feat-item-text {
+            font-size: 0.8125rem; font-weight: 700;
+            color: #1e1b4b; line-height: 1.5;
+        }
+        .ytt-feat-item-sub {
+            font-size: 0.72rem; color: #9ca3af;
+            font-weight: 400; display: block;
+            margin-top: 0.15rem; line-height: 1.4;
+        }
+
+        /* Pricing section */
+        .ytt-sp-pricing {
+            padding: 5rem 2rem;
+            background: #f4f6f9;
+            overflow: hidden;
+        }
+        .ytt-sp-pricing-inner { max-width: 760px; margin: 0 auto; }
+        .ytt-sp-plans {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            gap: 1.5rem;
+            margin-top: 2.5rem;
+        }
+        @media (max-width: 720px) {
+            .ytt-sp-plans { grid-template-columns: minmax(0, 1fr); width: 100%; max-width: 480px; margin-left: auto; margin-right: auto; }
+        }
+        @media (max-width: 480px) {
+            .ytt-sp-pricing { padding: 3rem 1rem; }
+            .ytt-sp-plan-card { padding: 1.25rem 1rem; }
+        }
+        p, h1, h2, h3, h4, li,
+        .ytt-sp-plan-desc, .ytt-sp-plan-features li {
+            overflow-wrap: break-word;
+        }
+        /* SPでの日本語の自然な改行（単語/フレーズ途中で切れない・孤立文字を減らす） */
+        @media (max-width: 768px) {
+            body, p, h1, h2, h3, h4, h5, li, dd, dt, td, th, a, button,
+            .ytt-sp-hero-lead, .ytt-sp-plan-desc, .ytt-sp-plan-features li,
+            .ytt-spec-header p, .ytt-sp-section-header p,
+            .ytt-sp-footer-cta p, .ytt-more-features-sub,
+            .ytt-feat-item-text, .ytt-feat-item-sub,
+            .ytt-trial-bubble, .ytt-panel-text p, .ytt-panel-text li {
+                line-break: strict;
+                overflow-wrap: break-word;
+            }
+        }
+        .ytt-panel-text { min-width: 0; }
+        .br-sp { display: none; }
+        @media (max-width: 600px) { .br-sp { display: block; } }
+        .ytt-sp-plan-card {
+            background: #fff;
+            border: 1.5px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 1.75rem 1.5rem;
+            display: flex; flex-direction: column; gap: 0;
+            position: relative;
+            min-width: 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .ytt-sp-plan-card.is-featured {
+            padding-top: 2.5rem;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79,70,229,0.08);
+        }
+        .ytt-sp-plan-card.is-premium {
+            border-color: #1f2937;
+        }
+        .ytt-sp-plan-badge {
+            position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+            background: var(--primary); color: white;
+            font-size: 0.75rem; font-weight: 800;
+            padding: 0.25rem 1rem; border-radius: 100px;
+            white-space: nowrap;
+        }
+        .ytt-sp-plan-name {
+            font-size: 1.3rem; font-weight: 800; color: #374151; margin-bottom: 0.25rem;
+        }
+        .ytt-sp-plan-name.accent { color: var(--primary); }
+        .ytt-sp-plan-desc {
+            font-size: 0.8125rem; color: #9ca3af; margin-bottom: 1rem;
+        }
+        .ytt-sp-plan-price {
+            font-size: 0; margin-bottom: 1rem;
+        }
+        .ytt-sp-plan-price-amount {
+            font-size: 1.75rem; font-weight: 900; color: #374151;
+        }
+        .ytt-sp-plan-price-period {
+            font-size: 0.875rem; color: #9ca3af; font-weight: 600;
+        }
+        .ytt-sp-plan-price-sub {
+            font-size: 0.75rem; color: #9ca3af; margin-top: 0.25rem; line-height: 1.5;
+        }
+        .ytt-sp-plan-divider {
+            height: 1px; background: #f0f0f0; margin: 1rem 0;
+        }
+        .ytt-plan-also-label {
+            font-size: 0.75rem; color: #9ca3af; font-weight: 600;
+            margin: 0 0 0.375rem;
+        }
+        .ytt-sp-plan-features {
+            list-style: none; padding: 0; margin: 0 0 1.5rem; flex: 1;
+        }
+        .ytt-sp-plan-features li {
+            display: flex; align-items: flex-start; gap: 0.5rem;
+            font-size: 0.875rem; color: #4b5563; padding: 0.35rem 0;
+        }
+        .ytt-sp-plan-features li img {
+            width: 16px; height: 16px; margin-top: 1px; flex-shrink: 0;
+        }
+        .ytt-sp-plan-features li.highlight { font-weight: 700; color: #1e1b4b; }
+        .ytt-sp-plan-cta {
+            display: block; text-align: center;
+            padding: 0.75rem 1.5rem; border-radius: 10px;
+            font-weight: 800; font-size: 0.9375rem; text-decoration: none;
+            border: 2px solid var(--primary); color: var(--primary);
+            transition: all 0.2s; white-space: nowrap;
+        }
+        .ytt-sp-plan-cta:hover { background: var(--primary); color: white; }
+        .ytt-sp-plan-cta.solid {
+            background: var(--primary); color: white;
+        }
+        .ytt-sp-plan-cta.solid:hover { opacity: 0.9; }
+        /* 買い切り（サブスクの下に配置。ツールだけ欲しい方向けに程よくアピール） */
+        .ytt-sp-buyout { max-width: 40rem; margin: 0 auto; }
+        .ytt-sp-buyout-lead { text-align: center; margin-bottom: 1.125rem; }
+        .ytt-sp-buyout-eyebrow {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            font-size: 0.8125rem; font-weight: 700; color: var(--primary);
+            letter-spacing: 0.08em; margin-bottom: 0.5rem;
+        }
+        .ytt-sp-buyout-title { font-size: 1.375rem; font-weight: 800; color: #374151; margin: 0; }
+        .ytt-sp-buyout-card {
+            position: relative;
+            display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
+            background: #fff; border: 1.5px solid #e5e7eb; border-radius: 16px;
+            padding: 1.5rem 1.75rem;
+        }
+        .ytt-sp-buyout-info { min-width: 0; }
+        .ytt-sp-buyout-name {
+            display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;
+            font-size: 1rem; font-weight: 800; color: #374151; margin-bottom: 0.75rem;
+        }
+        .ytt-sp-buyout-badge {
+            position: absolute; top: -12px; left: 18px;
+            font-size: 0.75rem; font-weight: 800; color: #fff; background: var(--primary);
+            border-radius: 100px; padding: 0.25rem 1rem; white-space: nowrap;
+        }
+        .ytt-sp-buyout-benefits { list-style: none; padding: 0; margin: 0; }
+        .ytt-sp-buyout-benefits li {
+            display: flex; align-items: flex-start; gap: 0.5rem;
+            font-size: 0.8125rem; color: #4b5563; padding: 0.2rem 0;
+        }
+        .ytt-sp-buyout-benefits li img { width: 15px; height: 15px; margin-top: 2px; flex-shrink: 0; }
+        .ytt-sp-buyout-fine { font-size: 0.75rem; color: #9ca3af; margin-top: 0.625rem; line-height: 1.5; }
+        .ytt-sp-buyout-action { flex-shrink: 0; text-align: center; }
+        .ytt-sp-buyout-price { line-height: 1; margin-bottom: 0.625rem; white-space: nowrap; }
+        .ytt-sp-buyout-amount { font-size: 1.625rem; font-weight: 900; color: #1e1b4b; }
+        .ytt-sp-buyout-cta {
+            display: block; text-align: center; white-space: nowrap;
+            padding: 0.7rem 1.75rem; border-radius: 10px; font-weight: 800; font-size: 0.9375rem;
+            text-decoration: none; background: var(--primary); color: #fff; border: 2px solid var(--primary);
+            transition: all 0.2s;
+        }
+        .ytt-sp-buyout-cta:hover { opacity: 0.9; }
+        @media (max-width: 560px) {
+            .ytt-sp-buyout-card { flex-direction: column; align-items: stretch; }
+            .ytt-sp-buyout-action { margin-top: 0.25rem; padding-top: 1rem; border-top: 1px solid #f0f0f0; }
+        }
+
+        /* ===== 追加セクション（FTO / FAQ / サポート） ===== */
+        .ytt-add-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+        .ytt-add-grid.cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 500px; margin-left: auto; margin-right: auto; }
+        @media (max-width: 680px) {
+            .ytt-add-grid, .ytt-add-grid.cols-2 { grid-template-columns: minmax(0, 1fr); max-width: 460px; margin-left: auto; margin-right: auto; }
+        }
+        .ytt-add-card {
+            background: #fff; border: 1.5px solid #e5e7eb; border-radius: 14px;
+            padding: 1.25rem; text-align: left; min-width: 0;
+        }
+        .ytt-add-card h3 {
+            font-size: 0.95rem; font-weight: 800; color: #1e1b4b; margin: 0 0 0.45rem;
+            display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap;
+        }
+        .ytt-add-card p { font-size: 0.8125rem; color: #4b5563; line-height: 1.75; margin: 0; }
+        /* FTO 訴求 */
+        .ytt-fto-biglogo { display: block; height: 88px; width: auto; max-width: 100%; margin: 1.1rem auto 0; }
+        @media (max-width: 600px) { .ytt-fto-biglogo { height: 64px; } }
+        .ytt-spec-inner.ytt-fto-wide { max-width: 1100px; }
+        .ytt-fto2 {
+            display: grid; grid-template-columns: minmax(0,1.55fr) minmax(0,1fr); gap: 2.5rem; align-items: center;
+            background: #fff; border: 1.5px solid #e5e7eb; border-radius: 20px;
+            padding: 1.75rem; margin-top: 1.5rem;
+        }
+        @media (max-width: 860px) { .ytt-fto2 { grid-template-columns: minmax(0, 1fr); gap: 1.25rem; } }
+        @media (max-width: 600px) { .ytt-fto2 { padding: 1rem; } }
+        .ytt-fto2-visual { min-width: 0; }
+        .ytt-fto-chart { width: 100%; height: auto; display: block; border-radius: 12px; border: 1px solid #e5e7eb; }
+        .ytt-fto-credit { font-size: 0.68rem; color: #9ca3af; margin: 0.4rem 0 0; text-align: right; }
+        .ytt-fto-credit a { color: #9ca3af; text-decoration: underline; text-underline-offset: 2px; }
+        .ytt-fto2-content { min-width: 0; }
+        .ytt-fto2-head { font-size: 1.15rem; font-weight: 800; color: #1e1b4b; line-height: 1.55; margin: 0 0 1rem; }
+        .ytt-fto2-head .accent { color: var(--primary); }
+        .ytt-fto-list { list-style: none; padding: 0; margin: 0 0 1rem; }
+        .ytt-fto-list li { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.9rem; font-weight: 700; color: #374151; padding: 0.4rem 0; }
+        .ytt-fto-list li img { width: 18px; height: 18px; margin-top: 2px; flex-shrink: 0; }
+        .ytt-fto-attention { border-left: 3px solid #f59e0b; padding: 0.35rem 0 0.35rem 0.8rem; margin: 0 0 1.1rem; font-size: 0.85rem; font-weight: 700; color: #92400e; line-height: 1.6; }
+        .ytt-fto2-btns { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+        .ytt-fto2-note { font-size: 0.72rem; color: #9ca3af; line-height: 1.6; margin: 0.9rem 0 0; }
+        .ytt-fto2-note a { color: #2563eb; text-decoration: underline; text-underline-offset: 2px; }
+        .ytt-fto-detail {
+            display: inline-block; margin-top: 0.75rem;
+            padding: 0.4rem 1.1rem; border-radius: 8px;
+            border: 1px solid #1f2937; color: #1f2937; background: #fff;
+            font-size: 0.8rem; font-weight: 600; text-decoration: none;
+            transition: all 0.15s; white-space: nowrap;
+        }
+        .ytt-fto-detail:hover { background: #1f2937; color: #fff; }
+        /* FAQ */
+        details.ytt-faq { background: #f9fafb; border: 1.5px solid #e5e7eb; border-radius: 14px; margin-top: 0.875rem; overflow: hidden; }
+        details.ytt-faq[open] { background: #fff; border-color: #d1d5db; }
+        details.ytt-faq > summary {
+            list-style: none; cursor: pointer; padding: 1rem 1.25rem;
+            font-size: 0.9375rem; font-weight: 800; color: #1e1b4b;
+            display: flex; align-items: center; justify-content: space-between; gap: 0.75rem;
+        }
+        details.ytt-faq > summary::-webkit-details-marker { display: none; }
+        .ytt-faq-q { display: flex; align-items: flex-start; gap: 0.5rem; text-align: left; }
+        .ytt-faq-q::before { content: "Q"; color: var(--primary); font-weight: 900; flex-shrink: 0; }
+        .ytt-faq-chev {
+            width: 22px; height: 22px; background: #4f46e5; color: #fff; border-radius: 50%;
+            display: inline-flex; align-items: center; justify-content: center;
+            font-size: 0.7rem; font-weight: 900; transition: transform 0.25s; flex-shrink: 0;
+        }
+        details.ytt-faq[open] .ytt-faq-chev { transform: rotate(180deg); }
+        .ytt-faq-a { padding: 0 1.25rem 1.25rem; font-size: 0.8125rem; color: #4b5563; line-height: 1.85; border-top: 1px dashed #e5e7eb; }
+        .ytt-faq-a p { margin: 0.75rem 0 0; }
+        .ytt-faq-a a { color: #2563eb; text-decoration: underline; text-underline-offset: 2px; }
+        /* サポート窓口 */
+        .ytt-support-card { text-align: center; }
+        .ytt-support-card h3 { justify-content: center; }
+        .ytt-support-card .sup-img { display: block; width: 48px; height: 48px; object-fit: contain; margin: 0 auto 0.7rem; }
+        .ytt-support-card .sup-link {
+            display: inline-block; margin-top: 0.75rem; font-size: 0.8125rem; font-weight: 700;
+            color: var(--primary); text-decoration: underline; text-underline-offset: 3px;
+        }
+        .ytt-sp-yt-note {
+            margin-top: 2rem;
+            border: 1px solid #e5e7eb; border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            background: #fff;
+            text-align: center; max-width: 560px; margin-left: auto; margin-right: auto;
+        }
+        .ytt-sp-yt-note p { font-size: 0.875rem; color: #6b7280; line-height: 1.7; margin: 0; }
+        .ytt-sp-yt-note strong { color: #374151; }
+
+        /* Detail link section */
+        .ytt-sp-detail {
+            padding: 4rem 2rem;
+            background: #fff;
+            text-align: center;
+        }
+        .ytt-sp-detail-inner { max-width: 640px; margin: 0 auto; }
+        .ytt-sp-detail h2 {
+            font-size: clamp(1.25rem, 3vw, 1.75rem);
+            font-weight: 900; color: #1e1b4b; margin-bottom: 0.75rem;
+        }
+        .ytt-sp-detail p {
+            font-size: 0.9375rem; color: #6b7280; line-height: 1.8; margin-bottom: 1.75rem;
+        }
+        .ytt-sp-detail-btn {
+            display: inline-flex; align-items: center; gap: 0.625rem;
+            background: #1e1b4b; color: white;
+            padding: 1rem 2.5rem; border-radius: 12px;
+            font-size: 1rem; font-weight: 800; text-decoration: none;
+            transition: opacity 0.2s;
+        }
+        .ytt-sp-detail-btn:hover { opacity: 0.85; }
+        .ytt-sp-detail-btn svg { flex-shrink: 0; }
+
+        /* CTA footer */
+        .ytt-sp-footer-cta {
+            padding: 5rem 2rem;
+            text-align: center;
+            background: #1e1b4b;
+        }
+        .ytt-sp-footer-cta h2 {
+            font-size: clamp(1.5rem, 4vw, 2.25rem);
+            font-weight: 900; color: #fff;
+            margin-bottom: 0.75rem;
+        }
+        .ytt-sp-footer-cta p {
+            font-size: clamp(0.9rem, 1.8vw, 1.0625rem);
+            color: rgba(255,255,255,0.7); line-height: 1.8; margin-bottom: 2rem;
+        }
+        .ytt-sp-footer-cta-btns {
+            display: flex; gap: 1rem; justify-content: center; align-items: center; flex-wrap: wrap;
+        }
+        /* 下部CTAのマニュアルリンク（暗背景用） */
+        .ytt-footer-cta-manuals {
+            margin-top: 2rem;
+            display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;
+            font-size: 0.875rem;
+        }
+        .ytt-footer-cta-manuals a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: underline; text-underline-offset: 3px;
+            font-weight: 600;
+            transition: color 0.15s;
+        }
+        .ytt-footer-cta-manuals a:hover {
+            color: #fff;
+        }
+        .btn-white-outline {
+            background: transparent; color: white;
+            border: 2px solid rgba(255,255,255,0.4);
+            padding: 0.875rem 2rem; border-radius: 10px;
+            font-size: 0.9375rem; font-weight: 700;
+            text-decoration: none; transition: all 0.2s; white-space: nowrap;
+        }
+        .btn-white-outline:hover { border-color: white; background: rgba(255,255,255,0.08); }
+        .btn-white-solid {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: white; color: #1e1b4b;
+            border: 2px solid white;
+            padding: 0.875rem 2rem; border-radius: 10px;
+            font-size: 0.9375rem; font-weight: 800;
+            text-decoration: none; transition: all 0.2s; white-space: nowrap;
+        }
+        .btn-white-solid:hover { background: #f0f0f0; }
+
+        /* 通常ボタン（手書き風を上書き） */
+        .btn-sq-blue {
+            display: inline-flex; align-items: center; gap: 0.375rem;
+            background: var(--primary); color: #fff;
+            border: none; border-radius: 10px;
+            padding: 0.75rem 1.75rem;
+            font-size: 1rem; font-weight: 800; text-decoration: none;
+            cursor: pointer; transition: opacity 0.2s; white-space: nowrap;
+        }
+        .btn-sq-blue:hover { opacity: 0.88; }
+        .btn-sq-blue.sm { font-size: 0.875rem; padding: 0.5rem 1.25rem; }
+        .btn-sq-white.sm { font-size: 0.875rem; padding: 0.5rem 1.25rem; }
+        .btn-sq-white {
+            display: inline-flex; align-items: center;
+            background: #fff; color: var(--primary);
+            border: 2px solid var(--primary); border-radius: 10px;
+            padding: 0.75rem 1.75rem;
+            font-size: 1rem; font-weight: 800; text-decoration: none;
+            cursor: pointer; transition: all 0.2s; white-space: nowrap;
+        }
+        .btn-sq-white:hover { background: var(--primary); color: #fff; }
+
+        /* ===== 必要スペック セクション ===== */
+        .ytt-spec-section {
+            padding: 4.5rem 1.5rem 5rem;
+            background: #fff;
+        }
+        .ytt-spec-inner { max-width: 720px; margin: 0 auto; }
+        .ytt-spec-header { text-align: center; margin-bottom: 1.5rem; }
+        .ytt-spec-header h2 {
+            font-size: clamp(1.4rem, 4vw, 2rem);
+            font-weight: 900; color: #1e1b4b;
+            margin: 0.5rem 0;
+        }
+        .ytt-spec-header p {
+            font-size: clamp(0.875rem, 1.8vw, 1rem);
+            color: #6b7280; line-height: 1.8;
+            margin: 0.5rem auto 0; max-width: 520px;
+        }
+        details.ytt-spec-acc {
+            background: #f9fafb;
+            border: 1.5px solid #e5e7eb;
+            border-radius: 14px;
+            margin-top: 1.25rem;
+            overflow: hidden;
+        }
+        details.ytt-spec-acc[open] { background: #fff; border-color: #d1d5db; }
+        details.ytt-spec-acc > summary {
+            list-style: none;
+            cursor: pointer;
+            padding: 1.125rem 1.5rem;
+            font-size: 1rem; font-weight: 800; color: #1e1b4b;
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 0.75rem;
+        }
+        details.ytt-spec-acc > summary::-webkit-details-marker { display: none; }
+        .ytt-spec-acc-label { display: flex; align-items: center; gap: 0.625rem; }
+        .ytt-spec-acc-label::before {
+            content: '';
+            width: 22px; height: 22px;
+            background: url('img/check-orange.png') center/contain no-repeat;
+            display: inline-block;
+            flex-shrink: 0;
+        }
+        .ytt-spec-acc-chev {
+            width: 22px; height: 22px;
+            background: #4f46e5; color: #fff;
+            border-radius: 50%;
+            display: inline-flex; align-items: center; justify-content: center;
+            font-size: 0.75rem; font-weight: 900;
+            transition: transform 0.25s;
+            flex-shrink: 0;
+        }
+        details.ytt-spec-acc[open] .ytt-spec-acc-chev { transform: rotate(180deg); }
+        .ytt-spec-acc-body {
+            padding: 0 1.5rem 1.5rem;
+            border-top: 1px dashed #e5e7eb;
+            margin-top: 0;
+        }
+        .ytt-spec-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.25rem;
+            font-size: 0.875rem;
+        }
+        .ytt-spec-table th,
+        .ytt-spec-table td {
+            padding: 0.75rem 0.75rem;
+            border-bottom: 1px solid #f0f0f0;
+            text-align: left;
+            vertical-align: top;
+            line-height: 1.7;
+        }
+        .ytt-spec-table th {
+            width: 25%;
+            color: #6b7280; font-weight: 700;
+            background: #f9fafb;
+            white-space: nowrap;
+        }
+        .ytt-spec-table td.spec-val {
+            color: #1e1b4b; font-weight: 700;
+        }
+        .ytt-spec-table td.spec-note {
+            color: #6b7280; font-size: 0.8125rem; font-weight: 400;
+        }
+        @media (max-width: 600px) {
+            .ytt-spec-table, .ytt-spec-table thead, .ytt-spec-table tbody,
+            .ytt-spec-table tr, .ytt-spec-table th, .ytt-spec-table td {
+                display: block; width: 100%;
+            }
+            .ytt-spec-table tr {
+                border-bottom: 1px solid #e5e7eb;
+                padding: 0.625rem 0;
+            }
+            .ytt-spec-table th {
+                background: transparent; padding: 0.25rem 0;
+                font-size: 0.75rem; color: #9ca3af;
+            }
+            .ytt-spec-table td { padding: 0.25rem 0; border: none; }
+        }
+        /* DLボタン（大型・統一スタイル） */
+        .ytt-dl-btn-main {
+            font-size: 1.0625rem !important;
+            padding: 0.95rem 2rem !important;
+        }
+
+        /* ===== DLアイコン（ダウンロード感を直感的に） ===== */
+        .dl-icon {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 24px; height: 24px;
+            flex-shrink: 0;
+            color: currentColor;
+            transition: transform 0.3s ease;
+        }
+        .dl-icon svg { width: 100%; height: 100%; }
+        .btn-sq-blue.sm .dl-icon { width: 16px; height: 16px; }
+        /* 静止時のやわらかな上下アニメ（注目を引く） */
+        @keyframes dl-bounce {
+            0%, 100% { transform: translateY(0); }
+            45%      { transform: translateY(2px); }
+            55%      { transform: translateY(2px); }
+        }
+        .ytt-dl-btn-main .dl-icon,
+        .btn-white-solid .dl-icon {
+            animation: dl-bounce 2.4s ease-in-out infinite;
+        }
+        /* ホバー時に強めにバウンス */
+        .ytt-dl-btn-main:hover .dl-icon,
+        .btn-white-solid:hover .dl-icon,
+        .btn-sq-blue:hover .dl-icon {
+            animation: none;
+            transform: translateY(4px);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .ytt-dl-btn-main .dl-icon,
+            .btn-white-solid .dl-icon { animation: none; }
+        }
+
+        /* ===== 24時間お試し吹き出し（右斜め上のシンプルなメモ） ===== */
+        .ytt-trial-wrap {
+            position: relative;
+            display: inline-block;
+        }
+        .ytt-trial-bubble {
+            position: absolute;
+            left: calc(100% - 1.5rem);   /* ボタン右端に少し被せる位置 */
+            bottom: calc(100% + 14px);   /* ボタンの上にしっかり余白を取って配置 */
+            background: #ffffff;
+            border: 1px solid #d1d5db;
+            color: #374151;
+            padding: 0.5rem 0.875rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            line-height: 1.5;
+            white-space: nowrap;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            z-index: 5;
+            text-align: center;
+        }
+        /* 下向きの吹き出しの尻尾（ボタンを指す） */
+        .ytt-trial-bubble::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            bottom: -7px;
+            width: 12px;
+            height: 12px;
+            background: #ffffff;
+            border-right: 1px solid #d1d5db;
+            border-bottom: 1px solid #d1d5db;
+            transform: rotate(45deg);
+        }
+        /* やさしい上下浮遊（傾きなし） */
+        @keyframes trial-float {
+            0%, 100% { translate: 0 0; }
+            50%      { translate: 0 -3px; }
+        }
+        .ytt-trial-bubble { animation: trial-float 3.2s ease-in-out infinite; }
+        @media (prefers-reduced-motion: reduce) {
+            .ytt-trial-bubble { animation: none; }
+        }
+
+        /* タブレット〜スマホ: ボタンの下に「上向き尻尾付き」の吹き出しとして配置（ボタン感を排除） */
+        @media (max-width: 768px) {
+            .ytt-sp-hero-btns { flex-direction: column; align-items: center; }
+            .ytt-trial-wrap { display: block; width: 100%; text-align: center; position: relative; }
+            .ytt-trial-bubble {
+                position: relative;
+                display: inline-block;
+                margin: 1rem auto 0;
+                animation: none;
+                font-size: 0.7rem;
+                padding: 0.5rem 0.875rem;
+                white-space: normal;
+                max-width: 18rem;
+                line-height: 1.5;
+                background: #fafafa;
+                border-style: dashed;
+                border-radius: 10px;
+            }
+            /* 上向きの三角尻尾（ボタンを指す） */
+            .ytt-trial-bubble::before {
+                content: '';
+                position: absolute;
+                left: 50%;
+                top: -7px;
+                bottom: auto;
+                width: 0;
+                height: 0;
+                background: transparent;
+                border-left: 7px solid transparent;
+                border-right: 7px solid transparent;
+                border-bottom: 7px solid #d1d5db;
+                transform: translateX(-50%);
+            }
+            .ytt-trial-bubble::after {
+                content: '';
+                position: absolute;
+                left: 50%;
+                top: -6px;
+                width: 0;
+                height: 0;
+                border-left: 6px solid transparent;
+                border-right: 6px solid transparent;
+                border-bottom: 6px solid #fafafa;
+                transform: translateX(-50%);
+            }
+        }
+
+        /* page footer */
+        .ytt-sp-page-footer {
+            padding: 1.75rem 2rem;
+            text-align: center;
+            font-size: 0.8125rem; color: #9ca3af;
+            border-top: 1px solid #f0f0f0;
+            background: #fff;
+        }
+        .ytt-sp-page-footer a { color: #9ca3af; text-decoration: underline; }
+
+        /* Demo section full-height on desktop */
+        @media (min-width: 769px) {
+            .ytt-sp-demo-wrap .ytt-demo {
+                min-height: 100vh;
+            }
+        }
+        /* SPでは「やってみよう」装飾画像のみ非表示（シミュレーター本体は残す） */
+        @media (max-width: 768px) {
+            .try-it-deco--ytt { display: none; }
+        }
+
+        /* ===== Tooltips ===== */
+        .nowrap { display: inline-block; white-space: nowrap; }
+        .has-tip { position: relative; }
+        .feat-info {
+            margin-left: auto; flex-shrink: 0;
+            width: 18px; height: 18px; color: #9ca3af;
+            display: inline-flex; align-items: center; justify-content: center;
+            transition: color 0.2s; cursor: pointer;
+        }
+        .feat-info svg { width: 100%; height: 100%; }
+        .feat-info:hover, .has-tip.tip-open .feat-info { color: #4f46e5; }
+        @media(max-width:768px) {
+            .feat-info { width: 22px; height: 22px; }
+            .has-tip { cursor: pointer; }
+        }
+        .feat-tip {
+            position: absolute; bottom: calc(100% + 10px); left: 50%;
+            transform: translateX(-50%); width: 240px;
+            background: #1e1b4b; color: #fff;
+            padding: 0.75rem 0.875rem; border-radius: 10px;
+            font-size: 0.75rem; line-height: 1.7;
+            opacity: 0; visibility: hidden; pointer-events: none;
+            transition: opacity 0.2s ease 0.35s, visibility 0s linear 0.55s;
+            z-index: 100; text-align: left;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.25); white-space: normal;
+        }
+        .feat-tip::after {
+            content: ''; position: absolute; top: 100%; left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent; border-top-color: #1e1b4b;
+        }
+        .feat-tip a { color: #a5b4fc; text-decoration: underline; text-underline-offset: 2px; font-weight: 700; }
+        .feat-tip a:hover { color: #c7d2fe; }
+        @media(hover:hover) {
+            .feat-tip { right: 0; left: auto; transform: none; }
+            .feat-tip::after { left: auto; right: 8px; transform: none; }
+            .has-tip .feat-info:hover ~ .feat-tip,
+            .has-tip .feat-tip:hover { opacity: 1; visibility: visible; pointer-events: auto; transition: opacity 0.15s ease, visibility 0s; }
+            .feat-tip::before { content: ''; position: absolute; top: 100%; left: 0; right: 0; height: 18px; }
+        }
+        .has-tip.tip-open .feat-tip { opacity: 1; visibility: visible; pointer-events: auto; }
+        @media(max-width:768px) {
+            .feat-tip { width: min(260px, 80vw); bottom: auto; top: calc(100% + 10px); }
+            .feat-tip::after { top: auto; bottom: 100%; border-top-color: transparent; border-bottom-color: #1e1b4b; }
+        }
+    
+        /* スマホ：追従ナビのボタンと本文中の小さなテキストリンクのタップ領域を44px相当に（見た目は維持） */
+        @media (max-width: 768px) {
+            .ytt-sp-nav-cta .btn-sq-blue.sm, .ytt-sp-nav-cta .btn-sq-white.sm { min-height: 44px; display: inline-flex; align-items: center; }
+            a[href][style*="font-size:0.8125rem"], a[href][style*="font-size:0.75rem"] { display: inline-block; padding: 0.5em 0; }
+        }
+</style>
+<style>
+    /* ===== 導入手順カード（特設ページの白カード＋手書きオレンジ番号） ===== */
+    .guide-card {
+        background: #fff; border: 1.5px solid #e5e7eb; border-radius: 20px;
+        padding: 1.75rem 1.75rem 0.75rem; margin-top: 1.5rem; text-align: left;
+    }
+    @media (max-width: 600px) { .guide-card { padding: 1.25rem 1rem 0.25rem; border-radius: 16px; } }
+    .gstep { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 0.85rem; padding-bottom: 1.6rem; margin-bottom: 1.6rem; border-bottom: 1px dashed #e5e7eb; }
+    .gstep:last-child { border-bottom: none; margin-bottom: 0; }
+    .gstep-no {
+        width: 40px; height: 34px; display: flex; align-items: center; justify-content: center;
+        background: url("img/fill-crayon-orange-badge.svg") 0 0 / 100% 100% no-repeat;
+        color: #1e1b4b; font-weight: 900; font-size: 1rem; font-family: Inter, sans-serif;
+    }
+    .gstep-body { min-width: 0; }
+    .gstep-title { font-size: 0.98rem; font-weight: 800; color: #1e1b4b; line-height: 1.6; margin: 0.25rem 0 0; }
+    .gstep-body p { font-size: 0.875rem; color: #4b5563; line-height: 1.85; margin: 0.45rem 0 0; }
+    .gstep-body p b { color: #1e1b4b; }
+    .gshot { margin: 0.8rem 0 0; }
+    .gshot img { display: block; max-width: 100%; height: auto; border: 1px solid #e5e7eb; border-radius: 12px; background: #fff; }
+    .gshot.narrow img { max-width: min(100%, 380px); }
+    .gshot.mid img { max-width: min(100%, 560px); }
+    .gshot figcaption { font-size: 0.75rem; color: #6b7280; margin-top: 0.35rem; line-height: 1.6; }
+    /* スクショの手書き風フレーム：本文（HTML）と画面の画像を、文字を足さずに見分けられるようにする */
+    .gframe { position: relative; display: inline-block; max-width: 100%; padding: 7px; vertical-align: top; }
+    .gframe > img { display: block; max-width: 100%; height: auto; border: none !important; border-radius: 5px !important; box-shadow: none !important; background: #fff; }
+    .gframe > svg.gframe-line { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+    .gframe > svg.gframe-line path { fill: none; stroke: #7b8190; stroke-linecap: round; stroke-linejoin: round; }
+    .gframe > svg.gframe-line path.p1 { stroke-width: 3.2; opacity: 0.92; }
+    .gframe > svg.gframe-line path.p2 { stroke-width: 2; opacity: 0.45; }
+    .gshot.narrow .gframe { max-width: min(100%, 394px); }
+    .gshot.mid .gframe { max-width: min(100%, 574px); }
+    .gshot-pair { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1rem; align-items: start; margin-top: 0.8rem; }
+    .gshot-pair .gshot { margin: 0; }
+    .gshot-pair .gshot img { width: auto; max-width: 100%; }
+    @media (max-width: 640px) { .gshot-pair { grid-template-columns: minmax(0, 1fr); } }
+    .gstep-btn { margin-top: 0.85rem; }
+    .gnote { border-left: 3px solid #f59e0b; padding: 0.35rem 0 0.35rem 0.8rem; margin: 0.8rem 0 0; font-size: 0.85rem; font-weight: 700; color: #92400e; line-height: 1.7; }
+    .gtip { background: #f9fafb; border-radius: 10px; padding: 0.7rem 0.9rem; margin: 0.8rem 0 0; font-size: 0.8125rem; color: #4b5563; line-height: 1.8; }
+    .gtip b { color: #1e1b4b; }
+    .gtip code, .gstep-body code { font-family: ui-monospace, Menlo, Consolas, monospace; background: #f3f4f6; border-radius: 4px; padding: 0.05em 0.35em; font-size: 0.9em; color: #1e1b4b; }
+    .gtable { width: 100%; border-collapse: collapse; margin-top: 0.8rem; font-size: 0.8125rem; }
+    .gtable th, .gtable td { padding: 0.6rem 0.7rem; border-bottom: 1px solid #f0f0f0; text-align: left; vertical-align: top; line-height: 1.7; }
+    .gtable th { width: 34%; color: #6b7280; font-weight: 700; background: #f9fafb; }
+    .gtable td { color: #374151; }
+    @media (max-width: 600px) { .gtable th, .gtable td { display: block; width: 100%; } .gtable th { border-bottom: none; padding-bottom: 0.2rem; } }
+    .dot { display: inline-block; width: 11px; height: 11px; border-radius: 50%; vertical-align: -1px; margin-right: 0.35rem; }
+    .dot.g { background: #22c55e; } .dot.y { background: #eab308; } .dot.r { background: #ef4444; }
+    /* 3ステップの目次（手書き数字） */
+    .flow3 .ytt-add-card { text-align: center; }
+    .flow3 .ytt-add-card h3 { justify-content: center; }
+    .flow3 .flow-num { display: block; height: 46px; width: auto; margin: 0 auto 0.6rem; }
+    .flow3 a.ytt-add-card { text-decoration: none; transition: border-color 0.15s, transform 0.15s; }
+    .flow3 a.ytt-add-card:hover { border-color: #a5b4fc; transform: translateY(-2px); }
+    /* スマホ：インストール／ホーム追加 */
+    .os-card h3 .os-tag { font-size: 0.7rem; font-weight: 800; padding: 0.15em 0.6em; border-radius: 999px; background: #1e1b4b; color: #fff; }
+    .os-card ol { margin: 0.35rem 0 0; padding-left: 1.2rem; font-size: 0.8125rem; color: #4b5563; line-height: 1.85; }
+    .app-mock { text-align: center; margin: 0.25rem auto 1.75rem; }
+    .app-mock-icon {
+        width: 108px; height: 108px; margin: 0 auto; border-radius: 26px;
+        display: flex; align-items: center; justify-content: center;
+        background:
+            radial-gradient(circle at 22% 24%, rgba(255,255,255,0.45) 0 1px, transparent 1.6px),
+            radial-gradient(circle at 78% 16%, rgba(255,255,255,0.35) 0 1px, transparent 1.6px),
+            radial-gradient(circle at 86% 58%, rgba(255,255,255,0.3) 0 1px, transparent 1.6px),
+            radial-gradient(circle at 14% 66%, rgba(255,255,255,0.25) 0 1px, transparent 1.6px),
+            radial-gradient(120% 85% at 50% 118%, #7b6bff 0%, #3b34a8 34%, #1c1c5a 66%, #10113a 100%);
+        box-shadow: 0 12px 26px rgba(30,27,75,0.28), inset 0 0 0 1px rgba(255,255,255,0.06);
+    }
+    .app-mock-icon img { width: 60%; height: auto; display: block; }
+    .app-mock-label { margin-top: 0.6rem; font-size: 1.05rem; font-weight: 600; color: #111827; letter-spacing: 0.01em; }
+    .app-mock-cap { margin: 0.35rem 0 0; font-size: 0.8125rem; color: #6b7280; }
+    .home-icon { text-align: center; margin-top: 1.25rem; }
+    .home-icon img { width: 140px; max-width: 45vw; display: block; margin: 0 auto; }
+    .home-icon figcaption { font-size: 0.8125rem; color: #4b5563; margin-top: 0.4rem; line-height: 1.7; }
+    /* Web版YTTとは：スマホ画面の縦長画像 */
+    .ytt-fto2-visual { text-align: center; }
+    .ytt-fto2-visual .webytt-sp { display: block; width: 100%; max-width: 260px; height: auto; margin: 0 auto; }
+    /* Web版YTTのスマホ画面モック（ytt-tokusetu.html と同じもの） */
+    .wy-phone { position: relative; width: 282px; margin: 0 auto; padding: 8px; background: #05070f; border-radius: 38px; box-shadow: 0 22px 48px rgba(30, 27, 75, 0.22); }
+    .wy-screen { width: 266px; border-radius: 30px; overflow: hidden; background: #0a0f2c; color: #e5e7eb; font-family: 'Noto Sans JP', system-ui, sans-serif; line-height: 1.2; text-align: left; }
+    .wy-screen svg { display: block; }
+    .wy-bar { height: 26px; display: flex; align-items: center; justify-content: center; gap: 4px; background: #0f1a47; color: #e9b949; font-size: 11px; font-weight: 800; font-style: italic; letter-spacing: 0.02em; }
+    .wy-logo { width: 13px; height: 10px; }
+    .wy-acct { display: flex; align-items: center; gap: 5px; padding: 4px 8px 5px; background: #0f1a47; }
+    .wy-dot { width: 6px; height: 6px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.18); flex-shrink: 0; }
+    .wy-acct-no { flex: 1; height: 16px; display: flex; align-items: center; padding: 0 6px; border: 1px solid #26336b; border-radius: 5px; background: #0a1236; color: #56608d; font-size: 7px; letter-spacing: 0.1em; }
+    .wy-ibtn { width: 18px; height: 18px; display: inline-flex; align-items: center; justify-content: center; color: #cbd5e1; border: 1px solid #3a4880; border-radius: 5px; }
+    .wy-ibtn.round { border-radius: 50%; }
+    .wy-ibtn svg { width: 11px; height: 11px; }
+    .wy-bal { display: flex; align-items: center; justify-content: space-between; gap: 6px; padding: 4px 8px 8px; background: #0f1a47; }
+    .wy-bal-main { font-size: 17px; font-weight: 800; color: #fff; letter-spacing: 0.01em; white-space: nowrap; }
+    .wy-bal-main small { font-size: 7px; font-weight: 500; color: #9aa3c7; margin-right: 4px; letter-spacing: 0; }
+    .wy-bal-sub { margin-top: 3px; font-size: 7px; color: #9aa3c7; white-space: nowrap; }
+    .wy-tiles { display: flex; gap: 5px; }
+    .wy-tile { width: 44px; height: 38px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; background: #22306b; border: 1px solid #4659a3; border-radius: 7px; font-size: 7.5px; font-weight: 800; color: #fff; }
+    .wy-tile svg { width: 15px; height: 15px; }
+    .wy-chart { position: relative; background: #0a0f2c; }
+    .wy-chart-svg { width: 266px; height: 360px; }
+    .wy-chip { position: absolute; left: 5px; top: 5px; display: inline-flex; align-items: center; gap: 5px; padding: 3px 7px; background: rgba(13, 20, 52, 0.92); border: 1px solid #1f2a58; border-radius: 99px; font: 600 6.5px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: #9aa3c7; }
+    .wy-chip b { font-size: 8.5px; color: #fff; }
+    .wy-chip i { font-style: normal; font-size: 6px; }
+    .wy-tv { position: absolute; left: 5px; bottom: 19px; font: 900 9px/1 system-ui, sans-serif; color: #e5e7eb; letter-spacing: -0.04em; }
+    .wy-axis text { font: 500 6.5px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #8c95b8; text-anchor: end; }
+    .wy-axis-tag { font: 700 6.5px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #fff; text-anchor: end; }
+    .wy-axis-tag.dark { fill: #0f172a; }
+    .wy-watermark { font: 700 24px system-ui, sans-serif; fill: rgba(148, 163, 184, 0.09); letter-spacing: 0.02em; }
+    .wy-al { stroke: #4f8df7; stroke-width: 0.9; stroke-dasharray: 1.6 2.2; fill: none; }
+    .wy-al-s { opacity: 0.75; }
+    .wy-al-y { stroke: #e9b949; opacity: 0.8; }
+    .wy-dates { position: relative; height: 15px; border-top: 1px solid #161f47; }
+    .wy-dates span { position: absolute; top: 3px; font-size: 6.5px; color: #8c95b8; white-space: nowrap; }
+    .wy-nav { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); padding: 6px 2px 9px; background: #0d1438; border-top: 1px solid #1c2552; }
+    .wy-nav span { position: relative; display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 5.8px; font-weight: 600; color: #8c95b8; white-space: nowrap; }
+    .wy-nav span svg { width: 14px; height: 14px; }
+    .wy-nav span.on { color: #e9b949; }
+    .wy-nav span.has-badge::after { content: ''; position: absolute; top: -1px; left: calc(50% + 4px); width: 5px; height: 5px; border-radius: 50%; background: #f97316; }
+    /* MT4 / MT5 / cTrader の切り替え（このページはMT4） */
+    .tool-badge { display: inline-block; margin: 0 0 0.6rem; padding: 0.2rem 0.9rem; border-radius: 999px; background: #1e1b4b; color: #fff; font-size: 0.8rem; font-weight: 800; letter-spacing: 0.06em; }
+    .tool-ask {
+        max-width: 460px; margin: 0 auto; padding: 1.1rem 1rem 1.2rem;
+        background: #fff; border: 2px solid #1e1b4b; border-radius: 18px;
+        box-shadow: 4px 5px 0 #1e1b4b;
+    }
+    .tool-ask-q { margin: 0; font-size: 1.05rem; font-weight: 900; color: #1e1b4b; }
+    .tool-ask-sub { margin: 0.25rem 0 0.9rem; font-size: 0.78rem; color: #6b7280; }
+    .tool-ask-btns { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.5rem; }
+    .tool-tab { display: inline-flex; align-items: center; justify-content: center; gap: 0.35rem; min-width: 96px; min-height: 48px; padding: 0.55rem 1.2rem; border-radius: 12px; border: 2px solid #c7d2fe; background: #fff; color: #1e1b4b; font-size: 1rem; font-weight: 900; text-decoration: none; transition: border-color 0.15s, transform 0.15s; }
+    .tool-tab:not(.is-on):not(.is-soon):hover { border-color: #4f46e5; transform: translateY(-2px); }
+    .tool-tab.is-on { background: #1e1b4b; border-color: #1e1b4b; color: #fff; }
+    .tool-check { font-size: 0.85rem; color: #fbbf24; }
+    @media (max-width: 400px) { .tool-tab { min-width: 0; flex: 1 1 0; padding: 0.55rem 0.6rem; } }
+    .tool-tab.is-soon { flex-direction: column; gap: 0; line-height: 1.15; }
+    .tool-tab.is-soon small { font-size: 0.62rem; }
+    .tool-tab small, .other-tool small { font-size: 0.65rem; font-weight: 700; color: #9ca3af; }
+    .tool-tab.is-soon, .other-tool.is-soon { color: #9ca3af; cursor: default; }
+    .other-tools { margin-top: 1.75rem; text-align: center; }
+    .other-tools-lead { font-size: 0.875rem; color: #4b5563; line-height: 1.85; margin: 0; }
+    .other-tools-lead b { color: #1e1b4b; }
+    .other-tools-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.6rem; margin-top: 0.9rem; }
+    .other-tool { display: inline-flex; align-items: center; gap: 0.4rem; min-height: 44px; padding: 0.55rem 1.2rem; border-radius: 12px; border: 1.5px solid #e5e7eb; background: #fff; color: #1e1b4b; font-size: 0.875rem; text-decoration: none; }
+    /* 取引ツールを選ぶまで、下の手順は表示しない */
+    .js-gate #gated:not(.is-open) { display: none; }
+    #tool-select { padding-bottom: 3.5rem; }
+    .section-alt { background: #f4f6f9; }
+    /* 「3ステップで導入完了」の背景の下辺を、次のセクションへ向かう矢印の形にする（route.html の rsec--arrowdown と同じ作り）。
+       矢印の下の三角部分は次のセクションに重ね、切り取った左右は次のセクションの白が見えるようにする */
+    #flow {
+        --tip: 48px;
+        position: relative; z-index: 1;
+        padding-bottom: calc(5rem + var(--tip));
+        margin-bottom: calc(-1 * var(--tip));
+        clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--tip)), 50% 100%, 0 calc(100% - var(--tip)));
+    }
+    #flow + section { --tip: 48px; padding-top: calc(4.5rem + var(--tip)); }
+    @media (max-width: 640px) { #flow, #flow + section { --tip: 30px; } }
+</style>
+
+<style>
+    /* ===== 使い方ページ（機能説明） ===== */
+    .hero-setup { font-size: 0.8125rem; color: #4b5563; margin: 0.5rem 0 0; }
+    .hero-setup a { color: #4f46e5; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+    .feat-label { max-width: 1100px; margin: 1.75rem auto 0; font-size: 0.95rem; font-weight: 900; color: #1e1b4b; text-align: left; }
+    .feat-label small { margin-left: 0.6rem; font-size: 0.75rem; font-weight: 700; color: #6b7280; }
+    .feat-label + .feat, .feat-label + .ytt-add-grid { margin-top: 0.7rem; }
+    /* 機能ごとのカード：左に動画（または画面）、右に説明 */
+    .feat {
+        display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 2rem; align-items: center;
+        background: #fff; border: 1.5px solid #e5e7eb; border-radius: 20px;
+        padding: 1.75rem; margin-top: 1.5rem; text-align: left;
+    }
+    .feat.is-sp { grid-template-columns: 300px minmax(0, 1fr); }
+    /* PC画面のモック（ノートPC風の枠。中身はSVGなので幅に合わせて縮む） */
+    .wy-pc { max-width: 520px; margin: 0 auto; }
+    .wy-pc-screen { padding: 7px; background: #05070f; border-radius: 14px 14px 6px 6px; box-shadow: 0 22px 48px rgba(30, 27, 75, 0.22); }
+    .wy-pc-svg { display: block; width: 100%; height: auto; border-radius: 7px; }
+    .wy-pc-base { width: 112%; height: 11px; margin: 0 -6%; background: #1f2937; border-radius: 2px 2px 12px 12px; }
+    @media (max-width: 860px) { .feat, .feat.is-sp { grid-template-columns: minmax(0, 1fr); gap: 1.25rem; } }
+    @media (max-width: 600px) { .feat { padding: 1.1rem 1rem 1.25rem; border-radius: 16px; } }
+    .feat-media { min-width: 0; text-align: center; }
+    .feat-body { min-width: 0; }
+    .feat-head { font-size: 1.08rem; font-weight: 800; color: #1e1b4b; line-height: 1.6; margin: 0 0 0.9rem; }
+    .feat-steps { list-style: none; counter-reset: fs; margin: 0; padding: 0; }
+    .feat-steps li { counter-increment: fs; position: relative; padding: 0 0 0.7rem 2.2rem; font-size: 0.9rem; color: #374151; line-height: 1.75; }
+    .feat-steps li::before {
+        content: counter(fs); position: absolute; left: 0; top: 0.05rem;
+        width: 1.55rem; height: 1.4rem; display: flex; align-items: center; justify-content: center;
+        background: url("img/fill-crayon-orange-badge.svg") 0 0 / 100% 100% no-repeat;
+        color: #1e1b4b; font-weight: 900; font-size: 0.8rem; font-family: Inter, sans-serif;
+    }
+    .feat-steps li b { color: #1e1b4b; }
+    /* 動画の置き場所（声なし・自動再生・くり返し） */
+    .fvid { margin: 0; }
+    .fvid .gframe { display: block; width: 100%; }
+    .fvid.sp { max-width: 260px; margin: 0 auto; }
+    .fvid-box {
+        position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.35rem;
+        width: 100%; aspect-ratio: 16 / 9; border-radius: 12px; background: #1e1b4b; color: #fff; overflow: hidden;
+    }
+    .fvid.sp .fvid-box { aspect-ratio: 9 / 16; }
+    video.fvid-box { display: block; object-fit: cover; }
+    .gframe > .fvid-box { border-radius: 6px; }
+    .fvid-play { width: 58px; height: 58px; border-radius: 50%; background: #fbbf24; position: relative; margin-bottom: 0.35rem; }
+    .fvid-play::after { content: ''; position: absolute; left: 23px; top: 18px; border-style: solid; border-width: 11px 0 11px 17px; border-color: transparent transparent transparent #1e1b4b; }
+    .fvid-label { font-size: 0.95rem; font-weight: 800; letter-spacing: 0.04em; }
+    .fvid-meta { font-size: 0.75rem; color: #c7d2fe; }
+    .fvid-box.is-shot { background: #334155; }
+    /* 機能の動画：画面の見方と同じノートPC／スマホの枠の中で再生（見えている間だけ再生、タップで全画面） */
+    .fvid .wy-pc { max-width: 100%; }
+    .fvid-video { display: block; width: 100%; height: auto; background: #0a0f2c; cursor: zoom-in; }
+    .wy-pc-screen .fvid-video { aspect-ratio: 16 / 9; border-radius: 7px; }
+    .wy-screen .fvid-video { aspect-ratio: 720 / 1400; }
+    .fvid-cap { margin-top: 0.9rem; font-size: 0.75rem; color: #6b7280; text-align: center; }
+    /* 機能一覧 */
+    .fidx-grid { margin-top: 0.7rem; }
+    a.ytt-add-card.fidx { text-decoration: none; transition: border-color 0.15s, transform 0.15s; }
+    a.ytt-add-card.fidx:hover { border-color: #a5b4fc; transform: translateY(-2px); }
+    .fidx-no {
+        width: 30px; height: 26px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
+        background: url("img/fill-crayon-orange-badge.svg") 0 0 / 100% 100% no-repeat;
+        color: #1e1b4b; font-weight: 900; font-size: 0.85rem; font-family: Inter, sans-serif;
+    }
+    .ai-one { grid-template-columns: minmax(0, 340px); justify-content: center; }
+    .help-more { font-size: 0.8125rem; color: #4b5563; line-height: 1.9; margin-top: 1.5rem; }
+    .help-more a { color: #4f46e5; text-decoration: underline; text-underline-offset: 3px; }
+</style>
+<style>
+    /* ===== 使い方の分野別ページ（トップ＋5ページ共通） ===== */
+    /* ページの切り替え：PCは1行、タブレットは3つ×2段、スマホは2つ×3段（はみ出しや1つだけの段を作らない） */
+    .fdev-switch { display: flex; justify-content: center; gap: 0.6rem; }
+    .fdev-switch button { min-height: 44px; padding: 0.5rem 1.6rem; border: 1.5px solid #e5e7eb; border-radius: 999px; background: #fff; color: #6b7280; font-size: 0.95rem; font-weight: 800; cursor: pointer; }
+    .fdev-switch button.on { background: #1e1b4b; border-color: #1e1b4b; color: #fff; }
+    /* 下にスクロールしたあとも切り替えられるように、バーの下に浮かせる小さな切り替え（page-ui.js が出し入れと位置を決める） */
+    .fdev-float { position: fixed; left: 50%; top: 80px; z-index: 880; display: flex; gap: 0.2rem; padding: 0.22rem; transform: translateX(-50%); background: #fff; border: 1.5px solid #e5e7eb; border-radius: 999px; box-shadow: 0 8px 22px rgba(30, 27, 75, 0.16); }
+    .fdev-float[hidden] { display: none; }
+    .fdev-float button { min-height: 36px; padding: 0.3rem 1.15rem; border: 0; border-radius: 999px; background: transparent; color: #6b7280; font-size: 0.85rem; font-weight: 800; cursor: pointer; }
+    .fdev-float button.on { background: #1e1b4b; color: #fff; }
+    .fdev-float button:focus-visible { outline: 3px solid #a5b4fc; outline-offset: 1px; }
+    html.toc-open .fdev-float { display: none; }
+    /* 上の固定バーの「導入方法」：白地に紫の枠。「Web版YTTを開く」の左に並べる */
+    .ytt-sp-nav-cta { display: flex; align-items: center; gap: 0.5rem; }
+    .nav-setup { display: inline-flex; align-items: center; justify-content: center; min-height: 38px; padding: 0.4rem 0.9rem; border: 1.5px solid #4f46e5; border-radius: 8px; background: #fff; color: #4f46e5; font-size: 0.85rem; font-weight: 800; text-decoration: none; white-space: nowrap; }
+    .nav-setup:hover { background: #eef2ff; }
+    .nav-setup:focus-visible { outline: 3px solid #a5b4fc; outline-offset: 2px; }
+    @media (max-width: 760px) { .nav-setup { min-height: 34px; padding: 0.35rem 0.6rem; font-size: 0.7rem; } .ytt-sp-nav-cta { gap: 0.35rem; } }
+    /* iPhone SE などのとても狭い幅：ロゴ・虫眼鏡・2つのボタンが1行に収まるように詰める */
+    @media (max-width: 380px) { .ytt-sp-nav-logo img { height: 18px !important; } .fsearch-toggle { width: 34px !important; height: 34px !important; } .ytt-sp-nav-cta { margin-left: 0.3rem !important; gap: 0.25rem; } .nav-setup { padding: 0.3rem 0.4rem; font-size: 0.66rem; } .ytt-sp-nav-cta .btn-sq-blue.sm { padding: 0.4rem 0.45rem !important; font-size: 0.66rem !important; } }
+    /* ページの行：数も色も減らして静かに（番号札はトップのカードと目次だけに出す） */
+    .fcat-nav { display: flex; flex-wrap: nowrap; justify-content: center; gap: 0.3rem; margin: 1.7rem auto 0; }
+    .fcat-nav a { display: inline-flex; align-items: center; justify-content: center; min-height: 34px; padding: 0.34rem 0.82rem; border: 1px solid #e7e9f0; border-radius: 999px; background: #fff; color: #4b5563; font-size: 0.8rem; font-weight: 700; text-decoration: none; white-space: nowrap; }
+    @media (max-width: 900px) { .fcat-nav { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); max-width: 600px; } }
+    @media (max-width: 560px) { .fcat-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.35rem; } .fcat-nav a { padding: 0.34rem 0.45rem; font-size: 0.76rem; }
+        /* 7つを2列に並べると最後が1つ余るので、まん中に置く */
+        .fcat-nav a:last-child:nth-child(odd) { grid-column: 1 / -1; width: 48%; margin: 0 auto; } }
+    /* 機能の検索 */
+    .fsearch.fsearch-nav { flex: 1 1 auto; min-width: 0; max-width: 440px; margin: 0 auto; }
+    .fsearch-nav .fsearch-box { min-height: 40px; padding: 0.3rem 0.8rem; border-radius: 999px; font-size: 0.875rem; }
+    .fsearch-nav .fsearch-results { top: calc(100% + 0.5rem); max-height: min(70vh, 520px); }
+    @media (max-width: 760px) { .fsearch-nav { max-width: none; flex: 1 1 60px; min-width: 60px; } .fsearch-nav .fsearch-box { min-height: 38px; padding: 0.25rem 0.6rem; font-size: 0.8rem; }
+      .ytt-sp-nav-cta { flex: 0 0 auto; } .ytt-sp-nav-cta .btn-sq-blue { white-space: nowrap !important; font-size: 0.7rem; padding: 0.45rem 0.7rem; } }
+    .ncta-sm { display: none; }
+    @media (max-width: 520px) { .ncta-lg { display: none; } .ncta-sm { display: inline; } }
+    @media (max-width: 430px) { .ytt-sp-nav-logo img { height: 22px; width: auto; max-width: none; } .fsearch-nav .fsearch-box svg { display: none; } .fsearch-nav .fsearch-box { padding-left: 0.7rem; } }
+    /* スマホの上の検索：ふだんは虫眼鏡のボタンだけ（バーがきつくならないように）。押すとバーのすぐ下に検索窓が開く */
+    .fsearch-toggle { display: none; }
+    @media (max-width: 600px) {
+        /* 上のバーは fixed のまま（sticky にすると、html/body の overflow-x: hidden のせいでスマホで固定されなくなる）。検索窓は fixed のバーを基準に下に出る */
+        .fsearch-toggle { display: inline-flex; flex: none; align-items: center; justify-content: center; width: 42px; height: 42px; margin-left: auto; padding: 0;
+            border: 1.5px solid #1e1b4b; border-radius: 50%; background: #fff; color: #1e1b4b; cursor: pointer; }
+        .fsearch-toggle svg { width: 19px; height: 19px; }
+        html.nav-search-open .fsearch-toggle { background: #1e1b4b; color: #fff; }
+        .fsearch.fsearch-nav { display: none; position: absolute; left: 0; right: 0; top: 100%; max-width: none; margin: 0; padding: 0.6rem 1rem 0.75rem;
+            background: #fff; border-bottom: 1px solid #e5e7eb; box-shadow: 0 12px 24px rgba(30, 27, 75, 0.1); }
+        html.nav-search-open .fsearch.fsearch-nav { display: block; }
+        .fsearch-nav .fsearch-box { min-height: 46px; padding: 0.3rem 0.9rem; }
+        .fsearch-nav .fsearch-box svg { display: block; }
+        /* iPhone は入力欄の文字が16pxより小さいと勝手に拡大するので、16pxにする */
+        .fsearch-nav .fsearch-box input { font-size: 16px; }
+        .fsearch-nav .fsearch-results { left: 1rem; right: 1rem; top: calc(100% - 0.2rem); max-height: 65vh; }
+        .ytt-sp-nav-cta { margin-left: 0.55rem; }
+    }
+    .fsearch { position: relative; max-width: 520px; margin: 1.7rem auto 0; text-align: left; }
+    .fsearch-box { display: flex; align-items: center; gap: 0.6rem; padding: 0 1rem; min-height: 52px; background: #fff; border: 2px solid #1e1b4b; border-radius: 999px; box-shadow: 0 6px 18px rgba(30, 27, 75, 0.08); cursor: text; }
+    .fsearch-box:focus-within { border-color: #4f46e5; box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.15); }
+    .fsearch-box svg { flex: none; width: 20px; height: 20px; color: #4f46e5; }
+    .fsearch-box input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; font: 700 1rem/1.4 inherit; color: #1e1b4b; }
+    .fsearch-box input::placeholder { color: #9ca3af; font-weight: 500; }
+    /* ブラウザの消すボタンは出さず、どの端末でも同じ × を出す（iPhone の Safari は検索窓に消すボタンを出さないため） */
+    .fsearch-box input::-webkit-search-cancel-button, .fsearch-box input::-webkit-search-decoration { -webkit-appearance: none; appearance: none; display: none; }
+    .fsearch-clear { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; margin-right: -0.3rem; padding: 0; border: 0; border-radius: 50%; background: #e5e7eb; color: #1e1b4b; cursor: pointer; }
+    .fsearch-clear[hidden] { display: none; }
+    .fsearch-clear svg { width: 13px; height: 13px; }
+    .fsearch-clear:hover { background: #d1d5db; }
+    .fsearch-clear:focus-visible { outline: 3px solid #a5b4fc; outline-offset: 2px; }
+    .fsearch-results { position: absolute; left: 0; right: 0; top: calc(100% + 8px); z-index: 60; max-height: min(62vh, 520px); overflow-y: auto; background: #fff; border: 1.5px solid #e5e7eb; border-radius: 16px; box-shadow: 0 18px 44px rgba(30, 27, 75, 0.18); padding: 0.4rem; }
+    .fsearch-results a { display: block; padding: 0.65rem 0.8rem; border-radius: 10px; color: #1e1b4b; text-decoration: none; }
+    .fsearch-results a:hover, .fsearch-results a.on { background: #eef0ff; }
+    .fsearch-results .fs-top { display: flex; align-items: center; justify-content: space-between; gap: 0.6rem; }
+    .fsearch-results b { font-size: 0.95rem; font-weight: 900; }
+    /* 同じ名前の機能（時間足を変える など）が、スマホ版かPC版か分かるように、名前の前に小さな札を出す */
+    .fsearch-results .fs-name { display: inline-flex; align-items: center; gap: 0.4rem; min-width: 0; }
+    .fsearch-results .fs-dev { flex: none; padding: 0.1rem 0.45rem; border-radius: 6px; font-size: 0.68rem; font-weight: 800; line-height: 1.4; }
+    .fsearch-results .fs-dev.sp { background: #e0f2fe; color: #0369a1; }
+    .fsearch-results .fs-dev.pc { background: #eef2ff; color: #3730a3; }
+    .fsearch-results .fs-cat { flex: none; display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.72rem; font-weight: 700; color: #6b7280; }
+    .fsearch-results .fs-cat .fcat-no { width: 18px; height: 16px; font-size: 0.62rem; }
+    .fsearch-results small { display: block; margin-top: 0.15rem; font-size: 0.8rem; line-height: 1.6; color: #4b5563; }
+    .fsearch-results mark { background: none; color: inherit; box-shadow: inset 0 -0.42em 0 #fde047; border-radius: 0; padding: 0 1px; }
+    .fsearch-results .fs-all { margin-top: 0.25rem; padding: 0.7rem; border-top: 1px solid #eef0f4; border-radius: 0 0 10px 10px; text-align: center; font-size: 0.84rem; font-weight: 800; color: #4f46e5; }
+    /* 検索結果のページ（ytt-web-search.html）：決定を押したとき、当てはまる機能だけを並べる。押して機能を見て、戻ると一覧のまま */
+    .fsearch.fsearch-page { margin: 1.4rem auto 0; }
+    .fs-page-list { display: grid; grid-template-columns: minmax(0, 1fr); gap: 2.2rem; width: 100%; margin: 0 auto; text-align: left; }
+    /* さがしていることば：1つずつ × で消せる */
+    /* さがしていることば・件数・1件目のあいだは詰めずに、ひと息ずつ空ける（airiさん 2026-09-15「近い」） */
+    .fs-words { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.9rem 0.5rem; margin: 0 auto 1.5rem; }
+    .fs-words-label { width: 100%; text-align: center; font-size: 0.78rem; font-weight: 700; color: #6b7280; }
+    .fs-word { display: inline-flex; align-items: center; gap: 0.35rem; min-height: 40px; padding: 0.2rem 0.3rem 0.2rem 0.95rem; border: 1.5px solid #1e1b4b; border-radius: 999px; background: #fff; color: #1e1b4b; font-size: 0.95rem; font-weight: 800; }
+    .fs-word button { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; padding: 0; border: 0; border-radius: 50%; background: #1e1b4b; color: #fff; font-size: 0.95rem; font-weight: 800; line-height: 1; cursor: pointer; }
+    .fs-word button:hover { background: #4f46e5; }
+    .fs-word button:focus-visible { outline: 3px solid #a5b4fc; outline-offset: 2px; }
+    #fs-page-count { text-align: center; }
+    .fs-hit { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0.6rem; min-width: 0; }
+    .fs-hit-head { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.7rem; }
+    .fs-hit-head .fs-cat { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.8rem; font-weight: 800; color: #4b5563; }
+    .fs-hit-head .fs-cat .fcat-no { width: 20px; height: 18px; font-size: 0.66rem; }
+    .fs-hit-head .fs-dev { padding: 0.1rem 0.45rem; border-radius: 6px; font-size: 0.7rem; font-weight: 800; line-height: 1.4; }
+    .fs-hit-head .fs-dev.sp { background: #e0f2fe; color: #0369a1; }
+    .fs-hit-head .fs-dev.pc { background: #eef2ff; color: #3730a3; }
+    .fs-hit-go { margin-left: auto; font-size: 0.84rem; font-weight: 800; color: #4f46e5; text-decoration: none; }
+    .fs-hit-go:hover { text-decoration: underline; }
+    .fs-page-count { margin: 0 0 1.8rem; font-size: 0.92rem; font-weight: 800; color: #1e1b4b; }
+    .fs-page-empty { margin: 0; padding: 1.2rem; border: 1.5px dashed #d1d5db; border-radius: 14px; text-align: center; color: #4b5563; font-size: 0.92rem; line-height: 1.8; }
+    .fs-page-item { display: grid; grid-template-columns: minmax(0, 1fr); min-width: 0; gap: 0.45rem; padding: 1rem 1.1rem; background: #fff; border: 1.5px solid #e5e7eb; border-radius: 16px; color: #1e1b4b; text-decoration: none; transition: border-color 0.15s, box-shadow 0.15s; }
+    .fs-page-item:hover { border-color: #4f46e5; box-shadow: 0 8px 22px rgba(30, 27, 75, 0.08); }
+    .fs-page-item:focus-visible { outline: 3px solid #a5b4fc; outline-offset: 2px; }
+    .fs-page-item .fs-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.3rem 0.6rem; }
+    .fs-page-item .fs-name { display: inline-flex; align-items: center; gap: 0.4rem; min-width: 0; }
+    .fs-page-item b { font-size: 1.05rem; font-weight: 900; }
+    .fs-page-item .fs-dev { flex: none; padding: 0.1rem 0.45rem; border-radius: 6px; font-size: 0.68rem; font-weight: 800; line-height: 1.4; }
+    .fs-page-item .fs-dev.sp { background: #e0f2fe; color: #0369a1; }
+    .fs-page-item .fs-dev.pc { background: #eef2ff; color: #3730a3; }
+    .fs-page-item .fs-cat { flex: none; display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.74rem; font-weight: 700; color: #6b7280; }
+    .fs-page-item .fs-cat .fcat-no { width: 18px; height: 16px; font-size: 0.62rem; }
+    .fs-page-item .fs-what { font-size: 0.9rem; color: #374151; line-height: 1.8; overflow-wrap: anywhere; }
+    .fs-page-item .fs-go { justify-self: end; font-size: 0.82rem; font-weight: 800; color: #4f46e5; }
+    .fs-page-item mark { background: #fef08a; color: inherit; border-radius: 3px; padding: 0 1px; }
+    @media (prefers-reduced-motion: reduce) { .fs-page-item { transition: none; } }
+    .fsearch-results .fs-none { padding: 0.9rem 0.8rem; font-size: 0.85rem; color: #4b5563; line-height: 1.7; }
+    .fsearch-results .fs-count { padding: 0.3rem 0.8rem 0.2rem; font-size: 0.72rem; font-weight: 700; color: #9ca3af; }
+    /* 検索から飛んできた機能をしばらく目立たせる */
+    .fcard.fs-hit { animation: fsHit 2.4s ease-out; }
+    @keyframes fsHit { 0%, 30% { border-color: #4f46e5; box-shadow: 0 0 0 5px rgba(79, 70, 229, 0.22); } 100% { border-color: #e5e7eb; box-shadow: none; } }
+    .fcat-nav a:hover { border-color: #a5b4fc; color: #1e1b4b; }
+    .fcat-nav a[aria-current="page"] { background: #1e1b4b; border-color: #1e1b4b; color: #fff; font-weight: 800; }
+    .fcat-no { width: 22px; height: 19px; display: inline-flex; align-items: center; justify-content: center; background: url("img/fill-crayon-orange-badge.svg") 0 0 / 100% 100% no-repeat; color: #1e1b4b; font: 900 0.72rem Inter, sans-serif; }
+    .fsub-hero { padding-bottom: 2.25rem; }
+    .fsub-hero .ytt-sp-hero-kicker { display: inline-block; margin: 0 0 0.5rem; font-size: 0.8125rem; font-weight: 800; color: #4f46e5; }
+    /* 機能の一覧（目次）：左のボタンから出し入れする。ytt-web-setup.html と同じ見え方 */
+    html.toc-open { overflow: hidden; }
+    .toc-tab {
+        position: fixed; left: 14px; top: 80px; z-index: 900;
+        display: inline-flex; align-items: center; justify-content: center;
+        width: 46px; height: 46px; padding: 0; border: 0; border-radius: 14px;
+        background: #1e1b4b; color: #fff; cursor: pointer;
+        box-shadow: 0 6px 18px rgba(30, 27, 75, 0.3); transition: transform 0.15s, background 0.15s;
+    }
+    .toc-tab svg { width: 25px; height: 25px; fill: currentColor; }
+    .toc-tab:hover { background: #2e2a6b; transform: translateY(-1px); }
+    .toc-back { position: fixed; inset: 0; z-index: 1090; background: rgba(17, 22, 58, 0.45); }
+    .toc-back[hidden], .toc-panel[hidden], .toc-list li[hidden] { display: none; }
+    .toc-panel {
+        position: fixed; top: 0; bottom: 0; left: 0; z-index: 1100;
+        width: min(340px, 90vw); padding: 1.15rem 1.05rem 2.5rem; overflow-y: auto;
+        background: #fff; box-shadow: 10px 0 36px rgba(30, 27, 75, 0.22); text-align: left;
+    }
+    .toc-head { display: flex; align-items: center; justify-content: space-between; margin: 0 0.2rem 1.1rem; padding: 0 0 0.7rem; border-bottom: 1px solid #e5e7eb; }
+    .toc-head-t { font-size: 1.15rem; font-weight: 900; letter-spacing: 0.14em; color: #1e1b4b; }
+    .toc-close { flex: none; display: inline-flex; width: 34px; height: 34px; align-items: center; justify-content: center; border: 0; border-radius: 50%; background: #f4f6f9; color: #1e1b4b; cursor: pointer; }
+    .toc-close svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; }
+    .toc-list { list-style: none; margin: 0; padding: 0; }
+    .toc-group { margin: 1.5rem 0 0.55rem; padding: 0 0.2rem; font-size: 1.06rem; font-weight: 900; color: #1e1b4b; }
+    .toc-group img { display: block; width: 100%; height: 8px; object-fit: fill; margin: 0 0 0.7rem; }
+    .toc-list li.toc-g:first-child .toc-group { margin-top: 0; }
+    .toc-list li.toc-g:first-child .toc-group img { display: none; }
+    .toc-list a {
+        position: relative; display: block; padding: 0.62rem 0.4rem 0.62rem 1.85rem;
+        font-size: 0.9rem; font-weight: 500; line-height: 1.5; color: #1e1b4b; text-decoration: none;
+    }
+    .toc-list a::before { content: ''; position: absolute; left: 0.55rem; top: 1.2rem; width: 6px; height: 6px; border-radius: 50%; background: #c7d2fe; }
+    .toc-list a:hover { color: #4f46e5; }
+    .toc-list a.is-now { font-weight: 900; color: #f97316; }
+    .toc-list a.is-now::before { background: #f97316; }
+    @media (max-width: 600px) {
+        .toc-tab { left: 10px; top: 72px; width: 44px; height: 44px; }
+        .toc-list a { font-size: 0.92rem; }
+    }
+    /* 機能のカード：見て分かるもの（動画・モック・図）を大きく、文字は要点だけ */
+    .fcard { position: relative; background: #fff; border: 2px solid #d3d8e2; border-radius: 20px; padding: 1.4rem 1.5rem 1.5rem; margin-top: 4.6rem; text-align: left; scroll-margin-top: 150px; }
+    @media (max-width: 600px) { .fcard { padding: 1.1rem 1rem 1.2rem; border-radius: 16px; margin-top: 4.2rem; scroll-margin-top: 140px; } }
+    /* 機能名はフォルダのタブのようにカードの上に出す。タブの下はカードの線に1.5pxかぶせて、枠がつながって見えるようにする */
+    .fcard-top { position: absolute; left: 1.2rem; bottom: calc(100% - 1.5px); z-index: 1; max-width: calc(100% - 2.4rem);
+        display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.7rem; padding: 0.6rem 1.3rem 0.5rem;
+        background: #fff; border: 1.5px solid #e5e7eb; border-bottom: none; border-radius: 16px 16px 0 0; }
+    /* 名前の下に、クレヨンで引いたような手書きの線（サイト共通の素材 img/underline-gold.png） */
+    .fcard-name { position: relative; margin: 0; padding: 0 0.15rem 0.45rem; font-size: 1.25rem; font-weight: 900; color: #1e1b4b; line-height: 1.4; }
+    .fcard-name::after { content: ""; position: absolute; left: -0.3rem; right: -0.3rem; bottom: 0; height: 0.55rem; z-index: -1;
+        background: url("img/underline-gold.png") 0 0 / 100% 100% no-repeat; }
+    @media (max-width: 600px) { .fcard-top { left: 0.9rem; max-width: calc(100% - 1.8rem); padding: 0.5rem 0.95rem 0.45rem; } .fcard-name { font-size: 1.05rem; } }
+    /* タブを外に出したので、カードの中の最初の要素の上の余白はいらない */
+    .fcard-top + .fcard-what, .fcard-top + .fcard-grid, .fcard.is-side .fcard-top + .fcard-grid { margin-top: 0; }
+    .finit { display: inline-block; padding: 0.15rem 0.6rem; border-radius: 999px; background: #1e1b4b; color: #fff; font-size: 0.72rem; font-weight: 700; }
+    .fcard-what { margin: 1rem 0 0; padding: 0; background: none; font-size: 1.02rem; line-height: 2.05; color: #374151; }
+    @media (max-width: 600px) { .fcard-what { font-size: 0.95rem; line-height: 1.95; } }
+    .fdraft { display: inline-block; padding: 0.15rem 0.6rem; border-radius: 999px; background: #fef3c7; color: #92400e; font-size: 0.72rem; font-weight: 800; border: 1px solid #f59e0b; }
+    /* これから追加される機能につける札（安田さんが今週末リリース予定。airiさん 2026-09-16） */
+    .fsoon { display: inline-block; margin-right: 0.4rem; padding: 0.14rem 0.6rem; border-radius: 4px; background: #1e1b4b; color: #fff; font-size: 0.72rem; font-weight: 800; }
+    /* 「アップデート予定」は枠のいちばん下に、うすい区切り線をはさんだ補足として出す */
+    .fsoon-box { margin-top: 0.7rem; padding-top: 0.7rem; border-top: 1px dashed #dfe3ea; }
+    .fsoon-line { margin: 0.3rem 0 0; font-size: 0.85rem; color: #4b5563; line-height: 1.8; }
+    .fsoon-line:first-child { margin-top: 0; }
+    .fsub { margin: 0 0 0.5rem; font-size: 0.8rem; font-weight: 900; color: #4f46e5; letter-spacing: 0.04em; }
+    .fsteps + .fsub, .fnotes + .fsub { margin-top: 0.9rem; }
+    .fsteps { list-style: none; margin: 0; padding: 0; counter-reset: fs2; }
+    .fsteps li { counter-increment: fs2; position: relative; padding: 0.1rem 0 0.65rem 2.1rem; font-size: 0.92rem; font-weight: 700; color: #1f2937; line-height: 1.7; }
+    .fsteps li::before { content: counter(fs2); position: absolute; left: 0; top: 0.1rem; width: 1.55rem; height: 1.4rem; display: flex; align-items: center; justify-content: center; background: url("img/fill-crayon-orange-badge.svg") 0 0 / 100% 100% no-repeat; color: #1e1b4b; font: 900 0.8rem Inter, sans-serif; }
+    .fnotes { margin: 0; padding: 0 0 0 1.15rem; }
+    .fnotes li { margin-bottom: 0.45rem; font-size: 0.88rem; color: #374151; line-height: 1.8; }
+    .fnotes li::marker { color: #f59e0b; }
+    /* 4つ目からのポイントは、たたんでおく（ほかのポイントを見る） */
+    .fnotes-more { margin-top: 0.15rem; }
+    /* 4つ目からのポイントは、左右に線を引いた区切りで開く（airiさん 2026-09-16 案3） */
+    .fnotes-more > summary { cursor: pointer; list-style: none; display: flex; align-items: center; gap: 0.6rem; margin: 0.6rem 0 0; font-size: 0.78rem; font-weight: 800; color: #6b7280; }
+    .fnotes-more > summary::before, .fnotes-more > summary::after { content: ""; flex: 1; height: 1px; background: #dfe3ea; }
+    .fnotes-more > summary::-webkit-details-marker { display: none; }
+    .fnotes-more > summary:hover .fnm-t { color: #1e1b4b; }
+    .fnm-t::after { content: " ▼"; font-size: 0.55rem; }
+    .fnotes-more[open] .fnm-t::after { content: " ▲"; }
+    .fnotes-more > ul.fnotes { margin-top: 0.35rem; }
+    .fcol .fnotes-more > ul.fnotes li:last-child { padding-bottom: 0; margin-bottom: 0; }
+    .fnotes b, .fsteps b { color: #1e1b4b; }
+    .fnotes a, .fsteps a { color: #4f46e5; }
+    .fwhere { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.6rem; }
+    .fwhere-item { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 0.3rem; padding: 0.3rem 0.65rem; border: 1.5px dashed #c7d2fe; border-radius: 10px; font-size: 0.78rem; color: #1e1b4b; font-weight: 700; }
+    .fwhere-item::before { content: "場所"; margin-right: 0.15rem; font-size: 0.68rem; font-weight: 800; color: #4f46e5; }
+    .fwhere-item b { margin-right: 0.15rem; padding: 0.05rem 0.4rem; border-radius: 6px; background: #eef2ff; color: #3730a3; font-size: 0.7rem; }
+    .fwhere-item i { font-style: normal; color: #9ca3af; }
+    .fwhere-item .wm-rail { flex-direction: row; box-shadow: none; }
+    .fcard-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.5rem; margin-top: 1.3rem; }
+    /* ノートPCの枠は台座が 112% 幅なので、左右に 6% の余白をとってカードからはみ出さないようにする */
+    .fcard-media { width: 100%; max-width: 920px; margin: 0 auto; padding: 0 6%; }
+    .fcard.is-wide .fcard-media { max-width: 1040px; }
+    /* スマホでは、モックをカードの内側いっぱいまで大きくする。台座のはみ出し分の左右6%の余白をやめ、カードの内側の余白にも少し食い込ませる（カードの枠の内側には収める） */
+    @media (max-width: 600px) {
+        .fcard-grid .fcard-media, .fcard.is-side .fcard-media { width: auto; max-width: none; padding: 0; margin-left: -0.55rem; margin-right: -0.55rem; }
+        .fcard-media .wy-pc-base { width: 104%; margin: 0 -2%; }
+        /* カードの中のスマホの枠（中は動画）は固定の282pxだと320pxの画面で右に出るので、枠いっぱいまで縮める */
+        .fcard-media .wy-phone { width: 100%; max-width: 282px; }
+        .fcard-media .wy-screen { width: 100%; }
+    }
+    /* 画面の見方：とても狭い画面（360px以下）では、スマホのモックの右に出す番号の丸を少し内側に寄せる */
+    @media (max-width: 360px) { .scr.is-sp .scr-pin { margin-left: -25px; } }
+    .fcard-side { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.3rem 2.6rem; align-items: start; }
+    /* 小さいカードの2枚1組（PCだけ横に並べる）。2枚の高さはそろえる。中は「説明の下に画像」、使い方・ポイントは1列 */
+    .fpair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 1.2rem; align-items: stretch; }
+    .fcard.is-half .fcard-media { max-width: 100%; padding: 0; }
+    /* 2枚1組は高さをそろえるので、縦に長い画像（レイアウトの画面など）は高さを抑えて、となりのカードに空白ができにくくする。タップで拡大できる */
+    .fcard.is-half .fduo.fimg-only img { width: auto; max-width: 100%; max-height: 300px; }
+    .fcard.is-half .fcard-side { grid-template-columns: minmax(0, 1fr); gap: 1.1rem; }
+    @media (max-width: 860px) { .fpair { grid-template-columns: minmax(0, 1fr); } }
+    /* 縦長・小さめのモックの機能：機能名から説明までを左、モックを右に置いて左右の余白をなくす */
+    .fcard.is-side .fcard-grid { grid-template-columns: minmax(0, 1fr) minmax(0, var(--mw, 320px));
+        grid-template-areas: "head media" "side media" ". media"; grid-template-rows: auto auto 1fr; gap: 1.1rem 2.6rem; margin-top: 1.1rem; }
+    .fcard.is-side .fcard-head > .fcard-what { margin-top: 0; }
+    .fcard.is-side .fcard-media { grid-area: media; max-width: var(--mw, 320px); padding: 0; }
+    .fcard.is-side .fcard-head { grid-area: head; min-width: 0; }
+    .fcard.is-side .fcard-side { grid-area: side; grid-template-columns: minmax(0, 1fr); gap: 1.1rem; }
+    @media (max-width: 860px) {
+        /* 縦に並ぶときは、機能名 → 説明 → モック → 使い方 の順にする */
+        .fcard.is-side .fcard-grid { grid-template-columns: minmax(0, 1fr); grid-template-areas: "head" "media" "side"; grid-template-rows: auto; gap: 1.3rem; }
+        /* 左右を auto にすると箱が中身の幅に縮み、中の figure（container-type）が幅0につぶれて、画像が消えて字が縦に並ぶ。箱は列いっぱい、最大幅は中の figure で抑える */
+        .fcard.is-side .fcard-media { justify-self: stretch; width: 100%; max-width: none; margin: 0; }
+        .fcard.is-side .fcard-media > figure { width: 100%; max-width: var(--mw, 320px); margin-left: auto; margin-right: auto; }
+    }
+    /* 「使い方」「ポイント」は手書き風の枠で囲む。見出しは枠の線の上にのせる
+       （クレヨン画像の枠も試したが、ザラつきが気持ち悪いので最初の線に戻した。airiさん 2026-09-13） */
+    .fcol { min-width: 0; min-inline-size: 0; margin: 0; padding: 0.25rem 1.15rem 0.95rem; border: 2px solid #e8eaf2; border-radius: 22px 14px 24px 16px / 16px 24px 14px 22px; }
+    .fcol > .fsub { margin: 0 0 0 -0.2rem; padding: 0 0.45rem; line-height: 1.3; }
+    /* 使い方は青、ポイントは濃い黄色、くわしくは緑の枠（見出しの字も同じ系統の色にそろえる） */
+    .fcol.is-steps { border-color: #7aaef2; }
+    .fcol.is-steps > .fsub { color: #2563eb; }
+    .fcol.is-notes { border-color: #e3ad1e; }
+    .fcol.is-notes > .fsub { color: #a16207; }
+    /* 使い方がないカードの「くわしく」は緑の枠 */
+    .fcol.is-detail { border-color: #5bbf8a; }
+    .fcol.is-detail > .fsub { color: #15803d; }
+    .fcol.is-detail .fnotes li::marker { color: #34a868; }
+    /* 枠の中の、箇条書きの下に続ける番号つき一覧（PCの描画ツールの10個の道具など） */
+    .fcol .fnotes-lead { margin: 0.9rem 0 0.35rem; font-size: 0.88rem; font-weight: 700; color: #1e1b4b; }
+    .fcol ol.fnum { margin: 0; padding-left: 1.7rem; }
+    .fcol ol.fnum li { margin-bottom: 0.35rem; font-size: 0.88rem; color: #374151; line-height: 1.75; }
+    .fcol ol.fnum li:last-child { margin-bottom: 0; }
+    .fcol ol.fnum li::marker { color: #f59e0b; font-weight: 900; }
+    .fcol.is-detail ol.fnum li::marker { color: #34a868; }
+    .fcol ol.fnum b { color: #1e1b4b; }
+    .fcol > :last-child { margin-bottom: 0; }
+    .fcol .fsteps li:last-child, .fcol .fnotes li:last-child { padding-bottom: 0; margin-bottom: 0; }
+    @media (max-width: 860px) { .fcard-side { grid-template-columns: minmax(0, 1fr); gap: 1.1rem; } }
+    .fcard-media { min-width: 0; }
+    .fcard-media .fvid { margin: 0; }
+    .fcard-media .fvid:not(.pc) { max-width: 290px; margin: 0 auto; }
+    .fcard-side { min-width: 0; }
+    .fcard > .fcard-side { margin-top: 0.8rem; }
+    .fpoints { list-style: none; margin: 0; padding: 0; counter-reset: fp; }
+    .fpoints li { counter-increment: fp; position: relative; padding: 0.15rem 0 0.75rem 2.1rem; font-size: 0.95rem; font-weight: 700; color: #1f2937; line-height: 1.65; }
+    .fpoints li::before { content: counter(fp); position: absolute; left: 0; top: 0.12rem; width: 1.55rem; height: 1.4rem; display: flex; align-items: center; justify-content: center; background: url("img/fill-crayon-orange-badge.svg") 0 0 / 100% 100% no-repeat; color: #1e1b4b; font: 900 0.8rem Inter, sans-serif; }
+    .fpoints li b { color: #1e1b4b; }
+    .fpoints a { color: #4f46e5; }
+    /* 「もっとくわしく」はカードの下、まん中に出す */
+    .fmore { margin-top: 1.3rem; padding-top: 0.2rem; border-top: 1px dashed #e5e7eb; text-align: center; }
+    .fmore summary { cursor: pointer; list-style: none; display: inline-flex; align-items: center; gap: 0.35rem; margin-top: 0.9rem; padding: 0.45rem 1.4rem; border: 1.5px solid #c7d2fe; border-radius: 999px; font-size: 0.84rem; font-weight: 800; color: #3730a3; background: #fff; }
+    .fmore summary:hover { border-color: #6366f1; background: #eef2ff; }
+    .fmore .fmore-body { text-align: left; }
+    .fmore summary::-webkit-details-marker { display: none; }
+    .fmore summary::after { content: "▼"; font-size: 0.6rem; }
+    .fmore[open] summary::after { content: "▲"; }
+    .fmore-body { margin-top: 0.9rem; }
+    .fmore-body > p { font-size: 0.875rem; color: #4b5563; line-height: 1.85; margin: 0.6rem 0 0; }
+    /* 使い方トップ「こんなときに」：つぶやき（かぎかっこ）→ 使う機能 → 動画 */
+    /* このページだけ：html/body の overflow-x を clip にする。hidden だと「横にスクロールする入れ物」になってしまい、position: sticky（フォルダーの帯の貼りつき）が効かないため */
+    html, body { overflow-x: clip; }
+    /* 書類フォルダーのように、色の帯が画面の上に貼りついて重なっていく（参考：大洋LINKS。airiさん 2026-09-17） */
+    .fsit-list { max-width: 1040px; margin: 0 auto; }
+    /* 貼りつきなし。PC・スマホとも普通に上から下へ流す（airiさん 2026-09-17） */
+    .fsit { position: relative; margin-bottom: 48px; text-align: center; }
+    .fsit:last-child { margin-bottom: 0; }
+    .fold-head { position: relative; display: flex; align-items: center; gap: 14px; padding: 16px 22px 30px; background: var(--fbg); color: var(--ffg); border-radius: 0 22px 0 0; text-align: left; }
+    /* 帯の上のつまみ。左は丸く、右の肩はなだらかに下って帯につながる（参考サイトと同じ形）。
+       帯の左上を丸めると、つまみとの境目がずれて見えるので、左上は角のまま */
+    .fold-tab { position: absolute; left: 0; bottom: calc(100% - 1px); width: 300px; height: 26px; display: block; }
+    .fold-no { flex: none; font: 900 0.9rem/1 Inter, system-ui, sans-serif; letter-spacing: 0.08em; opacity: 0.75; }
+    .fold-btn { flex: none; display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; font-weight: 900; color: inherit; text-decoration: none; }
+    .fold-btn i { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--ffg); color: var(--fbg); font-style: normal; font-size: 0.9rem; }
+    .fold-btn:hover { text-decoration: underline; }
+    .fold-btn:focus-visible { outline: 3px solid rgba(255, 255, 255, 0.85); outline-offset: 3px; border-radius: 6px; }
+    .fold-body { position: relative; margin-top: -18px; padding: 26px 22px 80px; background: #fff; border: 2px solid #d3d8e2; border-radius: 22px; }
+    /* つぶやきは大きく。かぎかっこは字から少し離す（airiさん 2026-09-16） */
+    .fsit-say { flex: 1; margin: 0; font-size: 1.28rem; font-weight: 900; color: inherit; line-height: 1.6; letter-spacing: 0.01em; }
+    .fsit-say::before { content: "「"; margin-right: 0.06em; font-size: 1.5em; line-height: 0; vertical-align: -0.1em; opacity: 0.55; }
+    .fsit-say::after { content: "」"; margin-left: 0.06em; font-size: 1.5em; line-height: 0; vertical-align: -0.3em; opacity: 0.55; }
+    .fsit-name { margin: 0; font-size: 1rem; font-weight: 900; color: #1e1b4b; }
+    .fsit-name span { display: inline-flex; }
+    .fsit-tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; margin: 0 0 1.4rem; }
+    .fsit-tab { padding: 0.42rem 1.05rem; border: 1.5px solid #c7d2fe; border-radius: 999px; background: #fff; font: 800 0.84rem/1.5 inherit; color: #3730a3; cursor: pointer; }
+    .fsit-tab:hover { background: #eef2ff; }
+    .fsit-tab.on { background: #1e1b4b; border-color: #1e1b4b; color: #fff; }
+    .fsit-tab:focus-visible { outline: 3px solid #a5b4fc; outline-offset: 2px; }
+    .fsit-pane[hidden] { display: none; }
+    .fsit-media { margin-top: 0.5rem; }
+    .fsit-media .fvid, .fsit-media .fduo { max-width: 860px; margin: 0 auto; }
+    .fsit-desc { max-width: 680px; margin: 0.7rem auto 0; font-size: 0.88rem; color: #4b5563; line-height: 1.85; }
+    .fsit-media .fvid, .fsit-media .fduo, .fsit-media .wy-pc { max-width: 720px; }
+    /* PCとスマホを並べる形は、スマホが上にはみ出す分の空きを上にとっている。
+       このセクションでは、説明のすぐ下に動画が来るよう、その空きを小さくする */
+    .fsit-media .fduo { padding-top: 7%; }
+    .fsit-media .fduo-sp { width: 27%; bottom: 2rem; }
+    /* 写真だけのもの（プロップ）は縦に長いので、動画と同じ高さに収まる幅にする */
+    .fsit-media .fduo:not(.vduo) .fduo-sp { width: 24%; }
+    /* 機能名は、左右に短い線をつけて「ここから説明」の区切りに見せる（四角で囲むとボタンに見えるため。airiさん 2026-09-16） */
+    .fsit-name { display: flex; align-items: center; justify-content: center; gap: 0.7rem; }
+    .fsit-name::before, .fsit-name::after { content: ""; width: 28px; height: 2px; background: #c3c8d2; }
+    .fsit-what { display: block; }
+    @media (max-width: 700px) {
+      .fsit { margin-bottom: 36px; }
+      .fold-head { flex-wrap: wrap; gap: 4px 10px; padding: 14px 16px 26px; border-radius: 0 16px 0 0; }
+      .fold-no { width: 100%; }
+      .fold-tab { width: 190px; height: 22px; }
+      .fsit-say { order: 2; width: 100%; flex: none; font-size: 1.02rem; line-height: 1.6; }
+      .fold-btn { order: 3; margin-left: auto; font-size: 0.75rem; }
+      .fold-btn i { width: 28px; height: 28px; }
+      .fold-body { padding: 20px 12px 44px; border-radius: 16px; }
+      /* スマホのモックは大きめにして、PCのモックより上にはみ出す（つながって見えないように） */
+      .fsit-media .fduo { padding-top: 15%; }
+      .fsit-media .fduo-sp, .fsit-media .fduo:not(.vduo) .fduo-sp { width: 34%; }
+      .fsit-name { font-size: 0.95rem; }
+    }
+    .fmore-body .wm { margin: 0.6rem 0 0; }
+    /* 導入ページから持ってきた表（コピーモードのルールなど .ytt-spec-table）にも、ほかの表と同じ罫線をつける（表には必ず罫線。airiさん 2026-09-15） */
+    /* PCはマスごとの罫線。スマホ（600px以下）は縦に積む表なので、ほかの表と同じく外枠と行ごとの区切り線だけ（マスごとに囲むと線が二重になる） */
+    @media (min-width: 601px) {
+        .fcard .ytt-spec-table { border-collapse: collapse; border: 1px solid #c9ced8; }
+        .fcard .ytt-spec-table th, .fcard .ytt-spec-table td { border: 1px solid #d5d9e2; }
+    }
+    @media (max-width: 600px) {
+        .fcard .ytt-spec-table { border: 1px solid #c9ced8; border-radius: 10px; overflow: hidden; }
+        .fcard .ytt-spec-table tr { display: block; padding: 0.55rem 0.75rem; border-bottom: 1px solid #d5d9e2; }
+        .fcard .ytt-spec-table tr:last-child { border-bottom: 0; }
+        .fcard .ytt-spec-table th, .fcard .ytt-spec-table td { display: block; border: 0; }
+        .fcard .ytt-spec-table td:empty { display: none; }
+    }
+    /* もっとくわしく：文の横に小さい画像・モック（sideMore）。狭い画面では縦に並べる */
+    .fmore-side { display: grid; grid-template-columns: minmax(0, 1fr) min(var(--sm, 440px), 48%); gap: 1rem 1.6rem; align-items: start; margin-top: 0.6rem; }
+    .fmore-side-t p { margin: 0; font-size: 0.875rem; color: #4b5563; line-height: 1.85; }
+    .fmore-side-m { min-width: 0; }
+    .fmore-side-m .fduo, .fmore-side-m .fmore-media, .fmore-side-m .gframe.gframe-mock { margin-top: 0; }
+    @media (max-width: 760px) { .fmore-side { grid-template-columns: minmax(0, 1fr); } .fmore-side-m { justify-self: center; width: 100%; max-width: var(--sm, 440px); } }
+    /* 画面を模したモックのグレーの線の囲み（crayon-lines.html が .gframe-mock で包む） */
+    .gframe.gframe-mock { display: block; width: 100%; max-width: 434px; margin: 0.6rem auto 0; }
+    .gframe-mock > .wm-set { margin: 0; max-width: none; }
+    .fmore-media { margin-bottom: 0.8rem; }
+    .ftable-wrap { overflow-x: auto; margin-top: 0.6rem; }
+    /* 表には必ず罫線をつける（airiさん 2026-09-15「表の線がないと見にくい」） */
+    .ftable { width: 100%; border-collapse: collapse; font-size: 0.82rem; border: 1px solid #c9ced8; }
+    .ftable th { text-align: left; padding: 0.45rem 0.6rem; background: #1e1b4b; color: #fff; font-size: 0.72rem; font-weight: 800; white-space: nowrap; border: 1px solid #3b3680; }
+    .ftable td { padding: 0.5rem 0.6rem; border: 1px solid #d5d9e2; color: #374151; line-height: 1.65; vertical-align: top; }
+    .ftable td:first-child { color: #1e1b4b; font-weight: 700; }
+    @media (max-width: 600px) { .ftable { display: block; border: 1px solid #c9ced8; border-radius: 10px; overflow: hidden; } .ftable thead { display: none; } .ftable tbody { display: block; } .ftable tr { display: block; padding: 0.55rem 0.75rem; border-bottom: 1px solid #d5d9e2; } .ftable tr:last-child { border-bottom: 0; } .ftable td { display: block; padding: 0.05rem 0; border: none; } .ftable td[data-h="初期値"]::before { content: "初期値："; color: #6b7280; } }
+    .wm .sw { display: inline-block; width: 16px; height: 12px; margin-left: 3px; border-radius: 3px; vertical-align: -1px; } .wm .sw.g { background: #2ea043; } .wm .sw.r { background: #d73a49; } .wm .sw.k { background: #0b1030; border: 1px solid #3a4170; }
+    .group-after { max-width: 1100px; margin: 1.2rem auto 0; text-align: left; }
+    /* 注意書き（note()）：オレンジの手書きの線（crayon-lines）で囲み、札を上に、大事な一文を大きく */
+    div.gnote { --cl: #f59e0b; display: block; max-width: 760px; margin: 1.4rem auto 0; padding: 0.9rem 1rem 0.8rem; border-left: 0; border-radius: 14px; background: #fff; text-align: center; font-weight: 400; color: #374151; }
+    .gnote-tag { display: inline-flex; align-items: center; justify-content: center; height: 1.6rem; padding: 0 0.8rem; background: url("img/fill-crayon-orange-badge.svg") 0 0 / 100% 100% no-repeat; color: #1e1b4b; font-size: 0.82rem; font-weight: 900; white-space: nowrap; }
+    div.gnote p { margin: 0.4rem 0 0; font-size: 0.88rem; font-weight: 400; color: #374151; line-height: 1.8; }
+    .gnote-big { display: block; font-size: 1.05rem; font-weight: 900; color: #1e1b4b; line-height: 1.6; }
+    .fset { list-style: none; margin: 0.9rem 0 0; padding: 0; }
+    .fset li { display: flex; justify-content: space-between; gap: 1rem; padding: 0.55rem 0; border-bottom: 1px dashed #e5e7eb; font-size: 0.875rem; }
+    .fset li a { color: #1e1b4b; font-weight: 700; text-decoration: underline; text-decoration-color: #c7d2fe; text-underline-offset: 3px; }
+    .fset li b { color: #1e1b4b; font-weight: 700; }
+    .fset li span { color: #6b7280; white-space: nowrap; font-size: 0.8125rem; }
+    .fset-note { font-size: 0.8125rem; color: #6b7280; margin-top: 1.1rem; text-align: left; }
+    /* 前後のページ：文字と矢印だけのボタン。次のページは濃紺で塗った主役、前のページは白の控えめ */
+    .fnext { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; max-width: 860px; margin: 0 auto; }
+    .fnext-a { display: flex; align-items: center; gap: 1.1rem; min-height: 86px; padding: 1rem 1.6rem; border: 1.5px solid #dfe2ea; border-radius: 16px;
+        background: #fff; color: #1e1b4b; text-decoration: none; transition: border-color 0.2s, background-color 0.2s, box-shadow 0.2s; }
+    .fnext-a:hover { border-color: #1e1b4b; box-shadow: 0 10px 24px rgba(30, 27, 75, 0.1); }
+    .fnext-a.is-next { justify-content: flex-end; text-align: right; background: #1e1b4b; border-color: #1e1b4b; color: #fff; }
+    .fnext-a.is-next:hover { background: #2b2769; border-color: #2b2769; }
+    .fnext-t { min-width: 0; }
+    .fnext-t small { display: block; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em; color: #8a90a2; }
+    .fnext-a.is-next .fnext-t small { color: rgba(255, 255, 255, 0.7); }
+    .fnext-t b { display: block; margin-top: 0.3rem; font-size: 1.08rem; font-weight: 900; line-height: 1.35; color: inherit; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .fnext-arw { flex: none; display: inline-flex; transition: transform 0.2s; }
+    .fnext-arw svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+    .fnext-a.is-prev:hover .fnext-arw { transform: translateX(-4px); }
+    .fnext-a.is-next:hover .fnext-arw { transform: translateX(4px); }
+    @media (max-width: 640px) { .fnext { grid-template-columns: minmax(0, 1fr); gap: 0.7rem; } .fnext-a { min-height: 74px; padding: 0.9rem 1.25rem; } }
+    /* トップ：分野のカード（見本のモックつき） */
+    /* トップの5ページ：①②は大きく2つ、③④⑤は3つ並び（1つだけの段を作らない） */
+    .fhub { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+    @media (max-width: 900px) { .fhub { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 600px) { .fhub { grid-template-columns: minmax(0, 1fr); } }
+    .fhub-vis.is-img { padding: 0; min-height: 0; aspect-ratio: 16 / 9; background: #0a0f2c; }
+    .fhub-vis.is-img img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    /* ヒーローのタイトル：1行にして、波線は文字の幅ぴったり（スマホで引き伸ばさない。導入方法ページと同じ） */
+    .ytt-sp-hero .fhub-title { font-size: clamp(1.5rem, 5.2vw, 3rem); }
+    .fhub-title .ytt-sp-title-line > span.line-text { white-space: nowrap; }
+    /* 波線の太さは、セクション見出しのオレンジの波線と同じ「字の長さ：線の太さ」にする
+       （高さを固定すると、長い見出しで横に引き伸ばされて線が細く見えるため。airiさん 2026-09-17） */
+    .ytt-sp-hero .fhub-title .ytt-sp-title-line .ytt-title-wave, .fsub-hero .ytt-sp-title-line .ytt-title-wave { width: 0; min-width: 100%; max-width: none; margin-left: 0; transform: none; height: auto; aspect-ratio: 1850 / 232; }
+    .fhub-card { display: flex; flex-direction: column; background: #fff; border: 1.5px solid #e5e7eb; border-radius: 20px; padding: 1.2rem; text-align: left; text-decoration: none; transition: border-color .15s, transform .15s; }
+    .fhub-card:hover { border-color: #a5b4fc; transform: translateY(-2px); }
+    .fhub-vis { display: flex; align-items: center; justify-content: center; min-height: 170px; margin-bottom: 1rem; padding: 12px; border-radius: 14px; background: #eef0f7; overflow: hidden; }
+    .fhub-vis .wm { box-shadow: none; }
+    .fhub-card h3 { display: flex; align-items: center; gap: 0.5rem; margin: 0; font-size: 1.1rem; font-weight: 900; color: #1e1b4b; }
+    .fhub-card h3 .fcat-no { width: 32px; height: 27px; font-size: 0.9rem; }
+    .fhub-card p { margin: 0.4rem 0 0; font-size: 0.85rem; color: #4b5563; line-height: 1.7; }
+    .fhub-card .go { margin-top: 0.8rem; font-size: 0.85rem; font-weight: 800; color: #4f46e5; }
+    /* PC＋スマホの2台並び（本物の画面） */
+    /* 動画の終わりが分かるように：下に進み具合の線。最後まで流れたら最後のコマで止めて、少し暗くして「おわり」。
+       まわりの丸が一周したら自動ではじめから（押すとすぐはじめから）。2026-09-13 airiさん案A */
+    .fvid-wrap { position: relative; display: block; border-radius: inherit; overflow: hidden; }
+    .fvid-prog { position: absolute; left: 0; right: 0; bottom: 0; height: 4px; background: rgba(255, 255, 255, 0.22); pointer-events: none; }
+    .fvid-prog i { display: block; height: 100%; width: 0; background: #fbbf24; }
+    .fvid-end { position: absolute; inset: 0; z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.3em;
+        margin: 0; padding: 0; border: 0; border-radius: inherit; background: rgba(8, 10, 28, 0.5); color: #fff; font: inherit; font-weight: 800;
+        font-size: clamp(12px, 4.2cqw, 20px); line-height: 1.3; cursor: pointer; -webkit-tap-highlight-color: transparent;
+        opacity: 0; visibility: hidden; transition: opacity 0.25s, visibility 0s linear 0.25s; }
+    .fvid-end.on { opacity: 1; visibility: visible; transition: opacity 0.25s; }
+    .fvid-end:focus-visible { outline: 3px solid #fbbf24; outline-offset: -3px; }
+    .fvid-end-ring { position: relative; display: block; width: 3.4em; height: 3.4em; }
+    .fvid-end-ring svg { position: absolute; left: 0; top: 0; width: 100%; height: 100%; transform: rotate(-90deg); }
+    .fvid-end-ring circle { fill: none; stroke-width: 3.5; }
+    .fvid-end-ring .t { stroke: rgba(255, 255, 255, 0.28); }
+    .fvid-end-ring .p { stroke: #fbbf24; stroke-linecap: round; stroke-dasharray: 132; stroke-dashoffset: 132; }
+    .fvid-end.on .fvid-end-ring .p { animation: fvidEndRing var(--fvid-wait, 2s) linear forwards; }
+    .fvid-end-ring svg.ic { left: 27%; top: 27%; width: 46%; height: 46%; transform: none; fill: none; stroke: #fff; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+    .flight .fvid-end { bottom: 64px; font-size: 18px; }   /* 拡大した動画は、下の本物の再生バーを押せるように空けておく */
+    @keyframes fvidEndRing { to { stroke-dashoffset: 0; } }
+    @media (prefers-reduced-motion: reduce) { .fvid-end { transition: none; } .fvid-end.on .fvid-end-ring .p { animation: none; stroke-dashoffset: 0; } }
+    /* 動画のモックには右上に「動画」の印（画像のモックと見分けるため） */
+    .fcard-media .wy-pc, .fcard-media .fd-phone, .fcard-media .wy-phone, .fmore-body .wy-pc, .fmore-body .wy-phone, .fsit-media .wy-pc { position: relative; }
+    .fmore-body .fvid { margin: 0.9rem auto 0; }
+    .fmore-body .wy-pc-base { display: none; }
+    .fcard-media img.fvmark, .fmore-body img.fvmark, .fsit-media img.fvmark { position: absolute; top: -20px; right: -20px; z-index: 4; width: 62px; height: 62px; pointer-events: none;
+        filter: drop-shadow(0 3px 8px rgba(30, 27, 75, 0.22)); }
+    @media (max-width: 600px) { .fcard-media img.fvmark, .fmore-body img.fvmark, .fsit-media img.fvmark { top: -12px; right: -5px; width: 42px; height: 42px; } }
+    /* PCとスマホが並ぶ動画は、右上にスマホの枠が重なるので、印はPCの枠の左上に置く */
+    .fduo .wy-pc img.fvmark { left: -20px; right: auto; }
+    .fduo.flip .wy-pc img.fvmark { left: auto; right: -20px; }
+    @media (max-width: 600px) { .fduo .wy-pc img.fvmark { left: -5px; } .fduo.flip .wy-pc img.fvmark { right: -5px; } }
+    .fduo { position: relative; container-type: inline-size; margin: 0; padding-top: 13%; }
+    .fduo-pc { width: 78%; }
+    .fduo .wy-pc { max-width: none; margin: 0; }
+    .fduo .wy-pc-screen img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 7px; }
+    .fduo-sp { position: absolute; right: 0; bottom: 1.6rem; width: 29%; }
+    .fduo.fpc-only { padding-top: 0; }
+    .fduo.fpc-only .wy-pc { max-width: none; }
+    .fduo.flip .fduo-pc { margin-left: auto; }
+    .fduo.flip .fduo-sp { left: 0; right: auto; }
+    .fduo.two .fduo-pc { width: 68%; }
+    .fduo.two .fduo-sp { display: flex; gap: 3%; width: 45%; }
+    .fduo.two .fd-phone { flex: 1; }
+    .fd-phone { padding: 1.3cqw; background: #05070f; border-radius: 4.8cqw; box-shadow: 0 20px 44px rgba(30, 27, 75, 0.35), 0 0 0 1px rgba(255,255,255,0.06) inset; }
+    .fd-phone img { display: block; width: 100%; height: auto; border-radius: 3.7cqw; }
+    .fd-phone video { display: block; width: 100%; height: auto; aspect-ratio: 720 / 1400; border-radius: 3.7cqw; background: #0a0f2c; }
+    .vduo .wy-pc-screen video { display: block; width: 100%; aspect-ratio: 16 / 9; border-radius: 7px; }
+    .fduo img { cursor: zoom-in; }
+    .fduo.fsp-only { display: flex; flex-direction: column; align-items: center; padding-top: 0; }
+    .fduo.fsp-only .fd-phone { width: 100%; max-width: 300px; }
+    /* スマホの画面を2枚並べる（オン／オフの見比べなど）。狭い幅でも横に2枚 */
+    .fduo.fsp-pair { flex-direction: row; flex-wrap: wrap; justify-content: center; align-items: flex-start; gap: 0.8rem 5%; }
+    .fduo.fsp-pair .fd-item { width: 44%; max-width: 280px; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+    .fduo.fsp-pair .fd-label { font-size: 0.85rem; font-weight: 800; color: #1e1b4b; }
+    .fduo.fsp-pair .fd-phone { max-width: none; }
+    .fduo.fsp-pair figcaption { width: 100%; }
+    .fmore-body ol.fnum { margin: 0.6rem 0 0; padding-left: 1.7rem; }
+    .fmore-body ol.fnum li { margin-bottom: 0.45rem; font-size: 0.88rem; color: #374151; line-height: 1.8; }
+    .fmore-body ol.fnum li::marker { color: #f59e0b; font-weight: 900; }
+    .fmore-body ol.fnum b { color: #1e1b4b; }
+    .fmore-shot { display: block; width: 100%; max-width: 560px; margin: 0.8rem auto 0; border-radius: 12px; }
+    /* 番号のついた一覧（描画ツールの道具の説明など）も、使い方の手順と同じオレンジのクレヨンの札にそろえる */
+    ol.fnum { list-style: none; counter-reset: fn; padding-left: 0 !important; }
+    ol.fnum > li { counter-increment: fn; position: relative; padding-left: 2.1rem; }
+    ol.fnum > li::before { content: counter(fn); position: absolute; left: 0; top: 0.2rem; width: 1.55rem; height: 1.4rem; display: flex; align-items: center; justify-content: center; background: url("img/fill-crayon-orange-badge.svg") 0 0 / 100% 100% no-repeat; color: #1e1b4b; font: 900 0.78rem Inter, sans-serif; }
+    /* 手書き風のクレヨン線（crayon-lines.html が描く）：使い方・ポイント・くわしくの枠、お知らせの枠、通知の手順のカード。CSS の枠線は透明にして、場所だけ残す */
+    .cline { position: relative; border-color: transparent !important; }
+    .cline > svg.cline-svg { position: absolute; left: 0; top: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; z-index: 0; }
+    .cline > svg.cline-svg path { fill: none; stroke: var(--cl, #c3c8d2); stroke-linecap: round; stroke-linejoin: round; }
+    .cline > svg.cline-svg path.p1 { stroke-width: 2.8; opacity: 0.95; }
+    .cline > svg.cline-svg path.p2 { stroke-width: 1.7; opacity: 0.45; }
+    .fcol.is-steps { --cl: #7aaef2; } .fcol.is-notes { --cl: #e3ad1e; } .fcol.is-detail { --cl: #5bbf8a; } .fct-note { --cl: #f59e0b; } .fshots > li { --cl: #c9ced8; }
+    .fcol > legend { position: relative; z-index: 1; }
+    /* 検索で当たったことば：黄色のアンダーライン */
+    mark.fs-hl { background: none; color: inherit; box-shadow: inset 0 -0.42em 0 #fde047; border-radius: 0; padding: 0 1px; }
+    /* 「もっとくわしく」の、画像つきの手順（通知の設定など）。スマホの画面は2つ並べ、PCの画面は横いっぱい。スマホ幅では1列 */
+    .fshots { list-style: none; counter-reset: fs; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.8rem; margin: 0.8rem 0 0; padding: 0; }
+    .fshots > li { counter-increment: fs; display: flex; flex-direction: column; gap: 0.6rem; min-width: 0; padding: 0.85rem 0.9rem; border: 1px solid #e5e7eb; border-radius: 14px; background: #fff; }
+    .fshots > li.wide { grid-column: 1 / -1; }
+    .fshots-t { font-size: 0.88rem; color: #374151; line-height: 1.75; }
+    .fshots-t::before { content: counter(fs); display: inline-flex; align-items: center; justify-content: center; width: 1.55rem; height: 1.4rem; margin-right: 0.45rem; background: url("img/fill-crayon-orange-badge.svg") 0 0 / 100% 100% no-repeat; color: #1e1b4b; font: 900 0.8rem Inter, sans-serif; vertical-align: 0.05em; }
+    .fshots-t b { color: #1e1b4b; }
+    .fshots .fduo { margin: auto 0 0; padding: 0; }
+    .fshots .fduo.fimg-only img { border: 1px solid #e5e7eb; border-radius: 10px; }
+    .fshots .fduo.fimg-only.fshot-sp img { max-width: 200px; }
+    .fshots .fduo.fimg-only.fshot-pc img { max-width: 560px; }
+    .fshots .fduo.fimg-only.fshot-arrive img { max-width: 420px; border-radius: 16px; }
+    @media (max-width: 560px) { .fshots { grid-template-columns: minmax(0, 1fr); } }
+    /* 通知の設定：cTraderの方は設定がいらないことを、見出しふうに大きく（オレンジの札を上に、まん中そろえ。airiさん 2026-09-15 案4） */
+    .fct-note { display: block; margin: 0.9rem 0 0; padding: 0.9rem 1rem 0.8rem; border: 2px solid #f59e0b; border-radius: 14px; background: #fff; text-align: center; }
+    .fct-tag { display: inline-flex; align-items: center; justify-content: center; height: 1.6rem; padding: 0 0.8rem; background: url("img/fill-crayon-orange-badge.svg") 0 0 / 100% 100% no-repeat; color: #1e1b4b; font-size: 0.82rem; font-weight: 900; white-space: nowrap; }
+    .fct-note p { margin: 0.4rem 0 0; font-size: 0.9rem; color: #374151; line-height: 1.8; }
+    .fct-big { display: block; font-size: 1.08rem; font-weight: 900; color: #1e1b4b; }
+    .fct-note b { color: #1e1b4b; }
+    /* 手順1：アプリのダウンロード（MT4・MT5を横に2つ。スマホ幅では縦） */
+    .fapps { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.7rem; }
+    .fapp { display: flex; align-items: center; gap: 0.8rem; min-width: 0; padding: 0.7rem 0.8rem; border: 1px solid #e5e7eb; border-radius: 12px; }
+    .fapp-icon { flex: none; width: 56px; height: 56px; border-radius: 13px; }
+    .fapp-body { min-width: 0; display: grid; gap: 0.35rem; font-size: 0.92rem; color: #1e1b4b; }
+    .fapp-links { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+    .fapp-links a { display: inline-flex; align-items: center; min-height: 36px; padding: 0.2rem 0.75rem; border: 1.5px solid #1e1b4b; border-radius: 999px; color: #1e1b4b; font-size: 0.78rem; font-weight: 800; text-decoration: none; }
+    .fapp-links a:hover { background: #1e1b4b; color: #fff; }
+    .fapp-links a:focus-visible { outline: 3px solid #a5b4fc; outline-offset: 2px; }
+    @media (max-width: 760px) { .fapps { grid-template-columns: minmax(0, 1fr); } }
+    /* iPhone SE などの狭い幅：アイコンを小さくし、リンクは1行に1つ（文字は折り返してよい） */
+    @media (max-width: 420px) { .fapp { gap: 0.6rem; padding: 0.6rem; } .fapp-icon { width: 44px; height: 44px; border-radius: 10px; } .fapp-links a { flex: 1 1 100%; justify-content: center; text-align: center; } }
+    .fduo.fimg-only { padding-top: 0; }
+    .fduo.fimg-only img { display: block; width: 100%; max-width: 520px; margin: 0 auto; border-radius: 14px; }
+    /* 手順・設定画面のスクショは、導入方法ページと同じグレーのクレヨン線で囲む（gframe-snippet.html が枠を足す） */
+    .fduo.fimg-only > .gframe { display: block; width: 100%; margin: 0 auto; }
+    .fduo.fimg-only > .gframe > img { width: 100%; max-width: 100%; margin: 0; }
+    .fcard.is-half .fduo.fimg-only > .gframe { width: fit-content; max-width: 100%; }
+    .fhub-img { display: block; width: 100%; height: auto; border-radius: 10px; }
+    /* 拡大表示（画像・動画）：右上の ×、まわりのタップ、Esc、スマホの「戻る」で閉じる。動画は本物の再生バーつき */
+    html.flight-open { overflow: hidden; }
+    .flight { position: fixed; inset: 0; z-index: 1000; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; padding: calc(64px + env(safe-area-inset-top, 0px)) 3vw calc(20px + env(safe-area-inset-bottom, 0px)); background: rgba(8, 10, 28, 0.94); }
+    .flight-stage { flex: 1 1 auto; min-height: 0; width: 100%; display: flex; align-items: center; justify-content: center; }
+    .flight-media { display: block; max-width: 100%; max-height: calc(100vh - 110px); border-radius: 12px; box-shadow: 0 24px 60px rgba(0,0,0,0.5); background: #0a0f2c; }
+    @supports (height: 100dvh) { .flight-media { max-height: calc(100dvh - 110px); } }
+    .flight-x { position: absolute; top: calc(12px + env(safe-area-inset-top, 0px)); right: 12px; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; padding: 0; border: 0; border-radius: 50%; background: #fff; color: #1e1b4b; box-shadow: 0 6px 18px rgba(0,0,0,0.35); cursor: pointer; }
+    .flight-x svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.8; stroke-linecap: round; }
+    .flight-x:hover { opacity: 0.88; }
+    /* 困ったときはの下の一文を中央に */
+    .help-more { text-align: center; }
+    /* 画面の見方：モックに①②…のマーク、そこから薄い線で説明へ（線は横並びのときだけ） */
+    .scr { max-width: 1100px; margin: 1.6rem auto 0; background: #fff; border: 1.5px solid #e5e7eb; border-radius: 20px; padding: 1.5rem 1.6rem 1.8rem; text-align: left; }
+    @media (max-width: 600px) { .scr { padding: 1.1rem 1rem 1.3rem; border-radius: 16px; } }
+    .scr-head { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem 0.8rem; margin-bottom: 1.4rem; }
+    .scr-dev { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.35rem 0.95rem 0.35rem 0.75rem; border-radius: 999px; background: #1e1b4b; color: #fff; font-size: 0.875rem; font-weight: 900; letter-spacing: 0.04em; }
+    .scr-dev svg { width: 17px; height: 17px; }
+    .scr-head p { margin: 0; font-size: 1.05rem; font-weight: 900; color: #1e1b4b; }
+    .scr-body { position: relative; display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr); gap: 0 96px; align-items: center; }
+    .scr.is-pc .scr-body { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); }
+    /* 1fr のままだと Safari で列がモックの幅（最大560px）まで広がり、スマホでカードの右にはみ出す。minmax(0, 1fr) で列の幅に収める */
+    @media (max-width: 860px) { .scr-body, .scr.is-pc .scr-body { grid-template-columns: minmax(0, 1fr); gap: 1.4rem; } }
+    .scr-media { display: flex; justify-content: center; min-width: 0; width: 100%; }
+    .scr-pinwrap { position: relative; display: inline-block; }
+    .scr.is-pc .scr-pinwrap { display: block; width: 100%; max-width: min(560px, 100%); min-width: 0; }
+    .scr.is-pc .scr-pinwrap .wy-pc { max-width: none; }
+    .scr-pin, .scr-no { width: 30px; height: 27px; display: flex; align-items: center; justify-content: center; background: url("img/fill-crayon-orange-badge.svg") 0 0 / 100% 100% no-repeat; color: #1e1b4b; font: 900 0.9rem Inter, sans-serif; }
+    .scr-pin { position: absolute; z-index: 3; margin: -13px 0 0 -15px; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.45)); transition: transform .15s; }
+    .scr-pin.on { transform: scale(1.18); }
+    .scr-list { list-style: none; margin: 0; padding: 0; }
+    .scr-list li { display: flex; align-items: flex-start; gap: 0.8rem; padding: 0.6rem 0.4rem; border-radius: 12px; transition: background .15s; }
+    .scr-list li.on { background: #fff7ed; }
+    .scr-no { flex: none; margin-top: 0.05rem; }
+    .scr-list b { display: block; font-size: 0.98rem; font-weight: 900; color: #1e1b4b; }
+    .scr-list p { margin: 0.1rem 0 0; font-size: 0.875rem; color: #4b5563; line-height: 1.75; }
+    .scr-lines { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+    .scr-lines path { fill: none; stroke: rgba(249, 115, 22, 0.55); stroke-width: 1.6; transition: stroke .15s, stroke-width .15s; }
+    .scr-lines circle { fill: rgba(249, 115, 22, 0.85); }
+    .scr-lines .on path { stroke: #f97316; stroke-width: 2.4; }
+
+    /* ===== Web版YTTの画面モック（使い方ページ） ===== */
+    .wm { --wm-bg: #141a46; --wm-card: #1d2458; --wm-line: #30397a; --wm-text: #e5e7eb; --wm-mute: #9aa3c7; --wm-y: #e9b949;
+        background: var(--wm-bg); color: var(--wm-text); border-radius: 14px; font-family: 'Noto Sans JP', system-ui, sans-serif; line-height: 1.35; text-align: left;
+        box-shadow: 0 18px 40px rgba(30, 27, 75, 0.2); max-width: 100%; margin: 0 auto; }
+    .wm .hl { outline: 2.5px solid #ef4444; outline-offset: 2px; border-radius: 6px; }
+    .wm small { font-weight: 500; }
+    /* 設定 */
+    .wm-set { width: 100%; max-width: 420px; overflow: hidden; }
+    .wm-set-head { display: flex; justify-content: space-between; padding: 10px 14px; font-size: 13px; font-weight: 800; border-bottom: 1px solid var(--wm-line); background: #19205a; }
+    .wm-set-head span { color: var(--wm-mute); font-weight: 400; }
+    .wm-set-body { display: grid; grid-template-columns: 76px minmax(0, 1fr); }
+    .wm-set-tabs { padding: 8px 0; border-right: 1px solid var(--wm-line); background: #121842; }
+    .wm-set-tabs span { display: block; padding: 7px 10px; font-size: 11px; color: var(--wm-mute); }
+    .wm-set-tabs span.on { background: #242b62; color: #fff; font-weight: 800; }
+    .wm-set-main { min-width: 0; padding: 8px 10px 12px; }
+    /* 狭い画面では、項目名が縮みきって字が縦に並ばないよう、名前に最低9文字ぶんの幅をもたせ、値（− 2.0 % ＋ など）は次の行に回す（後ろにある .wm-row-l の指定に負けないよう .wm-row .wm-row-l で書く） */
+    @media (max-width: 440px) { .wm-set-body { grid-template-columns: 56px minmax(0, 1fr); } .wm-set-tabs span { padding: 7px 7px; font-size: 10px; } .wm-row { flex-wrap: wrap; } .wm-row .wm-row-l { flex: 1 1 9em; } .wm-row em { white-space: normal; margin-left: auto; } }
+    .wm-sec { margin: 8px 0 5px; font-size: 10.5px; font-weight: 800; color: var(--wm-y); }
+    .wm-row { display: flex; align-items: center; gap: 7px; margin-top: 5px; padding: 8px 9px; border: 1px solid var(--wm-line); border-radius: 8px; background: var(--wm-card); font-size: 11.5px; font-weight: 700; }
+    .wm-row.is-on { border-color: rgba(233, 185, 73, 0.75); background: #2a2745; }
+    .wm-row i { font-style: normal; color: var(--wm-mute); font-size: 11px; }
+    .wm-row-l { flex: 1; min-width: 0; }
+    .wm-row-l small { display: block; margin-top: 1px; font-size: 9px; color: var(--wm-mute); }
+    .wm-row em { font-style: normal; padding: 2px 7px; border: 1px solid var(--wm-line); border-radius: 6px; font: 700 10px ui-monospace, Menlo, Consolas, monospace; color: #fff; white-space: nowrap; }
+    .wm-chk { width: 13px; height: 13px; border: 1.5px solid var(--wm-mute); border-radius: 3px; flex-shrink: 0; }
+    .wm-chk.on { border-color: var(--wm-y); background: radial-gradient(circle, var(--wm-y) 0 45%, transparent 46%); }
+    .wm-radio { width: 13px; height: 13px; border: 1.5px solid var(--wm-mute); border-radius: 50%; flex-shrink: 0; }
+    .wm-radio.on { border-color: var(--wm-y); background: radial-gradient(circle, var(--wm-y) 0 40%, transparent 42%); }
+    .wm-opt { display: flex; align-items: center; gap: 9px; margin-top: 6px; padding: 8px 9px; border: 1px solid var(--wm-line); border-radius: 9px; background: var(--wm-card); }
+    .wm-opt.on { border-color: rgba(233, 185, 73, 0.75); }
+    .wm-opt.on b { color: var(--wm-y); }
+    .wm-opt i { width: 26px; height: 26px; border-radius: 7px; flex-shrink: 0; border: 1px solid rgba(255,255,255,.12); }
+    .wm-opt b { display: block; font-size: 11.5px; }
+    .wm-opt small { display: block; font-size: 9px; color: var(--wm-mute); }
+    /* 右のパネル */
+    .wm-panel { width: 100%; max-width: 300px; padding: 12px; }
+    .wm-card { padding: 10px; border: 1px solid var(--wm-line); border-radius: 12px; background: var(--wm-card); }
+    .wm-card + .wm-card { margin-top: 8px; }
+    .wm-card-t { margin: 0 0 8px; font-size: 10.5px; font-weight: 800; color: var(--wm-mute); }
+    .wm-order { display: grid; grid-template-columns: minmax(0, 1fr) 58px minmax(0, 1fr); gap: 6px; }
+    .wm-order > span { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 46px; border-radius: 9px; font-size: 14px; font-weight: 900; }
+    .wm-sell { background: #3d5fd9; } .wm-buy { background: #c2414b; }
+    .wm-lot { border: 1px solid var(--wm-line); background: #141a46; font: 900 14px ui-monospace, Menlo, monospace !important; }
+    .wm-lot small { font-size: 8px; color: var(--wm-mute); font-family: system-ui; }
+    .wm-steps { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); margin-top: 7px; border: 1px solid var(--wm-line); border-radius: 7px; }
+    .wm-steps span { padding: 5px 0; text-align: center; font: 700 9.5px ui-monospace, Menlo, monospace; color: var(--wm-mute); }
+    .wm-close { display: grid; grid-template-columns: minmax(0, 1.8fr) minmax(0, 1fr); gap: 6px; margin-top: 7px; }
+    .wm-close span { padding: 9px 0; border: 1px solid var(--wm-line); border-radius: 8px; background: #232a60; text-align: center; font-size: 11.5px; font-weight: 800; color: #c7cbe0; }
+    .wm-bal-l { margin: 0; text-align: center; font-size: 10px; color: var(--wm-mute); }
+    .wm-bal { margin: 2px 0 0; text-align: center; font-size: 26px; font-weight: 900; }
+    .wm-bal-s { margin: 2px 0 10px; text-align: center; font-size: 10px; color: var(--wm-mute); }
+    .wm-risk { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 6px; }
+    .wm-risk span { display: flex; justify-content: space-between; align-items: center; gap: 4px; padding: 8px; border: 1px solid var(--wm-line); border-radius: 8px; }
+    .wm-risk small { font-size: 9px; color: var(--wm-mute); } .wm-risk b { font: 800 11.5px ui-monospace, Menlo, monospace; }
+    .wm-sc { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 6px; }
+    .wm-sc span { display: flex; flex-direction: column; align-items: center; padding: 10px 4px; border-radius: 9px; font-size: 11.5px; font-weight: 900; text-align: center; }
+    .wm-sc small { font-size: 7.5px; opacity: .8; margin-top: 2px; }
+    .wm-short { background: #22306b; border: 1px solid #4f6fd8; color: #dbe6ff; } .wm-long { background: #4a1f38; border: 1px solid #ef4d5a; color: #ffd5da; }
+    .wm-build { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr) minmax(0, 1fr); gap: 6px; }
+    .wm-build span { padding: 9px 0; border: 1px solid var(--wm-line); border-radius: 8px; background: #232a60; text-align: center; font-size: 10.5px; font-weight: 700; color: var(--wm-mute); }
+    .wm-build .wm-build-main { border-color: #c7cbe0; background: #141a46; color: #fff; font-weight: 900; }
+    .wm-build .wm-del { color: #f87171; }
+    /* 上のメニュー */
+    .wm-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; padding: 9px 10px; border-radius: 12px; font-size: 11px; }
+    .wm-sym { padding: 4px 8px; border-radius: 6px; background: #232a60; font: 800 11px ui-monospace, Menlo, monospace; }
+    .wm-tfs { display: flex; gap: 2px; } .wm-tfs i { font: 600 9.5px ui-monospace, Menlo, monospace; font-style: normal; color: var(--wm-mute); padding: 3px 4px; border-radius: 4px; }
+    .wm-tfs i.on { background: #3a3413; color: var(--wm-y); }
+    .wm-ico { display: inline-flex; width: 26px; height: 24px; align-items: center; justify-content: center; border: 1px solid var(--wm-line); border-radius: 6px; }
+    .wm-ico svg { width: 15px; height: 15px; fill: none; stroke: #cbd5e1; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+    .wm-pill { padding: 4px 10px; border: 1px solid var(--wm-line); border-radius: 999px; font-size: 10.5px; color: var(--wm-mute); }
+    .wm-pill b { margin-left: 3px; font: 700 10px ui-monospace, Menlo, monospace; }
+    .wm-pos { border-color: #b7791f; background: #2a2310; color: var(--wm-y); }
+    /* 右端のアイコン列（場所の表示に使う小さなもの） */
+    .wm-rail { display: inline-flex; flex-direction: column; gap: 4px; padding: 5px; border-radius: 9px; background: #141a46; vertical-align: middle; }
+    .wm-rail i { display: flex; width: 22px; height: 22px; align-items: center; justify-content: center; border-radius: 5px; }
+    .wm-rail i.hl { background: #3a3413; outline: 2px solid #ef4444; outline-offset: 1px; }
+    .wm-rail svg { width: 14px; height: 14px; fill: none; stroke: #aeb6d6; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .wm-rail i.hl svg { stroke: #e9b949; }
+    /* 分析ツールの窓 */
+    .wm-win { width: 100%; max-width: 520px; padding: 0 12px 12px; overflow: hidden; }
+    .wm-win-head { display: flex; justify-content: space-between; margin: 0 -12px 10px; padding: 10px 14px; border-bottom: 1px solid var(--wm-line); background: #19205a; font-size: 12.5px; font-weight: 800; }
+    .wm-win-head span { color: var(--wm-mute); font-weight: 400; }
+    .wm-tabs { display: flex; gap: 6px; margin: 0 0 10px; }
+    .wm-tabs span { flex: 1; padding: 6px 0; border: 1px solid var(--wm-line); border-radius: 7px; text-align: center; font-size: 10.5px; color: var(--wm-mute); }
+    .wm-tabs span.on { background: var(--wm-y); border-color: var(--wm-y); color: #1e1b4b; font-weight: 800; }
+    .wm .g { color: #4ade80; }
+    .wm-cal-top { display: flex; justify-content: space-between; align-items: center; font-size: 12px; }
+    .wm-cal-top b { font-size: 15px; } .wm-cal-top small { font-size: 9.5px; color: var(--wm-mute); } .wm-cal-top .g { font-size: 17px; }
+    .wm-cal-stats { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 6px; margin: 9px 0; }
+    .wm-cal-stats span { padding: 6px 8px; border-radius: 8px; background: #2a2352; box-shadow: 0 2px 6px -2px rgba(139, 92, 246, 0.75); }
+    .wm-cal-stats small { display: block; font-size: 8.5px; color: var(--wm-mute); } .wm-cal-stats b { font-size: 13px; }
+    .wm-cal-wd, .wm-cal-wk { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)) 42px; gap: 3px; }
+    .wm-cal-wd span { text-align: center; font-size: 9px; color: var(--wm-mute); padding: 2px 0; } .wm-cal-wd .sun { color: #f87171; }
+    .wm-cal-wk { margin-top: 3px; }
+    .wm-cal-wk > span { height: 30px; border-radius: 5px; background: #1b2150; position: relative; }
+    .wm-cal-wk > span.e { background: transparent; }
+    .wm-cal-wk > span i { position: absolute; left: 3px; top: 2px; font: 600 7.5px ui-monospace, Menlo, monospace; font-style: normal; color: var(--wm-mute); }
+    .wm-cal-wk > span.win { background: #2f5a45; box-shadow: 0 0 6px rgba(74, 222, 128, 0.45); }
+    .wm-cal-wk > span.win b { position: absolute; left: 3px; bottom: 2px; font-size: 7.5px; color: #86efac; }
+    .wm-cal-wk > span.lose { background: #5a2f36; box-shadow: 0 0 6px rgba(248, 113, 113, 0.45); }
+    .wm-cal-wk > span.lose b { position: absolute; left: 3px; bottom: 2px; font-size: 7.5px; color: #fca5a5; }
+    .wm-cal-wk > span.wk { background: transparent; display: flex; flex-direction: column; align-items: flex-end; justify-content: center; }
+    .wm-cal-wk .wk b { font-size: 8.5px; color: var(--wm-mute); } .wm-cal-wk .wk b.g { color: #4ade80; } .wm-cal-wk .wk small { font-size: 7px; color: var(--wm-mute); }
+    .wm-cal-wk .wk b.r, .wm-cal-top .r { color: #f87171; }
+    .wm-heat-t { display: grid; grid-template-columns: 34px repeat(8, minmax(0, 1fr)); gap: 2px; }
+    .wm-heat-t span { padding: 5px 0; border-radius: 3px; text-align: center; font: 600 8px ui-monospace, Menlo, monospace; color: #fff; }
+    .wm-heat-t span.h { color: var(--wm-mute); font-weight: 700; background: transparent; }
+    .wm-str-chart { display: block; width: 100%; height: auto; margin-bottom: 8px; }
+    .wm-str-bars { display: grid; grid-template-columns: 30px minmax(0, 1fr) 44px; gap: 5px 7px; align-items: center; }
+    .wm-str-bars .c { font: 800 9.5px ui-monospace, Menlo, monospace; } .wm-str-bars .v { font: 600 9px ui-monospace, Menlo, monospace; color: var(--wm-mute); text-align: right; }
+    .wm-str-bars .bar { height: 6px; border-radius: 3px; background: #262a5e; overflow: hidden; } .wm-str-bars .bar i { display: block; height: 100%; border-radius: 3px; }
+    .wm-news { max-width: 300px; padding-top: 12px; }
+    .wm-news-i { margin-top: 7px; padding: 9px 10px; border: 1px solid var(--wm-line); border-radius: 10px; background: var(--wm-card); }
+    .wm-news-i p { display: flex; align-items: center; gap: 6px; margin: 0 0 4px; font-size: 9px; color: var(--wm-mute); }
+    .wm-news-i time { margin-left: auto; font-family: ui-monospace, Menlo, monospace; }
+    .wm-news-i .imp { padding: 1px 5px; border: 1px solid var(--wm-y); border-radius: 3px; color: var(--wm-y); font-size: 8.5px; }
+    .wm-news-i .imp.r { border-color: #ef4444; color: #fca5a5; }
+    .wm-news-i b { display: block; font-size: 11.5px; } .wm-news-i .s { display: block; margin-top: 3px; font-size: 9.5px; color: var(--wm-mute); line-height: 1.5; }
+    /* チャートの図 */
+    .wm-chart { width: 100%; max-width: 520px; padding: 6px; }
+    .wm-chart svg { display: block; width: 100%; height: auto; border-radius: 9px; }
+    /* 流れ図 */
+    .wm-flow { display: flex; align-items: center; justify-content: center; gap: 10px; max-width: 460px; padding: 18px 14px; }
+    .wm-flow .n { flex: 1; padding: 12px; border: 1px solid var(--wm-line); border-radius: 12px; background: var(--wm-card); text-align: center; }
+    .wm-flow .n.y { border-color: rgba(233,185,73,.8); }
+    .wm-flow small { display: block; font-size: 10px; color: var(--wm-mute); } .wm-flow b { display: block; margin-top: 3px; font-size: 12.5px; }
+    .wm-flow > i { font-style: normal; font-size: 20px; color: var(--wm-y); }
+
+</style>
+<style>/* Safari対策（build-guide.js の safariSafe が付ける） */
+.ytt-more-features-grid > *,
+.ytt-sp-plans > *,
+.ytt-add-grid > *,
+.ytt-add-grid.cols-2 > *,
+.ytt-fto2 > *,
+.gstep > *,
+.gshot-pair > *,
+.wy-nav > *,
+.feat > *,
+.feat.is-sp > *,
+.ai-one > *,
+.fcat-nav > *,
+.fs-page-list > *,
+.fs-hit > *,
+.fs-page-item > *,
+.fcard-grid > *,
+.fcard-side > *,
+.fpair > *,
+.fcard.is-half .fcard-side > *,
+.fcard.is-side .fcard-grid > *,
+.fcard.is-side .fcard-side > *,
+.fmore-side > *,
+.fnext > *,
+.fhub > *,
+.fshots > *,
+.fapps > *,
+.scr-body > *,
+.scr.is-pc .scr-body > *,
+.wm-set-body > *,
+.wm-order > *,
+.wm-steps > *,
+.wm-close > *,
+.wm-risk > *,
+.wm-sc > *,
+.wm-build > *,
+.wm-cal-stats > *,
+.wm-cal-wd > *,
+.wm-cal-wk > *,
+.wm-heat-t > *,
+.wm-str-bars > * { min-width: 0; }
+</style>
+</head>
+<body>
+
+<!-- Web版YTT 使い方：モードと設定（ytt-web-f-settings.html）。webytt-materials/tools/build-guide.js と mocks.js で作成（手で直さず、スクリプトを直して作り直す） -->
+
+<nav class="ytt-sp-nav">
+    <a href="ytt-tokusetu.html" class="ytt-sp-nav-logo">
+        <img src="img/ytt-nav-logo.png" alt="YTT — FX SPACE">
+    </a>
+    <button type="button" class="fsearch-toggle" aria-label="機能をさがす" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg></button><div class="fsearch fsearch-nav" role="search">
+        <label class="fsearch-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg><input type="search" placeholder="機能をさがす" autocomplete="off" enterkeyhint="search" aria-label="機能をさがす"><button type="button" class="fsearch-clear" aria-label="入力を消す" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M7 7l10 10M17 7 7 17"/></svg></button></label>
+        <div class="fsearch-results" hidden></div>
+    </div><div class="ytt-sp-nav-cta">
+        <a href="ytt-web-setup.html" class="nav-setup">導入方法</a>
+        <a href="https://webytt.fx-space.com/" target="_blank" rel="noopener" class="btn-sq-blue sm"><span class="ncta-lg">Web版YTTを開く</span><span class="ncta-sm">YTTを開く</span></a>
+    </div>
+</nav>
+
+<button type="button" class="toc-tab" aria-expanded="false" aria-controls="toc-panel" aria-label="機能の一覧">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="4.5" cy="6.5" r="1.8"/><circle cx="4.5" cy="12" r="1.8"/><circle cx="4.5" cy="17.5" r="1.8"/><path d="M9.5 6.5h10M9.5 12h10M9.5 17.5h6.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+</button>
+<div class="toc-back" hidden></div>
+<nav class="toc-panel" id="toc-panel" aria-label="機能の一覧" hidden>
+    <p class="toc-head"><span class="toc-head-t">CONTENTS</span><button type="button" class="toc-close" aria-label="閉じる"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></p>
+    <ul class="toc-list">
+        <li class="toc-g"><p class="toc-group"><img src="img/dotline-yellow.png" alt="">使い方トップ</p></li>
+        <li><a href="ytt-web-features.html#screen">画面の見方</a></li>
+        <li><a href="ytt-web-features.html#features">Web版YTTでできること</a></li>
+        <li class="toc-g"><p class="toc-group"><img src="img/dotline-yellow.png" alt="">1　スマホの基本操作</p></li>
+        <li><a href="ytt-web-f-basic.html#sp-menu">チャートをタップして出るメニュー</a></li>
+        <li><a href="ytt-web-f-basic.html#timeframe">時間足を変える</a></li>
+        <li><a href="ytt-web-f-basic.html#pair">通貨ペアを変える</a></li>
+        <li><a href="ytt-web-f-basic.html#cursor">十字カーソル</a></li>
+        <li><a href="ytt-web-f-basic.html#drawing">描画ツール</a></li>
+        <li><a href="ytt-web-f-basic.html#split">チャートを2つ並べる</a></li>
+        <li><a href="ytt-web-f-basic.html#sp-screenshot">スクリーンショット</a></li>
+        <li><a href="ytt-web-f-basic.html#fullscreen">全画面で見る</a></li>
+        <li><a href="ytt-web-f-basic.html#sp-landscape">横向きで使う</a></li>
+        <li class="toc-g"><p class="toc-group"><img src="img/dotline-yellow.png" alt="">1　PCの基本操作</p></li>
+        <li><a href="ytt-web-f-basic.html#pc-pair">通貨ペアを変える・お気に入り</a></li>
+        <li><a href="ytt-web-f-basic.html#pc-tf">時間足を変える</a></li>
+        <li><a href="ytt-web-f-basic.html#pc-history">トレード履歴</a></li>
+        <li><a href="ytt-web-f-basic.html#pc-alert">通知の履歴（ベル）</a></li>
+        <li><a href="ytt-web-f-basic.html#pc-layout">チャートの並べ方（レイアウト）</a></li>
+        <li><a href="ytt-web-f-basic.html#screenshot">スクリーンショット</a></li>
+        <li><a href="ytt-web-f-basic.html#pc-draw">描画ツール</a></li>
+        <li><a href="ytt-web-f-basic.html#minichart">左のミニチャート</a></li>
+        <li><a href="ytt-web-f-basic.html#pc-account">口座を切り替える</a></li>
+        <li><a href="ytt-web-f-basic.html#shortcuts">キーボードのショートカット</a></li>
+        <li class="toc-g"><p class="toc-group"><img src="img/dotline-yellow.png" alt="">1　通知を受け取る設定</p></li>
+        <li><a href="ytt-web-f-basic.html#push-notify">スマホに通知を届ける設定</a></li>
+        <li class="toc-g"><p class="toc-group"><img src="img/dotline-yellow.png" alt="">2　注文・ロット・決済</p></li>
+        <li><a href="ytt-web-f-trade.html#order">成行注文</a></li>
+        <li><a href="ytt-web-f-trade.html#close">全決済・1/2決済</a></li>
+        <li><a href="ytt-web-f-trade.html#positions">ポジションと履歴</a></li>
+        <li><a href="ytt-web-f-trade.html#settle">決済まわりの設定</a></li>
+        <li><a href="ytt-web-f-trade.html#lot">ロットの決め方</a></li>
+        <li><a href="ytt-web-f-trade.html#auto-be">自動建値設置</a></li>
+        <li><a href="ytt-web-f-trade.html#trail">TPのトレイル化</a></li>
+        <li><a href="ytt-web-f-trade.html#rr-fix">RR比固定</a></li>
+        <li class="toc-g"><p class="toc-group"><img src="img/dotline-yellow.png" alt="">3　シナリオ・予約注文</p></li>
+        <li><a href="ytt-web-f-scenario.html#build">シナリオ構築</a></li>
+        <li><a href="ytt-web-f-scenario.html#scenario">シナリオ（TP/SL）</a></li>
+        <li><a href="ytt-web-f-scenario.html#reserve">予約注文</a></li>
+        <li><a href="ytt-web-f-scenario.html#trigger">エントリートリガー</a></li>
+        <li><a href="ytt-web-f-scenario.html#conditions">条件付け</a></li>
+        <li><a href="ytt-web-f-scenario.html#addpos">追加ポジ</a></li>
+        <li><a href="ytt-web-f-scenario.html#pullback">押し目</a></li>
+        <li><a href="ytt-web-f-scenario.html#collapse">崩壊</a></li>
+        <li><a href="ytt-web-f-scenario.html#be-line">建値</a></li>
+        <li><a href="ytt-web-f-scenario.html#trail-line">トレイル</a></li>
+        <li><a href="ytt-web-f-scenario.html#half-line">1/2決済</a></li>
+        <li><a href="ytt-web-f-scenario.html#order-ops">注文操作</a></li>
+        <li class="toc-g"><p class="toc-group"><img src="img/dotline-yellow.png" alt="">4　チャートの表示</p></li>
+        <li><a href="ytt-web-f-chart.html#autoline">オートライン</a></li>
+        <li><a href="ytt-web-f-chart.html#zigzag">zigzag MTF</a></li>
+        <li><a href="ytt-web-f-chart.html#alertline">通知ライン</a></li>
+        <li><a href="ytt-web-f-chart.html#breakeven">Breakeven表示</a></li>
+        <li><a href="ytt-web-f-chart.html#entry-viz">エントリーの可視化</a></li>
+        <li><a href="ytt-web-f-chart.html#history">チャートに取引履歴を表示</a></li>
+        <li><a href="ytt-web-f-chart.html#indicator">経済指標表示</a></li>
+        <li><a href="ytt-web-f-chart.html#session">セッション表示</a></li>
+        <li><a href="ytt-web-f-chart.html#scalp">スキャモード</a></li>
+        <li><a href="ytt-web-f-chart.html#watermark">通貨ペア・時間足をすかし表示</a></li>
+        <li class="toc-g"><p class="toc-group"><img src="img/dotline-yellow.png" alt="">5　分析ツール</p></li>
+        <li><a href="ytt-web-f-tools.html#calendar">損益カレンダー</a></li>
+        <li><a href="ytt-web-f-tools.html#strength">通貨強弱</a></li>
+        <li><a href="ytt-web-f-tools.html#heatmap">ヒートマップ</a></li>
+        <li><a href="ytt-web-f-tools.html#news">ニュース</a></li>
+        <li><a href="ytt-web-f-tools.html#takeprofit">利確速報</a></li>
+        <li class="toc-g is-here"><p class="toc-group"><img src="img/dotline-yellow.png" alt="">6　モードと設定</p></li>
+        <li><a href="#prop">プロップモード</a></li>
+        <li><a href="#virtual">仮想残高モード</a></li>
+        <li><a href="#copy">コピーモード（受信）</a></li>
+        <li><a href="#pl-hide">損益非表示</a></li>
+        <li><a href="#bonus">残高にボーナスを含めて表示</a></li>
+        <li><a href="#theme">配色</a></li>
+        <li><a href="#canvas">キャンバス（チャートの色）</a></li>
+        <li><a href="#open">設定を開く</a></li>
+        <li><a href="#sync">PCとスマホで共通のもの・別々のもの</a></li>
+        <li><a href="#fav">お気に入り（☆）</a></li>
+        <li><a href="#copy-settings">他の口座に設定をコピー</a></li>
+        <li><a href="#reset">初期値にリセット</a></li>
+    </ul>
+</nav>
+
+<section class="ytt-sp-hero fsub-hero">
+    <p class="ytt-sp-hero-kicker">Web版YTT 使い方</p>
+    <h1 class="ytt-sp-hero-title">
+        <span class="ytt-sp-title-line"><span class="line-text">モードと設定<img class="ytt-title-wave" src="img/wave-yellow.png" alt=""></span></span>
+    </h1>
+    <p class="ytt-sp-hero-lead">口座に合わせたモード、画面の見た目、<br>設定画面の使い方です。</p>
+    <nav class="fcat-nav" aria-label="使い方のページ">
+        <a href="ytt-web-features.html">使い方トップ</a>
+        <a href="ytt-web-f-basic.html">基本の操作</a><a href="ytt-web-f-trade.html">注文・ロット・決済</a><a href="ytt-web-f-scenario.html">シナリオ・予約注文</a><a href="ytt-web-f-chart.html">チャートの表示</a><a href="ytt-web-f-tools.html">分析ツール</a><a href="ytt-web-f-settings.html" aria-current="page">モードと設定</a>
+    </nav>
+</section>
+
+<section class="ytt-spec-section" style="background:#f4f6f9;">
+    <div class="ytt-spec-inner ytt-fto-wide">
+        <div class="ytt-spec-header">
+            <span class="section-title-badge section-title-badge--blue">
+                <img class="hero-title-side hero-title-side--left" src="img/title-side-blue-left.png" alt="">
+                モード
+                <img class="hero-title-side hero-title-side--right" src="img/title-side-blue-right.png" alt="">
+            </span>
+            <div style="text-align:center; margin-bottom:0.25rem;">
+                <div style="display:inline-block; white-space:nowrap;">
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">口座に合わせたモード</h2>
+                    <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
+                </div>
+            </div>
+            
+        </div>
+        <article class="fcard has-media is-wide" id="prop">
+            <div class="fcard-top"><h3 class="fcard-name">プロップモード</h3></div>
+            <p class="fcard-what">Fintokeiなどのプロップファーム（テストに合格すると、会社の資金でトレードできるサービス）で、ルール違反による失格を防ぐ機能です。合格ラインや失格ラインをチャートに表示し、損切りが1日の上限を超えないように自動で調整します。</p>
+            <div class="fcard-grid"><div class="fcard-media"><figure class="fduo"><div class="fduo-pc"><div class="wy-pc"><div class="wy-pc-screen"><img src="img/webytt/feat/feat-propline-pc.jpg" alt="PCの画面：プロップモードのライン" loading="lazy"></div><div class="wy-pc-base" aria-hidden="true"></div></div></div><div class="fduo-sp"><div class="fd-phone"><img src="img/webytt/feat/feat-propline-sp.jpg" alt="スマホの画面：プロップモードのライン" loading="lazy"></div></div><figcaption class="fvid-cap">PCとスマホの画面　タップで拡大</figcaption></figure></div><div class="fcard-side"><fieldset class="fcol is-steps"><legend class="fsub">使い方</legend><ol class="fsteps"><li>右下の歯車（スマホは下のメニューの「設定」）を押し、「一般」の「プロップモード」を開く</li><li>「プロップモード（初期残高）」にチェックを入れ、プランの初期資金を入れる</li><li>失格ラインなどの数値を、自分のプランのルールに合わせる</li></ol></fieldset><fieldset class="fcol is-notes"><legend class="fsub">ポイント</legend><ul class="fnotes"><li><b>ラインは、ポジションを持つと出ます</b></li><li>出るのは「プロップ:+8.0%」（合格）「プロップ:3%警告」「プロップ:-5.0%」（1日の上限）「プロップ:-10.0%」（全体の上限）</li><li>SLが1日の損失の上限より遠くに置かれないよう、自動で動きます（強制SL移動）</li></ul></fieldset></div></div><details class="fmore"><summary>もっとくわしく</summary><div class="fmore-body"><div class="ftable-wrap"><table class="ftable"><thead><tr><th>項目</th><th>最初の値</th><th>どうなるか</th></tr></thead><tbody><tr><td data-h="項目">失格ライン（初期残高比）</td><td data-h="最初の値">10%</td><td data-h="どうなるか">全体の損失の上限。ここまで下がると失格</td></tr><tr><td data-h="項目">失格ライン（0時証拠金比）</td><td data-h="最初の値">5%</td><td data-h="どうなるか">1日の損失の上限。その日の0時の有効証拠金から計算</td></tr><tr><td data-h="項目">合格ライン（初期残高比）</td><td data-h="最初の値">8%</td><td data-h="どうなるか">合格の目標</td></tr><tr><td data-h="項目">強制SL移動（0時証拠金比）</td><td data-h="最初の値">4.5%</td><td data-h="どうなるか">SLがこれより遠くに置かれないように動かす</td></tr><tr><td data-h="項目">合格時強制利確（初期残高比）</td><td data-h="最初の値">8.1%</td><td data-h="どうなるか">有効証拠金がここまで来ると、自動で全決済</td></tr><tr><td data-h="項目">3%警告ライン</td><td data-h="最初の値">3%</td><td data-h="どうなるか">同時に持っているポジションの損失がここまで来ると、警告が出る（決済はしない）</td></tr><tr><td data-h="項目">0時リセット基準</td><td data-h="最初の値">Fintokei（日本時間9時）</td><td data-h="どうなるか">1日の区切りの時刻。Fintokei（日本時間9時）・Fundora（日本時間6時／7時）・カスタム（時刻を指定）から選ぶ</td></tr><tr><td data-h="項目">0時有効証拠金（手動上書き）</td><td data-h="最初の値">—</td><td data-h="どうなるか">1日の損失の計算に使う金額を、手で入れる</td></tr></tbody></table></div><div class="gnote"><span class="gnote-tag">ご注意</span><p><span class="gnote-big">数値は、自分のプランに合わせてください</span>ルールはプロップファームやプランによって違います。</p></div></div></details>
+        </article>
+        <article class="fcard has-media is-wide" id="virtual">
+            <div class="fcard-top"><h3 class="fcard-name">仮想残高モード</h3></div>
+            <p class="fcard-what">プロップモード中に、「失格になるまでに使える金額」を残高とみなして、ロットを計算する機能です。負けが続くとロットが自動で小さくなるので、失格しにくくなります。</p>
+            <div class="fcard-grid"><div class="fcard-media"><figure class="fvid pc"><div class="wy-pc"><div class="wy-pc-screen"><span class="fvid-wrap"><video class="fvid-video" src="img/webytt/feat/feat-virtual.mp4" poster="img/webytt/feat/feat-virtual.jpg" muted loop playsinline preload="none" aria-label="動画：仮想残高モード（声なし）"></video></span></div><img class="fvmark" src="img/hand-play.svg" alt="" aria-hidden="true" width="62" height="62"><div class="wy-pc-base" aria-hidden="true"></div></div><figcaption class="fvid-cap">タップで拡大</figcaption></figure></div><div class="fcard-side"><fieldset class="fcol is-steps"><legend class="fsub">使い方</legend><ol class="fsteps"><li>プロップモードをオンにする</li><li>右下の歯車（スマホは下のメニューの「設定」）を押し、「一般」の「プロップモード」の「仮想残高モード」にチェックを入れる</li></ol></fieldset><fieldset class="fcol is-notes"><legend class="fsub">ポイント</legend><ul class="fnotes"><li>オンにすると、右上の残高が「仮想残高」の表示に変わります</li><li>スマホでも、PCと同じ見た目です</li><li>例：初期残高5,000万円（失格ライン10%）で、いまの残高が4,900万円なら、500万円＋（−100万円）＝400万円を残高としてロットを計算します</li></ul></fieldset></div></div><details class="fmore"><summary>もっとくわしく</summary><div class="fmore-body"><p>仮想残高は、「失格までに使える金額」に「これまでの損益」を足した金額です。初期残高5,000万円（失格ライン10%）で、いまの残高が4,900万円なら、次のようになります。</p><div class="wm wm-flow" role="img" aria-label="仮想残高の計算の例"><span class="n"><small>失格までに使える金額</small><b>500万円</b></span><i aria-hidden="true">＋</i><span class="n"><small>これまでの損益</small><b>−100万円</b></span><i aria-hidden="true">＝</i><span class="n y"><small>仮想残高</small><b>400万円</b></span></div></div></details>
+        </article>
+        <article class="fcard has-media is-wide" id="copy">
+            <div class="fcard-top"><h3 class="fcard-name">コピーモード（受信）</h3></div>
+            <p class="fcard-what">コピーを<b>受け取る側</b>の口座で使う機能です。コピー元の口座でWeb版YTTからエントリーすると、同じポジションがこの口座にも入ります。</p>
+            <div class="fcard-grid"><div class="fcard-media"><figure class="fvid pc"><div class="wy-pc"><div class="wy-pc-screen"><span class="fvid-wrap"><video class="fvid-video" src="img/webytt/feat/feat-copy.mp4" poster="img/webytt/feat/feat-copy.jpg" muted loop playsinline preload="none" aria-label="動画：コピーモード（受信）（声なし）"></video></span></div><img class="fvmark" src="img/hand-play.svg" alt="" aria-hidden="true" width="62" height="62"><div class="wy-pc-base" aria-hidden="true"></div></div><figcaption class="fvid-cap">タップで拡大</figcaption></figure></div><div class="fcard-side"><fieldset class="fcol is-steps"><legend class="fsub">使い方</legend><ol class="fsteps"><li>右下の歯車（スマホは下のメニューの「設定」）を押し、「一般」の「コピーモード」を開く</li><li>「コピーモード（受信）」にチェックを入れ、案内に従ってコピー元の口座を選ぶ</li><li>「コピー時のロット計算モード」を選ぶ（損失率固定／損失額固定／ロット残高固定）</li></ol></fieldset><fieldset class="fcol is-notes"><legend class="fsub">ポイント</legend><ul class="fnotes"><li>スマホでも、PCと同じ見た目です</li><li>コピーされるのは、コピー元でWeb版YTTからエントリーしたポジションだけです</li><li><b>オンにしてコピー元を確定した時点で、この口座の保有中のポジションはすべて決済され、予約（指値・逆指値）はすべて取り消されます</b></li></ul><details class="fnotes-more"><summary><span class="fnm-t">もっと見る（4）</span></summary><ul class="fnotes"><li>コピーされるのは、新規エントリー（成行と、約定した指値・逆指値）、全決済・部分決済、SL・TPの変更です。追加ポジは、この口座のロットにコピー元と同じ倍率をかけて入ります</li><li>この口座でポジションを手で決済すると、そのポジションはそれ以降コピーされません</li><li>コピー元のエントリーから「許容遅延時間」（最初は5.0秒）より時間がたっていたら、そのエントリーはコピーされません</li><li>コピー元の口座で、登録などの準備はいりません（同じDiscordのログインのほかの口座から選ぶだけです）</li></ul></details></fieldset></div></div><details class="fmore"><summary>もっとくわしく</summary><div class="fmore-body"><div class="fmore-side" style="--sm:434px"><div class="fmore-side-t"><p>設定の画面では、上の「コピーモード（受信）」でコピー元の口座を選び、下の「コピー時のロット計算モード」で、自分の口座でのロットの決め方を選びます。コピー中のルールは、その下の表のとおりです。</p></div><div class="fmore-side-m"><div class="fmore-media"><div class="wm wm-set" role="img" aria-label="設定の画面（一般）">
+    <div class="wm-set-head">設定<span aria-hidden="true">×</span></div>
+    <div class="wm-set-body">
+      <div class="wm-set-tabs"><span class="on">一般</span><span>キャンバス</span><span>配色</span></div>
+      <div class="wm-set-main"><p class="wm-sec">コピーモード</p><div class="wm-row hl"><i>☆</i><b class="wm-chk"></b><span class="wm-row-l">コピーモード(受信)</span><em>未選択</em></div><div class="wm-row"><i>☆</i><span class="wm-row-l">許容遅延時間</span><em>− 5.0 秒 ＋</em></div><p class="wm-sec">コピー時のロット計算モード</p><div class="wm-row is-on"><i>☆</i><b class="wm-radio on"></b><span class="wm-row-l">損失率固定</span><em>− 2.0 % ＋</em></div><div class="wm-row"><i>☆</i><b class="wm-radio"></b><span class="wm-row-l">損失額固定</span><em>− ¥5000 ＋</em></div><div class="wm-row"><i>☆</i><b class="wm-radio"></b><span class="wm-row-l">ロット残高固定</span><em>− 10万円：0.10 lot ＋</em></div></div>
+    </div>
+  </div></div></div></div>                <table class="ytt-spec-table">
+                    <tbody>
+                        <tr><th>設定方法</th><td class="spec-val">設定 → コピーモード（受信）をオン</td><td class="spec-note">コピー元の口座設定画面が出るので、案内に従って設定。「コピー時のロット計算モード」も確認</td></tr>
+                        <tr><th>新規エントリー</th><td class="spec-val">コピー以外はできない</td><td class="spec-note"></td></tr>
+                        <tr><th>TP / SL の移動</th><td class="spec-val">できない</td><td class="spec-note"></td></tr>
+                        <tr><th>コピーされる</th><td class="spec-val">Web版YTTからのエントリーのみ</td><td class="spec-note">コピー元が他の方法で建てたポジションはコピーされません</td></tr>
+                        <tr><th>ロット</th><td class="spec-val">ロット計算モードに従う</td><td class="spec-note">損失率固定・損失額固定のときは、SLが無いポジションはコピーされません</td></tr>
+                        <tr><th>TP / SL</th><td class="spec-val">同じ幅でコピー</td><td class="spec-note">約定価格の差を吸収するため、コピー元と同じTP/SL幅になるように設定されます</td></tr>
+                        <tr><th>オンにした後</th><td class="spec-val">Web版の画面は閉じてOK</td><td class="spec-note">連携ツールを入れた取引ツールは起動したままにしてください</td></tr>
+                    </tbody>
+                </table></div></details>
+        </article>
+    </div>
+</section>
+
+<section class="ytt-spec-section" style="background:#fff;">
+    <div class="ytt-spec-inner ytt-fto-wide">
+        <div class="ytt-spec-header">
+            <span class="section-title-badge section-title-badge--orange">
+                <img class="hero-title-side hero-title-side--left" src="img/title-side-orange-left.png" alt="">
+                見た目
+                <img class="hero-title-side hero-title-side--right" src="img/title-side-orange-right.png" alt="">
+            </span>
+            <div style="text-align:center; margin-bottom:0.25rem;">
+                <div style="display:inline-block; white-space:nowrap;">
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">画面の見た目を変える</h2>
+                    <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
+                </div>
+            </div>
+            
+        </div>
+        <article class="fcard has-media is-wide" id="pl-hide">
+            <div class="fcard-top"><h3 class="fcard-name">損益非表示</h3></div>
+            <p class="fcard-what">画面の金額を隠す機能です。金額が大きくなると、あせっていつもと違うトレードをしてしまうことがあります。そんなときに、金額を気にせずトレードするための機能です。</p>
+            <div class="fcard-grid"><div class="fcard-media"><figure class="fduo"><div class="fduo-pc"><div class="wy-pc"><div class="wy-pc-screen"><img src="img/webytt/feat/feat-plhide-pc.jpg" alt="PCの画面：損益非表示をオンにしたとき" loading="lazy"></div><div class="wy-pc-base" aria-hidden="true"></div></div></div><div class="fduo-sp"><div class="fd-phone"><img src="img/webytt/feat/feat-plhide-sp.jpg" alt="スマホの画面：損益非表示をオンにしたとき" loading="lazy"></div></div><figcaption class="fvid-cap">PCとスマホの画面　タップで拡大</figcaption></figure></div><div class="fcard-side"><fieldset class="fcol is-detail"><legend class="fsub">くわしく</legend><ul class="fnotes"><li>右下の歯車（スマホは下のメニューの「設定」）を押し、「一般」の「表示」 でオンにします</li><li>オンにすると、<b>残高・有効証拠金・許容損失</b>が「— — —」になります</li><li><b>持っているポジションの損益も「----」になります</b>（決済するまで、勝っているか負けているかは分かりません）</li></ul><details class="fnotes-more"><summary><span class="fnm-t">もっと見る（2）</span></summary><ul class="fnotes"><li>PCの画像は、左が残高と有効証拠金、右が保有中ポジションの損益です</li><li>PCは、最初から「お気に入り」（★）に入っているので、右のパネルからすぐ切り替えられます</li></ul></details></fieldset></div></div>
+        </article>
+        <article class="fcard has-media is-side" id="bonus" style="--mw:400px">
+            <div class="fcard-top"><h3 class="fcard-name">残高にボーナスを含めて表示</h3></div>
+            <div class="fcard-grid">
+                <div class="fcard-media"><figure class="fduo fimg-only"><img src="img/webytt/feat/feat-bonus-set.jpg" alt="設定の「一般」の「表示」。「残高にボーナスを含めて表示」を赤い枠で囲んだもの" loading="lazy" style="max-width:360px"><figcaption class="fvid-cap">PCの設定画面（スマホでも同じ見え方です）　タップで拡大</figcaption></figure></div>
+                <div class="fcard-head"><p class="fcard-what">口座のボーナスを、残高に含めて表示する設定です。</p></div>
+                <div class="fcard-side"><fieldset class="fcol is-detail"><legend class="fsub">くわしく</legend><ul class="fnotes"><li>右下の歯車（スマホは下のメニューの「設定」）を押し、「一般」の「表示」 でオンにします</li><li>この設定で変わるのは表示だけです</li></ul><details class="fnotes-more"><summary><span class="fnm-t">もっと見る（1）</span></summary><div class="fsoon-box"><p class="fsoon-line"><span class="fsoon">アップデート予定</span> ロットの計算にボーナスを含めるかどうかの設定が、連携ツール（EA）からWeb版YTTの設定に移ります</p></div></details></fieldset></div>
+            </div>
+        </article>
+        <article class="fcard has-media is-side" id="theme" style="--mw:440px">
+            <div class="fcard-top"><h3 class="fcard-name">配色</h3></div>
+            <div class="fcard-grid">
+                <div class="fcard-media"><figure class="fduo fimg-only"><img src="img/webytt/feat/feat-theme-set.jpg" alt="設定の「配色」タブ：素材（マット・ガラス）と配色（標準（紫）・ダーク・ライト）" loading="lazy" style="max-width:420px"><figcaption class="fvid-cap">PCの設定画面（スマホでも同じ見え方です）　タップで拡大</figcaption></figure></div>
+                <div class="fcard-head"><p class="fcard-what">画面全体の色と質感を、好みに合わせて変えられる設定です。</p></div>
+                <div class="fcard-side"><fieldset class="fcol is-steps"><legend class="fsub">使い方</legend><ol class="fsteps"><li>右下の歯車（スマホは「設定」）を押し、「配色」のタブを開く</li><li>「素材」と「配色」を選ぶ</li></ol></fieldset><fieldset class="fcol is-notes"><legend class="fsub">ポイント</legend><ul class="fnotes"><li><b>素材</b>：マット（枠のない一枚板の質感）／ガラス（カードや浮いているパネルだけが質感を持つ）</li><li><b>配色</b>：標準（紫）／ダーク（グレー）／ライト（白が基調で、明るい場所で見やすい）</li><li>配色を変えると、チャートの色も一緒に変わります（キャンバスで自分で変えた色は、そのまま残ります）</li></ul><details class="fnotes-more"><summary><span class="fnm-t">もっと見る（1）</span></summary><div class="fsoon-box"><p class="fsoon-line"><span class="fsoon">アップデート予定</span> 配色の種類が増えます</p></div></details></fieldset></div>
+            </div>
+        </article>
+        <article class="fcard has-media is-side" id="canvas" style="--mw:440px">
+            <div class="fcard-top"><h3 class="fcard-name">キャンバス（チャートの色）</h3></div>
+            <div class="fcard-grid">
+                <div class="fcard-media"><figure class="fduo fimg-only"><img src="img/webytt/feat/feat-canvas-set.jpg" alt="設定の「キャンバス」タブ：ローソク足の色、背景・グリッドの色、グリッドライン・十字カーソルの表示" loading="lazy" style="max-width:420px"><figcaption class="fvid-cap">PCの設定画面（スマホでも同じ見え方です）　タップで拡大</figcaption></figure></div>
+                <div class="fcard-head"><p class="fcard-what">ローソク足やチャートの背景の色など、チャートの見た目を細かく変えられる設定です。</p></div>
+                <div class="fcard-side"><fieldset class="fcol is-detail"><legend class="fsub">くわしく</legend><ul class="fnotes"><li>右下の歯車（スマホは「設定」）→「キャンバス」のタブで変えます</li><li>ローソク足（上昇・下降）、背景、グリッド、十字カーソルの色を選べます</li><li>「期間区切りライン」をオンにすると、日の区切り（0時）に縦の線が出ます（日足・週足・月足では出ません）</li></ul></fieldset></div>
+            </div>
+        </article>
+    </div>
+</section>
+
+<section class="ytt-spec-section" style="background:#f4f6f9;">
+    <div class="ytt-spec-inner ytt-fto-wide">
+        <div class="ytt-spec-header">
+            <span class="section-title-badge section-title-badge--blue">
+                <img class="hero-title-side hero-title-side--left" src="img/title-side-blue-left.png" alt="">
+                設定画面
+                <img class="hero-title-side hero-title-side--right" src="img/title-side-blue-right.png" alt="">
+            </span>
+            <div style="text-align:center; margin-bottom:0.25rem;">
+                <div style="display:inline-block; white-space:nowrap;">
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">設定画面の使い方</h2>
+                    <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
+                </div>
+            </div>
+            
+        </div>
+        <article class="fcard has-media is-side" id="open" style="--mw:440px">
+            <div class="fcard-top"><h3 class="fcard-name">設定を開く</h3></div>
+            <div class="fcard-grid">
+                <div class="fcard-media"><figure class="fduo fimg-only"><img src="img/webytt/feat/feat-settings-open.jpg" alt="設定画面：左に「一般」「キャンバス」「配色」のタブ、右に設定の項目、いちばん下に「他の口座に設定をコピー」と「初期値にリセット」のボタン" loading="lazy" style="max-width:420px"><figcaption class="fvid-cap">PCの設定画面　タップで拡大</figcaption></figure></div>
+                <div class="fcard-head"><p class="fcard-what">Web版YTTの細かい設定を変える画面です。「一般」「キャンバス」「配色」の3つのタブがあります。</p></div>
+                <div class="fcard-side"><fieldset class="fcol is-steps"><legend class="fsub">使い方</legend><ol class="fsteps"><li>PCは右下の歯車、スマホは下のメニューの「設定」を押す</li><li>タブを選んで、項目を変える</li></ol></fieldset><fieldset class="fcol is-notes"><legend class="fsub">ポイント</legend><ul class="fnotes"><li>変えた設定は、この口座にそのまま残ります（<a href="#reset">初期値にリセット</a>で元に戻せます）</li></ul></fieldset></div>
+            </div>
+        </article>
+        <article class="fcard has-media is-wide" id="sync">
+            <div class="fcard-top"><h3 class="fcard-name">PCとスマホで共通のもの・別々のもの</h3></div>
+            <p class="fcard-what">Web版YTTは、PCとスマホの両方で使えます。PCとスマホで共通になるものと、端末ごとに別々のものがあります。</p>
+            <div class="fcard-grid"><div class="fcard-media"><div class="ftable-wrap"><table class="ftable"><thead><tr><th>もの</th><th>PCとスマホ</th><th>くわしく</th></tr></thead><tbody><tr><td data-h="もの">お気に入りの通貨ペア（★）</td><td data-h="PCとスマホ">共通</td><td data-h="くわしく">同じDiscordのアカウントなら、口座を切り替えても同じです</td></tr><tr><td data-h="もの">ミニチャートの通貨ペア</td><td data-h="PCとスマホ">共通</td><td data-h="くわしく">スマホには、PCの上から3つが出ます</td></tr><tr><td data-h="もの">設定（一般・キャンバス・配色）</td><td data-h="PCとスマホ">共通（口座ごと）</td><td data-h="くわしく">口座ごとに残ります。同じ口座なら、PCで変えた設定がスマホにも入ります</td></tr><tr><td data-h="もの">通知の履歴</td><td data-h="PCとスマホ">共通（口座ごと）</td><td data-h="くわしく">口座ごとに残ります</td></tr><tr><td data-h="もの">いま使っている口座</td><td data-h="PCとスマホ">別々</td><td data-h="くわしく">PCで口座を切り替えても、スマホは元の口座のままです</td></tr><tr><td data-h="もの">最後に使ったロット数・パネルを動かした位置など</td><td data-h="PCとスマホ">別々</td><td data-h="くわしく">その端末だけに残ります</td></tr></tbody></table></div></div><div class="fcard-side"><fieldset class="fcol is-detail"><legend class="fsub">くわしく</legend><ul class="fnotes"><li><b>スマホで口座が変わらないときは</b>：PCとスマホは、それぞれ別に口座を選びます。スマホでも口座番号を押して、使う口座を選んでください（<a href="ytt-web-f-basic.html#pc-account">口座を切り替える</a>）</li><li>ほかの口座にも同じ設定を使いたいときは、<a href="#copy-settings">他の口座に設定をコピー</a>を使います</li></ul></fieldset></div></div>
+        </article>
+        <article class="fcard has-media is-wide" id="fav">
+            <div class="fcard-top"><h3 class="fcard-name">お気に入り（☆）</h3></div>
+            <p class="fcard-what">よく使う設定を、右のパネルからすぐにオン・オフできるようにする機能です。</p>
+            <div class="fcard-grid"><div class="fcard-media"><figure class="fduo fpc-only"><div class="wy-pc"><div class="wy-pc-screen"><img src="img/webytt/feat/feat-fav-pc.jpg" alt="PCの画面：お気に入り" loading="lazy"></div><div class="wy-pc-base" aria-hidden="true"></div></div><figcaption class="fvid-cap">PCの画面（左：設定の☆　右：右のパネルの「お気に入り」）　タップで拡大</figcaption></figure></div><div class="fcard-side"><fieldset class="fcol is-steps"><legend class="fsub">使い方</legend><ol class="fsteps"><li>設定画面で、項目の左の☆を押す（黄色の★になります）</li><li>右のパネルのいちばん下の「お気に入り」に、その項目が並ぶ</li></ol></fieldset><fieldset class="fcol is-notes"><legend class="fsub">ポイント</legend><ul class="fnotes"><li>右のパネルから、設定画面を開かずにオン・オフできます</li></ul></fieldset></div></div>
+        </article>
+        <article class="fcard has-media is-wide" id="copy-settings">
+            <div class="fcard-top"><h3 class="fcard-name">他の口座に設定をコピー</h3></div>
+            <p class="fcard-what">いまの口座の設定を、ほかの口座にもまとめてコピーする機能です。複数の口座を使っている人に便利です。</p>
+            <div class="fcard-grid"><div class="fcard-media"><figure class="fvid pc"><div class="wy-pc"><div class="wy-pc-screen"><span class="fvid-wrap"><video class="fvid-video" src="img/webytt/feat/feat-copyset.mp4" poster="img/webytt/feat/feat-copyset.jpg" muted loop playsinline preload="none" aria-label="動画：他の口座に設定をコピー（声なし）"></video></span></div><img class="fvmark" src="img/hand-play.svg" alt="" aria-hidden="true" width="62" height="62"><div class="wy-pc-base" aria-hidden="true"></div></div><figcaption class="fvid-cap">タップで拡大</figcaption></figure></div><div class="fcard-side"><fieldset class="fcol is-steps"><legend class="fsub">使い方</legend><ol class="fsteps"><li>右下の歯車（スマホは下のメニューの「設定」）を押し、いちばん下の「他の口座に設定をコピー」を押す</li><li>コピー先の口座を選んで、「確定」を押す</li><li>「設定をコピーしますか？」と出たら、「実行」を押す</li></ol></fieldset><fieldset class="fcol is-notes"><legend class="fsub">ポイント</legend><ul class="fnotes"><li>ロットの決め方（ロット計算モード）や、コピーモードの設定も、いっしょにコピーされます</li><li>コピー先の口座にもともと入っていた設定は、上書きされます</li><li>スマホも、設定画面のいちばん下に同じボタンがあります</li></ul></fieldset></div></div>
+        </article>
+        <article class="fcard has-media is-wide" id="reset">
+            <div class="fcard-top"><h3 class="fcard-name">初期値にリセット</h3></div>
+            <p class="fcard-what">設定をすべて、最初の状態に戻す機能です。</p>
+            <div class="fcard-grid"><div class="fcard-media"><figure class="fvid pc"><div class="wy-pc"><div class="wy-pc-screen"><span class="fvid-wrap"><video class="fvid-video" src="img/webytt/feat/feat-resetset.mp4" poster="img/webytt/feat/feat-resetset.jpg" muted loop playsinline preload="none" aria-label="動画：初期値にリセット（声なし）"></video></span></div><img class="fvmark" src="img/hand-play.svg" alt="" aria-hidden="true" width="62" height="62"><div class="wy-pc-base" aria-hidden="true"></div></div><figcaption class="fvid-cap">タップで拡大</figcaption></figure></div><div class="fcard-side"><fieldset class="fcol is-steps"><legend class="fsub">使い方</legend><ol class="fsteps"><li>右下の歯車（スマホは下のメニューの「設定」）を押し、いちばん下の「初期値にリセット」を押す</li><li>「初期値にリセットしますか？」と出たら、「実行」を押す</li></ol></fieldset><fieldset class="fcol is-notes"><legend class="fsub">ポイント</legend><ul class="fnotes"><li><b>この口座の設定が、すべて最初の値に戻ります。元に戻すことはできません</b></li><li>リセットすると、ページが自動で読み込み直されます</li><li>スマホも、設定画面のいちばん下に同じボタンがあります</li></ul></fieldset></div></div>
+        </article>
+    </div>
+</section>
+
+<section class="ytt-spec-section" style="background:#fff;">
+    <div class="ytt-spec-inner">
+        <div class="fnext">
+            <a class="fnext-a is-prev" href="ytt-web-f-tools.html"><span class="fnext-arw"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></span><span class="fnext-t"><small>前のページ</small><b>分析ツール</b></span></a>
+            <a class="fnext-a is-next" href="ytt-web-features.html"><span class="fnext-t"><small>もどる</small><b>使い方トップ</b></span><span class="fnext-arw"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+        </div>
+    </div>
+</section>
+
+<!-- 困ったときは -->
+<section class="ytt-spec-section" id="help" style="background:#f4f6f9;">
+    <div class="ytt-spec-inner">
+        <div class="ytt-spec-header">
+            <span class="section-title-badge section-title-badge--orange">
+                <img class="hero-title-side hero-title-side--left" src="img/title-side-orange-left.png" alt="">
+                困ったときは
+                <img class="hero-title-side hero-title-side--right" src="img/title-side-orange-right.png" alt="">
+            </span>
+            <div style="text-align:center; margin-bottom:0.25rem;">
+                <div style="display:inline-block; white-space:nowrap;">
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">分からないことがあったら</h2>
+                    <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
+                </div>
+            </div>
+            <p>使い方の質問はAIが24時間回答。<br>解決しないときは、YTT開発のエンジニアが対応します。</p>
+        </div>
+        <div class="ytt-add-grid cols-2">
+            <div class="ytt-add-card ytt-support-card">
+                <img class="sup-img" src="img/icon-ytt-ai-support.png" alt="">
+                <h3>YTT AIサポート</h3>
+                <p>導入・使い方の疑問に24時間いつでも回答。まずはここで解決できます。</p>
+                <a class="sup-link" href="https://discord.com/channels/1039824083208126474/1151440259553439784/1490345736083083284" target="_blank" rel="noopener">Discordで開く →</a>
+            </div>
+            <div class="ytt-add-card ytt-support-card">
+                <img class="sup-img" src="img/icon-ytt-support.png" alt="">
+                <h3>YTTサポート</h3>
+                <p>YTT開発のエンジニアが直接返信対応します。技術的な質問はこちら。</p>
+                <a class="sup-link" href="https://discord.com/channels/1039824083208126474/1151440259553439784/1490345379613642853" target="_blank" rel="noopener">Discordで開く →</a>
+            </div>
+        </div>
+        <p class="help-more">導入でつまずいたときは、<a href="ytt-web-setup.html#trouble">導入方法ページの「よくある質問」</a>も見てください。<br>機能の要望も、YTTサポートで受け付けています。</p>
+    </div>
+</section>
+
+<!-- フッターCTA -->
+<section class="ytt-sp-footer-cta">
+    <h2>Web版YTTを使ってみよう</h2>
+    <p>スマホからでも、PCからでも、<br>ブラウザを開けばすぐにトレードできます。</p>
+    <div class="ytt-sp-footer-cta-btns">
+        <a href="ytt-web-setup.html" class="btn-white-outline">導入方法を見る</a>
+        <a href="https://webytt.fx-space.com/" target="_blank" rel="noopener" class="btn-white-solid">Web版YTTを開く</a>
+    </div>
+</section>
+
+<footer class="ytt-sp-page-footer">
+    <p>© FX SPACE — <a href="ytt-tokusetu.html">YTT特設ページ</a> / <a href="index.html">トップページ</a></p>
+</footer>
+
+<script>
+  // 見出しのアンカーへ飛んだとき、固定ナビの下に潜らないようにする
+  document.documentElement.style.scrollPaddingTop = '72px';
+</script>
+<script>
+/* 手書き風フレーム：画像の実寸に合わせて、少しゆらいだ線で囲む（形は画像ごとに固定＝リサイズしても毎回同じ） */
+(function () {
+  function hash(str) { var h = 2166136261; for (var i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
+  function rng(seed) { return function () { seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0; return seed / 4294967296; }; }
+  function edge(pts, x1, y1, x2, y2, r, amp) {
+    var len = Math.hypot(x2 - x1, y2 - y1) || 1, n = Math.max(2, Math.round(len / 36));
+    var nx = -(y2 - y1) / len, ny = (x2 - x1) / len;
+    for (var i = 1; i <= n; i++) { var t = i / n, j = (r() - 0.5) * 2 * amp; pts.push([x1 + (x2 - x1) * t + nx * j, y1 + (y2 - y1) * t + ny * j]); }
+  }
+  function pathFor(w, h, seed) {
+    var r = rng(seed), m = 2.5, amp = Math.min(1.3, Math.max(0.6, Math.min(w, h) / 90));
+    var x0 = m, y0 = m, x1 = w - m, y1 = h - m;
+    var pts = [[x0 + 3 + r() * 3, y0 + r() * 1.5]];
+    edge(pts, x0, y0, x1, y0, r, amp);          // 上
+    edge(pts, x1, y0, x1, y1, r, amp);          // 右
+    edge(pts, x1, y1, x0, y1, r, amp);          // 下
+    edge(pts, x0, y1, x0, y0, r, amp);          // 左
+    pts.push([x0 + 9 + r() * 5, y0 - 0.8 + r() * 1.2]); // 描き終わりを少し重ねる（手で描いた感じ）
+    var d = 'M' + pts[0][0].toFixed(1) + ' ' + pts[0][1].toFixed(1);
+    for (var i = 1; i < pts.length; i++) {
+      var p = pts[i - 1], c = pts[i];
+      d += ' Q' + p[0].toFixed(1) + ' ' + p[1].toFixed(1) + ' ' + ((p[0] + c[0]) / 2).toFixed(1) + ' ' + ((p[1] + c[1]) / 2).toFixed(1);
+    }
+    var last = pts[pts.length - 1];
+    return d + ' L' + last[0].toFixed(1) + ' ' + last[1].toFixed(1);
+  }
+  function draw(box) {
+    var w = box.clientWidth, h = box.clientHeight; if (!w || !h) return;
+    var svg = box.querySelector('svg.gframe-line');
+    svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+    var seed = +box.getAttribute('data-seed');
+    svg.querySelector('.p1').setAttribute('d', pathFor(w, h, seed));
+    svg.querySelector('.p2').setAttribute('d', pathFor(w, h, (seed ^ 0x9e3779b9) >>> 0)); // 2回なぞった感じ
+  }
+  var NS = 'http://www.w3.org/2000/svg';
+  // クレヨンのかすれ：線の輪郭をざらつかせ（feDisplacementMap）、粒状に抜けを作る（feTurbulence のアルファで間引く）
+  var defs = document.createElementNS(NS, 'svg');
+  defs.setAttribute('width', '0'); defs.setAttribute('height', '0'); defs.setAttribute('aria-hidden', 'true');
+  defs.style.position = 'absolute';
+  defs.innerHTML = '<defs><filter id="gframe-crayon" x="-10%" y="-10%" width="120%" height="120%">' +
+    '<feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" seed="4" result="n1"/>' +
+    '<feDisplacementMap in="SourceGraphic" in2="n1" scale="2.8" xChannelSelector="R" yChannelSelector="G" result="rough"/>' +
+    '<feTurbulence type="fractalNoise" baseFrequency="1.15" numOctaves="2" seed="11" result="n2"/>' +
+    '<feColorMatrix in="n2" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.3 1.8" result="grain"/>' +
+    '<feComposite in="rough" in2="grain" operator="in"/>' +
+    '</filter></defs>';
+  document.body.appendChild(defs);
+  var ro = window.ResizeObserver ? new ResizeObserver(function (es) { es.forEach(function (e) { draw(e.target); }); }) : null;
+  document.querySelectorAll('.gshot img, .fvid-box').forEach(function (img) {
+    if (img.parentElement.classList.contains('gframe')) return;
+    var box = document.createElement('span');
+    box.className = 'gframe';
+    box.setAttribute('data-seed', hash(img.getAttribute('src') || ''));
+    img.parentNode.insertBefore(box, img);
+    box.appendChild(img);
+    var svg = document.createElementNS(NS, 'svg');
+    svg.setAttribute('class', 'gframe-line'); svg.setAttribute('aria-hidden', 'true');
+    var g = document.createElementNS(NS, 'g'); g.setAttribute('filter', 'url(#gframe-crayon)');
+    var p1 = document.createElementNS(NS, 'path'); p1.setAttribute('class', 'p1');
+    var p2 = document.createElementNS(NS, 'path'); p2.setAttribute('class', 'p2');
+    g.appendChild(p1); g.appendChild(p2); svg.appendChild(g);
+    box.appendChild(svg);
+    if (ro) ro.observe(box);
+    img.addEventListener('load', function () { draw(box); });
+    draw(box);
+  });
+})();
+</script>
+<!-- BudouX — 日本語の文節改行（全ページ共通・同梱版。js/budoux-init.js を参照） -->
+<script>
+/* 機能の動画：画面に入ったら読み込んで再生、外れたら止める。タップで全画面 */
+(function () {
+    var vids = document.querySelectorAll('video.fvid-video');
+    if (!vids.length) return;
+    if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+                var v = e.target;
+                if (e.isIntersecting) { if (v.preload === 'none') { v.preload = 'auto'; } var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+                else { v.pause(); }
+            });
+        }, { threshold: 0.35 });
+        vids.forEach(function (v) { io.observe(v); });
+    } else {
+        vids.forEach(function (v) { v.autoplay = true; v.preload = 'auto'; });
+    }
+    vids.forEach(function (v) {
+        v.addEventListener('click', function () {
+            if (window.fOpenLight) { window.fOpenLight(v); return; }
+            if (v.requestFullscreen) { v.requestFullscreen().catch(function () {}); }
+            else if (v.webkitEnterFullscreen) { v.webkitEnterFullscreen(); }
+        });
+    });
+})();
+</script>
+<script src="js/budoux-ja.min.js?v=20260907a" defer></script>
+<script src="js/budoux-init.js?v=20260907a" defer></script>
+<script>
+/* Web版YTT 使い方（build-guide.js がページの最後に埋め込む）
+   1. 拡大表示：本物の画面の画像・機能の動画をタップすると大きく出す。
+      拡大した動画には、ブラウザの本物の再生バー（controls）を出して、止める・戻すができるようにする。
+      閉じ方をいくつも用意する（右上の ×、まわりのタップ、Esc、スマホの「戻る」）
+   2. 動画の速さ：初めて見る人が目で追えるように、少しゆっくり流す（FVID_SPEED）
+   3. 画面の見方：モックの①②…のマークから、説明の番号へ薄い線を引く（横並びのときだけ）
+   4. 機能の一覧（目次）：左のボタンから出し入れする */
+
+// 動画の速さ。1 が元の速さ。小さくするとゆっくりになる
+var FVID_SPEED = 0.7;
+(function () {
+  var box = null, pushed = false;
+  function close(fromPop) {
+    if (!box) return;
+    var v = box.querySelector('video'); if (v) v.pause();
+    box.remove(); box = null;
+    document.documentElement.classList.remove('flight-open');
+    if (pushed && !fromPop) { pushed = false; try { history.back(); } catch (e) {} }
+    pushed = false;
+  }
+  window.fOpenLight = function (el) {
+    if (box) close();
+    var media;
+    if (el.tagName === 'VIDEO') {
+      media = document.createElement('video');
+      media.src = el.currentSrc || el.getAttribute('src');
+      if (el.poster) media.poster = el.poster;
+      media.muted = true; media.loop = true; media.autoplay = true; media.playsInline = true;
+      media.controls = true;                                   // ブラウザの本物の再生バー（止める・戻す・コマ送り）
+      media.setAttribute('playsinline', ''); media.setAttribute('muted', '');
+      media.playbackRate = FVID_SPEED;
+      media.addEventListener('loadedmetadata', function () { media.playbackRate = FVID_SPEED; });
+    } else {
+      media = document.createElement('img');
+      media.src = el.getAttribute('src'); media.alt = el.alt || '';
+    }
+    media.className = 'flight-media';
+    box = document.createElement('div');
+    box.className = 'flight';
+    box.setAttribute('role', 'dialog'); box.setAttribute('aria-modal', 'true'); box.setAttribute('aria-label', '拡大表示');
+    box.innerHTML = '<button type="button" class="flight-x" aria-label="閉じる"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button><div class="flight-stage"></div>';
+    if (media.tagName === 'VIDEO') {
+      var fw = document.createElement('span'); fw.className = 'fvid-wrap'; fw.style.display = 'inline-block'; fw.appendChild(media);
+      box.querySelector('.flight-stage').appendChild(fw);
+      if (window.fvidLoopUI) window.fvidLoopUI(media, fw, false);
+    } else {
+      box.querySelector('.flight-stage').appendChild(media);
+    }
+    // 画像や動画そのもの（動画の再生バーもふくむ）をタップしても閉じない。それ以外の場所・× で閉じる
+    box.addEventListener('click', function (e) { if (e.target === media || (e.target.classList && e.target.classList.contains('fvid-wrap'))) return; close(); });
+    document.body.appendChild(box);
+    document.documentElement.classList.add('flight-open');
+    if (media.play) { var p = media.play(); if (p && p.catch) p.catch(function () {}); }
+    // スマホの「戻る」で、ページを離れずに拡大だけを閉じる
+    try { history.pushState({ flight: 1 }, ''); pushed = true; } catch (e) {}
+    try { box.querySelector('.flight-x').focus({ preventScroll: true }); } catch (e) {}
+  };
+  window.addEventListener('popstate', function () { if (box) { pushed = false; close(true); } });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+  [].forEach.call(document.querySelectorAll('.fduo img'), function (img) {
+    img.addEventListener('click', function () { window.fOpenLight(img); });
+  });
+})();
+
+(function () {
+  var all = [].slice.call(document.querySelectorAll('.scr'));
+  if (!all.length) return;
+  var NS = 'http://www.w3.org/2000/svg';
+  function draw(scr) {
+    var body = scr.querySelector('.scr-body'), svg = scr.querySelector('.scr-lines'), list = scr.querySelector('.scr-list'), wrap = scr.querySelector('.scr-pinwrap');
+    if (!body || !svg || !list || !wrap) return;
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    var B = body.getBoundingClientRect(), L = list.getBoundingClientRect(), W = wrap.getBoundingClientRect();
+    if (L.left < W.right - 4) { svg.style.display = 'none'; return; }   // 縦に並んだとき（スマホ）は線を引かない
+    svg.style.display = '';
+    svg.setAttribute('viewBox', '0 0 ' + B.width + ' ' + B.height);
+    [].forEach.call(scr.querySelectorAll('.scr-pin'), function (pin) {
+      var n = pin.getAttribute('data-n'), no = list.querySelector('li[data-n="' + n + '"] .scr-no');
+      if (!no) return;
+      var P = pin.getBoundingClientRect(), N = no.getBoundingClientRect();
+      var x1 = P.left + P.width / 2 - B.left, y1 = P.top + P.height / 2 - B.top;
+      var x2 = N.left - B.left - 8, y2 = N.top + N.height / 2 - B.top;
+      var dx = Math.max(36, (x2 - x1) * 0.42);
+      var g = document.createElementNS(NS, 'g'); g.setAttribute('data-n', n);
+      var path = document.createElementNS(NS, 'path');
+      path.setAttribute('d', 'M' + x1 + ' ' + y1 + ' C' + (x1 + dx) + ' ' + y1 + ' ' + (x2 - dx) + ' ' + y2 + ' ' + x2 + ' ' + y2);
+      var dot = document.createElementNS(NS, 'circle');
+      dot.setAttribute('cx', x2); dot.setAttribute('cy', y2); dot.setAttribute('r', 3);
+      g.appendChild(path); g.appendChild(dot); svg.appendChild(g);
+    });
+  }
+  function redraw() { all.forEach(draw); }
+  // 説明にマウスをのせる／タップすると、その番号のマークと線を目立たせる
+  all.forEach(function (scr) {
+    [].forEach.call(scr.querySelectorAll('.scr-list li'), function (li) {
+      var n = li.getAttribute('data-n');
+      function on(v) {
+        li.classList.toggle('on', v);
+        [].forEach.call(scr.querySelectorAll('.scr-pin[data-n="' + n + '"], .scr-lines g[data-n="' + n + '"]'), function (el) {
+          if (el.classList) el.classList.toggle('on', v); else el.setAttribute('class', v ? 'on' : '');
+        });
+      }
+      li.addEventListener('mouseenter', function () { on(true); });
+      li.addEventListener('mouseleave', function () { on(false); });
+    });
+  });
+  window.addEventListener('resize', redraw);
+  window.addEventListener('load', redraw);
+  if (window.ResizeObserver) { var ro = new ResizeObserver(redraw); all.forEach(function (s) { ro.observe(s); }); }
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(redraw);
+  redraw();
+
+})();
+
+/* 上の固定バーのいちばん下の位置（スマホで検索窓を開いているときは、その下）。浮いているボタンをこの下に置いて、バーに潜らせない */
+function fNavBottom() {
+  var b = 0, nav = document.querySelector('.ytt-sp-nav');
+  if (nav) b = nav.getBoundingClientRect().bottom;
+  if (document.documentElement.classList.contains('nav-search-open')) {
+    var s = document.querySelector('.fsearch-nav');
+    if (s) b = Math.max(b, s.getBoundingClientRect().bottom);
+  }
+  return Math.max(0, Math.round(b));
+}
+
+/* スマホ / PC の切り替え（基本の操作のページ）
+   上の切り替えを通り過ぎたら、バーの下に小さな切り替えを浮かせて、どこからでも切り替えられるようにする（airiさん 2026-09-15）。
+   浮いている方で切り替えたときは、いま見ている機能と同じ名前の機能（なければその端末の先頭）へ移る */
+  (function () {
+    var sw = document.querySelector('.fdev-switch');
+    if (!sw) return;
+    var secs = [].slice.call(document.querySelectorAll('[data-dev-sec]'));
+    var fl = document.createElement('div');
+    fl.className = 'fdev-float'; fl.hidden = true;
+    fl.setAttribute('role', 'group'); fl.setAttribute('aria-label', 'スマホとPCの切り替え');
+    fl.innerHTML = '<button type="button" data-dev="sp">スマホ</button><button type="button" data-dev="pc">PC</button>';
+    document.body.appendChild(fl);
+    var btns = [].slice.call(sw.querySelectorAll('button')).concat([].slice.call(fl.querySelectorAll('button')));
+    function apply(dev) {
+      secs.forEach(function (s) { s.hidden = (s.getAttribute('data-dev-sec') !== dev); });
+      btns.forEach(function (b) { b.classList.toggle('on', b.getAttribute('data-dev') === dev); });
+      try { localStorage.setItem('ytt-basic-dev', dev); } catch (e) {}
+    }
+    function devOfHash() {
+      var h = decodeURIComponent(location.hash.slice(1));
+      if (!h) return null;
+      var el = document.getElementById(h);
+      var sec = el && el.closest ? el.closest('[data-dev-sec]') : null;
+      return sec ? sec.getAttribute('data-dev-sec') : null;
+    }
+    var saved = null;
+    try { saved = localStorage.getItem('ytt-basic-dev'); } catch (e) {}
+    apply(devOfHash() || saved || (window.innerWidth >= 900 ? 'pc' : 'sp'));
+    function curDev() { var b = sw.querySelector('button.on'); return b ? b.getAttribute('data-dev') : null; }
+    function switchKeep(dev) {
+      if (dev === curDev()) return;
+      var line = fNavBottom() + 70, name = null;
+      secs.some(function (s) {
+        if (s.hidden) return false;
+        return [].slice.call(s.querySelectorAll('.fcard')).some(function (c) {
+          if (c.getBoundingClientRect().bottom > line) { var h = c.querySelector('.fcard-name'); name = h ? h.textContent.trim() : null; return true; }
+          return false;
+        });
+      });
+      apply(dev);
+      var target = null;
+      secs.some(function (s) {
+        if (s.getAttribute('data-dev-sec') !== dev) return false;
+        if (!target) target = s;
+        if (!name) return true;
+        var hit = [].slice.call(s.querySelectorAll('.fcard-name')).filter(function (h) { return h.textContent.trim() === name; })[0];
+        if (hit) { target = hit.closest('.fcard'); return true; }
+        return false;
+      });
+      // 移った先の機能の見出し（カードの上に飛び出している札）が、バーと浮いている切り替えの下にちょうど見える位置へ
+      if (target) {
+        // 切り替えた直後は、出てきた段の画像が読み込まれて高さが変わるので、少しのあいだ何度か合わせ直す（自分でスクロールしたらやめる）
+        var stop = false;
+        var quit = function () { stop = true; };
+        ['wheel', 'touchstart', 'keydown'].forEach(function (ev) { window.addEventListener(ev, quit, { once: true, passive: true }); });
+        var align = function () {
+          if (stop) return;
+          var head = target.querySelector && target.querySelector('.fcard-top');
+          var t = target.getBoundingClientRect().top;
+          if (head) t = Math.min(t, head.getBoundingClientRect().top);
+          var fh = fl.offsetHeight || 46;
+          window.scrollTo(0, Math.max(0, t + window.pageYOffset - (fNavBottom() + 10 + fh + 12)));
+        };
+        align();
+        [120, 400, 900, 1600].forEach(function (ms) { setTimeout(align, ms); });
+      }
+      update();
+    }
+    function update() {
+      var top = fNavBottom(), past = sw.getBoundingClientRect().bottom < top, more = false;
+      secs.forEach(function (s) { if (!s.hidden && s.getBoundingClientRect().bottom > top + 120) more = true; });
+      fl.hidden = !(past && more);
+      fl.style.top = (top + 10) + 'px';
+    }
+    btns.forEach(function (b) {
+      b.addEventListener('click', function () { if (fl.contains(b)) switchKeep(b.getAttribute('data-dev')); else apply(b.getAttribute('data-dev')); });
+    });
+    var ticking = false;
+    function onScroll() { if (ticking) return; ticking = true; requestAnimationFrame(function () { ticking = false; update(); }); }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    if (window.MutationObserver) new MutationObserver(onScroll).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    update();
+    window.addEventListener('hashchange', function () {
+      var d = devOfHash();
+      if (d) { apply(d); var el = document.getElementById(decodeURIComponent(location.hash.slice(1))); if (el) el.scrollIntoView(); }
+    });
+  })();
+
+/* 使い方トップ「こんな悩み、ありませんか？」
+   ・機能の札を押すと、その場で画面と説明を入れかえる（ページは移動しない）
+   ・帯の右の「詳しく見る」は、今選んでいる機能のページへ連れていく */
+(function () {
+  document.querySelectorAll('.fsit').forEach(function (card) {
+    var tabs = [].slice.call(card.querySelectorAll('.fsit-tab'));
+    var panes = [].slice.call(card.querySelectorAll('.fsit-pane'));
+    var btn = card.querySelector('.fold-btn');
+    if (tabs.length < 2) return;
+    function show(i) {
+      panes.forEach(function (p, j) {
+        p.hidden = j !== i;
+        if (j !== i) [].forEach.call(p.querySelectorAll('video'), function (v) { try { v.pause(); } catch (e) {} });
+      });
+      tabs.forEach(function (t, j) { t.classList.toggle('on', j === i); t.setAttribute('aria-selected', j === i ? 'true' : 'false'); });
+      if (btn && tabs[i].dataset.href) btn.setAttribute('href', tabs[i].dataset.href);
+    }
+    tabs.forEach(function (t, i) { t.addEventListener('click', function () { show(i); }); });
+  });
+})();
+
+/* カードの中の動画を、少しゆっくり流す（初めて見る人が目で追えるように） */
+(function () {
+  var vids = [].slice.call(document.querySelectorAll('video.fvid-video'));
+  if (!vids.length) return;
+  vids.forEach(function (v) {
+    function slow() { try { v.playbackRate = FVID_SPEED; } catch (e) {} }
+    slow();
+    v.addEventListener('loadedmetadata', slow);
+    v.addEventListener('play', slow);          // 読み込み直しで元の速さに戻ることがあるので、再生のたびに入れ直す
+  });
+})();
+
+/* 機能の一覧（目次）：左のボタンで出し入れする */
+(function () {
+  var tab = document.querySelector('.toc-tab'), panel = document.querySelector('.toc-panel'),
+      back = document.querySelector('.toc-back');
+  if (!tab || !panel || !back) return;
+  var links = [].slice.call(panel.querySelectorAll('.toc-list a'));
+  // いま画面に出ている機能に色をつけて、目次のその場所までスクロールする
+  function mark() {
+    var now = null, first = null;
+    links.forEach(function (a) {
+      a.classList.remove('is-now');
+      var h = a.getAttribute('href');
+      if (!h || h.charAt(0) !== '#') return;
+      var el = document.getElementById(h.slice(1));
+      if (!el) return;
+      var r = el.getBoundingClientRect();
+      if (r.height < 4) return;                 // 隠れているもの（スマホ／PCの切り替えで消えている段）は数えない
+      if (r.top <= 160) now = a;                // 画面の上を通り過ぎたもののうち、いちばん下
+      if (!first && r.bottom > 160) first = a;  // まだ通り過ぎていない、いちばん上
+    });
+    now = now || first;
+    if (!now) return null;
+    now.classList.add('is-now');
+    return now;
+  }
+  // 目次を開いたとき、いま見ている機能が真ん中に来るようにする
+  function center(a) {
+    if (!a) { panel.scrollTop = 0; return; }
+    var pr = panel.getBoundingClientRect(), ar = a.getBoundingClientRect();
+    var to = panel.scrollTop + (ar.top - pr.top) - (pr.height / 2 - ar.height / 2);
+    panel.scrollTop = Math.max(0, to);
+  }
+  function open() {
+    panel.hidden = false;                       // 先に出してから位置を計る（隠れていると高さが取れない）
+    center(mark());
+    back.hidden = false;
+    tab.setAttribute('aria-expanded', 'true');
+    document.documentElement.classList.add('toc-open');
+  }
+  function shut() {
+    panel.hidden = true; back.hidden = true;
+    tab.setAttribute('aria-expanded', 'false');
+    document.documentElement.classList.remove('toc-open');
+  }
+  tab.addEventListener('click', function () { panel.hidden ? open() : shut(); });
+  // 目次のボタンは、上の固定バー（スマホで検索窓を開いているときはその下）のすぐ下に置く。幅や文字の大きさでバーの高さが変わっても見切れないように、毎回はかる
+  var placing = false;
+  function place() { tab.style.top = (fNavBottom() + 10) + 'px'; }
+  function placeSoon() { if (placing) return; placing = true; requestAnimationFrame(function () { placing = false; place(); }); }
+  window.addEventListener('resize', placeSoon);
+  window.addEventListener('scroll', placeSoon, { passive: true });
+  window.addEventListener('load', place);
+  if (window.ResizeObserver) { var nv = document.querySelector('.ytt-sp-nav'), fsn = document.querySelector('.fsearch-nav'); var rob = new ResizeObserver(placeSoon); if (nv) rob.observe(nv); if (fsn) rob.observe(fsn); }
+  if (window.MutationObserver) new MutationObserver(placeSoon).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);
+  place();
+  back.addEventListener('click', shut);
+  panel.querySelector('.toc-close').addEventListener('click', shut);
+  // 目次から飛ぶときは、ふつうのリンクのまま（見出しの位置合わせ、スマホ／PCの切り替えは別のしくみにまかせる）
+  links.forEach(function (a) { a.addEventListener('click', shut); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !panel.hidden) shut(); });
+})();
+
+/* スマホの上の検索：虫眼鏡を押すと、バーのすぐ下に検索窓を出す（外を押す・Esc・結果を選ぶで閉じる） */
+(function () {
+  var btn = document.querySelector('.fsearch-toggle'), root = document.querySelector('.fsearch-nav');
+  var input = root && root.querySelector('input');
+  if (!btn || !root || !input) return;
+  var doc = document.documentElement;
+  function isOpen() { return doc.classList.contains('nav-search-open'); }
+  function set(open) {
+    doc.classList.toggle('nav-search-open', open);
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (open) { try { input.focus({ preventScroll: true }); } catch (e) { input.focus(); } }   // 押した流れのまま focus（iPhoneでキーボードを出すため）
+    else { input.blur(); }
+  }
+  btn.addEventListener('click', function (e) { e.stopPropagation(); set(!isOpen()); });
+  // iPhoneのSafariは、ボタンやリンクではない所をタップしても click を出さないので、タップした瞬間（pointerdown）でも閉じる
+  function outside(e) { if (isOpen() && !root.contains(e.target) && !btn.contains(e.target)) set(false); }
+  document.addEventListener('pointerdown', outside);
+  document.addEventListener('click', outside);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && isOpen()) set(false); });
+  root.addEventListener('click', function (e) { if (e.target.closest && e.target.closest('.fsearch-results a')) set(false); });
+})();
+
+/* 動画の終わりが分かるように（ページの動画も、拡大した動画も）
+   ・下に進み具合の線（ページの動画だけ。拡大した動画には本物の再生バーがある）
+   ・最後まで流れたら最後のコマで止めて、少し暗くして「おわり」。まわりの丸が一周（FVID_END_WAIT）したら、自動ではじめから流す
+   ・止まっている間に押すと、すぐはじめから（押せる見た目どおりに動く） */
+var FVID_END_WAIT = 2000;
+var FVID_REPLAY_SVG = '<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>';
+window.fvidLoopUI = fvidLoopUI;
+function fvidLoopUI(video, wrap, withBar) {
+  if (!video || !wrap || wrap.querySelector('.fvid-end')) return;
+  // くり返しはブラウザの loop ではなくここで行う（終わりで一度止めるため。JSが動かないときは loop のまま）
+  video.loop = false; video.removeAttribute('loop');
+  var bar = null;
+  if (withBar) { bar = document.createElement('span'); bar.className = 'fvid-prog'; bar.innerHTML = '<i></i>'; wrap.appendChild(bar); }
+  var end = document.createElement('button');
+  end.type = 'button'; end.className = 'fvid-end'; end.tabIndex = -1;
+  end.setAttribute('aria-label', 'もう一度はじめから再生');
+  end.style.setProperty('--fvid-wait', FVID_END_WAIT + 'ms');
+  // 文字は出さない（airiさん指示）。丸とくり返しのマークだけ
+  end.innerHTML = '<span class="fvid-end-ring"><svg viewBox="0 0 48 48" aria-hidden="true"><circle class="t" cx="24" cy="24" r="21"/><circle class="p" cx="24" cy="24" r="21"/></svg>' + FVID_REPLAY_SVG + '</span>';
+  wrap.appendChild(end);
+  var timer = null;
+  function hide() { clearTimeout(timer); timer = null; end.classList.remove('on'); end.tabIndex = -1; }
+  // ページの動画は、画面に出ているときだけ自動で流す（外れていたら、戻ってきたときにページのしくみが流す）
+  function inView() {
+    if (document.hidden) return false;
+    if (wrap.closest && wrap.closest('.flight')) return true;
+    var r = video.getBoundingClientRect(), h = window.innerHeight || document.documentElement.clientHeight;
+    return r.height > 0 && (Math.min(r.bottom, h) - Math.max(r.top, 0)) / r.height >= 0.35;
+  }
+  function restart(byTap) {
+    hide();
+    try { video.currentTime = 0; } catch (e) {}
+    if (bar) bar.firstChild.style.width = '0%';
+    if (byTap || inView()) { var p = video.play(); if (p && p.catch) p.catch(function () {}); }
+  }
+  video.addEventListener('ended', function () {
+    if (bar) bar.firstChild.style.width = '100%';
+    end.classList.remove('on'); void end.offsetWidth;   // 丸のアニメーションを最初から
+    end.classList.add('on'); end.tabIndex = 0;
+    clearTimeout(timer); timer = setTimeout(function () { restart(false); }, FVID_END_WAIT);
+  });
+  video.addEventListener('play', hide);
+  // 拡大した動画で、止まっている間に再生バーで戻したときは「おわり」を消す（勝手にはじめからにしない）
+  video.addEventListener('seeking', function () { if (end.classList.contains('on') && video.currentTime < (video.duration || 0) - 0.05) hide(); });
+  end.addEventListener('click', function (e) { e.preventDefault(); e.stopPropagation(); restart(true); });
+  function tick() { if (bar && video.duration) bar.firstChild.style.width = Math.min(100, video.currentTime / video.duration * 100) + '%'; }
+  video.addEventListener('timeupdate', tick);
+  (function raf() { if (!video.paused) tick(); requestAnimationFrame(raf); })();
+}
+(function () {
+  [].forEach.call(document.querySelectorAll('video.fvid-video'), function (v) {
+    var wrap = v.parentElement && v.parentElement.classList.contains('fvid-wrap') ? v.parentElement : null;
+    fvidLoopUI(v, wrap, true);
+  });
+})();
+</script>
+<script src="js/ytt-web-search.js?v=8b3941ff" defer></script>
+<script>
+/* 手書き風のクレヨン線（ytt-web-setup.html のスクショの枠と同じ描き方）。build-guide.js がページの最後に入れる
+   ・スクショ（.fduo.fimg-only > img）：画像を span.gframe で包み、グレーの線で囲む（線の形は画像ごとに固定＝リサイズしても同じ）
+   ・枠（使い方・ポイント・くわしく／cTraderのお知らせ／通知の手順のカード）：CSS の枠線を消し、同じ描き方の線を色つきで引く。
+     見出し（legend）があるときは、見出しのところだけ線を途切れさせる */
+(function () {
+  function hash(str) { var h = 2166136261; for (var i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
+  function rng(seed) { return function () { seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0; return seed / 4294967296; }; }
+  function edge(pts, x1, y1, x2, y2, r, amp) {
+    var len = Math.hypot(x2 - x1, y2 - y1) || 1, n = Math.max(2, Math.round(len / 36));
+    var nx = -(y2 - y1) / len, ny = (x2 - x1) / len;
+    for (var i = 1; i <= n; i++) { var t = i / n, j = (r() - 0.5) * 2 * amp; pts.push([x1 + (x2 - x1) * t + nx * j, y1 + (y2 - y1) * t + ny * j]); }
+  }
+  function toPath(pts) {
+    var d = 'M' + pts[0][0].toFixed(1) + ' ' + pts[0][1].toFixed(1);
+    for (var i = 1; i < pts.length; i++) {
+      var p = pts[i - 1], c = pts[i];
+      d += ' Q' + p[0].toFixed(1) + ' ' + p[1].toFixed(1) + ' ' + ((p[0] + c[0]) / 2).toFixed(1) + ' ' + ((p[1] + c[1]) / 2).toFixed(1);
+    }
+    var last = pts[pts.length - 1];
+    return d + ' L' + last[0].toFixed(1) + ' ' + last[1].toFixed(1);
+  }
+  // 四角をぐるっと1周。gap（上の辺の [左, 右]）があれば、そこだけ線を引かない
+  function pathFor(w, h, seed, gap, m, top) {
+    var r = rng(seed), amp = Math.min(1.3, Math.max(0.6, Math.min(w, h) / 90));
+    var x0 = m, y0 = m + (top || 0), x1 = w - m, y1 = h - m, pts;
+    if (gap) {
+      pts = [[gap[1], y0 + (r() - 0.5)]];
+      edge(pts, gap[1], y0, x1, y0, r, amp);
+      edge(pts, x1, y0, x1, y1, r, amp);
+      edge(pts, x1, y1, x0, y1, r, amp);
+      edge(pts, x0, y1, x0, y0, r, amp);
+      edge(pts, x0, y0, gap[0], y0, r, amp);
+      return toPath(pts);
+    }
+    pts = [[x0 + 3 + r() * 3, y0 + r() * 1.5]];
+    edge(pts, x0, y0, x1, y0, r, amp);
+    edge(pts, x1, y0, x1, y1, r, amp);
+    edge(pts, x1, y1, x0, y1, r, amp);
+    edge(pts, x0, y1, x0, y0, r, amp);
+    pts.push([x0 + 9 + r() * 5, y0 - 0.8 + r() * 1.2]); // 描き終わりを少し重ねる（手で描いた感じ）
+    return toPath(pts);
+  }
+  var NS = 'http://www.w3.org/2000/svg';
+  // クレヨンのかすれ：線の輪郭をざらつかせ（feDisplacementMap）、粒状に抜けを作る（feTurbulence のアルファで間引く）
+  var defs = document.createElementNS(NS, 'svg');
+  defs.setAttribute('width', '0'); defs.setAttribute('height', '0'); defs.setAttribute('aria-hidden', 'true');
+  defs.style.position = 'absolute';
+  defs.innerHTML = '<defs><filter id="gframe-crayon" x="-10%" y="-10%" width="120%" height="120%">' +
+    '<feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" seed="4" result="n1"/>' +
+    '<feDisplacementMap in="SourceGraphic" in2="n1" scale="2.8" xChannelSelector="R" yChannelSelector="G" result="rough"/>' +
+    '<feTurbulence type="fractalNoise" baseFrequency="1.15" numOctaves="2" seed="11" result="n2"/>' +
+    '<feColorMatrix in="n2" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.3 1.8" result="grain"/>' +
+    '<feComposite in="rough" in2="grain" operator="in"/>' +
+    '</filter></defs>';
+  document.body.appendChild(defs);
+  function makeSvg(cls) {
+    var svg = document.createElementNS(NS, 'svg');
+    svg.setAttribute('class', cls); svg.setAttribute('aria-hidden', 'true');
+    var g = document.createElementNS(NS, 'g'); g.setAttribute('filter', 'url(#gframe-crayon)');
+    var p1 = document.createElementNS(NS, 'path'); p1.setAttribute('class', 'p1');
+    var p2 = document.createElementNS(NS, 'path'); p2.setAttribute('class', 'p2');
+    g.appendChild(p1); g.appendChild(p2); svg.appendChild(g);
+    return svg;
+  }
+  var ro = window.ResizeObserver ? new ResizeObserver(function (es) { es.forEach(function (e) { draw(e.target); }); }) : null;
+
+  function draw(box) {
+    var svg = box.querySelector(':scope > svg.gframe-line, :scope > svg.cline-svg'); if (!svg) return;
+    var seed = +box.getAttribute('data-seed'), gap = null, m = 2.5, top = 0;
+    var w = box.offsetWidth, h = box.offsetHeight; if (!w || !h) return;
+    if (svg.classList.contains('cline-svg')) {
+      m = 1.5;
+      // 線は枠の外側のふちに合わせる（fieldset などは、中の余白の位置が基準になるので、ずれを測って直す）
+      svg.style.left = '0px'; svg.style.top = '0px';
+      var br = box.getBoundingClientRect(), sr = svg.getBoundingClientRect();
+      svg.style.left = (br.left - sr.left) + 'px'; svg.style.top = (br.top - sr.top) + 'px';
+      svg.style.width = br.width + 'px'; svg.style.height = br.height + 'px';
+      w = br.width; h = br.height;
+      // 見出し（使い方・ポイントなど）があるときは、上の線を見出しの高さのまん中に通し、見出しのところだけ途切れさせる
+      var lg = box.querySelector(':scope > legend');
+      if (lg) { var lr = lg.getBoundingClientRect(); gap = [lr.left - br.left - 3, lr.right - br.left + 3]; top = lr.top + lr.height / 2 - br.top - m; }
+    }
+    svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+    svg.querySelector('.p1').setAttribute('d', pathFor(w, h, seed, gap, m, top));
+    svg.querySelector('.p2').setAttribute('d', pathFor(w, h, (seed ^ 0x9e3779b9) >>> 0, gap, m, top)); // 2回なぞった感じ
+  }
+
+  // スクショの枠
+  document.querySelectorAll('.fduo.fimg-only > img').forEach(function (img) {
+    if (img.parentElement.classList.contains('gframe')) return;
+    var box = document.createElement('span');
+    box.className = 'gframe';
+    box.setAttribute('data-seed', hash(img.getAttribute('src') || ''));
+    // 枠は横いっぱいにして、画像にもともと付いている最大の幅（例：200px・420px）まで。狭い画面ではみ出さないように
+    var mws = getComputedStyle(img).maxWidth, mw = parseFloat(mws); if (/px$/.test(mws) && mw > 0) box.style.maxWidth = (mw + 14) + 'px';
+    img.parentNode.insertBefore(box, img);
+    box.appendChild(img);
+    box.appendChild(makeSvg('gframe-line'));
+    if (ro) ro.observe(box);
+    img.addEventListener('load', function () { draw(box); });
+    draw(box);
+  });
+
+  // 画面を模して作ったモック（設定画面 .wm-set など）も、スクショと同じグレーの線で囲む。イメージを伝えるための図（計算の図など）は囲まない（airiさん 2026-09-15）
+  var nm = 0;
+  document.querySelectorAll('.fcard .wm-set').forEach(function (m) {
+    if (m.parentElement.classList.contains('gframe')) return;
+    var box = document.createElement('span');
+    box.className = 'gframe gframe-mock';
+    box.setAttribute('data-seed', hash((m.getAttribute('aria-label') || '') + (nm++)));
+    m.parentNode.insertBefore(box, m);
+    box.appendChild(m);
+    box.appendChild(makeSvg('gframe-line'));
+    if (ro) ro.observe(box);
+    draw(box);
+  });
+
+  // 色つきの枠（使い方・ポイント・くわしく／お知らせ／手順のカード）
+  var n = 0;
+  document.querySelectorAll('.fcol, .fct-note, .fshots > li, div.gnote').forEach(function (box) {
+    if (box.querySelector(':scope > svg.cline-svg')) return;
+    box.classList.add('cline');
+    box.setAttribute('data-seed', hash((box.textContent || '').slice(0, 40) + (n++)));
+    box.appendChild(makeSvg('cline-svg'));
+    if (ro) ro.observe(box);
+    draw(box);
+  });
+  // 見出しの文字の幅はフォントの読み込みで変わるので、読み込み後にもう一度
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { document.querySelectorAll('.cline').forEach(draw); });
+})();
+</script>
+
+</body>
+</html>

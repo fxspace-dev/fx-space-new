@@ -21,7 +21,8 @@
 <link rel="stylesheet" href="css/style.css?v=20260908e">
 <!--
   ▼ 公開前に確定が必要な項目（2026-09-13 時点）
-    1) 済 … 申込URL（https://my.fintokei.com/ja/contests/COP30）は末尾の ENTRY_URL に入れてあります。
+    1) 済 … 申込URL（https://my.fintokei.com/ja/contests/COP30?affiliate=55）は末尾の ENTRY_URL に入れてあります。
+       ※ ?affiliate=55 はよすが紐付け用。2026-09-17 によすがの指示で追加（本番も反映済み）。
     2) 済 … 順位と賞品の対応は公式の大会ページのルールで確認しました（2026-09-16）。こちらの推測どおりでした。
     3) 済 … ドローダウンは 最大20%・1日あたり10%（2026-09-16 Fintokei回答）。大会ページのルール文は数値が抜けていて修正依頼中とのこと。
     4) 済 … よすがに紐づいていないアカウントは「コンテストに参加」でエラーになる設定。エラーが出た人だけ変更申請する流れ（同回答）。
@@ -753,7 +754,7 @@ body.yc-page { padding-top: 65px; }
 
 /* 参加申込リンク。ENTRY_URL に入れると全ボタンに反映される（空のままなら参加方法セクションへ移動する） */
 (function () {
-    var ENTRY_URL = 'https://my.fintokei.com/ja/contests/COP30';
+    var ENTRY_URL = 'https://my.fintokei.com/ja/contests/COP30?affiliate=55';
     if (!ENTRY_URL) return;
     document.querySelectorAll('.yc-entry-link').forEach(function (a) {
         a.href = ENTRY_URL;

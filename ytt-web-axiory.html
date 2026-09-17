@@ -1111,6 +1111,9 @@
         .toc-tab { left: 10px; top: 72px; width: 44px; height: 44px; }
         .toc-list a { font-size: 0.92rem; }
     }
+    /* タイトル下の波線：セクション見出しのオレンジ波線と同じ「長さ：太さ＝9：1」にする（波線の幅＝文字幅なので、文字幅のem数から太さを出す） */
+    .ytt-sp-hero .ytt-sp-title-line .ytt-title-wave { height: calc(1em * var(--title-em, 9.04) / 9); }
+    @media (max-width: 640px) { .ytt-sp-hero .ytt-sp-title-line .ytt-title-wave { height: calc(1em * var(--title-em, 9.04) / 9); } }
 </style>
 
 </head>

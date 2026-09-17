@@ -1238,6 +1238,9 @@
     details.gfold[open] { background: #f9fafb; }
     details.gfold .gfold-body { padding: 0 0.9rem 0.8rem; font-size: 0.8125rem; color: #4b5563; line-height: 1.8; }
     details.gfold .gfold-body b { color: #1e1b4b; }
+    /* タイトル下の波線：セクション見出しのオレンジ波線と同じ「長さ：太さ＝9：1」にする（波線の幅＝文字幅なので、文字幅のem数から太さを出す） */
+    .ytt-sp-hero .ytt-sp-title-line .ytt-title-wave { height: calc(1em * var(--title-em, 9.04) / 9); }
+    @media (max-width: 640px) { .ytt-sp-hero .ytt-sp-title-line .ytt-title-wave { height: calc(1em * var(--title-em, 9.04) / 9); } }
 </style>
 
 <script>document.documentElement.classList.add('js-gate');</script>

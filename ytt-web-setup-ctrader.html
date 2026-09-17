@@ -1252,6 +1252,9 @@
     .setup-done .setup-done-h { margin: 0; font-size: 1.35rem; font-weight: 900; color: #1e1b4b; line-height: 1.4; }
     .setup-done .setup-done-t { margin: 0.35rem 0 0; font-size: 0.92rem; font-weight: 700; color: #374151; line-height: 1.7; }
     @media (max-width: 600px) { .setup-done .setup-done-h { font-size: 1.15rem; } }
+    /* タイトル下の波線：セクション見出しのオレンジ波線と同じ「長さ：太さ＝9：1」にする（波線の幅＝文字幅なので、文字幅のem数から太さを出す） */
+    .ytt-sp-hero .ytt-sp-title-line .ytt-title-wave { height: calc(1em * var(--title-em, 9.04) / 9); }
+    @media (max-width: 640px) { .ytt-sp-hero .ytt-sp-title-line .ytt-title-wave { height: calc(1em * var(--title-em, 9.04) / 9); } }
 </style>
 
 <script>document.documentElement.classList.add('js-gate');</script>

@@ -21,8 +21,9 @@
 <link rel="stylesheet" href="css/style.css?v=20260908e">
 <!--
   ▼ 公開前に確定が必要な項目（2026-09-13 時点）
-    1) 済 … 申込URL（https://my.fintokei.com/ja/contests/COP30?affiliate=55）は末尾の ENTRY_URL に入れてあります。
-       ※ ?affiliate=55 はよすが紐付け用。2026-09-17 によすがの指示で追加（本番も反映済み）。
+    1) 済 … 申込URL（https://my.fintokei.com/ja/contests/COP30）は末尾の ENTRY_URL に入れてあります。
+       ※ 一度 ?affiliate=55 を付けたが、Fintokeiから「大会ページでは機能しない」と回答があり素のURLに戻した（2026-09-17）。
+          新規登録でよすがに紐づけるURLは STEP1 のボタン（register?contestId=…&affiliate=55）。
     2) 済 … 順位と賞品の対応は公式の大会ページのルールで確認しました（2026-09-16）。こちらの推測どおりでした。
     3) 済 … ドローダウンは 最大20%・1日あたり10%（2026-09-16 Fintokei回答）。大会ページのルール文は数値が抜けていて修正依頼中とのこと。
     4) 済 … よすがに紐づいていないアカウントは「コンテストに参加」でエラーになる設定。エラーが出た人だけ変更申請する流れ（同回答）。
@@ -94,6 +95,7 @@
 [data-anim] { opacity: 1; }
 .js-anim [data-anim] { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
 .js-anim [data-anim].is-in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 @media (prefers-reduced-motion: reduce) {
     .js-anim [data-anim] { opacity: 1; transform: none; transition: none; }
 }
@@ -265,6 +267,7 @@ body.yc-page { padding-top: 65px; }
     border-left: 1px solid var(--yc-line-soft);
 }
 .yc-step:last-child::before { display: none; }
+.yc-steps.is-branch .yc-step::before { display: none; }
 .yc-step-num {
     position: absolute; left: -4.2rem; top: 0;
     width: 2.7rem; height: 2.7rem; border-radius: 50%;
@@ -535,36 +538,32 @@ body.yc-page { padding-top: 65px; }
 <section class="yc-section is-alt" id="howto">
     <div class="yc-inner">
         <h2 class="yc-eyebrow" data-anim><span>参加方法</span></h2>
+        <p class="yc-lead" data-anim>あてはまるものを選んでください。どれか分からない方は、まず&#9313;を押してみてください。エラーが出たら&#9314;です。</p>
 
-        <div class="yc-steps" data-anim>
+        <div class="yc-steps is-branch" data-anim>
             <div class="yc-step">
                 <div class="yc-step-num">1</div>
-                <h3>Fintokeiのアカウントを用意する</h3>
-                <p>すでにFintokeiを使っている方は、そのままで大丈夫です。はじめての方は、下のボタンから登録してください。登録と同時に大会への参加も申し込めます。</p>
-                <a class="yc-btn sm" href="https://my.fintokei.com/ja/register?contestId=COP30&amp;contestTitle=%E7%AC%AC1%E5%9B%9E+Yosuga%E6%9D%AF+supported+by+Fintokei&amp;affiliate=55" target="_blank" rel="noopener">Fintokeiに無料登録する</a>
+                <h3>Fintokeiがはじめての方</h3>
+                <p>下のボタンから登録すると、アカウントの作成と大会への参加が一度に終わります。&#9313;の手続きは要りません。</p>
+                <a class="yc-btn sm" href="https://my.fintokei.com/ja/register?contestId=COP30&amp;contestTitle=%E7%AC%AC1%E5%9B%9E+Yosuga%E6%9D%AF+supported+by+Fintokei&amp;affiliate=55" target="_blank" rel="noopener">登録して参加する</a>
             </div>
             <div class="yc-step">
                 <div class="yc-step-num">2</div>
-                <h3>大会ページから申し込む</h3>
-                <p>Fintokeiの大会ページで「コンテストに参加」を押します。<span data-after-close="申し込みの受付は終了しました。">受付は9月30日までです。</span></p>
-                <p data-hide-after-close>「よすが以外の紹介で登録されています」という内容のメッセージが出て参加できない方は、<a class="yc-ref" href="https://forms.gle/eH1HqWRUrXyicW5D9" target="_blank" rel="noopener">紐付けの変更申請フォーム</a>から申請してください。くわしくは下の案内をご覧ください。</p>
+                <h3>すでにFintokeiを使っている方</h3>
+                <p>大会ページで「コンテストに参加」を押します。<span data-after-close="申し込みの受付は終了しました。">受付は9月30日までです。</span></p>
+                <a class="yc-btn sm yc-join-link" href="#howto" target="_blank" rel="noopener">大会ページで参加する</a>
             </div>
-            <div class="yc-step">
+            <div class="yc-step" data-hide-after-close>
                 <div class="yc-step-num">3</div>
-                <h3>大会期間中に取引</h3>
-                <p>大会期間は9月21日〜10月20日。あとはいつものようにトレードするだけです。YTTもそのまま使えます。</p>
+                <h3>&#9313;でエラーが出た方</h3>
+                <p>そのアカウントは、よすが以外の人の紹介で登録されています。今回の大会に参加できるのは、よすが（FX SPACE）の紹介で登録したアカウントだけです。</p>
+                <p>下のボタンから、大会のあいだだけ「よすがの紹介」に変える申請をしてください。変更まで最大2営業日かかり、完了のお知らせは届きません。しばらくしてから、もう一度&#9313;をお試しください。</p>
+                <p>申請は9月30日まで受け付けていますが、変更に日数がかかるため、余裕をもって9月26日ごろまでの申請をおすすめします。大会が終わると、紹介元は元に戻ります。</p>
+                <a class="yc-btn sm" href="https://forms.gle/eH1HqWRUrXyicW5D9" target="_blank" rel="noopener">紐付けの変更を申請する</a>
             </div>
         </div>
 
-        <details class="yc-toggle" data-anim data-hide-after-close>
-            <summary><span class="yc-toggle-ic" aria-hidden="true">?</span>「コンテストに参加」でエラーが出た方はこちら</summary>
-            <div class="yc-toggle-body">
-                <p>そのアカウントは、よすが以外の人の紹介で登録されています。下のボタンから、大会のあいだだけ「よすがの紹介」に変えてもらう申請をしてください。申請は9月30日までです。</p>
-                <a class="yc-btn sm" href="https://forms.gle/eH1HqWRUrXyicW5D9" target="_blank" rel="noopener">よすがへの変更を申し込む</a>
-                <p>Fintokeiのアカウントには「誰の紹介で登録したか」という情報がついています。今回の大会に参加できるのは、よすが（FX SPACE）の紹介で登録した方だけです。</p>
-                <p>申請から変更まで、最大2営業日かかります。完了のお知らせは届かないので、しばらくしてから、もう一度大会ページで申し込んでみてください。大会が終わると、紹介元は元に戻ります。</p>
-            </div>
-        </details>
+        <p class="yc-note" data-anim>参加できたら、あとは9月21日〜10月20日のあいだ、いつものようにトレードするだけです。YTT・Web版YTTもそのまま使えます。</p>
     </div>
 </section>
 
@@ -580,6 +579,14 @@ body.yc-page { padding-top: 65px; }
                     <p>いりません。参加費は無料です。必要なのは、よすが（FX SPACE）の紹介で登録したFintokeiのアカウントだけです。</p>
                     <p>すでにFintokeiを使っている方は、そのまま大会ページから申し込めます。よすが以外の人の紹介で登録している場合は、「コンテストに参加」を押したときにエラーになります。そのときは<a class="yc-ref" href="https://forms.gle/eH1HqWRUrXyicW5D9" target="_blank" rel="noopener">コード変更申請フォーム</a>から、大会のあいだだけ「よすがの紹介」に変えてもらってください。申請は9月30日までです。</p>
                     <p>変更には最大2営業日かかります。完了の連絡は届かないので、しばらくしてから、もう一度大会ページで申し込んでみてください。大会が終わると、紹介元は元に戻ります。</p>
+                </div>
+            </details>
+
+            <details class="yc-faq">
+                <summary>どのボタンを押せばいいか分かりません</summary>
+                <div class="yc-faq-a">
+                    <p>Fintokeiのアカウントをまだお持ちでない方は、参加方法の&#9312;「登録して参加する」を押してください。登録と大会への参加が一度に終わります。</p>
+                    <p>すでにお持ちの方は&#9313;「大会ページで参加する」です。そこで「参加できません」という内容のメッセージが出た場合だけ、&#9314;の変更申請に進んでください。</p>
                 </div>
             </details>
 
@@ -676,7 +683,12 @@ body.yc-page { padding-top: 65px; }
        大会中（受付も続いている間）は、ボタンの下に小さくランキングへの案内を出す。
        飛び先は同じ大会ページなので、ボタンを2つ並べない */
     if (now >= CLOSE) {
-        document.querySelectorAll('.yc-entry-link').forEach(function (a) { a.textContent = 'ランキングを見る'; });
+        document.querySelectorAll('.yc-entry-link').forEach(function (a) {
+            a.textContent = 'ランキングを見る';
+            a.href = 'https://my.fintokei.com/ja/contests/COP30';
+            a.target = '_blank';
+            a.rel = 'noopener';
+        });
         /* 申込の受付が終わったら、申し込み前提の文言を差し替える・隠す */
         document.querySelectorAll('[data-after-close]').forEach(function (el) { el.textContent = el.getAttribute('data-after-close'); });
         document.querySelectorAll('[data-hide-after-close]').forEach(function (el) { el.hidden = true; });
@@ -752,15 +764,12 @@ body.yc-page { padding-top: 65px; }
     });
 })();
 
-/* 参加申込リンク。ENTRY_URL に入れると全ボタンに反映される（空のままなら参加方法セクションへ移動する） */
+/* 申込先は状況で3つに分かれるので、大きいボタン（.yc-entry-link）は参加方法セクションへ送り、
+   大会ページを直接開くのは参加方法の&#9313;のボタン（.yc-join-link）だけにしている */
 (function () {
-    var ENTRY_URL = 'https://my.fintokei.com/ja/contests/COP30?affiliate=55';
+    var ENTRY_URL = 'https://my.fintokei.com/ja/contests/COP30';
     if (!ENTRY_URL) return;
-    document.querySelectorAll('.yc-entry-link').forEach(function (a) {
-        a.href = ENTRY_URL;
-        a.target = '_blank';
-        a.rel = 'noopener';
-    });
+    document.querySelectorAll('.yc-join-link').forEach(function (a) { a.href = ENTRY_URL; });
 })();
 
 /* スクロール演出。IntersectionObserverが使えない環境では js-anim を付けないので、

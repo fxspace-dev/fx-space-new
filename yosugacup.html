@@ -21,9 +21,9 @@
 <link rel="stylesheet" href="css/style.css?v=20260908e">
 <!--
   ▼ 公開前に確定が必要な項目（2026-09-13 時点）
-    1) 済 … 申込URL（https://my.fintokei.com/ja/contests/COP30）は末尾の ENTRY_URL に入れてあります。
-       ※ 一度 ?affiliate=55 を付けたが、Fintokeiから「大会ページでは機能しない」と回答があり素のURLに戻した（2026-09-17）。
-          新規登録でよすがに紐づけるURLは STEP1 のボタン（register?contestId=…&affiliate=55）。
+    1) 済 … Fintokeiへ出るリンクはすべて affiliate=55 付き（よすが経由の登録として扱われるようにするため）。
+       参加の2つのボタンは register?contestId=COP30…&affiliate=55（すでに口座がある人はログイン後の画面になる）。
+       受付終了後のランキングは contests/COP30?affiliate=55、プラン説明は protrader-slim/?affiliate=55。
     2) 済 … 順位と賞品の対応は公式の大会ページのルールで確認しました（2026-09-16）。こちらの推測どおりでした。
     3) 済 … ドローダウンは 最大20%・1日あたり10%（2026-09-16 Fintokei回答）。大会ページのルール文は数値が抜けていて修正依頼中とのこと。
     4) 済 … よすがに紐づいていないアカウントは「コンテストに参加」でエラーになる設定。エラーが出た人だけ変更申請する流れ（同回答）。
@@ -452,7 +452,7 @@ body.yc-page { padding-top: 65px; }
             </div>
         </div>
 
-        <p class="yc-note" data-anim><a class="yc-ref" href="https://www.fintokei.com/jp/protrader-slim/" target="_blank" rel="noopener">賞品のチャレンジプラン・スリムについて詳しく見る</a><br><small>※トロフィーの画像はイメージです</small></p>
+        <p class="yc-note" data-anim><a class="yc-ref" href="https://www.fintokei.com/jp/protrader-slim/?affiliate=55" target="_blank" rel="noopener">賞品のチャレンジプラン・スリムについて詳しく見る</a><br><small>※トロフィーの画像はイメージです</small></p>
     </div>
 </section>
 
@@ -572,7 +572,7 @@ body.yc-page { padding-top: 65px; }
                 <span class="yc-path-label">アカウントをお持ちの方</span>
                 <h3>大会ページから参加します</h3>
                 <p>大会ページを開いて「コンテストに参加」を押してください。<span data-after-close="申し込みの受付は終了しました。">受付は9月30日までです。</span></p>
-                <div class="yc-path-push"><a class="yc-btn sm yc-join-link" href="#howto" target="_blank" rel="noopener">大会ページで参加する</a></div>
+                <div class="yc-path-push"><a class="yc-btn sm yc-join-link" href="https://my.fintokei.com/ja/register?contestId=COP30&amp;contestTitle=%E7%AC%AC1%E5%9B%9E+Yosuga%E6%9D%AF+supported+by+Fintokei&amp;affiliate=55" target="_blank" rel="noopener">大会ページで参加する</a></div>
 
                 <div class="yc-path-sub" data-hide-after-close>
                     <h4>⚠️「本コンテストは特定のアフィリエイト経由のアカウントが対象のため…」というエラーが出たときは</h4>
@@ -705,7 +705,7 @@ body.yc-page { padding-top: 65px; }
     if (now >= CLOSE) {
         document.querySelectorAll('.yc-entry-link').forEach(function (a) {
             a.textContent = 'ランキングを見る';
-            a.href = 'https://my.fintokei.com/ja/contests/COP30';
+            a.href = 'https://my.fintokei.com/ja/contests/COP30?affiliate=55';
             a.target = '_blank';
             a.rel = 'noopener';
         });
@@ -784,10 +784,10 @@ body.yc-page { padding-top: 65px; }
     });
 })();
 
-/* 申込先は状況で3つに分かれるので、大きいボタン（.yc-entry-link）は参加方法セクションへ送り、
-   大会ページを直接開くのは参加方法の&#9313;のボタン（.yc-join-link）だけにしている */
+/* 大きいボタン（.yc-entry-link）は参加方法セクションへ送る。Fintokeiを開くのは参加方法のボタンだけ。
+   リンクは必ず affiliate=55 付きにして、よすが経由の登録として扱われるようにしている */
 (function () {
-    var ENTRY_URL = 'https://my.fintokei.com/ja/contests/COP30';
+    var ENTRY_URL = 'https://my.fintokei.com/ja/register?contestId=COP30&contestTitle=%E7%AC%AC1%E5%9B%9E+Yosuga%E6%9D%AF+supported+by+Fintokei&affiliate=55';
     if (!ENTRY_URL) return;
     document.querySelectorAll('.yc-join-link').forEach(function (a) { a.href = ENTRY_URL; });
 })();

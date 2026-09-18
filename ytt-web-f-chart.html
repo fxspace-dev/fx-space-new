@@ -1459,6 +1459,12 @@
     .gframe.gframe-mock { display: block; width: 100%; max-width: 434px; margin: 0.6rem auto 0; }
     .gframe-mock > .wm-set { margin: 0; max-width: none; }
     .fmore-media { margin-bottom: 0.8rem; }
+    /* いつ時点の内容か（ページの上） */
+    /* タイトルの下に、最終更新と注意をひとまとめに。説明文とのあいだは広くあける（字がつまって見えないように） */
+    .fasof-date { margin: 1.1rem 0 0; font-size: 0.8rem; color: #6b7280; text-align: center; }
+    .fasof-date b { font-weight: 700; color: #374151; }
+    .fasof-note { max-width: 640px; margin: 0.35rem auto 2.4rem; font-size: 0.8rem; color: #6b7280; line-height: 1.8; text-align: center; }
+    @media (max-width: 600px) { .fasof-note { margin-bottom: 1.9rem; } }
     /* キーボードの絵（ショートカット）。説明のための図なので、クレヨンの枠では囲まない */
     .fkb { margin-top: 0.6rem; }
     .fkb-lead { margin: 0 0 0.9rem; font-size: 0.9rem; font-weight: 700; color: #1e1b4b; text-align: center; }
@@ -1988,6 +1994,8 @@
     <h1 class="ytt-sp-hero-title">
         <span class="ytt-sp-title-line"><span class="line-text">チャートの表示<img class="ytt-title-wave" src="img/wave-yellow.png" alt=""></span></span>
     </h1>
+    <p class="fasof-date">最終更新：<b>2026年9月18日 17:00</b></p>
+    <p class="fasof-note">※ Web版YTTはアップデートが続いているため、<wbr>実際の画面と違うことがあります。</p>
     <p class="ytt-sp-hero-lead">チャートに線や情報を重ねて、<br>相場の状況をひと目で分かるようにします。</p>
     <nav class="fcat-nav" aria-label="使い方のページ">
         <a href="ytt-web-features.html">使い方トップ</a>
@@ -2654,7 +2662,7 @@ function fvidLoopUI(video, wrap, withBar) {
   });
 })();
 </script>
-<script src="js/ytt-web-search.js?v=ffb90dd8" defer></script>
+<script src="js/ytt-web-search.js?v=c50a868e" defer></script>
 <script>
 /* 手書き風のクレヨン線（ytt-web-setup.html のスクショの枠と同じ描き方）。build-guide.js がページの最後に入れる
    ・スクショ（.fduo.fimg-only > img）：画像を span.gframe で包み、グレーの線で囲む（線の形は画像ごとに固定＝リサイズしても同じ）

@@ -1459,6 +1459,40 @@
     .gframe.gframe-mock { display: block; width: 100%; max-width: 434px; margin: 0.6rem auto 0; }
     .gframe-mock > .wm-set { margin: 0; max-width: none; }
     .fmore-media { margin-bottom: 0.8rem; }
+    /* キーボードの絵（ショートカット）。説明のための図なので、クレヨンの枠では囲まない */
+    .fkb { margin-top: 0.6rem; }
+    .fkb-lead { margin: 0 0 0.9rem; font-size: 0.9rem; font-weight: 700; color: #1e1b4b; text-align: center; }
+    .fkb-lead kbd, .fkb-cap { display: inline-flex; align-items: center; justify-content: center; min-width: 1.9em; padding: 0.1em 0.5em; border: 1.5px solid #1e1b4b; border-radius: 6px; background: #fff; font: 800 0.85em/1.5 Inter, system-ui, sans-serif; color: #1e1b4b; }
+    .fkb-board { display: grid; gap: 6px; max-width: 900px; margin: 0 auto; padding: 14px; border: 2px solid #d3d8e2; border-radius: 16px; background: #f3f4f6; }
+    .fkb-row { display: grid; grid-template-columns: repeat(42, minmax(0, 1fr)); gap: 6px; }
+    .fkb-key { display: flex; flex-direction: column; justify-content: space-between; min-height: 66px; padding: 5px 6px; border: 1.5px solid #d1d5db; border-radius: 8px; background: #fff; color: #9ca3af; text-decoration: none; text-align: left; overflow: hidden; }
+    .fkb-key b { font: 800 0.78rem/1 Inter, system-ui, sans-serif; }
+    .fkb-key i { font-style: normal; font-size: 0.7rem; font-weight: 800; line-height: 1.3; word-break: normal; overflow-wrap: anywhere; }
+    .fkb-key.is-act { background: #4f46e5; border-color: #4f46e5; color: #fff; }
+    .fkb-key.is-view { background: #f59e0b; border-color: #f59e0b; color: #1e1b4b; }
+    a.fkb-key:hover { border-color: #1e1b4b; }
+    a.fkb-key:focus-visible { outline: 3px solid #a5b4fc; outline-offset: 2px; }
+    .fkb-key.fkb-shift { background: #1e1b4b; border-color: #1e1b4b; color: #fff; }
+    .fkb-legend { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.4rem 1.4rem; margin: 0.9rem 0 0; padding: 0; list-style: none; font-size: 0.82rem; font-weight: 700; color: #374151; }
+    .fkb-legend li { display: flex; align-items: center; gap: 0.45rem; }
+    .fkb-dot { width: 14px; height: 14px; border-radius: 4px; }
+    .fkb-dot.is-act, .fkb-cap.is-act { background: #4f46e5; border-color: #4f46e5; color: #fff; }
+    .fkb-dot.is-view, .fkb-cap.is-view { background: #f59e0b; border-color: #f59e0b; color: #1e1b4b; }
+    /* PCはキーの中に名前が出ているので、一覧は出さない（同じことを2回書かない）。スマホはキーに字が入らないので一覧で読む */
+    .fkb-lists { display: none; }
+    @media (max-width: 860px) {
+      .fkb-board { gap: 3px; padding: 8px; border-radius: 12px; }
+      .fkb-row { gap: 3px; }
+      .fkb-key { min-height: 34px; padding: 3px; align-items: center; justify-content: center; border-radius: 5px; border-width: 1px; }
+      .fkb-key i { display: none; }
+      .fkb-key b { font-size: 0.72rem; }
+      .fkb-shift b { font-size: 0.6rem; }
+      .fkb-lists { display: grid; gap: 1rem; margin-top: 1.1rem; }
+      .fkb-list { display: grid; gap: 0.5rem; margin: 0; padding: 0; list-style: none; text-align: left; }
+      .fkb-list li { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.9rem; line-height: 1.6; }
+      .fkb-list .fkb-cap { flex: none; margin-top: 0.1em; }
+      .fkb-list a { color: #1e1b4b; font-weight: 600; text-decoration: underline; text-decoration-color: #c7d2fe; text-underline-offset: 3px; }
+    }
     .ftable-wrap { overflow-x: auto; margin-top: 0.6rem; }
     /* 表には必ず罫線をつける（airiさん 2026-09-15「表の線がないと見にくい」） */
     .ftable { width: 100%; border-collapse: collapse; font-size: 0.82rem; border: 1px solid #c9ced8; }
@@ -1823,6 +1857,7 @@
 .fcard.is-side .fcard-grid > *,
 .fcard.is-side .fcard-side > *,
 .fmore-side > *,
+.fkb-row > *,
 .fnext > *,
 .fhub > *,
 .fshots > *,
@@ -2137,8 +2172,13 @@
         </article>
         <article class="fcard has-media is-wide" id="shortcuts">
             <div class="fcard-top"><h3 class="fcard-name">キーボードのショートカット</h3></div>
-            <p class="fcard-what">PCでは、よく使う操作をキーボードだけで呼び出せます。マウスでボタンを探さなくていいので、エントリーや決済をすばやく行えます。</p>
-            <div class="fcard-grid"><div class="fcard-media"><div class="ftable-wrap"><table class="ftable"><thead><tr><th>キー</th><th>できること</th><th>くわしく</th></tr></thead><tbody><tr><td data-h="キー"><kbd>L</kbd></td><td data-h="できること">ロングシナリオ（買い）を出す</td><td data-h="くわしく"><a href="ytt-web-f-scenario.html#scenario">シナリオ</a></td></tr><tr><td data-h="キー"><kbd>Shift</kbd>＋<kbd>L</kbd></td><td data-h="できること">ショートシナリオ（売り）を出す</td><td data-h="くわしく"><a href="ytt-web-f-scenario.html#scenario">シナリオ</a></td></tr><tr><td data-h="キー"><kbd>Shift</kbd>＋<kbd>S</kbd></td><td data-h="できること">シナリオ構築のパネルを出す</td><td data-h="くわしく"><a href="ytt-web-f-scenario.html#build">シナリオ構築</a></td></tr><tr><td data-h="キー"><kbd>Q</kbd></td><td data-h="できること">建値の線を置く（保有中のポジションを選んでいるとき）</td><td data-h="くわしく"><a href="ytt-web-f-scenario.html#be-line">建値</a></td></tr><tr><td data-h="キー"><kbd>W</kbd></td><td data-h="できること">トレイルの線を置く（保有中のポジションを選んでいるとき）</td><td data-h="くわしく"><a href="ytt-web-f-scenario.html#trail-line">トレイル</a></td></tr><tr><td data-h="キー"><kbd>Shift</kbd>＋<kbd>X</kbd></td><td data-h="できること">全決済</td><td data-h="くわしく"><a href="ytt-web-f-trade.html#close">全決済・1/2決済</a></td></tr><tr><td data-h="キー"><kbd>Shift</kbd>＋<kbd>H</kbd></td><td data-h="できること">1/2決済</td><td data-h="くわしく"><a href="ytt-web-f-trade.html#close">全決済・1/2決済</a></td></tr></tbody></table></div></div><div class="fcard-side"><fieldset class="fcol is-detail"><legend class="fsub">くわしく</legend><ul class="fnotes"><li>「Shift＋」は、Shiftキーを押しながら、そのキーを押します</li><li>全決済・1/2決済は、ボタンを押したときと同じく確認の画面が出ます（設定の「ワンクリック決済」がオンなら、すぐに決済されます）</li><li>Q と W は、チャートで保有中のポジションを選んでいるときに使えます</li></ul><details class="fnotes-more"><summary><span class="fnm-t">もっと見る（1）</span></summary><ul class="fnotes"><li>スマホにはありません</li></ul></details></fieldset></div></div>
+            <p class="fcard-what">PCでは、よく使う操作をキーボードだけで呼び出せます。設定を開かなくても、線を置いたり、チャートの表示を切り替えたりできます。</p>
+            <div class="fcard-grid"><div class="fcard-media"><div class="fkb">
+    <p class="fkb-lead"><kbd>Shift</kbd> を押しながら、色のついたキーを押します。</p>
+    <div class="fkb-board"><div class="fkb-row"><span class="fkb-key" style="grid-column:1 / span 4"><b>1</b></span><a class="fkb-key is-view" style="grid-column:5 / span 4" href="ytt-web-f-chart.html#autoline" aria-label="Shift＋2：オートラインのオン・オフ（Shift＋L でも同じ）"><b>2</b><i>オートライン</i></a><a class="fkb-key is-view" style="grid-column:9 / span 4" href="ytt-web-f-chart.html#zigzag" aria-label="Shift＋3：「zigzag MTF表示」のオン・オフ"><b>3</b><i>zigzag<br>MTF</i></a><a class="fkb-key is-view" style="grid-column:13 / span 4" href="ytt-web-f-chart.html#zigzag" aria-label="Shift＋4：「zigzag MTF表示(下位足)」のオン・オフ"><b>4</b><i>zigzag<br>下位足</i></a><a class="fkb-key is-view" style="grid-column:17 / span 4" href="ytt-web-f-chart.html#zigzag" aria-label="Shift＋5：「トレンド背景」のオン・オフ"><b>5</b><i>トレンド背景</i></a><span class="fkb-key" style="grid-column:21 / span 4"><b>6</b></span><span class="fkb-key" style="grid-column:25 / span 4"><b>7</b></span><span class="fkb-key" style="grid-column:29 / span 4"><b>8</b></span><span class="fkb-key" style="grid-column:33 / span 4"><b>9</b></span><span class="fkb-key" style="grid-column:37 / span 4"><b>0</b></span></div><div class="fkb-row"><a class="fkb-key is-act" style="grid-column:3 / span 4" href="ytt-web-f-scenario.html#be-line" aria-label="Shift＋Q：建値の線を置く"><b>Q</b><i>建値</i></a><a class="fkb-key is-act" style="grid-column:7 / span 4" href="ytt-web-f-scenario.html#trail-line" aria-label="Shift＋W：トレイルの線を置く"><b>W</b><i>トレイル</i></a><span class="fkb-key" style="grid-column:11 / span 4"><b>E</b></span><a class="fkb-key is-view" style="grid-column:15 / span 4" href="ytt-web-f-settings.html#pl-hide" aria-label="Shift＋R：残高を隠す・出す"><b>R</b><i>残高を隠す</i></a><span class="fkb-key" style="grid-column:19 / span 4"><b>T</b></span><span class="fkb-key" style="grid-column:23 / span 4"><b>Y</b></span><span class="fkb-key" style="grid-column:27 / span 4"><b>U</b></span><span class="fkb-key" style="grid-column:31 / span 4"><b>I</b></span><span class="fkb-key" style="grid-column:35 / span 4"><b>O</b></span><a class="fkb-key is-view" style="grid-column:39 / span 4" href="ytt-web-f-chart.html#history" aria-label="Shift＋P：「チャートに取引履歴を表示」のオン・オフ"><b>P</b><i>取引履歴</i></a></div><div class="fkb-row"><a class="fkb-key is-view" style="grid-column:4 / span 4" href="ytt-web-f-chart.html#session" aria-label="Shift＋A：セッション表示のオン・オフ"><b>A</b><i>セッション</i></a><a class="fkb-key is-act" style="grid-column:8 / span 4" href="ytt-web-f-scenario.html#build" aria-label="Shift＋S：シナリオ構築のパネルを出す"><b>S</b><i>シナリオ構築</i></a><span class="fkb-key" style="grid-column:12 / span 4"><b>D</b></span><span class="fkb-key" style="grid-column:16 / span 4"><b>F</b></span><span class="fkb-key" style="grid-column:20 / span 4"><b>G</b></span><a class="fkb-key is-act" style="grid-column:24 / span 4" href="ytt-web-f-chart.html#alertline" aria-label="Shift＋H：通知ラインを出す"><b>H</b><i>通知ライン</i></a><span class="fkb-key" style="grid-column:28 / span 4"><b>J</b></span><span class="fkb-key" style="grid-column:32 / span 4"><b>K</b></span><a class="fkb-key is-view" style="grid-column:36 / span 4" href="ytt-web-f-chart.html#autoline" aria-label="Shift＋L：オートラインのオン・オフ（Shift＋2 でも同じ）"><b>L</b><i>オートライン</i></a></div><div class="fkb-row"><span class="fkb-key fkb-shift" style="grid-column:1 / span 5"><b>Shift</b><i>押しながら</i></span><a class="fkb-key is-view" style="grid-column:6 / span 4" href="ytt-web-f-chart.html#zigzag" aria-label="Shift＋Z：zigzag MTF の3つの表示を、まとめてオン・オフ"><b>Z</b><i>zigzag<br>まとめて</i></a><a class="fkb-key is-act" style="grid-column:10 / span 4" href="ytt-web-f-scenario.html#scenario" aria-label="Shift＋X：シナリオを削除する"><b>X</b><i>シナリオ削除</i></a><a class="fkb-key is-view" style="grid-column:14 / span 4" href="ytt-web-f-chart.html#scalp" aria-label="Shift＋C：スキャモードのオン・オフ"><b>C</b><i>スキャモード</i></a><span class="fkb-key" style="grid-column:18 / span 4"><b>V</b></span><span class="fkb-key" style="grid-column:22 / span 4"><b>B</b></span><a class="fkb-key is-view" style="grid-column:26 / span 4" href="ytt-web-f-chart.html#indicator" aria-label="Shift＋N：経済指標表示のオン・オフ"><b>N</b><i>経済指標</i></a><span class="fkb-key" style="grid-column:30 / span 4"><b>M</b></span></div></div>
+    <ul class="fkb-legend"><li><span class="fkb-dot is-act"></span>線を置く・パネルを出す・消す</li><li><span class="fkb-dot is-view"></span>チャートの表示を切り替える</li></ul>
+    <div class="fkb-lists"><ul class="fkb-list"><li><span class="fkb-cap is-act">S</span><a href="ytt-web-f-scenario.html#build">シナリオ構築のパネルを出す</a></li><li><span class="fkb-cap is-act">X</span><a href="ytt-web-f-scenario.html#scenario">シナリオを削除する</a></li><li><span class="fkb-cap is-act">Q</span><a href="ytt-web-f-scenario.html#be-line">建値の線を置く</a></li><li><span class="fkb-cap is-act">W</span><a href="ytt-web-f-scenario.html#trail-line">トレイルの線を置く</a></li><li><span class="fkb-cap is-act">H</span><a href="ytt-web-f-chart.html#alertline">通知ラインを出す</a></li></ul><ul class="fkb-list"><li><span class="fkb-cap is-view">2</span><a href="ytt-web-f-chart.html#autoline">オートラインのオン・オフ（Shift＋L でも同じ）</a></li><li><span class="fkb-cap is-view">3</span><a href="ytt-web-f-chart.html#zigzag">「zigzag MTF表示」のオン・オフ</a></li><li><span class="fkb-cap is-view">4</span><a href="ytt-web-f-chart.html#zigzag">「zigzag MTF表示(下位足)」のオン・オフ</a></li><li><span class="fkb-cap is-view">5</span><a href="ytt-web-f-chart.html#zigzag">「トレンド背景」のオン・オフ</a></li><li><span class="fkb-cap is-view">L</span><a href="ytt-web-f-chart.html#autoline">オートラインのオン・オフ（Shift＋2 でも同じ）</a></li><li><span class="fkb-cap is-view">Z</span><a href="ytt-web-f-chart.html#zigzag">zigzag MTF の3つの表示を、まとめてオン・オフ</a></li><li><span class="fkb-cap is-view">N</span><a href="ytt-web-f-chart.html#indicator">経済指標表示のオン・オフ</a></li><li><span class="fkb-cap is-view">A</span><a href="ytt-web-f-chart.html#session">セッション表示のオン・オフ</a></li><li><span class="fkb-cap is-view">P</span><a href="ytt-web-f-chart.html#history">「チャートに取引履歴を表示」のオン・オフ</a></li><li><span class="fkb-cap is-view">C</span><a href="ytt-web-f-chart.html#scalp">スキャモードのオン・オフ</a></li><li><span class="fkb-cap is-view">R</span><a href="ytt-web-f-settings.html#pl-hide">残高を隠す・出す</a></li></ul></div>
+  </div></div><div class="fcard-side"><fieldset class="fcol is-detail"><legend class="fsub">くわしく</legend><ul class="fnotes"><li><b>注文や決済のショートカットはありません</b>（押しまちがいで注文・決済されないようにするためです）</li><li>Shift＋X は、シナリオの「削除」ボタンと同じです</li><li>スマホにはありません</li></ul></fieldset></div></div>
         </article>
     </div>
 </section>
@@ -2716,7 +2756,7 @@ function fvidLoopUI(video, wrap, withBar) {
   });
 })();
 </script>
-<script src="js/ytt-web-search.js?v=8b3941ff" defer></script>
+<script src="js/ytt-web-search.js?v=ffb90dd8" defer></script>
 <script>
 /* 手書き風のクレヨン線（ytt-web-setup.html のスクショの枠と同じ描き方）。build-guide.js がページの最後に入れる
    ・スクショ（.fduo.fimg-only > img）：画像を span.gframe で包み、グレーの線で囲む（線の形は画像ごとに固定＝リサイズしても同じ）

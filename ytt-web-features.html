@@ -1459,6 +1459,40 @@
     .gframe.gframe-mock { display: block; width: 100%; max-width: 434px; margin: 0.6rem auto 0; }
     .gframe-mock > .wm-set { margin: 0; max-width: none; }
     .fmore-media { margin-bottom: 0.8rem; }
+    /* キーボードの絵（ショートカット）。説明のための図なので、クレヨンの枠では囲まない */
+    .fkb { margin-top: 0.6rem; }
+    .fkb-lead { margin: 0 0 0.9rem; font-size: 0.9rem; font-weight: 700; color: #1e1b4b; text-align: center; }
+    .fkb-lead kbd, .fkb-cap { display: inline-flex; align-items: center; justify-content: center; min-width: 1.9em; padding: 0.1em 0.5em; border: 1.5px solid #1e1b4b; border-radius: 6px; background: #fff; font: 800 0.85em/1.5 Inter, system-ui, sans-serif; color: #1e1b4b; }
+    .fkb-board { display: grid; gap: 6px; max-width: 900px; margin: 0 auto; padding: 14px; border: 2px solid #d3d8e2; border-radius: 16px; background: #f3f4f6; }
+    .fkb-row { display: grid; grid-template-columns: repeat(42, minmax(0, 1fr)); gap: 6px; }
+    .fkb-key { display: flex; flex-direction: column; justify-content: space-between; min-height: 66px; padding: 5px 6px; border: 1.5px solid #d1d5db; border-radius: 8px; background: #fff; color: #9ca3af; text-decoration: none; text-align: left; overflow: hidden; }
+    .fkb-key b { font: 800 0.78rem/1 Inter, system-ui, sans-serif; }
+    .fkb-key i { font-style: normal; font-size: 0.7rem; font-weight: 800; line-height: 1.3; word-break: normal; overflow-wrap: anywhere; }
+    .fkb-key.is-act { background: #4f46e5; border-color: #4f46e5; color: #fff; }
+    .fkb-key.is-view { background: #f59e0b; border-color: #f59e0b; color: #1e1b4b; }
+    a.fkb-key:hover { border-color: #1e1b4b; }
+    a.fkb-key:focus-visible { outline: 3px solid #a5b4fc; outline-offset: 2px; }
+    .fkb-key.fkb-shift { background: #1e1b4b; border-color: #1e1b4b; color: #fff; }
+    .fkb-legend { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.4rem 1.4rem; margin: 0.9rem 0 0; padding: 0; list-style: none; font-size: 0.82rem; font-weight: 700; color: #374151; }
+    .fkb-legend li { display: flex; align-items: center; gap: 0.45rem; }
+    .fkb-dot { width: 14px; height: 14px; border-radius: 4px; }
+    .fkb-dot.is-act, .fkb-cap.is-act { background: #4f46e5; border-color: #4f46e5; color: #fff; }
+    .fkb-dot.is-view, .fkb-cap.is-view { background: #f59e0b; border-color: #f59e0b; color: #1e1b4b; }
+    /* PCはキーの中に名前が出ているので、一覧は出さない（同じことを2回書かない）。スマホはキーに字が入らないので一覧で読む */
+    .fkb-lists { display: none; }
+    @media (max-width: 860px) {
+      .fkb-board { gap: 3px; padding: 8px; border-radius: 12px; }
+      .fkb-row { gap: 3px; }
+      .fkb-key { min-height: 34px; padding: 3px; align-items: center; justify-content: center; border-radius: 5px; border-width: 1px; }
+      .fkb-key i { display: none; }
+      .fkb-key b { font-size: 0.72rem; }
+      .fkb-shift b { font-size: 0.6rem; }
+      .fkb-lists { display: grid; gap: 1rem; margin-top: 1.1rem; }
+      .fkb-list { display: grid; gap: 0.5rem; margin: 0; padding: 0; list-style: none; text-align: left; }
+      .fkb-list li { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.9rem; line-height: 1.6; }
+      .fkb-list .fkb-cap { flex: none; margin-top: 0.1em; }
+      .fkb-list a { color: #1e1b4b; font-weight: 600; text-decoration: underline; text-decoration-color: #c7d2fe; text-underline-offset: 3px; }
+    }
     .ftable-wrap { overflow-x: auto; margin-top: 0.6rem; }
     /* 表には必ず罫線をつける（airiさん 2026-09-15「表の線がないと見にくい」） */
     .ftable { width: 100%; border-collapse: collapse; font-size: 0.82rem; border: 1px solid #c9ced8; }
@@ -1823,6 +1857,7 @@
 .fcard.is-side .fcard-grid > *,
 .fcard.is-side .fcard-side > *,
 .fmore-side > *,
+.fkb-row > *,
 .fnext > *,
 .fhub > *,
 .fshots > *,
@@ -2808,7 +2843,7 @@ function fvidLoopUI(video, wrap, withBar) {
   });
 })();
 </script>
-<script src="js/ytt-web-search.js?v=8b3941ff" defer></script>
+<script src="js/ytt-web-search.js?v=ffb90dd8" defer></script>
 <script>
 /* 手書き風のクレヨン線（ytt-web-setup.html のスクショの枠と同じ描き方）。build-guide.js がページの最後に入れる
    ・スクショ（.fduo.fimg-only > img）：画像を span.gframe で包み、グレーの線で囲む（線の形は画像ごとに固定＝リサイズしても同じ）

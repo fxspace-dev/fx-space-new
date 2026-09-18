@@ -85,6 +85,7 @@
 .yc-h2 { font-size: clamp(1.5rem, 4.4vw, 2.2rem); font-weight: 900; line-height: 1.45; margin: 0 0 1rem; text-align: center; }
 .yc-lead { color: var(--yc-muted); font-size: 0.98rem; line-height: 2; margin: 0 auto 2.4rem; max-width: 620px; text-align: center; }
 .yc-note { color: var(--yc-dim); font-size: 0.82rem; line-height: 1.9; margin: 2.4rem 0 0; text-align: center; }
+.yc-note small { font-size: 0.8rem; }
 .yc-ref { color: var(--yc-dim); font-size: 0.82rem; text-decoration: underline; }
 .yc-ref:hover { color: var(--yc-muted); }
 
@@ -135,7 +136,7 @@ body.yc-page { padding-top: 65px; }
 .yc-count.is-key { border-color: rgba(227, 191, 95, 0.55); }
 .yc-count-label { font-size: 0.82rem; font-weight: 700; color: var(--yc-muted); letter-spacing: 0.08em; }
 .yc-count-value { font-weight: 900; color: var(--yc-text); margin-top: 0.25rem; line-height: 1.05; font-size: 0.95rem; }
-.yc-count-value b { font-size: 2.8rem; font-weight: 900; margin: 0 0.08em; color: var(--yc-violet-lt); }
+.yc-count-value b { font-size: 2.1rem; font-weight: 900; margin: 0 0.06em; color: var(--yc-violet-lt); }
 .yc-count.is-key .yc-count-value b { color: var(--yc-gold); }
 .yc-cta .yc-btn { width: 100%; }
 .yc-cta-link { display: inline-block; margin-top: 1.1rem; font-size: 0.85rem; color: var(--yc-dim); text-decoration: underline; }
@@ -269,6 +270,7 @@ body.yc-page { padding-top: 65px; }
 .yc-path p { font-size: 0.9rem; line-height: 1.9; color: var(--yc-muted); margin: 0 0 1.1rem; }
 .yc-path .yc-btn { display: block; width: 100%; text-align: center; }
 .yc-path-push { margin-top: auto; }
+.yc-path .yc-path-hint { font-size: 0.82rem; color: var(--yc-dim); margin: 0.9rem 0 0; }
 .yc-path-sub { margin-top: 1.5rem; padding-top: 1.3rem; border-top: 1px solid var(--yc-line-soft); }
 .yc-path-sub h4 { font-size: 0.86rem; font-weight: 900; margin: 0 0 0.55rem; color: var(--yc-text); line-height: 1.75; }
 .yc-path-sub p { font-size: 0.82rem; color: var(--yc-dim); margin-bottom: 0.9rem; }
@@ -573,11 +575,13 @@ body.yc-page { padding-top: 65px; }
                 <h3>大会ページから参加します</h3>
                 <p>大会ページを開いて「コンテストに参加」を押してください。<span data-after-close="申し込みの受付は終了しました。">受付は9月30日までです。</span></p>
                 <div class="yc-path-push"><a class="yc-btn sm yc-join-link" href="https://my.fintokei.com/ja/register?contestId=COP30&amp;contestTitle=%E7%AC%AC1%E5%9B%9E+Yosuga%E6%9D%AF+supported+by+Fintokei&amp;affiliate=55" target="_blank" rel="noopener">大会ページで参加する</a></div>
+                <p class="yc-path-hint" data-hide-after-close>ボタンを押して「ようこそ、○○さん」の画面（ダッシュボード）が開いたときは、左のメニューのトロフィーのマーク（コンテスト）から「第1回 Yosuga杯」を選び、「コンテストに参加」を押してください。</p>
 
                 <div class="yc-path-sub" data-hide-after-close>
                     <h4>⚠️「本コンテストは特定のアフィリエイト経由のアカウントが対象のため…」というエラーが出たときは</h4>
                     <p>そのアカウントが、よすが以外の人の紹介で登録されています。下のボタンから、大会のあいだだけ「よすがの紹介」に変える申請をしてください。</p>
                     <p>変更まで最大2営業日かかり、完了のお知らせは届きません。しばらくしてから、もう一度上のボタンをお試しください。申請は9月30日まで受け付けていますが、余裕をもって9月26日ごろまでをおすすめします。大会が終わると、紹介元は元に戻ります。</p>
+                    <p>フォームには、お名前と<strong>Fintokeiに登録しているメールアドレス</strong>を正しくご入力ください。間違っていると変更の手続きができません。申請から3営業日たっても参加できないときは、お手数ですがもう一度申請してください。</p>
                     <a class="yc-btn sm" href="https://forms.gle/eH1HqWRUrXyicW5D9" target="_blank" rel="noopener">紐付けの変更を申請する</a>
                 </div>
             </div>
@@ -666,10 +670,18 @@ body.yc-page { padding-top: 65px; }
 (function () {
     // 受付は大会開始後の 9/30 まで続くので、それまでは「受付終了まで」を出し、過ぎたら「大会終了まで」に切り替える
     var CLOSE = Date.UTC(2026, 8, 30, 14, 59, 59); // 9/30 23:59:59 JST 申込締切
-    var START = Date.UTC(2026, 8, 20, 15, 0, 0);   // 9/21 00:00 JST 大会スタート
+    var START = Date.UTC(2026, 8, 21, 0, 0, 0);    // 9/21 9:00 JST 大会スタート（Fintokeiの大会ページの表示に合わせている）
     var END   = Date.UTC(2026, 9, 20, 14, 59, 59); // 10/20 23:59:59 JST 終了
     var now = Date.now();
     var boxes = [];
+
+    /* 残り時間を、Fintokeiの大会ページと同じ「○日○時間」の数え方で返す（1日を切ったら「○時間○分」） */
+    function remain(ms) {
+        var min = Math.max(0, Math.floor(ms / 60000));
+        var d = Math.floor(min / 1440), h = Math.floor((min % 1440) / 60), m = min % 60;
+        if (d > 0) return '<b>' + d + '</b>日<b>' + h + '</b>時間';
+        return '<b>' + h + '</b>時間<b>' + m + '</b>分';
+    }
 
     function box(label, value, key) {
         return '<div class="yc-count' + (key ? ' is-key' : '') + '">' +
@@ -679,15 +691,13 @@ body.yc-page { padding-top: 65px; }
 
     /* 左は申込の受付、右は大会そのもの。大会が終わったら1つだけ出す */
     if (now < CLOSE) {
-        var d = Math.ceil((CLOSE - now) / 86400000);
-        boxes.push(box('申込の受付終了まで', d > 1 ? 'あと <b>' + d + '</b> 日' : '<b>本日</b> まで', true));
+        boxes.push(box('申込の受付終了まで', remain(CLOSE - now), true));
     } else if (now < END) {
-        boxes.push(box('大会終了まで', 'あと <b>' + Math.ceil((END - now) / 86400000) + '</b> 日', true));
+        boxes.push(box('大会終了まで', remain(END - now), true));
     }
 
     if (now < START) {
-        var ds = Math.ceil((START - now) / 86400000);
-        boxes.push(box('大会スタートまで', ds > 1 ? 'あと <b>' + ds + '</b> 日' : '<b>明日</b> スタート'));
+        boxes.push(box('大会スタートまで', remain(START - now)));
     } else if (now < END) {
         boxes.push(box('開催中', '大会 <b>' + (Math.floor((now - START) / 86400000) + 1) + '</b> 日目'));
     } else {
@@ -715,8 +725,10 @@ body.yc-page { padding-top: 65px; }
     } else if (now >= START) {
         document.querySelectorAll('.yc-cta').forEach(function (cta) {
             var a = document.createElement('a');
-            a.className = 'yc-cta-link yc-entry-link';
-            a.href = '#howto';
+            a.className = 'yc-cta-link';
+            a.href = 'https://my.fintokei.com/ja/contests/COP30?affiliate=55';
+            a.target = '_blank';
+            a.rel = 'noopener';
             a.textContent = '開催中のランキングを見る';
             cta.appendChild(a);
         });

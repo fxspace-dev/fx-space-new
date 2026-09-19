@@ -1241,6 +1241,11 @@
     /* タイトル下の波線：セクション見出しのオレンジ波線と同じ「長さ：太さ＝9：1」にする（波線の幅＝文字幅なので、文字幅のem数から太さを出す） */
     .ytt-sp-hero .ytt-sp-title-line .ytt-title-wave { height: calc(1em * var(--title-em, 9.04) / 9); }
     @media (max-width: 640px) { .ytt-sp-hero .ytt-sp-title-line .ytt-title-wave { height: calc(1em * var(--title-em, 9.04) / 9); } }
+    /* ツール選択ボタン：ツールのアイコンを入れて、見た目で選べるように（狭いスマホではアイコンを文字の上に） */
+    .tool-tab .tt-ic { flex: none; width: 30px; height: 30px; border-radius: 7px; object-fit: contain; }
+    .tool-tab .tt-lb { display: inline-flex; align-items: center; gap: 0.35rem; }
+    @media (min-width: 601px) { .tool-tab { gap: 0.6rem; } .tool-tab .tt-ic { width: 40px; height: 40px; border-radius: 9px; } }
+    @media (max-width: 400px) { .tool-tab { flex-direction: column; gap: 0.3rem; padding-top: 0.6rem; padding-bottom: 0.6rem; } }
 </style>
 
 <script>document.documentElement.classList.add('js-gate');</script>
@@ -1447,9 +1452,9 @@
             <p class="tool-ask-q" id="tool-ask-q">お使いの取引ツールはどれですか？</p>
             <p class="tool-ask-sub">選ぶと、そのツールの導入方法が表示されます</p>
             <div class="tool-ask-btns">
-                <a class="tool-tab" data-tool="mt4" href="ytt-web-setup.html?tool=mt4">MT4</a>
-                <a class="tool-tab" data-tool="mt5" href="ytt-web-setup-mt5.html?tool=mt5">MT5</a>
-                <a class="tool-tab" data-tool="ctrader" href="ytt-web-setup-ctrader.html?tool=ctrader">cTrader</a>
+                <a class="tool-tab" data-tool="mt4" href="ytt-web-setup.html?tool=mt4"><img class="tt-ic" src="img/webytt/rec/icon-mt4.jpg" alt="" width="160" height="160"><span class="tt-lb">MT4</span></a>
+                <a class="tool-tab" data-tool="mt5" href="ytt-web-setup-mt5.html?tool=mt5"><img class="tt-ic" src="img/webytt/rec/icon-mt5.jpg" alt="" width="160" height="160"><span class="tt-lb">MT5</span></a>
+                <a class="tool-tab" data-tool="ctrader" href="ytt-web-setup-ctrader.html?tool=ctrader"><img class="tt-ic" src="img/webytt/rec/icon-ctrader.png" alt="" width="66" height="64"><span class="tt-lb">cTrader</span></a>
             </div>
         </div>
         <div class="rec" id="no-account">
@@ -1547,7 +1552,7 @@
                 <span class="hv-chapters-label">見たいところから再生</span>
                 <button type="button" data-t="0"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg>STEP 1 口座登録<small>0:00</small></button>
                 <button type="button" data-t="40.5"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg>STEP 2 連携ツール<small>0:40</small></button>
-                <button type="button" data-t="144.3"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg>STEP 3 ログイン<small>2:24</small></button>
+                <button type="button" data-t="158.7"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg>STEP 3 ログイン<small>2:38</small></button>
             </div>
         </div>
     </div>
@@ -2308,7 +2313,7 @@
     document.querySelectorAll('.tool-tab[data-tool]').forEach(function (t) {
       var on = t.getAttribute('data-tool') === me;
       t.classList.toggle('is-on', on);
-      if (on) { t.setAttribute('aria-current', 'page'); if (!t.querySelector('.tool-check')) t.insertAdjacentHTML('afterbegin', '<span class="tool-check" aria-hidden="true">✓</span>'); }
+      if (on) { t.setAttribute('aria-current', 'page'); if (!t.querySelector('.tool-check')) (t.querySelector('.tt-lb') || t).insertAdjacentHTML('afterbegin', '<span class="tool-check" aria-hidden="true">✓</span>'); }
     });
   }
   function openGate(target, smooth) {

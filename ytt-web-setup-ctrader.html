@@ -1269,7 +1269,7 @@
   ・流れとスクショは既存Canva「YTT導入方法」(DAF1unsWf4o) を踏襲
   ・見た目は ytt-tokusetu.html と同じ部品（head の <style> は特設ページのものをそのまま使用）
   【本番反映前TODO】
-  [1] ダウンロードボタンは、プレミアム限定のDiscordチャンネル（連携ツールを置いた投稿）へのリンクです（airiさん 2026-09-17）。zipをサーバーに置く必要はありません
+  [1] ダウンロードボタンは、よすが指定のDiscord認証リンク（fx-space.com/YTTWebDL.php に戻る）です。利用規約の同意をはさんでダウンロードされます（2026-09-19）。zipをサーバーに置く必要はありません
 ====================================================================
 -->
 
@@ -1765,7 +1765,9 @@
                 <div class="gstep-no">1</div>
                 <div class="gstep-body">
                     <p class="gstep-title">連携ツールをダウンロードする</p>
-                    <div class="gstep-btn"><a href="https://discord.com/channels/1039824083208126474/1283239173418913882/1547475609515597864" class="btn-sq-blue" id="dlBtn" target="_blank" rel="noopener">連携ツールをダウンロード</a></div>
+                    <div class="gstep-btn"><a href="https://discord.com/oauth2/authorize?client_id=1132937165379211284&amp;response_type=code&amp;redirect_uri=https%3A%2F%2Ffx-space.com%2FYTTWebDL.php&amp;scope=identify" class="btn-sq-blue" id="dlBtn" target="_blank" rel="noopener">このリンクを開く</a></div>
+                    <p>Discordの確認画面で「認証」を押すと、利用規約が表示されます。同意するとダウンロードが始まります（すでに同意している方には表示されません）。</p>
+                    <p><a href="https://drive.google.com/file/d/1Fd6qcQIisp-V8Eh5tV1722wkCf7qZEzc/view?usp=sharing" target="_blank" rel="noopener" style="color:#4f46e5;text-decoration:underline;text-underline-offset:3px;">利用規約</a>は、ここからいつでも確認できます。</p>
                     <figure class="gshot mid"><img src="img/webytt/s07-zip.png" alt="webytt一式.zip のダウンロード" loading="lazy"></figure>
                     <p>ブラウザの警告が出た場合は「ダウンロードする」を選んでください。</p>
                     <figure class="gshot narrow"><img src="img/webytt/s08-dl-warning.png" alt="ブラウザのダウンロード警告" loading="lazy"></figure>

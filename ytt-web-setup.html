@@ -1689,9 +1689,10 @@
                 <div class="gstep-body">
                     <p class="gstep-title">zipファイルを解凍する</p>
                     <p>解凍すると、取引ツールごとのフォルダが入っています。お使いの取引ツールのフォルダだけ使います。</p>
-                    <figure class="gshot narrow"><img src="img/webytt/s09-folders-mt4.png" alt="解凍後のフォルダ cTrader / cTrader_Cloud / MT4 / MT5（MT4のフォルダを使う）" loading="lazy"></figure>
+                    <figure class="gshot narrow"><img src="img/webytt/s09-folders-mt4.png" alt="解凍後のフォルダ cTrader / cTrader_cloud / MT4 / MT5（MT4のフォルダを使う）" loading="lazy"></figure>
                     <p>MT4フォルダの中身は次の2つです。</p>
-                    <figure class="gshot narrow"><img src="img/webytt/s10-mt4-files.png" alt="YTT_OrderEA.ex4 と YTT_OrderReceiver.dll" loading="lazy"></figure>
+                    <figure class="gshot narrow"><img src="img/webytt/s10-mt4-files.png" alt="YTTWeb_MT4_1.01.ex4 と YTTWeb_MT4_1.01.dll" loading="lazy"></figure>
+                    <p class="gnote">※動画と画像のファイル名は以前のもの（YTT_OrderEA など）です。今は <b>YTTWeb_MT4_1.01</b> のような名前に変わっていますが、手順は同じです。</p>
                     <div class="gtip">解凍方法が分からない方は <a href="https://mainichi.doda.jp/article/2022/08/03/2098" target="_blank" rel="noopener">こちら</a></div>
                 </div>
             </div>
@@ -1713,8 +1714,8 @@
             <div class="gstep">
                 <div class="gstep-no">5</div>
                 <div class="gstep-body">
-                    <p class="gstep-title">その中に「YTT_OrderEA.ex4」を移す（もしくはコピー＆ペーストする）</p>
-                    <figure class="gshot narrow"><img src="img/webytt/s14-ea-placed.png" alt="ExpertsフォルダにYTT_OrderEA.ex4を置いた状態" loading="lazy"></figure>
+                    <p class="gstep-title">その中に「YTTWeb_MT4_1.01.ex4」を移す（もしくはコピー＆ペーストする）</p>
+                    <figure class="gshot narrow"><img src="img/webytt/s14-ea-placed.png" alt="ExpertsフォルダにYTTWeb_MT4_1.01.ex4を置いた状態" loading="lazy"></figure>
                 </div>
             </div>
             <div class="gstep">
@@ -1727,8 +1728,8 @@
             <div class="gstep">
                 <div class="gstep-no">7</div>
                 <div class="gstep-body">
-                    <p class="gstep-title">その中に「YTT_OrderReceiver.dll」を移す（もしくはコピー＆ペーストする）</p>
-                    <figure class="gshot narrow"><img src="img/webytt/s16-dll-placed.png" alt="LibrariesフォルダにYTT_OrderReceiver.dllを置いた状態" loading="lazy"></figure>
+                    <p class="gstep-title">その中に「YTTWeb_MT4_1.01.dll」を移す（もしくはコピー＆ペーストする）</p>
+                    <figure class="gshot narrow"><img src="img/webytt/s16-dll-placed.png" alt="LibrariesフォルダにYTTWeb_MT4_1.01.dllを置いた状態" loading="lazy"></figure>
                 </div>
             </div>
             <div class="gstep">
@@ -1798,15 +1799,15 @@
                 <div class="gstep-body">
                     <p class="gstep-title">「エキスパートアドバイザ」の左にある「＋」をクリック</p>
                     <figure class="gshot narrow"><img src="img/webytt/s23-expand-ea.png" alt="エキスパートアドバイザの＋をクリック" loading="lazy"></figure>
-                    <p>前の段階で Experts フォルダに入れた連携ツールが表示されます（名前は <b>YTT_OrderEA</b>）。</p>
+                    <p>前の段階で Experts フォルダに入れた連携ツールが表示されます（名前は <b>YTTWeb_MT4_1.01</b>）。</p>
                     <div class="gtip">表示されないときは「エキスパートアドバイザ」を右クリック →「更新」、またはMT4を再起動してください。</div>
                 </div>
             </div>
             <div class="gstep">
                 <div class="gstep-no">6</div>
                 <div class="gstep-body">
-                    <p class="gstep-title">「YTT_OrderEA」を右クリック →「チャートに表示」</p>
-                    <figure class="gshot mid"><img src="img/webytt/s24-attach-chart.png" alt="YTT_OrderEAを右クリックしてチャートに表示を選ぶ" loading="lazy"></figure>
+                    <p class="gstep-title">「YTTWeb_MT4_1.01」を右クリック →「チャートに表示」</p>
+                    <figure class="gshot mid"><img src="img/webytt/s24-attach-chart.png" alt="YTTWeb_MT4_1.01を右クリックしてチャートに表示を選ぶ" loading="lazy"></figure>
                 </div>
             </div>
             <div class="gstep">
@@ -1814,7 +1815,7 @@
                 <div class="gstep-body">
                     <p class="gstep-title">「全般」タブ →「自動売買を許可する」にチェック →「DLLの使用を許可する」にチェック</p>
                     <figure class="gshot"><img src="img/webytt/s25-general-tab.png" alt="全般タブで自動売買とDLLの使用を許可する" loading="lazy"></figure>
-                    <details class="gfold"><summary>手順7の途中で「OK」を押してしまったときは<svg class="gfold-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9.5l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></summary><div class="gfold-body">次のどちらかで、この画面に戻れます。<br>・チャート右上の「YTT_OrderEA」の横にある<b>顔のマーク</b>を<b>クリック</b><br>・チャート上を<b>右クリック</b>→<b>「エキスパートアドバイザ」</b>→<b>「設定」</b><figure class="gshot mid"><img src="img/webytt/s25b-ea-icon.png" alt="チャート右上のYTT_OrderEAの横にある顔のマークをクリック" loading="lazy"></figure></div></details>
+                    <details class="gfold"><summary>手順7の途中で「OK」を押してしまったときは<svg class="gfold-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9.5l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></summary><div class="gfold-body">次のどちらかで、この画面に戻れます。<br>・チャート右上の「YTTWeb_MT4_1.01」の横にある<b>顔のマーク</b>を<b>クリック</b><br>・チャート上を<b>右クリック</b>→<b>「エキスパートアドバイザ」</b>→<b>「設定」</b><figure class="gshot mid"><img src="img/webytt/s25b-ea-icon.png" alt="チャート右上のYTTWeb_MT4_1.01の横にある顔のマークをクリック" loading="lazy"></figure></div></details>
                 </div>
             </div>
             <div class="gstep">
@@ -2044,7 +2045,7 @@
         </details>
         <details class="ytt-faq">
             <summary><span class="ytt-faq-q">「初期化失敗（DLL使用不可…）」と表示される</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
-            <div class="ytt-faq-a"><p>DLLの使用が許可されていません。次の2か所を確認してください。</p><p>①連携ツールの設定画面の「全般」タブで「DLLの使用を許可する」にチェック<br>②MT4上部のメニュー「ツール」→「オプション」→「エキスパートアドバイザ」タブで「DLLの使用を許可する」にチェック</p><p>それでも出る場合は、「MQL4」→「Libraries」に YTT_OrderReceiver.dll が入っているか確認してください。</p></div>
+            <div class="ytt-faq-a"><p>DLLの使用が許可されていません。次の2か所を確認してください。</p><p>①連携ツールの設定画面の「全般」タブで「DLLの使用を許可する」にチェック<br>②MT4上部のメニュー「ツール」→「オプション」→「エキスパートアドバイザ」タブで「DLLの使用を許可する」にチェック</p><p>それでも出る場合は、「MQL4」→「Libraries」に YTTWeb_MT4_1.01.dll が入っているか確認してください。</p></div>
         </details>
         <details class="ytt-faq">
             <summary><span class="ytt-faq-q">取引ツールのチャート上の表示が「承認待ち」のまま変わらない</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
@@ -2068,7 +2069,7 @@
         </details>
         <details class="ytt-faq">
             <summary><span class="ytt-faq-q">セキュリティソフトにひっかかってダウンロードできない／DLLが消える</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
-            <div class="ytt-faq-a"><p>①DLLの使用許可をしていない<br>②DLLの名前がオリジナルファイル（YTT_OrderReceiver.dll）と異なっている（末尾に（1）が付いているなど）<br>③「MQL4」→「Libraries」中のDLLファイルがセキュリティソフトにより削除／中身が空白になっている</p><p>③の場合は<a href="https://support.microsoft.com/ja-jp/windows/windows-%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%E3%81%AB%E9%99%A4%E5%A4%96%E3%82%92%E8%BF%BD%E5%8A%A0%E3%81%99%E3%82%8B-811816c0-4dfd-af4a-47e4-c301afe13b26" target="_blank" rel="noopener">こちら</a>等を参考に除外処理をおこなってください（Windowsセキュリティ以外の場合は各自除外処理の方法をお調べください）。</p></div>
+            <div class="ytt-faq-a"><p>①DLLの使用許可をしていない<br>②DLLの名前がオリジナルファイル（YTTWeb_MT4_1.01.dll）と異なっている（末尾に（1）が付いているなど）<br>③「MQL4」→「Libraries」中のDLLファイルがセキュリティソフトにより削除／中身が空白になっている</p><p>③の場合は<a href="https://support.microsoft.com/ja-jp/windows/windows-%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%E3%81%AB%E9%99%A4%E5%A4%96%E3%82%92%E8%BF%BD%E5%8A%A0%E3%81%99%E3%82%8B-811816c0-4dfd-af4a-47e4-c301afe13b26" target="_blank" rel="noopener">こちら</a>等を参考に除外処理をおこなってください（Windowsセキュリティ以外の場合は各自除外処理の方法をお調べください）。</p></div>
         </details>
         <details class="ytt-faq">
             <summary><span class="ytt-faq-q">Web版YTTの新しいバージョンが出たときは</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
@@ -2127,7 +2128,7 @@
                 <table class="ytt-spec-table">
                     <tbody>
                         <tr><th>口座</th><td class="spec-val">証券会社・口座タイプ・有効証拠金残高</td><td class="spec-note">Web版YTTで使用している口座番号も</td></tr>
-                        <tr><th>環境</th><td class="spec-val">OS（MacかWindows）・スマホの機種</td><td class="spec-note">連携ツールのバージョン（例：YTT_OrderEA 1.00）</td></tr>
+                        <tr><th>環境</th><td class="spec-val">OS（MacかWindows）・スマホの機種</td><td class="spec-note">連携ツールのバージョン（例：YTTWeb_MT4_1.01）</td></tr>
                         <tr><th>内容</th><td class="spec-val">困っていることをできるだけ具体的に</td><td class="spec-note">症状発生時のスクショ、ターミナル→エキスパートタブのスクショ</td></tr>
                         <tr><th>※必須</th><td class="spec-val">エラーのコピー</td><td class="spec-note">エラーが出ていた場合、エキスパートタブに出ていたエラーの文字をコピーして貼り付け</td></tr>
                     </tbody>

@@ -768,6 +768,7 @@ function setupAnimations() {
     for (var pi = 0; pi < yttPanelIds.length; pi++) {
         (function(idx) {
             var panelId = yttPanelIds[idx];
+            if (!document.querySelector(panelId)) return; // YTTセクションを作り直したので、旧パネルが無いときは何もしない
             var tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: panelId,

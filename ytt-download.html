@@ -77,12 +77,6 @@
         }
         /* スマホ: 見出しの文字幅に関係なく波線の幅を揃える（短い見出しで線が細く見えるのを防ぐ。全4ページ共通） */
         @media (max-width: 640px) { .ytt-sp-title-line .ytt-title-wave { width: max(100%, 200px); max-width: calc(100vw - 2rem); margin-left: 50%; transform: translateX(-50%); } }
-        /* === タイトル下の波線 === #1
-           使い方ページ（ytt-web-features.html）のタイトルと同じ「字の大きさ：線の太さ」にする（線の高さ＝文字の大きさの1.01倍）。
-           文字の大きさで決めるので、行の長さが違っても太さは同じ。横幅は文字の幅に合わせる。airiさん 2026-09-18
-           元の波線（wave-yellow.png）を1本で使う。2行のうち長い方の行に合わせた波線を、短い方の行でも同じ大きさで使い、文字の幅からはみ出した分は切る（2行で波の大きさがそろう）。幅はページ下の小さなプログラムが --wave-w に入れる。 */
-        .ytt-sp-hero .ytt-sp-title-line .ytt-title-wave { width: 0; min-width: 100%; max-width: none; margin-left: 0; transform: none; height: 1.01em; overflow: hidden; }
-        .ytt-sp-hero .ytt-title-wave img { display: block; height: 100%; width: var(--wave-w, auto); min-width: 100%; max-width: none; object-fit: fill; }
         .ytt-sp-hero-lead {
             font-size: clamp(0.9375rem, 2vw, 1.0625rem);
             color: #6b7280; line-height: 1.85;
@@ -283,10 +277,6 @@
             display: block;
             transition: transform 0.35s ease;
         }
-        /* === マニュアルの見本画像 === #2
-           Web版の見本画像（横長 1200×630）の全体が見えるように、枠を画像と同じ比率に（高さ210px固定だと左右が切れる） */
-        .manual-card-preview { height: auto; aspect-ratio: 1200 / 630; }
-        .manual-screenshot { object-position: center; }
         .manual-card:hover .manual-screenshot {
             transform: scale(1.03);
         }
@@ -331,6 +321,256 @@
             box-shadow: 0 6px 16px rgba(79,70,229,0.4);
         }
 
+        /* アップデート履歴 — 濃紺セクション */
+        .ytt-sp-section-header#updates {
+            background: #252259;
+            margin-top: 0;
+        }
+        .ytt-sp-section-header#updates h2 { color: #fff; }
+        .ytt-sp-section-header#updates p { color: rgba(255,255,255,0.75); }
+        /* 濃紺背景上で「最新の更新情報」バッジを明るいオレンジに */
+        .ytt-sp-section-header#updates .section-title-badge--orange {
+            color: #fb923c;
+        }
+        .updates-section {
+            padding: 2rem 1.5rem 4rem;
+            background: #252259;
+        }
+        .updates-inner {
+            max-width: 760px; margin: 0 auto;
+            position: relative;
+        }
+        /* 濃紺背景上のタイムライン点線を明るく */
+        @media (min-width: 720px) {
+            .updates-section .updates-list::before {
+                border-left-color: rgba(255,255,255,0.2) !important;
+            }
+        }
+        /* 濃紺背景上の日付テキストを明るく */
+        .updates-section .update-date { color: rgba(255,255,255,0.6); }
+        /* 縦のタイムライン軸（左サイドのライン） */
+        .updates-list {
+            margin-top: 2rem;
+            position: relative;
+            padding-left: 0;
+        }
+        @media (min-width: 720px) {
+            .updates-list::before {
+                content: '';
+                position: absolute;
+                left: 38px; top: 8px; bottom: 8px;
+                width: 0;
+                border-left: 2px dashed #d1d5db;
+                background: transparent;
+                z-index: 0;
+            }
+        }
+        /* 履歴は最新2件だけ表示し、それより前は「過去の履歴を見る」で開く（JSで自動判定。カード追加時の編集は不要） */
+        .update-item.is-folded { display: none; }
+        .updates-more {
+            display: flex; justify-content: center;
+            margin: 0.25rem 0 1.5rem;
+        }
+        .updates-more-btn {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            min-height: 44px; padding: 0.6rem 1.4rem;
+            border: 1.5px solid rgba(255,255,255,0.4); border-radius: 999px;
+            background: transparent; color: #fff;
+            font-size: 0.9rem; font-weight: 700; cursor: pointer;
+            transition: background 0.15s, border-color 0.15s;
+        }
+        .updates-more-btn:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.7); }
+        .updates-more-btn .chev { display: inline-block; transition: transform 0.2s; }
+        .updates-more.is-open .updates-more-btn .chev { transform: rotate(180deg); }
+        /* 各アップデートカード */
+        .update-item {
+            position: relative;
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 0;
+            border: none;
+            background: transparent;
+            transition: none;
+        }
+        .update-item:hover { background: transparent; }
+        .update-item:last-child { margin-bottom: 0; }
+        @media (max-width: 720px) {
+            .update-item { grid-template-columns: 1fr; gap: 0.75rem; }
+        }
+        /* 左側：日付＋バージョンドット */
+        .update-meta {
+            position: relative;
+            min-width: 0;
+            padding-top: 0.5rem;
+            text-align: center;
+        }
+        .update-date {
+            font-size: 0.75rem;
+            color: #9ca3af;
+            font-weight: 800;
+            letter-spacing: 0.04em;
+            margin-bottom: 0.5rem;
+        }
+        .update-dot {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px; height: 24px;
+            border-radius: 50%;
+            background: #fff;
+            border: 3px solid #cbd5e1;
+            position: relative;
+            z-index: 1;
+        }
+        .update-item.is-latest .update-dot {
+            border-color: #f97316;
+            background: #f97316;
+            animation: dot-pulse 2.4s ease-in-out infinite;
+        }
+        @keyframes dot-pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(249,115,22,0.5); }
+            50%      { box-shadow: 0 0 0 8px rgba(249,115,22,0); }
+        }
+        @media (max-width: 720px) {
+            .update-meta { padding-top: 0; text-align: left; }
+            .update-dot { display: none; }
+        }
+        /* 右側：カード本体 */
+        .update-card {
+            position: relative;
+            background: #fff;
+            border: 1.5px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 1.5rem 1.75rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+        }
+        .update-item.is-latest .update-card {
+            border-color: #f97316;
+            background: #fff;
+        }
+        /* 「最新」バッジ — カード右上に目立つ四角タグ */
+        .update-latest-badge {
+            position: absolute;
+            top: -16px; right: 20px;
+            display: none;
+            background: #f97316;
+            color: #fff;
+            font-size: 0.9375rem;
+            font-weight: 900;
+            padding: 0.5rem 1.125rem;
+            border-radius: 6px;
+            letter-spacing: 0.08em;
+            box-shadow: 0 4px 12px rgba(249,115,22,0.35);
+        }
+        .update-item.is-latest .update-latest-badge { display: inline-block; }
+        /* バージョン併記（横並び） */
+        .update-versions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 0.875rem;
+        }
+        .update-version {
+            display: inline-flex; align-items: center;
+            font-size: 0.8125rem; font-weight: 900;
+            color: var(--primary);
+            background: #eef2ff;
+            padding: 0.25rem 0.625rem;
+            border-radius: 4px;
+            letter-spacing: 0.02em;
+        }
+        .update-item.is-latest .update-version {
+            color: #c2410c;
+            background: #fff7ed;
+        }
+        /* タイトル */
+        .update-body h4 {
+            font-size: 1rem; font-weight: 900;
+            color: #1e1b4b; margin: 0 0 0.875rem;
+            line-height: 1.45;
+        }
+        /* 番号付き項目リスト */
+        .update-body ol.update-numbered {
+            margin: 0; padding: 0;
+            list-style: none;
+            counter-reset: update-item;
+        }
+        .update-body ol.update-numbered > li {
+            counter-increment: update-item;
+            position: relative;
+            padding-left: 1.875rem;
+            margin: 0.75rem 0;
+            font-size: 0.875rem;
+            color: #374151;
+            line-height: 1.85;
+        }
+        .update-body ol.update-numbered > li::before {
+            content: counter(update-item);
+            position: absolute;
+            left: 0; top: 0.15rem;
+            width: 1.375rem; height: 1.375rem;
+            background: #1e1b4b;
+            color: #fff;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 900;
+        }
+        .update-notes {
+            margin: 0.5rem 0 0;
+            padding: 0;
+            list-style: none;
+            font-size: 0.8125rem;
+            color: #6b7280;
+            line-height: 1.8;
+            background: #f9fafb;
+            border-left: 3px solid #d1d5db;
+            border-radius: 0 8px 8px 0;
+            padding: 0.625rem 0.875rem;
+        }
+        .update-notes li {
+            position: relative;
+            padding-left: 1.25em;
+            margin: 0.25rem 0;
+        }
+        .update-notes li::before {
+            content: '※';
+            position: absolute;
+            left: 0; top: 0;
+            color: #9ca3af;
+            font-weight: 800;
+        }
+        /* お手数ですが…等の脚注 */
+        .update-footnote {
+            margin: 1rem 0 0;
+            padding-top: 0.75rem;
+            border-top: 1px dashed #e5e7eb;
+            font-size: 0.8125rem;
+            color: #6b7280;
+            line-height: 1.7;
+        }
+        /* タグ — 四角タグ（intro/風シンプル） */
+        .update-tag {
+            display: inline-block;
+            font-size: 0.6875rem;
+            font-weight: 900;
+            padding: 0.15rem 0.5rem;
+            border-radius: 3px;
+            margin-right: 0.5rem;
+            vertical-align: middle;
+            letter-spacing: 0.04em;
+            border: 1.5px solid currentColor;
+            background: #fff;
+        }
+        .update-tag.add { color: #16a34a; }
+        .update-tag.fix { color: #ea580c; }
+        .update-tag.imp { color: #4f46e5; }
+        @media (prefers-reduced-motion: reduce) {
+            .update-item.is-latest .update-dot { animation: none; }
+        }
+
         .ytt-sp-page-footer {
             padding: 1.5rem 2rem;
             text-align: center;
@@ -351,15 +591,25 @@
   ytt-download.html
 
   【本番反映前TODO】
-  [1] ダウンロードボタンは、プレミアム限定のDiscordチャンネル（連携ツール一式を置いた投稿）へのリンク。
-      導入方法ページのボタンと同じ行き先。zipへの直リンクにすると加入していない方でも落とせるため（airiさん 2026-09-18）
+  [1] ダウンロードURL（設定済み・本番と同じ。新しいZIPを出すたびに href を差し替えること）
+      → 「YTT最新版をダウンロード」ボタンの遷移先URL（計1箇所）
+  [2] アップデート履歴
+      → 【安田さん編集】新しいリリースが出るたびに本ページの
+        「アップデート履歴」セクションに新カードを追加
+        既存カードを参考にコピペ可（一番上に追加し、旧最新の is-latest と「最新」バッジを外す）
+        ※ 表示は自動で「最新2件」だけになり、3件目以降は「過去の履歴を見る」ボタンで開く（編集不要）
+        ※ 2026/2/22 のカードは例として書いたもので実際の更新ではないため 2026-09-07 に削除済み
+  [3] バージョン番号（ヒーローの v1.6.39 等）
+      → 最新版に合わせて差し替え
 
   【ページの流れ】
   ヒーロー（YTTロゴ）
    ↓
-  Web版YTTをダウンロード（メインCTA）
+  最新版をダウンロード（メインCTA）
    ↓
-  公式マニュアル（導入方法 ytt-web-setup.html / 使い方 ytt-web-features.html）
+  公式マニュアル（導入方法 / 使い方）
+   ↓
+  アップデート履歴（タイムライン式・LATESTバッジ付き）
 ====================================================================
 -->
 
@@ -377,12 +627,12 @@
         <img class="hero-logo" src="img/ytt-hero-logo.png" alt="YTT — よすがトレードツール">
     </div>
     <h1 class="ytt-sp-hero-title" data-anim>
-        <span class="ytt-sp-title-line"><span class="line-text">Web版YTTを<span class="ytt-title-wave" aria-hidden="true"><img src="img/wave-yellow.png" alt=""></span></span></span>
-        <span class="ytt-sp-title-line"><span class="line-text">今すぐ手に入れよう<span class="ytt-title-wave" aria-hidden="true"><img src="img/wave-yellow.png" alt=""></span></span></span>
+        <span class="ytt-sp-title-line"><span class="line-text">最新版のYTTを<img class="ytt-title-wave" src="img/wave-yellow.png" alt=""></span></span>
+        <span class="ytt-sp-title-line"><span class="line-text">今すぐ手に入れよう<img class="ytt-title-wave" src="img/wave-yellow.png" alt=""></span></span>
     </h1>
     <p class="ytt-sp-hero-lead" data-anim>
-        ダウンロードした連携ツールを、<wbr>お使いの取引ツール（MT4 / MT5 / cTrader）に入れるだけ。<br>
-        あとはスマホでもPCでも、<wbr>ブラウザからYTTが使えます。
+        ダウンロードした.zipファイルを<wbr>お使いのプラットフォームに導入するだけ。<br>
+        旧バージョンをお使いの方は、<wbr>上書き更新で最新版に切り替わります。
     </p>
 </section>
 
@@ -392,7 +642,7 @@
         <!-- ▼ href = 配布ファイルのパス（htmlから見た相対 or 絶対URL）に差し替え。
              download 属性を付けると「遷移」ではなく「ダウンロード」になり、
              download="ファイル名.zip" で保存時のファイル名を指定できます。      -->
-        <a href="https://discord.com/channels/1039824083208126474/1283239173418913882/1547475609515597864" target="_blank" rel="noopener" class="dl-mega-btn">
+        <a href="https://fx-space.com/download/YTT%20for%20MT4_MT5_cTrader_20260731.zip" download="YTT for MT4_MT5_cTrader_20260731.zip" class="dl-mega-btn">
             <span class="dl-mega-icon" aria-hidden="true">
                 <!-- 段ボール箱（trial-startと同じデザイン） -->
                 <svg class="dl-mega-box-svg" viewBox="0 0 76 74" xmlns="http://www.w3.org/2000/svg">
@@ -410,8 +660,8 @@
                 </svg>
             </span>
             <span class="dl-mega-text">
-                <span class="dl-mega-title">Web版YTTをダウンロード</span>
-                <span class="dl-mega-sub">約 518 KB / .zip 形式</span>
+                <span class="dl-mega-title">YTT最新版をダウンロード</span>
+                <span class="dl-mega-sub">約 3.2 MB / .zip 形式</span>
             </span>
             <span class="dl-mega-dl-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
@@ -441,9 +691,9 @@
 <section class="manuals-section">
     <div class="manuals-grid">
         <!-- 導入方法 -->
-        <a class="manual-card" href="ytt-web-setup.html" data-anim>
+        <a class="manual-card" href="https://www.canva.com/design/DAF1unsWf4o/2r40mzmK0qw0eZA9k4MP9Q/edit" target="_blank" rel="noopener" data-anim>
             <div class="manual-card-preview install">
-<img src="img/og-webytt-setup.jpg" alt="Web版YTT 導入ガイド" class="manual-screenshot" width="1200" height="630" loading="lazy">
+<img src="img/manual-install-preview.png" alt="導入方法マニュアル" class="manual-screenshot">
             </div>
             <h3 class="manual-card-title">
                 <img src="img/check-orange.png" alt="" class="check-icon">
@@ -454,9 +704,9 @@
         </a>
 
         <!-- 使い方 -->
-        <a class="manual-card" href="ytt-web-features.html" data-anim>
+        <a class="manual-card" href="https://www.canva.com/design/DAF_Wqy7hQc/IJKV8x4ruUtEpWdzpuJ4wg/edit" target="_blank" rel="noopener" data-anim>
             <div class="manual-card-preview usage">
-<img src="img/og-webytt-guide.jpg" alt="Web版YTT 使い方ガイド" class="manual-screenshot" width="1200" height="630" loading="lazy">
+<img src="img/manual-usage-preview.png" alt="使い方マニュアル" class="manual-screenshot">
             </div>
             <h3 class="manual-card-title">
                 <img src="img/check-orange.png" alt="" class="check-icon">
@@ -468,10 +718,288 @@
     </div>
 </section>
 
+<!-- アップデート履歴 -->
+<div class="ytt-sp-section-header" id="updates" data-anim>
+    <div class="section-h-badge-row">
+        <span class="section-title-badge section-title-badge--orange">
+            <img class="hero-title-side hero-title-side--left" src="img/title-side-orange-left.png" alt="">
+            最新の更新情報
+            <img class="hero-title-side hero-title-side--right" src="img/title-side-orange-right.png" alt="">
+        </span>
+    </div>
+    <div class="section-h-title-row">
+        <span class="h2-with-wave">
+            <h2>アップデート履歴</h2>
+            <img class="h2-title-wave" src="img/wave-orange.png" alt="">
+        </span>
+    </div>
+    <p>YTTのバージョンごとの<wbr>変更点をまとめています。</p>
+</div>
+
+<section class="updates-section">
+    <div class="updates-inner">
+        <div class="updates-list" data-anim>
+
+            <!-- 実データ：最新版を一番上に -->
+
+            <!-- ▼▼▼ 新バージョン用カード（安田さん記入欄）▼▼▼
+                 ・【】内を書き換えてください（日付 / バージョン / 見出し / 各項目）
+                 ・タグは  追加=add  /  修正=fix  /  改善=imp
+                 ・補足(※)が不要な項目は  <ul class="update-notes">…</ul>  ごと削除
+                 ・項目を増減する場合は  <li>…</li>  を複製 / 削除
+                 ・MT4版のみ等の場合は不要な <span class="update-version"> を削除     -->
+            <div class="update-item is-latest" data-update>
+                <div class="update-meta">
+                    <div class="update-date">2026/7/31</div>
+                    <span class="update-dot" aria-hidden="true"></span>
+                </div>
+                <div class="update-card">
+                    <span class="update-latest-badge">最新</span>
+                    <div class="update-versions">
+                        <span class="update-version">MT4版 ver1.7.05</span>
+                        <span class="update-version">MT5版 ver1.7.05</span>
+                        <span class="update-version">cTrader版 ver1.7.05</span>
+                    </div>
+                    <div class="update-body">
+                        <h4>MT4版・MT5版・cTrader版アップデート</h4>
+                        <ol class="update-numbered">
+                            <li>
+                                <span class="update-tag fix">修正</span>コピートレードを複数のチャートに設置した際に、まれに同じエントリーが重複してコピーされる不具合を修正しました。
+                                                            <ul class="update-notes">
+                                    <li>コピーモードをご利用の方は必ずアップデートをお願いします。</li>
+<li>コピーを利用の際は、コピー元・コピー先両方で最新版をご利用ください。</li>
+<li>本口座でご利用の前にデモ口座での動作確認をお願いします。</li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <!-- ▲▲▲ 新バージョン用カード ここまで ▲▲▲ -->
+
+            <!-- 旧・最新版（is-latest を外して通常カードへ降格） -->
+            <div class="update-item" data-update>
+                <div class="update-meta">
+                    <div class="update-date">2026/7/29</div>
+                    <span class="update-dot" aria-hidden="true"></span>
+                </div>
+                <div class="update-card">
+                    <div class="update-versions">
+                        <span class="update-version">MT4版 ver1.7.04</span>
+                        <span class="update-version">MT5版 ver1.7.04</span>
+                        <span class="update-version">cTrader版 ver1.7.04</span>
+                    </div>
+                    <div class="update-body">
+                        <h4>MT4版・MT5版・cTrader版アップデート</h4>
+                        <ol class="update-numbered">
+                            <li>
+                                <span class="update-tag fix">修正</span>MT4版でtradingviewモードをオフにした時にホイールが動作しない不具合を修正しました
+                            </li>
+                            <li>
+                                <span class="update-tag imp">改善</span>コピートレードの安定性を向上させました
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 旧・最新版（is-latest を外して通常カードへ降格） -->
+            <div class="update-item" data-update>
+                <div class="update-meta">
+                    <div class="update-date">2026/7/27</div>
+                    <span class="update-dot" aria-hidden="true"></span>
+                </div>
+                <div class="update-card">
+                    <div class="update-versions">
+                        <span class="update-version">MT4版 ver1.7.03</span>
+                        <span class="update-version">MT5版 ver1.7.03</span>
+                    </div>
+                    <div class="update-body">
+                        <h4>MT4版・MT5版アップデート</h4>
+                        <ol class="update-numbered">
+                            <li>
+                                <span class="update-tag fix">修正</span>一部環境で、再起動時にMT4の表示設定（ツールバーのカスタマイズ・チャート配列）がリセットされる不具合を修正しました。
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div class="update-item" data-update>
+                <div class="update-meta">
+                    <div class="update-date">2026/7/26</div>
+                    <span class="update-dot" aria-hidden="true"></span>
+                </div>
+                <div class="update-card">
+                    <div class="update-versions">
+                        <span class="update-version">MT4版 ver1.7.02</span>
+                        <span class="update-version">MT5版 ver1.7.02</span>
+                    </div>
+                    <div class="update-body">
+                        <h4>MT4版・MT5版アップデート</h4>
+                        <ol class="update-numbered">
+                            <li>
+                                <span class="update-tag fix">修正</span>YTTを表示した状態でMT4を閉じた場合に、MT4の表示設定の変更が保存されない不具合を修正しました。
+                            </li>
+                            <li>
+                                <span class="update-tag fix">修正</span>一部証券会社でゴールドのロット計算が不正になる不具合を修正しました。
+                            </li>
+                            <li>
+                                <span class="update-tag fix">修正</span>Appleシリコン搭載MacでMT5版YTTが起動できない不具合を修正しました。
+                                <ul class="update-notes">
+                                    <li>Windows、およびIntelチップのMacをお使いの方もこれまでどおりご利用いただけます。</li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 旧・最新版（is-latest を外して通常カードへ降格） -->
+            <div class="update-item" data-update>
+                <div class="update-meta">
+                    <div class="update-date">2026/7/18</div>
+                    <span class="update-dot" aria-hidden="true"></span>
+                </div>
+                <div class="update-card">
+                    <div class="update-versions">
+                        <span class="update-version">MT4版 ver1.7.01</span>
+                        <span class="update-version">MT5版 ver1.7.01</span>
+                        <span class="update-version">cTrader版 ver1.7.01</span>
+                    </div>
+                    <div class="update-body">
+                        <h4>MT4版・MT5版・cTrader版アップデート</h4>
+                        <ol class="update-numbered">
+                            <li>
+                                <span class="update-tag add">追加</span>利確速報機能を追加しました（MT4・MT5・cTrader）
+                                <ul class="update-notes">
+                                    <li>利確速報機能の追加に伴い、利用規約への同意とYTT使用口座の再登録が必要となります。</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <span class="update-tag fix">修正</span>一部不具合を修正しました（MT4・MT5）
+                            </li>
+                            <li>
+                                <span class="update-tag imp">改善</span>コピトレの安定性を大幅に改善しました（MT4・MT5・cTrader）
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div class="update-item" data-update>
+                <div class="update-meta">
+                    <div class="update-date">2026/5/3</div>
+                    <span class="update-dot" aria-hidden="true"></span>
+                </div>
+                <div class="update-card">
+                    <div class="update-versions">
+                        <span class="update-version">MT4版 ver1.6.39</span>
+                        <span class="update-version">MT5版 ver1.0.27</span>
+                    </div>
+                    <div class="update-body">
+                        <h4>MT4版・MT5版アップデート</h4>
+                        <ol class="update-numbered">
+                            <li>
+                                <span class="update-tag add">追加</span>Fintokeiの新3%ルールに対応しました。
+                                <ul class="update-notes">
+                                    <li>計算時に取引履歴のデータを使用しているため、MT4/MT5の"取引履歴"タブの表示期間を"全期間"に設定してご利用ください。</li>
+                                    <li>両建て（買い・売りの同時エントリー）をしている通貨ペアでは3%損失ラインは表示されません。</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <span class="update-tag fix">修正</span>Fintokeiの一部口座でXAUUSDのロット計算結果が不正となる不具合を修正しました。
+                            </li>
+                            <li>
+                                <span class="update-tag imp">改善</span>コピートレードの安定性を向上させました。
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div class="update-item" data-update>
+                <div class="update-meta">
+                    <div class="update-date">2026/3/9</div>
+                    <span class="update-dot" aria-hidden="true"></span>
+                </div>
+                <div class="update-card">
+                    <div class="update-versions">
+                        <span class="update-version">MT4版 ver1.6.38</span>
+                        <span class="update-version">MT5版 ver1.0.26</span>
+                    </div>
+                    <div class="update-body">
+                        <h4>MT4版・MT5版アップデート</h4>
+                        <ol class="update-numbered">
+                            <li>
+                                <span class="update-tag add">追加</span>損失率固定モードで取引手数料を加味する機能を追加しました。
+                                <ul class="update-notes">
+                                    <li>パラメータ設定の"1ロット当たりの往復手数料（USD）"を入力すると自動でロット・SL計算に反映されます。</li>
+                                    <li>手数料は証券会社毎に異なるのでご自身で確認をお願いします。</li>
+                                    <li>デフォルトでは手数料0（機能オフ）の設定となっています。</li>
+                                    <li>手数料の計算時に内部的にUSDJPYの価格を使用しているため、"気配値表示"の一覧にUSDJPYを表示してご利用ください。</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <span class="update-tag imp">改善</span>シナリオセット後にYTTのパネルを格納するとシナリオがリセットされる不具合を改善しました。<br>また、トレード状況を表示している場合にYTTパネル格納したとき、トレード状況パネルが消えないように修正しました。
+                            </li>
+                            <li>
+                                <span class="update-tag add">追加</span>1/2決済ライン設置機能を追加しました。
+                                <ul class="update-notes">
+                                    <li>シナリオセット時、またはエントリー後に"1/2決済ライン"ボタンを押すことで1/2決済ラインが設置可能です。エントリー後に1/2決済ラインに到達すると、そのチャートの通貨ペアの全ポジションで1/2ロット分の決済が行われます。</li>
+                                    <li>1/2決済ラインに到達した時点でラインは削除されます。</li>
+                                    <li>同じ通貨ペアの個別ポジションの1/2決済には対応していません。</li>
+                                    <li>デモ口座などで動作確認を行った上でご利用ください。</li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
 <footer class="ytt-sp-page-footer">
     <p>© FX SPACE — <a href="ytt-tokusetu.html">YTT特設ページ</a> / <a href="index.html">トップページ</a></p>
 </footer>
 
+<script>
+// アップデート履歴：最新2件だけ見せて、3件目以降は「過去の履歴を見る」で展開（件数はカードの数から自動で決まる）
+(function () {
+    var list = document.querySelector('.updates-list');
+    if (!list) return;
+    var items = Array.prototype.slice.call(list.querySelectorAll('.update-item'));
+    var older = items.slice(2);
+    if (!older.length) return;
+    older.forEach(function (el) { el.classList.add('is-folded'); });
+    var wrap = document.createElement('div');
+    wrap.className = 'updates-more';
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'updates-more-btn';
+    btn.setAttribute('aria-expanded', 'false');
+    var label = function (open) {
+        btn.innerHTML = (open ? '過去の履歴を閉じる' : '過去の履歴を見る（' + older.length + '件）') + ' <span class="chev" aria-hidden="true">▼</span>';
+    };
+    label(false);
+    btn.addEventListener('click', function () {
+        var open = !wrap.classList.contains('is-open');
+        wrap.classList.toggle('is-open', open);
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        older.forEach(function (el) {
+            el.classList.toggle('is-folded', !open);
+            el.style.opacity = 1; el.style.transform = 'none'; /* 出現アニメの対象外なので即表示 */
+        });
+        label(open);
+        if (!open) { wrap.scrollIntoView({ block: 'nearest' }); }
+        if (window.ScrollTrigger && ScrollTrigger.refresh) { ScrollTrigger.refresh(); }
+    });
+    wrap.appendChild(btn);
+    items[1].insertAdjacentElement('afterend', wrap);
+})();
+</script>
 <script src="js/gsap.min.js?v=20260301a"></script>
 <script src="js/ScrollTrigger.min.js?v=20260301a"></script>
 <script>
@@ -504,24 +1032,20 @@
             scrollTrigger: { trigger: card, start: 'top 88%', once: true }
         });
     });
-})();
-</script>
-<script>
-/* タイトル下の波線：2行のうち長い方の行に合わせた幅を --wave-w に入れる（短い行は同じ大きさの波線の左側だけが見える）。
-   元の画像の縦横比（1850×232）で、文字の大きさの1.01倍の高さにしたときの幅より短くはしない */
-(function () {
-  function fit() {
-    document.querySelectorAll('.ytt-sp-hero-title').forEach(function (h1) {
-      var fs = parseFloat(getComputedStyle(h1).fontSize) || 16;
-      var w = fs * 1.01 * 1850 / 232;
-      h1.querySelectorAll('.line-text').forEach(function (t) { w = Math.max(w, t.getBoundingClientRect().width); });
-      h1.style.setProperty('--wave-w', Math.ceil(w) + 'px');
+    // アップデート履歴
+    var updatesList = document.querySelector('.updates-list[data-anim]');
+    if (updatesList) {
+        gsap.fromTo(updatesList, { opacity: 0, y: 16 }, {
+            opacity: 1, y: 0, duration: 0.6, ease: 'power2.out',
+            scrollTrigger: { trigger: updatesList, start: 'top 85%', once: true }
+        });
+    }
+    gsap.utils.toArray('[data-update]:not(.is-folded)').forEach(function(item, i) {
+        gsap.fromTo(item, { opacity: 0, x: -16 }, {
+            opacity: 1, x: 0, duration: 0.5, delay: i * 0.08, ease: 'power2.out',
+            scrollTrigger: { trigger: item, start: 'top 88%', once: true }
+        });
     });
-  }
-  fit();
-  window.addEventListener('resize', fit);
-  window.addEventListener('load', fit);
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
 })();
 </script>
 <!-- BudouX — 日本語の文節改行（全ページ共通・同梱版。js/budoux-init.js を参照） -->

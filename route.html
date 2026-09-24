@@ -88,6 +88,7 @@
 
 /* 2カードのキャプション（各カードの一言） */
 /* ルート選択の「選ぶと、あなたのルートの…」（.rsec-lead）と同じ文字サイズ・色に合わせる */
+.tools-cap-note{ font-size:0.8em; }
 .tools-cap{ text-align:center; font-size:clamp(0.875rem,1.8vw,1rem); font-weight:400; color:#6b7280; margin:0.6rem 0 0.9rem; line-height:1.8; }
 
 /* YTT／コミュニティの中身は「同じ大きさ」に揃える（バランスのため高さを360pxに固定） */
@@ -97,6 +98,9 @@
 .ob-ytt-anim-desc{ font-size:0.74rem; color:rgba(255,255,255,0.6); line-height:1.55; margin:0 0 0.7rem; }
 .rsec--tools .ob-ytt-anim-scene{ flex:1 1 auto; min-height:0; background:#0a0f1a; border-radius:8px; overflow:hidden; border:1px solid rgba(255,255,255,0.05); }
 .ob-ytt-anim-scene svg{ width:100%; height:100%; display:block; }
+/* Web版YTTの画面の動画（2026-09-22）：カードの高さの中に全体が収まるように */
+.rsec--tools .ytt-vid-scene{ display:flex; align-items:center; justify-content:center; }
+.ytt-vid{ display:block; width:100%; height:100%; object-fit:contain; background:#0a0f1a; }
 
 /* コミュニティのDiscord風モックも同じ360pxに揃える（ヘッダー＋本文＋入力欄で構成） */
 .rsec--tools .community-chat{ height:360px; display:flex; flex-direction:column; box-shadow:none; }
@@ -124,6 +128,143 @@
 .tm-embed-meta{ font-size:0.6rem; color:#8a8f98; margin-top:0.22rem; }
 .tm-embed--pass{ border-left-color:#f59e0b; }
 .tm-embed-r b{ color:#f2f3f5; font-weight:800; }
+
+/* ===== YTTカード：特設ページの「こんな悩み、ありませんか？」と同じカード（2026-09-23） =====
+   特設ページ（ytt-tokusetu.html）の部品を、このセクションの中だけに効かせる。カードの幅はせまいので、スマホと同じ並べ方にする */
+.rsec--tools .wy-pc { max-width: 520px; margin: 0 auto; }
+.rsec--tools .wy-pc-screen { padding: 7px; background: #05070f; border-radius: 14px 14px 6px 6px; box-shadow: 0 22px 48px rgba(30, 27, 75, 0.22); }
+.rsec--tools .wy-pc-svg { display: block; width: 100%; height: auto; border-radius: 7px; }
+.rsec--tools .wy-pc-base { width: 112%; height: 11px; margin: 0 -6%; background: #1f2937; border-radius: 2px 2px 12px 12px; }
+.rsec--tools .fvid { margin: 0; }
+.rsec--tools .fvid .wy-pc { max-width: 100%; }
+.rsec--tools .fvid-video { display: block; width: 100%; height: auto; background: #0a0f2c; cursor: zoom-in; }
+.rsec--tools .wy-pc-screen .fvid-video { aspect-ratio: 16 / 9; border-radius: 7px; }
+.rsec--tools .wy-screen .fvid-video { aspect-ratio: 720 / 1400; }
+.rsec--tools .fvid-cap { margin-top: 0.9rem; font-size: 0.75rem; color: #6b7280; text-align: center; }
+.rsec--tools .fsit-list { max-width: 1040px; margin: 0 auto; }
+.rsec--tools .fsit { position: sticky; top: var(--fnav, 150px); margin-bottom: 48px; text-align: center; }
+.rsec--tools .fsit:last-child { margin-bottom: 0; }
+.rsec--tools .fold-head { position: relative; display: flex; align-items: center; gap: 14px; padding: 16px 22px 30px; background: var(--fbg); color: var(--ffg); border-radius: 0 22px 0 0; text-align: left; }
+.rsec--tools .fold-tab { position: absolute; left: 0; bottom: calc(100% - 1px); width: 300px; height: 26px; display: block; }
+.rsec--tools .fold-no { flex: none; font: 900 0.9rem/1 Inter, system-ui, sans-serif; letter-spacing: 0.08em; opacity: 0.75; }
+.rsec--tools .fold-btn { flex: none; display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; font-weight: 900; color: inherit; text-decoration: none; }
+.rsec--tools .fold-btn i { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--ffg); color: var(--fbg); font-style: normal; font-size: 0.9rem; }
+.rsec--tools .fold-btn:hover { text-decoration: underline; }
+.rsec--tools .fold-btn:focus-visible { outline: 3px solid rgba(255, 255, 255, 0.85); outline-offset: 3px; border-radius: 6px; }
+.rsec--tools .fold-body { position: relative; margin-top: -18px; padding: 26px 22px 80px; background: #fff; border: 2px solid #d3d8e2; border-radius: 22px; }
+.rsec--tools .fsit-say { flex: 1; margin: 0; font-size: 1.28rem; font-weight: 900; color: inherit; line-height: 1.6; letter-spacing: 0.01em; }
+.rsec--tools .fsit-say::before { content: "「"; margin-right: 0.06em; font-size: 1.5em; line-height: 0; vertical-align: -0.1em; opacity: 0.55; }
+.rsec--tools .fsit-say::after { content: "」"; margin-left: 0.06em; font-size: 1.5em; line-height: 0; vertical-align: -0.3em; opacity: 0.55; }
+.rsec--tools .fsit-name { margin: 0; font-size: 1rem; font-weight: 900; color: #1e1b4b; }
+.rsec--tools .fsit-name span { display: inline-flex; }
+.rsec--tools .fsit-pane[hidden] { display: none; }
+.rsec--tools .fsit-media { margin-top: 0.5rem; }
+.rsec--tools .fsit-media .fvid, .rsec--tools .fsit-media .fduo { max-width: 860px; margin: 0 auto; }
+.rsec--tools .fsit-desc { max-width: 680px; margin: 0.7rem auto 0; font-size: 0.88rem; color: #4b5563; line-height: 1.85; }
+.rsec--tools .fsit-media .fvid, .rsec--tools .fsit-media .fduo, .rsec--tools .fsit-media .wy-pc { max-width: 720px; }
+.rsec--tools .fsit-media .fduo { padding-top: 7%; }
+.rsec--tools .fsit-media .fduo-sp { width: 27%; bottom: 2rem; }
+.rsec--tools .fsit-media .fduo:not(.vduo) .fduo-sp { width: 24%; }
+.rsec--tools .fsit-name { display: flex; align-items: center; justify-content: center; gap: 0.7rem; }
+.rsec--tools .fsit-name::before, .rsec--tools .fsit-name::after { content: ""; width: 28px; height: 2px; background: #c3c8d2; }
+.rsec--tools .fsit-what { display: block; }
+@media (max-width: 700px) {
+  .rsec--tools .fsit { position: static; margin-bottom: 36px; }
+  .rsec--tools .fold-head { flex-wrap: wrap; gap: 4px 10px; padding: 14px 16px 26px; border-radius: 0 16px 0 0; }
+  .rsec--tools .fold-no { width: 100%; }
+  .rsec--tools .fold-tab { width: 190px; height: 22px; }
+  .rsec--tools .fsit-say { order: 2; width: 100%; flex: none; font-size: 1.02rem; line-height: 1.6; }
+  .rsec--tools .fold-btn { order: 3; margin-left: auto; font-size: 0.75rem; }
+  .rsec--tools .fold-btn i { width: 28px; height: 28px; }
+  .rsec--tools .fold-body { padding: 20px 12px 26px; border-radius: 16px; }
+  .rsec--tools .fsit-media .fduo { padding-top: 15%; }
+  .rsec--tools .fsit-media .fduo-sp, .rsec--tools .fsit-media .fduo:not(.vduo) .fduo-sp { width: 34%; }
+  .rsec--tools .fsit-name { font-size: 0.95rem; }
+}
+.rsec--tools .fvid-wrap { position: relative; display: block; border-radius: inherit; overflow: hidden; }
+.rsec--tools .fsit-media .wy-pc { position: relative; }
+.rsec--tools .fsit-media img.fvmark { position: absolute; top: -20px; right: -20px; z-index: 4; width: 62px; height: 62px; pointer-events: none; filter: drop-shadow(0 3px 8px rgba(30, 27, 75, 0.22)); }
+@media (max-width: 600px) {
+  .rsec--tools .fsit-media img.fvmark { top: -12px; right: -5px; width: 42px; height: 42px; }
+}
+.rsec--tools .fduo .wy-pc img.fvmark { left: -20px; right: auto; }
+.rsec--tools .fduo.flip .wy-pc img.fvmark { left: auto; right: -20px; }
+@media (max-width: 600px) {
+  .rsec--tools .fduo .wy-pc img.fvmark { left: -5px; }
+  .rsec--tools .fduo.flip .wy-pc img.fvmark { right: -5px; }
+}
+.rsec--tools .fduo { position: relative; container-type: inline-size; margin: 0; padding-top: 13%; }
+.rsec--tools .fduo-pc { width: 78%; }
+.rsec--tools .fduo .wy-pc { max-width: none; margin: 0; }
+.rsec--tools .fduo .wy-pc-screen img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 7px; }
+.rsec--tools .fduo-sp { position: absolute; right: 0; bottom: 1.6rem; width: 29%; }
+.rsec--tools .fduo.fpc-only { padding-top: 0; }
+.rsec--tools .fduo.fpc-only .wy-pc { max-width: none; }
+.rsec--tools .fduo.flip .fduo-pc { margin-left: auto; }
+.rsec--tools .fduo.flip .fduo-sp { left: 0; right: auto; }
+.rsec--tools .fduo.two .fduo-pc { width: 68%; }
+.rsec--tools .fduo.two .fduo-sp { display: flex; gap: 3%; width: 45%; }
+.rsec--tools .fduo.two .fd-phone { flex: 1; }
+.rsec--tools .fd-phone { padding: 1.3cqw; background: #05070f; border-radius: 4.8cqw; box-shadow: 0 20px 44px rgba(30, 27, 75, 0.35), 0 0 0 1px rgba(255,255,255,0.06) inset; }
+.rsec--tools .fd-phone img { display: block; width: 100%; height: auto; border-radius: 3.7cqw; }
+.rsec--tools .fd-phone video { display: block; width: 100%; height: auto; aspect-ratio: 720 / 1400; border-radius: 3.7cqw; background: #0a0f2c; }
+.rsec--tools .vduo .wy-pc-screen video { display: block; width: 100%; aspect-ratio: 16 / 9; border-radius: 7px; }
+.rsec--tools .fduo img { cursor: zoom-in; }
+.rsec--tools .fduo.fsp-only { display: flex; flex-direction: column; align-items: center; padding-top: 0; }
+.rsec--tools .fduo.fsp-only .fd-phone { width: 100%; max-width: 300px; }
+.rsec--tools .fduo.fsp-pair { flex-direction: row; flex-wrap: wrap; justify-content: center; align-items: flex-start; gap: 0.8rem 5%; }
+.rsec--tools .fduo.fsp-pair .fd-item { width: 44%; max-width: 280px; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+.rsec--tools .fduo.fsp-pair .fd-label { font-size: 0.85rem; font-weight: 800; color: #1e1b4b; }
+.rsec--tools .fduo.fsp-pair .fd-phone { max-width: none; }
+.rsec--tools .fduo.fsp-pair figcaption { width: 100%; }
+.rsec--tools .fduo.fimg-only { padding-top: 0; }
+.rsec--tools .fduo.fimg-only img { display: block; width: 100%; max-width: 520px; margin: 0 auto; border-radius: 14px; }
+.rsec--tools #situations .fsit-name { margin-top: 0.75rem; }
+.rsec--tools .fsit { position: static; margin: 0; }
+.rsec--tools .fold-head { flex-wrap: wrap; gap: 4px 10px; padding: 14px 16px 26px; border-radius: 0 16px 0 0; }
+.rsec--tools .fold-no { width: 100%; }
+.rsec--tools .fold-tab { width: 190px; height: 22px; }
+.rsec--tools .fsit-say { order: 2; width: 100%; flex: none; font-size: 1.02rem; line-height: 1.6; }
+.rsec--tools .fold-btn { order: 3; margin-left: auto; font-size: 0.75rem; }
+.rsec--tools .fold-btn i { width: 28px; height: 28px; }
+.rsec--tools .fold-body { padding: 14px 12px 14px; border-radius: 16px; }
+/* 拡大表示は無いので「動画」の手の印は出さない（左の「‹」ボタンと重なるため） */
+.rsec--tools img.fvmark { display: none; }
+/* PCとスマホの並べ方（2026-09-23 airiさん）：スマホを大きくしてPCより上に出し、別の画面だと分かるようにする。
+   下の端はそろえて、PCの右端に少し重ねる。上の空きは、スマホがはみ出す分だけ */
+.rsec--tools .fsit-media { margin-top: 0.55rem; }
+.rsec--tools .fsit-media .fduo { padding-top: 20% !important; }
+.rsec--tools .fsit-media .fduo-pc { width: 70%; }
+.rsec--tools .fsit-media .fduo-sp, .rsec--tools .fsit-media .fduo:not(.vduo) .fduo-sp { width: 34% !important; bottom: 1.55rem !important; }
+/* 「タップで拡大」は、PCとスマホの両方の下に1行で */
+.rsec--tools .fsit-media .fvid-cap { white-space: nowrap; }
+/* プロップモードだけ画像（縦に長い）なので、スマホの画面を動画と同じ縦横の比にそろえる */
+.rsec--tools .fsit-media .fd-phone img { aspect-ratio: 720 / 1400; object-fit: cover; object-position: top; }
+.rsec--tools .fsit-media .fvid-cap { margin-top: 0.45rem; font-size: 0.72rem; }
+/* 5枚の高さをそろえる：帯と説明文の高さはJSで一番高いものに合わせる（画面の絵は説明のすぐ下） */
+.rsec--tools #ob-ytt-anim-wrap .fcar-slide { display: flex; }
+.rsec--tools #ob-ytt-anim-wrap .fsit { width: 100%; }
+/* カードの角：色の帯と白い部分を1枚のカードに見せ、四すみを丸くそろえる */
+.rsec--tools .fold-head { border-radius: 16px 16px 0 0; }
+.rsec--tools .fold-tab { display: none; }
+.rsec--tools .fold-body { border-radius: 0 0 16px 16px; border-top: 0; }
+/* タップで拡大 */
+.rsec--tools .fsit-media video, .rsec--tools .fsit-media .fduo img:not(.fvmark) { cursor: zoom-in !important; }
+/* コミュニティのDiscord風モックは、YTTのカードと同じ高さに（高さはJSでYTTに合わせる） */
+.rsec--tools .community-chat { height: var(--ytt-card-h, 360px) !important; }
+.rsec--tools .fsit-name { font-size: 0.95rem; }
+.rsec--tools .fsit-desc { font-size: 0.82rem; line-height: 1.75; }
+/* 拡大表示（特設ページ ytt-tokusetu.html と同じもの。右上の×・下の「閉じる」・まわりのタップ・Esc・スマホの「戻る」で閉じる） */
+/* 拡大表示（画像・動画）：右上の ×、まわりのタップ、Esc、スマホの「戻る」で閉じる。動画は本物の再生バーつき */ html.flight-open { overflow: hidden; }
+.flight { position: fixed; inset: 0; z-index: 1000; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; padding: calc(64px + env(safe-area-inset-top, 0px)) 3vw calc(20px + env(safe-area-inset-bottom, 0px)); background: rgba(8, 10, 28, 0.94); }
+.flight-stage { flex: 1 1 auto; min-height: 0; width: 100%; display: flex; align-items: center; justify-content: center; }
+.flight-media { display: block; max-width: 100%; max-height: calc(100vh - 110px); border-radius: 12px; box-shadow: 0 24px 60px rgba(0,0,0,0.5); background: #0a0f2c; }
+.flight-x { position: absolute; top: calc(12px + env(safe-area-inset-top, 0px)); right: 12px; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; padding: 0; border: 0; border-radius: 50%; background: #fff; color: #1e1b4b; box-shadow: 0 6px 18px rgba(0,0,0,0.35); cursor: pointer; }
+.flight-x svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.8; stroke-linecap: round; }
+.flight-x:hover { opacity: 0.88; }
+
+.flight-close { flex: none; padding: 0.7rem 2.2rem; border: 0; border-radius: 999px; background: #fff; color: #1e1b4b; font: 800 0.95rem/1 inherit; font-family: inherit; cursor: pointer; }
+.flight-close:hover { opacity: 0.88; }
 
 /* ===== 横スライドのカルーセル（YTT機能・コミュニティのモックを1つずつ順番に） ===== */
 .fcar{ position:relative; margin-top:0.9rem; }
@@ -908,6 +1049,25 @@ body{ padding-top:50px; }
   .tools-block{ padding-left:0.6rem; padding-right:0.6rem; }
 }
 </style>
+<style>
+/* === タイトル下の波線（2026-09-23 airiさん「YTT特設でやったように太さを合わせて」） ===
+   高さ＝文字の大きさの1.01倍（ページ下の小さなプログラムが入れる）。元の波線を縦横比そのままで使い、文字の幅からはみ出した分は切る */
+.tw-wave { display: block; width: 0; min-width: 100%; height: 1.01em; overflow: hidden; }
+.tw-wave img { display: block !important; height: 100% !important; width: auto; min-width: 100%; max-width: none !important; max-height: none !important; aspect-ratio: auto !important; object-fit: fill !important; margin: 0 !important; }
+.route-head .tw .tw-wave { margin-top: -2px; }
+</style>
+<style>
+/* === スマホで押しやすく（2026-09-24）：「詳しく見る」と機能のタブは、見た目はそのままで押せる範囲だけ広げる === */
+@media (max-width: 700px) {
+  .fold-btn { position: relative; }
+  .fold-btn::after { content: ""; position: absolute; inset: -8px -6px; }
+  .fsit-tab { position: relative; }
+  .fsit-tab::after { content: ""; position: absolute; left: 0; right: 0; top: -6px; bottom: -6px; }
+}
+/* 機能のタブ：押せる印は淡い色の塗りではなく、濃い色の枠で（決まり：淡いベタ塗りはしない） */
+.fsit-tab:hover { background: #fff !important; border-color: #4f46e5 !important; }
+.fsit-tab.on:hover { background: #1e1b4b !important; border-color: #1e1b4b !important; }
+</style>
 </head>
 <body>
 
@@ -917,8 +1077,8 @@ body{ padding-top:50px; }
 <header class="route-head">
   <img class="route-logo" src="img/fxspace-symbol.png" alt="FX SPACE">
   <h1 class="heading-lg">
-    <span class="tw">プロトレーダーになるための<img src="img/underline-wave.png" alt=""></span><br>
-    <span class="tw accent">最短ルート<img src="img/underline-wave.png" alt=""></span>
+    <span class="tw">プロトレーダーになるための<span class="tw-wave" aria-hidden="true"><img src="img/underline-wave.png" alt=""></span></span><br>
+    <span class="tw accent">最短ルート<span class="tw-wave" aria-hidden="true"><img src="img/underline-wave.png" alt=""></span></span>
   </h1>
   <p class="route-sub">やることはシンプル。<br>実力をつけて、資金を大きくして、プロへ。</p>
 </header>
@@ -1037,16 +1197,16 @@ body{ padding-top:50px; }
             <a class="content-card" data-cat="learn" data-rec="elearning,community" href="https://discord.com/channels/1039824083208126474/1238309633139937330" target="_blank"><div class="card-emoji">📚</div><h4>トレード学習</h4><span class="card-tip">初級・中級・上級に分かれたカリキュラム。自分のレベルに合わせてステップアップできます。</span><p>初級〜上級カリキュラム</p><span class="card-link">学習 →</span></a>
             <a class="content-card" data-cat="learn" data-rec="elearning" href="https://fx-space.com/intro/y-curriculum.html" target="_blank"><div class="card-emoji">📖</div><h4>Yカリキュラム</h4><span class="card-tip">ライン→<wbr>シナリオ→<wbr>タイミング→<wbr>過去検証。動画で学び、答え合わせで合格していく、よすが式の学習ロードマップ。</span><p>学習ロードマップ</p><span class="card-link">見る →</span></a>
             <a class="content-card" data-cat="learn" data-rec="community,ytt" href="https://discord.com/channels/1039824083208126474/1246768528506486836" target="_blank"><div class="card-emoji">📝</div><h4>超実践FX問題集</h4><span class="card-tip">同じ56チャートで、ライン・ナウキャスト・シナリオの3問ずつ（全168問）を詳細解説付きで演習。知識だけでなく実践的な判断力を鍛えられます。</span><p>56チャート×3問の実力テスト</p><span class="card-link">挑戦 →</span></a>
-            <a class="content-card" data-cat="learn" data-rec="elearning" href="https://discord.com/channels/1039824083208126474/1462665754934640680" target="_blank"><div class="card-emoji">🔍</div><h4>トレード学習ナビ</h4><span class="card-tip">過去のすべての学習動画をキーワードで検索。</span><p>よすがのこれまでの全動画をキーワード検索</p><span class="card-link">検索 →</span></a>
+            <a class="content-card" data-cat="learn" data-rec="elearning" href="https://discord.com/channels/1039824083208126474/1462665754934640680" target="_blank"><div class="card-emoji">🔍</div><h4>FX動画ナビ</h4><span class="card-tip">過去のすべての学習動画をキーワードで検索。</span><p>よすがのこれまでの全動画をキーワード検索</p><span class="card-link">検索 →</span></a>
             <a class="content-card" data-cat="community" data-rec="elearning" href="https://discord.com/channels/1039824083208126474/1181506867944501321" target="_blank"><div class="card-emoji">💬</div><h4>フォーラム</h4><span class="card-tip">FXに関するあらゆる質問ができる掲示板。初心者の基本的な質問も大歓迎です。</span><p>何でも質問OK</p><span class="card-link">質問 →</span></a>
             <a class="content-card" data-cat="community" data-rec="elearning" href="https://discord.com/channels/1039824083208126474/1181536360398590003" target="_blank"><div class="card-emoji">🧑‍🏫</div><h4>astroへ質問</h4><span class="card-tip">ASTROのプロトレーダーに直接質問できるチャンネル。実践的なアドバイスがもらえます。</span><p>プロトレーダーに直接質問</p><span class="card-link">質問 →</span></a>
             <a class="content-card" data-cat="community" data-rec="ytt,community,zeropro" href="https://discord.com/channels/1039824083208126474/1282263648886329396" target="_blank"><div class="card-emoji">📡</div><h4>ライブチャート分析</h4><span class="card-tip">メンバーとリアルタイムでチャート分析・議論できます。</span><p>リアルタイムで交流</p><span class="card-link">参加 →</span></a>
             <a class="content-card" data-cat="community" href="https://discord.com/channels/1039824083208126474/1426177028058517607" target="_blank"><div class="card-emoji">☕</div><h4>雑談</h4><span class="card-tip">初心者応援・今日のできごと・マネートピックなど、テーマ別に雑談できるチャンネル。</span><p>テーマ別の雑談チャンネル</p><span class="card-link">入室 →</span></a>
             <a class="content-card" data-cat="trade" data-rec="ytt,community,zeropro" href="https://discord.com/channels/1039824083208126474/1048136270582382592" target="_blank"><div class="card-emoji">📊</div><h4>毎朝のシナリオ</h4><span class="card-tip">平日毎朝よすがが更新するシナリオ構築動画。3通貨（スタンダード）と15通貨（プレミアム）の2本立て。</span><p>平日毎日更新（3通貨＋15通貨）</p><span class="card-link">見る →</span></a>
             <a class="content-card" data-cat="trade" data-rec="ytt,community,zeropro" href="https://discord.com/channels/1039824083208126474/1521088083158896651" target="_blank"><div class="card-emoji">🎯</div><h4>利確速報</h4><span class="card-tip">メンバーの利確をリアルタイムで通知。どの通貨・時間帯でどれくらい利確したのかがわかり、みんなでトレードしている一体感が生まれます。</span><p>リアルタイム利確通知</p><span class="card-link">見る →</span></a>
-            <a class="content-card" data-cat="trade" href="https://discord.com/channels/1039824083208126474/1194299754088247298" target="_blank"><div class="card-emoji">🏆</div><h4>合格・出金報告</h4><span class="card-tip">合格報告・出金・残高増加など、仲間の成功が集まるチャンネル。モチベーションに。</span><p>仲間の成功体験</p><span class="card-link">見る →</span></a>
+            <a class="content-card" data-cat="trade" href="https://discord.com/channels/1039824083208126474/1529770753052901476" target="_blank"><div class="card-emoji">🏆</div><h4>合格・出金報告</h4><span class="card-tip">合格報告・出金・残高増加など、仲間の成功が集まるチャンネル。モチベーションに。</span><p>仲間の成功体験</p><span class="card-link">見る →</span></a>
             <a class="content-card" data-cat="trade" href="https://discord.com/channels/1039824083208126474/1161882625519140874" target="_blank"><div class="card-emoji">🔁</div><h4>FTO（過去相場検証）</h4><span class="card-tip">過去の相場を巻き戻して何度も検証できるツール。2026年7月よりYTTがFTOに搭載（サブスク限定先行）。</span><p>過去相場を巻き戻して検証</p><span class="card-link">見る →</span></a>
-            <a class="content-card" data-cat="trade" href="https://fx-space.com/intro/ytt-tokusetu.html" target="_blank"><div class="card-emoji">🛰️</div><h4>YTT</h4><span class="card-tip">学んだことをすぐ実践できるトレードツール。分析サポート・自動ライン描画・シナリオ機能などを搭載。</span><p>実践トレードツール</p><span class="card-link">詳しく →</span></a>
+            <a class="content-card" data-cat="trade" href="https://fx-space.com/intro/ytt-tokusetu.html" target="_blank"><div class="card-emoji">🛰️</div><h4>YTT</h4><span class="card-tip">学んだことをすぐ実践できるトレードツール。シナリオ構築・予約注文・オートラインなどを搭載。Web版なら、スマホでもPCでもブラウザから使えます。</span><p>実践トレードツール</p><span class="card-link">詳しく →</span></a>
             <a class="content-card" data-cat="trade" data-rec="zeropro" href="https://discord.com/channels/1039824083208126474/1136925665099251753" target="_blank"><div class="card-emoji">🌟</div><h4>ASTRO</h4><span class="card-tip">プロップ合格などプロ実績を持つトレーダーの申請制チーム。申請・昇格でランクが上がります。</span><p>申請制のプロトレーダーチーム</p><span class="card-link">詳細 →</span></a>
             <a class="content-card" data-cat="support" href="https://discordapp.com/channels/1039824083208126474/1416640423396511804/1490341286773915758" target="_blank"><div class="card-emoji">✉️</div><h4>お問い合わせ</h4><span class="card-tip">分からないこと・要望など、運営（サポーター）への問い合わせ窓口。Ticketチャンネルが作成され、本人と運営のみ閲覧できます。</span><p>運営に直接問い合わせ</p><span class="card-link">問い合わせ →</span></a>
             <a class="content-card" data-cat="support" href="https://discordapp.com/channels/1039824083208126474/1416640423396511804/1490342419982454924" target="_blank"><div class="card-emoji">🤖</div><h4>AIサポート</h4><span class="card-tip">FX SPACE全般のAIへのお問い合わせ。すぐ返答が来ますが、内容は必ずしも正確ではない点にご注意ください。</span><p>全般をAIに質問（即答）</p><span class="card-link">AIに聞く →</span></a>
@@ -1841,7 +2001,7 @@ body{ padding-top:50px; }
   <div class="astro-wrap">
     <!-- ランク（ASTROランク制）：条件・説明は画像に任せ、テキストは最小限にする -->
     <div class="astro-rank rv">
-      <img class="astro-rank-img" src="img/astro-rank-chart.png" alt="ASTRO TRADERS ランク一覧：個人口座ルートとプロップルート、KarmanからVoyagerまでの昇格条件" width="1080" height="1080" loading="lazy">
+      <img class="astro-rank-img" src="img/astro-rank-chart-v2.png" alt="ASTRO TRADERS ランク一覧：個人口座ルートとプロップルート、KarmanからVoyagerまでの昇格条件" width="1293" height="1217" loading="lazy">
       <p class="rank-zoom-hint" id="rank-zoom-hint"><img src="img/zoom-icon.png" alt="">画像をタップして拡大</p>
       <p class="astro-goal">プロの最高峰 <b>Voyager</b> を目指そう</p>
       <div><a class="rank-astro-link" href="https://discordapp.com/channels/1039824083208126474/1136925665099251753/1179699238481969162" target="_blank" rel="noopener">ASTROについて詳しく →</a></div>
@@ -1863,198 +2023,122 @@ body{ padding-top:50px; }
   </div>
   <div class="tools-wrap">
 
-    <!-- YTT：機能アニメで見せる -->
+    <!-- YTT：特設ページの「こんな悩み、ありませんか？」の5枚を1枚ずつめくって見せる（2026-09-23） -->
     <div class="tools-block rv">
       <div class="tools-block-head"><img class="tools-ytt-logo" src="img/ytt-logo-wide.png" alt="YTT"></div>
-      <div class="tools-cap">学んだことをすぐ実践できるトレードツール</div>
-      <div class="fcar" id="ob-ytt-anim-wrap" data-auto="5000">
+      <div class="tools-cap">学んだことをすぐ実践できるトレードツール<br><span class="tools-cap-note">（画面はWeb版YTTです）</span></div>
+      <div class="fcar" id="ob-ytt-anim-wrap" data-auto="9000">
        <div class="fcar-view"><div class="fcar-track">
-
-        <!-- 機能1: 直感的な注文・決済 -->
-        <div class="fcar-slide"><div class="ob-ytt-anim-item">
-          <div class="ob-ytt-anim-head"><div class="ob-ytt-anim-title">直感的な注文・決済</div></div>
-          <p class="ob-ytt-anim-desc">ロット数を指定してBUY/SELLで即座に注文。全決済・1/2決済も1クリック。</p>
-          <div class="ob-ytt-anim-scene" id="scene-ytt-p1">
-            <svg viewBox="0 0 280 220" preserveAspectRatio="xMidYMid meet">
-              <rect id="p1-panel" x="50" y="5" width="180" height="210" rx="8" fill="#2b2d31" opacity="0"></rect>
-              <text id="p1-title" x="140" y="22" fill="rgba(255,255,255,0.5)" text-anchor="middle" font-size="8" font-weight="600" font-family="Inter" opacity="0">注文パネル</text>
-              <g id="p1-lot" opacity="0">
-                <rect x="68" y="28" width="26" height="27" rx="4" fill="#3f4147"></rect>
-                <text x="81" y="40" fill="rgba(255,255,255,0.7)" text-anchor="middle" font-size="9" font-family="Inter">▲</text>
-                <text x="81" y="51" fill="rgba(255,255,255,0.7)" text-anchor="middle" font-size="9" font-family="Inter">▼</text>
-                <rect x="98" y="28" width="80" height="27" rx="4" fill="#1e1f22" stroke="#3f4147" stroke-width="0.8"></rect>
-                <text x="138" y="47" fill="white" text-anchor="middle" font-size="16" font-weight="800" font-family="Inter">0.01</text>
-                <rect x="182" y="28" width="30" height="27" rx="4" fill="#3f4147"></rect>
-                <rect x="190" y="40" width="3" height="10" rx="0.5" fill="rgba(255,255,255,0.5)"></rect>
-                <rect x="195" y="36" width="3" height="14" rx="0.5" fill="rgba(255,255,255,0.5)"></rect>
-                <rect x="200" y="42" width="3" height="8" rx="0.5" fill="rgba(255,255,255,0.5)"></rect>
-                <polygon points="202,40 206,40 204,36" fill="rgba(255,255,255,0.5)"></polygon>
-              </g>
-              <g id="p1-sell" opacity="0">
-                <rect x="58" y="60" width="82" height="36" rx="5" fill="#8B1A1A"></rect>
-                <text x="99" y="77" fill="white" text-anchor="middle" font-size="14" font-weight="900" font-family="Inter">SELL</text>
-                <text x="99" y="90" fill="rgba(255,255,255,0.5)" text-anchor="middle" font-size="8" font-family="Inter">0.01 lot</text>
-              </g>
-              <g id="p1-buy" opacity="0">
-                <rect x="144" y="60" width="82" height="36" rx="5" fill="#1D5FB6"></rect>
-                <text x="185" y="77" fill="white" text-anchor="middle" font-size="14" font-weight="900" font-family="Inter">BUY</text>
-                <text x="185" y="90" fill="rgba(255,255,255,0.5)" text-anchor="middle" font-size="8" font-family="Inter">0.01 lot</text>
-              </g>
-              <g id="p1-cls" opacity="0">
-                <rect x="58" y="101" width="168" height="26" rx="5" fill="#C8A200"></rect>
-                <text x="142" y="118" fill="#1e1f22" text-anchor="middle" font-size="11" font-weight="700" font-family="Inter">全決済</text>
-              </g>
-              <g id="p1-half" opacity="0">
-                <rect x="58" y="131" width="168" height="26" rx="5" fill="#2B8C44"></rect>
-                <text x="142" y="148" fill="#1e1f22" text-anchor="middle" font-size="11" font-weight="700" font-family="Inter">1/2決済</text>
-              </g>
-              <g id="p1-pl" opacity="0">
-                <rect x="58" y="163" width="168" height="44" rx="6" fill="#1e1f22" stroke="#3f4147" stroke-width="0.5"></rect>
-                <circle id="p1-pl-dot" cx="68" cy="176" r="3" fill="#4ade80"></circle>
-                <text x="76" y="179" fill="rgba(255,255,255,0.6)" font-size="8" font-weight="600" font-family="Inter">USDJPY  Buy 0.01</text>
-                <text x="66" y="199" fill="rgba(255,255,255,0.4)" font-size="7.5" font-weight="600" font-family="Inter">損益</text>
-                <text id="p1-pl-val" x="218" y="200" fill="#4ade80" text-anchor="end" font-size="15" font-weight="900" font-family="Inter">+0 円</text>
-              </g>
-            </svg>
-          </div>
-        </div></div>
-
-        <!-- 機能2: Yトレード・シナリオ機能 -->
-        <div class="fcar-slide"><div class="ob-ytt-anim-item">
-          <div class="ob-ytt-anim-head"><div class="ob-ytt-anim-title">Yトレード・シナリオ機能</div></div>
-          <p class="ob-ytt-anim-desc">チャート上でTP/SLを視覚的に設定。朝にシナリオを仕込んで張り付き不要に。</p>
-          <div class="ob-ytt-anim-scene" id="scene-ytt">
-            <svg viewBox="0 0 280 160" preserveAspectRatio="xMidYMid meet">
-              <line class="grid-line" x1="0" y1="40" x2="280" y2="40" stroke="rgba(255,255,255,0.05)"></line>
-              <line class="grid-line" x1="0" y1="80" x2="280" y2="80" stroke="rgba(255,255,255,0.05)"></line>
-              <line class="grid-line" x1="0" y1="120" x2="280" y2="120" stroke="rgba(255,255,255,0.05)"></line>
-              <g class="candle" style="opacity:0;"><line x1="14" y1="128" x2="14" y2="142" stroke="#ef4444" stroke-width="1"></line><rect x="12" y="130" width="4" height="8" rx="0.5" fill="#ef4444"></rect></g>
-              <g class="candle" style="opacity:0;"><line x1="21" y1="124" x2="21" y2="140" stroke="#22c55e" stroke-width="1"></line><rect x="19" y="126" width="4" height="10" rx="0.5" fill="#22c55e"></rect></g>
-              <g class="candle" style="opacity:0;"><line x1="28" y1="126" x2="28" y2="144" stroke="#ef4444" stroke-width="1"></line><rect x="26" y="130" width="4" height="10" rx="0.5" fill="#ef4444"></rect></g>
-              <g class="candle" style="opacity:0;"><line x1="35" y1="122" x2="35" y2="138" stroke="#22c55e" stroke-width="1"></line><rect x="33" y="124" width="4" height="10" rx="0.5" fill="#22c55e"></rect></g>
-              <g class="candle" style="opacity:0;"><line x1="42" y1="126" x2="42" y2="140" stroke="#ef4444" stroke-width="1"></line><rect x="40" y="128" width="4" height="8" rx="0.5" fill="#ef4444"></rect></g>
-              <g class="candle" style="opacity:0;"><line x1="49" y1="120" x2="49" y2="142" stroke="#22c55e" stroke-width="1"></line><rect x="47" y="124" width="4" height="12" rx="0.5" fill="#22c55e"></rect></g>
-              <g class="candle" style="opacity:0;"><line x1="56" y1="118" x2="56" y2="140" stroke="#ef4444" stroke-width="1"></line><rect x="54" y="122" width="4" height="14" rx="0.5" fill="#ef4444"></rect></g>
-              <g class="candle" style="opacity:0;"><line x1="63" y1="112" x2="63" y2="138" stroke="#22c55e" stroke-width="1"></line><rect x="61" y="116" width="4" height="15" rx="0.5" fill="#22c55e"></rect></g>
-              <g class="candle" style="opacity:0;"><line x1="70" y1="110" x2="70" y2="136" stroke="#ef4444" stroke-width="1"></line><rect x="68" y="114" width="4" height="16" rx="0.5" fill="#ef4444"></rect></g>
-              <g class="candle" style="opacity:0;"><line x1="77" y1="112" x2="77" y2="140" stroke="#22c55e" stroke-width="1"></line><rect x="75" y="116" width="4" height="16" rx="0.5" fill="#22c55e"></rect></g>
-              <g class="candle" style="opacity:0;"><line x1="84" y1="108" x2="84" y2="134" stroke="#ef4444" stroke-width="1"></line><rect x="82" y="112" width="4" height="16" rx="0.5" fill="#ef4444"></rect></g>
-              <g class="candle" style="opacity:0;"><line x1="91" y1="106" x2="91" y2="132" stroke="#22c55e" stroke-width="1"></line><rect x="89" y="110" width="4" height="14" rx="0.5" fill="#22c55e"></rect></g>
-              <g class="candle" style="opacity:0;"><line x1="98" y1="108" x2="98" y2="136" stroke="#ef4444" stroke-width="1"></line><rect x="96" y="112" width="4" height="18" rx="0.5" fill="#ef4444"></rect></g>
-              <g class="candle" style="opacity:0;"><line x1="105" y1="104" x2="105" y2="130" stroke="#22c55e" stroke-width="1"></line><rect x="103" y="108" width="4" height="14" rx="0.5" fill="#22c55e"></rect></g>
-              <path class="scenario-path" d="M 107,108 L 155,35 L 192,75 L 250,10" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="300" stroke-dashoffset="300" style="opacity:0;"></path>
-              <g id="ytt-buy" opacity="0"><rect x="184" y="67" width="16" height="16" rx="2" fill="rgba(0,0,0,0.7)" stroke="#facc15" stroke-width="1.2"></rect><text x="192" y="79" fill="#facc15" font-size="11" text-anchor="middle" font-weight="900" font-family="Inter">↑</text></g>
-              <g id="ytt-tp" opacity="0"><rect x="240" y="17" width="16" height="16" rx="2" fill="rgba(0,0,0,0.7)" stroke="#facc15" stroke-width="1.2"></rect><text x="248" y="29" fill="#4ade80" font-size="11" text-anchor="middle" font-weight="900" font-family="Inter">✓</text></g>
-              <g id="ytt-sl" opacity="0"><rect x="240" y="117" width="16" height="16" rx="2" fill="rgba(0,0,0,0.7)" stroke="#facc15" stroke-width="1.2"></rect><text x="248" y="130" fill="#facc15" font-size="11" text-anchor="middle" font-weight="900" font-family="Inter">✗</text></g>
-              <text class="ytt-status" x="140" y="155" fill="rgba(255,255,255,0.45)" font-size="6.5" text-anchor="middle" font-family="Inter" font-weight="600" opacity="0">シナリオ完成</text>
-            </svg>
-          </div>
-        </div></div>
-
-        <!-- 機能3: 分析サポート・オートライン -->
-        <div class="fcar-slide"><div class="ob-ytt-anim-item">
-          <div class="ob-ytt-anim-head"><div class="ob-ytt-anim-title">分析サポート・オートライン</div></div>
-          <p class="ob-ytt-anim-desc">独自ロジックで重要ラインを自動描画。トレンド方向も時間足ごとに可視化。</p>
-          <div class="ob-ytt-anim-scene" id="scene-ytt-p3">
-            <svg viewBox="0 0 280 210" preserveAspectRatio="xMidYMid meet">
-              <line x1="0" y1="52" x2="280" y2="52" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"></line>
-              <line x1="0" y1="105" x2="280" y2="105" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"></line>
-              <line x1="0" y1="158" x2="280" y2="158" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"></line>
-              <g id="p3-candles" opacity="0">
-                <rect x="18" y="130" width="4" height="18" rx="0.5" fill="#22c55e"></rect>
-                <rect x="32" y="140" width="4" height="15" rx="0.5" fill="#ef4444"></rect>
-                <rect x="46" y="120" width="4" height="20" rx="0.5" fill="#22c55e"></rect>
-                <rect x="60" y="128" width="4" height="14" rx="0.5" fill="#ef4444"></rect>
-                <rect x="74" y="105" width="4" height="22" rx="0.5" fill="#22c55e"></rect>
-                <rect x="88" y="115" width="4" height="16" rx="0.5" fill="#ef4444"></rect>
-                <rect x="102" y="90" width="4" height="24" rx="0.5" fill="#22c55e"></rect>
-                <rect x="116" y="100" width="4" height="18" rx="0.5" fill="#ef4444"></rect>
-                <rect x="130" y="78" width="4" height="20" rx="0.5" fill="#22c55e"></rect>
-                <rect x="144" y="85" width="4" height="15" rx="0.5" fill="#ef4444"></rect>
-                <rect x="158" y="60" width="4" height="25" rx="0.5" fill="#22c55e"></rect>
-                <rect x="172" y="70" width="4" height="18" rx="0.5" fill="#ef4444"></rect>
-                <rect x="186" y="48" width="4" height="22" rx="0.5" fill="#22c55e"></rect>
-              </g>
-              <line id="p3-hl1" x1="10" y1="38" x2="205" y2="38" stroke="#ef4444" stroke-width="2" stroke-dasharray="195" stroke-dashoffset="195"></line>
-              <text id="p3-hl1-lbl" x="207" y="41" fill="#ef4444" font-size="6.5" font-weight="800" font-family="Inter" opacity="0">強</text>
-              <line id="p3-hl2" x1="10" y1="82" x2="205" y2="82" stroke="#22d3ee" stroke-width="1.5" stroke-dasharray="195" stroke-dashoffset="195"></line>
-              <text id="p3-hl2-lbl" x="207" y="85" fill="#22d3ee" font-size="6.5" font-weight="700" font-family="Inter" opacity="0">中</text>
-              <line id="p3-hl3" x1="10" y1="130" x2="205" y2="130" stroke="#22d3ee" stroke-width="1" stroke-dasharray="4,3" opacity="0"></line>
-              <text id="p3-hl3-lbl" x="207" y="133" fill="#22d3ee" font-size="6.5" font-weight="700" font-family="Inter" opacity="0">弱</text>
-              <line id="p3-hl4" x1="10" y1="165" x2="205" y2="165" stroke="rgba(255,255,255,0.45)" stroke-width="0.8" stroke-dasharray="3,4" opacity="0"></line>
-              <line id="p3-ch1" x1="4" y1="126" x2="202" y2="41" stroke="#a78bfa" stroke-width="1.2" stroke-dasharray="220" stroke-dashoffset="220"></line>
-              <line id="p3-ch2" x1="4" y1="168" x2="202" y2="83" stroke="#a78bfa" stroke-width="1.2" stroke-dasharray="220" stroke-dashoffset="220"></line>
-              <g id="p3-trend" opacity="0">
-                <rect x="215" y="8" width="58" height="82" rx="5" fill="rgba(0,0,0,0.8)" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"></rect>
-                <g id="p3-tr1" opacity="0">
-                  <text x="223" y="28" fill="rgba(255,255,255,0.55)" font-size="8.5" font-weight="700" font-family="Inter">H4</text>
-                  <rect x="252" y="18" width="15" height="13" rx="2.5" fill="rgba(239,68,68,0.2)"></rect>
-                  <text x="259.5" y="28.5" fill="#ef4444" text-anchor="middle" font-size="10" font-weight="900" font-family="Inter">↓</text>
-                </g>
-                <g id="p3-tr2" opacity="0">
-                  <text x="223" y="46" fill="rgba(255,255,255,0.55)" font-size="8.5" font-weight="700" font-family="Inter">H1</text>
-                  <rect x="252" y="36" width="15" height="13" rx="2.5" fill="rgba(34,211,238,0.2)"></rect>
-                  <text x="259.5" y="46.5" fill="#22d3ee" text-anchor="middle" font-size="10" font-weight="900" font-family="Inter">→</text>
-                </g>
-                <g id="p3-tr3" opacity="0">
-                  <text x="223" y="64" fill="rgba(255,255,255,0.55)" font-size="8.5" font-weight="700" font-family="Inter">M15</text>
-                  <rect x="252" y="54" width="15" height="13" rx="2.5" fill="rgba(74,222,128,0.2)"></rect>
-                  <text x="259.5" y="64.5" fill="#4ade80" text-anchor="middle" font-size="10" font-weight="900" font-family="Inter">↑</text>
-                </g>
-                <g id="p3-tr4" opacity="0">
-                  <text x="223" y="82" fill="rgba(255,255,255,0.55)" font-size="8.5" font-weight="700" font-family="Inter">M5</text>
-                  <rect x="252" y="72" width="15" height="13" rx="2.5" fill="rgba(74,222,128,0.2)"></rect>
-                  <text x="259.5" y="82.5" fill="#4ade80" text-anchor="middle" font-size="10" font-weight="900" font-family="Inter">↑</text>
-                </g>
-              </g>
-              <line id="p3-econ" x1="148" y1="5" x2="148" y2="190" stroke="#ef4444" stroke-width="0.8" opacity="0"></line>
-              <text id="p3-econ-t" x="153" y="10" fill="#ef4444" font-size="7" font-weight="700" font-family="Inter" writing-mode="tb" opacity="0">雇用統計</text>
-            </svg>
-          </div>
-        </div></div>
-
-        <!-- 機能4: リスク管理・自動ロット計算 -->
-        <div class="fcar-slide"><div class="ob-ytt-anim-item">
-          <div class="ob-ytt-anim-head"><div class="ob-ytt-anim-title">リスク管理・自動ロット計算</div></div>
-          <p class="ob-ytt-anim-desc">損失率を決めるだけでロットを自動計算。1トレードのリスクを常に一定に。</p>
-          <div class="ob-ytt-anim-scene" id="scene-ytt-p5">
-            <svg viewBox="0 0 280 210" preserveAspectRatio="xMidYMid meet">
-              <rect x="5" y="5" width="270" height="200" rx="4" fill="#0f1523" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
-              <g id="p5-scene1">
-                <text id="p5-title" x="140" y="38" fill="rgba(255,255,255,0.7)" text-anchor="middle" font-size="12" font-weight="800" font-family="Inter" opacity="0">損失率固定モード</text>
-                <g id="p5-balance" opacity="0">
-                  <text x="60" y="68" fill="rgba(255,255,255,0.4)" font-size="8" font-family="Inter">残高</text>
-                  <text x="220" y="68" fill="rgba(255,255,255,0.8)" text-anchor="end" font-size="12" font-weight="800" font-family="Inter">1,000,000 円</text>
-                  <line x1="50" y1="75" x2="230" y2="75" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
-                </g>
-                <g id="p5-rate" opacity="0">
-                  <text x="60" y="95" fill="rgba(255,255,255,0.4)" font-size="8" font-family="Inter">許容損失率</text>
-                  <text x="220" y="95" fill="#fbbf24" text-anchor="end" font-size="14" font-weight="900" font-family="Inter">2.0 %</text>
-                  <line x1="50" y1="102" x2="230" y2="102" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
-                </g>
-                <text id="p5-arrow" x="140" y="122" fill="rgba(255,255,255,0.25)" text-anchor="middle" font-size="14" font-family="Inter" opacity="0">↓</text>
-                <g id="p5-maxloss" opacity="0">
-                  <text x="60" y="145" fill="rgba(255,255,255,0.4)" font-size="8" font-family="Inter">最大損失額</text>
-                  <text x="220" y="145" fill="#ef4444" text-anchor="end" font-size="13" font-weight="800" font-family="Inter">20,000 円</text>
-                  <line x1="50" y1="152" x2="230" y2="152" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
-                </g>
-                <g id="p5-lot" opacity="0">
-                  <rect x="59" y="160" width="180" height="30" rx="6" fill="rgba(74,222,128,0.08)" stroke="#4ade80" stroke-width="0.8"/>
-                  <text x="69" y="180" fill="rgba(74,222,128,0.6)" font-size="9" font-weight="600" font-family="Inter">推奨ロット</text>
-                  <text x="229" y="181" fill="#4ade80" text-anchor="end" font-size="16" font-weight="900" font-family="Inter">0.15</text>
-                </g>
-              </g>
-            </svg>
-          </div>
-        </div></div>
-
+        <div class="fcar-slide">
+        <article class="fsit" style="--fbg:#1e1b4b;--ffg:#ffffff">
+                <div class="fold-head">
+                    <svg class="fold-tab" viewBox="0 0 300 26" preserveAspectRatio="none" aria-hidden="true"><path d="M0 26V16C0 7.2 7.2 0 16 0h228c18 0 24 26 56 26z" fill="#1e1b4b"></path></svg>
+                    <span class="fold-no">01</span>
+                    <p class="fsit-say">予め決めたトレードを、勝手にしておいてほしいなぁ…</p>
+                    <a class="fold-btn" href="ytt-web-f-scenario.html#scenario">詳しく見る<i aria-hidden="true">→</i></a>
+                </div>
+                <div class="fold-body">
+                
+                <div class="fsit-panes">
+                    <div class="fsit-pane">
+                        <p class="fsit-name">シナリオ（TP/SL）</p>
+                        <p class="fsit-desc"><span class="fsit-what">エントリーと同時に、利確（TP）と損切り（SL）を置けます。</span></p>
+                        <div class="fsit-media"><figure class="fduo vduo"><div class="fduo-pc"><div class="wy-pc"><div class="wy-pc-screen"><span class="fvid-wrap"><video class="fvid-video" src="img/webytt/feat/feat-scenario.mp4" poster="img/webytt/feat/feat-scenario.jpg" muted loop playsinline preload="none" aria-label="PCの動画：シナリオ（TP/SL）（声なし）"></video></span></div><img class="fvmark" src="img/hand-play.svg" alt="" aria-hidden="true" width="62" height="62"><div class="wy-pc-base" aria-hidden="true"></div></div></div><div class="fduo-sp"><div class="fd-phone"><span class="fvid-wrap"><video class="fvid-video" src="img/webytt/feat/feat-scenario-sp.mp4" poster="img/webytt/feat/feat-scenario-sp.jpg" muted loop playsinline preload="none" aria-label="スマホの動画：シナリオ（TP/SL）（声なし）"></video></span></div></div><figcaption class="fvid-cap">PCとスマホの動画　タップで拡大</figcaption></figure></div>
+                    </div>
+                    
+                    
+                    
+                </div>
+                </div>
+            </article>
+        </div>
+        <div class="fcar-slide">
+        <article class="fsit" style="--fbg:#f59e0b;--ffg:#1e1b4b">
+                <div class="fold-head">
+                    <svg class="fold-tab" viewBox="0 0 300 26" preserveAspectRatio="none" aria-hidden="true"><path d="M0 26V16C0 7.2 7.2 0 16 0h228c18 0 24 26 56 26z" fill="#f59e0b"></path></svg>
+                    <span class="fold-no">02</span>
+                    <p class="fsit-say">負ける額を、いつも同じにしておきたいなぁ…</p>
+                    <a class="fold-btn" href="ytt-web-f-trade.html#lot">詳しく見る<i aria-hidden="true">→</i></a>
+                </div>
+                <div class="fold-body">
+                
+                <div class="fsit-panes">
+                    <div class="fsit-pane">
+                        <p class="fsit-name">ロットの決め方</p>
+                        <p class="fsit-desc"><span class="fsit-what">1回の損失を「残高の○%」か「○円」に決めておくと、SLまでの幅に合わせて、ロットが自動で決まります。</span></p>
+                        <div class="fsit-media"><figure class="fduo vduo"><div class="fduo-pc"><div class="wy-pc"><div class="wy-pc-screen"><span class="fvid-wrap"><video class="fvid-video" src="img/webytt/feat/feat-lot.mp4" poster="img/webytt/feat/feat-lot.jpg" muted loop playsinline preload="none" aria-label="PCの動画：ロットの決め方（声なし）"></video></span></div><img class="fvmark" src="img/hand-play.svg" alt="" aria-hidden="true" width="62" height="62"><div class="wy-pc-base" aria-hidden="true"></div></div></div><div class="fduo-sp"><div class="fd-phone"><span class="fvid-wrap"><video class="fvid-video" src="img/webytt/feat/feat-lot-sp.mp4" poster="img/webytt/feat/feat-lot-sp.jpg" muted loop playsinline preload="none" aria-label="スマホの動画：ロットの決め方（声なし）"></video></span></div></div><figcaption class="fvid-cap">PCとスマホの動画　タップで拡大</figcaption></figure></div>
+                    </div>
+                </div>
+                </div>
+            </article>
+        </div>
+        <div class="fcar-slide">
+        <article class="fsit" style="--fbg:#4f46e5;--ffg:#ffffff">
+                <div class="fold-head">
+                    <svg class="fold-tab" viewBox="0 0 300 26" preserveAspectRatio="none" aria-hidden="true"><path d="M0 26V16C0 7.2 7.2 0 16 0h228c18 0 24 26 56 26z" fill="#4f46e5"></path></svg>
+                    <span class="fold-no">03</span>
+                    <p class="fsit-say">大事なラインを、毎回引くのは面倒だなぁ…</p>
+                    <a class="fold-btn" href="ytt-web-f-chart.html#autoline">詳しく見る<i aria-hidden="true">→</i></a>
+                </div>
+                <div class="fold-body">
+                
+                <div class="fsit-panes">
+                    <div class="fsit-pane">
+                        <p class="fsit-name">オートライン</p>
+                        <p class="fsit-desc"><span class="fsit-what">大事な水平線・トレンドライン・チャネルラインを、自動でチャートに引いてくれます。線の色は時間足ごとに分かれています。</span></p>
+                        <div class="fsit-media"><figure class="fduo vduo"><div class="fduo-pc"><div class="wy-pc"><div class="wy-pc-screen"><span class="fvid-wrap"><video class="fvid-video" src="img/webytt/feat/feat-autoline.mp4" poster="img/webytt/feat/feat-autoline.jpg" muted loop playsinline preload="none" aria-label="PCの動画：オートライン（声なし）"></video></span></div><img class="fvmark" src="img/hand-play.svg" alt="" aria-hidden="true" width="62" height="62"><div class="wy-pc-base" aria-hidden="true"></div></div></div><div class="fduo-sp"><div class="fd-phone"><span class="fvid-wrap"><video class="fvid-video" src="img/webytt/feat/feat-autoline-sp.mp4" poster="img/webytt/feat/feat-autoline-sp.jpg" muted loop playsinline preload="none" aria-label="スマホの動画：オートライン（声なし）"></video></span></div></div><figcaption class="fvid-cap">PCとスマホの動画　タップで拡大</figcaption></figure></div>
+                    </div>
+                </div>
+                </div>
+            </article>
+        </div>
+        <div class="fcar-slide">
+        <article class="fsit" style="--fbg:#eab308;--ffg:#1e1b4b">
+                <div class="fold-head">
+                    <svg class="fold-tab" viewBox="0 0 300 26" preserveAspectRatio="none" aria-hidden="true"><path d="M0 26V16C0 7.2 7.2 0 16 0h228c18 0 24 26 56 26z" fill="#eab308"></path></svg>
+                    <span class="fold-no">04</span>
+                    <p class="fsit-say">チャートを見ていなくても、価格が来たら教えてほしいなぁ…</p>
+                    <a class="fold-btn" href="ytt-web-f-chart.html#alertline">詳しく見る<i aria-hidden="true">→</i></a>
+                </div>
+                <div class="fold-body">
+                
+                <div class="fsit-panes">
+                    <div class="fsit-pane">
+                        <p class="fsit-name">通知ライン</p>
+                        <p class="fsit-desc"><span class="fsit-what">チャートに置いた線に価格が来たら、スマホにお知らせが届きます。</span></p>
+                        <div class="fsit-media"><figure class="fduo vduo"><div class="fduo-pc"><div class="wy-pc"><div class="wy-pc-screen"><span class="fvid-wrap"><video class="fvid-video" src="img/webytt/feat/feat-alertline.mp4" poster="img/webytt/feat/feat-alertline.jpg" muted loop playsinline preload="none" aria-label="PCの動画：通知ライン（声なし）"></video></span></div><img class="fvmark" src="img/hand-play.svg" alt="" aria-hidden="true" width="62" height="62"><div class="wy-pc-base" aria-hidden="true"></div></div></div><div class="fduo-sp"><div class="fd-phone"><span class="fvid-wrap"><video class="fvid-video" src="img/webytt/feat/feat-alertline-sp.mp4" poster="img/webytt/feat/feat-alertline-sp.jpg" muted loop playsinline preload="none" aria-label="スマホの動画：通知ライン（声なし）"></video></span></div></div><figcaption class="fvid-cap">PCとスマホの動画　タップで拡大</figcaption></figure></div>
+                    </div>
+                </div>
+                </div>
+            </article>
+        </div>
+        <div class="fcar-slide">
+        <article class="fsit" style="--fbg:#3730a3;--ffg:#ffffff">
+                <div class="fold-head">
+                    <svg class="fold-tab" viewBox="0 0 300 26" preserveAspectRatio="none" aria-hidden="true"><path d="M0 26V16C0 7.2 7.2 0 16 0h228c18 0 24 26 56 26z" fill="#3730a3"></path></svg>
+                    <span class="fold-no">05</span>
+                    <p class="fsit-say">プロップの失格だけは、絶対に避けたいなぁ…</p>
+                    <a class="fold-btn" href="ytt-web-f-settings.html#prop">詳しく見る<i aria-hidden="true">→</i></a>
+                </div>
+                <div class="fold-body">
+                
+                <div class="fsit-panes">
+                    <div class="fsit-pane">
+                        <p class="fsit-name">プロップモード</p>
+                        <p class="fsit-desc"><span class="fsit-what">合格ライン・失格ラインをチャートに出し、SLが1日の損失の上限を超えないように、自動で動かします。</span></p>
+                        <div class="fsit-media"><figure class="fduo"><div class="fduo-pc"><div class="wy-pc"><div class="wy-pc-screen"><img src="img/webytt/feat/feat-propline-pc.jpg" alt="PCの画面：プロップモードのライン" loading="lazy"></div><div class="wy-pc-base" aria-hidden="true"></div></div></div><div class="fduo-sp"><div class="fd-phone"><img src="img/webytt/feat/feat-propline-sp.jpg" alt="スマホの画面：プロップモードのライン" loading="lazy"></div></div><figcaption class="fvid-cap">PCとスマホの画面　タップで拡大</figcaption></figure></div>
+                    </div>
+                </div>
+                </div>
+            </article>
+        </div>
        </div></div>
        <button type="button" class="fcar-nav fcar-prev" aria-label="前へ">‹</button>
        <button type="button" class="fcar-nav fcar-next" aria-label="次へ">›</button>
        <div class="fcar-dots"></div>
       </div>
-      <a class="tools-btn tools-btn--yt" href="https://youtu.be/x6CJtJN3Ces" target="_blank" rel="noopener"><img src="img/icon-youtube-crayon.svg" alt="">YTT解説 →</a>
       <a class="tools-btn tools-btn--tokusetu" href="https://fx-space.com/intro/ytt-tokusetu.html" target="_blank" rel="noopener">YTTについて詳しく →</a>
+      <a class="tools-btn tools-btn--tokusetu" href="https://fx-space.com/intro/ytt-web-features.html" target="_blank" rel="noopener">使い方を見る →</a>
     </div>
 
     <!-- コミュニティ：Discord風モックで見せる -->
@@ -2612,6 +2696,7 @@ body{ padding-top:50px; }
 (function(){
   var wrap=document.getElementById('ob-ytt-anim-wrap');
   if(!wrap || typeof gsap==='undefined') return;
+  if(!document.getElementById('scene-ytt-p1')) return; // Web版の動画に差しかえたので、旧アニメが無ければ何もしない
   var played=false;
   function play(){
     if(played) return; played=true;
@@ -2626,6 +2711,96 @@ body{ padding-top:50px; }
     es.forEach(function(e){ if(e.isIntersecting){ play(); io.disconnect(); } });
   },{threshold:0.15});
   io.observe(wrap);
+})();
+
+/* YTTカードの動画：見えているスライドの動画だけ再生する（見えないスライドは止める） */
+(function(){
+  var vids=document.querySelectorAll('video.ytt-vid, .rsec--tools video.fvid-video'); if(!vids.length) return;
+  if(!('IntersectionObserver' in window)){ vids.forEach(function(v){ v.preload='auto'; v.autoplay=true; }); return; }
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){ var v=e.target;
+      if(e.isIntersecting){ if(v.preload==='none') v.preload='auto'; var p=v.play(); if(p&&p.catch) p.catch(function(){}); }
+      else { v.pause(); } });
+  },{threshold:0.35});
+  vids.forEach(function(v){ io.observe(v); });
+})();
+
+/* 拡大表示（特設ページと同じ仕組み） */
+var FVID_SPEED = 0.7;
+(function () {
+  var box = null, pushed = false;
+  function close(fromPop) {
+    if (!box) return;
+    var v = box.querySelector('video'); if (v) v.pause();
+    box.remove(); box = null;
+    document.documentElement.classList.remove('flight-open');
+    if (pushed && !fromPop) { pushed = false; try { history.back(); } catch (e) {} }
+    pushed = false;
+  }
+  window.fOpenLight = function (el) {
+    if (box) close();
+    var media;
+    if (el.tagName === 'VIDEO') {
+      media = document.createElement('video');
+      media.src = el.currentSrc || el.getAttribute('src');
+      if (el.poster) media.poster = el.poster;
+      media.muted = true; media.loop = true; media.autoplay = true; media.playsInline = true;
+      media.controls = true;                                   // ブラウザの本物の再生バー（止める・戻す・コマ送り）
+      media.setAttribute('playsinline', ''); media.setAttribute('muted', '');
+      media.playbackRate = FVID_SPEED;
+      media.addEventListener('loadedmetadata', function () { media.playbackRate = FVID_SPEED; });
+    } else {
+      media = document.createElement('img');
+      media.src = el.getAttribute('src'); media.alt = el.alt || '';
+    }
+    media.className = 'flight-media';
+    box = document.createElement('div');
+    box.className = 'flight';
+    box.setAttribute('role', 'dialog'); box.setAttribute('aria-modal', 'true'); box.setAttribute('aria-label', '拡大表示');
+    box.innerHTML = '<button type="button" class="flight-x" aria-label="閉じる"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button><div class="flight-stage"></div><button type="button" class="flight-close">閉じる</button>';
+    if (media.tagName === 'VIDEO') {
+      var fw = document.createElement('span'); fw.className = 'fvid-wrap'; fw.style.display = 'inline-block'; fw.appendChild(media);
+      box.querySelector('.flight-stage').appendChild(fw);
+      if (window.fvidLoopUI) window.fvidLoopUI(media, fw, false);
+    } else {
+      box.querySelector('.flight-stage').appendChild(media);
+    }
+    // 画像や動画そのもの（動画の再生バーもふくむ）をタップしても閉じない。それ以外の場所・× で閉じる
+    box.addEventListener('click', function (e) { if (e.target.classList && e.target.classList.contains('flight-close')) { close(); return; } if (e.target === media || (e.target.classList && e.target.classList.contains('fvid-wrap'))) return; close(); });
+    document.body.appendChild(box);
+    document.documentElement.classList.add('flight-open');
+    if (media.play) { var p = media.play(); if (p && p.catch) p.catch(function () {}); }
+    // スマホの「戻る」で、ページを離れずに拡大だけを閉じる
+    try { history.pushState({ flight: 1 }, ''); pushed = true; } catch (e) {}
+    try { box.querySelector('.flight-x').focus({ preventScroll: true }); } catch (e) {}
+  };
+  window.addEventListener('popstate', function () { if (box) { pushed = false; close(true); } });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+  [].forEach.call(document.querySelectorAll('.rsec--tools .fduo img:not(.fvmark)'), function (img) {
+    img.addEventListener('click', function () { window.fOpenLight(img); });
+  });
+  [].forEach.call(document.querySelectorAll('.rsec--tools .fsit-media video'), function (v) {
+    v.addEventListener('click', function () { window.fOpenLight(v); });
+    v.addEventListener('loadedmetadata', function () { v.playbackRate = FVID_SPEED; }); v.playbackRate = FVID_SPEED;
+  });
+})();
+/* YTTカード5枚の高さをそろえる：色の帯と説明文の高さを、一番高いものに合わせる（画面の絵が説明のすぐ下に来るように） */
+(function(){
+  var wrap=document.getElementById('ob-ytt-anim-wrap'); if(!wrap) return;
+  function eqh(sel){ var els=[].slice.call(wrap.querySelectorAll(sel)); els.forEach(function(e){ e.style.minHeight=''; });
+    var m=0; els.forEach(function(e){ m=Math.max(m,e.getBoundingClientRect().height); }); els.forEach(function(e){ e.style.minHeight=Math.ceil(m)+'px'; }); }
+  function fit(){ eqh('.fold-head'); eqh('.fsit-desc'); }
+  fit(); window.addEventListener('resize', fit); window.addEventListener('load', fit);
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(fit);
+})();
+
+/* コミュニティのDiscord風モックの高さを、となりのYTTのカードの高さに合わせる */
+(function(){
+  var ytt=document.querySelector('#ob-ytt-anim-wrap .fcar-view'), sec=document.querySelector('.rsec--tools');
+  if(!ytt||!sec) return;
+  function fit(){ var h=Math.round(ytt.getBoundingClientRect().height); if(h>0) sec.style.setProperty('--ytt-card-h', h+'px'); }
+  fit(); window.addEventListener('resize', fit); window.addEventListener('load', fit);
+  if('ResizeObserver' in window) new ResizeObserver(fit).observe(ytt);
 })();
 
 /* 横スライドのカルーセル：自動送り＋矢印＋ドット。1つずつ順番に見せて疲れないように */
@@ -2779,5 +2954,25 @@ var startZeropro = (function(){
 <!-- BudouX — 日本語の文節改行（全ページ共通・同梱版。js/budoux-init.js を参照） -->
 <script src="js/budoux-ja.min.js?v=20260907a" defer></script>
 <script src="js/budoux-init.js?v=20260907a" defer></script>
+<script>
+/* タイトル下の波線（2026-09-23、YTT特設ページと同じ決まり）：線の高さ＝タイトルの文字の大きさの1.01倍。
+   元の波線を1本で使い、2行あるときは長い方の行に合わせた大きさを短い行でも使って、文字からはみ出した分は切る */
+(function () {
+  var RATIO = 1684 / 203; /* underline-wave.png の縦横比 */
+  function fit() {
+    document.querySelectorAll('.route-head h1').forEach(function (h) {
+      var waves = [].slice.call(h.querySelectorAll('.tw-wave')); if (!waves.length) return;
+      var fs = parseFloat(getComputedStyle(h.matches('h1') ? h : (h.querySelector('h1') || h)).fontSize) || 16;
+      var hgt = fs * 1.01, w = hgt * RATIO;
+      waves.forEach(function (s) { w = Math.max(w, s.parentElement.getBoundingClientRect().width); });
+      waves.forEach(function (s) { s.style.height = hgt + 'px'; s.firstElementChild.style.width = Math.ceil(w) + 'px'; });
+    });
+  }
+  fit(); window.addEventListener('resize', fit); window.addEventListener('load', fit);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+})();
+</script>
+<!-- 見出しの下の波線の太さを、文字の大きさにそろえる（2026-09-24） -->
+<script src="js/wave-fit.js?v=20260924a" defer></script>
 </body>
 </html>

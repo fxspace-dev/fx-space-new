@@ -1870,7 +1870,7 @@ body{ padding-top:50px; }
   text-align:center;
   font-size:0.75rem;
   font-weight:700;
-  color:#a78bfa;
+  color:#4338ca; /* 薄い紫 #a78bfa は読みにくかったので濃いインディゴに（2026-09-23） */
   margin:0.75rem 0 0.25rem;
   letter-spacing:0.04em;
 }
@@ -1982,6 +1982,97 @@ body.is-figure-full .home-nav{ display:none; }
 .yc-credit{ font-size:0.68rem; color:#9ca3af; margin:0.35rem 0 0.7rem; text-align:right; }
 .yc-credit a{ color:#9ca3af !important; text-decoration:underline !important; text-underline-offset:2px; }
 </style>
+<style>
+/* 診断結果「YTT」：Web版YTTの画面（PC＋スマホ）とできること。特設ページ（ytt-tokusetu.html）の部品を、この枠の中だけに効かせる（2026-09-22） */
+.ob-ytt-web .ytt-fto-list { list-style: none; padding: 0; margin: 0 0 1rem; }
+.ob-ytt-web .ytt-fto-list li { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.9rem; font-weight: 700; color: #374151; padding: 0.4rem 0; }
+.ob-ytt-web .ytt-fto-list li img { width: 18px; height: 18px; margin-top: 2px; flex-shrink: 0; }
+/* Web版YTTのスマホ画面モック（ytt-tokusetu.html と同じもの） */ .ob-ytt-web .wy-phone { position: relative; width: 282px; margin: 0 auto; padding: 8px; background: #05070f; border-radius: 38px; box-shadow: 0 22px 48px rgba(30, 27, 75, 0.22); }
+.ob-ytt-web .wy-screen { width: 266px; border-radius: 30px; overflow: hidden; background: #0a0f2c; color: #e5e7eb; font-family: 'Noto Sans JP', system-ui, sans-serif; line-height: 1.2; text-align: left; }
+.ob-ytt-web .wy-screen svg { display: block; }
+.ob-ytt-web .wy-bar { height: 26px; display: flex; align-items: center; justify-content: center; gap: 4px; background: #0f1a47; color: #e9b949; font-size: 11px; font-weight: 800; font-style: italic; letter-spacing: 0.02em; }
+.ob-ytt-web .wy-logo { width: 13px; height: 10px; }
+.ob-ytt-web .wy-acct { display: flex; align-items: center; gap: 5px; padding: 4px 8px 5px; background: #0f1a47; }
+.ob-ytt-web .wy-dot { width: 6px; height: 6px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.18); flex-shrink: 0; }
+.ob-ytt-web .wy-acct-no { flex: 1; height: 16px; display: flex; align-items: center; padding: 0 6px; border: 1px solid #26336b; border-radius: 5px; background: #0a1236; color: #56608d; font-size: 7px; letter-spacing: 0.1em; }
+.ob-ytt-web .wy-ibtn { width: 18px; height: 18px; display: inline-flex; align-items: center; justify-content: center; color: #cbd5e1; border: 1px solid #3a4880; border-radius: 5px; }
+.ob-ytt-web .wy-ibtn.round { border-radius: 50%; }
+.ob-ytt-web .wy-ibtn svg { width: 11px; height: 11px; }
+.ob-ytt-web .wy-bal { display: flex; align-items: center; justify-content: space-between; gap: 6px; padding: 4px 8px 8px; background: #0f1a47; }
+.ob-ytt-web .wy-bal-main { font-size: 17px; font-weight: 800; color: #fff; letter-spacing: 0.01em; white-space: nowrap; }
+.ob-ytt-web .wy-bal-main small { font-size: 7px; font-weight: 500; color: #9aa3c7; margin-right: 4px; letter-spacing: 0; }
+.ob-ytt-web .wy-bal-sub { margin-top: 3px; font-size: 7px; color: #9aa3c7; white-space: nowrap; }
+.ob-ytt-web .wy-tiles { display: flex; gap: 5px; }
+.ob-ytt-web .wy-tile { width: 44px; height: 38px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; background: #22306b; border: 1px solid #4659a3; border-radius: 7px; font-size: 7.5px; font-weight: 800; color: #fff; }
+.ob-ytt-web .wy-tile svg { width: 15px; height: 15px; }
+.ob-ytt-web .wy-chart { position: relative; background: #0a0f2c; }
+.ob-ytt-web .wy-chart-svg { width: 266px; height: 360px; }
+.ob-ytt-web .wy-chip { position: absolute; left: 5px; top: 5px; display: inline-flex; align-items: center; gap: 5px; padding: 3px 7px; background: rgba(13, 20, 52, 0.92); border: 1px solid #1f2a58; border-radius: 99px; font: 600 6.5px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: #9aa3c7; }
+.ob-ytt-web .wy-chip b { font-size: 8.5px; color: #fff; }
+.ob-ytt-web .wy-chip i { font-style: normal; font-size: 6px; }
+.ob-ytt-web .wy-tv { position: absolute; left: 5px; bottom: 19px; font: 900 9px/1 system-ui, sans-serif; color: #e5e7eb; letter-spacing: -0.04em; }
+.ob-ytt-web .wy-axis text { font: 500 6.5px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #8c95b8; text-anchor: end; }
+.ob-ytt-web .wy-axis-tag { font: 700 6.5px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #fff; text-anchor: end; }
+.ob-ytt-web .wy-axis-tag.dark { fill: #0f172a; }
+.ob-ytt-web .wy-watermark { font: 700 24px system-ui, sans-serif; fill: rgba(148, 163, 184, 0.09); letter-spacing: 0.02em; }
+.ob-ytt-web .wy-al { stroke: #4f8df7; stroke-width: 0.9; stroke-dasharray: 1.6 2.2; fill: none; }
+.ob-ytt-web .wy-al-s { opacity: 0.75; }
+.ob-ytt-web .wy-al-y { stroke: #e9b949; opacity: 0.8; }
+.ob-ytt-web .wy-dates { position: relative; height: 15px; border-top: 1px solid #161f47; }
+.ob-ytt-web .wy-dates span { position: absolute; top: 3px; font-size: 6.5px; color: #8c95b8; white-space: nowrap; }
+.ob-ytt-web .wy-nav { display: grid; grid-template-columns: repeat(7, 1fr); padding: 6px 2px 9px; background: #0d1438; border-top: 1px solid #1c2552; }
+.ob-ytt-web .wy-nav span { position: relative; display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 5.8px; font-weight: 600; color: #8c95b8; white-space: nowrap; }
+.ob-ytt-web .wy-nav span svg { width: 14px; height: 14px; }
+.ob-ytt-web .wy-nav span.on { color: #e9b949; }
+.ob-ytt-web .wy-nav span.has-badge::after { content: ''; position: absolute; top: -1px; left: calc(50% + 4px); width: 5px; height: 5px; border-radius: 50%; background: #f97316; }
+/* Web版YTTとは：PCとスマホを横並びに */ .ob-ytt-web .wy-devices { position: relative; width: 100%; max-width: 880px; margin: 0 auto; padding-left: 144px; }
+.ob-ytt-web .wy-lap-screen { display: block; padding: 9px 9px 12px; background: #171c2e; border-radius: 16px; box-shadow: 0 22px 44px rgba(30, 27, 75, 0.22); }
+.ob-ytt-web .wy-lap-screen img { display: block; width: 100%; height: auto; border-radius: 5px; }
+.ob-ytt-web .wy-lap-base { display: block; width: 112%; height: 14px; margin: 0 -6%; background: #262c42; border-radius: 0 0 14px 14px; }
+.ob-ytt-web .wy-devices .wy-phone { position: absolute; left: 0; bottom: -14px; transform: scale(0.88); transform-origin: bottom left; }
+@media (max-width: 1175px) {
+  .ob-ytt-web .wy-devices { padding-left: 128px; }
+  .ob-ytt-web .wy-devices .wy-phone { transform: scale(0.78); }
+}
+@media (max-width: 860px) {
+  .ob-ytt-web .wy-devices { padding-left: 110px; }
+  .ob-ytt-web .wy-devices .wy-phone { transform: scale(0.68); }
+}
+@media (max-width: 700px) {
+  .ob-ytt-web .wy-devices { padding-left: 92px; }
+  .ob-ytt-web .wy-devices .wy-phone { transform: scale(0.58); }
+}
+@media (max-width: 600px) {
+  .ob-ytt-web .wy-devices { padding-left: 74px; }
+  .ob-ytt-web .wy-devices .wy-phone { transform: scale(0.46); }
+}
+@media (max-width: 470px) {
+  .ob-ytt-web .wy-devices { padding-left: 54px; }
+  .ob-ytt-web .wy-devices .wy-phone { transform: scale(0.34); }
+}
+/* できること：並びのそろったカード */ .ob-ytt-web .wy-feats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.6rem; max-width: 700px; margin: 0 auto 1.4rem; }
+.ob-ytt-web .wy-feats li { justify-content: center; gap: 0.45rem; padding: 0.75rem 0.6rem; border: 1.5px solid #e5e7eb; border-radius: 12px; background: #fff; font-size: 0.875rem; color: #1e1b4b; text-align: center; }
+.ob-ytt-web .wy-feats li img { margin-top: 1px; }
+@media (max-width: 600px) {
+  /* できること：チェックの位置をそろえる */ .ob-ytt-web .wy-feats li { justify-content: flex-start; text-align: left; padding-left: 1rem; }
+}
+.ob-ytt-web { max-width: 760px; margin: 1.25rem auto 1.75rem; }
+.ob-ytt-web .wy-feats { margin: 2rem auto 0; }
+/* 結果カードの幅はせまいので、画面の幅ではなくカードに合わせた大きさにする */
+.ob-ytt-web .wy-devices { padding-left: 74px; }
+.ob-ytt-web .wy-devices .wy-phone { transform: scale(0.46); }
+@media (max-width: 470px) {
+  .ob-ytt-web .wy-devices { padding-left: 54px; }
+  .ob-ytt-web .wy-devices .wy-phone { transform: scale(0.34); }
+}
+</style>
+<style>
+/* === タイトル下の波線（2026-09-23 airiさん「YTT特設でやったように太さを合わせて」） ===
+   高さ＝文字の大きさの1.01倍（ページ下の小さなプログラムが入れる）。元の波線を縦横比そのままで使い、文字の幅からはみ出した分は切る */
+.tw-wave { display: block; width: 0; min-width: 100%; height: 1.01em; overflow: hidden; }
+.tw-wave img { display: block !important; height: 100% !important; width: auto; min-width: 100%; max-width: none !important; max-height: none !important; aspect-ratio: auto !important; object-fit: fill !important; margin: 0 !important; }
+.ob-welcome-wrap .tw-wave.ob-welcome-wave { width: 0; margin: calc(0.5rem - 0.5cm) 0 0; object-fit: initial; }
+</style>
 </head>
 <body>
 
@@ -1992,7 +2083,7 @@ body.is-figure-full .home-nav{ display:none; }
   <img class="ob-logo" src="img/fxspace-symbol.png" alt="FX SPACE">
   <div class="ob-welcome-wrap">
     <h1 class="ob-welcome">ようこそ、<span class="accent">FX SPACE</span>へ!</h1>
-    <img class="ob-welcome-wave" src="img/underline-wave.png" alt="">
+    <span class="tw-wave ob-welcome-wave" aria-hidden="true"><img src="img/underline-wave.png" alt=""></span>
   </div>
   <p class="ob-welcome-sub">あなたにぴったりのルートを見つけましょう。</p>
 </header>
@@ -2371,195 +2462,77 @@ body.is-figure-full .home-nav{ display:none; }
     </div>
 
     <div class="ob-ytt-anim-caption">YTTで、こんなことができます</div>
-    <div class="ob-ytt-anim-caption-sub">MT4/TradingView上で動く、よすが式の補助ツール</div>
-    <div class="ob-ytt-anim" id="ob-ytt-anim-wrap">
-
-      <!-- Feature 1: 直感的な注文・決済 -->
-      <div class="ob-ytt-anim-item">
-        <div class="ob-ytt-anim-head">
-          <div class="ob-ytt-anim-title">直感的な注文・決済</div>
-        </div>
-        <p class="ob-ytt-anim-desc">ロット数を指定してBUY/SELLで即座に注文。全決済・1/2決済も1クリック。</p>
-        <div class="ob-ytt-anim-scene" id="scene-ytt-p1">
-          <svg viewBox="0 0 280 220" preserveAspectRatio="xMidYMid meet">
-            <rect id="p1-panel" x="50" y="5" width="180" height="210" rx="8" fill="#2b2d31" opacity="0"></rect>
-            <text id="p1-title" x="140" y="22" fill="rgba(255,255,255,0.5)" text-anchor="middle" font-size="8" font-weight="600" font-family="Inter" opacity="0">注文パネル</text>
-            <g id="p1-lot" opacity="0">
-              <rect x="68" y="28" width="26" height="27" rx="4" fill="#3f4147"></rect>
-              <text x="81" y="40" fill="rgba(255,255,255,0.7)" text-anchor="middle" font-size="9" font-family="Inter">▲</text>
-              <text x="81" y="51" fill="rgba(255,255,255,0.7)" text-anchor="middle" font-size="9" font-family="Inter">▼</text>
-              <rect x="98" y="28" width="80" height="27" rx="4" fill="#1e1f22" stroke="#3f4147" stroke-width="0.8"></rect>
-              <text x="138" y="47" fill="white" text-anchor="middle" font-size="16" font-weight="800" font-family="Inter">0.01</text>
-              <rect x="182" y="28" width="30" height="27" rx="4" fill="#3f4147"></rect>
-              <rect x="190" y="40" width="3" height="10" rx="0.5" fill="rgba(255,255,255,0.5)"></rect>
-              <rect x="195" y="36" width="3" height="14" rx="0.5" fill="rgba(255,255,255,0.5)"></rect>
-              <rect x="200" y="42" width="3" height="8" rx="0.5" fill="rgba(255,255,255,0.5)"></rect>
-              <polygon points="202,40 206,40 204,36" fill="rgba(255,255,255,0.5)"></polygon>
-            </g>
-            <g id="p1-sell" opacity="0">
-              <rect x="58" y="60" width="82" height="36" rx="5" fill="#8B1A1A"></rect>
-              <text x="99" y="77" fill="white" text-anchor="middle" font-size="14" font-weight="900" font-family="Inter">SELL</text>
-              <text x="99" y="90" fill="rgba(255,255,255,0.5)" text-anchor="middle" font-size="8" font-family="Inter">0.01 lot</text>
-            </g>
-            <g id="p1-buy" opacity="0">
-              <rect x="144" y="60" width="82" height="36" rx="5" fill="#1D5FB6"></rect>
-              <text x="185" y="77" fill="white" text-anchor="middle" font-size="14" font-weight="900" font-family="Inter">BUY</text>
-              <text x="185" y="90" fill="rgba(255,255,255,0.5)" text-anchor="middle" font-size="8" font-family="Inter">0.01 lot</text>
-            </g>
-            <g id="p1-cls" opacity="0">
-              <rect x="58" y="101" width="168" height="26" rx="5" fill="#C8A200"></rect>
-              <text x="142" y="118" fill="#1e1f22" text-anchor="middle" font-size="11" font-weight="700" font-family="Inter">全決済</text>
-            </g>
-            <g id="p1-half" opacity="0">
-              <rect x="58" y="131" width="168" height="26" rx="5" fill="#2B8C44"></rect>
-              <text x="142" y="148" fill="#1e1f22" text-anchor="middle" font-size="11" font-weight="700" font-family="Inter">1/2決済</text>
-            </g>
-            <g id="p1-pl" opacity="0">
-              <rect x="58" y="163" width="168" height="44" rx="6" fill="#1e1f22" stroke="#3f4147" stroke-width="0.5"></rect>
-              <circle id="p1-pl-dot" cx="68" cy="176" r="3" fill="#4ade80"></circle>
-              <text x="76" y="179" fill="rgba(255,255,255,0.6)" font-size="8" font-weight="600" font-family="Inter">USDJPY  Buy 0.01</text>
-              <text x="66" y="199" fill="rgba(255,255,255,0.4)" font-size="7.5" font-weight="600" font-family="Inter">損益</text>
-              <text id="p1-pl-val" x="218" y="200" fill="#4ade80" text-anchor="end" font-size="15" font-weight="900" font-family="Inter">+0 円</text>
-            </g>
-          </svg>
-        </div>
-      </div>
-
-      <!-- Feature 2: Yトレード・シナリオ機能 -->
-      <div class="ob-ytt-anim-item">
-        <div class="ob-ytt-anim-head">
-          <div class="ob-ytt-anim-title">Yトレード・シナリオ機能</div>
-        </div>
-        <p class="ob-ytt-anim-desc">チャート上でTP/SLを視覚的に設定。朝にシナリオを仕込んで張り付き不要に。</p>
-        <div class="ob-ytt-anim-scene" id="scene-ytt">
-          <svg viewBox="0 0 280 160" preserveAspectRatio="xMidYMid meet">
-            <line class="grid-line" x1="0" y1="40" x2="280" y2="40" stroke="rgba(255,255,255,0.05)"></line>
-            <line class="grid-line" x1="0" y1="80" x2="280" y2="80" stroke="rgba(255,255,255,0.05)"></line>
-            <line class="grid-line" x1="0" y1="120" x2="280" y2="120" stroke="rgba(255,255,255,0.05)"></line>
-            <g class="candle" style="opacity:0;"><line x1="14" y1="128" x2="14" y2="142" stroke="#ef4444" stroke-width="1"></line><rect x="12" y="130" width="4" height="8" rx="0.5" fill="#ef4444"></rect></g>
-            <g class="candle" style="opacity:0;"><line x1="21" y1="124" x2="21" y2="140" stroke="#22c55e" stroke-width="1"></line><rect x="19" y="126" width="4" height="10" rx="0.5" fill="#22c55e"></rect></g>
-            <g class="candle" style="opacity:0;"><line x1="28" y1="126" x2="28" y2="144" stroke="#ef4444" stroke-width="1"></line><rect x="26" y="130" width="4" height="10" rx="0.5" fill="#ef4444"></rect></g>
-            <g class="candle" style="opacity:0;"><line x1="35" y1="122" x2="35" y2="138" stroke="#22c55e" stroke-width="1"></line><rect x="33" y="124" width="4" height="10" rx="0.5" fill="#22c55e"></rect></g>
-            <g class="candle" style="opacity:0;"><line x1="42" y1="126" x2="42" y2="140" stroke="#ef4444" stroke-width="1"></line><rect x="40" y="128" width="4" height="8" rx="0.5" fill="#ef4444"></rect></g>
-            <g class="candle" style="opacity:0;"><line x1="49" y1="120" x2="49" y2="142" stroke="#22c55e" stroke-width="1"></line><rect x="47" y="124" width="4" height="12" rx="0.5" fill="#22c55e"></rect></g>
-            <g class="candle" style="opacity:0;"><line x1="56" y1="118" x2="56" y2="140" stroke="#ef4444" stroke-width="1"></line><rect x="54" y="122" width="4" height="14" rx="0.5" fill="#ef4444"></rect></g>
-            <g class="candle" style="opacity:0;"><line x1="63" y1="112" x2="63" y2="138" stroke="#22c55e" stroke-width="1"></line><rect x="61" y="116" width="4" height="15" rx="0.5" fill="#22c55e"></rect></g>
-            <g class="candle" style="opacity:0;"><line x1="70" y1="110" x2="70" y2="136" stroke="#ef4444" stroke-width="1"></line><rect x="68" y="114" width="4" height="16" rx="0.5" fill="#ef4444"></rect></g>
-            <g class="candle" style="opacity:0;"><line x1="77" y1="112" x2="77" y2="140" stroke="#22c55e" stroke-width="1"></line><rect x="75" y="116" width="4" height="16" rx="0.5" fill="#22c55e"></rect></g>
-            <g class="candle" style="opacity:0;"><line x1="84" y1="108" x2="84" y2="134" stroke="#ef4444" stroke-width="1"></line><rect x="82" y="112" width="4" height="16" rx="0.5" fill="#ef4444"></rect></g>
-            <g class="candle" style="opacity:0;"><line x1="91" y1="106" x2="91" y2="132" stroke="#22c55e" stroke-width="1"></line><rect x="89" y="110" width="4" height="14" rx="0.5" fill="#22c55e"></rect></g>
-            <g class="candle" style="opacity:0;"><line x1="98" y1="108" x2="98" y2="136" stroke="#ef4444" stroke-width="1"></line><rect x="96" y="112" width="4" height="18" rx="0.5" fill="#ef4444"></rect></g>
-            <g class="candle" style="opacity:0;"><line x1="105" y1="104" x2="105" y2="130" stroke="#22c55e" stroke-width="1"></line><rect x="103" y="108" width="4" height="14" rx="0.5" fill="#22c55e"></rect></g>
-            <path class="scenario-path" d="M 107,108 L 155,35 L 192,75 L 250,10" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="300" stroke-dashoffset="300" style="opacity:0;"></path>
-            <g id="ytt-buy" opacity="0"><rect x="184" y="67" width="16" height="16" rx="2" fill="rgba(0,0,0,0.7)" stroke="#facc15" stroke-width="1.2"></rect><text x="192" y="79" fill="#facc15" font-size="11" text-anchor="middle" font-weight="900" font-family="Inter">↑</text></g>
-            <g id="ytt-tp" opacity="0"><rect x="240" y="17" width="16" height="16" rx="2" fill="rgba(0,0,0,0.7)" stroke="#facc15" stroke-width="1.2"></rect><text x="248" y="29" fill="#4ade80" font-size="11" text-anchor="middle" font-weight="900" font-family="Inter">✓</text></g>
-            <g id="ytt-sl" opacity="0"><rect x="240" y="117" width="16" height="16" rx="2" fill="rgba(0,0,0,0.7)" stroke="#facc15" stroke-width="1.2"></rect><text x="248" y="130" fill="#facc15" font-size="11" text-anchor="middle" font-weight="900" font-family="Inter">✗</text></g>
-            <text class="ytt-status" x="140" y="155" fill="rgba(255,255,255,0.45)" font-size="6.5" text-anchor="middle" font-family="Inter" font-weight="600" opacity="0">シナリオ完成</text>
-          </svg>
-        </div>
-      </div>
-
-      <!-- Feature 3: 分析サポート・オートライン -->
-      <div class="ob-ytt-anim-item">
-        <div class="ob-ytt-anim-head">
-          <div class="ob-ytt-anim-title">分析サポート・オートライン</div>
-        </div>
-        <p class="ob-ytt-anim-desc">独自ロジックで重要ラインを自動描画。トレンド方向も時間足ごとに可視化。</p>
-        <div class="ob-ytt-anim-scene" id="scene-ytt-p3">
-          <svg viewBox="0 0 280 210" preserveAspectRatio="xMidYMid meet">
-            <line x1="0" y1="52" x2="280" y2="52" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"></line>
-            <line x1="0" y1="105" x2="280" y2="105" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"></line>
-            <line x1="0" y1="158" x2="280" y2="158" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"></line>
-            <g id="p3-candles" opacity="0">
-              <rect x="18" y="130" width="4" height="18" rx="0.5" fill="#22c55e"></rect>
-              <rect x="32" y="140" width="4" height="15" rx="0.5" fill="#ef4444"></rect>
-              <rect x="46" y="120" width="4" height="20" rx="0.5" fill="#22c55e"></rect>
-              <rect x="60" y="128" width="4" height="14" rx="0.5" fill="#ef4444"></rect>
-              <rect x="74" y="105" width="4" height="22" rx="0.5" fill="#22c55e"></rect>
-              <rect x="88" y="115" width="4" height="16" rx="0.5" fill="#ef4444"></rect>
-              <rect x="102" y="90" width="4" height="24" rx="0.5" fill="#22c55e"></rect>
-              <rect x="116" y="100" width="4" height="18" rx="0.5" fill="#ef4444"></rect>
-              <rect x="130" y="78" width="4" height="20" rx="0.5" fill="#22c55e"></rect>
-              <rect x="144" y="85" width="4" height="15" rx="0.5" fill="#ef4444"></rect>
-              <rect x="158" y="60" width="4" height="25" rx="0.5" fill="#22c55e"></rect>
-              <rect x="172" y="70" width="4" height="18" rx="0.5" fill="#ef4444"></rect>
-              <rect x="186" y="48" width="4" height="22" rx="0.5" fill="#22c55e"></rect>
-            </g>
-            <line id="p3-hl1" x1="10" y1="38" x2="205" y2="38" stroke="#ef4444" stroke-width="2" stroke-dasharray="195" stroke-dashoffset="195"></line>
-            <text id="p3-hl1-lbl" x="207" y="41" fill="#ef4444" font-size="6.5" font-weight="800" font-family="Inter" opacity="0">強</text>
-            <line id="p3-hl2" x1="10" y1="82" x2="205" y2="82" stroke="#22d3ee" stroke-width="1.5" stroke-dasharray="195" stroke-dashoffset="195"></line>
-            <text id="p3-hl2-lbl" x="207" y="85" fill="#22d3ee" font-size="6.5" font-weight="700" font-family="Inter" opacity="0">中</text>
-            <line id="p3-hl3" x1="10" y1="130" x2="205" y2="130" stroke="#22d3ee" stroke-width="1" stroke-dasharray="4,3" opacity="0"></line>
-            <text id="p3-hl3-lbl" x="207" y="133" fill="#22d3ee" font-size="6.5" font-weight="700" font-family="Inter" opacity="0">弱</text>
-            <line id="p3-hl4" x1="10" y1="165" x2="205" y2="165" stroke="rgba(255,255,255,0.45)" stroke-width="0.8" stroke-dasharray="3,4" opacity="0"></line>
-            <line id="p3-ch1" x1="4" y1="126" x2="202" y2="41" stroke="#a78bfa" stroke-width="1.2" stroke-dasharray="220" stroke-dashoffset="220"></line>
-            <line id="p3-ch2" x1="4" y1="168" x2="202" y2="83" stroke="#a78bfa" stroke-width="1.2" stroke-dasharray="220" stroke-dashoffset="220"></line>
-            <g id="p3-trend" opacity="0">
-              <rect x="215" y="8" width="58" height="82" rx="5" fill="rgba(0,0,0,0.8)" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"></rect>
-              <g id="p3-tr1" opacity="0">
-                <text x="223" y="28" fill="rgba(255,255,255,0.55)" font-size="8.5" font-weight="700" font-family="Inter">H4</text>
-                <rect x="252" y="18" width="15" height="13" rx="2.5" fill="rgba(239,68,68,0.2)"></rect>
-                <text x="259.5" y="28.5" fill="#ef4444" text-anchor="middle" font-size="10" font-weight="900" font-family="Inter">↓</text>
-              </g>
-              <g id="p3-tr2" opacity="0">
-                <text x="223" y="46" fill="rgba(255,255,255,0.55)" font-size="8.5" font-weight="700" font-family="Inter">H1</text>
-                <rect x="252" y="36" width="15" height="13" rx="2.5" fill="rgba(34,211,238,0.2)"></rect>
-                <text x="259.5" y="46.5" fill="#22d3ee" text-anchor="middle" font-size="10" font-weight="900" font-family="Inter">→</text>
-              </g>
-              <g id="p3-tr3" opacity="0">
-                <text x="223" y="64" fill="rgba(255,255,255,0.55)" font-size="8.5" font-weight="700" font-family="Inter">M15</text>
-                <rect x="252" y="54" width="15" height="13" rx="2.5" fill="rgba(74,222,128,0.2)"></rect>
-                <text x="259.5" y="64.5" fill="#4ade80" text-anchor="middle" font-size="10" font-weight="900" font-family="Inter">↑</text>
-              </g>
-              <g id="p3-tr4" opacity="0">
-                <text x="223" y="82" fill="rgba(255,255,255,0.55)" font-size="8.5" font-weight="700" font-family="Inter">M5</text>
-                <rect x="252" y="72" width="15" height="13" rx="2.5" fill="rgba(74,222,128,0.2)"></rect>
-                <text x="259.5" y="82.5" fill="#4ade80" text-anchor="middle" font-size="10" font-weight="900" font-family="Inter">↑</text>
-              </g>
-            </g>
-            <line id="p3-econ" x1="148" y1="5" x2="148" y2="190" stroke="#ef4444" stroke-width="0.8" opacity="0"></line>
-            <text id="p3-econ-t" x="153" y="10" fill="#ef4444" font-size="7" font-weight="700" font-family="Inter" writing-mode="tb" opacity="0">雇用統計</text>
-          </svg>
-        </div>
-      </div>
-
-      <!-- Feature 4: リスク管理 -->
-      <div class="ob-ytt-anim-item">
-        <div class="ob-ytt-anim-head">
-          <div class="ob-ytt-anim-title">リスク管理・自動ロット計算</div>
-        </div>
-        <p class="ob-ytt-anim-desc">損失率を決めるだけでロットを自動計算。1トレードのリスクを常に一定に。</p>
-        <div class="ob-ytt-anim-scene" id="scene-ytt-p5">
-          <svg viewBox="0 0 280 210" preserveAspectRatio="xMidYMid meet">
-            <rect x="5" y="5" width="270" height="200" rx="4" fill="#0f1523" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
-            <g id="p5-scene1">
-              <text id="p5-title" x="140" y="38" fill="rgba(255,255,255,0.7)" text-anchor="middle" font-size="12" font-weight="800" font-family="Inter" opacity="0">損失率固定モード</text>
-              <g id="p5-balance" opacity="0">
-                <text x="60" y="68" fill="rgba(255,255,255,0.4)" font-size="8" font-family="Inter">残高</text>
-                <text x="220" y="68" fill="rgba(255,255,255,0.8)" text-anchor="end" font-size="12" font-weight="800" font-family="Inter">1,000,000 円</text>
-                <line x1="50" y1="75" x2="230" y2="75" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
-              </g>
-              <g id="p5-rate" opacity="0">
-                <text x="60" y="95" fill="rgba(255,255,255,0.4)" font-size="8" font-family="Inter">許容損失率</text>
-                <text x="220" y="95" fill="#fbbf24" text-anchor="end" font-size="14" font-weight="900" font-family="Inter">2.0 %</text>
-                <line x1="50" y1="102" x2="230" y2="102" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
-              </g>
-              <text id="p5-arrow" x="140" y="122" fill="rgba(255,255,255,0.25)" text-anchor="middle" font-size="14" font-family="Inter" opacity="0">↓</text>
-              <g id="p5-maxloss" opacity="0">
-                <text x="60" y="145" fill="rgba(255,255,255,0.4)" font-size="8" font-family="Inter">最大損失額</text>
-                <text x="220" y="145" fill="#ef4444" text-anchor="end" font-size="13" font-weight="800" font-family="Inter">20,000 円</text>
-                <line x1="50" y1="152" x2="230" y2="152" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
-              </g>
-              <g id="p5-lot" opacity="0">
-                <rect x="59" y="160" width="180" height="30" rx="6" fill="rgba(74,222,128,0.08)" stroke="#4ade80" stroke-width="0.8"/>
-                <text x="69" y="180" fill="rgba(74,222,128,0.6)" font-size="9" font-weight="600" font-family="Inter">推奨ロット</text>
-                <text x="229" y="181" fill="#4ade80" text-anchor="end" font-size="16" font-weight="900" font-family="Inter">0.15</text>
-              </g>
-            </g>
-          </svg>
-        </div>
-      </div>
-
+    <div class="ob-ytt-anim-caption-sub">よすが式の補助ツール。下の画面はWeb版YTTで、スマホでもPCでもブラウザから使えます</div>
+    <div class="ob-ytt-web">
+      <!-- Web版YTTの画面（トップページの診断結果と同じもの。2026-09-22） -->
+      <div class="wy-devices">
+                <div class="wy-lap">
+                        <span class="wy-lap-screen"><img src="img/webytt/wy-pc-screen.jpg" alt="Web版YTTのPC画面。左にチャート、右に注文パネル" loading="lazy" width="1180" height="721"></span>
+                        <span class="wy-lap-base"></span>
+                    </div>
+                <div class="wy-phone" role="img" aria-label="Web版YTTのスマホ画面。上に残高、右上にシナリオと成行のボタン、中央にオートライン付きのチャート、下に切り替えメニュー">
+                    <div class="wy-screen" aria-hidden="true">
+                        <div class="wy-bar"><svg class="wy-logo" viewBox="0 0 20 14"><path d="M2 3v9M6 6v6M10 1v11M14 6v6M18 3v9" stroke="#e9b949" stroke-width="2.4"/></svg><span>YTT</span></div>
+                        <div class="wy-acct">
+                            <span class="wy-dot"></span>
+                            <span class="wy-acct-no">口座番号</span>
+                            <span class="wy-ibtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><circle cx="12" cy="13.5" r="3.5"/><path d="M8.5 7l1.5-3h4l1.5 3"/></svg></span>
+                            <span class="wy-ibtn round"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v5h-5"/></svg></span>
+                        </div>
+                        <div class="wy-bal">
+                            <div>
+                                <div class="wy-bal-main"><small>残高</small>¥1,870,936</div>
+                                <div class="wy-bal-sub">有効証拠金　1,870,936</div>
+                            </div>
+                            <div class="wy-tiles">
+                                <span class="wy-tile"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 6l6 6-6 6" stroke="#4f8df7"/><path d="M12 6l6 6-6 6" stroke="#ef4d5a"/></svg>シナリオ</span>
+                                <span class="wy-tile"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="10" height="12" rx="2.5" fill="#ef4d5a"/><rect x="11" y="6" width="10" height="12" rx="2.5" fill="#4f8df7" opacity=".9"/></svg>成行</span>
+                            </div>
+                        </div>
+                        <div class="wy-chart">
+                            <span class="wy-chip">USDJPY · M30<b>153.948</b><i>▸</i></span>
+                            <svg class="wy-chart-svg" viewBox="0 0 266 360" preserveAspectRatio="none" aria-hidden="true">
+<path d="M0 12.2H224M0 73.2H224M0 134.2H224M0 195.3H224M0 256.3H224M0 317.3H224M6 0V360M96 0V360M172 0V360" stroke="rgba(148,163,184,.08)" stroke-width="1" fill="none"/>
+<text class="wy-watermark" x="112" y="180.4" text-anchor="middle">USDJPY M30</text>
+<path d="M0 119L224 82.4" class="wy-al"/>
+<path d="M0 332.5L224 314.2" class="wy-al"/>
+<path d="M120 274.6H224" class="wy-al wy-al-s"/>
+<path d="M60 302H224" class="wy-al wy-al-s"/>
+<path d="M0 335.6H224" class="wy-al wy-al-y"/>
+<path d="M4 245.5V256.4M6.37 234.3V252.8M8.75 235.8V241.1M11.12 223.9V240.1M13.49 214.5V232.2M15.87 211.9V226.9M18.24 211.4V216.5M20.62 179.5V214.2M22.99 166V184.5M25.36 124.5V169.1M27.74 96.1V136.5M53.85 254.7V276.5M56.22 253.3V257M58.59 244.8V254.5M60.97 230.5V245.9M65.71 213.3V238M82.33 247.4V283.1M84.7 216.8V252.6M87.08 191.1V220.9M89.45 167.4V196.5M110.81 271.5V289.8M113.19 255.1V277.2M115.56 246.6V268M117.93 219.4V252.1M120.31 227.9V232.9M134.55 249.8V272.7M136.92 239.3V259.3M139.3 227.5V249.9M141.67 222.1V229.2M144.04 207.9V224.8M146.42 209.7V215.5M158.29 241.8V257.4M163.03 250V257.4M172.53 260.6V266.2M174.9 247.8V266.8M177.27 235.6V253.1M179.65 233.6V240M184.4 241.3V253.7M189.14 245.7V250.4M191.52 229.6V253.3M193.89 225.4V232.4M196.26 192.1V230.8M198.64 172.1V198.7M201.01 159V178.3M203.38 137V161.6M205.76 64.1V145.4M215.25 155.9V163.6" stroke="#22b573" stroke-width=".6" fill="none"/>
+<path d="M30.11 108.5V131.3M32.48 127.8V151.2M34.86 141V171.3M37.23 165.5V177.9M39.6 172.4V192.1M41.98 183.5V206M44.35 205.7V227.2M46.73 222.6V250.1M49.1 246.8V264.9M51.47 252.4V273.4M63.34 230.9V235.9M68.09 218.5V235.4M70.46 224.9V248.3M72.84 242.6V249.2M75.21 246V265.4M77.58 262.4V273.2M79.96 261.4V282.3M91.82 166.6V186M94.2 176.4V190.6M96.57 189.4V204.8M98.95 199.3V203.5M101.32 197.2V238M103.69 229.7V259.5M106.07 253V274.2M108.44 272.2V328M122.68 226.6V248.8M125.05 240.2V249M127.43 245.6V253.7M129.8 249.8V254.3M132.18 251.3V274.2M148.79 208.6V219.1M151.16 210.5V226.7M153.54 223.5V243.8M155.91 236V255.4M160.66 246.4V255.5M165.41 246.8V263.9M167.78 255.7V260.8M170.15 258.9V267.4M182.02 229.4V249.4M186.77 238.6V251.6M208.13 120V143.2M210.51 135.9V144M212.88 138V160.8M217.63 148.7V172.9M220 162.9V174.7" stroke="#ef4d5a" stroke-width=".6" fill="none"/>
+<path d="M3.25 251.9h1.5v4.4h-1.5zM5.62 240.7h1.5v11.2h-1.5zM8.00 239.7h1.5v1h-1.5zM10.37 231.9h1.5v7.8h-1.5zM12.74 222.6h1.5v9.3h-1.5zM15.12 215.1h1.5v7.5h-1.5zM17.49 213.5h1.5v1.6h-1.5zM19.87 182h1.5v31.5h-1.5zM22.24 168.5h1.5v13.5h-1.5zM24.61 131.7h1.5v36.8h-1.5zM26.99 115.4h1.5v16.3h-1.5zM53.10 256h1.5v16.3h-1.5zM55.47 253.4h1.5v2.6h-1.5zM57.84 245.2h1.5v8.2h-1.5zM60.22 233.5h1.5v11.7h-1.5zM64.96 219.7h1.5v15.3h-1.5zM81.58 247.6h1.5v34.2h-1.5zM83.95 219.1h1.5v28.5h-1.5zM86.33 191.9h1.5v27.2h-1.5zM88.70 169.5h1.5v22.4h-1.5zM110.06 273.5h1.5v13.3h-1.5zM112.44 262.7h1.5v10.8h-1.5zM114.81 250.3h1.5v12.4h-1.5zM117.18 231.8h1.5v18.5h-1.5zM119.56 229.1h1.5v2.7h-1.5zM133.80 255.8h1.5v13.2h-1.5zM136.17 248.9h1.5v6.9h-1.5zM138.55 227.7h1.5v21.2h-1.5zM140.92 223.6h1.5v4.1h-1.5zM143.29 215.1h1.5v8.5h-1.5zM145.67 209.8h1.5v5.3h-1.5zM157.54 250h1.5v4h-1.5zM162.28 251.1h1.5v3.6h-1.5zM171.78 263.6h1.5v0.8h-1.5zM174.15 250h1.5v13.6h-1.5zM176.52 238.1h1.5v11.9h-1.5zM178.90 235h1.5v3.1h-1.5zM183.65 244h1.5v4.8h-1.5zM188.39 247h1.5v2.4h-1.5zM190.77 231.6h1.5v15.4h-1.5zM193.14 228.1h1.5v3.5h-1.5zM195.51 196.2h1.5v31.9h-1.5zM197.89 176.5h1.5v19.7h-1.5zM200.26 160.4h1.5v16.1h-1.5zM202.63 137.8h1.5v22.6h-1.5zM205.01 121h1.5v16.8h-1.5zM214.50 158.4h1.5v2.4h-1.5z" fill="#22b573"/>
+<path d="M29.36 115.4h1.5v14.4h-1.5zM31.73 129.8h1.5v14.7h-1.5zM34.11 144.5h1.5v24.2h-1.5zM36.48 168.7h1.5v4.8h-1.5zM38.85 173.5h1.5v17.5h-1.5zM41.23 191h1.5v14.7h-1.5zM43.60 205.7h1.5v20.5h-1.5zM45.98 226.2h1.5v23.4h-1.5zM48.35 249.6h1.5v11.2h-1.5zM50.72 260.8h1.5v11.5h-1.5zM62.59 233.5h1.5v1.5h-1.5zM67.34 219.7h1.5v10.4h-1.5zM69.71 230.1h1.5v16.4h-1.5zM72.09 246.5h1.5v1.5h-1.5zM74.46 248h1.5v16.7h-1.5zM76.83 264.7h1.5v2.9h-1.5zM79.21 267.6h1.5v14.2h-1.5zM91.07 169.5h1.5v11.6h-1.5zM93.45 181.1h1.5v8.7h-1.5zM95.82 189.8h1.5v11.4h-1.5zM98.20 201.2h1.5v0.8h-1.5zM100.57 201.9h1.5v31.4h-1.5zM102.94 233.3h1.5v24.9h-1.5zM105.32 258.2h1.5v15h-1.5zM107.69 273.2h1.5v13.6h-1.5zM121.93 229.1h1.5v15.2h-1.5zM124.30 244.3h1.5v4.5h-1.5zM126.68 248.8h1.5v2.7h-1.5zM129.05 251.5h1.5v0.8h-1.5zM131.43 251.7h1.5v17.3h-1.5zM148.04 209.8h1.5v7.1h-1.5zM150.41 216.9h1.5v8.6h-1.5zM152.79 225.5h1.5v13.7h-1.5zM155.16 239.2h1.5v14.8h-1.5zM159.91 250h1.5v4.7h-1.5zM164.66 251.1h1.5v7.2h-1.5zM167.03 258.3h1.5v1.9h-1.5zM169.40 260.2h1.5v4h-1.5zM181.27 235h1.5v13.8h-1.5zM186.02 244h1.5v5.4h-1.5zM207.38 121h1.5v15.4h-1.5zM209.76 136.4h1.5v7h-1.5zM212.13 143.4h1.5v17.4h-1.5zM216.88 158.4h1.5v11.9h-1.5zM219.25 170.3h1.5v2.4h-1.5z" fill="#ef4d5a"/>
+<path d="M0 172.7H224" stroke="#ef4d5a" stroke-width=".7" stroke-dasharray="1.5 1.5"/>
+<g class="wy-axis"><text x="263" y="14.8">155.000</text><text x="263" y="45.3">154.800</text><text x="263" y="75.8">154.600</text><text x="263" y="106.3">154.400</text><text x="263" y="136.8">154.200</text><text x="263" y="167.3">154.000</text><text x="263" y="197.9">153.800</text><text x="263" y="228.4">153.600</text><text x="263" y="258.9">153.400</text><text x="263" y="289.4">153.200</text><text x="263" y="319.9">153.000</text><text x="263" y="350.4">152.800</text></g>
+<rect x="225" y="160.7" width="41" height="10" rx="1.5" fill="#ef4d5a"/>
+<text class="wy-axis-tag" x="263" y="168.39999999999998">153.952</text>
+<rect x="225" y="171.7" width="41" height="10" rx="1.5" fill="#cbd5e1"/>
+<text class="wy-axis-tag dark" x="263" y="179.39999999999998">153.948</text>
+</svg>
+                            <span class="wy-tv">TV</span>
+                            <div class="wy-dates"><span style="left:2px">9月8日</span><span style="left:84px">9月9日</span><span style="left:160px">9月10日</span></div>
+                        </div>
+                        <div class="wy-nav">
+                            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h15l-3.5-3.5"/><path d="M20 16H5l3.5 3.5"/></svg>通貨ペア</span>
+                            <span class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3v18M17 3v18"/><rect x="5" y="7" width="4" height="8" rx=".5" fill="currentColor"/><rect x="15" y="6" width="4" height="10" rx=".5"/></svg>チャート</span>
+                            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 9h6M9 13h6M9 17h3"/></svg>ポジション</span>
+                            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>履歴</span>
+                            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg>ツール</span>
+                            <span class="has-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></svg>アラート</span>
+                            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 3v2.5M12 18.5V21M3 12h2.5M18.5 12H21M5.6 5.6l1.8 1.8M16.6 16.6l1.8 1.8M5.6 18.4l1.8-1.8M16.6 7.4l1.8-1.8"/></svg>設定</span>
+                        </div>
+                    </div>
+                </div>
+                </div>
+      <ul class="ytt-fto-list wy-feats">
+                    <li><img src="img/check-orange.png" alt="">注文・決済</li>
+                    <li><img src="img/check-orange.png" alt="">シナリオ構築・予約注文</li>
+                    <li><img src="img/check-orange.png" alt="">オートライン</li>
+                    <li><img src="img/check-orange.png" alt="">コピーモード</li>
+                    <li><img src="img/check-orange.png" alt="">通知・トレードノート</li>
+                    <li><img src="img/check-orange.png" alt="">経済指標表示 ほか</li>
+                </ul>
     </div>
 
     <div class="ob-result-actions">
@@ -2826,16 +2799,16 @@ body.is-figure-full .home-nav{ display:none; }
             <a class="content-card" data-cat="learn" data-rec="elearning,community" href="https://discord.com/channels/1039824083208126474/1238309633139937330" target="_blank"><div class="card-emoji">📚</div><h4>トレード学習</h4><span class="card-tip">初級・中級・上級に分かれたカリキュラム。自分のレベルに合わせてステップアップできます。</span><p>初級〜上級カリキュラム</p><span class="card-link">学習 →</span></a>
             <a class="content-card" data-cat="learn" data-rec="elearning" href="https://fx-space.com/intro/y-curriculum.html" target="_blank"><div class="card-emoji">📖</div><h4>Yカリキュラム</h4><span class="card-tip">ライン→<wbr>シナリオ→<wbr>タイミング→<wbr>過去検証。動画で学び、答え合わせで合格していく、よすが式の学習ロードマップ。</span><p>学習ロードマップ</p><span class="card-link">見る →</span></a>
             <a class="content-card" data-cat="learn" data-rec="community,ytt" href="https://discord.com/channels/1039824083208126474/1246768528506486836" target="_blank"><div class="card-emoji">📝</div><h4>超実践FX問題集</h4><span class="card-tip">同じ56チャートで、ライン・ナウキャスト・シナリオの3問ずつ（全168問）を詳細解説付きで演習。知識だけでなく実践的な判断力を鍛えられます。</span><p>56チャート×3問の実力テスト</p><span class="card-link">挑戦 →</span></a>
-            <a class="content-card" data-cat="learn" data-rec="elearning" href="https://discord.com/channels/1039824083208126474/1462665754934640680" target="_blank"><div class="card-emoji">🔍</div><h4>トレード学習ナビ</h4><span class="card-tip">過去のすべての学習動画をキーワードで検索。</span><p>よすがのこれまでの全動画をキーワード検索</p><span class="card-link">検索 →</span></a>
+            <a class="content-card" data-cat="learn" data-rec="elearning" href="https://discord.com/channels/1039824083208126474/1462665754934640680" target="_blank"><div class="card-emoji">🔍</div><h4>FX動画ナビ</h4><span class="card-tip">過去のすべての学習動画をキーワードで検索。</span><p>よすがのこれまでの全動画をキーワード検索</p><span class="card-link">検索 →</span></a>
             <a class="content-card" data-cat="community" data-rec="elearning" href="https://discord.com/channels/1039824083208126474/1181506867944501321" target="_blank"><div class="card-emoji">💬</div><h4>フォーラム</h4><span class="card-tip">FXに関するあらゆる質問ができる掲示板。初心者の基本的な質問も大歓迎です。</span><p>何でも質問OK</p><span class="card-link">質問 →</span></a>
             <a class="content-card" data-cat="community" data-rec="elearning" href="https://discord.com/channels/1039824083208126474/1181536360398590003" target="_blank"><div class="card-emoji">🧑‍🏫</div><h4>astroへ質問</h4><span class="card-tip">ASTROのプロトレーダーに直接質問できるチャンネル。実践的なアドバイスがもらえます。</span><p>プロトレーダーに直接質問</p><span class="card-link">質問 →</span></a>
             <a class="content-card" data-cat="community" data-rec="ytt,community,zeropro" href="https://discord.com/channels/1039824083208126474/1282263648886329396" target="_blank"><div class="card-emoji">📡</div><h4>ライブチャート分析</h4><span class="card-tip">メンバーとリアルタイムでチャート分析・議論できます。</span><p>リアルタイムで交流</p><span class="card-link">参加 →</span></a>
             <a class="content-card" data-cat="community" href="https://discord.com/channels/1039824083208126474/1426177028058517607" target="_blank"><div class="card-emoji">☕</div><h4>雑談</h4><span class="card-tip">初心者応援・今日のできごと・マネートピックなど、テーマ別に雑談できるチャンネル。</span><p>テーマ別の雑談チャンネル</p><span class="card-link">入室 →</span></a>
             <a class="content-card" data-cat="trade" data-rec="ytt,community,zeropro" href="https://discord.com/channels/1039824083208126474/1048136270582382592" target="_blank"><div class="card-emoji">📊</div><h4>毎朝のシナリオ</h4><span class="card-tip">平日毎朝よすがが更新するシナリオ構築動画。3通貨（スタンダード）と15通貨（プレミアム）の2本立て。</span><p>平日毎日更新（3通貨＋15通貨）</p><span class="card-link">見る →</span></a>
             <a class="content-card" data-cat="trade" data-rec="ytt,community,zeropro" href="https://discord.com/channels/1039824083208126474/1521088083158896651" target="_blank"><div class="card-emoji">🎯</div><h4>利確速報</h4><span class="card-tip">メンバーの利確をリアルタイムで通知。どの通貨・時間帯でどれくらい利確したのかがわかり、みんなでトレードしている一体感が生まれます。</span><p>リアルタイム利確通知</p><span class="card-link">見る →</span></a>
-            <a class="content-card" data-cat="trade" href="https://discord.com/channels/1039824083208126474/1194299754088247298" target="_blank"><div class="card-emoji">🏆</div><h4>合格・出金報告</h4><span class="card-tip">合格報告・出金・残高増加など、仲間の成功が集まるチャンネル。モチベーションに。</span><p>仲間の成功体験</p><span class="card-link">見る →</span></a>
+            <a class="content-card" data-cat="trade" href="https://discord.com/channels/1039824083208126474/1529770753052901476" target="_blank"><div class="card-emoji">🏆</div><h4>合格・出金報告</h4><span class="card-tip">合格報告・出金・残高増加など、仲間の成功が集まるチャンネル。モチベーションに。</span><p>仲間の成功体験</p><span class="card-link">見る →</span></a>
             <a class="content-card" data-cat="trade" href="https://discord.com/channels/1039824083208126474/1161882625519140874" target="_blank"><div class="card-emoji">🔁</div><h4>FTO（過去相場検証）</h4><span class="card-tip">過去の相場を巻き戻して何度も検証できるツール。2026年7月よりYTTがFTOに搭載（サブスク限定先行）。</span><p>過去相場を巻き戻して検証</p><span class="card-link">見る →</span></a>
-            <a class="content-card" data-cat="trade" href="https://fx-space.com/intro/ytt-tokusetu.html" target="_blank"><div class="card-emoji">🛰️</div><h4>YTT</h4><span class="card-tip">学んだことをすぐ実践できるトレードツール。分析サポート・自動ライン描画・シナリオ機能などを搭載。</span><p>実践トレードツール</p><span class="card-link">詳しく →</span></a>
+            <a class="content-card" data-cat="trade" href="https://fx-space.com/intro/ytt-tokusetu.html" target="_blank"><div class="card-emoji">🛰️</div><h4>YTT</h4><span class="card-tip">学んだことをすぐ実践できるトレードツール。シナリオ構築・予約注文・オートラインなどを搭載。Web版なら、スマホでもPCでもブラウザから使えます。</span><p>実践トレードツール</p><span class="card-link">詳しく →</span></a>
             <a class="content-card" data-cat="trade" data-rec="zeropro" href="https://discord.com/channels/1039824083208126474/1136925665099251753" target="_blank"><div class="card-emoji">🌟</div><h4>ASTRO</h4><span class="card-tip">プロップ合格などプロ実績を持つトレーダーの申請制チーム。申請・昇格でランクが上がります。</span><p>申請制のプロトレーダーチーム</p><span class="card-link">詳細 →</span></a>
             <a class="content-card" data-cat="support" href="https://discordapp.com/channels/1039824083208126474/1416640423396511804/1490341286773915758" target="_blank"><div class="card-emoji">✉️</div><h4>お問い合わせ</h4><span class="card-tip">分からないこと・要望など、運営（サポーター）への問い合わせ窓口。Ticketチャンネルが作成され、本人と運営のみ閲覧できます。</span><p>運営に直接問い合わせ</p><span class="card-link">問い合わせ →</span></a>
             <a class="content-card" data-cat="support" href="https://discordapp.com/channels/1039824083208126474/1416640423396511804/1490342419982454924" target="_blank"><div class="card-emoji">🤖</div><h4>AIサポート</h4><span class="card-tip">FX SPACE全般のAIへのお問い合わせ。すぐ返答が来ますが、内容は必ずしも正確ではない点にご注意ください。</span><p>全般をAIに質問（即答）</p><span class="card-link">AIに聞く →</span></a>
@@ -3005,6 +2978,7 @@ function animateYttP5() {
 
 function startYttAnimations() {
   if (typeof gsap === 'undefined') return;
+  if (!document.getElementById('scene-ytt-p1')) return; // Web版の画面に差しかえたので、旧アニメの場所が無ければ何もしない
   if (!yttAnimPlayed.p1) { yttAnimPlayed.p1=true; animateYttP1(); }
   if (!yttAnimPlayed.p2) { yttAnimPlayed.p2=true; animateCandles(); }
   if (!yttAnimPlayed.p3) { yttAnimPlayed.p3=true; animateYttP3(); }
@@ -3227,5 +3201,25 @@ function startYttAnimations() {
 <!-- BudouX — 日本語の文節改行（全ページ共通・同梱版。js/budoux-init.js を参照） -->
 <script src="js/budoux-ja.min.js?v=20260907a" defer></script>
 <script src="js/budoux-init.js?v=20260907a" defer></script>
+<script>
+/* タイトル下の波線（2026-09-23、YTT特設ページと同じ決まり）：線の高さ＝タイトルの文字の大きさの1.01倍。
+   元の波線を1本で使い、2行あるときは長い方の行に合わせた大きさを短い行でも使って、文字からはみ出した分は切る */
+(function () {
+  var RATIO = 1684 / 203; /* underline-wave.png の縦横比 */
+  function fit() {
+    document.querySelectorAll('.ob-welcome-wrap').forEach(function (h) {
+      var waves = [].slice.call(h.querySelectorAll('.tw-wave')); if (!waves.length) return;
+      var fs = parseFloat(getComputedStyle(h.matches('h1') ? h : (h.querySelector('h1') || h)).fontSize) || 16;
+      var hgt = fs * 1.01, w = hgt * RATIO;
+      waves.forEach(function (s) { w = Math.max(w, s.parentElement.getBoundingClientRect().width); });
+      waves.forEach(function (s) { s.style.height = hgt + 'px'; s.firstElementChild.style.width = Math.ceil(w) + 'px'; });
+    });
+  }
+  fit(); window.addEventListener('resize', fit); window.addEventListener('load', fit);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+})();
+</script>
+<!-- 見出しの下の波線の太さを、文字の大きさにそろえる（2026-09-24） -->
+<script src="js/wave-fit.js?v=20260924a" defer></script>
 </body>
 </html>

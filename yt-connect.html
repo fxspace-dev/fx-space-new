@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FX SPACE - YouTubeメンバーシップのつなぎ方</title>
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    <link rel="apple-touch-icon" href="img/favicon.png">
 <meta property="og:title" content="FX SPACE - YouTubeメンバーシップのつなぎ方">
 <meta property="og:description" content="YouTubeのメンバーになったら、Discordとつないでメンバー限定の部屋に入れるようにしよう。">
 <meta property="og:type" content="website">
@@ -1403,12 +1405,18 @@ body[data-device="sp"] .pc-only{display:none;}
 }
 .ob-welcome-wavy .ttl-line:last-child{ margin-bottom:0.25rem; }
 </style>
+<style>
+/* === タイトル下の波線（2026-09-23、YTT特設ページと同じ決まり）：高さ＝文字の大きさの1.01倍。
+   元の波線を縦横比そのままで使い、2行のうち長い方の行に合わせた大きさを短い行でも使って、はみ出した分は切る（幅はページ下の小さなプログラムが --wave-w に入れる） */
+.ob-welcome-wavy .ttl-line { padding-bottom: calc(1.01em - 8px) !important; }
+.ob-welcome-wavy .ttl-line::after { height: 1.01em !important; bottom: -4px !important; background: url("img/underline-wave.png") 0 0 / var(--wave-w, auto) 100% no-repeat !important; }
+</style>
 </head>
 <body>
 
 <!-- Header -->
 <header class="ob-header">
-  <img class="ob-logo" src="img/fxspace-logo-horizontal.png" alt="FX SPACE">
+  <img class="ob-logo" src="img/ytt-nav-logo.png" alt="FX SPACE">
   <div class="ob-welcome-wrap">
     <h1 class="ob-welcome ob-welcome-wavy"><span class="ttl-line">YouTubeメンバーシップを</span><span class="ttl-line"><span class="accent">Discord</span>につなごう</span></h1>
   </div>
@@ -2002,5 +2010,19 @@ function toggleFaq(el) {
 <!-- BudouX — 日本語の文節改行（全ページ共通・同梱版。js/budoux-init.js を参照） -->
 <script src="js/budoux-ja.min.js?v=20260907a" defer></script>
 <script src="js/budoux-init.js?v=20260907a" defer></script>
+<script>
+/* タイトル下の波線（YTT特設ページと同じ）：長い方の行の幅を --wave-w に入れる。元の画像の縦横比（1684×203）で、文字の1.01倍の高さにしたときの幅より短くはしない */
+(function () {
+  function fit() {
+    document.querySelectorAll('.ob-welcome-wavy').forEach(function (h) {
+      var fs = parseFloat(getComputedStyle(h).fontSize) || 16, w = fs * 1.01 * 1684 / 203;
+      h.querySelectorAll('.ttl-line').forEach(function (t) { w = Math.max(w, t.getBoundingClientRect().width); });
+      h.style.setProperty('--wave-w', Math.ceil(w) + 'px');
+    });
+  }
+  fit(); window.addEventListener('resize', fit); window.addEventListener('load', fit);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+})();
+</script>
 </body>
 </html>

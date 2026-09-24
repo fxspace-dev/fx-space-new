@@ -1117,6 +1117,13 @@
     @media (max-width: 640px) { .ytt-sp-hero .ytt-sp-title-line .ytt-title-wave { height: calc(1em * var(--title-em, 9.04) / 9); } }
 </style>
 
+<style>
+/* === タイトル下の黄色い波線（2026-09-23 airiさん「YTT特設でやったように太さを合わせて・すべてのページで」） ===
+   YTT特設ページ（ytt-tokusetu.html）と同じ決まり：線の高さ＝文字の大きさの1.01倍（太さが文字に比例）。
+   元の波線を1本で使い、2行のうち長い方の行に合わせた幅を短い行でも同じ大きさで使って、文字からはみ出した分は切る。幅はページ下の小さなプログラムが --wave-w に入れる */
+.ytt-sp-hero .ytt-sp-hero-title .ytt-sp-title-line .ytt-title-wave { display: block; width: 0 !important; min-width: 100%; max-width: none !important; margin-left: 0 !important; transform: none !important; height: 1.01em !important; aspect-ratio: auto !important; overflow: hidden; }
+.ytt-sp-hero .ytt-sp-hero-title .ytt-title-wave img { display: block; height: 100%; width: var(--wave-w, auto); min-width: 100%; max-width: none; object-fit: fill; }
+</style>
 </head>
 <body>
 
@@ -1158,7 +1165,7 @@
 <!-- HERO -->
 <section class="ytt-sp-hero">
     <h1 class="ytt-sp-hero-title acct-title" style="--title-em: 10.4;">
-        <span class="ytt-sp-title-line"><span class="line-text"><img class="ft-title-logo" src="img/webytt/rec/fintokei.png" alt="Fintokei" width="383" height="73">をはじめる<img class="ytt-title-wave" src="img/wave-yellow.png" alt=""></span></span>
+        <span class="ytt-sp-title-line"><span class="line-text"><img class="ft-title-logo" src="img/webytt/rec/fintokei.png" alt="Fintokei" width="383" height="73">をはじめる<span class="ytt-title-wave" aria-hidden="true"><img src="img/wave-yellow.png" alt=""></span></span></span>
     </h1>
     <p class="ytt-sp-hero-lead">
         Fintokeiは、テストに合格すると、デモ口座での成績に応じて報酬を受け取れるプロップファームです。<br>
@@ -1399,13 +1406,6 @@
 
 <script>
 (function(){
-  var dl = document.getElementById('dlBtn');
-  if (dl && dl.getAttribute('href').indexOf('#href-tbd') === 0) {
-    dl.addEventListener('click', function(e){ e.preventDefault(); alert('ダウンロードURLは準備中です。Discordの「😊交流」チャンネルの配布ファイル（webytt.zip）をご利用ください。'); });
-  }
-  document.querySelectorAll('[data-soon]').forEach(function (a) {
-    a.addEventListener('click', function (e) { e.preventDefault(); alert('cTraderの導入方法ページは準備中です。'); });
-  });
   // ---- STEP 4：MT4 / MT5 の画面切り替え ----
   var step4 = document.getElementById('h-step4');
   if (step4) step4.querySelectorAll('.os-switch [data-show]').forEach(function (b) {
@@ -1611,5 +1611,25 @@
 <!-- BudouX — 日本語の文節改行（全ページ共通・同梱版。js/budoux-init.js を参照） -->
 <script src="js/budoux-ja.min.js?v=20260907a" defer></script>
 <script src="js/budoux-init.js?v=20260907a" defer></script>
+<script>
+/* タイトル下の波線（YTT特設ページと同じ）：2行のうち長い方の行の幅を --wave-w に入れる。
+   元の画像の縦横比（1850×232）で、文字の大きさの1.01倍の高さにしたときの幅より短くはしない */
+(function () {
+  function fit() {
+    document.querySelectorAll('.ytt-sp-hero-title').forEach(function (h1) {
+      var fs = parseFloat(getComputedStyle(h1).fontSize) || 16;
+      var w = fs * 1.01 * 1850 / 232;
+      h1.querySelectorAll('.line-text').forEach(function (t) { w = Math.max(w, t.getBoundingClientRect().width); });
+      h1.style.setProperty('--wave-w', Math.ceil(w) + 'px');
+    });
+  }
+  fit();
+  window.addEventListener('resize', fit);
+  window.addEventListener('load', fit);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+})();
+</script>
+<!-- 見出しの下の波線の太さを、文字の大きさにそろえる（2026-09-24） -->
+<script src="js/wave-fit.js?v=20260924a" defer></script>
 </body>
 </html>

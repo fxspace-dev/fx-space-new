@@ -343,6 +343,11 @@
 
         [data-anim] { opacity: 0; }
     </style>
+<style>
+/* === 見出し下のオレンジ波線の太さを、YTT特設ページと同じに（2026-09-23） === */
+img[src$="wave-orange.png"] { height: clamp(14px, 3vw, 22px) !important; }
+@media (max-width: 640px) { img[src$="wave-orange.png"] { height: clamp(18px, 6vw, 26px) !important; } }
+</style>
 </head>
 <body>
 
@@ -528,5 +533,7 @@
 <!-- BudouX — 日本語の文節改行（全ページ共通・同梱版。js/budoux-init.js を参照） -->
 <script src="js/budoux-ja.min.js?v=20260907a" defer></script>
 <script src="js/budoux-init.js?v=20260907a" defer></script>
+<!-- 見出しの下の波線の太さを、文字の大きさにそろえる（2026-09-24） -->
+<script src="js/wave-fit.js?v=20260924a" defer></script>
 </body>
 </html>

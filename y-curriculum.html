@@ -860,6 +860,13 @@ body{ padding-top:50px; }
   .ycp-foot a:hover{ transform:translateY(-2px); box-shadow:0 8px 0 rgba(0,0,0,0.18), 0 14px 30px rgba(0,0,0,0.3); }
   .ycp-foot-note{ color:rgba(255,255,255,0.6); font-size:0.75rem; margin:1rem 0 0; }
 </style>
+<style>
+/* === タイトル下の波線（2026-09-23 airiさん「YTT特設でやったように太さを合わせて」） ===
+   高さ＝文字の大きさの1.01倍（ページ下の小さなプログラムが入れる）。元の波線を縦横比そのままで使い、文字の幅からはみ出した分は切る */
+.tw-wave { display: block; width: 0; min-width: 100%; height: 1.01em; overflow: hidden; }
+.tw-wave img { display: block !important; height: 100% !important; width: auto; min-width: 100%; max-width: none !important; max-height: none !important; aspect-ratio: auto !important; object-fit: fill !important; margin: 0 !important; }
+.rsec-head .tw h1 + .tw-wave { margin-top: -2px; }
+</style>
 </head>
 <body>
 <nav class="home-nav"><a href="index.html" class="home-nav-logo"><img src="img/ytt-nav-logo.png" alt="FX SPACE"></a></nav>
@@ -871,7 +878,7 @@ body{ padding-top:50px; }
       王道ルート
       <img class="hero-title-side hero-title-side--right" src="img/title-side-yellow-right.png" alt="">
     </span>
-    <div><span class="tw"><h1>Yカリキュラムで学ぶ</h1><img src="img/underline-wave.png" alt=""></span></div>
+    <div><span class="tw"><h1>Yカリキュラムで学ぶ</h1><span class="tw-wave" aria-hidden="true"><img src="img/underline-wave.png" alt=""></span></span></div>
     <p class="rsec-lead">動画で学び、答え合わせで合格していく5ステップ。</p>
   </div>
 
@@ -955,5 +962,25 @@ body{ padding-top:50px; }
 <!-- BudouX — 日本語の文節改行（全ページ共通・同梱版。js/budoux-init.js を参照） -->
 <script src="js/budoux-ja.min.js?v=20260907a" defer></script>
 <script src="js/budoux-init.js?v=20260907a" defer></script>
+<script>
+/* タイトル下の波線（2026-09-23、YTT特設ページと同じ決まり）：線の高さ＝タイトルの文字の大きさの1.01倍。
+   元の波線を1本で使い、2行あるときは長い方の行に合わせた大きさを短い行でも使って、文字からはみ出した分は切る */
+(function () {
+  var RATIO = 1684 / 203; /* underline-wave.png の縦横比 */
+  function fit() {
+    document.querySelectorAll('.rsec-head .tw').forEach(function (h) {
+      var waves = [].slice.call(h.querySelectorAll('.tw-wave')); if (!waves.length) return;
+      var fs = parseFloat(getComputedStyle(h.matches('h1') ? h : (h.querySelector('h1') || h)).fontSize) || 16;
+      var hgt = fs * 1.01, w = hgt * RATIO;
+      waves.forEach(function (s) { w = Math.max(w, s.parentElement.getBoundingClientRect().width); });
+      waves.forEach(function (s) { s.style.height = hgt + 'px'; s.firstElementChild.style.width = Math.ceil(w) + 'px'; });
+    });
+  }
+  fit(); window.addEventListener('resize', fit); window.addEventListener('load', fit);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+})();
+</script>
+<!-- 見出しの下の波線の太さを、文字の大きさにそろえる（2026-09-24） -->
+<script src="js/wave-fit.js?v=20260924a" defer></script>
 </body>
 </html>

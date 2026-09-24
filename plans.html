@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FX SPACE - サブスクリプション</title>
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    <link rel="apple-touch-icon" href="img/favicon.png">
     <meta property="og:title" content="FX SPACE - サブスクリプション">
     <meta property="og:description" content="スタンダードとプレミアム、それぞれで使える機能を紹介します。">
     <meta property="og:type" content="website">
@@ -306,6 +308,12 @@
         .plan-year-link { display:inline-block; padding:0.7rem 1.5rem; }
       }
 </style>
+<style>
+/* === タイトル下の波線（2026-09-23、YTT特設ページと同じ決まり）：高さ＝文字の大きさの1.01倍。
+   元の波線を縦横比そのままで使い、2行のうち長い方の行に合わせた大きさを短い行でも使って、はみ出した分は切る（幅はページ下の小さなプログラムが --wave-w に入れる） */
+.pricing-title-wavy .ttl-line { padding-bottom: calc(1.01em - 8px) !important; }
+.pricing-title-wavy .ttl-line::after { height: 1.01em !important; bottom: -4px !important; background: url("img/underline-wave.png") 0 0 / var(--wave-w, auto) 100% no-repeat !important; }
+</style>
 </head>
 <body style="scroll-behavior: auto;">
 
@@ -362,7 +370,7 @@
                             <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">AIサポート</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">FX SPACEに関する疑問に24時間いつでも答えてくれるAIアシスタント。気軽に相談できます。<br><a href="https://discord.com/channels/1039824083208126474/1416640423396511804" target="_blank">Discordで見る →</a></span></li>
                             <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">毎日のシナリオ動画（3通貨ペア）</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">毎朝、よすががその日のシナリオを動画で解説。スタンダードでは主要3通貨ペアの分析が届きます。<br><a href="https://discord.com/channels/1039824083208126474/1048136270582382592" target="_blank">Discordで見る →</a></span></li>
                             <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">深掘解説等の限定動画</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">会員限定の特別解説動画。テーマ別に基礎から応用まで深く学べます。</span></li>
-                            <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">サポートツール YTT</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">よすが式チャート分析ツール。複雑なテクニカル分析を直感的に行え、エントリー判断の精度が上がります。<br><a href="https://discord.com/channels/1039824083208126474/1447939661186990173" target="_blank">Discordで見る →</a></span></li>
+                            <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">サポートツール YTT</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">よすが式トレードツール。シナリオ構築・予約注文・オートラインなどで、エントリー判断と注文をサポートします。Web版なら、スマホでもPCでもブラウザから使えます。<br><a href="https://discord.com/channels/1039824083208126474/1447939661186990173" target="_blank">Discordで見る →</a></span></li>
                             <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">3か月プロ企画 ゼロプロ90参加権利</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">90日間でゼロからプロを目指す集中プログラム。3か月に1回の募集タイミングで参加できます。<br><a href="https://discord.com/channels/1039824083208126474/1171706488234979378" target="_blank">Discordで見る →</a></span></li>
                             <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">プロトレーダー ASTRO</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">プロトレーダーASTROの相場観・分析にアクセス可能。実践的な視点を学べます。<br><a href="https://discord.com/channels/1039824083208126474/1136925665099251753" target="_blank">Discordで見る →</a></span></li>
                             <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">プロに相談</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">困ったときにプロトレーダーに直接相談できる窓口。学習や実トレードの疑問をすぐ解消できます。<br><a href="https://discord.com/channels/1039824083208126474/1181536360398590003" target="_blank">Discordで見る →</a></span></li>
@@ -578,7 +586,7 @@
                     <div class="prem-title-wrap has-tip">
                       <h4>YTT（よすが式トレードツール）</h4>
                       <span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span>
-                      <span class="feat-tip">よすが式チャート分析ツールを買い切りで購入できます。サブスク不要でツールだけ使いたい方に。<br><a href="https://discord.com/channels/1039824083208126474/1161882625519140874/1194128730411511909" target="_blank">Discordで見る →</a></span>
+                      <span class="feat-tip">よすが式トレードツールを買い切りで購入できます。サブスク不要でツールだけ使いたい方に。</span>
                     </div>
                     <div class="purchase-type">買い切り</div>
                     <div class="purchase-price">¥110,000</div>
@@ -761,5 +769,19 @@ document.addEventListener('DOMContentLoaded', function(){
 <!-- BudouX — 日本語の文節改行（全ページ共通・同梱版。js/budoux-init.js を参照） -->
 <script src="js/budoux-ja.min.js?v=20260907a" defer></script>
 <script src="js/budoux-init.js?v=20260907a" defer></script>
+<script>
+/* タイトル下の波線（YTT特設ページと同じ）：長い方の行の幅を --wave-w に入れる。元の画像の縦横比（1684×203）で、文字の1.01倍の高さにしたときの幅より短くはしない */
+(function () {
+  function fit() {
+    document.querySelectorAll('.pricing-title-wavy').forEach(function (h) {
+      var fs = parseFloat(getComputedStyle(h).fontSize) || 16, w = fs * 1.01 * 1684 / 203;
+      h.querySelectorAll('.ttl-line').forEach(function (t) { w = Math.max(w, t.getBoundingClientRect().width); });
+      h.style.setProperty('--wave-w', Math.ceil(w) + 'px');
+    });
+  }
+  fit(); window.addEventListener('resize', fit); window.addEventListener('load', fit);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+})();
+</script>
 </body>
 </html>

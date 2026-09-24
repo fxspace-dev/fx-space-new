@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YTTダウンロード — FX SPACE</title>
+    <title>最新のデスクトップ版YTT ダウンロード — FX SPACE</title>
+    <link rel="icon" type="image/png" href="icon.png">
     <meta name="robots" content="noindex">
     <link rel="stylesheet" href="css/style.css?v=20260908e">
     <style>
@@ -582,6 +583,26 @@
 
         [data-anim] { opacity: 0; }
     </style>
+<style>
+/* === タイトル下の黄色い波線（2026-09-23 airiさん「YTT特設でやったように太さを合わせて・すべてのページで」） ===
+   YTT特設ページ（ytt-tokusetu.html）と同じ決まり：線の高さ＝文字の大きさの1.01倍（太さが文字に比例）。
+   元の波線を1本で使い、2行のうち長い方の行に合わせた幅を短い行でも同じ大きさで使って、文字からはみ出した分は切る。幅はページ下の小さなプログラムが --wave-w に入れる */
+.ytt-sp-hero .ytt-sp-hero-title .ytt-sp-title-line .ytt-title-wave { display: block; width: 0 !important; min-width: 100%; max-width: none !important; margin-left: 0 !important; transform: none !important; height: 1.01em !important; aspect-ratio: auto !important; overflow: hidden; }
+.ytt-sp-hero .ytt-sp-hero-title .ytt-title-wave img { display: block; height: 100%; width: var(--wave-w, auto); min-width: 100%; max-width: none; object-fit: fill; }
+</style>
+<style>
+/* === 見出し下のオレンジ波線の太さを、YTT特設ページと同じに（2026-09-23） === */
+img[src$="wave-orange.png"] { height: clamp(14px, 3vw, 22px) !important; }
+@media (max-width: 640px) { img[src$="wave-orange.png"] { height: clamp(18px, 6vw, 26px) !important; } }
+</style>
+<style>
+/* === デスクトップ版であることが分かるように（2026-09-24）：Web版のダウンロードページへの案内 === */
+.dl-other-ver { margin: 0.9rem auto 0; font-size: 0.875rem; color: #6b7280; text-align: center; }
+.dl-other-ver a { color: #4f46e5; font-weight: 800; text-decoration: underline; text-underline-offset: 3px; }
+.dl-other-ver a:hover { color: #3430b0; }
+/* 幅のせまいスマホでは、ボタンの文字が右の矢印に重ならないよう矢印を隠す（左の箱の絵でダウンロードだと分かる） */
+@media (max-width: 400px) { .dl-mega-dl-icon { display: none; } }
+</style>
 </head>
 <body>
 
@@ -592,7 +613,7 @@
 
   【本番反映前TODO】
   [1] ダウンロードURL（設定済み・本番と同じ。新しいZIPを出すたびに href を差し替えること）
-      → 「YTT最新版をダウンロード」ボタンの遷移先URL（計1箇所）
+      → 「最新のデスクトップ版YTTをダウンロード」ボタンの遷移先URL（計1箇所）
   [2] アップデート履歴
       → 【安田さん編集】新しいリリースが出るたびに本ページの
         「アップデート履歴」セクションに新カードを追加
@@ -627,13 +648,16 @@
         <img class="hero-logo" src="img/ytt-hero-logo.png" alt="YTT — よすがトレードツール">
     </div>
     <h1 class="ytt-sp-hero-title" data-anim>
-        <span class="ytt-sp-title-line"><span class="line-text">最新版のYTTを<img class="ytt-title-wave" src="img/wave-yellow.png" alt=""></span></span>
-        <span class="ytt-sp-title-line"><span class="line-text">今すぐ手に入れよう<img class="ytt-title-wave" src="img/wave-yellow.png" alt=""></span></span>
+        <span class="ytt-sp-title-line"><span class="line-text">最新のデスクトップ版YTTを<span class="ytt-title-wave" aria-hidden="true"><img src="img/wave-yellow.png" alt=""></span></span></span>
+        <span class="ytt-sp-title-line"><span class="line-text">今すぐ手に入れよう<span class="ytt-title-wave" aria-hidden="true"><img src="img/wave-yellow.png" alt=""></span></span></span>
     </h1>
     <p class="ytt-sp-hero-lead" data-anim>
+        パソコンのMT4・MT5・cTraderに<wbr>入れて使うYTTです。<br>
         ダウンロードした.zipファイルを<wbr>お使いのプラットフォームに導入するだけ。<br>
         旧バージョンをお使いの方は、<wbr>上書き更新で最新版に切り替わります。
     </p>
+    <!-- Web版と迷った人のための案内（2026-09-24） -->
+    <p class="dl-other-ver" data-anim>スマホでも使いたい方は <a href="ytt-web-download.html">Web版YTTのダウンロードへ →</a></p>
 </section>
 
 <!-- メインDLボタン -->
@@ -660,7 +684,7 @@
                 </svg>
             </span>
             <span class="dl-mega-text">
-                <span class="dl-mega-title">YTT最新版をダウンロード</span>
+                <span class="dl-mega-title"><span style="white-space:nowrap;">最新の</span><wbr><span style="white-space:nowrap;">デスクトップ版</span><wbr><span style="white-space:nowrap;">YTTを</span><wbr><span style="white-space:nowrap;">ダウンロード</span></span>
                 <span class="dl-mega-sub">約 3.2 MB / .zip 形式</span>
             </span>
             <span class="dl-mega-dl-icon" aria-hidden="true">
@@ -1051,5 +1075,25 @@
 <!-- BudouX — 日本語の文節改行（全ページ共通・同梱版。js/budoux-init.js を参照） -->
 <script src="js/budoux-ja.min.js?v=20260907a" defer></script>
 <script src="js/budoux-init.js?v=20260907a" defer></script>
+<script>
+/* タイトル下の波線（YTT特設ページと同じ）：2行のうち長い方の行の幅を --wave-w に入れる。
+   元の画像の縦横比（1850×232）で、文字の大きさの1.01倍の高さにしたときの幅より短くはしない */
+(function () {
+  function fit() {
+    document.querySelectorAll('.ytt-sp-hero-title').forEach(function (h1) {
+      var fs = parseFloat(getComputedStyle(h1).fontSize) || 16;
+      var w = fs * 1.01 * 1850 / 232;
+      h1.querySelectorAll('.line-text').forEach(function (t) { w = Math.max(w, t.getBoundingClientRect().width); });
+      h1.style.setProperty('--wave-w', Math.ceil(w) + 'px');
+    });
+  }
+  fit();
+  window.addEventListener('resize', fit);
+  window.addEventListener('load', fit);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+})();
+</script>
+<!-- 見出しの下の波線の太さを、文字の大きさにそろえる（2026-09-24） -->
+<script src="js/wave-fit.js?v=20260924a" defer></script>
 </body>
 </html>

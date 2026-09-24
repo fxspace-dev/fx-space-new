@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YTTを使うにはサブスク加入が必要です — FX SPACE</title>
+    <link rel="icon" type="image/png" href="icon.png">
     <meta name="robots" content="noindex">
     <link rel="stylesheet" href="css/style.css?v=20260908e">
     <style>
@@ -132,7 +133,7 @@
         .h2-lines .h2-line { display: inline; }
         @media (max-width: 640px) {
             .h2-lines .h2-line { display: block; width: fit-content; margin: 0 auto; }
-            .h2-lines .h2-line::after { content: ''; display: block; height: clamp(18px, 6vw, 26px); margin-top: 2px; background: url('img/wave-orange.png') center / 100% 100% no-repeat; }
+            .h2-lines .h2-line::after { content: ''; display: block; height: 1.01em; margin-top: 2px; background: url('img/wave-orange.png') 0 0 / var(--wave-w, auto) 100% no-repeat; } /* 高さ＝文字の1.01倍、長い方の行に合わせた大きさ（js/wave-fit.js が --wave-w を入れる。2026-09-24） */
             .h2-lines .h2-line + .h2-line { margin-top: 0.15em; }
             .h2-lines + .h2-title-wave { display: none; }
         }
@@ -605,6 +606,22 @@
 
         [data-anim] { opacity: 0; }
     </style>
+<style>
+/* === 24時間お試し：Web版YTTではまだ使えないので一時的に隠す（2026-09-22、特設ページと同じ）。使えるようになったら、この1行を消すだけで元に戻る === */
+.trial-off { display: none !important; }
+</style>
+<style>
+/* === タイトル下の黄色い波線（2026-09-23 airiさん「YTT特設でやったように太さを合わせて・すべてのページで」） ===
+   YTT特設ページ（ytt-tokusetu.html）と同じ決まり：線の高さ＝文字の大きさの1.01倍（太さが文字に比例）。
+   元の波線を1本で使い、2行のうち長い方の行に合わせた幅を短い行でも同じ大きさで使って、文字からはみ出した分は切る。幅はページ下の小さなプログラムが --wave-w に入れる */
+.ytt-sp-hero .ytt-sp-hero-title .ytt-sp-title-line .ytt-title-wave { display: block; width: 0 !important; min-width: 100%; max-width: none !important; margin-left: 0 !important; transform: none !important; height: 1.01em !important; aspect-ratio: auto !important; overflow: hidden; }
+.ytt-sp-hero .ytt-sp-hero-title .ytt-title-wave img { display: block; height: 100%; width: var(--wave-w, auto); min-width: 100%; max-width: none; object-fit: fill; }
+</style>
+<style>
+/* === 見出し下のオレンジ波線の太さを、YTT特設ページと同じに（2026-09-23） === */
+img[src$="wave-orange.png"] { height: clamp(14px, 3vw, 22px) !important; }
+@media (max-width: 640px) { img[src$="wave-orange.png"] { height: clamp(18px, 6vw, 26px) !important; } }
+</style>
 </head>
 <body>
 
@@ -657,8 +674,8 @@
         </svg>
     </div>
     <h1 class="ytt-sp-hero-title" data-anim>
-        <span class="ytt-sp-title-line"><span class="line-text">YTTのご利用には<img class="ytt-title-wave" src="img/wave-yellow.png" alt=""></span></span>
-        <span class="ytt-sp-title-line"><span class="line-text">サブスク加入が必要です<img class="ytt-title-wave" src="img/wave-yellow.png" alt=""></span></span>
+        <span class="ytt-sp-title-line"><span class="line-text">YTTのご利用には<span class="ytt-title-wave" aria-hidden="true"><img src="img/wave-yellow.png" alt=""></span></span></span>
+        <span class="ytt-sp-title-line"><span class="line-text">サブスク加入が必要です<span class="ytt-title-wave" aria-hidden="true"><img src="img/wave-yellow.png" alt=""></span></span></span>
     </h1>
     <p class="ytt-sp-hero-lead" data-anim>
         スタンダード／プレミアムどちらでも<wbr>YTTがフルでご利用いただけます。<br>
@@ -721,7 +738,7 @@
         <div class="step-item" data-anim>
             <img class="step-num" src="img/crayon-orange-3.png" alt="3">
             <div class="step-visual">
-                <img src="img/ytt-order-panel.png" alt="YTT 注文パネル" class="step-visual-img">
+                <img src="img/webytt/wy-order-panel.png" alt="Web版YTTの注文パネル" class="step-visual-img" width="72" height="72">
             </div>
             <h3>YTTを使う</h3>
             <p>すぐに<br>ダウンロード開始</p>
@@ -822,7 +839,7 @@
                 </div>
                 <div class="plan-divider"></div>
                 <ul class="plan-features">
-                    <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text-ytt"><span class="pf-ytt-inner">YTT（よすがトレードツール）<img src="img/wave-yellow.png" class="pf-ytt-wave" alt=""></span></span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">よすが式チャート分析ツール。複雑なテクニカル分析を直感的に行え、エントリー判断の精度が上がります。</span></li>
+                    <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text-ytt"><span class="pf-ytt-inner">YTT（よすがトレードツール）<img src="img/wave-yellow.png" class="pf-ytt-wave" alt=""></span></span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">よすが式トレードツール。シナリオ構築・予約注文・オートラインなどで、エントリー判断と注文をサポートします。Web版なら、スマホでもPCでもブラウザから使えます。</span></li>
                     <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">速攻プロフローチャート</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">プロの思考順序をフローチャートで可視化したガイドです。</span></li>
                     <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">AIサポート</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">FX SPACEに関する疑問に24時間いつでも答えてくれるAIアシスタント。気軽に相談できます。</span></li>
                     <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">毎日のシナリオ動画</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">毎朝、よすががその日のシナリオを動画で解説。スタンダードでは主要3通貨ペアの分析が届きます。</span></li>
@@ -843,7 +860,7 @@
                 </div>
                 <div class="plan-divider"></div>
                 <ul class="plan-features">
-                    <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text-ytt"><span class="pf-ytt-inner">YTT（よすがトレードツール）<img src="img/wave-yellow.png" class="pf-ytt-wave" alt=""></span></span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">よすが式チャート分析ツール。複雑なテクニカル分析を直感的に行え、エントリー判断の精度が上がります。</span></li>
+                    <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text-ytt"><span class="pf-ytt-inner">YTT（よすがトレードツール）<img src="img/wave-yellow.png" class="pf-ytt-wave" alt=""></span></span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">よすが式トレードツール。シナリオ構築・予約注文・オートラインなどで、エントリー判断と注文をサポートします。Web版なら、スマホでもPCでもブラウザから使えます。</span></li>
                     <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text">スタンダードの全機能</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">上記スタンダードプランの全機能をそのまま利用できます。基礎から実践まで全てカバー。</span></li>
                     <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text" style="font-weight:700;">ライブチャート分析</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">よすががチャンスと感じた相場をリアルタイム通知。プレミアム会員だけが見られる専用チャンネル。</span></li>
                     <li class="has-tip"><span class="pf-icon pf-icon-check"><img src="img/check-orange.png" alt="✓"></span><span class="pf-text" style="font-weight:700;">トレード交流</span><span class="feat-info" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="feat-tip">メンバー同士でトレードを共有・議論する場。利確・損切報告で切磋琢磨できます。</span></li>
@@ -857,7 +874,8 @@
 </section>
 
 <!-- 24h無料お試し誘導（濃紺背景・右斜め上に24hデコ） -->
-<section class="trial-cta-section">
+<!-- Web版YTTにはまだお試しが無いので一時的に隠す（2026-09-22、特設ページと同じ trial-off）。消さずに残してある -->
+<section class="trial-cta-section trial-off">
     <!-- 右斜め上のデコ24hアイコン -->
     <div class="trial-cta-floating-24h" aria-hidden="true">
         <img src="img/icon-24h.png" alt="">
@@ -892,7 +910,7 @@
         </div>
         <div class="yt-notice-divider">
             <p class="yt-notice-cta-label">接続がまだの方はこちら</p>
-            <a href="https://www.canva.com/design/DAGyGaJXg0o/TJzrufq9rwLhkgdNS1K23Q/edit?utm_content=DAGyGaJXg0o&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" target="_blank" rel="noopener" class="yt-notice-cta">接続ガイドを見る →</a>
+            <a href="yt-connect.html" target="_blank" rel="noopener" class="yt-notice-cta">接続ガイドを見る →</a>
         </div>
     </div>
 </section>
@@ -1011,5 +1029,25 @@ document.addEventListener('DOMContentLoaded', function(){
   });
 })();
 </script>
+<script>
+/* タイトル下の波線（YTT特設ページと同じ）：2行のうち長い方の行の幅を --wave-w に入れる。
+   元の画像の縦横比（1850×232）で、文字の大きさの1.01倍の高さにしたときの幅より短くはしない */
+(function () {
+  function fit() {
+    document.querySelectorAll('.ytt-sp-hero-title').forEach(function (h1) {
+      var fs = parseFloat(getComputedStyle(h1).fontSize) || 16;
+      var w = fs * 1.01 * 1850 / 232;
+      h1.querySelectorAll('.line-text').forEach(function (t) { w = Math.max(w, t.getBoundingClientRect().width); });
+      h1.style.setProperty('--wave-w', Math.ceil(w) + 'px');
+    });
+  }
+  fit();
+  window.addEventListener('resize', fit);
+  window.addEventListener('load', fit);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+})();
+</script>
+<!-- 見出しの下の波線の太さを、文字の大きさにそろえる（2026-09-24） -->
+<script src="js/wave-fit.js?v=20260924a" defer></script>
 </body>
 </html>

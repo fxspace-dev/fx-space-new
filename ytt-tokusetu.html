@@ -1173,6 +1173,44 @@
             .toc-list a { font-size: 0.92rem; }
         }
     </style>
+<style>
+/* === YTTは2つから選べます（Web版・デスクトップ版。2026-09-24） === */
+.ytt-two { margin-top: 2.75rem; text-align: center; }
+.ytt-two-title { margin: 0 0 0.4rem; font-size: clamp(1.1rem, 3vw, 1.4rem); font-weight: 900; color: #1e1b4b; }
+.ytt-two-lead { margin: 0 auto 1.6rem; max-width: 680px; font-size: 0.9rem; color: #6b7280; line-height: 1.8; }
+.ytt-two-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.1rem; max-width: 860px; margin: 0 auto; text-align: left; }
+@media (max-width: 700px) { .ytt-two-grid { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; } }
+.ytt-two-card { position: relative; display: flex; flex-direction: column; background: #fff; border: 1.5px solid #e5e7eb; border-radius: 16px; padding: 1.5rem 1.25rem 1.25rem; }
+.ytt-two-card.is-rec { border: 2px solid #4f46e5; }
+.ytt-two-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); padding: 0.2rem 0.95rem; border-radius: 999px; background: #4f46e5; color: #fff; font-size: 0.75rem; font-weight: 800; white-space: nowrap; }
+.ytt-two-head { display: flex; align-items: center; gap: 0.9rem; }
+.ytt-two-img { flex: none; width: 72px; height: 72px; object-fit: cover; border-radius: 12px; border: 1px solid #e5e7eb; }
+.ytt-two-name { margin: 0; font-size: 1.15rem; font-weight: 900; color: #1e1b4b; }
+.ytt-two-how { margin: 0.2rem 0 0; font-size: 0.82rem; color: #6b7280; line-height: 1.6; }
+.ytt-two-forlabel { margin: 1.1rem 0 0.2rem; font-size: 0.78rem; font-weight: 800; color: #6b7280; }
+.ytt-two-for { list-style: none; margin: 0 0 1.2rem; padding: 0; }
+.ytt-two-for li { display: flex; align-items: flex-start; gap: 0.5rem; padding: 0.25rem 0; font-size: 0.9rem; font-weight: 700; color: #374151; line-height: 1.6; }
+.ytt-two-for li img { flex: none; width: 18px; height: 18px; margin-top: 3px; }
+.ytt-two-btns { margin-top: auto; display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.ytt-two-btn { flex: 1 1 8rem; display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0.6rem 1rem; box-sizing: border-box; border: 2px solid #4f46e5; border-radius: 10px; background: #fff; color: #4f46e5; font-size: 0.92rem; font-weight: 800; text-decoration: none; white-space: nowrap; transition: background 0.2s, color 0.2s, opacity 0.2s; }
+.ytt-two-btn:hover { background: #4f46e5; color: #fff; }
+.ytt-two-btn.is-main { background: #4f46e5; color: #fff; }
+.ytt-two-btn.is-main:hover { opacity: 0.88; }
+/* スマホではボタンを1つずつ横いっぱいに（文字が2行に折れないように） */
+@media (max-width: 480px) { .ytt-two-btn { flex-basis: 100%; white-space: nowrap !important; } }
+</style>
+<style>
+/* === スマホで押しやすく（2026-09-24）：「詳しく見る」と機能のタブは、見た目はそのままで押せる範囲だけ広げる === */
+@media (max-width: 700px) {
+  .fold-btn { position: relative; }
+  .fold-btn::after { content: ""; position: absolute; inset: -8px -6px; }
+  .fsit-tab { position: relative; }
+  .fsit-tab::after { content: ""; position: absolute; left: 0; right: 0; top: -6px; bottom: -6px; }
+}
+/* 機能のタブ：押せる印は淡い色の塗りではなく、濃い色の枠で（決まり：淡いベタ塗りはしない） */
+.fsit-tab:hover { background: #fff !important; border-color: #4f46e5 !important; }
+.fsit-tab.on:hover { background: #1e1b4b !important; border-color: #1e1b4b !important; }
+</style>
 </head>
 <body style="scroll-behavior: smooth;">
 
@@ -1207,7 +1245,7 @@
     </h1>
     <p class="ytt-sp-hero-lead">
         よすがが独自に開発したトレード支援ツール。<br>
-        スマホでもPCでも、ブラウザから<wbr>注文・分析・リスク管理まで行えます。
+        Web版なら、スマホでもPCでもブラウザから<wbr>注文・分析・リスク管理まで行えます。
     </p>
     <div class="ytt-sp-hero-btns">
         <a href="ytt-web-setup.html" class="btn-sq-white ytt-dl-btn-main">導入方法を見る</a>
@@ -1239,7 +1277,7 @@
         </div>
         <div class="ytt-fto2 wy-intro">
             <p class="wy-catch">スマホでも<span class="accent">有利なカスタマイズトレード</span>が可能に</p>
-            <p class="ytt-fto2-head">MT4 / MT5 / cTrader に連携ツールを入れておけば、ブラウザから注文・決済までできます。</p>
+            <p class="ytt-fto2-head">Web版YTTは、MT4 / MT5 / cTrader に連携ツールを入れておけば、ブラウザから注文・決済までできます。</p>
             <div class="ytt-fto2-visual">
                 <div class="wy-devices">
                 <div class="wy-lap">
@@ -1311,7 +1349,46 @@
                     <li><img src="img/check-orange.png" alt="">通知・トレードノート</li>
                     <li><img src="img/check-orange.png" alt="">経済指標表示 ほか</li>
                 </ul>
-                <p class="ytt-fto2-note">詳しい機能は、Web版YTTの使い方ページ（準備中）で紹介します。</p>
+                <p class="ytt-fto2-note">詳しい機能は、<a href="ytt-web-features.html">Web版YTTの使い方ページ</a>で紹介しています。</p>
+            </div>
+        </div>
+
+        <!-- YTTは2種類（Web版・デスクトップ版）。機能の比べっこはしない（アップデートのたびに直すことになるため）。「どんな使い方の人向けか」だけを書く（2026-09-24） -->
+        <div class="ytt-two">
+            <h3 class="ytt-two-title">YTTは2つから選べます</h3>
+            <p class="ytt-two-lead">どちらもスタンダード・プレミアムプランで使えます。<wbr>迷ったら、スマホでも使えるWeb版がおすすめです。</p>
+            <div class="ytt-two-grid">
+                <div class="ytt-two-card is-rec">
+                    <span class="ytt-two-badge">おすすめ</span>
+                    <div class="ytt-two-head">
+                        <img class="ytt-two-img" src="img/webytt/wy-order-panel.png" alt="Web版YTTの注文パネル" width="72" height="72">
+                        <div><p class="ytt-two-name">Web版YTT</p><p class="ytt-two-how">スマホでもパソコンでも、<wbr>ブラウザで使う</p></div>
+                    </div>
+                    <p class="ytt-two-forlabel">こんな人に</p>
+                    <ul class="ytt-two-for">
+                        <li><img src="img/check-orange.png" alt="" width="18" height="18">スマホでもトレードしたい</li>
+                        <li><img src="img/check-orange.png" alt="" width="18" height="18">はじめてYTTを使う</li>
+                        <li><img src="img/check-orange.png" alt="" width="18" height="18">どちらにするか迷っている</li>
+                    </ul>
+                    <div class="ytt-two-btns">
+                        <a class="ytt-two-btn" href="ytt-web-setup.html">導入方法を見る</a>
+                        <a class="ytt-two-btn is-main" href="ytt-web-download.html">ダウンロード</a>
+                    </div>
+                </div>
+                <div class="ytt-two-card">
+                    <div class="ytt-two-head">
+                        <img class="ytt-two-img" src="img/ytt-order-panel.png" alt="デスクトップ版YTTの注文パネル" width="72" height="72">
+                        <div><p class="ytt-two-name">デスクトップ版YTT</p><p class="ytt-two-how">パソコンのMT4・MT5・cTraderに<wbr>入れて使う</p></div>
+                    </div>
+                    <p class="ytt-two-forlabel">こんな人に</p>
+                    <ul class="ytt-two-for">
+                        <li><img src="img/check-orange.png" alt="" width="18" height="18">パソコンの取引ツールでトレードしている</li>
+                        <li><img src="img/check-orange.png" alt="" width="18" height="18">これまでのYTTに慣れている</li>
+                    </ul>
+                    <div class="ytt-two-btns">
+                        <a class="ytt-two-btn is-main" href="ytt-download.html">ダウンロード・導入方法</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -1332,7 +1409,7 @@
                     <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
                 </div>
             </div>
-            
+            <p>Web版YTTの実際の画面で紹介します。</p>
         </div>
         <div class="fsit-list">
             <article class="fsit" style="--fbg:#1e1b4b;--ffg:#ffffff">
@@ -1559,7 +1636,7 @@
             </span>
             <div style="text-align:center; margin-bottom:0.25rem;">
                 <div style="display:inline-block; white-space:nowrap;">
-                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">導入前に使用環境を確認</h2>
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">Web版YTTの使用環境を確認</h2>
                     <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
                 </div>
             </div>
@@ -1779,6 +1856,10 @@
         </div>
 
         <details class="ytt-faq">
+            <summary><span class="ytt-faq-q">Web版とデスクトップ版、どちらを使えばいい？</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
+            <div class="ytt-faq-a"><p>迷ったら<strong>Web版YTT</strong>がおすすめです。スマホでもパソコンでも、ブラウザから使えます。パソコンのMT4・MT5・cTraderに入れて使う<strong>デスクトップ版YTT</strong>も、これまでどおり使えます。どちらもスタンダード・プレミアムプランでご利用いただけます。<br><a href="ytt-download.html">デスクトップ版YTTのダウンロード・導入方法はこちら</a></p></div>
+        </details>
+        <details class="ytt-faq">
             <summary><span class="ytt-faq-q">スマホでも使える？</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
             <div class="ytt-faq-a"><p>はい。<strong>Web版YTT</strong>は、スマホ（iPhone / Android）でもPCでも、ブラウザから使えます。スマホは、Androidなら「インストール」、iPhoneなら「ホーム画面に追加」して、アプリのように使うのがおすすめです。<a href="ytt-web-setup.html">導入方法を見る →</a></p></div>
         </details>
@@ -1852,7 +1933,7 @@
 <section class="ytt-sp-footer-cta">
     <h2>YTTを今すぐ使い始めよう</h2>
     <p>
-        スマホでもPCでも。<br>
+        Web版なら、スマホでもPCでも。<br>
         導入は約15分で終わります。
     </p>
     <div class="ytt-sp-footer-cta-btns">
@@ -1863,7 +1944,7 @@
     </div>
     <div class="ytt-footer-cta-manuals">
         <a href="https://webytt.fx-space.com/" target="_blank" rel="noopener">Web版YTTを開く →</a>
-        <a href="https://www.canva.com/design/DAF_Wqy7hQc/IJKV8x4ruUtEpWdzpuJ4wg/edit" target="_blank" rel="noopener">使い方マニュアル →</a>
+        <a href="https://www.canva.com/design/DAF_Wqy7hQc/IJKV8x4ruUtEpWdzpuJ4wg/edit" target="_blank" rel="noopener">デスクトップ版の使い方マニュアル →</a>
     </div>
 </section>
 
@@ -2174,5 +2255,7 @@ function fvidLoopUI(video, wrap, withBar) {
 <!-- BudouX — 日本語の文節改行（全ページ共通・同梱版。js/budoux-init.js を参照） -->
 <script src="js/budoux-ja.min.js?v=20260907a" defer></script>
 <script src="js/budoux-init.js?v=20260907a" defer></script>
+<!-- 見出しの下の波線の太さを、文字の大きさにそろえる（2026-09-24） -->
+<script src="js/wave-fit.js?v=20260924a" defer></script>
 </body>
 </html>

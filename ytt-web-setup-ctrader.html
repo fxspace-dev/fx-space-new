@@ -1269,6 +1269,29 @@
    元の波線を1本で使い、2行のうち長い方の行に合わせた幅を短い行でも同じ大きさで使って、文字からはみ出した分は切る。幅はページ下の小さなプログラムが --wave-w に入れる */
 .ytt-sp-hero .ytt-sp-hero-title .ytt-sp-title-line .ytt-title-wave { display: block; width: 0 !important; min-width: 100%; max-width: none !important; margin-left: 0 !important; transform: none !important; height: 1.01em !important; aspect-ratio: auto !important; overflow: hidden; }
 .ytt-sp-hero .ytt-sp-hero-title .ytt-title-wave img { display: block; height: 100%; width: var(--wave-w, auto); min-width: 100%; max-width: none; object-fit: fill; }
+
+    /* 価格のずれの注意（よすが依頼 2026-10-01）。制限事項の4枚目のカード。PCは2枚×2枚に並べる */
+    @media (min-width: 681px) {
+        #limits .ytt-add-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 880px; margin-left: auto; margin-right: auto; }
+    }
+    .lim-price .lp-mock { flex: 1; display: flex; align-items: center; justify-content: center; }
+    .lp-chips { display: none; align-items: center; gap: 0.5rem; }
+    .lp-chip { border-radius: 10px; padding: 0.55rem 0.8rem; text-align: center; min-width: 6.8rem; }
+    .lp-chip small { display: block; font-size: 0.7rem; font-weight: 800; margin-bottom: 0.1rem; }
+    .lp-chip b { font-family: 'Inter', 'Noto Sans JP', sans-serif; font-size: 1.3rem; font-weight: 800; font-variant-numeric: tabular-nums; color: #fff; }
+    .lp-chip b i { font-style: normal; color: #f97316; }
+    .lp-tool { background: #11163a; color: #e9b949; }
+    .lp-ytt { background: #0b0f24; color: #c7d2fe; }
+    .lp-neq { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 1.3rem; color: #f97316; }
+    /* Cloud版：カードが2枚なので、価格の注意は下の段に横長で置き、絵は数字だけにする */
+    @media (min-width: 681px) {
+        #gated[data-ct="cloud"] #limits .lim-price { grid-column: 1 / -1; display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 1.1rem; align-items: center; }
+        #gated[data-ct="cloud"] #limits .lim-price .lp-mock { grid-row: 1 / 3; margin: 0; padding: 0; border: 0; }
+        #gated[data-ct="cloud"] #limits .lim-price h3 { align-self: end; }
+        #gated[data-ct="cloud"] #limits .lim-price p { align-self: start; }
+        #gated[data-ct="cloud"] #limits .lp-chart { display: none; }
+        #gated[data-ct="cloud"] #limits .lp-chips { display: flex; }
+    }
 </style>
 </head>
 <body data-tool="ctrader">
@@ -1327,7 +1350,7 @@
         <a href="#tool-select" class="btn-sq-blue">導入をはじめる</a>
     </div>
     <p style="font-size:0.8125rem;color:#6b7280;margin-top:1.25rem;">
-        <a href="https://drive.google.com/file/d/1Fd6qcQIisp-V8Eh5tV1722wkCf7qZEzc/view?usp=sharing" target="_blank" rel="noopener" style="color:#4f46e5;text-decoration:underline;text-underline-offset:3px;">利用規約</a>　※必ず目を通してください
+        <a href="ytt-terms.html" target="_blank" rel="noopener" style="color:#4f46e5;text-decoration:underline;text-underline-offset:3px;">利用規約</a>　※必ず目を通してください
     </p>
 </section>
 
@@ -1783,7 +1806,7 @@
                     <p>初めての方には利用規約が表示されるので、確認して同意します（すでに同意している方には表示されません）。下の画面になると、ダウンロードが<b>自動で始まります</b>。</p>
                     <figure class="gshot mid"><img src="img/webytt/s07b-dl-page.png" width="660" height="280" alt="YTTWebをダウンロード中です。の画面" loading="lazy"></figure>
                     <p>始まらないときは、この画面の「ダウンロード」を押してください。</p>
-                    <p><a href="https://drive.google.com/file/d/1Fd6qcQIisp-V8Eh5tV1722wkCf7qZEzc/view?usp=sharing" target="_blank" rel="noopener" style="color:#4f46e5;text-decoration:underline;text-underline-offset:3px;">利用規約</a>は、ここからいつでも確認できます。</p>
+                    <p><a href="ytt-terms.html" target="_blank" rel="noopener" style="color:#4f46e5;text-decoration:underline;text-underline-offset:3px;">利用規約</a>は、ここからいつでも確認できます。</p>
                 </div>
             </div>
             <div class="gstep ct-normal">
@@ -2058,6 +2081,25 @@
   <text x="140" y="300" font-size="13.5" font-weight="800" fill="#1e1b4b" text-anchor="middle">PCを閉じる・スリープ</text>
   <text x="140" y="320" font-size="13.5" font-weight="800" fill="#16a34a" text-anchor="middle">● つながったまま</text>
 </svg></div><h3>Cloud版はPCを閉じてもOK</h3><p>連携ツールはcTraderのクラウドで動くので、PCを閉じたりスリープしたりしても止まりません。つながらないときは、cTraderの「Status」が<b>Running</b>になっているか確認してください。</p></div>
+            <div class="ytt-add-card lim-card lim-price"><div class="lim-mock lp-mock" role="img" aria-label="cTraderは153.948、Web版YTTは153.951と、価格がずれている例">
+                <svg class="lp-chart" viewBox="0 0 300 292" aria-hidden="true">
+                  <rect x="2" y="2" width="296" height="124" rx="10" fill="#11163a" stroke="#1e1b4b" stroke-width="2.5"/>
+                  <text x="16" y="27" font-size="14" font-weight="800" fill="#e9b949">cTrader</text>
+                  <path d="M16 104 L40 92 L60 98 L84 78 L104 86 L126 64 L146 74 L168 58 L190 66 L212 70" stroke="#22c55e" stroke-width="2.6" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+                  <path d="M16 70 H212" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="4 4"/>
+                  <rect x="214" y="56" width="80" height="28" rx="6" fill="#fff"/>
+                  <text x="254" y="75.5" font-size="15" font-weight="800" fill="#1e1b4b" text-anchor="middle" font-family="Inter, 'Noto Sans JP', sans-serif">153.9<tspan fill="#f97316">48</tspan></text>
+                  <circle cx="150" cy="146" r="16" fill="#f97316"/>
+                  <text x="150" y="153" font-size="20" font-weight="800" fill="#fff" text-anchor="middle" font-family="Inter, sans-serif">≠</text>
+                  <rect x="2" y="166" width="296" height="124" rx="10" fill="#0b0f24" stroke="#1e1b4b" stroke-width="2.5"/>
+                  <text x="16" y="191" font-size="14" font-weight="800" fill="#c7d2fe">Web版YTT</text>
+                  <path d="M16 104 L40 92 L60 98 L84 78 L104 86 L126 64 L146 74 L168 58 L190 66 L212 70" transform="translate(0 158)" stroke="#22c55e" stroke-width="2.6" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+                  <path d="M16 228 H212" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="4 4"/>
+                  <rect x="214" y="214" width="80" height="28" rx="6" fill="#fff"/>
+                  <text x="254" y="233.5" font-size="15" font-weight="800" fill="#1e1b4b" text-anchor="middle" font-family="Inter, 'Noto Sans JP', sans-serif">153.9<tspan fill="#f97316">51</tspan></text>
+                </svg>
+                <div class="lp-chips" aria-hidden="true"><div class="lp-chip lp-tool"><small>cTrader</small><b>153.9<i>48</i></b></div><span class="lp-neq">≠</span><div class="lp-chip lp-ytt"><small>Web版YTT</small><b>153.9<i>51</i></b></div></div>
+            </div><h3>価格がずれることがある</h3><p>cTraderの価格とWeb版YTTの価格は、ずれが生じることがあります。</p></div>
         </div>
     </div>
 </section>

@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web版YTT 7日間無料お試し — FX SPACE</title>
+    <meta name="description" content="Web版YTTを7日間無料でお試しいただけます。使い始めるまでの流れと、Discordで使えるコンテンツをご案内します。">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Web版YTT 7日間無料お試し — FX SPACE">
+    <meta property="og:description" content="Web版YTTを7日間無料でお試し。使い始めるまでの流れと、Discordで使えるコンテンツをご案内します。">
+    <meta property="og:image" content="https://fx-space.com/intro/img/og-webytt-setup.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://fx-space.com/intro/img/og-webytt-setup.jpg">
+    <link rel="icon" type="image/png" href="icon.png">
+    <meta name="robots" content="noindex">
+    <link rel="stylesheet" href="css/style.css?v=20260908e">
+    <style>
+        body {
+            background: #fff;
+            /* 折り返しは既定 normal。BudouX 適用後（body.budoux-ready）だけ keep-all にする */
+            word-break: normal;
+            overflow-wrap: break-word;
+            line-break: strict;
+        }
+        body.budoux-ready { word-break: keep-all; }
+
+        /* NAV（ytt-subscribe.html と同じ） */
+        .ytt-sp-nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            background: rgba(255,255,255,0.95); backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e5e7eb;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0.875rem 2rem; gap: 1rem;
+        }
+        .ytt-sp-nav-logo { display: flex; align-items: center; text-decoration: none; color: inherit; }
+        .ytt-sp-nav-logo img { height: 28px; width: auto; }
+        .ytt-sp-nav-back { font-size: 0.8125rem; font-weight: 700; color: #6b7280; text-decoration: none; }
+        .ytt-sp-nav-back:hover { color: #1e1b4b; }
+        @media (max-width: 600px) {
+            .ytt-sp-nav { padding: 0.625rem 0.875rem; gap: 0.5rem; }
+            .ytt-sp-nav-logo img { height: 24px; }
+            .ytt-sp-nav-back { font-size: 0.75rem; }
+        }
+
+        /* ===== 最初の画面 ===== */
+        .tr-hero { padding: 7.5rem 1.5rem 4rem; text-align: center; background: #fff; }
+        .ytt-sp-hero-title {
+            font-size: clamp(1.375rem, 6vw, 2.5rem);
+            font-weight: 900; color: #1e1b4b;
+            line-height: 1.4; letter-spacing: -0.01em;
+            margin: 0 0 2rem;
+            font-feature-settings: "palt";
+        }
+        .ytt-sp-title-line { display: block; text-align: center; }
+        .ytt-sp-title-line > span.line-text { display: inline-block; white-space: nowrap; position: relative; }
+        /* タイトル下の波線（特設ページと同じ決まり：高さ＝文字の1.01倍、長い方の行に合わせた幅を短い行でも使い、はみ出しは切る） */
+        .ytt-sp-title-line .ytt-title-wave { display: block; width: 0; min-width: 100%; height: 1.01em; overflow: hidden; margin: 0.05em 0 0.15em; }
+        .ytt-sp-title-line .ytt-title-wave img { display: block; height: 100%; width: var(--wave-w, auto); min-width: 100%; max-width: none; object-fit: fill; }
+
+        /* 主役のボタン（申し込みへ進む） */
+        .tr-cta {
+            display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+            min-height: 60px; padding: 1rem 2.25rem;
+            background: #f97316; color: #fff; border-radius: 999px;
+            font-size: 1.125rem; font-weight: 900; text-decoration: none;
+            font-feature-settings: "palt";
+            transition: transform 0.15s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.15s;
+        }
+        .tr-cta:hover { transform: translateY(-2px); background: #ea580c; }
+        .tr-cta:active { transform: translateY(1px) scale(0.98); }
+        .tr-cta:focus-visible { outline: 3px solid #1e1b4b; outline-offset: 3px; }
+        /* 申し込みの条件（法律で求められる表示）。たたまず、いつも全部見せる（よすがさんの指示 2026-10-06）。
+           見た目は「4つのステップ」のカードと同じ白い枠（airiさんがA案を選択）。小さすぎ・薄すぎにしない */
+        .tr-fine { max-width: 32em; margin: 1.5rem auto 0; text-align: left; }
+        .tr-nw { display: inline-block; }
+        /* 「4つのステップ」のカードと同じ白い枠。見出しは太く、項目名は紺 */
+        .tr-check { padding: 1rem 1.25rem 0.85rem; background: #fff; border: 1.5px solid #e5e7eb; border-radius: 16px; }
+        .tr-check-head { margin: 0 0 0.4rem !important; font-size: 0.9375rem !important; font-weight: 900; line-height: 1.6 !important; color: #1e1b4b !important; }
+        .tr-check-list { margin: 0; }
+        .tr-check-list > div { display: grid; grid-template-columns: 6.5rem 1fr; column-gap: 0.9rem; padding: 0.5rem 0; }
+        .tr-check-list > div + div { border-top: 1px dashed #e5e7eb; }
+        .tr-check-list dt { white-space: nowrap; font-size: 0.8125rem; font-weight: 700; color: #4338ca; line-height: 1.7; }
+        .tr-check-list dd { margin: 0; font-size: 0.875rem; color: #1f2937; line-height: 1.7; overflow-wrap: anywhere; }
+        .tr-check-sub { display: block; font-size: 0.75rem; color: #6b7280; }
+        .tr-check-list a { color: #4338ca; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+        .tr-check-more { margin: 0.6rem 0 0 !important; font-size: 0.75rem !important; line-height: 1.7 !important; color: #6b7280 !important; }
+        .tr-check-more a { display: inline-block; margin-left: 0.4em; color: #6b7280; text-decoration: underline; text-underline-offset: 3px; }
+        @media (max-width: 480px) {
+            .tr-check { padding: 0.9rem 1rem 0.75rem; }
+            .tr-check-list > div { grid-template-columns: 5.6rem 1fr; column-gap: 0.6rem; }
+            .tr-check-list dt { font-size: 0.75rem; }
+            .tr-check-list dd { font-size: 0.8125rem; }
+        }
+        .tr-soon-msg { display: none; max-width: 26em; margin: 0.875rem auto 0; padding: 0.75rem 1rem; border: 1.5px solid #d1d5db; border-radius: 12px; background: #fff; color: #1e1b4b; font-size: 0.9375rem; line-height: 1.7; }
+        .tr-soon-msg.is-on { display: block; }
+
+        /* ===== セクション見出し（ytt-subscribe.html と同じ形） ===== */
+        .tr-sec { padding: clamp(3.5rem, 8vw, 5.5rem) 1.5rem; }
+        .tr-sec--indigo { background: #3730a3; }
+        .tr-sec--gray { background: #f8f9fc; }
+        .tr-head { text-align: center; margin: 0 auto 2.25rem; max-width: 40em; }
+        .section-h-title-row { display: block; margin-top: 0.875rem; }
+        .tr-head h2 {
+            font-size: clamp(1.375rem, 4vw, 1.875rem);
+            font-weight: 900; color: #1e1b4b; line-height: 1.4; margin: 0;
+            font-feature-settings: "palt"; text-wrap: balance;
+        }
+        .h2-with-wave { display: inline-block; position: relative; }
+        .h2-title-wave { display: block; width: 100%; height: clamp(14px, 2.5vw, 18px); object-fit: fill; margin-top: 4px; }
+        @media (max-width: 640px) { .h2-title-wave { height: clamp(18px, 6vw, 26px); margin-top: 2px; } }
+        /* スマホで2行になる見出し：1本の長い波線を敷くと文字より長くなるので、行ごとに波線を敷く（ytt-subscribe.html と同じ。--wave-w は js/wave-fit.js が入れる） */
+        .h2-lines .h2-line { display: inline; }
+        @media (max-width: 640px) {
+            .h2-lines .h2-line { display: block; width: fit-content; margin: 0 auto; }
+            .h2-lines .h2-line::after { content: ''; display: block; height: 1.01em; margin-top: 2px; background: url('img/wave-orange.png') 0 0 / var(--wave-w, auto) 100% no-repeat; }
+            .h2-lines .h2-line + .h2-line { margin-top: 0.15em; }
+            .h2-lines + .h2-title-wave { display: none; }
+        }
+        .tr-head p { font-size: 1rem; color: #4b5563; line-height: 1.85; margin: 1rem auto 0; text-wrap: pretty; }
+        .tr-sec--indigo .tr-head h2 { color: #fff; }
+        .tr-sec--indigo .tr-head p { color: #e0e7ff; }
+        .tr-sec--indigo .section-title-badge--orange { color: #fff; }
+        .section-title-badge--navy { color: #1e1b4b; }
+
+        /* ===== ① 使い始めるまでの流れ ===== */
+        .tr-steps {
+            max-width: 1040px; margin: 0 auto;
+            display: grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+            gap: 0.75rem; align-items: stretch;
+        }
+        .tr-step {
+            position: relative; background: #fff;
+            border: 1.5px solid #e5e7eb; border-radius: 16px;
+            padding: 1.75rem 1rem 1.25rem; text-align: center;
+            display: flex; flex-direction: column;
+        }
+        .tr-step-num { position: absolute; top: -14px; left: -12px; width: 48px; height: 48px; z-index: 2; }
+        .tr-step-vis { width: 72px; height: 72px; margin: 0 auto 0.875rem; }
+        .tr-step-vis svg, .tr-step-vis img { width: 72px; height: 72px; display: block; }
+        .tr-step-vis img { object-fit: cover; border-radius: 12px; }
+        /* ステップ4：ホーム画面に追加したときのアイコン（本物のアイコンの地の色。グラデは使わず単色） */
+        .tr-app-icon { width: 72px; height: 72px; border-radius: 17px; display: flex; align-items: center; justify-content: center;
+            background: #1c1c5a; }
+        .tr-step-vis .tr-app-icon img { width: 60%; height: auto; border-radius: 0; object-fit: contain; }
+        .tr-app-name { display: block; margin-top: 0.3rem; font-size: 0.75rem; font-weight: 600; color: #111827; text-align: center; white-space: nowrap; }
+        .tr-step-vis.has-name { height: auto; display: flex; flex-direction: column; align-items: center; }
+        .tr-step h3 { font-size: 1.0625rem; font-weight: 900; color: #1e1b4b; margin: 0 0 0.5rem; line-height: 1.45; }
+        .tr-step p { font-size: 0.9375rem; color: #4b5563; line-height: 1.7; margin: 0; }
+        .tr-step-link {
+            align-self: center; margin-top: auto; display: inline-flex; align-items: center; justify-content: center; gap: 0.35rem;
+            min-height: 44px; padding: 0.5rem 1.1rem;
+            border: 1.5px solid #4338ca; border-radius: 999px; background: #fff;
+            font-size: 0.9375rem; font-weight: 800; color: #4338ca; text-decoration: none; line-height: 1.3;
+            transition: background-color 0.15s, color 0.15s;
+        }
+        .tr-step p + .tr-step-link { margin-top: 0.9rem; }
+        .tr-step-link::after { content: '\203A'; font-size: 1.15em; line-height: 1; }
+        .tr-step-link:hover { background: #4338ca; color: #fff; }
+        .tr-step-link:active { transform: translateY(1px); }
+        .tr-step-link:focus-visible { outline: 3px solid #1e1b4b; outline-offset: 2px; }
+        .tr-step-arrow { display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.5rem; font-weight: 900; }
+        @media (max-width: 860px) {
+            .tr-steps { grid-template-columns: 1fr; gap: 0; max-width: 420px; }
+            .tr-step-arrow { padding: 0.5rem 0; transform: rotate(90deg); font-size: 1.25rem; }
+            .tr-step { text-align: left; display: grid; grid-template-columns: 64px 1fr; column-gap: 1rem; padding: 1.25rem 1rem 1.25rem 1.25rem; }
+            .tr-step-vis { grid-row: 1 / span 3; width: 64px; height: 64px; margin: 0; }
+            .tr-step-vis svg, .tr-step-vis > img, .tr-app-icon { width: 64px; height: 64px; }
+            .tr-app-icon { border-radius: 15px; }
+            .tr-step-link { justify-self: start; }
+        }
+        .tr-pc-note { max-width: 1040px; margin: 1.75rem auto 0; text-align: center; font-size: 0.9375rem; color: #e0e7ff; }
+
+        /* ===== ② Discordで使えるもの ===== */
+        .tr-dc-wrap {
+            max-width: 980px; margin: 0 auto;
+            display: grid; grid-template-columns: 360px 1fr; gap: 2.5rem; align-items: center;
+        }
+        @media (max-width: 820px) { .tr-dc-wrap { grid-template-columns: 1fr; gap: 1.5rem; max-width: 460px; } }
+
+        /* 手書き風のグレーの枠（導入方法ページの gframe と同じ線） */
+        .gframe { position: relative; display: block; padding: 7px; }
+        .gframe > svg.gframe-line { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+        .gframe > svg.gframe-line path { fill: none; stroke: #7b8190; stroke-linecap: round; stroke-linejoin: round; }
+        .gframe > svg.gframe-line path.p1 { stroke-width: 3.2; opacity: 0.92; }
+        .gframe > svg.gframe-line path.p2 { stroke-width: 2; opacity: 0.45; }
+
+        /* Discord のチャンネル一覧（実物の配色に合わせた画面） */
+        .dc { background: #2b2d31; border-radius: 8px; overflow: hidden; font-family: 'Noto Sans JP', sans-serif; }
+        .dc-server { display: flex; align-items: center; gap: 0.6rem; padding: 0.85rem 1rem; border-bottom: 1px solid #1f2023; color: #f2f3f5; font-weight: 800; font-size: 0.9375rem; }
+        .dc-server img { width: 26px; height: 26px; border-radius: 8px; background: #fff; object-fit: contain; }
+        .dc-cat { padding: 0.9rem 1rem 0.3rem; font-size: 0.75rem; font-weight: 800; color: #949ba4; letter-spacing: 0.02em; }
+        .dc-list { list-style: none; margin: 0; padding: 0 0.5rem 0.75rem; }
+        .dc-ch {
+            display: flex; align-items: center; gap: 0.45rem; width: 100%;
+            min-height: 44px; padding: 0.5rem 0.6rem; margin: 1px 0; border: 0; border-radius: 4px;
+            background: transparent; color: #949ba4; font: inherit; font-size: 0.9375rem; font-weight: 600; text-align: left;
+            cursor: pointer; transition: background-color 0.15s, color 0.15s;
+        }
+        .dc-ch svg { width: 18px; height: 18px; flex: none; }
+        .dc-ch:hover { background: #35373c; color: #dbdee1; }
+        .dc-ch.is-on { background: #404249; color: #fff; }
+        .dc-ch:focus-visible { outline: 2px solid #5865f2; outline-offset: 1px; }
+
+        .dc-info { min-height: 15rem; }
+        .dc-info-ch { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.875rem; font-weight: 800; color: #4338ca; margin: 0 0 0.5rem; }
+        .dc-info h3 { font-size: clamp(1.375rem, 3.5vw, 1.75rem); font-weight: 900; color: #1e1b4b; line-height: 1.4; margin: 0 0 0.75rem; font-feature-settings: "palt"; word-break: normal; }
+        .dc-info p { font-size: 1rem; color: #4b5563; line-height: 1.85; margin: 0; word-break: normal; }
+        .dc-dots { display: flex; gap: 6px; margin-top: 1.25rem; }
+        .dc-dots i { display: block; width: 22px; height: 4px; border-radius: 2px; background: #d1d5db; }
+        .dc-dots i.is-on { background: #4338ca; }
+        @media (max-width: 820px) { .dc-info { min-height: 0; } }
+
+        .tr-howto {
+            max-width: 980px; margin: 3rem auto 0;
+            border: 1.5px solid #1e1b4b; border-radius: 16px; padding: 1.5rem 1.75rem;
+            display: grid; grid-template-columns: auto 1fr; gap: 0.5rem 1.5rem; align-items: start;
+        }
+        .tr-howto-title { font-size: 1.0625rem; font-weight: 900; color: #1e1b4b; margin: 0; white-space: nowrap; }
+        .tr-howto ul { list-style: none; margin: 0; padding: 0; }
+        .tr-howto li { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 1rem; color: #374151; line-height: 1.8; }
+        .tr-howto li + li { margin-top: 0.35rem; }
+        .tr-howto li img { width: 18px; height: 18px; flex: none; margin-top: calc((1.8em - 18px) / 2); }
+        .tr-howto a { color: #4338ca; font-weight: 800; text-underline-offset: 3px; }
+        @media (max-width: 640px) { .tr-howto { grid-template-columns: 1fr; padding: 1.25rem 1.1rem; } }
+
+        /* ===== 最後 ===== */
+        .tr-last { text-align: center; }
+        .tr-last h2 { font-size: clamp(1.375rem, 4vw, 1.875rem); font-weight: 900; color: #fff; line-height: 1.45; margin: 0 0 1.75rem; font-feature-settings: "palt"; text-wrap: balance; }
+        .tr-last .tr-soon-msg { border-color: #fff; }
+
+        .ytt-sp-page-footer { padding: 1.5rem 2rem; text-align: center; font-size: 0.8125rem; color: #9ca3af; border-top: 1px solid #f0f0f0; background: #fff; }
+        .ytt-sp-page-footer a { color: #9ca3af; text-decoration: underline; }
+        .ytt-sp-page-footer p { margin: 0; }
+        .tr-legal { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0 1.25rem; margin-bottom: 0.5rem !important; }
+        .tr-legal a { display: inline-block; padding: 0.6rem 0; color: #6b7280 !important; }
+
+        @media (max-width: 600px) {
+            .tr-hero { padding: 6rem 0.85rem 3rem; }
+            .tr-sec { padding-left: 0.85rem; padding-right: 0.85rem; }
+            .tr-cta { width: 100%; max-width: 360px; padding: 1rem 1.25rem; font-size: 1.0625rem; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .tr-cta, .dc-ch { transition: none; }
+        }
+    </style>
+</head>
+<body>
+<!--
+====================================================================
+  Web版YTT 7日間無料お試し（「無料でお試し」を押したあとのページ）
+  最初の画面 → ① 使い始めるまでの流れ → ② Discordで使えるもの
+  → 最後のボタン。最初のボタンの下にいつも全部見せる「お申し込み前の確認事項」（法律で求められる表示。2つ出ていたのを、よすがさんの指示で上だけに）。フッターに利用規約・プライバシーポリシー・特定商取引法に基づく表記
+  ※ お試しの登録先（#href-tbd-trial-start）は未定。決まったら2か所の href を差し替える
+====================================================================
+-->
+
+<nav class="ytt-sp-nav">
+    <a href="ytt-tokusetu.html" class="ytt-sp-nav-logo"><img src="img/ytt-nav-logo.png" alt="YTT — FX SPACE" width="140" height="28"></a>
+    <a href="ytt-tokusetu.html" class="ytt-sp-nav-back">← YTT特設ページに戻る</a>
+</nav>
+
+<!-- 最初の画面 -->
+<section class="tr-hero">
+    <h1 class="ytt-sp-hero-title" data-anim>
+        <span class="ytt-sp-title-line"><span class="line-text">Web版YTT 7日間無料お試し<span class="ytt-title-wave" aria-hidden="true"><img src="img/wave-yellow.png" alt=""></span></span></span>
+    </h1>
+    <div data-anim>
+        <a href="#href-tbd-trial-start" class="tr-cta">7日間の無料お試しを始める</a>
+        <div class="tr-fine">
+            <div class="tr-check">
+                <p class="tr-check-head">お申し込み前の確認事項</p>
+                <dl class="tr-check-list">
+                    <div><dt>無料期間</dt><dd>お申し込みから7日間（168時間）</dd></div>
+                    <div><dt>料金</dt><dd>お試しのあとは自動でスタンダードプラン<span class="tr-nw">（月額2,900円・税込）</span>に<span class="tr-nw">切り替わり、</span><span class="tr-nw">1か月ごとに</span>自動で更新</dd></div>
+                    <div><dt>初回のお支払い</dt><dd>無料期間が終わった時点<span class="tr-check-sub">例：10月6日12時にお申し込み → 10月13日12時</span></dd></div>
+                    <div><dt>お支払い方法</dt><dd>PayPal</dd></div>
+                    <div><dt>解約方法</dt><dd><a href="https://discord.com/oauth2/authorize?client_id=1132937165379211284&amp;response_type=code&amp;redirect_uri=https%3A%2F%2Ffx-space.com%2Fpp_sub_cancel.php&amp;scope=identify" target="_blank" rel="noopener">こちら</a>からDiscordでログイン。PayPalの自動支払いの停止でも解約できます</dd></div>
+                    <div><dt>解約後</dt><dd>その時点でご利用終了。返金はありません（日割りもなし）</dd></div>
+                    <div><dt>無料お試し</dt><dd>お一人さま1回限り</dd></div>
+                </dl>
+            </div>
+                <p class="tr-check-more">Web版YTTは取引を補助する道具で、利益を保証するものではありません。投資の判断はご自身で行ってください。<a href="fxspace-tokushoho.html" target="_blank" rel="noopener">特定商取引法に基づく表記</a></p>
+        </div>
+    </div>
+</section>
+
+<!-- ① 使い始めるまでの流れ -->
+<section class="tr-sec tr-sec--indigo" id="flow">
+    <div class="tr-head" data-anim>
+        <span class="section-title-badge section-title-badge--orange">
+            <img class="hero-title-side hero-title-side--left" src="img/title-side-orange-left.png" alt="">
+            使い始めるまでの流れ
+            <img class="hero-title-side hero-title-side--right" src="img/title-side-orange-right.png" alt="">
+        </span>
+        <div class="section-h-title-row">
+            <span class="h2-with-wave"><h2>4つのステップで使えます</h2><img class="h2-title-wave" src="img/wave-orange.png" alt=""></span>
+        </div>
+    </div>
+
+    <div class="tr-steps" data-anim-group>
+        <div class="tr-step">
+            <img class="tr-step-num" src="img/crayon-orange-1.png" alt="1" width="48" height="48">
+            <div class="tr-step-vis">
+                <svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <rect x="4" y="4" width="64" height="64" rx="14" fill="#5865f2"/>
+                    <g transform="translate(36 36) scale(1.1)" fill="#fff">
+                        <path d="M 9.5 -8 C 6.3 -9.2 3 -9.6 -0.2 -9.6 C -3.4 -9.6 -6.7 -9.2 -9.9 -8 C -12.2 -3.7 -13.5 1.2 -14 6.2 C -10.7 8.7 -7.5 10.2 -4.4 11.2 C -3.6 10.1 -2.9 8.9 -2.3 7.7 C -3.6 7.2 -4.8 6.6 -5.9 5.9 C -5.6 5.7 -5.3 5.5 -5 5.2 C -1.7 6.8 1.9 6.8 5.2 5.2 C 5.5 5.4 5.8 5.7 6.1 5.9 C 5 6.6 3.8 7.2 2.5 7.7 C 3.1 8.9 3.8 10.1 4.6 11.2 C 7.7 10.2 10.9 8.7 14.2 6.2 C 13.7 1.2 12.4 -3.7 9.5 -8 Z M -4.5 3.3 C -6 3.3 -7.2 1.9 -7.2 0.2 C -7.2 -1.5 -6 -2.9 -4.5 -2.9 C -3 -2.9 -1.8 -1.5 -1.8 0.2 C -1.8 1.9 -3 3.3 -4.5 3.3 Z M 4.1 3.3 C 2.6 3.3 1.4 1.9 1.4 0.2 C 1.4 -1.5 2.6 -2.9 4.1 -2.9 C 5.6 -2.9 6.8 -1.5 6.8 0.2 C 6.8 1.9 5.6 3.3 4.1 3.3 Z"/>
+                    </g>
+                </svg>
+            </div>
+            <h3>Discordでログイン</h3>
+            <p>FX SPACEのDiscordのアカウントでログインします。</p>
+            <a class="tr-step-link" href="https://discord.gg/CcUtqSdRDZ" target="_blank" rel="noopener">Discordに参加する（無料）</a>
+        </div>
+        <div class="tr-step-arrow" aria-hidden="true">→</div>
+        <div class="tr-step">
+            <img class="tr-step-num" src="img/crayon-orange-2.png" alt="2" width="48" height="48">
+            <div class="tr-step-vis">
+                <svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <rect x="4" y="4" width="64" height="64" rx="14" fill="#1e1b4b"/>
+                    <rect x="13" y="20" width="46" height="32" rx="5" fill="#fff"/>
+                    <rect x="13" y="26" width="46" height="6" fill="#c7d2fe"/>
+                    <text x="36" y="47" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="900" fill="#1e1b4b">¥0</text>
+                </svg>
+            </div>
+            <h3>PayPalで登録</h3>
+            <p>お支払い方法を登録します。</p>
+        </div>
+        <div class="tr-step-arrow" aria-hidden="true">→</div>
+        <div class="tr-step">
+            <img class="tr-step-num" src="img/crayon-orange-3.png" alt="3" width="48" height="48">
+            <div class="tr-step-vis">
+                <svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <rect x="4" y="4" width="64" height="64" rx="14" fill="#4338ca"/>
+                    <rect x="14" y="18" width="44" height="29" rx="3" fill="#fff"/>
+                    <polyline points="19,40 27,33 33,37 42,26 52,30" stroke="#f97316" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    <rect x="31" y="47" width="10" height="6" fill="#fff"/>
+                    <rect x="24" y="53" width="24" height="3.5" rx="1.75" fill="#fff"/>
+                </svg>
+            </div>
+            <h3>Web版YTTをつなぐ</h3>
+            <p>導入方法ページの3ステップを、パソコンで進めます。</p>
+            <a class="tr-step-link" href="ytt-web-setup.html" target="_blank" rel="noopener">導入方法を見る</a>
+        </div>
+        <div class="tr-step-arrow" aria-hidden="true">→</div>
+        <div class="tr-step">
+            <img class="tr-step-num" src="img/crayon-orange-4.png" alt="4" width="48" height="48">
+            <div class="tr-step-vis has-name" role="img" aria-label="ホーム画面に追加されたYTT for Webのアイコン"><span class="tr-app-icon"><img src="img/ytt-mark.png" alt="" width="43" height="43"></span><span class="tr-app-name">YTT for Web</span></div>
+            <h3>使ってみる</h3>
+            <p>スマホでもPCでも、ブラウザで使えます。</p>
+            <a class="tr-step-link" href="ytt-web-features.html" target="_blank" rel="noopener">使い方を見る</a>
+        </div>
+    </div>
+</section>
+
+<!-- ② YTT以外のコンテンツ（Discord） -->
+<section class="tr-sec" id="discord">
+    <div class="tr-head" data-anim>
+        <span class="section-title-badge section-title-badge--navy">
+            <img class="hero-title-side hero-title-side--left" src="img/title-side-orange-left.png" alt="">
+            YTTだけじゃない
+            <img class="hero-title-side hero-title-side--right" src="img/title-side-orange-right.png" alt="">
+        </span>
+        <div class="section-h-title-row">
+            <span class="h2-with-wave"><h2 class="h2-lines"><span class="h2-line">Discordのコンテンツも</span><span class="h2-line">7日間見られます</span></h2><img class="h2-title-wave" src="img/wave-orange.png" alt=""></span>
+        </div>
+    </div>
+
+    <div class="tr-dc-wrap" data-anim>
+        <div class="gframe" data-gframe data-seed="7213">
+            <div class="dc" role="tablist" aria-label="FX SPACEのDiscordのチャンネル">
+                <div class="dc-server"><img src="img/favicon.png" alt="" width="26" height="26">FX SPACE</div>
+                <div class="dc-cat">チャンネル</div>
+                <ul class="dc-list" id="dcList"></ul>
+            </div>
+        </div>
+        <div class="dc-info" aria-live="polite">
+            <p class="dc-info-ch" id="dcCh"></p>
+            <h3 id="dcTitle"></h3>
+            <p id="dcText"></p>
+            <div class="dc-dots" id="dcDots" aria-hidden="true"></div>
+        </div>
+    </div>
+
+    <div class="tr-howto" data-anim>
+        <p class="tr-howto-title">Discordの使い方</p>
+        <ul>
+            <li><img src="img/check-indigo.svg" alt="" width="18" height="18">お試しを始めると、FX SPACEのDiscordで、これらのチャンネルが見られるようになります。</li>
+            <li><img src="img/check-indigo.svg" alt="" width="18" height="18">Discordは無料のチャットアプリです。</li>
+        </ul>
+    </div>
+</section>
+
+
+<!-- 最後 -->
+<section class="tr-sec tr-sec--indigo tr-last">
+    <h2 data-anim>準備ができたら、<wbr>お試しを始めましょう</h2>
+    <div data-anim>
+        <a href="#href-tbd-trial-start" class="tr-cta">7日間の無料お試しを始める</a>
+    </div>
+</section>
+
+<footer class="ytt-sp-page-footer">
+    <p class="tr-legal"><a href="ytt-terms.html" target="_blank" rel="noopener">利用規約</a><a href="fxspace-privacy.html" target="_blank" rel="noopener">プライバシーポリシー</a><a href="fxspace-tokushoho.html" target="_blank" rel="noopener">特定商取引法に基づく表記</a></p>
+    <p>© FX SPACE — <a href="ytt-tokusetu.html">YTT特設ページ</a> / <a href="index.html">トップページ</a></p>
+</footer>
+
+<script>
+/* ② Discordのチャンネル一覧：順に切り替わる。押したらそのチャンネルで止まる */
+(function () {
+  /* index.html の「プランと料金」スタンダードの項目と説明文・「Discordで見る」の行き先のチャンネル（YTT本体・ASTROは除く。限定動画はお試しでは見られないので除く。初心者応援は index.html のコミュニティの説明）。YTTサポートは ytt-trial-start.html の文 */
+  var CH = [
+    ['朝の3通貨シナリオ動画', '毎日のシナリオ動画（3通貨ペア）', '毎朝、よすががその日のシナリオを動画で解説。スタンダードでは主要3通貨ペアの分析が届きます。'],
+    ['フローチャート', '速攻プロフローチャート', 'プロの思考順序をフローチャートで可視化したガイドです。'],
+    ['yttサポート', 'YTTサポート', '導入・使い方の疑問に、AIが24時間いつでも回答します。YTT開発のエンジニアが直接返信対応する窓口もあります。'],
+    ['astroへ質問', 'プロに相談', '困ったときにプロトレーダーに直接相談できる窓口。学習や実トレードの疑問をすぐ解消できます。'],
+    ['雑談-初心者応援', '初心者応援', 'FXを始めたばかりでも大丈夫。資金管理やメンタルの悩みも、先輩トレーダーやよすがが丁寧に回答してくれます。']
+  ];
+  var HASH = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 3.5 8 20.5M16 3.5l-2 17M4.5 8.5h16M3.5 15.5h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
+  var list = document.getElementById('dcList'), dots = document.getElementById('dcDots');
+  if (!list) return;
+  CH.forEach(function (c, i) {
+    var li = document.createElement('li');
+    li.innerHTML = '<button type="button" class="dc-ch" role="tab" data-i="' + i + '">' + HASH + '<span>' + c[0] + '</span></button>';
+    list.appendChild(li);
+    dots.appendChild(document.createElement('i'));
+  });
+  var btns = list.querySelectorAll('.dc-ch'), ds = dots.querySelectorAll('i');
+  var elCh = document.getElementById('dcCh'), elT = document.getElementById('dcTitle'), elX = document.getElementById('dcText');
+  var cur = -1, timer = null, stopped = false, visible = false;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function show(i) {
+    if (i === cur) return;
+    cur = i;
+    btns.forEach(function (b, k) { b.classList.toggle('is-on', k === i); b.setAttribute('aria-selected', k === i ? 'true' : 'false'); });
+    ds.forEach(function (d, k) { d.classList.toggle('is-on', k === i); });
+    elCh.innerHTML = HASH.replace('<svg', '<svg width="16" height="16"') + CH[i][0];
+    elT.textContent = CH[i][1];
+    elX.textContent = CH[i][2];
+    if (window.gsap && !reduce) gsap.fromTo([elT, elX], { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.35, stagger: 0.05, ease: 'power3.out' });
+  }
+  function tick() { show((cur + 1) % CH.length); }
+  function run() { clearInterval(timer); if (!stopped && visible && !reduce) timer = setInterval(tick, 3200); }
+  btns.forEach(function (b) {
+    b.addEventListener('click', function () { stopped = true; clearInterval(timer); show(+b.getAttribute('data-i')); });
+  });
+  show(0);
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (es) { visible = es[0].isIntersecting; if (visible) run(); else clearInterval(timer); }, { threshold: 0.3 }).observe(list);
+  }
+})();
+</script>
+
+<script>
+/* 手書き風のグレーの枠（ytt-web-setup.html の gframe と同じ線。data-gframe の要素を囲む） */
+(function () {
+  function rng(seed) { return function () { seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0; return seed / 4294967296; }; }
+  function edge(pts, x1, y1, x2, y2, r, amp) {
+    var len = Math.hypot(x2 - x1, y2 - y1) || 1, n = Math.max(2, Math.round(len / 36));
+    var nx = -(y2 - y1) / len, ny = (x2 - x1) / len;
+    for (var i = 1; i <= n; i++) { var t = i / n, j = (r() - 0.5) * 2 * amp; pts.push([x1 + (x2 - x1) * t + nx * j, y1 + (y2 - y1) * t + ny * j]); }
+  }
+  function pathFor(w, h, seed) {
+    var r = rng(seed), m = 2.5, amp = Math.min(1.3, Math.max(0.6, Math.min(w, h) / 90));
+    var x0 = m, y0 = m, x1 = w - m, y1 = h - m;
+    var pts = [[x0 + 3 + r() * 3, y0 + r() * 1.5]];
+    edge(pts, x0, y0, x1, y0, r, amp); edge(pts, x1, y0, x1, y1, r, amp); edge(pts, x1, y1, x0, y1, r, amp); edge(pts, x0, y1, x0, y0, r, amp);
+    pts.push([x0 + 9 + r() * 5, y0 - 0.8 + r() * 1.2]);
+    var d = 'M' + pts[0][0].toFixed(1) + ' ' + pts[0][1].toFixed(1);
+    for (var i = 1; i < pts.length; i++) { var p = pts[i - 1], c = pts[i]; d += ' Q' + p[0].toFixed(1) + ' ' + p[1].toFixed(1) + ' ' + ((p[0] + c[0]) / 2).toFixed(1) + ' ' + ((p[1] + c[1]) / 2).toFixed(1); }
+    var last = pts[pts.length - 1];
+    return d + ' L' + last[0].toFixed(1) + ' ' + last[1].toFixed(1);
+  }
+  var NS = 'http://www.w3.org/2000/svg';
+  var defs = document.createElementNS(NS, 'svg');
+  defs.setAttribute('width', '0'); defs.setAttribute('height', '0'); defs.setAttribute('aria-hidden', 'true'); defs.style.position = 'absolute';
+  defs.innerHTML = '<defs><filter id="gframe-crayon" x="-10%" y="-10%" width="120%" height="120%">' +
+    '<feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" seed="4" result="n1"/>' +
+    '<feDisplacementMap in="SourceGraphic" in2="n1" scale="2.8" xChannelSelector="R" yChannelSelector="G" result="rough"/>' +
+    '<feTurbulence type="fractalNoise" baseFrequency="1.15" numOctaves="2" seed="11" result="n2"/>' +
+    '<feColorMatrix in="n2" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.3 1.8" result="grain"/>' +
+    '<feComposite in="rough" in2="grain" operator="in"/></filter></defs>';
+  document.body.appendChild(defs);
+  function draw(box) {
+    var w = box.clientWidth, h = box.clientHeight; if (!w || !h) return;
+    var svg = box.querySelector('svg.gframe-line'), seed = +box.getAttribute('data-seed');
+    svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+    svg.querySelector('.p1').setAttribute('d', pathFor(w, h, seed));
+    svg.querySelector('.p2').setAttribute('d', pathFor(w, h, (seed ^ 0x9e3779b9) >>> 0));
+  }
+  var ro = window.ResizeObserver ? new ResizeObserver(function (es) { es.forEach(function (e) { draw(e.target); }); }) : null;
+  document.querySelectorAll('[data-gframe]').forEach(function (box) {
+    var svg = document.createElementNS(NS, 'svg');
+    svg.setAttribute('class', 'gframe-line'); svg.setAttribute('aria-hidden', 'true');
+    svg.innerHTML = '<g filter="url(#gframe-crayon)"><path class="p1"/><path class="p2"/></g>';
+    box.appendChild(svg);
+    if (ro) ro.observe(box);
+    draw(box);
+  });
+})();
+</script>
+
+<script>
+/* お試しの登録先が決まるまで：ボタンを押したら「準備中」と出す（href を本物に差し替えれば自動で消える） */
+(function () {
+  document.querySelectorAll('a.tr-cta[href^="#href-tbd"]').forEach(function (btn) {
+    var msg = document.createElement('div');
+    msg.className = 'tr-soon-msg'; msg.setAttribute('role', 'status');
+    msg.textContent = 'お試しの登録ページは準備中です。もう少しだけお待ちください。';
+    btn.insertAdjacentElement('afterend', msg);
+    var t;
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      msg.classList.add('is-on'); clearTimeout(t);
+      t = setTimeout(function () { msg.classList.remove('is-on'); }, 5000);
+    });
+  });
+})();
+</script>
+
+<script src="js/gsap.min.js?v=20260301a"></script>
+<script src="js/ScrollTrigger.min.js?v=20260301a"></script>
+<script>
+(function () {
+  if (typeof gsap === 'undefined') return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* 最初の画面：上から順に */
+  gsap.from('.tr-hero [data-anim]', { opacity: 0, y: 16, duration: 0.7, stagger: 0.08, ease: 'power3.out' });
+
+  /* 見出しと見せ場のかたまり：画面に入ったら1回だけ */
+  gsap.utils.toArray('.tr-sec [data-anim]').forEach(function (el) {
+    gsap.from(el, { opacity: 0, y: 28, duration: 0.7, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 88%', once: true } });
+  });
+
+  /* ① 手順：順に */
+  gsap.from('.tr-steps .tr-step', {
+    opacity: 0, y: 24, duration: 0.6, stagger: 0.1, ease: 'power3.out',
+    scrollTrigger: { trigger: '.tr-steps', start: 'top 85%', once: true }
+  });
+
+
+  window.addEventListener('load', function () { ScrollTrigger.refresh(); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { ScrollTrigger.refresh(); });
+})();
+</script>
+
+<script>
+/* タイトル下の波線（特設ページと同じ）：2行のうち長い方の行の幅を --wave-w に入れる */
+(function () {
+  function fit() {
+    document.querySelectorAll('.ytt-sp-hero-title').forEach(function (h1) {
+      var fs = parseFloat(getComputedStyle(h1).fontSize) || 16;
+      var w = fs * 1.01 * 1850 / 232;
+      h1.querySelectorAll('.line-text').forEach(function (t) { w = Math.max(w, t.getBoundingClientRect().width); });
+      h1.style.setProperty('--wave-w', Math.ceil(w) + 'px');
+    });
+  }
+  fit();
+  window.addEventListener('resize', fit);
+  window.addEventListener('load', fit);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+})();
+</script>
+<!-- BudouX — 日本語の文節改行（全ページ共通・同梱版） -->
+<script src="js/budoux-ja.min.js?v=20260907a" defer></script>
+<script src="js/budoux-init.js?v=20260907a" defer></script>
+<!-- 見出しの下の波線の太さを、文字の大きさにそろえる -->
+<script src="js/wave-fit.js?v=20260924a" defer></script>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>特定商取引法に基づく表記 — FX SPACE</title>
+    <link rel="icon" type="image/png" href="icon.png">
+    <meta name="robots" content="noindex">
+    <link rel="stylesheet" href="css/style.css?v=20260908e">
+    <style>
+        body { background: #f9fafb; color: #1e1b4b; }
+
+        .terms-nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            background: rgba(255,255,255,0.95); backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e5e7eb;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0.875rem 2rem; gap: 1rem;
+        }
+        .terms-nav-logo { display: flex; align-items: center; text-decoration: none; }
+        .terms-nav-logo img { height: 28px; width: auto; }
+        .terms-nav-back {
+            font-size: 0.8125rem; font-weight: 700; color: #6b7280;
+            text-decoration: none;
+        }
+        .terms-nav-back:hover { color: #1e1b4b; }
+        @media (max-width: 600px) {
+            .terms-nav { padding: 0.625rem 0.875rem; }
+            .terms-nav-logo img { height: 24px; }
+            .terms-nav-back { font-size: 0.75rem; }
+        }
+
+        .terms-wrap {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 6rem 1.5rem 4rem;
+        }
+
+        .terms-h1 {
+            font-size: clamp(1.4rem, 4vw, 1.875rem);
+            font-weight: 900; color: #1e1b4b;
+            margin: 0 0 0.5rem;
+            text-align: center;
+        }
+        .terms-date {
+            text-align: center;
+            font-size: 0.8125rem; color: #9ca3af;
+            margin-bottom: 2.5rem;
+        }
+        .terms-content {
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 2rem 2rem;
+        }
+        @media (max-width: 600px) {
+            .terms-content { padding: 1.5rem 1.25rem; }
+        }
+        .terms-lead {
+            font-size: 0.9375rem;
+            line-height: 1.95;
+            color: #374151;
+            margin: 0 0 1.5rem;
+        }
+        .terms-content h2 {
+            font-size: 1.0625rem;
+            font-weight: 900;
+            color: #1e1b4b;
+            margin: 2rem 0 0.75rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #f97316;
+            display: inline-block;
+        }
+        .terms-content h2:first-child { margin-top: 0; }
+        .terms-content p {
+            font-size: 0.9375rem;
+            line-height: 1.95;
+            color: #374151;
+            margin: 0 0 1rem;
+        }
+        .terms-content ol {
+            margin: 0.75rem 0 1.25rem 1.5rem;
+            padding: 0;
+            font-size: 0.875rem;
+            line-height: 1.9;
+            color: #4b5563;
+        }
+        .terms-content ol li { margin-bottom: 0.5rem; }
+        .terms-content ul {
+            margin: 0.5rem 0 0.75rem 1.25rem;
+            padding: 0;
+            list-style: disc;
+            font-size: 0.875rem;
+            line-height: 1.9;
+            color: #4b5563;
+        }
+        .terms-content ul li { margin-bottom: 0.375rem; }
+        /* 表：罫線つき。スマホは項目名の下に中身 */
+        .toku { width: 100%; border-collapse: collapse; border: 1px solid #e5e7eb; font-size: 0.875rem; line-height: 1.85; color: #374151; }
+        .toku th, .toku td { border-bottom: 1px solid #e5e7eb; padding: 0.85rem 1rem; text-align: left; vertical-align: top; }
+        .toku th { width: 11em; background: #f9fafb; font-weight: 800; color: #1e1b4b; border-right: 1px solid #e5e7eb; }
+        .toku td p { margin: 0 0 0.35rem; font-size: inherit; line-height: inherit; }
+        .toku td p:last-child { margin-bottom: 0; }
+        .toku a { color: #4338ca; text-decoration: underline; text-underline-offset: 3px; word-break: break-all; }
+        @media (max-width: 600px) {
+            .toku, .toku tbody, .toku tr, .toku th, .toku td { display: block; width: auto; }
+            .toku th { border-right: 0; padding: 0.6rem 0.85rem; }
+            .toku td { padding: 0.7rem 0.85rem 0.9rem; }
+        }
+
+        .terms-foot {
+            text-align: center;
+            margin-top: 2.5rem;
+            font-size: 0.8125rem;
+            color: #6b7280;
+            line-height: 1.85;
+        }
+        .terms-foot a {
+            color: #9ca3af;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="terms-nav">
+    <a href="index.html" class="terms-nav-logo">
+        <img src="img/ytt-nav-logo.png" alt="YTT — FX SPACE" width="800" height="151">
+    </a>
+    <a href="ytt-tokusetu.html" class="terms-nav-back js-back">← 前のページに戻る</a>
+</nav>
+
+<div class="terms-wrap">
+    <h1 class="terms-h1">特定商取引法に基づく表記</h1>
+    <p class="terms-date">2026年10月6日</p>
+    <div class="terms-content">
+        <p class="terms-lead">対象：FX SPACE スタンダードプラン(Web版YTT・FX SPACE Discord のスタンダード向けコンテンツ。7日間無料お試しを含む)</p>
+        <table class="toku">
+            <tbody>
+            <tr><th scope="row">販売事業者</th><td><p>株式会社ASTRO</p></td></tr>
+            <tr><th scope="row">運営統括責任者</th><td><p>長谷川 浩太</p></td></tr>
+            <tr><th scope="row">所在地</th><td><p>〒104-0061 東京都中央区銀座1-12-4 N&amp;E BLD.7階</p></td></tr>
+            <tr><th scope="row">電話番号</th><td><p>ご請求があった場合は、遅滞なく開示いたします。お問い合わせは下記のメールアドレスまでお願いいたします。</p></td></tr>
+            <tr><th scope="row">メールアドレス</th><td><p><a href="mailto:yosuga.fx@gmail.com">yosuga.fx@gmail.com</a></p></td></tr>
+            <tr><th scope="row">サービス名</th><td><p>FX SPACE スタンダードプラン(Web版YTT・FX SPACE Discord のスタンダード向けコンテンツ)</p></td></tr>
+            <tr><th scope="row">お申し込み方法</th><td><p>次のいずれかの方法でお申し込みいただけます。</p><p>(1) PayPal でのお申し込み</p><p>(2) YouTube チャンネル「よすが ┃FX SPACE」のメンバーシップ(レベル「よすが式FXメンバー」または「ライブチャート分析」)へのご加入</p></td></tr>
+            <tr><th scope="row">販売価格</th><td><p>PayPal: 月額 2,900円(税込)</p><p>YouTube メンバーシップ「よすが式FXメンバー」: 月額 3,490円</p><p>YouTube メンバーシップ「ライブチャート分析」: 月額 6,300円(「よすが式FXメンバー」の特典を含みます)</p><p>YouTube メンバーシップの価格は YouTube に表示される価格です。ご利用の端末・アプリにより異なる場合があります。</p></td></tr>
+            <tr><th scope="row">無料お試し</th><td><p>お試しページの「7日間の無料お試しを始める」から PayPal でお申し込みいただいた場合に限り、お申し込みから7日間(168時間)無料でご利用いただけます。</p><p>通常のお申し込み(PayPal)および YouTube メンバーシップには、無料お試し期間はありません。</p></td></tr>
+            <tr><th scope="row">商品代金以外の必要料金</th><td><p>インターネット接続に必要な通信料はお客様のご負担となります。</p></td></tr>
+            <tr><th scope="row">お支払い方法</th><td><p>PayPal(PayPal に登録したお支払い方法)</p><p>YouTube メンバーシップ(YouTube に登録したお支払い方法。決済は YouTube(Google)が行います)</p></td></tr>
+            <tr><th scope="row">お支払い時期</th><td><p>PayPal(通常のお申し込み): お申し込み時に初回のお支払いが発生し、以後1か月ごとに自動でお支払いいただきます。</p><p>PayPal(無料お試し): お申し込みから7日間(168時間)の無料お試し期間が終了した時点で初回のお支払い(2,900円)が発生し、以後1か月ごとに自動でお支払いいただきます。</p><p>YouTube メンバーシップ: ご加入時に初回のお支払いが発生し、以後 YouTube の定めるところにより1か月ごとに自動でお支払いいただきます。</p></td></tr>
+            <tr><th scope="row">提供時期</th><td><p>PayPal: お申し込みの手続き完了後、直ちにご利用いただけます。</p><p>YouTube メンバーシップ: ご加入後、Discord と YouTube のアカウントを連携し、Discord のロールが付与された時点からご利用いただけます。</p></td></tr>
+            <tr><th scope="row">契約期間・自動更新</th><td><p>いずれのお申し込み方法も1か月ごとの自動更新です。解約のお手続きをされるまで継続します。</p><p>無料お試し期間の終了後は、自動でスタンダードプラン(月額2,900円)の有料契約に切り替わります。</p></td></tr>
+            <tr><th scope="row">解約方法</th><td><p>いつでも解約できます。</p><p>PayPal: お試しページの「<a href="https://discord.com/oauth2/authorize?client_id=1132937165379211284&amp;response_type=code&amp;redirect_uri=https%3A%2F%2Ffx-space.com%2Fpp_sub_cancel.php&amp;scope=identify" target="_blank" rel="noopener">解約はこちら</a>」から Discord でログインして解約するか、PayPal の「自動支払い」の設定から停止してください。お申し込みから7日間(168時間)の無料お試し期間内に解約された場合、料金は一切発生しません。</p><p>YouTube メンバーシップ: YouTube の「購入とメンバーシップ」からメンバーシップを解約してください。</p></td></tr>
+            <tr><th scope="row">解約後の取扱い</th><td><p>PayPal: 解約のお手続きが完了した時点で、直ちにご利用いただけなくなります(無料お試し期間中の解約も同様です)。</p><p>YouTube メンバーシップ: YouTube の仕様により、お支払い済みの期間の終了までご利用いただけます。その後、ご利用いただけなくなります。</p></td></tr>
+            <tr><th scope="row">返品・返金</th><td><p>PayPal: デジタルサービスの性質上、お支払い後の返金はいたしません(月の途中で解約された場合の日割り返金もいたしません)。ただし、当社の責めに帰すべき事由によりサービスを提供できなかった場合はこの限りではありません。</p><p>YouTube メンバーシップ: 返金は YouTube(Google)の定めるところによります。</p></td></tr>
+            <tr><th scope="row">申込みの有効期限</th><td><p>ありません。</p></td></tr>
+            <tr><th scope="row">特別な販売条件</th><td><p>無料お試しは、お一人さま1回限りです。</p><p>未成年の方は、法定代理人(保護者)の同意を得たうえでお申し込みください。</p></td></tr>
+            <tr><th scope="row">動作環境</th><td><p>Web版YTT: パソコン・スマートフォンのブラウザ(Chrome / Safari / Edge 等の最新版)</p><p>Discord のアカウント(無料)が必要です。</p></td></tr>
+            <tr><th scope="row">表現及び商品に関する注意書き</th><td><p>本サービスは、FX取引の分析・学習を補助するものであり、利益を保証するものではありません。また、特定の金融商品の売買を推奨・助言するものではありません。投資の判断はご自身の責任で行ってください。</p></td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <p class="terms-foot">
+        <a href="ytt-tokusetu.html" class="js-back">← 前のページに戻る</a>
+    </p>
+</div>
+
+<script>
+// 来たページ（導入方法・使い方など）があれば、戻るリンクの行き先をそこにする
+(function() {
+    var r = document.referrer;
+    if (!r || r.indexOf(location.origin) !== 0 || r === location.href) return;
+    document.querySelectorAll('.js-back').forEach(function(a) { a.href = r; });
+})();
+</script>
+
+<!-- BudouX — 日本語の文節改行（全ページ共通・同梱版。js/budoux-init.js を参照） -->
+<script src="js/budoux-ja.min.js?v=20260907a" defer></script>
+<script src="js/budoux-init.js?v=20260907a" defer></script>
+</body>
+</html>

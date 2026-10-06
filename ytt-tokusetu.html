@@ -6,7 +6,7 @@
     <title>YTT（よすがトレードツール）— FX SPACE</title>
     <link rel="icon" type="image/png" href="icon.png">
     <meta property="og:title" content="YTT（よすがトレードツール）— FX SPACE">
-    <meta property="og:description" content="よすが独自開発のトレード支援ツール。スマホでもPCでも、ブラウザからシナリオ構築・予約注文・相場分析まで。">
+    <meta property="og:description" content="よすが独自開発のトレードサポートツール。スマホでもPCでも、ブラウザからシナリオ構築・予約注文・相場分析まで。">
     <meta property="og:image" content="https://fx-space.com/intro/img/og-ytt-tokusetu.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -1124,9 +1124,19 @@
         /* === 背景の白・グレーを交互に（2026-09-19） === #2
            「他にもこんな機能が」「体験してみよう」「動作環境」がグレーで続いていたので、真ん中の体験セクションを白に */
         #demo.ytt-demo, #demo .ytt-demo-header { background: #fff; }
-        /* === 24時間お試し：Web版YTTではまだ使えないので一時的に隠す（2026-09-19） === #1
-           ボタン・吹き出し・FAQは消さずに残してある。使えるようになったら、この1行を消すだけで元に戻る */
-        .trial-off { display: none !important; }
+        /* === お試し：24時間お試しは隠していたが、Web版YTTの7日間無料お試し（ytt-web-trial.html）として公開（2026-10-05） === #1
+           また隠すときは、下の1行の先頭の「/*」と末尾を外して .trial-off を有効にする */
+        /* .trial-off { display: none !important; } */
+        /* 最初の画面のボタンは「お試し」と「ダウンロード」の2つだけ。同じ大きさにそろえる（導入方法・使い方は上のメニューと一番下にある。2026-10-05） */
+        /* 上のメニュー・一番下のボタンも「お試し → ダウンロード」の2つ。導入方法・使い方は一番下の文字のリンクへ（2026-10-05） */
+        .ytt-sp-nav-cta > a.sm { display: inline-flex; align-items: center; justify-content: center; gap: 0.35rem; min-width: 10rem; height: 40px; box-sizing: border-box; }
+        @media (max-width: 600px) {
+            .ytt-sp-nav-cta > a.sm { min-width: 6.5rem; height: 40px; }
+            .ytt-sp-nav-cta .nav-dl .nav-dl-label { display: inline; } /* ボタンが2つになったので、スマホでも「ダウンロード」の文字を出す */
+        }
+        @media (max-width: 380px) { .ytt-sp-nav-cta > a.sm { min-width: 5.5rem; } }
+        .ytt-sp-footer-cta-btns > a { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; min-width: 15rem; height: 58px; box-sizing: border-box; }
+        .ytt-sp-hero-btns > a.ytt-dl-btn-main { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; min-width: 15rem; height: 62px; box-sizing: border-box; }
             /* === シミュレーターの下に使い方ページへのリンク（2026-09-19） === #5 */
         .ytt-demo-more { margin: 1.25rem auto 0; padding: 0 1rem; text-align: center; font-size: 0.875rem; color: #6b7280; line-height: 1.9; }
         .ytt-demo-more a { font-size: 1rem; font-weight: 800; color: #4f46e5; text-decoration: underline; text-underline-offset: 4px; }
@@ -1220,10 +1230,8 @@
         <img src="img/ytt-nav-logo.png" alt="FX SPACE">
     </a>
     <div class="ytt-sp-nav-cta">
-        <a href="ytt-web-setup.html" class="btn-sq-white sm">導入方法</a>
-        <a href="ytt-web-features.html" class="btn-sq-white sm">使い方</a>
+        <a href="ytt-web-trial.html" class="btn-sq-white sm trial-off"><span class="ytt-nav-btn-label">7日間無料お試し</span><span class="ytt-nav-btn-label-sp">お試し</span></a>
         <a href="ytt-web-download.html" class="btn-sq-blue sm nav-dl" aria-label="ダウンロード"><span class="dl-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="3" x2="12" y2="15"/></svg></span><span class="nav-dl-label">ダウンロード</span></a>
-        <a href="https://fx-space.com/intro/ytt-trial-start.html" class="btn-sq-white sm trial-off"><span class="ytt-nav-btn-label">24時間お試し</span><span class="ytt-nav-btn-label-sp">お試し</span></a>
     </div>
 </nav>
 
@@ -1244,17 +1252,12 @@
         <span class="ytt-sp-title-line"><span class="line-text">これ一つで完結<span class="ytt-title-wave" aria-hidden="true"><img src="img/wave-yellow.png" alt=""></span></span></span>
     </h1>
     <p class="ytt-sp-hero-lead">
-        よすがが独自に開発したトレード支援ツール。<br>
+        よすがが独自に開発したトレードサポートツール。<br>
         Web版なら、スマホでもPCでもブラウザから<wbr>注文・分析・リスク管理まで行えます。
     </p>
     <div class="ytt-sp-hero-btns">
-        <a href="ytt-web-setup.html" class="btn-sq-white ytt-dl-btn-main">導入方法を見る</a>
-        <a href="ytt-web-features.html" class="btn-sq-white ytt-dl-btn-main">使い方を見る</a>
+        <a href="ytt-web-trial.html" class="btn-sq-white ytt-dl-btn-main trial-off">7日間無料でお試し</a>
         <a href="ytt-web-download.html" class="btn-sq-blue ytt-dl-btn-main"><span class="dl-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="3" x2="12" y2="15"/></svg></span>ダウンロード</a>
-        <div class="ytt-trial-wrap trial-off">
-            <a href="https://fx-space.com/intro/ytt-trial-start.html" class="btn-sq-white">24時間無料でお試し</a>
-            <span class="ytt-trial-bubble">サブスク加入前に<br>全機能を1日試せます</span>
-        </div>
     </div>
 </section>
 
@@ -1356,7 +1359,7 @@
         <!-- YTTは2種類（Web版・デスクトップ版）。機能の比べっこはしない（アップデートのたびに直すことになるため）。「どんな使い方の人向けか」だけを書く（2026-09-24） -->
         <div class="ytt-two">
             <h3 class="ytt-two-title">YTTは2つから選べます</h3>
-            <p class="ytt-two-lead">どちらもスタンダード・プレミアムプランで使えます。<wbr>迷ったら、スマホでも使えるWeb版がおすすめです。</p>
+            <p class="ytt-two-lead">どちらもスタンダード・プレミアムプラン、買い切りで使えます。<wbr>迷ったら、スマホでも使えるWeb版がおすすめです。</p>
             <div class="ytt-two-grid">
                 <div class="ytt-two-card is-rec">
                     <span class="ytt-two-badge">おすすめ</span>
@@ -1824,6 +1827,7 @@
                     <div class="ytt-sp-buyout-name">YTT（よすが式トレードツール）</div>
                     <ul class="ytt-sp-buyout-benefits">
                         <li><img src="img/check-orange.png" alt="✓"><span>月額費用なし・ずっと使える</span></li>
+                        <li><img src="img/check-orange.png" alt="✓"><span>Web版・デスクトップ版のどちらも使える</span></li>
                         <li><img src="img/check-orange.png" alt="✓"><span>最新アップデートも無料で更新</span></li>
                         <li><img src="img/check-orange.png" alt="✓"><span>AIサポート1年間つき</span></li>
                     </ul>
@@ -1857,7 +1861,7 @@
 
         <details class="ytt-faq">
             <summary><span class="ytt-faq-q">Web版とデスクトップ版、どちらを使えばいい？</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
-            <div class="ytt-faq-a"><p>迷ったら<strong>Web版YTT</strong>がおすすめです。スマホでもパソコンでも、ブラウザから使えます。パソコンのMT4・MT5・cTraderに入れて使う<strong>デスクトップ版YTT</strong>も、これまでどおり使えます。どちらもスタンダード・プレミアムプランでご利用いただけます。<br><a href="ytt-download.html">デスクトップ版YTTのダウンロード・導入方法はこちら</a></p></div>
+            <div class="ytt-faq-a"><p>迷ったら<strong>Web版YTT</strong>がおすすめです。スマホでもパソコンでも、ブラウザから使えます。パソコンのMT4・MT5・cTraderに入れて使う<strong>デスクトップ版YTT</strong>も、これまでどおり使えます。スタンダード・プレミアムプラン、買い切りのどれでも、両方をご利用いただけます。<br><a href="ytt-download.html">デスクトップ版YTTのダウンロード・導入方法はこちら</a></p></div>
         </details>
         <details class="ytt-faq">
             <summary><span class="ytt-faq-q">スマホでも使える？</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
@@ -1869,7 +1873,7 @@
         </details>
         <details class="ytt-faq">
             <summary><span class="ytt-faq-q">買い切りとサブスク、どっちを選べばいい？</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
-            <div class="ytt-faq-a"><p>ツールだけ使えれば十分なら<strong>買い切り</strong>がおすすめ。月額なしでずっと使え、アップデートの更新も無料、AIサポートも1年間ついてきます。毎日のシナリオ動画やライブチャート分析、コミュニティで学びながら使いたいなら<strong>サブスク（スタンダード／プレミアム）</strong>が向いています。</p></div>
+            <div class="ytt-faq-a"><p>ツールだけ使えれば十分なら<strong>買い切り</strong>がおすすめ。月額なしでずっと使え、Web版・デスクトップ版のどちらも使えます。アップデートの更新も無料、AIサポートも1年間ついてきます。毎日のシナリオ動画やライブチャート分析、コミュニティで学びながら使いたいなら<strong>サブスク（スタンダード／プレミアム）</strong>が向いています。</p></div>
         </details>
         <details class="ytt-faq">
             <summary><span class="ytt-faq-q">MT4・MT5・cTrader、どれを使えばいい？</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
@@ -1885,7 +1889,7 @@
         </details>
         <details class="ytt-faq trial-off">
             <summary><span class="ytt-faq-q">試してから決められる？</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
-            <div class="ytt-faq-a"><p>はい。<strong>24時間無料でお試し</strong>できます。サブスク加入前に全機能を1日じっくり試せるので、自分に合うか確かめてから決められます。<a href="https://fx-space.com/intro/ytt-trial-start.html">お試しを始める →</a></p></div>
+            <div class="ytt-faq-a"><p>はい。<strong>7日間無料でお試し</strong>できます。Web版YTTと、スタンダードプランのDiscordのコンテンツを7日間試して、自分に合うか確かめてから決められます。解約しなければ、8日目から自動でスタンダードプラン（月2,900円）に切り替わります。<a href="ytt-web-trial.html">お試しの流れを見る →</a></p></div>
         </details>
         <details class="ytt-faq">
             <summary><span class="ytt-faq-q">解約・退会はできる？</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
@@ -1937,12 +1941,12 @@
         導入は約15分で終わります。
     </p>
     <div class="ytt-sp-footer-cta-btns">
-        <a href="ytt-web-setup.html" class="btn-white-outline">導入方法を見る</a>
-        <a href="ytt-web-features.html" class="btn-white-outline">使い方を見る</a>
+        <a href="ytt-web-trial.html" class="btn-white-outline trial-off">7日間無料でお試し</a>
         <a href="ytt-web-download.html" class="btn-white-solid"><span class="dl-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="3" x2="12" y2="15"/></svg></span>ダウンロード</a>
-        <a href="https://fx-space.com/intro/ytt-trial-start.html" class="btn-white-outline trial-off">24時間無料でお試し</a>
     </div>
     <div class="ytt-footer-cta-manuals">
+        <a href="ytt-web-setup.html">導入方法を見る →</a>
+        <a href="ytt-web-features.html">使い方を見る →</a>
         <a href="https://webytt.fx-space.com/" target="_blank" rel="noopener">Web版YTTを開く →</a>
         <a href="https://www.canva.com/design/DAF_Wqy7hQc/IJKV8x4ruUtEpWdzpuJ4wg/edit" target="_blank" rel="noopener">デスクトップ版の使い方マニュアル →</a>
     </div>
@@ -1950,7 +1954,7 @@
 
 <!-- PAGE FOOTER -->
 <footer class="ytt-sp-page-footer">
-    <p>© FX SPACE — <a href="index.html">トップページ</a> / <a href="https://drive.google.com/file/d/17vbSozToeLWHQO9s_eBHcceYGh80ryCQ/view?usp=sharing" target="_blank">利用規約</a> / <a href="ytt-web-setup.html">導入方法</a> / <a href="https://www.canva.com/design/DAF_Wqy7hQc/IJKV8x4ruUtEpWdzpuJ4wg/edit" target="_blank" rel="noopener">使い方マニュアル</a></p>
+    <p>© FX SPACE — <a href="index.html">トップページ</a> / <a href="ytt-terms.html" target="_blank" rel="noopener">利用規約</a> / <a href="fxspace-privacy.html" target="_blank" rel="noopener">プライバシーポリシー</a> / <a href="fxspace-tokushoho.html" target="_blank" rel="noopener">特定商取引法に基づく表記</a> / <a href="ytt-web-setup.html">導入方法</a> / <a href="https://www.canva.com/design/DAF_Wqy7hQc/IJKV8x4ruUtEpWdzpuJ4wg/edit" target="_blank" rel="noopener">使い方マニュアル</a></p>
 </footer>
 
 <!-- SCRIPTS -->

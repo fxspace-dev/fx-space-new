@@ -607,8 +607,8 @@
         [data-anim] { opacity: 0; }
     </style>
 <style>
-/* === 24時間お試し：Web版YTTではまだ使えないので一時的に隠す（2026-09-22、特設ページと同じ）。使えるようになったら、この1行を消すだけで元に戻る === */
-.trial-off { display: none !important; }
+/* === お試し：24時間お試しは終了し、Web版YTTの7日間無料お試し（ytt-web-trial.html）に置き換えて表示（2026-10-07）。また隠すときは下の1行のコメントを外す === */
+/* .trial-off { display: none !important; } */
 </style>
 <style>
 /* === タイトル下の黄色い波線（2026-09-23 airiさん「YTT特設でやったように太さを合わせて・すべてのページで」） ===
@@ -631,8 +631,7 @@ img[src$="wave-orange.png"] { height: clamp(14px, 3vw, 22px) !important; }
   ytt-subscribe.html
 
   【本番反映前TODO】
-  [1] #href-tbd-trial-24h（未設定のまま。2026-09-06 暫定で「近日公開」メッセージ表示に変更。戻し方は本文のコメント参照）
-      → 「YTT 24時間お試しを見る」ボタンの遷移先URL（計1箇所）
+  [1] お試しボタンは 7日間無料お試し（ytt-web-trial.html）へ（2026-10-07、24時間お試しから置き換え）
         ※ サブスク加入リンク・YouTubeメンバーシップ案内は
           特設ページ(ytt-tokusetu.html) と同じURLを使用済み
 
@@ -645,7 +644,7 @@ img[src$="wave-orange.png"] { height: clamp(14px, 3vw, 22px) !important; }
    ↓
   YTTが使える2つのプラン（スタンダード/プレミアム）
    ↓
-  まだ迷っている方へ（24時間お試し誘導）
+  まだ迷っている方へ（7日間無料お試し誘導）
    ↓
   YouTubeメンバーシップ連携案内
 ====================================================================
@@ -873,13 +872,8 @@ img[src$="wave-orange.png"] { height: clamp(14px, 3vw, 22px) !important; }
     </div>
 </section>
 
-<!-- 24h無料お試し誘導（濃紺背景・右斜め上に24hデコ） -->
-<!-- Web版YTTにはまだお試しが無いので一時的に隠す（2026-09-22、特設ページと同じ trial-off）。消さずに残してある -->
+<!-- 7日間無料お試し誘導（濃紺背景）。24時間お試しから置き換え（2026-10-07）。24hのデコ画像は外した -->
 <section class="trial-cta-section trial-off">
-    <!-- 右斜め上のデコ24hアイコン -->
-    <div class="trial-cta-floating-24h" aria-hidden="true">
-        <img src="img/icon-24h.png" alt="">
-    </div>
     <div class="trial-cta-inner" data-anim>
         <span class="section-title-badge section-title-badge--orange">
             <img class="hero-title-side hero-title-side--left" src="img/title-side-orange-left.png" alt="">
@@ -888,14 +882,11 @@ img[src$="wave-orange.png"] { height: clamp(14px, 3vw, 22px) !important; }
         </span>
         <h2 class="trial-cta-heading">いきなり加入はちょっと…<br>という方へ</h2>
         <p class="trial-cta-desc">
-            <strong>YTTを完全無料</strong>で<wbr>1日たっぷり試してから、<wbr>加入を検討できます。
+            <strong>Web版YTTを7日間無料</strong>で<wbr>試してから、<wbr>加入を決められます。
         </p>
-        <!-- 【近日公開の暫定対応 2026-09-06】お試しページが未完成のため data-coming-soon を付け、押すと「近日公開」メッセージを出す（末尾の trial-soon 用 style/script 参照）。
-             ページ完成時の戻し方: (1) href を実URLに差し替え (2) data-coming-soon と aria-disabled を削除 (3) 下の「※ 近日公開予定」の p を削除 (4) 末尾の trial-soon 用 style/script を削除 -->
-        <a href="#href-tbd-trial-24h" class="btn-trial" data-coming-soon="1" aria-disabled="true">
-            YTT 24時間お試しを見る →
+        <a href="ytt-web-trial.html" class="btn-trial">
+            7日間無料でお試し →
         </a>
-        <p class="trial-soon-note">※ 近日公開予定</p>
     </div>
 </section>
 
@@ -916,7 +907,7 @@ img[src$="wave-orange.png"] { height: clamp(14px, 3vw, 22px) !important; }
 </section>
 
 <footer class="ytt-sp-page-footer">
-    <p>© FX SPACE — <a href="ytt-tokusetu.html">YTT特設ページ</a> / <a href="index.html">トップページ</a></p>
+    <p>© FX SPACE — <a href="ytt-tokusetu.html">YTT特設ページ</a> / <a href="index.html">トップページ</a> / <a href="ytt-terms.html" target="_blank" rel="noopener">利用規約</a> / <a href="fxspace-privacy.html" target="_blank" rel="noopener">プライバシーポリシー</a> / <a href="fxspace-tokushoho.html" target="_blank" rel="noopener">特定商取引法に基づく表記</a></p>
 </footer>
 
 <script src="js/gsap.min.js?v=20260301a"></script>
@@ -1007,28 +998,6 @@ document.addEventListener('DOMContentLoaded', function(){
 <!-- BudouX — 日本語の文節改行（全ページ共通・同梱版。js/budoux-init.js を参照） -->
 <script src="js/budoux-ja.min.js?v=20260907a" defer></script>
 <script src="js/budoux-init.js?v=20260907a" defer></script>
-<!-- 近日公開の暫定対応（お試しページ完成時に丸ごと削除してOK） -->
-<style>
-.btn-trial[data-coming-soon]{cursor:default;}
-.trial-soon-note{margin:0.6rem 0 0;font-size:0.8125rem;color:#6b7280;text-align:center;}
-.trial-soon-msg{display:none;margin:0.9rem auto 0;max-width:420px;padding:0.85rem 1rem;border:1.5px solid #e0c897;border-radius:12px;background:#fff;color:#1e1b4b;font-size:0.9375rem;line-height:1.7;text-align:center;}
-.trial-soon-msg.is-on{display:block;}
-</style>
-<script>
-(function(){
-  var btn=document.querySelector('.btn-trial[data-coming-soon]'); if(!btn) return;
-  var msg=document.createElement('div'); msg.className='trial-soon-msg'; msg.setAttribute('role','status');
-  msg.textContent='24時間お試しのページは近日公開予定です。もう少しだけお待ちください。';
-  var note=btn.parentElement.querySelector('.trial-soon-note');
-  (note||btn).insertAdjacentElement('afterend', msg);
-  var t;
-  btn.addEventListener('click', function(e){
-    e.preventDefault();
-    msg.classList.add('is-on'); clearTimeout(t);
-    t=setTimeout(function(){ msg.classList.remove('is-on'); }, 5000);
-  });
-})();
-</script>
 <script>
 /* タイトル下の波線（YTT特設ページと同じ）：2行のうち長い方の行の幅を --wave-w に入れる。
    元の画像の縦横比（1850×232）で、文字の大きさの1.01倍の高さにしたときの幅より短くはしない */

@@ -1125,9 +1125,9 @@
         /* === 背景の白・グレーを交互に（2026-09-19） === #2
            「他にもこんな機能が」「体験してみよう」「動作環境」がグレーで続いていたので、真ん中の体験セクションを白に */
         #demo.ytt-demo, #demo .ytt-demo-header { background: #fff; }
-        /* === 24時間お試し：Web版YTTではまだ使えないので一時的に隠す（2026-09-19） === #1
+        /* === お試し：24時間お試しは終了し、Web版YTTの7日間無料お試し（ytt-web-trial.html）に置き換え（2026-10-07、特設ページと同じ） === #1
            ボタン・吹き出し・FAQは消さずに残してある。使えるようになったら、この1行を消すだけで元に戻る */
-        .trial-off { display: none !important; }
+        /* .trial-off { display: none !important; } */
             /* === シミュレーターの下に使い方ページへのリンク（2026-09-19） === #5 */
         .ytt-demo-more { margin: 1.25rem auto 0; padding: 0 1rem; text-align: center; font-size: 0.875rem; color: #6b7280; line-height: 1.9; }
         .ytt-demo-more a { font-size: 1rem; font-weight: 800; color: #4f46e5; text-decoration: underline; text-underline-offset: 4px; }
@@ -1224,7 +1224,7 @@
         <a href="ytt-web-setup.html" class="btn-sq-white sm">導入方法</a>
         <a href="ytt-web-features.html" class="btn-sq-white sm">使い方</a>
         <a href="ytt-web-download.html" class="btn-sq-blue sm nav-dl" aria-label="ダウンロード"><span class="dl-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="3" x2="12" y2="15"/></svg></span><span class="nav-dl-label">ダウンロード</span></a>
-        <a href="https://fx-space.com/intro/ytt-trial-start.html" class="btn-sq-white sm trial-off"><span class="ytt-nav-btn-label">24時間お試し</span><span class="ytt-nav-btn-label-sp">お試し</span></a>
+        <a href="ytt-web-trial.html" class="btn-sq-white sm trial-off"><span class="ytt-nav-btn-label">7日間無料お試し</span><span class="ytt-nav-btn-label-sp">お試し</span></a>
     </div>
 </nav>
 
@@ -1253,8 +1253,8 @@
         <a href="ytt-web-features.html" class="btn-sq-white ytt-dl-btn-main">使い方を見る</a>
         <a href="ytt-web-download.html" class="btn-sq-blue ytt-dl-btn-main"><span class="dl-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="3" x2="12" y2="15"/></svg></span>ダウンロード</a>
         <div class="ytt-trial-wrap trial-off">
-            <a href="https://fx-space.com/intro/ytt-trial-start.html" class="btn-sq-white">24時間無料でお試し</a>
-            <span class="ytt-trial-bubble">サブスク加入前に<br>全機能を1日試せます</span>
+            <a href="ytt-web-trial.html" class="btn-sq-white">7日間無料でお試し</a>
+            <span class="ytt-trial-bubble">Web版YTTを<br>7日間無料で試せます</span>
         </div>
     </div>
 </section>
@@ -1778,7 +1778,7 @@
         </details>
         <details class="ytt-faq trial-off">
             <summary><span class="ytt-faq-q">試してから決められる？</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
-            <div class="ytt-faq-a"><p>はい。<strong>24時間無料でお試し</strong>できます。サブスク加入前に全機能を1日じっくり試せるので、自分に合うか確かめてから決められます。<a href="https://fx-space.com/intro/ytt-trial-start.html">お試しを始める →</a></p></div>
+            <div class="ytt-faq-a"><p>はい。<strong>7日間無料でお試し</strong>できます。Web版YTTと、Discordのコンテンツを7日間試して、自分に合うか確かめてから決められます。解約しなければ、8日目から自動でスタンダードプラン（月2,900円）に切り替わります。<a href="ytt-web-trial.html">お試しの流れを見る →</a></p></div>
         </details>
         <details class="ytt-faq">
             <summary><span class="ytt-faq-q">解約・退会はできる？</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
@@ -1833,7 +1833,7 @@
         <a href="ytt-web-setup.html" class="btn-white-outline">導入方法を見る</a>
         <a href="ytt-web-features.html" class="btn-white-outline">使い方を見る</a>
         <a href="ytt-web-download.html" class="btn-white-solid"><span class="dl-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="3" x2="12" y2="15"/></svg></span>ダウンロード</a>
-        <a href="https://fx-space.com/intro/ytt-trial-start.html" class="btn-white-outline trial-off">24時間無料でお試し</a>
+        <a href="ytt-web-trial.html" class="btn-white-outline trial-off">7日間無料でお試し</a>
     </div>
     <div class="ytt-footer-cta-manuals">
         <a href="https://webytt.fx-space.com/" target="_blank" rel="noopener">Web版YTTを開く →</a>

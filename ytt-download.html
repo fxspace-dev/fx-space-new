@@ -603,6 +603,16 @@ img[src$="wave-orange.png"] { height: clamp(14px, 3vw, 22px) !important; }
 /* 幅のせまいスマホでは、ボタンの文字が右の矢印に重ならないよう矢印を隠す（左の箱の絵でダウンロードだと分かる） */
 @media (max-width: 400px) { .dl-mega-dl-icon { display: none; } }
 </style>
+<style>
+/* スマホのタイトル・見出し（2026-10-24 ytt-fto.html と同じ大きさ。1行に入りきらないものは js/sp-heading-fit.js が入る大きさまで縮める） */
+@media (max-width: 600px) {
+  .ytt-sp-hero .ytt-sp-hero-title { font-size: 1.875rem !important; }
+  .ytt-sp-hero .ytt-sp-hero-title .line-text { white-space: nowrap !important; }
+  .ytt-sp-hero .ytt-sp-hero-title .line-text wbr, .ytt-spec-header h2 wbr { display: none; }
+  .ytt-spec-header h2 { font-size: clamp(1.25rem, 5.8vw, 1.4rem) !important; }
+}
+</style>
+<script src="js/sp-heading-fit.js?v=20261024a" defer></script>
 </head>
 <body>
 
@@ -666,7 +676,7 @@ img[src$="wave-orange.png"] { height: clamp(14px, 3vw, 22px) !important; }
         <!-- ▼ href = 配布ファイルのパス（htmlから見た相対 or 絶対URL）に差し替え。
              download 属性を付けると「遷移」ではなく「ダウンロード」になり、
              download="ファイル名.zip" で保存時のファイル名を指定できます。      -->
-        <a href="https://fx-space.com/download/YTT%20for%20MT4_MT5_cTrader_20260731.zip" download="YTT for MT4_MT5_cTrader_20260731.zip" class="dl-mega-btn">
+        <a href="https://fx-space.com/download/YTT_MT4_MT5_cTrader_20261026.zip" download="YTT_MT4_MT5_cTrader_20261026.zip" class="dl-mega-btn">
             <span class="dl-mega-icon" aria-hidden="true">
                 <!-- 段ボール箱（trial-startと同じデザイン） -->
                 <svg class="dl-mega-box-svg" viewBox="0 0 76 74" xmlns="http://www.w3.org/2000/svg">
@@ -774,11 +784,105 @@ img[src$="wave-orange.png"] { height: clamp(14px, 3vw, 22px) !important; }
                  ・MT4版のみ等の場合は不要な <span class="update-version"> を削除     -->
             <div class="update-item is-latest" data-update>
                 <div class="update-meta">
-                    <div class="update-date">2026/7/31</div>
+                    <div class="update-date">2026/10/26</div>
                     <span class="update-dot" aria-hidden="true"></span>
                 </div>
                 <div class="update-card">
                     <span class="update-latest-badge">最新</span>
+                    <div class="update-versions">
+                        <span class="update-version">MT4版 ver1.7.13</span>
+                        <span class="update-version">MT5版 ver1.7.13</span>
+                        <span class="update-version">cTrader版 ver1.7.13</span>
+                    </div>
+                    <div class="update-body">
+                        <h4>MT4版・MT5版・cTrader版アップデート</h4>
+                        <ol class="update-numbered">
+                            <li>
+                                <span class="update-tag fix">修正</span>一部口座で全決済やトレード状況表示等が正常にされない不具合を改善しました。（MT5）
+                            </li>
+                            <li>
+                                <span class="update-tag imp">改善</span>セキュリティ面を改善しました。（MT4・MT5・cTrader）
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <!-- ▲▲▲ 新バージョン用カード ここまで ▲▲▲ -->
+
+            <!-- 旧・最新版（is-latest を外して通常カードへ降格） -->
+            <div class="update-item" data-update>
+                <div class="update-meta">
+                    <div class="update-date">2026/10/4</div>
+                    <span class="update-dot" aria-hidden="true"></span>
+                </div>
+                <div class="update-card">
+                    <div class="update-versions">
+                        <span class="update-version">MT4版 ver1.7.12</span>
+                        <span class="update-version">MT5版 ver1.7.12</span>
+                        <span class="update-version">cTrader版 ver1.7.12</span>
+                    </div>
+                    <div class="update-body">
+                        <h4>MT4版・MT5版・cTrader版アップデート</h4>
+                        <ol class="update-numbered">
+                            <li>
+                                <span class="update-tag fix">修正</span>オートラインと重なったボタンが反応しない不具合を修正しました。（MT5）
+                            </li>
+                            <li>
+                                <span class="update-tag fix">修正</span>トレード状況内の表示が更新されない場合がある不具合を修正しました。（MT5）
+                            </li>
+                            <li>
+                                <span class="update-tag fix">修正</span>その他軽微な不具合を修正しました。（MT4・MT5・cTrader）
+                            </li>
+                            <li>
+                                <span class="update-tag imp">改善</span>セキュリティ面を改善しました。（MT4・MT5・cTrader）
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 旧・最新版（is-latest を外して通常カードへ降格） -->
+            <div class="update-item" data-update>
+                <div class="update-meta">
+                    <div class="update-date">2026/9/26</div>
+                    <span class="update-dot" aria-hidden="true"></span>
+                </div>
+                <div class="update-card">
+                    <div class="update-versions">
+                        <span class="update-version">MT4版 ver1.7.10</span>
+                        <span class="update-version">MT5版 ver1.7.10</span>
+                        <span class="update-version">cTrader版 ver1.7.11</span>
+                    </div>
+                    <div class="update-body">
+                        <h4>MT4版・MT5版・cTrader版アップデート</h4>
+                        <ol class="update-numbered">
+                            <li>
+                                <span class="update-tag add">追加</span>損失額固定モードを追加しました。（MT4・MT5・cTrader）
+                            </li>
+                            <li>
+                                <span class="update-tag imp">改善</span>セキュリティ面を改善しました。（MT4・MT5・cTrader）
+                                <ul class="update-notes">
+                                    <li>今回のアップデートから、導入時に認証コードの入力が必要となります。<a href="https://discord.com/oauth2/authorize?client_id=1132937165379211284&amp;response_type=code&amp;redirect_uri=https%3A%2F%2Ffx-space.com%2Fyauth%2FYTTauth_9fhwrgu.php&amp;scope=identify+connections" target="_blank" rel="noopener">こちら</a>の口座登録ページ上で認証コードをご確認ください。</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <span class="update-tag imp">改善</span>オートラインのロジックを調整しました。（MT4・MT5）
+                            </li>
+                            <li>
+                                <span class="update-tag imp">改善</span>描画処理の負荷を軽減しました。（MT5）
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 旧・最新版（is-latest を外して通常カードへ降格） -->
+            <div class="update-item" data-update>
+                <div class="update-meta">
+                    <div class="update-date">2026/7/31</div>
+                    <span class="update-dot" aria-hidden="true"></span>
+                </div>
+                <div class="update-card">
                     <div class="update-versions">
                         <span class="update-version">MT4版 ver1.7.05</span>
                         <span class="update-version">MT5版 ver1.7.05</span>
@@ -799,7 +903,6 @@ img[src$="wave-orange.png"] { height: clamp(14px, 3vw, 22px) !important; }
                     </div>
                 </div>
             </div>
-            <!-- ▲▲▲ 新バージョン用カード ここまで ▲▲▲ -->
 
             <!-- 旧・最新版（is-latest を外して通常カードへ降格） -->
             <div class="update-item" data-update>

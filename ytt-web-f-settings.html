@@ -1902,6 +1902,16 @@
 .fsit-tab:hover { background: #fff !important; border-color: #4f46e5 !important; }
 .fsit-tab.on:hover { background: #1e1b4b !important; border-color: #1e1b4b !important; }
 </style>
+<style>
+/* スマホのタイトル・見出し（2026-10-24 ytt-fto.html と同じ大きさ。1行に入りきらないものは js/sp-heading-fit.js が入る大きさまで縮める） */
+@media (max-width: 600px) {
+  .ytt-sp-hero .ytt-sp-hero-title { font-size: 1.875rem !important; }
+  .ytt-sp-hero .ytt-sp-hero-title .line-text { white-space: nowrap !important; }
+  .ytt-sp-hero .ytt-sp-hero-title .line-text wbr, .ytt-spec-header h2 wbr { display: none; }
+  .ytt-spec-header h2 { font-size: clamp(1.25rem, 5.8vw, 1.4rem) !important; }
+}
+</style>
+<script src="js/sp-heading-fit.js?v=20261024a" defer></script>
 </head>
 <body>
 

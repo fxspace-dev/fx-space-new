@@ -1221,6 +1221,21 @@
 .fsit-tab:hover { background: #fff !important; border-color: #4f46e5 !important; }
 .fsit-tab.on:hover { background: #1e1b4b !important; border-color: #1e1b4b !important; }
 </style>
+<style>
+/* スマホのタイトル・見出し（2026-10-24 ytt-fto.html と同じ大きさ。1行に入りきらないものは js/sp-heading-fit.js が入る大きさまで縮める） */
+@media (max-width: 600px) {
+  .ytt-sp-hero .ytt-sp-hero-title { font-size: 1.875rem !important; }
+  .ytt-sp-hero .ytt-sp-hero-title .line-text { white-space: nowrap !important; }
+  .ytt-sp-hero .ytt-sp-hero-title .line-text wbr, .ytt-spec-header h2 wbr { display: none; }
+  .ytt-spec-header h2 { font-size: clamp(1.25rem, 5.8vw, 1.4rem) !important; }
+}
+</style>
+<script src="js/sp-heading-fit.js?v=20261024a" defer></script>
+<style>
+/* スマホだけ、タイトルを「トレードは／これ一つで完結」の2行にして文字を大きくする（PCは今までどおり2行。2026-10-28） */
+.ytt-sp-hero-title .tl-sp { display: none; }
+@media (max-width: 600px) { .ytt-sp-hero-title .tl-pc { display: none; } .ytt-sp-hero-title .tl-sp { display: block; } .ytt-sp-hero .ytt-sp-hero-title.ytt-sp-hero-title { font-size: 2.25rem !important; line-height: 1.2; } .ytt-sp-hero .ytt-sp-hero-title .tl-sp .ytt-title-wave { margin: -0.12em 0 -0.3em !important; } .ytt-sp-hero .ytt-sp-hero-title .tl-sp + .tl-sp .ytt-title-wave { margin-bottom: 0 !important; } }
+</style>
 </head>
 <body style="scroll-behavior: smooth;">
 
@@ -1248,8 +1263,10 @@
 <section class="ytt-sp-hero">
     <img src="images/ytt-logo.png" alt="YTT" class="ytt-sp-hero-logo">
     <h1 class="ytt-sp-hero-title">
-        <span class="ytt-sp-title-line"><span class="line-text">シナリオ構築から分析・決済まで<span class="ytt-title-wave" aria-hidden="true"><img src="img/wave-yellow.png" alt=""></span></span></span>
-        <span class="ytt-sp-title-line"><span class="line-text">これ一つで完結<span class="ytt-title-wave" aria-hidden="true"><img src="img/wave-yellow.png" alt=""></span></span></span>
+        <span class="ytt-sp-title-line tl-pc"><span class="line-text">シナリオ構築から分析・決済まで<span class="ytt-title-wave" aria-hidden="true"><img src="img/wave-yellow.png" alt=""></span></span></span>
+        <span class="ytt-sp-title-line tl-sp"><span class="line-text">トレードは<span class="ytt-title-wave" aria-hidden="true"><img src="img/wave-yellow.png" alt=""></span></span></span>
+        <span class="ytt-sp-title-line tl-sp"><span class="line-text">これ一つで完結<span class="ytt-title-wave" aria-hidden="true"><img src="img/wave-yellow.png" alt=""></span></span></span>
+        <span class="ytt-sp-title-line tl-pc"><span class="line-text">これ一つで完結<span class="ytt-title-wave" aria-hidden="true"><img src="img/wave-yellow.png" alt=""></span></span></span>
     </h1>
     <p class="ytt-sp-hero-lead">
         よすがが独自に開発したトレードサポートツール。<br>

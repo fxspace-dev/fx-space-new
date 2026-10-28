@@ -1125,6 +1125,16 @@
 .ytt-sp-hero .ytt-sp-hero-title .ytt-sp-title-line .ytt-title-wave { display: block; width: 0 !important; min-width: 100%; max-width: none !important; margin-left: 0 !important; transform: none !important; height: 1.01em !important; aspect-ratio: auto !important; overflow: hidden; }
 .ytt-sp-hero .ytt-sp-hero-title .ytt-title-wave img { display: block; height: 100%; width: var(--wave-w, auto); min-width: 100%; max-width: none; object-fit: fill; }
 </style>
+<style>
+/* スマホのタイトル・見出し（2026-10-24 ytt-fto.html と同じ大きさ。1行に入りきらないものは js/sp-heading-fit.js が入る大きさまで縮める） */
+@media (max-width: 600px) {
+  .ytt-sp-hero .ytt-sp-hero-title { font-size: 1.875rem !important; }
+  .ytt-sp-hero .ytt-sp-hero-title .line-text { white-space: nowrap !important; }
+  .ytt-sp-hero .ytt-sp-hero-title .line-text wbr, .ytt-spec-header h2 wbr { display: none; }
+  .ytt-spec-header h2 { font-size: clamp(1.25rem, 5.8vw, 1.4rem) !important; }
+}
+</style>
+<script src="js/sp-heading-fit.js?v=20261024a" defer></script>
 </head>
 <body>
 

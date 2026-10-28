@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HFM 100%入金ボーナスの受け取り方｜FX SPACE</title>
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    <meta name="description" content="HFMの100%入金ボーナスは、期間中の最初の入金と同じ額（最大45,000円）のボーナスがもらえるキャンペーンです。登録からボーナス口座への入金、MT4へのログインまでを画像つきで案内します。">
+    <meta property="og:title" content="HFM 100%入金ボーナスの受け取り方｜FX SPACE">
+    <meta property="og:description" content="HFMの100%入金ボーナスは、期間中の最初の入金と同じ額（最大45,000円）のボーナスがもらえるキャンペーンです。登録からボーナス口座への入金、MT4へのログインまでを画像つきで案内します。">
+    <meta property="og:image" content="https://fx-space.com/intro/img/og-hfm-deposit-bonus.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:image" content="https://fx-space.com/intro/img/og-hfm-deposit-bonus.png">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="stylesheet" href="css/style.css?v=20260908e">
+    <style>
+        /* ===== 上の固定ナビ（ytt-fto / hfm-bonus-hunter と同じ） ===== */
+        .ytt-sp-nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            background: rgba(255,255,255,0.95); backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e5e7eb;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0.875rem 2rem; gap: 1rem;
+        }
+        .ytt-sp-nav-logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: inherit; }
+        .ytt-sp-nav-logo img { height: 28px; width: auto; }
+        .ytt-sp-nav-cta { display: flex; gap: 0.5rem; align-items: center; }
+        @media (max-width: 600px) {
+            .ytt-sp-nav { padding: 0.625rem 0.875rem; gap: 0.5rem; }
+            .ytt-sp-nav-logo img { height: 24px; }
+            .ytt-sp-nav-cta .btn-sq-blue.sm { font-size: 0.75rem; padding: 0.4rem 0.75rem; min-height: 44px; }
+        }
+
+        /* ===== 地の色：白にしない（グレー2色で交互。白は上に置くカードだけ） ===== */
+        body { background: #f3f4f6; }
+        .sec-a { background: #f3f4f6; }
+        .sec-b { background: #e6e7ea; }
+        .nw { white-space: nowrap; }
+
+        /* ===== 最初の画面 ===== */
+        .ytt-sp-hero { padding: 9rem 2rem 5rem; text-align: center; }
+        @media (max-width: 600px) { .ytt-sp-hero { padding: 7.5rem 1rem 4rem; } }
+        .db-hero-logo { display: block; width: 204px; height: auto; margin: 0 auto 2.5rem; }
+        @media (max-width: 600px) { .db-hero-logo { width: 116px; margin-bottom: 1.75rem; } }
+        .ytt-sp-hero-title {
+            font-size: clamp(1.75rem, 8vw, 3rem);
+            font-weight: 900; color: #1e1b4b;
+            line-height: 1.3; letter-spacing: -0.02em;
+            margin: 0 0 1.25rem;
+        }
+        .ytt-sp-title-line { display: block; text-align: center; }
+        .ytt-sp-title-line > span.line-text { display: inline-block; white-space: nowrap; position: relative; }
+        /* PCは1行、スマホは2行（1行に入らないため） */
+        .t-sp { display: none; }
+        @media (max-width: 600px) { .t-pc { display: none; } .t-sp { display: block; } }
+        .ytt-sp-hero-btns { display: flex; justify-content: center; margin-top: 2rem; }
+        .ytt-sp-hero-btns .btn-sq-blue { white-space: normal; max-width: 100%; box-sizing: border-box; justify-content: center; text-align: center; line-height: 1.5; font-size: 1.0625rem; padding: 0.95rem 2rem; }
+
+        /* 100%入金ボーナスとは（文で短く。ytt-fto の「FTOとは」と同じ見た目） */
+        .db-about { max-width: 36em; margin: 3rem auto 0; padding: 1.4rem 1.5rem 1.3rem; border: 1.5px solid #e5e7eb; border-radius: 16px; background: #fff; text-align: left; }
+        .db-about-t { margin: 0 0 0.6rem; font-size: 1.1rem; font-weight: 900; color: #1e1b4b; padding-left: 0.75rem; border-left: 4px solid #f97316; line-height: 1.4; white-space: nowrap; }
+        .db-about-t wbr { display: none; }
+        .db-about p { margin: 0.45rem 0 0; font-size: 1rem; line-height: 1.85; color: #374151; }
+        .db-about p b { color: #1e1b4b; }
+        .db-about a { color: #4338ca; font-weight: 700; }
+        @media (max-width: 600px) { .db-about { margin-top: 2.25rem; padding: 1.1rem 1rem 1rem; } }
+
+        /* ===== ボタン ===== */
+        .btn-sq-blue {
+            display: inline-flex; align-items: center; gap: 0.375rem;
+            background: var(--primary); color: #fff;
+            border: none; border-radius: 10px;
+            padding: 0.75rem 1.75rem;
+            font-size: 1rem; font-weight: 800; text-decoration: none;
+            cursor: pointer; transition: opacity 0.2s; white-space: nowrap;
+        }
+        .btn-sq-blue:hover { opacity: 0.88; }
+        .btn-sq-blue.sm { font-size: 0.875rem; padding: 0.5rem 1.25rem; }
+
+        /* ===== セクションの型 ===== */
+        .ytt-spec-section { padding: 4.5rem 1.5rem 5rem; }
+        .ytt-spec-inner { max-width: 720px; margin: 0 auto; }
+        .ytt-spec-inner.wide { max-width: 1000px; }
+        .ytt-spec-header { text-align: center; margin-bottom: 1.5rem; }
+        .ytt-spec-header h2 { font-size: clamp(1.4rem, 4vw, 2rem); font-weight: 900; color: #1e1b4b; margin: 0.5rem 0; }
+        .ytt-spec-header p { font-size: clamp(0.875rem, 1.8vw, 1rem); color: #4b5563; line-height: 1.8; margin: 0.5rem auto 0; max-width: 520px; }
+        @media (max-width: 640px) { img[src$="wave-orange.png"] { height: clamp(18px, 6vw, 26px) !important; } }
+        @media (max-width: 600px) {
+            .ytt-spec-section { padding-left: 0.75rem; padding-right: 0.75rem; }
+            .ytt-spec-inner, .ytt-spec-inner.wide { max-width: none; }
+        }
+
+        /* キャンペーンの中身（白い枠の中の行。ピル型にしない） */
+        .db-terms { max-width: 40em; margin: 0 auto; padding: 0.4rem 1.4rem; border: 1.5px solid #e5e7eb; border-radius: 16px; background: #fff; }
+        .db-terms dl { margin: 0; }
+        .db-terms .row { display: grid; grid-template-columns: 7.5em minmax(0, 1fr); gap: 1rem; padding: 0.85rem 0; }
+        .db-terms .row + .row { border-top: 1.5px dashed #e5e7eb; }
+        .db-terms dt { font-size: 0.9375rem; font-weight: 800; color: #1e1b4b; line-height: 1.7; }
+        .db-terms dd { margin: 0; font-size: 1rem; color: #374151; line-height: 1.7; }
+        .db-terms dd b { color: #1e1b4b; }
+        .db-terms dd small { display: block; font-size: 0.875rem; color: #6b7280; }
+        @media (max-width: 600px) {
+            .db-terms { padding: 0.3rem 1rem; }
+            .db-terms .row { grid-template-columns: 1fr; gap: 0.15rem; padding: 0.75rem 0; }
+        }
+
+        /* 5ステップの目次（手書き数字） */
+        .ytt-add-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.75rem; margin-top: 1.5rem; }
+        @media (max-width: 900px) { .ytt-add-grid { grid-template-columns: 1fr; max-width: 460px; margin-left: auto; margin-right: auto; gap: 0.5rem; } }
+        .ytt-add-card { background: #fff; border: 1.5px solid #e5e7eb; border-radius: 14px; padding: 1.1rem 0.8rem; text-align: center; min-width: 0; text-decoration: none; transition: border-color 0.15s, transform 0.15s; }
+        .ytt-add-card:hover { border-color: #a5b4fc; transform: translateY(-2px); }
+        .ytt-add-card h3 { font-size: 1rem; font-weight: 800; color: #1e1b4b; margin: 0 0 0.4rem; }
+        .ytt-add-card p { font-size: 0.875rem; color: #4b5563; line-height: 1.7; margin: 0; }
+        .ytt-add-card .flow-num { display: block; height: 46px; width: auto; margin: 0 auto 0.6rem; }
+        .ytt-add-card.goal { border-color: #f97316; }
+        @media (max-width: 900px) {
+            .ytt-add-card { display: grid; grid-template-columns: 44px minmax(0, 1fr); column-gap: 0.75rem; align-items: center; text-align: left; padding: 0.85rem 0.9rem; }
+            .ytt-add-card .flow-num { grid-row: span 2; height: 38px; margin: 0 auto; }
+            .ytt-add-card h3 { margin: 0; }
+        }
+        .db-flow-note { margin: 1.25rem auto 0; max-width: 40em; text-align: center; font-size: 0.9375rem; color: #374151; line-height: 1.8; }
+        .db-flow-note b { color: #1e1b4b; }
+
+        /* ===== 手順カード（ytt-fto / hfm-bonus-hunter と同じ） ===== */
+        .guide-card { background: #fff; border: 1.5px solid #e5e7eb; border-radius: 20px; padding: 1.75rem 1.75rem 0.75rem; margin-top: 1.5rem; text-align: left; }
+        @media (max-width: 600px) { .guide-card { padding: 1.25rem 0.7rem 0.25rem; border-radius: 16px; } }
+        .gstep { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 0.85rem; padding-bottom: 1.6rem; margin-bottom: 1.6rem; border-bottom: 1px dashed #e5e7eb; }
+        .gstep:last-child { border-bottom: none; margin-bottom: 0; }
+        .gstep-no {
+            width: 40px; height: 34px; display: flex; align-items: center; justify-content: center;
+            background: url("img/fill-crayon-orange-badge.svg") 0 0 / 100% 100% no-repeat;
+            color: #1e1b4b; font-weight: 900; font-size: 1rem; font-family: Inter, sans-serif;
+        }
+        .gstep-body { min-width: 0; }
+        .gstep-title { font-size: 0.98rem; font-weight: 800; color: #1e1b4b; line-height: 1.6; margin: 0.25rem 0 0; }
+        .gstep-body p { font-size: 0.875rem; color: #4b5563; line-height: 1.85; margin: 0.45rem 0 0; }
+        .gstep-body p b { color: #1e1b4b; }
+        .gstep-btn { margin-top: 0.85rem; }
+        .gstep-btn .btn-sq-blue { white-space: normal; max-width: 100%; box-sizing: border-box; justify-content: center; text-align: center; }
+        .gshot { margin: 0.8rem 0 0; }
+        .gshot img { display: block; max-width: 100%; height: auto; border: 1px solid #e5e7eb; border-radius: 12px; background: #fff; }
+        .gshot.narrow img { max-width: min(100%, 300px); }
+        .gnote { border-left: 3px solid #f59e0b; padding: 0.35rem 0 0.35rem 0.8rem; margin: 0.8rem 0 0; font-size: 0.875rem; font-weight: 700; color: #92400e; line-height: 1.7; }
+        /* スクショの手書き風フレーム */
+        .gframe { position: relative; display: inline-block; max-width: 100%; padding: 7px; vertical-align: top; }
+        .gframe > img { display: block; max-width: 100%; height: auto; border: none !important; border-radius: 5px !important; box-shadow: none !important; background: #fff; }
+        .gframe > svg.gframe-line { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+        .gframe > svg.gframe-line path { fill: none; stroke: #7b8190; stroke-linecap: round; stroke-linejoin: round; }
+        .gframe > svg.gframe-line path.p1 { stroke-width: 3.2; opacity: 0.92; }
+        .gframe > svg.gframe-line path.p2 { stroke-width: 2; opacity: 0.45; }
+        .gshot.narrow .gframe { max-width: min(100%, 314px); }
+
+        /* ===== よくある質問（ytt-fto と同じ見た目） ===== */
+        .db-faq { max-width: 44em; margin: 0 auto; }
+        details.ytt-faq { background: #fff; border: 1.5px solid #e5e7eb; border-radius: 14px; margin-top: 0.875rem; overflow: hidden; }
+        details.ytt-faq[open] { border-color: #d1d5db; }
+        details.ytt-faq > summary { list-style: none; cursor: pointer; padding: 1rem 1.25rem; font-size: 0.9375rem; font-weight: 800; color: #1e1b4b; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; }
+        details.ytt-faq > summary::-webkit-details-marker { display: none; }
+        .ytt-faq-q { display: flex; align-items: flex-start; gap: 0.5rem; text-align: left; }
+        .ytt-faq-q::before { content: "Q"; color: #4f46e5; font-weight: 900; flex-shrink: 0; }
+        .ytt-faq-chev { width: 22px; height: 22px; background: #4f46e5; color: #fff; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 900; transition: transform 0.25s; flex-shrink: 0; }
+        details.ytt-faq[open] .ytt-faq-chev { transform: rotate(180deg); }
+        .ytt-faq-a { padding: 0 1.25rem 1.25rem; font-size: 0.875rem; color: #4b5563; line-height: 1.85; border-top: 1px dashed #e5e7eb; }
+        .ytt-faq-a p { margin: 0.75rem 0 0; }
+        .ytt-faq-a b { color: #1e1b4b; }
+        @media (max-width: 600px) { details.ytt-faq > summary { padding: 1rem 0.9rem; } .ytt-faq-a { padding: 0 0.9rem 1.1rem; } }
+
+        /* ===== 最後の一押し（ほかのページと同じ紺の帯） ===== */
+        .ytt-sp-footer-cta { padding: 5rem 2rem; text-align: center; background: #1e1b4b; }
+        .ytt-sp-footer-cta h2 { font-size: clamp(1.5rem, 4vw, 2.25rem); font-weight: 900; color: #fff; margin: 0 0 2rem; }
+        .ytt-sp-footer-cta-btns { display: flex; gap: 1rem; justify-content: center; align-items: center; flex-wrap: wrap; }
+        .btn-white-solid { display: inline-flex; align-items: center; gap: 0.5rem; background: #fff; color: #1e1b4b; border: 2px solid #fff; padding: 0.875rem 2rem; border-radius: 10px; font-size: 0.9375rem; font-weight: 800; text-decoration: none; transition: background 0.2s; white-space: nowrap; }
+        .btn-white-solid:hover { background: #f0f0f0; }
+        .ytt-sp-footer-cta .db-risk { max-width: 44em; margin: 2.5rem auto 0; font-size: 0.8125rem; color: #c7d2fe; line-height: 1.8; text-align: center; }
+        .db-risk a { color: #c7d2fe; font-weight: 400; text-decoration: underline; text-decoration-color: rgba(199,210,254,0.5); text-underline-offset: 2px; }
+        @media (max-width: 600px) { .ytt-sp-footer-cta { padding: 3.5rem 1rem; } }
+
+        /* ===== ページの下 ===== */
+        .ytt-sp-page-footer { padding: 1.75rem 2rem; text-align: center; font-size: 0.8125rem; color: #6b7280; border-top: 1px solid #d1d5db; background: #e6e7ea; }
+        .ytt-sp-page-footer a { color: #6b7280; text-decoration: underline; }
+        @media (max-width: 768px) { .ytt-sp-page-footer a { display: inline-block; padding: 0.75em 0; } }
+        @media (prefers-reduced-motion: reduce) { .ytt-add-card, .btn-sq-blue, .ytt-faq-chev { transition: none; } .ytt-add-card:hover { transform: none; } }
+    </style>
+    <style>
+    /* === タイトル下の黄色い波線（YTT特設ページと同じ決まり：高さ＝文字の1.01倍。幅はページ下のプログラムが --wave-w に入れる） === */
+    .ytt-sp-hero .ytt-sp-hero-title .ytt-sp-title-line .ytt-title-wave { display: block; width: 0 !important; min-width: 100%; max-width: none !important; margin: 0.1rem 0 0.5rem; height: 1.01em !important; overflow: hidden; }
+    .ytt-sp-hero .ytt-sp-hero-title .ytt-title-wave img { display: block; height: 100%; width: var(--wave-w, auto); min-width: 100%; max-width: none; object-fit: fill; }
+    /* 1行で見せるタイトル・見出しは、BudouX の区切りで折り返さない（Chrome は nowrap の中でも wbr で折れるため） */
+    .ytt-sp-hero-title wbr, .ytt-spec-header h2 wbr { display: none; }
+    </style>
+    <style>
+    /* スマホのタイトル・見出し（ytt-fto.html と同じ大きさ。1行に入りきらないものは js/sp-heading-fit.js が入る大きさまで縮める） */
+    @media (max-width: 600px) {
+      .ytt-sp-hero .ytt-sp-hero-title { font-size: 1.875rem !important; }
+      .ytt-sp-hero .ytt-sp-hero-title .line-text { white-space: nowrap !important; }
+      .ytt-spec-header h2 { font-size: clamp(1.25rem, 5.8vw, 1.4rem) !important; }
+    }
+    </style>
+<script src="js/sp-heading-fit.js?v=20261024a" defer></script>
+</head>
+<body>
+
+<!--
+====================================================================
+  HFM 100%入金ボーナスの受け取り方  hfm-deposit-bonus.html（2026-10-27 作成）
+  ・よすが依頼：Canva「HFM100％入金ボーナス」（DAHOHzDBtgo）の中身をWebページにしたもの。宣伝文の「45,000円獲得手順」のリンク先にする想定
+  ・毎月（ときどき月2回）開催。毎回書き換えずに済むよう、ページに開催期間は書かない（期間はHFMのキャンペーンページへのリンクで案内）
+  ・条件の出どころ：HFM公式LP lp.hfm.com/int/jp/bonus-offer（よくある質問を含む）、HFMからの案内文（2026-10-21着）、
+    Top-Up Bonus 利用規約 Version 2026/03（3.3 電話番号の認証、3.8 ボーナスは出金不可、3.9 移したお金に対して付く、3.13 利益は出金可、3.14 出金した割合でボーナスが減る）
+  ・STEP 1〜2 の画像は ytt-web-hfm.html と同じ。STEP 3〜5 の画像は Canva から取り出したもの（img/hfm-bonus/）
+====================================================================
+-->
+
+<nav class="ytt-sp-nav">
+    <a href="index.html" class="ytt-sp-nav-logo">
+        <img src="img/ytt-nav-logo.png" alt="FX SPACE">
+    </a>
+    <div class="ytt-sp-nav-cta">
+        <a href="https://www.hfm.com/int/?refid=30443481&amp;acid=fxspaceysg" target="_blank" rel="noopener" class="btn-sq-blue sm">HFMに登録する</a>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="ytt-sp-hero sec-a">
+    <img class="db-hero-logo" src="img/hfm-logo.png" alt="HFM（HF Markets）" width="445" height="218">
+    <h1 class="ytt-sp-hero-title">
+        <span class="ytt-sp-title-line t-pc"><span class="line-text">100%入金ボーナスの受け取り方<span class="ytt-title-wave" aria-hidden="true"><img src="img/wave-yellow.png" alt=""></span></span></span>
+        <span class="ytt-sp-title-line t-sp" aria-hidden="true"><span class="line-text">100%入金ボーナスの<span class="ytt-title-wave"><img src="img/wave-yellow.png" alt=""></span></span></span>
+        <span class="ytt-sp-title-line t-sp" aria-hidden="true"><span class="line-text">受け取り方<span class="ytt-title-wave"><img src="img/wave-yellow.png" alt=""></span></span></span>
+    </h1>
+    <div class="ytt-sp-hero-btns">
+        <a href="https://www.hfm.com/int/?refid=30443481&amp;acid=fxspaceysg" class="btn-sq-blue" target="_blank" rel="noopener">HFMに登録する</a>
+    </div>
+
+    <div class="db-about">
+        <h2 class="db-about-t">100%入金ボーナスとは</h2>
+        <p>HFMが期間を決めて開くキャンペーンです。開催期間中に<b>ボーナス口座へ最初に入金</b>すると、<b>入金した額と同じ額のボーナス</b>（最大<wbr><span class="nw">45,000円</span><wbr>）がもらえます。</p>
+        <p>たとえば<wbr><span class="nw">45,000円</span><wbr>を入金すると、ボーナスと合わせて<wbr><span class="nw">90,000円</span><wbr>を取引の証拠金にできます。ボーナスそのものは出金できませんが、取引で出た利益は出金できます。</p>
+        <p>開催期間は <a href="https://lp.hfm.com/int/jp/bonus-offer?refid=30443481&amp;acid=fxspaceysg" target="_blank" rel="noopener">HFMのキャンペーンページ</a> に出ています。</p>
+    </div>
+</section>
+
+<!-- キャンペーンの中身 -->
+<section class="ytt-spec-section sec-b" id="terms">
+    <div class="ytt-spec-inner wide">
+        <div class="ytt-spec-header">
+            <span class="section-title-badge section-title-badge--orange">
+                <img class="hero-title-side hero-title-side--left" src="img/title-side-orange-left.png" alt="">
+                キャンペーンの中身
+                <img class="hero-title-side hero-title-side--right" src="img/title-side-orange-right.png" alt="">
+            </span>
+            <div style="text-align:center; margin-bottom:0.25rem;">
+                <div style="display:inline-block; white-space:nowrap;">
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">入金と同じ額がもらえます</h2>
+                    <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
+                </div>
+            </div>
+        </div>
+        <div class="db-terms">
+            <dl>
+                <div class="row"><dt>もらえる額</dt><dd>入金した額の<b>100%</b>（最大<wbr><b class="nw">45,000円</b>）</dd></div>
+                <div class="row"><dt>対象の入金</dt><dd>開催期間中の<b>最初の入金</b><small>2回目からの入金は、100%ではなく20%のボーナスになります</small></dd></div>
+                <div class="row"><dt>入金する口座</dt><dd><b>Top-Up Bonus口座</b>（ボーナス口座）</dd></div>
+                <div class="row"><dt>必要なこと</dt><dd>入金の前に<b>本人確認</b>を終えておく</dd></div>
+                <div class="row"><dt>使える人</dt><dd>はじめての人も、HFMの口座を持っている人も</dd></div>
+            </dl>
+        </div>
+    </div>
+</section>
+
+<!-- 流れ -->
+<section class="ytt-spec-section sec-a" id="flow">
+    <div class="ytt-spec-inner wide">
+        <div class="ytt-spec-header">
+            <span class="section-title-badge section-title-badge--orange">
+                <img class="hero-title-side hero-title-side--left" src="img/title-side-orange-left.png" alt="">
+                受け取るまで
+                <img class="hero-title-side hero-title-side--right" src="img/title-side-orange-right.png" alt="">
+            </span>
+            <div style="text-align:center; margin-bottom:0.25rem;">
+                <div style="display:inline-block; white-space:nowrap;">
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">5ステップで受け取れます</h2>
+                    <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
+                </div>
+            </div>
+        </div>
+        <div class="ytt-add-grid">
+            <a class="ytt-add-card" href="#d-step1"><img class="flow-num" src="img/crayon-1.png" alt="1"><h3>登録</h3><p>HFMのアカウントを作る</p></a>
+            <a class="ytt-add-card" href="#d-step2"><img class="flow-num" src="img/crayon-2.png" alt="2"><h3>本人確認</h3><p>名前・住所を入れて書類を出す</p></a>
+            <a class="ytt-add-card" href="#d-step3"><img class="flow-num" src="img/crayon-3.png" alt="3"><h3>ボーナス口座</h3><p>Top-Up Bonus口座を作る</p></a>
+            <a class="ytt-add-card goal" href="#d-step4"><img class="flow-num" src="img/crayon-4.png" alt="4"><h3>入金</h3><p>ボーナス口座に入金するとボーナスが付く</p></a>
+            <a class="ytt-add-card" href="#d-step5"><img class="flow-num" src="img/crayon-5.png" alt="5"><h3>MT4にログイン</h3><p>取引を始める</p></a>
+        </div>
+        <p class="db-flow-note">本人確認まで終わっている人は<b>STEP 3</b>から。<wbr><span class="nw">Top-Up Bonus口座</span><wbr>も持っている人は<b>STEP 4</b>からです。</p>
+    </div>
+</section>
+
+<!-- STEP 1 -->
+<section class="ytt-spec-section sec-b" id="d-step1">
+    <div class="ytt-spec-inner">
+        <div class="ytt-spec-header">
+            <span class="section-title-badge section-title-badge--blue">
+                <img class="hero-title-side hero-title-side--left" src="img/title-side-blue-left.png" alt="">
+                STEP 1
+                <img class="hero-title-side hero-title-side--right" src="img/title-side-blue-right.png" alt="">
+            </span>
+            <div style="text-align:center; margin-bottom:0.25rem;">
+                <div style="display:inline-block; white-space:nowrap;">
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">HFMのアカウントを登録する</h2>
+                    <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
+                </div>
+            </div>
+        </div>
+        <div class="guide-card">
+            <div class="gstep">
+                <div class="gstep-no">1</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">HFMのサイトを開いて「登録」</p>
+                    <div class="gstep-btn"><a href="https://www.hfm.com/int/?refid=30443481&amp;acid=fxspaceysg" class="btn-sq-blue" target="_blank" rel="noopener">HFMのサイトを開く</a></div>
+                    <figure class="gshot"><img src="img/webytt/hfm/h-01-top.jpg" alt="HFMのサイトの登録ボタン" width="791" height="341" loading="lazy"></figure>
+                </div>
+            </div>
+            <div class="gstep">
+                <div class="gstep-no">2</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">居住国・メールアドレス・パスワードを入力して「続行」</p>
+                    <figure class="gshot"><img src="img/webytt/hfm/h-02-register.png" alt="アカウント登録の画面。メールアドレスとパスワードを入力して続行" width="960" height="764" loading="lazy"></figure>
+                </div>
+            </div>
+            <div class="gstep">
+                <div class="gstep-no">3</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">メールに届いた6桁のコードを入力して「続行」</p>
+                    <figure class="gshot"><img src="img/webytt/hfm/h-03-verify-email.png" alt="メールを認証する画面。6桁のコードを入力して続行" width="960" height="732" loading="lazy"></figure>
+                    <p>コードが見つからないときは、迷惑メールのフォルダも確認してください。</p>
+                </div>
+            </div>
+            <div class="gstep">
+                <div class="gstep-no">4</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">「アカウントの準備ができました」と出たら「こちらをクリック」</p>
+                    <figure class="gshot"><img src="img/webytt/hfm/h-04-ready.png" alt="アカウントの準備ができましたの画面" width="960" height="686" loading="lazy"></figure>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- STEP 2 -->
+<section class="ytt-spec-section sec-a" id="d-step2">
+    <div class="ytt-spec-inner">
+        <div class="ytt-spec-header">
+            <span class="section-title-badge section-title-badge--blue">
+                <img class="hero-title-side hero-title-side--left" src="img/title-side-blue-left.png" alt="">
+                STEP 2
+                <img class="hero-title-side hero-title-side--right" src="img/title-side-blue-right.png" alt="">
+            </span>
+            <div style="text-align:center; margin-bottom:0.25rem;">
+                <div style="display:inline-block; white-space:nowrap;">
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">本人確認をする</h2>
+                    <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
+                </div>
+            </div>
+            <p>本人確認が終わる前に入金すると、ボーナスは付きません。</p>
+        </div>
+        <div class="guide-card">
+            <div class="gstep">
+                <div class="gstep-no">1</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">左のメニューの「登録を完了」</p>
+                    <figure class="gshot"><img src="img/webytt/hfm/h-05-complete.png" alt="HFMの会員ページ。左のメニューの登録を完了" width="800" height="994" loading="lazy"></figure>
+                </div>
+            </div>
+            <div class="gstep">
+                <div class="gstep-no">2</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">名前・電話番号・生年月日を入力して「続行」</p>
+                    <figure class="gshot"><img src="img/webytt/hfm/h-06-profile.png" alt="プロフィールの入力画面" width="820" height="956" loading="lazy"></figure>
+                    <p>口座通貨は「JPY」を選び、下の2つにチェックを入れます。</p>
+                </div>
+            </div>
+            <div class="gstep">
+                <div class="gstep-no">3</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">住所などを入力し、取引経験を選んで「次へ」</p>
+                    <figure class="gshot"><img src="img/webytt/hfm/h-07-address.png" alt="住所や投資家プロフィールの入力画面" width="960" height="584" loading="lazy"></figure>
+                </div>
+            </div>
+            <div class="gstep">
+                <div class="gstep-no">4</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">本人確認書類と住所確認書類を提出する</p>
+                    <figure class="gshot"><img src="img/webytt/hfm/h-08-id.png" alt="本人確認書類の提出画面" width="960" height="750" loading="lazy"></figure>
+                    <p>書類の種類（運転免許証・マイナンバーカード・パスポート）を選び、スマホで撮影するか、PCに保存した画像を送ります。PCから送るときは「次へ」→「手動アップロード」です。</p>
+                    <p>住所確認書類も、同じように提出します。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- STEP 3 -->
+<section class="ytt-spec-section sec-b" id="d-step3">
+    <div class="ytt-spec-inner">
+        <div class="ytt-spec-header">
+            <span class="section-title-badge section-title-badge--blue">
+                <img class="hero-title-side hero-title-side--left" src="img/title-side-blue-left.png" alt="">
+                STEP 3
+                <img class="hero-title-side hero-title-side--right" src="img/title-side-blue-right.png" alt="">
+            </span>
+            <div style="text-align:center; margin-bottom:0.25rem;">
+                <div style="display:inline-block; white-space:nowrap;">
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">ボーナス口座を作る</h2>
+                    <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
+                </div>
+            </div>
+            <p>一度作れば、次の開催からは同じ口座に入金するだけです（60日間、入出金も取引もないと口座は閉じられます）。</p>
+        </div>
+        <div class="guide-card">
+            <div class="gstep">
+                <div class="gstep-no">1</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">会員ページの左のメニューで「プロモーション」→「受取可能ボーナス」</p>
+                    <div class="gstep-btn"><a href="https://my.hfm.com/jp/int/login?refid=30443481&amp;acid=fxspaceysg&amp;next=/jp/trader/available-bonus" class="btn-sq-blue" target="_blank" rel="noopener">会員ページにログインする</a></div>
+                    <figure class="gshot narrow"><img src="img/hfm-bonus/b-01-promo-menu.webp" alt="HFMの会員ページの左のメニュー。プロモーションを開いて、受取可能ボーナスを赤い枠で囲んでいる" width="348" height="698" loading="lazy"></figure>
+                    <p>上のボタンからログインすると、「受取可能ボーナス」の画面がそのまま開きます。</p>
+                </div>
+            </div>
+            <div class="gstep">
+                <div class="gstep-no">2</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">「100% Top-up Bonus」の「取引口座を開設」</p>
+                    <figure class="gshot"><img src="img/hfm-bonus/b-02-topup-card.webp" alt="受取可能ボーナスの画面。左の100% Top-up Bonusのカードの、取引口座を開設のボタンを赤い枠で囲んでいる" width="772" height="318" loading="lazy"></figure>
+                    <p>見当たらないときは、左のメニューの「取引口座」→「ライブ口座を開設」→「ボーナス口座」からも作れます。</p>
+                </div>
+            </div>
+            <div class="gstep">
+                <div class="gstep-no">3</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">「ボーナス口座」のTop-Up Bonusが選ばれているのを確かめて「→」</p>
+                    <figure class="gshot"><img src="img/hfm-bonus/b-03-bonus-tab.webp" alt="取引口座をお選びくださいの画面。ボーナス口座のタブでTop-Up Bonusが選ばれていて、右下の矢印ボタンを赤い枠で囲んでいる" width="675" height="230" loading="lazy"></figure>
+                </div>
+            </div>
+            <div class="gstep">
+                <div class="gstep-no">4</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">「MT4」を選び、レバレッジとパスワードを決め、利用規約にチェックを入れて「口座を開設」</p>
+                    <figure class="gshot"><img src="img/hfm-bonus/b-04-setup.webp" alt="Top-Up Bonus 取引口座のセットアップの画面。プラットフォームでMT4を選び、口座通貨JPY、レバレッジ、口座ニックネーム、パスワードを入れて、利用規約のチェックと口座を開設のボタンを赤い枠で囲んでいる" width="681" height="571" loading="lazy"></figure>
+                    <p>パスワードはMT4のログインに使うので、控えておいてください。</p>
+                </div>
+            </div>
+            <div class="gstep">
+                <div class="gstep-no">5</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">口座番号とサーバーが出たら完了</p>
+                    <figure class="gshot"><img src="img/hfm-bonus/b-05-opened.webp" alt="新たな取引口座が開設されましたの表示。取引口座番号（ログイン）とサーバーが出ている" width="516" height="95" loading="lazy"></figure>
+                    <p>同じ内容がメールでも届きます。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- STEP 4 -->
+<section class="ytt-spec-section sec-a" id="d-step4">
+    <div class="ytt-spec-inner">
+        <div class="ytt-spec-header">
+            <span class="section-title-badge section-title-badge--blue">
+                <img class="hero-title-side hero-title-side--left" src="img/title-side-blue-left.png" alt="">
+                STEP 4
+                <img class="hero-title-side hero-title-side--right" src="img/title-side-blue-right.png" alt="">
+            </span>
+            <div style="text-align:center; margin-bottom:0.25rem;">
+                <div style="display:inline-block; white-space:nowrap;">
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">ボーナス口座に入金する</h2>
+                    <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
+                </div>
+            </div>
+            <p>開催期間中に入金してください。ボーナス口座にお金が入ると、すぐにボーナスが付きます。</p>
+        </div>
+        <div class="guide-card">
+            <div class="gstep">
+                <div class="gstep-no">1</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">左のメニューの「入金」</p>
+                    <figure class="gshot narrow"><img src="img/hfm-bonus/d-01-menu.webp" alt="HFMの会員ページの左のメニュー。入金を赤い枠で囲んでいる" width="930" height="945" loading="lazy"></figure>
+                </div>
+            </div>
+            <div class="gstep">
+                <div class="gstep-no">2</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">入金先がボーナス口座の番号になっているのを確かめ、「銀行送金」→「Local Bank Transfer (A)」</p>
+                    <figure class="gshot"><img src="img/hfm-bonus/d-02-method.webp" alt="入金の画面。いちばん上の入金先がトップアップボーナス口座のIDになっていることを確認と書き込み、銀行送金とLocal Bank Transfer (A)を赤い枠で囲んでいる" width="927" height="291" loading="lazy"></figure>
+                    <p>Local Bank Transfer (A) は国内の銀行から振り込む方法で、手数料は無料です。着金までの時間は、画面の表示では10分から最大12時間です。</p>
+                </div>
+            </div>
+            <div class="gstep">
+                <div class="gstep-no">3</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">金額と振込名義（カタカナ）を入れて「入金」</p>
+                    <figure class="gshot"><img src="img/hfm-bonus/d-03-amount.webp" alt="Local Bank Transfer (A)の入力画面。入金額（ボーナス満額狙いなら45,000円）、振込名義の名と姓を入れて、入金ボタンを赤い枠で囲んでいる" width="945" height="455" loading="lazy"></figure>
+                    <p>ボーナスを満額もらうなら、金額は<b class="nw">45,000円</b>です。この方法で入金できるのは<wbr><span class="nw">10,000円</span><wbr>からです。「入金」を押すと振込先が出るので、そこに振り込みます。</p>
+                </div>
+            </div>
+            <div class="gstep">
+                <div class="gstep-no">4</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">右上の更新ボタンを押して、金額が変わっていれば着金</p>
+                    <figure class="gshot"><img src="img/hfm-bonus/d-04-balance.webp" alt="会員ページの右上。45,000.00 JPYの横の更新ボタンを赤い枠で囲み、更新を押すと入金が反映されていた場合値が変わると書き込んでいる" width="897" height="399" loading="lazy"></figure>
+                </div>
+            </div>
+            <div class="gstep">
+                <div class="gstep-no">5</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">お金がウォレット（お財布）に入ったときは、ボーナス口座へ移す</p>
+                    <figure class="gshot"><img src="img/hfm-bonus/d-05-gear.webp" alt="マイ取引口座の画面。口座の行の歯車ボタンを押し、資金を追加するを赤い枠で囲んでいる" width="1200" height="550" loading="lazy"></figure>
+                    <figure class="gshot"><img src="img/hfm-bonus/d-06-transfer.webp" alt="資金移動の画面。移動元にお財布、移動先に運用するMT4口座番号、入れる金額を入れて、資金移動のボタンを赤い枠で囲んでいる" width="1200" height="420" loading="lazy"></figure>
+                    <p>「マイ取引口座」でボーナス口座の歯車→「資金を追加する」。移動元を「お財布」、移動先をボーナス口座の番号にして「資金移動」を押します。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- STEP 5 -->
+<section class="ytt-spec-section sec-b" id="d-step5">
+    <div class="ytt-spec-inner">
+        <div class="ytt-spec-header">
+            <span class="section-title-badge section-title-badge--blue">
+                <img class="hero-title-side hero-title-side--left" src="img/title-side-blue-left.png" alt="">
+                STEP 5
+                <img class="hero-title-side hero-title-side--right" src="img/title-side-blue-right.png" alt="">
+            </span>
+            <div style="text-align:center; margin-bottom:0.25rem;">
+                <div style="display:inline-block; white-space:nowrap;">
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">MT4にログインする</h2>
+                    <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
+                </div>
+            </div>
+        </div>
+        <div class="guide-card">
+            <div class="gstep">
+                <div class="gstep-no">1</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">「マイ取引口座」でボーナス口座の「取引」→「更に表示」</p>
+                    <figure class="gshot"><img src="img/hfm-bonus/m-01-trade.webp" alt="マイ取引口座の画面。口座の行の取引ボタンを押すとプラットフォームを選択が開き、更に表示を赤い枠で囲んでいる" width="1200" height="538" loading="lazy"></figure>
+                </div>
+            </div>
+            <div class="gstep">
+                <div class="gstep-no">2</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">「MT4デスクトッププラットフォーム」を押してダウンロードし、インストールする</p>
+                    <figure class="gshot narrow"><img src="img/hfm-bonus/m-02-desktop.webp" alt="プラットフォームを選択の画面。MT4デスクトッププラットフォームを赤い枠で囲んでいる" width="524" height="519" loading="lazy"></figure>
+                    <p>インストールの画面は、<a href="ytt-web-hfm.html#h-step4">HFMで口座を作る</a>のSTEP 4で案内しています。</p>
+                </div>
+            </div>
+            <div class="gstep">
+                <div class="gstep-no">3</div>
+                <div class="gstep-body">
+                    <p class="gstep-title">MT4の「ファイル」→「取引口座にログイン」で、口座番号・パスワード・サーバーを入れる</p>
+                    <figure class="gshot narrow"><img src="img/hfm-bonus/m-03-login.webp" alt="MT4のファイルメニューの取引口座にログインと、取引口座のログイン情報の画面。ログインIDにMT4口座番号、パスワード、サーバーにサーバー情報を入れる" width="826" height="1145" loading="lazy"></figure>
+                    <p>口座番号とサーバーは、STEP 3 の最後の画面かメールで確かめられます。これで取引を始められます。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- よくある質問 -->
+<section class="ytt-spec-section sec-a" id="faq">
+    <div class="ytt-spec-inner wide">
+        <div class="ytt-spec-header">
+            <span class="section-title-badge section-title-badge--orange">
+                <img class="hero-title-side hero-title-side--left" src="img/title-side-orange-left.png" alt="">
+                よくある質問
+                <img class="hero-title-side hero-title-side--right" src="img/title-side-orange-right.png" alt="">
+            </span>
+            <div style="text-align:center; margin-bottom:0.25rem;">
+                <div style="display:inline-block; white-space:nowrap;">
+                    <h2 style="font-size:clamp(0.85rem,4.5vw,1.5rem); white-space:nowrap; margin:0;">入金する前に確認</h2>
+                    <img src="img/wave-orange.png" alt="" style="display:block;width:100%;height:clamp(14px,3vw,22px);object-fit:fill;margin:0.1rem 0 0.5rem;">
+                </div>
+            </div>
+        </div>
+        <div class="db-faq">
+            <details class="ytt-faq">
+                <summary><span class="ytt-faq-q">もうHFMの口座を持っています。もらえますか？</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
+                <div class="ytt-faq-a"><p>もらえます。「初回入金」は、はじめてHFMに登録する人という意味ではなく、<b>開催期間中の最初の入金</b>のことです。ログインして、ボーナス口座に入金してください。</p></div>
+            </details>
+            <details class="ytt-faq">
+                <summary><span class="ytt-faq-q">毎回ボーナス口座を作り直しますか？</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
+                <div class="ytt-faq-a"><p>作り直さなくて大丈夫です。一度作ったTop-Up Bonus口座に入金すれば、次の開催でも対象になります。ただし、60日間入出金も取引もないと口座は閉じられるので、そのときはSTEP 3でもう一度作ってください。</p></div>
+            </details>
+            <details class="ytt-faq">
+                <summary><span class="ytt-faq-q">50,000円入金したら？</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
+                <div class="ytt-faq-a"><p><span class="nw">45,000円</span>に対して100%のボーナス（<span class="nw">45,000円</span>）が付きます。上限を超えた<span class="nw">5,000円</span>分は対象外です。</p></div>
+            </details>
+            <details class="ytt-faq">
+                <summary><span class="ytt-faq-q">45,000円のあと、さらに20,000円入金したら？</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
+                <div class="ytt-faq-a"><p>最初の<span class="nw">45,000円</span>に100%（<span class="nw">45,000円</span>）、あとの<span class="nw">20,000円</span>に20%（<span class="nw">4,000円</span>）のボーナスが付きます。</p></div>
+            </details>
+            <details class="ytt-faq">
+                <summary><span class="ytt-faq-q">10,000円だけ入金したら？</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
+                <div class="ytt-faq-a"><p><span class="nw">10,000円</span>に100%（<span class="nw">10,000円</span>）のボーナスが付きます。100%になるのは最初の入金だけなので、そのあとの入金は20%のボーナスになります。</p></div>
+            </details>
+            <details class="ytt-faq">
+                <summary><span class="ytt-faq-q">KATANA口座やPro口座に入金してもいいですか？</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
+                <div class="ytt-faq-a"><p>ボーナスが付くのは<b>Top-Up Bonus口座だけ</b>です。ほかの口座に入金するとボーナスは付かないので、入金先の口座番号を確かめてから入金してください。</p></div>
+            </details>
+            <details class="ytt-faq">
+                <summary><span class="ytt-faq-q">ほかのボーナスと一緒にもらえますか？</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
+                <div class="ytt-faq-a"><p>1回の入金に、いくつものボーナスが同時に付くことはありません。</p></div>
+            </details>
+            <details class="ytt-faq">
+                <summary><span class="ytt-faq-q">本人確認はしないとだめですか？</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
+                <div class="ytt-faq-a"><p>必要です。本人確認が終わっていないと、ボーナス口座に入金してもボーナスは付きません。電話番号の確認も必要です。入金の前に済ませておいてください。</p></div>
+            </details>
+            <details class="ytt-faq">
+                <summary><span class="ytt-faq-q">ボーナスや利益は出金できますか？</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
+                <div class="ytt-faq-a"><p>ボーナスは取引の証拠金として使え、<b>そこで出た利益と自分で入金したお金は出金できます</b>。ボーナスそのものは出金できません。</p><p>出金すると、出金した割合と同じだけボーナスが減ります（例：出金できるお金の半分を出すと、ボーナスも半分になる）。</p></div>
+            </details>
+        </div>
+    </div>
+</section>
+
+<!-- 最後の一押し（ほかのページと同じ紺の帯） -->
+<section class="ytt-sp-footer-cta">
+    <h2>最大<wbr><span class="nw">45,000円</span><wbr>のボーナスを受け取ろう</h2>
+    <div class="ytt-sp-footer-cta-btns">
+        <a href="https://www.hfm.com/int/?refid=30443481&amp;acid=fxspaceysg" class="btn-white-solid" target="_blank" rel="noopener">HFMに登録する</a>
+    </div>
+    <p class="db-risk">FXの取引にはリスクがあります。このページは手順の案内で、利益を保証するものではありません。投資の判断はご自身で行ってください。<br><wbr>条件の出どころ：<a href="https://lp.hfm.com/int/jp/bonus-offer?refid=30443481&amp;acid=fxspaceysg" target="_blank" rel="noopener">HFM 100%入金ボーナス 公式ページ</a></p>
+</section>
+
+<footer class="ytt-sp-page-footer">
+    <p>© FX SPACE — <a href="ytt-web-hfm.html">HFMで口座を作る</a> / <a href="index.html">トップページ</a></p>
+</footer>
+
+<script>
+/* 見出しのアンカーへ飛んだとき、固定ナビの下に潜らないようにする */
+document.documentElement.style.scrollPaddingTop = '72px';
+</script>
+<script>
+/* 手書き風フレーム：画像の実寸に合わせて、少しゆらいだ線で囲む（ytt-fto / hfm-bonus-hunter と同じ） */
+(function () {
+  function hash(str) { var h = 2166136261; for (var i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
+  function rng(seed) { return function () { seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0; return seed / 4294967296; }; }
+  function edge(pts, x1, y1, x2, y2, r, amp) {
+    var len = Math.hypot(x2 - x1, y2 - y1) || 1, n = Math.max(2, Math.round(len / 36));
+    var nx = -(y2 - y1) / len, ny = (x2 - x1) / len;
+    for (var i = 1; i <= n; i++) { var t = i / n, j = (r() - 0.5) * 2 * amp; pts.push([x1 + (x2 - x1) * t + nx * j, y1 + (y2 - y1) * t + ny * j]); }
+  }
+  function pathFor(w, h, seed) {
+    var r = rng(seed), m = 2.5, amp = Math.min(1.3, Math.max(0.6, Math.min(w, h) / 90));
+    var x0 = m, y0 = m, x1 = w - m, y1 = h - m;
+    var pts = [[x0 + 3 + r() * 3, y0 + r() * 1.5]];
+    edge(pts, x0, y0, x1, y0, r, amp);
+    edge(pts, x1, y0, x1, y1, r, amp);
+    edge(pts, x1, y1, x0, y1, r, amp);
+    edge(pts, x0, y1, x0, y0, r, amp);
+    pts.push([x0 + 9 + r() * 5, y0 - 0.8 + r() * 1.2]);
+    var d = 'M' + pts[0][0].toFixed(1) + ' ' + pts[0][1].toFixed(1);
+    for (var i = 1; i < pts.length; i++) {
+      var p = pts[i - 1], c = pts[i];
+      d += ' Q' + p[0].toFixed(1) + ' ' + p[1].toFixed(1) + ' ' + ((p[0] + c[0]) / 2).toFixed(1) + ' ' + ((p[1] + c[1]) / 2).toFixed(1);
+    }
+    var last = pts[pts.length - 1];
+    return d + ' L' + last[0].toFixed(1) + ' ' + last[1].toFixed(1);
+  }
+  function draw(box) {
+    var w = box.clientWidth, h = box.clientHeight; if (!w || !h) return;
+    var svg = box.querySelector('svg.gframe-line');
+    svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+    var seed = +box.getAttribute('data-seed');
+    svg.querySelector('.p1').setAttribute('d', pathFor(w, h, seed));
+    svg.querySelector('.p2').setAttribute('d', pathFor(w, h, (seed ^ 0x9e3779b9) >>> 0));
+  }
+  var NS = 'http://www.w3.org/2000/svg';
+  var defs = document.createElementNS(NS, 'svg');
+  defs.setAttribute('width', '0'); defs.setAttribute('height', '0'); defs.setAttribute('aria-hidden', 'true');
+  defs.style.position = 'absolute';
+  defs.innerHTML = '<defs><filter id="gframe-crayon" x="-10%" y="-10%" width="120%" height="120%">' +
+    '<feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" seed="4" result="n1"/>' +
+    '<feDisplacementMap in="SourceGraphic" in2="n1" scale="2.8" xChannelSelector="R" yChannelSelector="G" result="rough"/>' +
+    '<feTurbulence type="fractalNoise" baseFrequency="1.15" numOctaves="2" seed="11" result="n2"/>' +
+    '<feColorMatrix in="n2" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.3 1.8" result="grain"/>' +
+    '<feComposite in="rough" in2="grain" operator="in"/>' +
+    '</filter></defs>';
+  document.body.appendChild(defs);
+  var ro = window.ResizeObserver ? new ResizeObserver(function (es) { es.forEach(function (e) { draw(e.target); }); }) : null;
+  document.querySelectorAll('.gshot img').forEach(function (img) {
+    if (img.parentElement.classList.contains('gframe')) return;
+    var box = document.createElement('span');
+    box.className = 'gframe';
+    box.setAttribute('data-seed', hash(img.getAttribute('src') || ''));
+    img.parentNode.insertBefore(box, img);
+    box.appendChild(img);
+    var svg = document.createElementNS(NS, 'svg');
+    svg.setAttribute('class', 'gframe-line'); svg.setAttribute('aria-hidden', 'true');
+    var g = document.createElementNS(NS, 'g'); g.setAttribute('filter', 'url(#gframe-crayon)');
+    var p1 = document.createElementNS(NS, 'path'); p1.setAttribute('class', 'p1');
+    var p2 = document.createElementNS(NS, 'path'); p2.setAttribute('class', 'p2');
+    g.appendChild(p1); g.appendChild(p2); svg.appendChild(g);
+    box.appendChild(svg);
+    if (ro) ro.observe(box);
+    img.addEventListener('load', function () { draw(box); });
+    draw(box);
+  });
+})();
+</script>
+<!-- BudouX — 日本語の文節改行（全ページ共通・同梱版。js/budoux-init.js を参照） -->
+<script src="js/budoux-ja.min.js?v=20260907a" defer></script>
+<script src="js/budoux-init.js?v=20260907a" defer></script>
+<script>
+/* タイトル下の波線（YTT特設ページと同じ）：長い方の行の幅を --wave-w に入れる */
+(function () {
+  function fit() {
+    document.querySelectorAll('.ytt-sp-hero-title').forEach(function (h1) {
+      var fs = parseFloat(getComputedStyle(h1).fontSize) || 16;
+      var w = fs * 1.01 * 1850 / 232;
+      h1.querySelectorAll('.line-text').forEach(function (t) { w = Math.max(w, t.getBoundingClientRect().width); });
+      h1.style.setProperty('--wave-w', Math.ceil(w) + 'px');
+    });
+  }
+  fit();
+  window.addEventListener('resize', fit);
+  window.addEventListener('load', fit);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+})();
+</script>
+<!-- 見出しの下の波線の太さを、文字の大きさにそろえる -->
+<script src="js/wave-fit.js?v=20260924a" defer></script>
+</body>
+</html>

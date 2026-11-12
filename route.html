@@ -1143,7 +1143,7 @@ body{ padding-top:50px; }
         </div>
       </div>
       <div class="conn"><i></i></div>
-      <div class="node goal wide" data-tip="ランクはKarmanから始まり、最高峰はVoyager。Mars以降は飛び級あり・降格なし。">プロトレーダー</div>
+      <div class="node goal wide" data-tip="ランクはKarmanから始まり、最高峰はVoyager。飛び級あり・降格なし。">プロトレーダー</div>
     </div>
     </div><!-- /fc-main -->
 
@@ -2001,12 +2001,16 @@ body{ padding-top:50px; }
   <div class="astro-wrap">
     <!-- ランク（ASTROランク制）：条件・説明は画像に任せ、テキストは最小限にする -->
     <div class="astro-rank rv">
-      <img class="astro-rank-img" src="img/astro-rank-chart-v2.png" alt="ASTRO TRADERS ランク一覧：個人口座ルートとプロップルート、KarmanからVoyagerまでの昇格条件" width="1293" height="1217" loading="lazy">
+      <picture>
+        <!-- PCは横長、スマホは縦長（文字が小さくならないように） -->
+        <source media="(min-width:761px)" srcset="img/astro-rank-chart-v4-wide.jpg" width="1671" height="941">
+        <img class="astro-rank-img" src="img/astro-rank-chart-v4.jpg" alt="ASTRO TRADERS ランク一覧：入口のKarmanはリアル口座でプロ条件を2か月連続達成またはプロップ口座合格。Moon 100万円からVoyager 1億円までは、リアル利益とプロップ出金額（手取り）を合わせた実績額で昇格" width="1122" height="1402" loading="lazy">
+      </picture>
       <p class="rank-zoom-hint" id="rank-zoom-hint"><img src="img/zoom-icon.png" alt="">画像をタップして拡大</p>
       <p class="astro-goal">プロの最高峰 <b>Voyager</b> を目指そう</p>
       <div><a class="rank-astro-link" href="https://discordapp.com/channels/1039824083208126474/1136925665099251753/1179699238481969162" target="_blank" rel="noopener">ASTROについて詳しく →</a></div>
       <div><a class="astro-apply astro-apply--stack" href="https://discordapp.com/channels/1039824083208126474/1136925665099251753/1179699297105739846" target="_blank" rel="noopener">プロ申請へ →</a></div>
-      <p class="rank-note">※ YTTを入れてトレードしていれば、実績から自動で判定されるため申請は不要です。<a href="https://fx-space.com/intro/ytt-tokusetu.html" target="_blank" rel="noopener">YTTについて詳しく</a></p>
+      <p class="rank-note">※ 現在は自動判定を一時停止しているため、昇格には申請が必要です（来月以降に再開予定）。</p>
     </div>
   </div>
 </section>

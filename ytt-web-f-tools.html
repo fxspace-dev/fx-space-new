@@ -1470,7 +1470,7 @@
     .fkb-lead { margin: 0 0 0.9rem; font-size: 0.9rem; font-weight: 700; color: #1e1b4b; text-align: center; }
     .fkb-lead kbd, .fkb-cap { display: inline-flex; align-items: center; justify-content: center; min-width: 1.9em; padding: 0.1em 0.5em; border: 1.5px solid #1e1b4b; border-radius: 6px; background: #fff; font: 800 0.85em/1.5 Inter, system-ui, sans-serif; color: #1e1b4b; }
     .fkb-board { display: grid; gap: 6px; max-width: 900px; margin: 0 auto; padding: 14px; border: 2px solid #d3d8e2; border-radius: 16px; background: #f3f4f6; }
-    .fkb-row { display: grid; grid-template-columns: repeat(42, minmax(0, 1fr)); gap: 6px; }
+    .fkb-row { display: grid; grid-template-columns: repeat(50, minmax(0, 1fr)); gap: 6px; }
     .fkb-key { display: flex; flex-direction: column; justify-content: space-between; min-height: 66px; padding: 5px 6px; border: 1.5px solid #d1d5db; border-radius: 8px; background: #fff; color: #9ca3af; text-decoration: none; text-align: left; overflow: hidden; }
     .fkb-key b { font: 800 0.78rem/1 Inter, system-ui, sans-serif; }
     .fkb-key i { font-style: normal; font-size: 0.7rem; font-weight: 800; line-height: 1.3; word-break: normal; overflow-wrap: anywhere; }
@@ -1994,6 +1994,8 @@
         <li><a href="ytt-web-f-chart.html#history">チャートに取引履歴を表示</a></li>
         <li><a href="ytt-web-f-chart.html#indicator">経済指標表示</a></li>
         <li><a href="ytt-web-f-chart.html#session">セッション表示</a></li>
+        <li><a href="ytt-web-f-chart.html#ind">インジケーター</a></li>
+        <li><a href="ytt-web-f-chart.html#trend-arrow">トレンド方向の矢印</a></li>
         <li><a href="ytt-web-f-chart.html#scalp">スキャモード</a></li>
         <li><a href="ytt-web-f-chart.html#watermark">通貨ペア・時間足をすかし表示</a></li>
         <li class="toc-g is-here"><p class="toc-group"><img src="img/dotline-yellow.png" alt="">5　分析ツール</p></li>
@@ -2007,7 +2009,7 @@
         <li><a href="ytt-web-f-settings.html#virtual">仮想残高モード</a></li>
         <li><a href="ytt-web-f-settings.html#copy">コピーモード（受信）</a></li>
         <li><a href="ytt-web-f-settings.html#pl-hide">損益非表示</a></li>
-        <li><a href="ytt-web-f-settings.html#bonus">残高にボーナスを含めて表示</a></li>
+        <li><a href="ytt-web-f-settings.html#bonus">残高表示と計算にボーナスを含める</a></li>
         <li><a href="ytt-web-f-settings.html#theme">配色</a></li>
         <li><a href="ytt-web-f-settings.html#canvas">キャンバス（チャートの色）</a></li>
         <li><a href="ytt-web-f-settings.html#open">設定を開く</a></li>
@@ -2023,7 +2025,7 @@
     <h1 class="ytt-sp-hero-title">
         <span class="ytt-sp-title-line"><span class="line-text">分析ツール<span class="ytt-title-wave" aria-hidden="true"><img src="img/wave-yellow.png" alt=""></span></span></span>
     </h1>
-    <p class="fasof-date">最終更新：<b>2026年9月18日 17:00</b></p>
+    <p class="fasof-date">最終更新：<b>2026年11月13日 17:30</b></p>
     <p class="fasof-note">※ Web版YTTはアップデートが続いているため、<wbr>実際の画面と違うことがあります。</p>
     <p class="ytt-sp-hero-lead">PCの画面の右端に並ぶアイコンから開く、<br>分析と振り返りのためのツールです。</p>
     <nav class="fcat-nav" aria-label="使い方のページ">
@@ -2663,7 +2665,7 @@ function fvidLoopUI(video, wrap, withBar) {
   });
 })();
 </script>
-<script src="js/ytt-web-search.js?v=c50a868e" defer></script>
+<script src="js/ytt-web-search.js?v=6ec6cdc9" defer></script>
 <script>
 /* 手書き風のクレヨン線（ytt-web-setup.html のスクショの枠と同じ描き方）。build-guide.js がページの最後に入れる
    ・スクショ（.fduo.fimg-only > img）：画像を span.gframe で包み、グレーの線で囲む（線の形は画像ごとに固定＝リサイズしても同じ）

@@ -1470,7 +1470,7 @@
     .fkb-lead { margin: 0 0 0.9rem; font-size: 0.9rem; font-weight: 700; color: #1e1b4b; text-align: center; }
     .fkb-lead kbd, .fkb-cap { display: inline-flex; align-items: center; justify-content: center; min-width: 1.9em; padding: 0.1em 0.5em; border: 1.5px solid #1e1b4b; border-radius: 6px; background: #fff; font: 800 0.85em/1.5 Inter, system-ui, sans-serif; color: #1e1b4b; }
     .fkb-board { display: grid; gap: 6px; max-width: 900px; margin: 0 auto; padding: 14px; border: 2px solid #d3d8e2; border-radius: 16px; background: #f3f4f6; }
-    .fkb-row { display: grid; grid-template-columns: repeat(42, minmax(0, 1fr)); gap: 6px; }
+    .fkb-row { display: grid; grid-template-columns: repeat(50, minmax(0, 1fr)); gap: 6px; }
     .fkb-key { display: flex; flex-direction: column; justify-content: space-between; min-height: 66px; padding: 5px 6px; border: 1.5px solid #d1d5db; border-radius: 8px; background: #fff; color: #9ca3af; text-decoration: none; text-align: left; overflow: hidden; }
     .fkb-key b { font: 800 0.78rem/1 Inter, system-ui, sans-serif; }
     .fkb-key i { font-style: normal; font-size: 0.7rem; font-weight: 800; line-height: 1.3; word-break: normal; overflow-wrap: anywhere; }
@@ -1994,6 +1994,8 @@
         <li><a href="ytt-web-f-chart.html#history">チャートに取引履歴を表示</a></li>
         <li><a href="ytt-web-f-chart.html#indicator">経済指標表示</a></li>
         <li><a href="ytt-web-f-chart.html#session">セッション表示</a></li>
+        <li><a href="ytt-web-f-chart.html#ind">インジケーター</a></li>
+        <li><a href="ytt-web-f-chart.html#trend-arrow">トレンド方向の矢印</a></li>
         <li><a href="ytt-web-f-chart.html#scalp">スキャモード</a></li>
         <li><a href="ytt-web-f-chart.html#watermark">通貨ペア・時間足をすかし表示</a></li>
         <li class="toc-g"><p class="toc-group"><img src="img/dotline-yellow.png" alt="">5　分析ツール</p></li>
@@ -2007,7 +2009,7 @@
         <li><a href="#virtual">仮想残高モード</a></li>
         <li><a href="#copy">コピーモード（受信）</a></li>
         <li><a href="#pl-hide">損益非表示</a></li>
-        <li><a href="#bonus">残高にボーナスを含めて表示</a></li>
+        <li><a href="#bonus">残高表示と計算にボーナスを含める</a></li>
         <li><a href="#theme">配色</a></li>
         <li><a href="#canvas">キャンバス（チャートの色）</a></li>
         <li><a href="#open">設定を開く</a></li>
@@ -2023,7 +2025,7 @@
     <h1 class="ytt-sp-hero-title">
         <span class="ytt-sp-title-line"><span class="line-text">モードと設定<span class="ytt-title-wave" aria-hidden="true"><img src="img/wave-yellow.png" alt=""></span></span></span>
     </h1>
-    <p class="fasof-date">最終更新：<b>2026年9月18日 17:00</b></p>
+    <p class="fasof-date">最終更新：<b>2026年11月13日 17:30</b></p>
     <p class="fasof-note">※ Web版YTTはアップデートが続いているため、<wbr>実際の画面と違うことがあります。</p>
     <p class="ytt-sp-hero-lead">口座に合わせたモード、画面の見た目、<br>設定画面の使い方です。</p>
     <nav class="fcat-nav" aria-label="使い方のページ">
@@ -2061,7 +2063,7 @@
         <article class="fcard has-media is-wide" id="copy">
             <div class="fcard-top"><h3 class="fcard-name">コピーモード（受信）</h3></div>
             <p class="fcard-what">コピーを<b>受け取る側</b>の口座で使う機能です。コピー元の口座でWeb版YTTからエントリーすると、同じポジションがこの口座にも入ります。</p>
-            <div class="fcard-grid"><div class="fcard-media"><figure class="fvid pc"><div class="wy-pc"><div class="wy-pc-screen"><span class="fvid-wrap"><video class="fvid-video" src="img/webytt/feat/feat-copy.mp4" poster="img/webytt/feat/feat-copy.jpg" muted loop playsinline preload="none" aria-label="動画：コピーモード（受信）（声なし）"></video></span></div><img class="fvmark" src="img/hand-play.svg" alt="" aria-hidden="true" width="62" height="62"><div class="wy-pc-base" aria-hidden="true"></div></div><figcaption class="fvid-cap">タップで拡大</figcaption></figure></div><div class="fcard-side"><fieldset class="fcol is-steps"><legend class="fsub">使い方</legend><ol class="fsteps"><li>右下の歯車（スマホは下のメニューの「設定」）を押し、「一般」の「コピーモード」を開く</li><li>「コピーモード（受信）」にチェックを入れ、案内に従ってコピー元の口座を選ぶ</li><li>「コピー時のロット計算モード」を選ぶ（損失率固定／損失額固定／ロット残高固定）</li></ol></fieldset><fieldset class="fcol is-notes"><legend class="fsub">ポイント</legend><ul class="fnotes"><li>スマホでも、PCと同じ見た目です</li><li>コピーされるのは、コピー元でWeb版YTTからエントリーしたポジションだけです</li><li><b>オンにしてコピー元を確定した時点で、この口座の保有中のポジションはすべて決済され、予約（指値・逆指値）はすべて取り消されます</b></li></ul><details class="fnotes-more"><summary><span class="fnm-t">もっと見る（4）</span></summary><ul class="fnotes"><li>コピーされるのは、新規エントリー（成行と、約定した指値・逆指値）、全決済・部分決済、SL・TPの変更です。追加ポジは、この口座のロットにコピー元と同じ倍率をかけて入ります</li><li>この口座でポジションを手で決済すると、そのポジションはそれ以降コピーされません</li><li>コピー元のエントリーから「許容遅延時間」（最初は5.0秒）より時間がたっていたら、そのエントリーはコピーされません</li><li>コピー元の口座で、登録などの準備はいりません（同じDiscordのログインのほかの口座から選ぶだけです）</li></ul></details></fieldset></div></div><details class="fmore"><summary>もっとくわしく</summary><div class="fmore-body"><div class="fmore-side" style="--sm:434px"><div class="fmore-side-t"><p>設定の画面では、上の「コピーモード（受信）」でコピー元の口座を選び、下の「コピー時のロット計算モード」で、自分の口座でのロットの決め方を選びます。コピー中のルールは、その下の表のとおりです。</p></div><div class="fmore-side-m"><div class="fmore-media"><div class="wm wm-set" role="img" aria-label="設定の画面（一般）">
+            <div class="fcard-grid"><div class="fcard-media"><figure class="fvid pc"><div class="wy-pc"><div class="wy-pc-screen"><span class="fvid-wrap"><video class="fvid-video" src="img/webytt/feat/feat-copy.mp4" poster="img/webytt/feat/feat-copy.jpg" muted loop playsinline preload="none" aria-label="動画：コピーモード（受信）（声なし）"></video></span></div><img class="fvmark" src="img/hand-play.svg" alt="" aria-hidden="true" width="62" height="62"><div class="wy-pc-base" aria-hidden="true"></div></div><figcaption class="fvid-cap">タップで拡大</figcaption></figure></div><div class="fcard-side"><fieldset class="fcol is-steps"><legend class="fsub">使い方</legend><ol class="fsteps"><li>右下の歯車（スマホは下のメニューの「設定」）を押し、「一般」の「コピーモード」を開く</li><li>「コピーモード（受信）」にチェックを入れ、案内に従ってコピー元の口座を選ぶ</li><li>「コピー時のロット計算モード」を選ぶ（損失率固定／損失額固定／ロット残高固定）</li></ol></fieldset><fieldset class="fcol is-notes"><legend class="fsub">ポイント</legend><ul class="fnotes"><li>スマホでも、PCと同じ見た目です</li><li>コピーされるのは、コピー元でWeb版YTTからエントリーしたポジションだけです</li><li>コピー元とこの口座の<b>どちらもWeb版YTTにつないでいる</b>必要があります（Web版YTTと、MT4/MT5に入れる通常版YTTのあいだではコピーできません）</li></ul><details class="fnotes-more"><summary><span class="fnm-t">もっと見る（6）</span></summary><ul class="fnotes"><li>1つのコピー元から、いくつもの口座へ同時にコピーできます</li><li><b>オンにしてコピー元を確定した時点で、この口座の保有中のポジションはすべて決済され、予約（指値・逆指値）はすべて取り消されます</b></li><li>コピーされるのは、新規エントリー（成行と、約定した指値・逆指値）、全決済・部分決済、SL・TPの変更です。追加ポジは、この口座のロットにコピー元と同じ倍率をかけて入ります</li><li>この口座でポジションを手で決済すると、そのポジションはそれ以降コピーされません</li><li>コピー元のエントリーから「許容遅延時間」（最初は5.0秒）より時間がたっていたら、そのエントリーはコピーされません</li><li>コピー元の口座で、登録などの準備はいりません（同じDiscordのログインのほかの口座から選ぶだけです）</li></ul></details></fieldset></div></div><details class="fmore"><summary>もっとくわしく</summary><div class="fmore-body"><div class="fmore-side" style="--sm:434px"><div class="fmore-side-t"><p>設定の画面では、上の「コピーモード（受信）」でコピー元の口座を選び、下の「コピー時のロット計算モード」で、自分の口座でのロットの決め方を選びます。コピー中のルールは、その下の表のとおりです。</p></div><div class="fmore-side-m"><div class="fmore-media"><div class="wm wm-set" role="img" aria-label="設定の画面（一般）">
     <div class="wm-set-head">設定<span aria-hidden="true">×</span></div>
     <div class="wm-set-body">
       <div class="wm-set-tabs"><span class="on">一般</span><span>キャンバス</span><span>配色</span></div>
@@ -2104,11 +2106,11 @@
             <div class="fcard-grid"><div class="fcard-media"><figure class="fduo"><div class="fduo-pc"><div class="wy-pc"><div class="wy-pc-screen"><img src="img/webytt/feat/feat-plhide-pc.jpg" alt="PCの画面：損益非表示をオンにしたとき" loading="lazy"></div><div class="wy-pc-base" aria-hidden="true"></div></div></div><div class="fduo-sp"><div class="fd-phone"><img src="img/webytt/feat/feat-plhide-sp.jpg" alt="スマホの画面：損益非表示をオンにしたとき" loading="lazy"></div></div><figcaption class="fvid-cap">PCとスマホの画面　タップで拡大</figcaption></figure></div><div class="fcard-side"><fieldset class="fcol is-detail"><legend class="fsub">くわしく</legend><ul class="fnotes"><li>右下の歯車（スマホは下のメニューの「設定」）を押し、「一般」の「表示」 でオンにします</li><li>オンにすると、<b>残高・有効証拠金・許容損失</b>が「— — —」になります</li><li><b>持っているポジションの損益も「----」になります</b>（決済するまで、勝っているか負けているかは分かりません）</li></ul><details class="fnotes-more"><summary><span class="fnm-t">もっと見る（2）</span></summary><ul class="fnotes"><li>PCの画像は、左が残高と有効証拠金、右が保有中ポジションの損益です</li><li>PCは、最初から「お気に入り」（★）に入っているので、右のパネルからすぐ切り替えられます</li></ul></details></fieldset></div></div>
         </article>
         <article class="fcard has-media is-side" id="bonus" style="--mw:400px">
-            <div class="fcard-top"><h3 class="fcard-name">残高にボーナスを含めて表示</h3></div>
+            <div class="fcard-top"><h3 class="fcard-name">残高表示と計算にボーナスを含める</h3></div>
             <div class="fcard-grid">
-                <div class="fcard-media"><figure class="fduo fimg-only"><img src="img/webytt/feat/feat-bonus-set.jpg" alt="設定の「一般」の「表示」。「残高にボーナスを含めて表示」を赤い枠で囲んだもの" loading="lazy" style="max-width:360px"><figcaption class="fvid-cap">PCの設定画面（スマホでも同じ見え方です）　タップで拡大</figcaption></figure></div>
-                <div class="fcard-head"><p class="fcard-what">口座のボーナスを、残高に含めて表示する設定です。</p></div>
-                <div class="fcard-side"><fieldset class="fcol is-detail"><legend class="fsub">くわしく</legend><ul class="fnotes"><li>右下の歯車（スマホは下のメニューの「設定」）を押し、「一般」の「表示」 でオンにします</li><li>この設定で変わるのは表示だけです</li></ul><details class="fnotes-more"><summary><span class="fnm-t">もっと見る（1）</span></summary><div class="fsoon-box"><p class="fsoon-line"><span class="fsoon">アップデート予定</span> ロットの計算にボーナスを含めるかどうかの設定が、連携ツール（EA）からWeb版YTTの設定に移ります</p></div></details></fieldset></div>
+                <div class="fcard-media"><figure class="fduo fimg-only"><img src="img/webytt/feat/feat-bonus-set.jpg" alt="設定の「一般」の「ロットの決め方」。「残高表示と計算にボーナスを含める」を赤い枠で囲んだもの" loading="lazy" style="max-width:360px"><figcaption class="fvid-cap">PCの設定画面（スマホでも同じ見え方です）　タップで拡大</figcaption></figure></div>
+                <div class="fcard-head"><p class="fcard-what">口座のボーナスを、残高の表示と、ロットの計算に含めるかどうかの設定です。</p></div>
+                <div class="fcard-side"><fieldset class="fcol is-detail"><legend class="fsub">くわしく</legend><ul class="fnotes"><li>右下の歯車（スマホは下のメニューの「設定」）を押し、「一般」の「ロットの決め方」 でオンにします</li><li>オンにすると、残高の表示と、ロットの自動計算の両方にボーナスが入ります</li></ul></fieldset></div>
             </div>
         </article>
         <article class="fcard has-media is-side" id="theme" style="--mw:440px">
@@ -2124,7 +2126,7 @@
             <div class="fcard-grid">
                 <div class="fcard-media"><figure class="fduo fimg-only"><img src="img/webytt/feat/feat-canvas-set.jpg" alt="設定の「キャンバス」タブ：ローソク足の色、背景・グリッドの色、グリッドライン・十字カーソルの表示" loading="lazy" style="max-width:420px"><figcaption class="fvid-cap">PCの設定画面（スマホでも同じ見え方です）　タップで拡大</figcaption></figure></div>
                 <div class="fcard-head"><p class="fcard-what">ローソク足やチャートの背景の色など、チャートの見た目を細かく変えられる設定です。</p></div>
-                <div class="fcard-side"><fieldset class="fcol is-detail"><legend class="fsub">くわしく</legend><ul class="fnotes"><li>右下の歯車（スマホは「設定」）→「キャンバス」のタブで変えます</li><li>ローソク足（上昇・下降）、背景、グリッド、十字カーソルの色を選べます</li><li>「期間区切りライン」をオンにすると、日の区切り（0時）に縦の線が出ます（日足・週足・月足では出ません）</li></ul></fieldset></div>
+                <div class="fcard-side"><fieldset class="fcol is-detail"><legend class="fsub">くわしく</legend><ul class="fnotes"><li>右下の歯車（スマホは「設定」）→「キャンバス」のタブで変えます</li><li>ローソク足（上昇・下降）、背景、Ask・Bid の線、グリッド、十字カーソルの色を選べます</li><li>「期間区切りライン」をオンにすると、日の区切り（0時）に縦の線が出ます（日足・週足・月足では出ません）。区切る時刻は、サーバー時間か日本時間から選べます</li></ul><details class="fnotes-more"><summary><span class="fnm-t">もっと見る（1）</span></summary><ul class="fnotes"><li>「出来高」をオンにすると、チャートの下に出来高の棒グラフが出ます</li></ul></details></fieldset></div>
             </div>
         </article>
     </div>
@@ -2149,7 +2151,7 @@
         <article class="fcard has-media is-side" id="open" style="--mw:440px">
             <div class="fcard-top"><h3 class="fcard-name">設定を開く</h3></div>
             <div class="fcard-grid">
-                <div class="fcard-media"><figure class="fduo fimg-only"><img src="img/webytt/feat/feat-settings-open.jpg" alt="設定画面：左に「一般」「キャンバス」「配色」のタブ、右に設定の項目、いちばん下に「他の口座に設定をコピー」と「初期値にリセット」のボタン" loading="lazy" style="max-width:420px"><figcaption class="fvid-cap">PCの設定画面　タップで拡大</figcaption></figure></div>
+                <div class="fcard-media"><figure class="fduo fimg-only"><img src="img/webytt/feat/feat-settings-open.jpg" alt="設定画面：左に「一般」「キャンバス」「配色」のタブ、右に設定の項目（ロットの決め方・決済関連など）、いちばん下に「他の口座に設定をコピー」と「初期値にリセット」のボタン" loading="lazy" style="max-width:420px"><figcaption class="fvid-cap">PCの設定画面　タップで拡大</figcaption></figure></div>
                 <div class="fcard-head"><p class="fcard-what">Web版YTTの細かい設定を変える画面です。「一般」「キャンバス」「配色」の3つのタブがあります。</p></div>
                 <div class="fcard-side"><fieldset class="fcol is-steps"><legend class="fsub">使い方</legend><ol class="fsteps"><li>PCは右下の歯車、スマホは下のメニューの「設定」を押す</li><li>タブを選んで、項目を変える</li></ol></fieldset><fieldset class="fcol is-notes"><legend class="fsub">ポイント</legend><ul class="fnotes"><li>変えた設定は、この口座にそのまま残ります（<a href="#reset">初期値にリセット</a>で元に戻せます）</li></ul></fieldset></div>
             </div>
@@ -2157,7 +2159,7 @@
         <article class="fcard has-media is-wide" id="sync">
             <div class="fcard-top"><h3 class="fcard-name">PCとスマホで共通のもの・別々のもの</h3></div>
             <p class="fcard-what">Web版YTTは、PCとスマホの両方で使えます。PCとスマホで共通になるものと、端末ごとに別々のものがあります。</p>
-            <div class="fcard-grid"><div class="fcard-media"><div class="ftable-wrap"><table class="ftable"><thead><tr><th>もの</th><th>PCとスマホ</th><th>くわしく</th></tr></thead><tbody><tr><td data-h="もの">お気に入りの通貨ペア（★）</td><td data-h="PCとスマホ">共通</td><td data-h="くわしく">同じDiscordのアカウントなら、口座を切り替えても同じです</td></tr><tr><td data-h="もの">ミニチャートの通貨ペア</td><td data-h="PCとスマホ">共通</td><td data-h="くわしく">スマホには、PCの上から3つが出ます</td></tr><tr><td data-h="もの">設定（一般・キャンバス・配色）</td><td data-h="PCとスマホ">共通（口座ごと）</td><td data-h="くわしく">口座ごとに残ります。同じ口座なら、PCで変えた設定がスマホにも入ります</td></tr><tr><td data-h="もの">通知の履歴</td><td data-h="PCとスマホ">共通（口座ごと）</td><td data-h="くわしく">口座ごとに残ります</td></tr><tr><td data-h="もの">いま使っている口座</td><td data-h="PCとスマホ">別々</td><td data-h="くわしく">PCで口座を切り替えても、スマホは元の口座のままです</td></tr><tr><td data-h="もの">最後に使ったロット数・パネルを動かした位置など</td><td data-h="PCとスマホ">別々</td><td data-h="くわしく">その端末だけに残ります</td></tr></tbody></table></div></div><div class="fcard-side"><fieldset class="fcol is-detail"><legend class="fsub">くわしく</legend><ul class="fnotes"><li><b>スマホで口座が変わらないときは</b>：PCとスマホは、それぞれ別に口座を選びます。スマホでも口座番号を押して、使う口座を選んでください（<a href="ytt-web-f-basic.html#pc-account">口座を切り替える</a>）</li><li>ほかの口座にも同じ設定を使いたいときは、<a href="#copy-settings">他の口座に設定をコピー</a>を使います</li></ul></fieldset></div></div>
+            <div class="fcard-grid"><div class="fcard-media"><div class="ftable-wrap"><table class="ftable"><thead><tr><th>もの</th><th>PCとスマホ</th><th>くわしく</th></tr></thead><tbody><tr><td data-h="もの">お気に入りの通貨ペア（★）</td><td data-h="PCとスマホ">共通</td><td data-h="くわしく">同じDiscordのアカウントなら、口座を切り替えても同じです</td></tr><tr><td data-h="もの">ミニチャートの通貨ペア</td><td data-h="PCとスマホ">共通</td><td data-h="くわしく">スマホには、PCの上から3つが出ます</td></tr><tr><td data-h="もの">設定（一般・キャンバス・配色）</td><td data-h="PCとスマホ">共通（口座ごと）</td><td data-h="くわしく">口座ごとに残ります。同じ口座なら、PCで変えた設定がスマホにも入ります</td></tr><tr><td data-h="もの">通知の履歴</td><td data-h="PCとスマホ">共通（口座ごと）</td><td data-h="くわしく">口座ごとに残ります</td></tr><tr><td data-h="もの">自分で引いた線・図形、シナリオ構築の絵</td><td data-h="PCとスマホ">共通</td><td data-h="くわしく">口座を切り替えても同じものが出ます（通知ラインと注文は口座ごとです）</td></tr><tr><td data-h="もの">いま使っている口座</td><td data-h="PCとスマホ">別々</td><td data-h="くわしく">PCで口座を切り替えても、スマホは元の口座のままです</td></tr><tr><td data-h="もの">最後に使ったロット数・パネルを動かした位置など</td><td data-h="PCとスマホ">別々</td><td data-h="くわしく">その端末だけに残ります</td></tr></tbody></table></div></div><div class="fcard-side"><fieldset class="fcol is-detail"><legend class="fsub">くわしく</legend><ul class="fnotes"><li><b>スマホで口座が変わらないときは</b>：PCとスマホは、それぞれ別に口座を選びます。スマホでも口座番号を押して、使う口座を選んでください（<a href="ytt-web-f-basic.html#pc-account">口座を切り替える</a>）</li><li>ほかの口座にも同じ設定を使いたいときは、<a href="#copy-settings">他の口座に設定をコピー</a>を使います</li></ul></fieldset></div></div>
         </article>
         <article class="fcard has-media is-wide" id="fav">
             <div class="fcard-top"><h3 class="fcard-name">お気に入り（☆）</h3></div>
@@ -2726,7 +2728,7 @@ function fvidLoopUI(video, wrap, withBar) {
   });
 })();
 </script>
-<script src="js/ytt-web-search.js?v=c50a868e" defer></script>
+<script src="js/ytt-web-search.js?v=6ec6cdc9" defer></script>
 <script>
 /* 手書き風のクレヨン線（ytt-web-setup.html のスクショの枠と同じ描き方）。build-guide.js がページの最後に入れる
    ・スクショ（.fduo.fimg-only > img）：画像を span.gframe で包み、グレーの線で囲む（線の形は画像ごとに固定＝リサイズしても同じ）

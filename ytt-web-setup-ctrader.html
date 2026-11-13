@@ -1867,7 +1867,7 @@
                     <p>「Symbol」の通貨ペアはどれでも構いません。入力するのは<b>必須設定</b>の2つだけです。</p>
                     <table class="gtable">
                         <tr><th>PairingToken（口座登録画面に表示されます）</th><td>STEP 1 で控えた<b>32文字の認証コード</b>を貼り付けます</td></tr>
-                        <tr><th>通貨ペア名末尾サフィックス</th><td>通貨ペア名の末尾に文字が付いている口座では、その文字を入力します。<br>例：Fintokei の <code>USDJPYp</code> → <code>p</code> ／ HFMプロ口座の <code>USDJPYr</code> → <code>r</code><br>サフィックスが無い口座は空欄のままでOK</td></tr>
+                        <tr><th>通貨ペア名末尾サフィックス</th><td>通貨ペア名の末尾に文字が付いている口座では、その文字を入力します。<br>例：Fintokei の <code>USDJPYp</code> → <code>p</code> ／ HFMプロ口座の <code>USDJPYr</code> → <code>r</code><br>サフィックスが無い口座は空欄のままでOK<br>空欄のままでも、口座に合わせて自動で推定されます。特定の通貨ペアだけ価格が出ないときは、ここに入力してください</td></tr>
                     </table>
                     <div class="gtip"><b>任意設定</b>はそのままで構いません。<br>金・銀・ビットコイン・日経・オイルなどを取引する方は、下のほうの「通貨ペア名設定」に、その証券会社で使われている商品名を入力します（例：<code>XAUUSD</code> の欄に <code>GOLD</code>）。空欄のときは標準の名称が使われるので、同じ名前なら空欄でOKです。<br>記号が先頭につく口座（<code>#BTCUSD</code> など）は、その欄に <code>#</code> だけでなく <code>#BTCUSD</code> と名前を全部入れます。末尾の文字（サフィックス）は、上の「通貨ペア名末尾サフィックス」に入れておけば、ほかの欄に入れ直さなくてかまいません。</div>
                 </div>
@@ -2091,25 +2091,25 @@
   <text x="140" y="300" font-size="13.5" font-weight="800" fill="#1e1b4b" text-anchor="middle">PCを閉じる・スリープ</text>
   <text x="140" y="320" font-size="13.5" font-weight="800" fill="#16a34a" text-anchor="middle">● つながったまま</text>
 </svg></div><h3>Cloud版はPCを閉じてもOK</h3><p>連携ツールはcTraderのクラウドで動くので、PCを閉じたりスリープしたりしても止まりません。つながらないときは、cTraderの「Status」が<b>Running</b>になっているか確認してください。</p></div>
-            <div class="ytt-add-card lim-card lim-price"><div class="lim-mock lp-mock" role="img" aria-label="cTraderは153.948、Web版YTTは153.951と、価格がずれている例">
+            <div class="ytt-add-card lim-card lim-price"><div class="lim-mock lp-mock" role="img" aria-label="cTraderもWeb版YTTも153.948と、同じ価格が出ている例">
                 <svg class="lp-chart" viewBox="0 0 300 292" aria-hidden="true">
                   <rect x="2" y="2" width="296" height="124" rx="10" fill="#11163a" stroke="#1e1b4b" stroke-width="2.5"/>
                   <text x="16" y="27" font-size="14" font-weight="800" fill="#e9b949">cTrader</text>
                   <path d="M16 104 L40 92 L60 98 L84 78 L104 86 L126 64 L146 74 L168 58 L190 66 L212 70" stroke="#22c55e" stroke-width="2.6" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
                   <path d="M16 70 H212" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="4 4"/>
                   <rect x="214" y="56" width="80" height="28" rx="6" fill="#fff"/>
-                  <text x="254" y="75.5" font-size="15" font-weight="800" fill="#1e1b4b" text-anchor="middle" font-family="Inter, 'Noto Sans JP', sans-serif">153.9<tspan fill="#f97316">48</tspan></text>
-                  <circle cx="150" cy="146" r="16" fill="#f97316"/>
-                  <text x="150" y="153" font-size="20" font-weight="800" fill="#fff" text-anchor="middle" font-family="Inter, sans-serif">≠</text>
+                  <text x="254" y="75.5" font-size="15" font-weight="800" fill="#1e1b4b" text-anchor="middle" font-family="Inter, 'Noto Sans JP', sans-serif">153.948</text>
+                  <circle cx="150" cy="146" r="16" fill="#16a34a"/>
+                  <text x="150" y="153" font-size="20" font-weight="800" fill="#fff" text-anchor="middle" font-family="Inter, sans-serif">=</text>
                   <rect x="2" y="166" width="296" height="124" rx="10" fill="#0b0f24" stroke="#1e1b4b" stroke-width="2.5"/>
                   <text x="16" y="191" font-size="14" font-weight="800" fill="#c7d2fe">Web版YTT</text>
                   <path d="M16 104 L40 92 L60 98 L84 78 L104 86 L126 64 L146 74 L168 58 L190 66 L212 70" transform="translate(0 158)" stroke="#22c55e" stroke-width="2.6" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
                   <path d="M16 228 H212" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="4 4"/>
                   <rect x="214" y="214" width="80" height="28" rx="6" fill="#fff"/>
-                  <text x="254" y="233.5" font-size="15" font-weight="800" fill="#1e1b4b" text-anchor="middle" font-family="Inter, 'Noto Sans JP', sans-serif">153.9<tspan fill="#f97316">51</tspan></text>
+                  <text x="254" y="233.5" font-size="15" font-weight="800" fill="#1e1b4b" text-anchor="middle" font-family="Inter, 'Noto Sans JP', sans-serif">153.948</text>
                 </svg>
                 <div class="lp-chips" aria-hidden="true"><div class="lp-chip lp-tool"><small>cTrader</small><b>153.9<i>48</i></b></div><span class="lp-neq">≠</span><div class="lp-chip lp-ytt"><small>Web版YTT</small><b>153.9<i>51</i></b></div></div>
-            </div><h3>価格がずれることがある</h3><p>cTraderの価格とWeb版YTTの価格は、ずれが生じることがあります。</p></div>
+            </div><h3>価格が出るまで数秒かかることがある</h3><p>Web版YTTのチャートには、お使いの口座の価格とスプレッドがそのまま出ます。通貨ペアや時間足を切り替えたあとは、価格が出るまで数秒かかることがあります。cTraderとの接続が切れているあいだは、価格は更新されません。</p></div>
         </div>
     </div>
 </section>
@@ -2163,10 +2163,14 @@
             <div class="ytt-faq-a"><p>表示の途中が抜けていることがあります。ページを更新（再読み込み）すると直ります。</p></div>
         </details>
         <details class="ytt-faq">
+            <summary><span class="ytt-faq-q">通貨ペアや時間足を切り替えると、チャートが出るまで時間がかかる</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
+            <div class="ytt-faq-a"><p>お使いの口座の価格をそのまま表示しているため、切り替えたあとは、価格が出るまで数秒かかることがあります。</p><p>数十秒以上かかるときは、連携ツールを最新版に入れ直してください（STEP 2）。最新版でも10秒以上かかるときは、YTTサポートにご連絡ください。</p></div>
+        </details>
+        <details class="ytt-faq">
             <summary><span class="ytt-faq-q">前のYTTのファイルは消したほうがいい？</span><span class="ytt-faq-chev" aria-hidden="true">▼</span></summary>
             <div class="ytt-faq-a"><p>残しておいても問題ありません。消すと、取引ツールが少し軽くなります。</p><p>MT4のYTTは、消さなくて大丈夫です。</p></div>
         </details>
-        <p style="font-size:0.8125rem;color:#6b7280;margin-top:1.25rem;text-align:left;">新しい連携ツールが配布されたときは、ファイルをダウンロードしてお使いの取引ツールの導入方法ページで「STEP 2」の手順をもう一度行ってください。</p>
+        <p style="font-size:0.8125rem;color:#6b7280;margin-top:1.25rem;text-align:left;">新しい連携ツールが配布されたときは、ファイルをダウンロードしてお使いの取引ツールの導入方法ページで「STEP 2」の手順をもう一度行ってください。古い連携ツール（1.01以前）は、安全のため動かなくなっています。</p>
     </div>
 </section>
 
@@ -2211,7 +2215,7 @@
                 <table class="ytt-spec-table">
                     <tbody>
                         <tr><th>口座</th><td class="spec-val">証券会社・口座タイプ・有効証拠金残高</td><td class="spec-note">Web版YTTで使用している口座番号も</td></tr>
-                        <tr><th>環境</th><td class="spec-val">OS（MacかWindows）・スマホの機種</td><td class="spec-note">連携ツールのバージョン（例：YTTWeb_cTrader_1.01）</td></tr>
+                        <tr><th>環境</th><td class="spec-val">OS（MacかWindows）・スマホの機種</td><td class="spec-note">連携ツールのバージョン（例：YTTWeb_cTrader_1.06）</td></tr>
                         <tr><th>内容</th><td class="spec-val">困っていることをできるだけ具体的に</td><td class="spec-note">症状発生時のスクショ、ターミナル→エキスパートタブのスクショ</td></tr>
                         <tr><th>※必須</th><td class="spec-val">エラーのコピー</td><td class="spec-note">エラーが出ていた場合、エキスパートタブに出ていたエラーの文字をコピーして貼り付け</td></tr>
                     </tbody>
